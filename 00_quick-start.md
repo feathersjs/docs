@@ -1,9 +1,3 @@
----
-title: Quick Start
-permalink: /docs/
-layout: docs
----
-
 ## About Feathers
 
 Feathers extends [Express 4](http://expressjs.com), one of the most popular web frameworks for [NodeJS](http://nodejs.org/). It makes it easy to create shared RESTful web services and real-time applications using SocketIO and several other NodeJS websocket libraries supported by [Primus](http://primus.io).
