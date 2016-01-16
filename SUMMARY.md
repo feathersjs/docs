@@ -13,6 +13,6 @@
 * [Microservices](09_microservices.md)
 * [Performance](10_performance.md)
 * [API](11_api.md)
-* [FAQ](12_fax.md)
+* [FAQ](12_faq.md)
 * [Changelog](13_changelog.md)
 
