@@ -10,4 +10,9 @@
 * [Front End](06_frontend.md)
 * [Mobile](07_mobile.md)
 * [Authentication](08_authentication.md)
+* [Microservices](09_microservices.md)
+* [Performance](10_performance.md)
+* [API](11_api.md)
+* [FAQ](12_fax.md)
+* [Changelog](13_changelog.md)
 
