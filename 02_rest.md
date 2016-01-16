@@ -4,7 +4,7 @@ In almost every case you want to expose your services through a RESTful JSON int
 
 Adding a dummy paragraph to see if the comments are removed.
 
-To set service parameters in a middleware, just attach it to the `req.feathers` object which will become the params for any service call. It is also possible to use URL parameters for REST API calls which will also be added to the params object:
+To set service parameters in a middleware, just attach it to the `req.feathers` object which will become the params for any service call. Editing this paragraph to see if comments are removed. It is also possible to use URL parameters for REST API calls which will also be added to the params object:
 
 ```js
 var bodyParser = require('body-parser');
