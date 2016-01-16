@@ -1,9 +1,3 @@
----
-title: REST APIs
-layout: docs
-permalink: /docs/rest/
----
-
 ## Configuring
 
 In almost every case you want to expose your services through a RESTful JSON interface. This can be achieved by calling `app.configure(feathers.rest())`. Note that you will have to provide your own body parser middleware like the standard [Express 4 body-parser](https://github.com/expressjs/body-parser) to make REST `.create`, `.update` and `.patch` calls pass the parsed data.
