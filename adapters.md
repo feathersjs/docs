@@ -13,4 +13,4 @@
     - [feathers-sequelize](adapters.sequelize.md)
     
 ## Built-in Pagination Support
-TODO: Pagination example.  Explanation of how it works.  Which adapters support it?
+TODO: Pagination example.  Explanation of how it works.  Which adapters support it?  Is this the best place for this?
