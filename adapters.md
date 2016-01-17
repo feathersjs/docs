@@ -4,6 +4,7 @@
 - Memory - [feathers-memory](adapters.memory.md)
 - MongoDB - [feathers-mongoose](adapters.mongoose.md)
 - NeDB - [feathers-nedb](adapters.nedb.md)
+- Waterline - [feathers-waterline](adapters.waterline.md)
 - MySQL
     - [feathers-knex](adapters.knex.md)
     - [feathers-sequelize](adapters.sequelize.md)
