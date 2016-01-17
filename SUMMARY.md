@@ -16,7 +16,7 @@
    * [feathers-memory](adapters.memory.md)
    * [feathers-mongoose](adapters.mongoose.md)
    * [feathers-nedb](adapters.nedb.md)
-   * feathers-knex
+   * [feathers-knex](adapters.knex.md)
 * [Hooks](hooks.md)
 * [Middleware](middleware.md)
 * [Versioning](versioning.md)
