@@ -20,7 +20,7 @@
    * [React](frontend.react.md)
    * [Angular](frontend.angular.md)
 * [Mobile](mobile.md)
-   * [React Native](mobile.react-nativemd)
+   * [React Native](mobile.react-native.md)
    * [iOS](mobile.ios.md)
 * [Setting Up Authentication](authentication.md)
    * [Local (username & password)](authentication.local.md)
@@ -35,3 +35,4 @@
 * [FAQ](faq.md)
 * [Changelog](changelog.md)
 * [License](license.md)
+
