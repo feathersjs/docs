@@ -22,7 +22,7 @@
 * [Hooks](hooks.md)
 * [Middleware](middleware.md)
 * [Versioning](versioning.md)
-* [Setting Up Authentication](authentication.md)
+* [Authentication](authentication.md)
    * [Local (username & password)](authentication.local.md)
 * [Authorization / Access Control](authorization.md)
 * [Front End](frontend.md)
