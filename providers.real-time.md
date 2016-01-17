@@ -3,7 +3,7 @@
 * Brief introduction to real-time messaging with WebSockets and comparison to normal HTTP.
 
 * Two popular libraries
-  * [Socket.io](04.2.1_socket-io.md)
-  * [Primus](04.2.2_primus.md)
+  * [Socket.io](providers.real-time.socket-io.md)
+  * [Primus](providers.real-time.primus.md)
 
 * [Create a Custom Provider](providers.create.md)
