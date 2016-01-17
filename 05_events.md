@@ -2,8 +2,7 @@
 
 ## Event filtering
 
-By default all service events will be dispatched to all connected clients.
-In many cases you probably want to be able to only dispatch events for certain clients.
+By default all service events will be dispatched to all connected clients. In many cases you probably want to be able to only dispatch events for certain clients.
 This can be done by implementing the `created`, `updated`, `patched` and `removed` methods as `function(data, params, callback) {}` with `params` being the parameters set when the client connected, in SocketIO when authorizing and setting `socket.feathers` and Primus with `req.feathers`.
 
 ```js
@@ -67,3 +66,5 @@ socket.on('todo updated', function(data) {
   // if authorized and in the same company
 });
 ```
+
+## Custom Events
