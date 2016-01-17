@@ -18,7 +18,7 @@
    * [feathers-nedb](adapters.nedb.md)
    * [feathers-knex](adapters.knex.md)
    * [feathers-sequelize](adapters.sequelize.md)
-   * feathers-waterline
+   * [feathers-waterline](adapters.waterline.md)
 * [Hooks](hooks.md)
 * [Middleware](middleware.md)
 * [Versioning](versioning.md)
