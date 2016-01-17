@@ -1,5 +1,16 @@
 # Middleware
 
+
+## Custom service middleware
+
+Custom Express middleware that only should be run before a specific service can simply be passed to `app.use` before the service object:
+
+```js
+app.use('/todos', ensureAuthenticated, logRequest, todoService);
+```
+
+Keep in mind that shared authentication (between REST and websockets) should use a service based approach as described in the [authentication section of the guide](/learn/authentication).
+
 ## Find where a method call came from
 
 Sometimes you want to allow certain service calls internally (like creating a new user) but not through the REST or websocket API. This can be done by adding the information in a middleware to the `request.feathers` object which will be merged into service call parameters:
