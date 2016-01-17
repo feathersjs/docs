@@ -17,7 +17,7 @@
    * [feathers-mongoose](adapters.mongoose.md)
    * [feathers-nedb](adapters.nedb.md)
    * [feathers-knex](adapters.knex.md)
-   * feathers-sequelize
+   * [feathers-sequelize](adapters.sequelize.md)
 * [Hooks](hooks.md)
 * [Middleware](middleware.md)
 * [Versioning](versioning.md)
