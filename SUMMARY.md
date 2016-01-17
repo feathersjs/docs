@@ -13,7 +13,7 @@
    * [Create a Provider](providers.create.md)
 * [Events](events.md)
 * [Data Adapters](adapters.md)
-   * feathers-memory
+   * [feathers-memory](adapters.memory.md)
 * [Hooks](hooks.md)
 * [Middleware](middleware.md)
 * [Versioning](versioning.md)
