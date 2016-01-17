@@ -20,7 +20,7 @@
    * [React](08.3_react.md)
    * [Angular](08.4_angular.md)
 * [Mobile](09.0_mobile.md)
-   * [React Native](09.1_react-native.md)
+   * [React Native](09.1_react-nativemd)
    * [iOS](09.2_ios.md)
 * [Setting Up Authentication](10.0_authentication.md)
    * [Local (username & password)](10.1_local-auth.md)
