@@ -12,7 +12,7 @@
     - [feathers-sequelize](adapters.sequelize.md)
 
 
- - **Waterline** - [feathers-waterline](adapters.waterline.md) supports the following data stores:
+ - **Waterline** -  [feathers-waterline](adapters.waterline.md) supports the following data stores:
   - [PostgreSQL](https://github.com/balderdashy/sails-postgresql) - *0.9+ compatible*
   - [MySQL](https://github.com/balderdashy/sails-mysql) - *0.9+ compatible*
   - [MongoDB](https://github.com/balderdashy/sails-mongo) - *0.9+ compatible*
