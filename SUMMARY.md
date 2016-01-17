@@ -28,6 +28,7 @@
 * [Microservices](12_microservices.md)
 * [Performance](13_performance.md)
 * [Plugins](02.2_generator-feathers-plugin.md)
+   * Plugin Generator
 * [API](14_api.md)
 * [FAQ](15_faq.md)
 * [Changelog](16_changelog.md)
