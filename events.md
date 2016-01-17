@@ -84,4 +84,53 @@ socket.on('todo updated', function(data) {
 });
 ```
 
+
+
+## Only send certain events
+
+In almost any larger application not every user is supposed to receive every event through websockets. The [event filtering section](/api/#event-filtering) in the API documentation contains detailed documentation on how to only send events to authorized users.
+
+The following example only dispatches the Todo `updated` event if the authorized user belongs to the same company:
+
+```js
+app.configure(feathers.socketio(function(io) {
+  io.use(function (socket, callback) {
+    // Authorize using the /users service
+    app.lookup('users').find({
+      username: handshake.username,
+      password: handshake.password
+    }, function(error, user) {
+      if(!error || !user) {
+        return callback(error, false);
+      }
+
+      socket.feathers = {
+        user: user
+      };
+
+      callback(null, true);
+    });
+  });
+}));
+
+app.use('todos', {
+  update: function(id, data, params, callback) {
+    // Update
+    callback(null, data);
+  },
+
+  updated: function(todo, params, callback) {
+    // params === handshake.feathers
+    if(todo.companyId === params.user.companyId) {
+      // Dispatch the todo data to this client
+      return callback(null, todo);
+    }
+
+    // Call back with a falsy value to prevent dispatching
+    callback(null, false);
+  }
+});
+```
+
+
 ## Custom Events
