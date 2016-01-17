@@ -21,15 +21,6 @@ app.use('/users/:userId/todos', {
 __Note:__ This route has to be registered _before_ the `/users` service otherwise the `get` route from the user service at `/users` will be matched first.
 
 
-## Custom service middleware
-
-Custom Express middleware that only should be run before a specific service can simply be passed to `app.use` before the service object:
-
-```js
-app.use('/todos', ensureAuthenticated, logRequest, todoService);
-```
-
-Keep in mind that shared authentication (between REST and websockets) should use a service based approach as described in the [authentication section of the guide](/learn/authentication).
 
 ## Another Node web framework
 
