@@ -2,9 +2,7 @@
 
 In almost every case you want to expose your services through a RESTful JSON interface. This can be achieved by calling `app.configure(feathers.rest())`. Note that you will have to provide your own body parser middleware like the standard [Express 4 body-parser](https://github.com/expressjs/body-parser) to make REST `.create`, `.update` and `.patch` calls pass the parsed data.
 
-Adding a dummy paragraph to see if the comments are removed.
-
-To set service parameters in a middleware, just attach it to the `req.feathers` object which will become the params for any service call. Editing this paragraph to see if comments are removed. It is also possible to use URL parameters for REST API calls which will also be added to the params object:
+To set service parameters in a middleware, just attach it to the `req.feathers` object which will become the params for any service call. It is also possible to use URL parameters for REST API calls which will also be added to the params object:
 
 ```js
 var bodyParser = require('body-parser');
