@@ -14,6 +14,7 @@
 * [Events](events.md)
 * [Data Adapters](adapters.md)
 * [Hooks](hooks.md)
+* Middleware
 * [Front End](frontend.md)
    * [Feathers](frontend.feathers.md)
    * [DoneJS](frontend.donejs.md)
@@ -36,5 +37,4 @@
    * [What about koa?](faq.koa.md)
 * [Changelog](changelog.md)
 * [License](license.md)
-* Middleware
 
