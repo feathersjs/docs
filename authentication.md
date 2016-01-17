@@ -1,6 +1,6 @@
 # Setting Up Authentication
 
-At some point, you are probably going to put information in your databases that you want to keep private. You'll need to implement `authentication` to verify the identity of your users, and `authorization` to control access to resources.  
+At some point, you are probably going to put information in your databases that you want to keep private. You'll need to add an `authentication` method to verify the identity of your users, and `authorization` to control access to resources.  
 
 Cookie-based and token-based authentication are the two most-common methods of putting server-side authentication into practice. Cookie-based authentication relies on server-side cookies to remember the user.  Token-based authentication requires an encrypted auth token with each request. While cookie-based authentication is the most common, token-based authentication offers several advantages for modern web apps. The Auth0 blog has a [great article on the advantages that token authentication offers](https://auth0.com/blog/2014/01/07/angularjs-authentication-with-cookies-vs-token/).
 
