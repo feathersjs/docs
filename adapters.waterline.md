@@ -1,6 +1,6 @@
 # feathers-waterline
 
-The `feathers-waterline` adapter adds support for the following data stores:
+The `feathers-waterline` adapter enables support for the following data stores:
   - [Redis](https://github.com/balderdashy/sails-redis)
   - [Riak](https://github.com/balderdashy/sails-riak)
   - [IRC](https://github.com/balderdashy/sails-irc)
