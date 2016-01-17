@@ -79,11 +79,6 @@ todoService.get('laundry', {}, function(error, todo) {
 });
 ```
 
-## Add authentication
-
-Generally any authentication mechanism used for Express can also be implemented in Feathers.
-
-Please refer to the [authentication](/learn/authentication/) and [authorization](/learn/authorization) section of the guide and, in more detail, the [feathers-hooks](https://github.com/feathersjs/feathers-hooks) and [feahters-passport](https://github.com/feathersjs/feathers-passport) modules for more information.
 
 ## Only send certain events
 
