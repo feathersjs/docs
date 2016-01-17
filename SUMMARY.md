@@ -33,7 +33,7 @@
    * [App](api.app.md)
    * [Service](api.service.md)
 * [FAQ](faq.md)
-   * What about koa?
+   * [What about koa?](faq.koa.md)
 * [Changelog](changelog.md)
 * [License](license.md)
 
