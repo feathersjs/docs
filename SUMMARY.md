@@ -30,6 +30,7 @@
    * [DoneJS](frontend.donejs.md)
    * [React](frontend.react.md)
    * [Angular](frontend.angular.md)
+* [Pagination](pagination.md)
 * [Mobile](mobile.md)
    * [React Native](mobile.react-native.md)
    * [iOS](mobile.ios.md)
@@ -43,5 +44,4 @@
 * [FAQ](faq.md)
 * [Changelog](changelog.md)
 * [License](license.md)
-* [Pagination](pagination.md)
 
