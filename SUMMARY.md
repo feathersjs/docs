@@ -4,6 +4,7 @@
 * [Help Write the Feathers Book](01_contributing.md)
 * [Quick Start](02_quick-start.md)
    * [generator-feathers](02.1_generator-feathers.md)
+   * generator-feathers-plugin
 * [Services](03_services.md)
 * [Providers](04.0_providers.md)
    * [REST](04.1_rest.md)
