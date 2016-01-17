@@ -1,8 +1,8 @@
 # Data Adapters
 
 ## Supported Data Stores:
- - Memory: [feathers-memory](adapters.memory.md)
- - MongoDB: [feathers-mongoose](adapters.mongoose.md)
+ - Memory - [feathers-memory](adapters.memory.md)
+ - MongoDB - [feathers-mongoose](adapters.mongoose.md)
  - NeDB - [feathers-nedb](adapters.nedb.md)
  - Waterline - [feathers-waterline](adapters.waterline.md)
  - PostgreSQL, MySQL, MariaDB, and SQLite
