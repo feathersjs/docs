@@ -29,10 +29,10 @@
 * [Performance](13_performance.md)
 * [Plugins](14.0_plugins.md)
    * [The Plugin Generator](14.1_plugin-generator.md)
-* [API](14_api.md)
-   * App
-   * Service
-* [FAQ](15_faq.md)
-* [Changelog](16_changelog.md)
-* [License](17_license.md)
+* [API](15.0_api.md)
+   * [App](15.1_app.md)
+   * [Service](15.2_service.md)
+* [FAQ](16_faq.md)
+* [Changelog](17_changelog.md)
+* [License](18_license.md)
 
