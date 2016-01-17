@@ -1,25 +1,5 @@
 # FAQ
 
-## Nested routes
-
-Feathers does not provide an ORM so it does not know about associations between your services. Generally services are connected by their resource ids so any nested route can be expressed by query parameters. For example if you have a user service and would like to get all todos (assuming the associated user id is stored in each todo) for that user the url would be `/todos?userId=<userid>`.
-
-You can however add Express style parameters to your routes when you register a service which will then be set in the `params` object in each service call. For example a `/users/:userId/todos` route can be provided like this:
-
-```js
-app.use('/users/:userId/todos', {
-  find: function(params, calllback) {
-    // params.userId == current user id
-  },
-  create: function(data, params, callback) {
-    data.userId = params.userId;
-    // store the data
-  }
-})
-```
-
-__Note:__ This route has to be registered _before_ the `/users` service otherwise the `get` route from the user service at `/users` will be matched first.
-
 
 
 ## What about koa?
