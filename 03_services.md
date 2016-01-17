@@ -1,4 +1,4 @@
-# Feathers Services
+# Services
 
 As mentioned, the basic Feathers functionality is fully compatible with Express. The key concept added to that of middleware is *service* objects. A service can be any JavaScript object that offers one or more of the `find`, `get`, `create`, `update`, `remove` and `setup` service methods with the following signatures:
 
