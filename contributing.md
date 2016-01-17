@@ -8,21 +8,22 @@ The docs are all written in [GitHub Flavored Markdown](https://help.github.com/a
 
 ### Organizing Files
 
-You'll notice that the [GitHub Repo](https://github.com/feathersjs/feathers-docs) is organized in a simple, flat, file structure.  Each file is prefixed with the chapter number.  For example, this contributing guide is named `01_contributing.md`.  Some of the chapters are split into multiple sections.  The `real-time` chapter spans multiple files, so the first is `05.0_real-time.md` and the following sections are prefixed with `05.1`, `05.2`, etc.  The numbering system helps keep things organized for the next person that wants to edit the docs, so please keep any file edits nicely numbered.
+You'll notice that the [GitHub Repo](https://github.com/feathersjs/feathers-docs) is organized in a simple, flat, file structure.  The first file in each chapter is named as a description of the entire chapter's topic.  For example, this contributing guide is named `contributing.md`.  Some of the chapters are split into multiple sections. All subsections are prefixed with the same topic, separated by a `.`.  So, because the `providers` chapter spans multiple files, the first file is named `providers.md`, the next section is `providers.rest.md`, etc.  This naming system helps keep chapters together in the file system.  In order to see the chapter ordering, you'll need to open the table of contents file.
 
-### Managing the Table of Contents
+### Table of Contents
 
 [SUMMARY.md](https://github.com/feathersjs/feathers-docs/blob/master/SUMMARY.md) = Table of Contents.
 
-You'll find the table of contents in the [SUMMARY.md](https://github.com/feathersjs/feathers-docs/blob/master/SUMMARY.md) file.  It's a list of markdown links.  You can link to a file simply by putting the filename (including the `.md` extension) inside the link parentheses.
+You'll find the table of contents in the [SUMMARY.md](https://github.com/feathersjs/feathers-docs/blob/master/SUMMARY.md) file.  It's a nested list of markdown links.  You can link to a file simply by putting the filename (including the extension) inside the link target.
 
-So that's it. You make your edits, keep your files and the Table of Contents organized, and send us a pull request.
-
-### The Introduction Page
+### Introduction Page
 
 Intro Page = [README.md](https://github.com/feathersjs/feathers-docs/blob/master/README.md)
 
 If you feel like you want to give the introduction page some shine and polish, you'll find it in the [README.md](https://github.com/feathersjs/feathers-docs/blob/master/README.md).
+
+### Send a Pull Request
+So that's it. You make your edits, keep your files and the Table of Contents organized, and send us a pull request.
 
 ### Enjoy the Offline Docs
 Moments after your edits are merged, they will be automatically published to the web, as a downloadable PDF, .mobi file (Kindle compatible), and ePub file (iBooks compatible).
