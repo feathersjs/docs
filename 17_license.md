@@ -1,9 +1,3 @@
----
-title: License
-layout: docs
-permalink: /docs/license/
----
-
 ## The MIT license
 
 Copyright (C) 2015 [Feathers contributors](https://github.com/feathersjs/feathers/graphs/contributors)

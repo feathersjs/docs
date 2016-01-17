@@ -1,3 +1,5 @@
 Welcome to the Feathers Book
 
-This is where we can put an intro to Feathers and maybe how it is spread out across repos and modules.
+Feathers makes it easy to create shared, RESTful web services and real-time applications using Socket.io and several other WebSocket libraries supported by [Primus](http://primus.io).
+
+Feathers extends [Express 4](http://expressjs.com), one of the most popular web frameworks for [NodeJS](http://nodejs.org/).
