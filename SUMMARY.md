@@ -15,6 +15,7 @@
 * [Data Adapters](adapters.md)
 * [Hooks](hooks.md)
 * [Middleware](middleware.md)
+* Routing
 * [Front End](frontend.md)
    * [Feathers](frontend.feathers.md)
    * [DoneJS](frontend.donejs.md)
@@ -36,5 +37,4 @@
 * [FAQ](faq.md)
 * [Changelog](changelog.md)
 * [License](license.md)
-* Routing
 
