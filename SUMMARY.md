@@ -14,7 +14,7 @@
 * [Events](events.md)
 * [Data Adapters](adapters.md)
 * [Hooks](hooks.md)
-* Middleware
+* [Middleware](middleware.md)
 * [Front End](frontend.md)
    * [Feathers](frontend.feathers.md)
    * [DoneJS](frontend.donejs.md)
