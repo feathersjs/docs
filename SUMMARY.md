@@ -10,7 +10,7 @@
    * [Realtime](providers.real-time.md)
        * [Socket.io](providers.real-time.socket-io.md)
        * [Primus](providers.real-time.primus.md)
-   * [Create a Provider](providers.create-a-provider.md)
+   * [Create a Provider](providers.create.md)
 * [Events](events.md)
 * [Database Adapters](adapters.md)
 * [Hooks](hooks.md)
