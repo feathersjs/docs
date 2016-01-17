@@ -12,7 +12,7 @@ app.use('/todos', ensureAuthenticated, logRequest, todoService);
 Keep in mind that shared authentication (between REST and websockets) should use a service based approach as described in the [authentication section of the guide](/learn/authentication).
 
 
-## Nested routes
+## Nested Routes
 
 Feathers does not provide an ORM so it does not know about associations between your services. Generally services are connected by their resource ids so any nested route can be expressed by query parameters. For example if you have a user service and would like to get all todos (assuming the associated user id is stored in each todo) for that user the url would be `/todos?userId=<userid>`.
 
