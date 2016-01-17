@@ -3,6 +3,7 @@
 ## Supported Data Stores:
 - Memory - [feathers-memory](adapters.memory.md)
 - MongoDB - [feathers-mongoose](adapters.mongoose.md)
+- NeDB - [feathers-nedb](adapters.nedb.md)
 - MySQL
     - [feathers-knex](adapters.knex.md)
     - [feathers-sequelize](adapters.sequelize.md)
