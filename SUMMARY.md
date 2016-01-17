@@ -10,7 +10,7 @@
 * [Front End](06_frontend.md)
 * [Mobile](07_mobile.md)
 * [Setting Up Authentication](08.0_authentication.md)
-   * [Setting Up Local Auth](08.1_local-auth.md)
+   * [Local Auth (username & password)](08.1_local-auth.md)
 * [Authorization / Access Control](09_authorization.md)
 * [Microservices](09_microservices.md)
 * [Performance](10_performance.md)
