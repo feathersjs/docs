@@ -8,6 +8,7 @@
  - PostgreSQL, MySQL, MariaDB, and SQLite
   - [feathers-knex](adapters.knex.md)
   - [feathers-sequelize](adapters.sequelize.md)
+ - Oracle - [feathers-knex](adapters.knex.md)
  - Microsoft SQL Server
     - [feathers-sequelize](adapters.sequelize.md)
     
