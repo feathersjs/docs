@@ -22,8 +22,6 @@ __Note:__ This route has to be registered _before_ the `/users` service otherwis
 
 
 
-
-
 ## What about koa?
 
 Koa is a *"next generation web framework for Node.JS"* using ES6 generator functions instead of Express middleware. This approach does unfortunately not easily play well with Feathers services so there are no direct plans yet to use it as a future base for Feathers.
