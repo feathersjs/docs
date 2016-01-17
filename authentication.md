@@ -11,4 +11,6 @@ The [feathers-authentication](https://github.com/feathersjs/feathers-authenticat
 
 
 ## Other Auth Plugins
-Feathers is based on Express. It's likely that an auth plugin used for Express can also work for Feathers.  If you have an authentication method that you would like listed here, please [submit a pull request](contributing.md).
+Feathers is based on Express. It's likely that an auth plugin used for Express can also work for Feathers.
+
+If you have an authentication method that you would like listed here, please [submit a pull request](contributing.md).
