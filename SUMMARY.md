@@ -16,4 +16,5 @@
 * [API](11_api.md)
 * [FAQ](12_faq.md)
 * [Changelog](13_changelog.md)
+* Authorization / Access Control
 
