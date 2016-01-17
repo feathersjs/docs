@@ -5,7 +5,7 @@
  - MongoDB: [feathers-mongoose](adapters.mongoose.md)
  - NeDB - [feathers-nedb](adapters.nedb.md)
  - Waterline - [feathers-waterline](adapters.waterline.md)
- - PostgreSQL, MySQL, MariaDB, SQLite3, and Oracle
+ - PostgreSQL, MySQL, MariaDB, and SQLite
   - [feathers-knex](adapters.knex.md)
   - [feathers-sequelize](adapters.sequelize.md)
  - Microsoft SQL Server
