@@ -12,7 +12,7 @@
        * [Primus](providers.real-time.primus.md)
    * [Create a Provider](providers.create.md)
 * [Events](events.md)
-* [Database Adapters](adapters.md)
+* [Data Adapters](adapters.md)
 * [Hooks](hooks.md)
 * [Front End](frontend.md)
    * [Feathers](frontend.feathers.md)
