@@ -21,61 +21,6 @@ app.use('/users/:userId/todos', {
 __Note:__ This route has to be registered _before_ the `/users` service otherwise the `get` route from the user service at `/users` will be matched first.
 
 
-
-
-
-## Add authentication
-
-Generally any authentication mechanism used for Express can also be implemented in Feathers.
-
-Please refer to the [authentication](/learn/authentication/) and [authorization](/learn/authorization) section of the guide and, in more detail, the [feathers-hooks](https://github.com/feathersjs/feathers-hooks) and [feahters-passport](https://github.com/feathersjs/feathers-passport) modules for more information.
-
-## Only send certain events
-
-In almost any larger application not every user is supposed to receive every event through websockets. The [event filtering section](/api/#event-filtering) in the API documentation contains detailed documentation on how to only send events to authorized users.
-
-The following example only dispatches the Todo `updated` event if the authorized user belongs to the same company:
-
-```js
-app.configure(feathers.socketio(function(io) {
-  io.use(function (socket, callback) {
-    // Authorize using the /users service
-    app.lookup('users').find({
-      username: handshake.username,
-      password: handshake.password
-    }, function(error, user) {
-      if(!error || !user) {
-        return callback(error, false);
-      }
-
-      socket.feathers = {
-        user: user
-      };
-
-      callback(null, true);
-    });
-  });
-}));
-
-app.use('todos', {
-  update: function(id, data, params, callback) {
-    // Update
-    callback(null, data);
-  },
-
-  updated: function(todo, params, callback) {
-    // params === handshake.feathers
-    if(todo.companyId === params.user.companyId) {
-      // Dispatch the todo data to this client
-      return callback(null, todo);
-    }
-
-    // Call back with a falsy value to prevent dispatching
-    callback(null, false);
-  }
-});
-```
-
 ## Custom service middleware
 
 Custom Express middleware that only should be run before a specific service can simply be passed to `app.use` before the service object:
