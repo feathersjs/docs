@@ -1,6 +1,8 @@
 # Data Adapters
 
-## Supported Data Stores:
+Because Feathers is isomorphic, it can support data stores on both the server and the browser.
+
+## Server-Side Data Stores:
  - **Memory** - [feathers-memory](adapters.memory.md)
  - **MongoDB** - [feathers-mongoose](adapters.mongoose.md)
  - **NeDB** - [feathers-nedb](adapters.nedb.md)
@@ -24,6 +26,8 @@
   - Apache Cassandra
   - GraphQL
   - Solr
+
+## Client-Side Data Stores  
     
 ## Built-in Pagination Support
 TODO: Pagination example.  Explanation of how it works.  Which adapters support it?  Is this the best place for this?
