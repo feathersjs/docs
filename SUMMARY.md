@@ -27,7 +27,7 @@
 * [Authorization / Access Control](11_authorization.md)
 * [Microservices](12_microservices.md)
 * [Performance](13_performance.md)
-* [Plugins](02.2_generator-feathers-plugin.md)
+* [Plugins](14.0_plugins.md)
    * [The Plugin Generator](14.1_plugin-generator.md)
 * [API](14_api.md)
 * [FAQ](15_faq.md)
