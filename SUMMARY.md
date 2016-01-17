@@ -10,6 +10,7 @@
 * [Front End](06_frontend.md)
 * [Mobile](07_mobile.md)
 * [Authentication](08_authentication.md)
+   * Setting Up Local Auth
 * [Microservices](09_microservices.md)
 * [Performance](10_performance.md)
 * [API](11_api.md)
