@@ -30,6 +30,3 @@ Because Feathers is isomorphic, it can support data stores on both the server an
 ## Client-Side Data Stores
 
 TODO: List the data stores available in the browser.
-    
-## Built-in Pagination Support
-TODO: Pagination example.  Explanation of how it works.  Which adapters support it?  Is this the best place for this?
