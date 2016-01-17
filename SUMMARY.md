@@ -14,6 +14,7 @@
 * [Events](events.md)
 * [Data Adapters](adapters.md)
    * [feathers-memory](adapters.memory.md)
+   * feathers-mongoose
 * [Hooks](hooks.md)
 * [Middleware](middleware.md)
 * [Versioning](versioning.md)
