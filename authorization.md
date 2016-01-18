@@ -1,6 +1,6 @@
 # Authorization / Access Control
 
-**TODO: Review this section.**
+TODO: This section needs review.
 
 Once we know which user we are working with, we need to know which parts of the app they have access to. This is called Authorization, and it's where hooks really come in handy.
 
