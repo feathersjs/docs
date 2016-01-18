@@ -26,6 +26,7 @@
 * [Hooks](hooks.md)
 * [Middleware](middleware.md)
 * [Versioning](versioning.md)
+* Configuration
 * [Authentication](authentication.md)
    * [Local (username & password)](authentication.local.md)
 * [Authorization / Access Control](authorization.md)
@@ -50,5 +51,4 @@
 * [FAQ](faq.md)
 * [Changelog](changelog.md)
 * [License](license.md)
-* Configuration
 
