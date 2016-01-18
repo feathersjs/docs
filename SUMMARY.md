@@ -25,7 +25,7 @@
    * [Client-Side](adapters.client.md)
 * [Hooks](hooks.md)
 * [Middleware](middleware.md)
-* [Versioning](versioning.md)
+* [Routing & Versioning](versioning.md)
 * [Configuration](configuration.md)
 * [Authentication](authentication.md)
    * [Local (username & password)](authentication.local.md)
