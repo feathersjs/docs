@@ -2,7 +2,7 @@
 
 * [Introduction](README.md)
 * [Help Write the Feathers Book](contributing.md)
-* Getting Help
+* [Getting Help](getting-help.md)
 * [Quick Start](quick-start.md)
    * [Feathers Generator](quick-start.generator-feathers.md)
 * [Services](services.md)
