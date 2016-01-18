@@ -1,4 +1,4 @@
 # Data Adapters
 
-Because Feathers is isomorphic, it supports [Server-Side data stores](adapters.server.md) and [Client-Side data stores](adapters.client.md).
+An Adapter is at the heart of every service.  Adapters connect services to a data store of some sort. Because Feathers is isomorphic, it supports [Server-Side data stores](adapters.server.md) and [Client-Side data stores](adapters.client.md).
 
