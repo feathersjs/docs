@@ -7,7 +7,7 @@ Cookie-based and token-based authentication are the two most-common methods of p
 ## The `feathers-authentication` plugin
 The [feathers-authentication](https://github.com/feathersjs/feathers-authentication) plugin makes it easy to add token-based auth to your app. Choose a tutorial below to get started.
 
-* [Setting Up Local Auth](08.1_local-auth.md) (username and password)
+* [Setting Up Local Auth](authentication.local.md) (username and password)
 
 
 ## Other Auth Plugins
