@@ -3,7 +3,7 @@
 
 ## Custom service middleware
 
-Custom Express middleware that only should be run before a specific service can simply be passed to `app.use` before the service object:
+Custom Express middleware that only should run before a specific service can be passed to `app.use` before the service object:
 
 ```js
 app.use('/todos', ensureAuthenticated, logRequest, todoService);
