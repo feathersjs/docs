@@ -1,5 +1,41 @@
 # Events
 
+
+## Better Event Filtering
+// TODO: Add some information about what we're doing here.  Taken from https://github.com/feathersjs/feathers-socketio/issues/2
+```js
+const todos = app.service('todos');
+
+// Blanket filter out all connections that don't belong to the same company
+todos.filter(function(data, connection) {
+  if(data.company_id !== connection.user.company_id) {
+    return false;
+  }
+
+  return data;
+});
+
+// After that, filter todos, if the user that created it
+// and the connected user aren't friends
+todos.filter('created', function(data, connection, hook) {
+  const todoUserId = hook.params.user._id;
+  const currentUserFriends = connection.user.friends;
+
+  if(currentUserFriends.indexOf(todoUserId) === -1) {
+    return false;
+  }
+
+  return data;
+});
+
+// Other ways to use it
+todos.filter({
+  removed: [a, b],
+  updated: function(data, connection, hook, callback) {}
+});
+```
+
+
 ## Get websocket events from REST calls
 
 Every service emits all events no matter from where it has been called. So even creating a new Todo internally on the server will send the event out on every socket that should receive it. This is very similar to what [Firebase](http://firebase.io/) does (but for free and open source). For a more detailed comparison and migration guide read [Feathers as an open source alternative to Firebase](https://medium.com/all-about-feathersjs/using-feathersjs-as-an-open-source-alternative-to-firebase-b5d93c200cee).
