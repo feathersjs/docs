@@ -22,6 +22,8 @@ main.use('/api', api);
 
 Now your service will be exposed at /api/todos.
 
+<hr>
+
 **Another note:** In 1.x you will still have to call api.setup() manually and the websocket routes will not be updated (meaning you still listen to things like socket.on('todo created')) like this:
 
 ```js
