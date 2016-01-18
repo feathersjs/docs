@@ -5,7 +5,7 @@ TODO: Show how to implement access control with `feathers-hooks`.
 Once we know which user we are working with, we need to know which parts of the app they have access to. This is called Authorization, and it's where hooks really come in handy.
 
 ## Adding user information to requests.
-The `feathers-authentication` plugin, upon login, gives back an encrypted token containing information about the user. Since that token is required for every request, we will need to decode the token in order to identify the user.
+The `feathers-authentication` plugin, upon login, gives back an encrypted token containing information about the user.  The auth plugin also includes a special middleware that decrypts any tokens coming found in the Authorization header of requests that come through the REST provider.
 
 ## User authorization
 Since `feathers-authentication` adds the authenticated user information to the service call parameters we can just check those in the hook and return with an error if the user is not authorized:
