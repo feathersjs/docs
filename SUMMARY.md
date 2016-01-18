@@ -5,6 +5,7 @@
 * [Quick Start](quick-start.md)
    * [Feathers Generator](quick-start.generator-feathers.md)
 * [Services](services.md)
+   * Extending Services
 * [Providers](providers.md)
    * [REST](providers.rest.md)
    * [Realtime](providers.real-time.md)
