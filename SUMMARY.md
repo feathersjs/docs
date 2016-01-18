@@ -35,7 +35,7 @@
        * [DoneJS](frontend.donejs.md)
        * [React](frontend.react.md)
        * [Angular](frontend.angular.md)
-       * CanJS
+       * [CanJS](frontend.frameworks.canjs.md)
 * [Mobile](mobile.md)
    * [React Native](mobile.react-native.md)
    * [iOS](mobile.ios.md)
