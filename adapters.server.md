@@ -1,17 +1,17 @@
 # Server-Side Adapters
 
- - **Memory** - [feathers-memory](adapters.memory.md)
- - **MongoDB** - [feathers-mongoose](adapters.mongoose.md)
- - **NeDB** - [feathers-nedb](adapters.nedb.md)
+ - **Memory** - [feathers-memory](adapters.server.memory.md)
+ - **MongoDB** - [feathers-mongoose](adapters.server.mongoose.md)
+ - **NeDB** - [feathers-nedb](adapters.server.nedb.md)
  - **PostgreSQL, MySQL, MariaDB, and SQLite**
-  - [feathers-knex](adapters.knex.md)
-  - [feathers-sequelize](adapters.sequelize.md)
- - **Oracle** - [feathers-knex](adapters.knex.md)
+  - [feathers-knex](adapters.server.knex.md)
+  - [feathers-sequelize](adapters.server.sequelize.md)
+ - **Oracle** - [feathers-knex](adapters.server.knex.md)
  - **Microsoft SQL Server**
-    - [feathers-sequelize](adapters.sequelize.md)
+    - [feathers-sequelize](adapters.server.sequelize.md)
 
 
- - **Waterline** -  [feathers-waterline](adapters.waterline.md) adds support for the following data stores:
+ - **Waterline** -  [feathers-waterline](adapters.server.waterline.md) adds support for the following data stores:
   - Redis
   - Riak
   - IRC
