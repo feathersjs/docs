@@ -1,6 +1,6 @@
 # Setting up Local Auth
 
-A `local` auth strategy authenticates users against users in the local database. The [feathers-authentication](https://github.com/feathersjs/feathers-authenication) plugin makes it easy to add local auth to your app.
+A `local` auth strategy authenticates users against users in the local database. The [feathers-authentication](https://github.com/feathersjs/feathers-authentication) plugin makes it easy to add local auth to your app.
 
 If you already have an app started, you can simply add the following lines to your server setup.  Just make sure you have used the `bodyParser` and, if applicable, `cors` plugins before you use the `feathers-authentication` plugin.
 ```js
