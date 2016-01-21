@@ -165,4 +165,4 @@ socket = io('', {
 In the above example, the `transports` key is only needed if you, for some reason, need to force the browser to only use websockets.  The `forceNew` key is only needed if you have previously connected an *unauthenticated* Websocket connection and you now want to start an *authenticated* request.
 
 ### What's next?
-Adding authentication allows you to know **who** users are. Now you'll want to specify **what** they can do. This is done using authorization hooks. Learn more about it in the section on [Authorization](authorization.md).
+Adding authentication allows you to know **who** users are. Now you'll want to specify **what** they can do. This is done using authorization hooks. Learn more about it in the [Authorization section](authorization.md).
