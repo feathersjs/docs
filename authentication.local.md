@@ -9,7 +9,7 @@ app.configure(feathersAuth({
 }));
 ```
 
-See the [feathers-authentication api options](https://github.com/feathersjs/feathers-authenication#options) for all available configuration options.
+See the [feathers-authentication api options](https://github.com/feathersjs/feathers-authentication#options) for all available configuration options.
 
 ## Getting Started Tutorial
 
