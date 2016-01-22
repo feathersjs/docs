@@ -1,6 +1,6 @@
 # Services
 
-Services are the heart of every Feathers application. A service can be any JavaScript object that offers one or more of the `find`, `get`, `create`, `update`, `remove` and `setup` service methods and can be used just like an [Express middleware](http://expressjs.com/en/guide/using-middleware.html) with `app.use('/path', serviceObject)`. A very simple service can look like this:
+Services are the heart of every Feathers application. A service can be any JavaScript object that offers one or more of the `find`, `get`, `create`, `update`, `remove` and `setup` service methods. It can be used just like an [Express middleware](http://expressjs.com/en/guide/using-middleware.html) with `app.use('/path', serviceObject)`. A very simple service can looks like this:
 
 ```js
 import feathers from 'feathers';
@@ -17,7 +17,7 @@ app.use('/todos', {
 });
 ```
 
-With the [REST provider](rest.html) set up, going to visiting `/todos/dishes` in the browser will return a JSON object like this:
+With the [REST provider](rest.html) set up, going to `/todos/dishes` in the browser will return a JSON object like this:
 
 ```json
 {
@@ -26,7 +26,7 @@ With the [REST provider](rest.html) set up, going to visiting `/todos/dishes` in
 }
 ```
 
-Here is the complete list of service method signatures:
+The complete list of service method signatures is as follows:
 
 ```js
 const myService = {
@@ -52,7 +52,7 @@ class MyService {
   update(id, data, params [, callback]) {}
   patch(id, data, params [, callback]) {}
   remove(id, params [, callback]) {}
-  setup(app) {}
+  setup(app, path) {}
 }
 
 app.use('/my-service', new MyService());
@@ -63,7 +63,7 @@ app.use('/my-service', new MyService());
 Service methods should return a [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) as in the example above and use the following parameters:
 
 - `id` is the unique identifier for the resource
-- `data` is the resource data object
+- `data` is the resource data
 - `params` can contain any extra parameters, for example the authenticated user. `params.query` contains the query parameters from the client (see the [REST](rest.html) and [real-time](real-time.html) providers).
 - `callback` can be called instead of returning a Promise. It is a Node-style callback function following the `function(error, data)` convention.
 
