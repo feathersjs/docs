@@ -12,8 +12,8 @@
    * In Memory
    * NeDB
    * Mongoose
-   * [Waterline](db.waterline.md)
    * KnexJS
+   * [Waterline](db.waterline.md)
 * [Hooks](hooks.md)
 * [Middleware](middleware.md)
 * [Routing & Versioning](versioning.md)
