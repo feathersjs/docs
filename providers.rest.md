@@ -1,4 +1,4 @@
-# The REST Provider
+# The REST API Provider
 
 ## Configuring
 
