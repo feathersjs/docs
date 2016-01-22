@@ -1,7 +1,7 @@
 # Summary
 
 * [Getting Started](README.md)
-* [Quick Start](quick-start.md)
+    * [Quick Start](quick-start.md)
 * [Services](services.md)
 * [REST](providers.rest.md)
 * [Real-Time](providers.real-time.md)
