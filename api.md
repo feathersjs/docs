@@ -1,6 +1,19 @@
 # API
 
-Just like the module itself, Feathers core API is very small. An initialized application provides the same functionality as an [Express 4](http://expressjs.com/en/4x/api.html) application. The differences and two additional methods and their usage are outlined in this chapter.
+Feathers core API is very small and an initialized application provides the same functionality as an [Express 4](http://expressjs.com/en/4x/api.html) application. The differences and additional methods and their usage are outlined in this chapter.
+
+## configure
+
+`app.configure(callback)` runs a `callback` function with the application as the context (`this`). It can be used to initialize plugins or services.
+
+```js
+function setupService() {
+    this.use('/todos', todoService);
+}
+
+app.configure(setupService);
+```
+
 
 ## listen
 
@@ -91,7 +104,9 @@ app.use('/my/todos', {
 
 var todoService = app.service('my/todos');
 // todoService is an event emitter
-todoService.on('created', todo => console.log('Created todo', todo));
+todoService.on('created', todo => 
+    console.log('Created todo', todo)
+);
 ```
 
-You can use `app.service(path, service)` instead `app.use(path, service)` if you want to be more explicit that you are registering a service. It is what is called internally by `app.use([path], service)` if a service object is being passed. `app.service` does __not__ provide the Express `app.use` functionality and does not check the service object for valid methods.
+You can use `app.service(path, service)` instead `app.use(path, service)` if you want to be more explicit that you are registering a service. It is called internally by `app.use([path], service)` if a service object is passed. `app.service` does __not__ provide the Express `app.use` functionality and does not check the service object for valid methods.
