@@ -60,9 +60,9 @@ app.use('/my-service', new MyService());
 
 ## Service methods
 
-Service methods should return a [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) as in the example above and use the following parameters:
+Service methods should return a [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) and use the following parameters:
 
-- `id` is the unique identifier for the resource
+- `id` is the unique identifier for the resource. A resource is the data identified by a unique id.
 - `data` is the resource data
 - `params` can contain any extra parameters, for example the authenticated user. `params.query` contains the query parameters from the client (see the [REST](rest.html) and [real-time](real-time.html) providers).
 - `callback` can be called instead of returning a Promise. It is a Node-style callback function following the `function(error, data)` convention.
