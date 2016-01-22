@@ -2,7 +2,6 @@
 
 * [Introduction](README.md)
 * [Quick Start](quick-start.md)
-   * [Feathers Generator](quick-start.generator-feathers.md)
 * [Services](services.md)
 * [REST](providers.rest.md)
 * [Real-Time](providers.real-time.md)
