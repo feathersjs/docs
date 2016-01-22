@@ -15,7 +15,6 @@
    * [Local (username & password)](authentication.local.md)
 * [Authorization / Access Control](authorization.md)
 * [Front End](frontend.md)
-   * [Pagination](frontend.pagination.md)
 * [API](api.md)
 * [Guides](how_to.md)
    * Creating a plugin
