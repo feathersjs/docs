@@ -1,5 +1,7 @@
 # API
 
+Just like the module itself, Feathers core API is very small. An initialized application provides the same functionality as an [Express 4](http://expressjs.com/en/4x/api.html) application. The differences and two additional methods and their usage are outlined in this chapter.
+
 ## listen
 
 `app.listen([port])` starts the application on the given port. It will first call the original [Express app.listen([port])](http://expressjs.com/api.html#app.listen), then run `app.setup(server)` (see below) with the server object and then return the server object.
@@ -16,10 +18,12 @@ __HTTPS__
 With your Feathers application initialized it is easy to set up an HTTPS REST and SocketIO server:
 
 ```js
-app.configure(feathers.socketio()).use('/todos', todoService);
+import fs from 'fs';
+import https from 'https';
 
-var https = require('https');
-var server = https.createServer({
+app.configure(socketio()).use('/todos', todoService);
+
+const server = https.createServer({
   key: fs.readFileSync('privatekey.pem'),
   cert: fs.readFileSync('certificate.pem')
 }, app).listen(443);
@@ -33,12 +37,12 @@ __Virtual Hosts__
 You can use the [vhost](https://github.com/expressjs/vhost) middleware to run your Feathers app on a virtual host:
 
 ```js
-var vhost = require('vhost')
+import vhost from 'vhost';
 
 app.use('/todos', todoService);
 
-var host = feathers().use(vhost('foo.com', app));
-var server = host.listen(8080);
+const host = feathers().use(vhost('foo.com', app));
+const server = host.listen(8080);
 
 // Here we need to call app.setup because .listen on our virtal hosted
 // app is never called
@@ -63,10 +67,10 @@ app.use(function(req,res,next){
 });
 // Add a service.
 app.use('/todos', {
-  get: function(name, params, callback) {
-    callback(null, {
-      id: name,
-      description: "You have to do " + name + "!"
+  get(id, params, callback) {
+    return Promise.resolve({
+      id,
+      description: `You have to do ${name}!`
     });
   }
 });
