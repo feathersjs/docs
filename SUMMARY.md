@@ -10,8 +10,8 @@
    * [Events](events.md)
 * [Databases](databases.md)
    * In Memory
-   * [Waterline](db.waterline.md)
    * NeDB
+   * [Waterline](db.waterline.md)
 * [Hooks](hooks.md)
 * [Middleware](middleware.md)
 * [Routing & Versioning](versioning.md)
