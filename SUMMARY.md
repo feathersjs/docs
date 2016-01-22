@@ -9,7 +9,7 @@
    * [Primus](providers.real-time.primus.md)
    * [Events](events.md)
 * [Databases](databases.md)
-   * Querying and Pagination
+   * [Querying and Pagination](db.querying.md)
    * [In Memory](db.in_memory.md)
    * [NeDB](db.nedb.md)
    * [Mongoose](db.mongoose.md)
