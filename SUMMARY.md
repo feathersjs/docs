@@ -10,7 +10,7 @@
    * [Events](events.md)
 * [Databases](databases.md)
    * [In Memory](db.in_memory.md)
-   * NeDB
+   * [NeDB](db.nedb.md)
    * Mongoose
    * Sequelize
    * KnexJS
