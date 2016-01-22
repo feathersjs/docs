@@ -37,11 +37,11 @@
 * [API](api.md)
    * [App](api.app.md)
    * [Service](api.service.md)
+* How To
 * [Feathers vs.](versus.md)
 * [FAQ](faq.md)
 * [Getting Help](getting-help.md)
 * [Contributing](contributing.md)
 * [Changelog](changelog.md)
 * [License](license.md)
-* How To
 
