@@ -12,7 +12,7 @@
    * [In Memory](db.in_memory.md)
    * [NeDB](db.nedb.md)
    * [Mongoose](db.mongoose.md)
-   * Sequelize
+   * [Sequelize](db.sequelize.md)
    * KnexJS
    * [Waterline](db.waterline.md)
 * [Hooks](hooks.md)
