@@ -37,7 +37,7 @@
    * [App](api.app.md)
    * [Service](api.service.md)
 * [Guides](how_to.md)
-   * Create a plugin
+   * Creating a plugin
    * React and React Native
    * CanJS
 * [Feathers vs.](versus.md)
