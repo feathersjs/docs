@@ -51,4 +51,5 @@
 * [FAQ](faq.md)
 * [Changelog](changelog.md)
 * [License](license.md)
+* Contributing to Feathers
 
