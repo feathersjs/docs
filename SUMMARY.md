@@ -14,7 +14,7 @@
    * [Mongoose](adapters.server.mongoose.md)
    * [Knex](adapters.server.knex.md)
    * [Sequelize](adapters.server.sequelize.md)
-   * [feathers-waterline](adapters.server.waterline.md)
+   * [Waterline](adapters.server.waterline.md)
 * [Hooks](hooks.md)
 * [Middleware](middleware.md)
 * [Routing & Versioning](versioning.md)
