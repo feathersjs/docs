@@ -19,6 +19,7 @@
    * [Waterline](db.waterline.md)
 * [Hooks](hooks.md)
 * [Middleware](middleware.md)
+   * Hooks
 * [Routing & Versioning](versioning.md)
 * [Authentication](authentication.md)
    * [Local (username & password)](authentication.local.md)
