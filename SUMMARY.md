@@ -22,7 +22,6 @@
    * [Express middleware](express-middleware.md)
    * [Versioning](versioning.md)
 * [Authentication](authentication.md)
-   * [Local (username & password)](authentication.local.md)
 * [Authorization / Access Control](authorization.md)
 * [Front End](frontend.md)
 * [API Documentation](api.md)
