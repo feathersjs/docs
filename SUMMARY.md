@@ -13,6 +13,7 @@
    * NeDB
    * Mongoose
    * [Waterline](db.waterline.md)
+   * KnexJS
 * [Hooks](hooks.md)
 * [Middleware](middleware.md)
 * [Routing & Versioning](versioning.md)
