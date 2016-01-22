@@ -1,4 +1,4 @@
-# Setting Up Authentication
+# Authentication
 
 At some point, you are probably going to put information in your databases that you want to keep private. You'll need to implement an `authentication` scheme to identify your users, and `authorization` to control access to resources.  
 
@@ -7,10 +7,10 @@ Cookie-based and token-based authentication are the two most-common methods of p
 ## The `feathers-authentication` plugin
 The [feathers-authentication](https://github.com/feathersjs/feathers-authentication) plugin makes it easy to add token-based auth to your app. Choose a tutorial below to get started.
 
-* [Setting Up Local Auth](authentication.local.md) (username and password)
+* [Setting Up Local Auth](local.md) (username and password)
 
 
 ## Other Authentication Plugins
 Feathers is based on Express. It's likely that an auth plugin used for Express can also work for Feathers.
 
-If you have an authentication method that you would like listed here, please [submit a pull request](contributing.md).
+If you have an authentication method that you would like listed here, please [submit a pull request](../contributing.md).

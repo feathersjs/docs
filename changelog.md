@@ -1,4 +1,22 @@
 # Changelog
+
+__2.0.0__
+
+- Separate API providers into [feathers-rest](), [feathers-socketio]() and [feathers-primus]()
+- Make Feathers universal (isomorphic)
+- Change websocket service paths to use parent application mountpoint
+- Migrate codebase to ES6
+
+__1.3.0__
+
+- Add ability to create, update, patch and remove many ([#144](https://github.com/feathersjs/feathers/issues/144), [#179](https://github.com/feathersjs/feathers/pull/179))
+- Handle middleware passed after the service to app.use ([#176](https://github.com/feathersjs/feathers/issues/176), [#178](https://github.com/feathersjs/feathers/pull/178))
+
+__1.2.0__
+
+- Add hook object to service events parameters ([#148](https://github.com/feathersjs/feathers/pull/148))
+- Argument normalization runs before event mixin punched methods ([#150](https://github.com/feathersjs/feathers/issues/150))
+
 __1.1.1__
 
 - Fix 404 not being properly thrown by REST provider ([#146](https://github.com/feathersjs/feathers/pull/146))
