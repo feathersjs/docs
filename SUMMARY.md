@@ -32,7 +32,6 @@
        * [Angular](frontend.angular.md)
        * [CanJS](frontend.frameworks.canjs.md)
 * [Mobile](mobile.md)
-   * [iOS](mobile.ios.md)
 * [Microservices](microservices.md)
 * [Performance](performance.md)
 * [Plugins](plugins.md)
