@@ -49,7 +49,7 @@
    * [App](api.app.md)
    * [Service](api.service.md)
 * [FAQ](faq.md)
+* Contributing to Feathers
 * [Changelog](changelog.md)
 * [License](license.md)
-* Contributing to Feathers
 
