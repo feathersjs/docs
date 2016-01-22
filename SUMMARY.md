@@ -11,7 +11,7 @@
 * [Databases](databases.md)
    * [In Memory](databases.memory.md)
    * [NeDB](databases.nedb.md)
-   * [Mongoose](adapters.server.mongoose.md)
+   * [Mongoose](databases.mongoose.md)
    * [Knex](adapters.server.knex.md)
    * [Sequelize](adapters.server.sequelize.md)
    * [Waterline](adapters.server.waterline.md)
