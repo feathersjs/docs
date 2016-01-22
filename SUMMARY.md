@@ -11,7 +11,7 @@
 * [Databases](databases.md)
    * [In Memory](db.in_memory.md)
    * [NeDB](db.nedb.md)
-   * Mongoose
+   * [Mongoose](db.mongoose.md)
    * Sequelize
    * KnexJS
    * [Waterline](db.waterline.md)
