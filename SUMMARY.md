@@ -8,7 +8,7 @@
    * [Socket.io](providers.real-time.socket-io.md)
    * [Primus](providers.real-time.primus.md)
    * [Events](events.md)
-* [Databases](adapters.md)
+* [Databases](databases.md)
    * [In Memory](adapters.server.memory.md)
    * [NeDB](adapters.server.nedb.md)
    * [Mongoose](adapters.server.mongoose.md)
