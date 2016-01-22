@@ -11,6 +11,7 @@
 * [Databases](adapters.md)
    * [In Memory](adapters.server.memory.md)
    * [Mongoose](adapters.server.mongoose.md)
+   * [feathers-nedb](adapters.server.nedb.md)
    * [Server-Side](adapters.server.md)
        * [feathers-nedb](adapters.server.nedb.md)
        * [feathers-knex](adapters.server.knex.md)
