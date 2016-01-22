@@ -9,6 +9,7 @@
    * [Primus](providers.real-time.primus.md)
    * [Events](events.md)
 * [Databases](databases.md)
+   * Waterline
 * [Hooks](hooks.md)
 * [Middleware](middleware.md)
 * [Routing & Versioning](versioning.md)
