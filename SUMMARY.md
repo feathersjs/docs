@@ -9,6 +9,7 @@
    * [Primus](providers.real-time.primus.md)
    * [Events](events.md)
 * [Databases](adapters.md)
+   * [feathers-memory](adapters.server.memory.md)
    * [Server-Side](adapters.server.md)
        * [feathers-memory](adapters.server.memory.md)
        * [feathers-mongoose](adapters.server.mongoose.md)
