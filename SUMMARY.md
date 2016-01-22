@@ -16,7 +16,6 @@
        * [feathers-knex](adapters.server.knex.md)
        * [feathers-sequelize](adapters.server.sequelize.md)
        * [feathers-waterline](adapters.server.waterline.md)
-   * [Client-Side](adapters.client.md)
 * [Hooks](hooks.md)
 * [Middleware](middleware.md)
 * [Routing & Versioning](versioning.md)
