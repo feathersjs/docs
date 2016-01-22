@@ -9,7 +9,7 @@
    * [Primus](providers.real-time.primus.md)
    * [Events](events.md)
 * [Databases](databases.md)
-   * In Memory
+   * [In Memory](db.in_memory.md)
    * NeDB
    * Mongoose
    * Sequelize
