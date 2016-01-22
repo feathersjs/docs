@@ -24,7 +24,7 @@
    * [Local (username & password)](authentication.local.md)
 * [Authorization / Access Control](authorization.md)
 * [Front End](frontend.md)
-* [API](api.md)
+* [API Documentation](api.md)
 * [Guides](how_to.md)
    * Creating a plugin
    * React and React Native
