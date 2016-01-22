@@ -1,7 +1,7 @@
 # Summary
 
 * [Introduction](README.md)
-* [Help Write the Feathers Book](contributing.md)
+* [Contributing](contributing.md)
 * [Quick Start](quick-start.md)
    * [Feathers Generator](quick-start.generator-feathers.md)
 * [Getting Help](getting-help.md)
