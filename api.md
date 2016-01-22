@@ -67,7 +67,7 @@ app.use(function(req,res,next){
 });
 // Add a service.
 app.use('/todos', {
-  get(id, params, callback) {
+  get(id) {
     return Promise.resolve({
       id,
       description: `You have to do ${name}!`
@@ -84,16 +84,14 @@ app.use('/todos', {
 
 ```js
 app.use('/my/todos', {
-  create: function(data, params, callback) {
-    callback(null, data);
+  create(data) {
+    return Promise.resolve(data);
   }
 });
 
 var todoService = app.service('my/todos');
 // todoService is an event emitter
-todoService.on('created', function(todo) {
-  console.log('Created todo', todo);
-});
+todoService.on('created', todo => console.log('Created todo', todo));
 ```
 
 You can use `app.service(path, service)` instead `app.use(path, service)` if you want to be more explicit that you are registering a service. It is what is called internally by `app.use([path], service)` if a service object is being passed. `app.service` does __not__ provide the Express `app.use` functionality and does not check the service object for valid methods.
