@@ -9,13 +9,13 @@
    * [Primus](providers.real-time.primus.md)
    * [Events](events.md)
 * [Databases](databases.md)
+   * Querying and Pagination
    * [In Memory](db.in_memory.md)
    * [NeDB](db.nedb.md)
    * [Mongoose](db.mongoose.md)
    * [Sequelize](db.sequelize.md)
    * [KnexJS](db.knexjs.md)
    * [Waterline](db.waterline.md)
-   * Querying and Pagination
 * [Hooks](hooks.md)
 * [Middleware](middleware.md)
 * [Routing & Versioning](versioning.md)
