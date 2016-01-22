@@ -10,7 +10,7 @@
    * [Events](events.md)
 * [Databases](databases.md)
    * [In Memory](databases.memory.md)
-   * [NeDB](adapters.server.nedb.md)
+   * [NeDB](databases.nedb.md)
    * [Mongoose](adapters.server.mongoose.md)
    * [Knex](adapters.server.knex.md)
    * [Sequelize](adapters.server.sequelize.md)
