@@ -22,7 +22,7 @@
    * [Express middleware](express-middleware.md)
    * [Versioning](versioning.md)
 * [Authentication](authentication.md)
-* [Authorization / Access Control](authorization.md)
+* [Authorization](authorization.md)
 * [Front End](frontend.md)
 * [API Documentation](api.md)
 * [Guides](how_to.md)
