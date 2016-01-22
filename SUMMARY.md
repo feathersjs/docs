@@ -1,7 +1,6 @@
 # Summary
 
 * [Introduction](README.md)
-* [Contributing](contributing.md)
 * [Quick Start](quick-start.md)
    * [Feathers Generator](quick-start.generator-feathers.md)
 * [Getting Help](getting-help.md)
@@ -49,6 +48,7 @@
    * [App](api.app.md)
    * [Service](api.service.md)
 * [FAQ](faq.md)
+* [Contributing](contributing.md)
 * [Changelog](changelog.md)
 * [License](license.md)
 
