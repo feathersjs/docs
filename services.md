@@ -4,13 +4,13 @@ As mentioned, the basic Feathers functionality is fully compatible with Express.
 
 ```js
 var myService = {
-  find: function(params, callback) {},
-  get: function(id, params, callback) {},
-  create: function(data, params, callback) {},
-  update: function(id, data, params, callback) {},
-  patch: function(id, data, params, callback) {},
-  remove: function(id, params, callback) {},
-  setup: function(app) {}
+  find(params [, callback]) {},
+  get(id, params [, callback]) {},
+  create(data, params [, callback]) {},
+  update(id, data, params [, callback]) {},
+  patch(id, data, params [, callback]) {},
+  remove(id, params [, callback]) {},
+  setup(app) {}
 }
 ```
 
@@ -38,6 +38,8 @@ var todos = {
   }
 }
 ```
+
+## Service methods
 
 ### find
 
@@ -187,9 +189,7 @@ feathers()
 
 You can see the combination when going to `http://localhost:8000/my/test`.
 
-__Pro tip:__
-
-Bind the apps `service` method to your service to always look your services up dynamically:
+> __Pro tip:__ Bind the apps `service` method to your service to always look your services up dynamically:
 
 ```js
 var myService = {
@@ -210,4 +210,4 @@ var myService = {
 
 ## Events
 
-Any registered service will be automatically turned into an event emitter that emits events when a resource has changed, that is a `create`, `update`, `patch` or `remove` service call returned successfully. For more information about events, please follow up in the [real-time events](events.html) chapter.
+Any registered service will be automatically turned into an event emitter that emits events when a resource has changed, that is a `create`, `update`, `patch` or `remove` service call returned successfully. For more information about events, please follow up in the [real-time events chapter](events.html).
