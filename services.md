@@ -41,7 +41,7 @@ var todos = {
 
 ### find
 
-`find(params, callback)` retrieves a list of all resources from the service. SocketIO parameters will be passed as `params.query` to the service.
+`find(params [, callback])` retrieves a list of all resources from the service. SocketIO parameters will be passed as `params.query` to the service.
 
 __REST__
 
@@ -210,4 +210,4 @@ var myService = {
 
 ## Events
 
-Any registered service will be automatically turned into an event emitter that emits events when a resource has changed, that is a `create`, `update` or `remove` service call returned successfully.
+Any registered service will be automatically turned into an event emitter that emits events when a resource has changed, that is a `create`, `update`, `patch` or `remove` service call returned successfully. For more information about events, please follow up in the [real-time events](events.html) chapter.
