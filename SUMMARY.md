@@ -11,6 +11,7 @@
 * [Databases](databases.md)
    * In Memory
    * [Waterline](db.waterline.md)
+   * NeDB
 * [Hooks](hooks.md)
 * [Middleware](middleware.md)
 * [Routing & Versioning](versioning.md)
