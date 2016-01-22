@@ -34,7 +34,6 @@
 * [Mobile](mobile.md)
 * [API](api.md)
    * [App](api.app.md)
-   * [Service](api.service.md)
 * [Guides](how_to.md)
    * Creating a plugin
    * React and React Native
