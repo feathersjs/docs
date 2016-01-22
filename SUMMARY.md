@@ -11,6 +11,7 @@
 * [Hooks](hooks.md)
 * [Middleware](middleware.md)
 * [Routing & Versioning](versioning.md)
+* [Databases](databases.md)
 * [Authentication](authentication.md)
    * [Local (username & password)](authentication.local.md)
 * [Authorization / Access Control](authorization.md)
@@ -26,5 +27,4 @@
 * [Contributing](contributing.md)
 * [Changelog](changelog.md)
 * [License](license.md)
-* [Databases](databases.md)
 
