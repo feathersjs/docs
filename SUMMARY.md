@@ -10,6 +10,7 @@
    * [Events](events.md)
 * [Databases](databases.md)
    * [Waterline](db.waterline.md)
+   * In Memory
 * [Hooks](hooks.md)
 * [Middleware](middleware.md)
 * [Routing & Versioning](versioning.md)
