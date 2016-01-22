@@ -39,6 +39,7 @@
    * [Service](api.service.md)
 * [How To](how_to.md)
    * Create a plugin
+   * React and React Native
 * [Feathers vs.](versus.md)
 * [FAQ](faq.md)
 * [Getting Help](getting-help.md)
