@@ -1,25 +1,5 @@
 # Quick Start
 
-## About Feathers
-
-Feathers extends [Express 4](http://expressjs.com), one of the most popular web frameworks for [NodeJS](http://nodejs.org/). It makes it easy to create shared RESTful web services and real-time applications using SocketIO and several other NodeJS websocket libraries supported by [Primus](http://primus.io).
-
-If you are not familiar with Express head over to the [Express Guides](http://expressjs.com/guide.html) to get an idea. Feathers works the exact same way and supports the same functionality except that
-
-```js
-var express = require('express');
-var app = express();
-```
-
-is replaced with
-
-```js
-var feathers = require('feathers');
-var app = feathers();
-```
-
-This means that you can literally drop Feathers into your existing Express 4 application and start adding new services right away without having to change anything.
-
 The following guide will walk through creating a basic Todo REST and websocket API with Feathers. To get started, lets create a new folder and in it run
 
 > `npm install feathers`

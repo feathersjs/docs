@@ -10,7 +10,7 @@ The [feathers-authentication](https://github.com/feathersjs/feathers-authenticat
 * [Setting Up Local Auth](authentication.local.md) (username and password)
 
 
-## Other Auth Plugins
+## Other Authentication Plugins
 Feathers is based on Express. It's likely that an auth plugin used for Express can also work for Feathers.
 
 If you have an authentication method that you would like listed here, please [submit a pull request](contributing.md).

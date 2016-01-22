@@ -63,7 +63,7 @@ service.before({
 var port = 3030;
 var server = app.listen(port);
 server.on('listening', function() {
-  console.log(`Feathers application started on localhost:3030);
+  console.log(`Feathers application started on localhost:3030`);
 });
 ```
 
