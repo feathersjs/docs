@@ -37,7 +37,7 @@
 * [API](api.md)
    * [App](api.app.md)
    * [Service](api.service.md)
-* [How To](how_to.md)
+* [Guides](how_to.md)
    * Create a plugin
    * React and React Native
    * CanJS
