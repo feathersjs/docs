@@ -34,8 +34,6 @@
 * [Mobile](mobile.md)
 * [Microservices](microservices.md)
 * [Performance](performance.md)
-* [Plugins](plugins.md)
-   * [The Plugin Generator](plugins.generator.md)
 * [API](api.md)
    * [App](api.app.md)
    * [Service](api.service.md)
