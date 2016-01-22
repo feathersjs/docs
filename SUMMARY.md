@@ -11,8 +11,8 @@
 * [Databases](databases.md)
    * In Memory
    * NeDB
-   * [Waterline](db.waterline.md)
    * Mongoose
+   * [Waterline](db.waterline.md)
 * [Hooks](hooks.md)
 * [Middleware](middleware.md)
 * [Routing & Versioning](versioning.md)
