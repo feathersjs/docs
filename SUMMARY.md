@@ -1,6 +1,6 @@
 # Summary
 
-* [Introduction](README.md)
+* [Getting Started](README.md)
 * [Quick Start](quick-start.md)
 * [Services](services.md)
 * [REST](providers.rest.md)
