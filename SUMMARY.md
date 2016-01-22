@@ -9,7 +9,7 @@
    * [Primus](providers.real-time.primus.md)
    * [Events](events.md)
 * [Databases](databases.md)
-   * [In Memory](adapters.server.memory.md)
+   * [In Memory](databases.memory.md)
    * [NeDB](adapters.server.nedb.md)
    * [Mongoose](adapters.server.mongoose.md)
    * [Knex](adapters.server.knex.md)
