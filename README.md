@@ -12,13 +12,12 @@ The heart of every Feathers application are your [Services](). Services are smal
 
 ### Modern Applications
 
-There is a lot to building modern applications. Feathers helps We think services are great! Which is why Feathers does not only allow you to create REST
+There is a lot to building a modern application. Here are the most important things Feathers can help with:
 
-
-
-Feathers makes it easy to create shared, RESTful web services and real-time applications using Socket.io and several other WebSocket libraries supported by [Primus](http://primus.io).
-
-Feathers extends [Express 4](http://expressjs.com), one of the most popular web frameworks for [NodeJS](http://nodejs.org/).
+- __REST APIs__ - Feathers automatically provides REST APIs for all your services. That makes it easy for mobile applications, a web-frontend and other developers to communicate with your application.
+- __Real-Time__ - Real-time shouldn't be an afterthought. It should come for free. Feathers services can notify clients when something has been created, updated or removed. To get even better performance, service methods can also be directly accessed through real-time channels.
+- __Cross-Cutting Concerns__ - Need to send an email when creating a new user? Get some additional data from somewhere else? [Service Hooks]() are a powerful way to add that functionality and still keep it separated from the rest of your application.
+- __Universal usage__ - We think services and hooks are a great way to build applications. That's why Feathers works the same in NodeJS and on clients like the Browser, other Node servers or React-Native.
 
 ## Not Just Another Node Web Framework
 
