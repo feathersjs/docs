@@ -16,12 +16,6 @@
 * [Authorization / Access Control](authorization.md)
 * [Front End](frontend.md)
    * [Pagination](frontend.pagination.md)
-   * [Frameworks](frontend.frameworks.md)
-       * [Feathers](frontend.feathers.md)
-       * [DoneJS](frontend.donejs.md)
-       * [React](frontend.react.md)
-       * [Angular](frontend.angular.md)
-       * [CanJS](frontend.frameworks.canjs.md)
 * [API](api.md)
 * [Guides](how_to.md)
    * Creating a plugin
