@@ -33,7 +33,6 @@
        * [CanJS](frontend.frameworks.canjs.md)
 * [Mobile](mobile.md)
 * [Microservices](microservices.md)
-* [Performance](performance.md)
 * [API](api.md)
    * [App](api.app.md)
    * [Service](api.service.md)
