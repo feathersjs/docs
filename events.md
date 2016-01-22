@@ -1,5 +1,108 @@
 # Events
 
+ It is therefore possible to bind to the below events via `app.service(servicename).on()` and, if enabled, all events will also broadcast to all connected SocketIO clients in the form of `<servicepath> <eventname>`. Note that the service path will always be stripped of leading and trailing slashes regardless of how it has been registered (e.g. `/my/service/` will become `my/service`).
+
+### created
+
+The `created` event will be published with the callback data when a service `create` returns successfully.
+
+```js
+app.use('/todos', {
+  create: function(data, params, callback) {
+    callback(null, data);
+  }
+});
+
+app.service('/todos').on('created', function(todo) {
+  console.log('Created todo', todo);
+});
+
+app.service('/todos').create({
+  description: 'We have to do something!'
+}, {}, function(error, callback) {
+  // ...
+});
+
+app.listen(8000);
+```
+
+__SocketIO__
+
+```html
+<script src="http://localhost:8000/socket.io/socket.io.js"></script>
+<script>
+  var socket = io.connect('http://localhost:8000/');
+
+  socket.on('todos created', function(todo) {
+    console.log('Got a new Todo!', todo);
+  });
+</script>
+```
+
+### updated, patched
+
+The `updated` and `patched` events will be published with the callback data when a service `update` or `patch` method calls back successfully.
+
+```js
+app.use('/my/todos/', {
+  update: function(id, data, params, callback) {
+    callback(null, data);
+  }
+});
+
+app.listen(8000);
+```
+
+__SocketIO__
+
+```html
+<script src="http://localhost:8000/socket.io/socket.io.js"></script>
+<script>
+  var socket = io.connect('http://localhost:8000/');
+
+  socket.on('my/todos updated', function(todo) {
+    console.log('Got an updated Todo!', todo);
+  });
+
+  socket.emit('my/todos::update', 1, {
+    description: 'Updated description'
+  }, {}, function(error, callback) {
+   // Do something here
+  });
+</script>
+```
+
+### removed
+
+The `removed` event will be published with the callback data when a service `remove` calls back successfully.
+
+```js
+app.use('/todos', {
+  remove: function(id, params, callback) {
+    callback(null, { id: id });
+  }
+});
+
+app.service('/todos').remove(1, {}, function(error, callback) {
+  // ...
+});
+
+app.listen(8000);
+```
+
+__SocketIO__
+
+```html
+<script src="http://localhost:8000/socket.io/socket.io.js"></script>
+<script>
+  var socket = io.connect('http://localhost:8000/');
+
+  socket.on('todos removed', function(todo) {
+    // Remove element showing the Todo from the page
+    $('#todo-' + todo.id).remove();
+  });
+</script>
+```
 
 ## Better Event Filtering
 // TODO: Add some information about what we're doing here.  Taken from https://github.com/feathersjs/feathers-socketio/issues/2
