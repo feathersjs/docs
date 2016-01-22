@@ -1,3 +1,5 @@
+# The Feathers documentation
+
 Welcome to the Feathers documentation! 
 
 ## What is Feathers?
