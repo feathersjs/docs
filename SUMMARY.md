@@ -20,7 +20,6 @@
 * [Hooks](hooks.md)
 * [Middleware](middleware.md)
 * [Routing & Versioning](versioning.md)
-* [Configuration](configuration.md)
 * [Authentication](authentication.md)
    * [Local (username & password)](authentication.local.md)
 * [Authorization / Access Control](authorization.md)
