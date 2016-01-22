@@ -12,9 +12,9 @@
    * In Memory
    * NeDB
    * Mongoose
+   * Sequelize
    * KnexJS
    * [Waterline](db.waterline.md)
-   * Sequelize
 * [Hooks](hooks.md)
 * [Middleware](middleware.md)
 * [Routing & Versioning](versioning.md)
