@@ -1,0 +1,5 @@
+# Feathers vs. Meteor
+
+Meteor has amassed a large community and a lot of venture backed funding. Our biggest complaint is that because of this funding, there is some serious lock in. Meteor has it's own package system, how you use npm modules can be inconsistent and it is a large codebase. There is also the risk that when investors start pushing for a return on their investment, it could negatively impact the community.
+
+From a feature standpoint Feathers is pretty similar to Meteor. You get real-time API's from both. However, we let you use the defacto npm for managing dependencies, we let you choose whether you want to use Webpack, Gulp, Grunt, or any other tool for managing assets, and Feathers is completely client agnostic without any additional overhead. Everything is open, flexible and pluggable. You use only what you need.
