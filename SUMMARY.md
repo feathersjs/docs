@@ -2,7 +2,7 @@
 
 * [Getting Started](README.md)
    * [Quick Start](quick-start.md)
-   * [Your first app](your_first_app.md)
+   * [Your First App](your-first-app.md)
 * [Services](services.md)
 * [REST](providers.rest.md)
 * [Real-Time](providers.real-time.md)
