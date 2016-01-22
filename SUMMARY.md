@@ -40,6 +40,7 @@
 * [How To](how_to.md)
    * Create a plugin
    * React and React Native
+   * CanJS
 * [Feathers vs.](versus.md)
 * [FAQ](faq.md)
 * [Getting Help](getting-help.md)
