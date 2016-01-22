@@ -37,7 +37,7 @@
 * [API](api.md)
    * [App](api.app.md)
    * [Service](api.service.md)
-* How To
+* [How To](how_to.md)
 * [Feathers vs.](versus.md)
 * [FAQ](faq.md)
 * [Getting Help](getting-help.md)
