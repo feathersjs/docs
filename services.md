@@ -183,28 +183,28 @@ send('todo::remove', 2, {}, function(error, data) {
 `setup(app, path)` initializes the service, passing an instance of the Feathers application and the path it has been registered on. If enabled, the SocketIO server is available via `app.io`. `setup` is a great way to connect services:
 
 ```js
-var todoService = {
+class TodoService {
   get(id, params) {
     return Promise.resolve({
       id,
       description: `You have to ${id}!`
     });
   }
-};
+}
 
-var myService = {
+class MyService {
   setup: function(app) {
     this.todo = app.service('todo');
-  },
+  }
 
-  get: function(name, params, callback) {
+  get(name, params) {
     return this.todo.get('take out trash')
       .then(todo => ({ name, todo }));
   }
 }
 
-feathers().use('todo', todoService)
-    .use('my', myService)
+feathers().use('/todo', new TodoService())
+    .use('/my-service', new MyService())
     .listen(8000);
 ```
 
@@ -213,10 +213,10 @@ You can see the combination when going to `http://localhost:8000/my/test`.
 > __Pro tip:__ Bind the apps `service` method to your service to always look services up dynamically:
 
 ```js
-var myService = {
+class MyService {
   setup(app) {
     this.service = app.service.bind(app);
-  },
+  }
 
   get(name, params) {
     return this.service('todos')
@@ -228,4 +228,4 @@ var myService = {
 
 ## Events
 
-Any registered service will be automatically turned into an event emitter that emits events when a resource has changed, that is a `create`, `update`, `patch` or `remove` service call returned successfully. For more information about events, please follow up in the [real-time events chapter](events.html).
+Any registered service will automatically turn into an event emitter that emits events when a resource has changed, that is a `create`, `update`, `patch` or `remove` service call returned successfully. For more information about events, please follow up in the [real-time events chapter](events.html).
