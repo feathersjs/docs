@@ -15,6 +15,7 @@
    * [Sequelize](db.sequelize.md)
    * [KnexJS](db.knexjs.md)
    * [Waterline](db.waterline.md)
+   * Querying and Pagination
 * [Hooks](hooks.md)
 * [Middleware](middleware.md)
 * [Routing & Versioning](versioning.md)
