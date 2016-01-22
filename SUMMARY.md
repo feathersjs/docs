@@ -6,7 +6,7 @@
 * [Services](services.md)
    * [Extending Services](services.extending.md)
 * [REST](providers.rest.md)
-* [Realtime APIs](providers.real-time.md)
+* [Real-Time](providers.real-time.md)
    * [Socket.io](providers.real-time.socket-io.md)
    * [Primus](providers.real-time.primus.md)
    * [Events](events.md)
