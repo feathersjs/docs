@@ -1,4 +1,18 @@
-Welcome to the Feathers Book
+Welcome to the Feathers documentation! 
+
+## What is Feathers?
+
+Feathers is a service-oriented framework for modern applications. What do we mean by that?
+
+### Service oriented
+
+The heart of every Feathers application are your [Services](). Services are small, data-oriented objects that can be used to perform create, update and delete functionality on a database, another server or somewhere entirely different.
+
+### Modern Applications
+
+There is a lot to building modern applications. Feathers helps We think services are great! Which is why Feathers does not only allow you to create REST
+
+
 
 Feathers makes it easy to create shared, RESTful web services and real-time applications using Socket.io and several other WebSocket libraries supported by [Primus](http://primus.io).
 
