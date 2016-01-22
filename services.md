@@ -3,8 +3,12 @@
 As mentioned, the basic Feathers functionality is fully compatible with Express. The key concept added to that of middleware is *service* objects. A service can be any JavaScript object that offers one or more of the `find`, `get`, `create`, `update`, `remove` and `setup` service methods with the following signatures:
 
 ```js
-var myService = {
-  find(params [, callback]) {},
+const myService = {
+  find(params [, callback]) {
+    callback(null, []);
+    // or
+    return Promise.resolve([]);
+  },
   get(id, params [, callback]) {},
   create(data, params [, callback]) {},
   update(id, data, params [, callback]) {},
@@ -12,6 +16,22 @@ var myService = {
   remove(id, params [, callback]) {},
   setup(app) {}
 }
+
+app.use('/my-service', myService);
+```
+
+```js
+class MyService {
+  find(params [, callback]) {}
+  get(id, params [, callback]) {}
+  create(data, params [, callback]) {}
+  update(id, data, params [, callback]) {}
+  patch(id, data, params [, callback]) {}
+  remove(id, params [, callback]) {}
+  setup(app) {}
+}
+
+app.use('/my-service', new MyService());
 ```
 
 And can be used like any other Express middleware `app.use('/my-service', myService)`.
