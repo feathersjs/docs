@@ -38,6 +38,7 @@
    * [App](api.app.md)
    * [Service](api.service.md)
 * [How To](how_to.md)
+   * Create a plugin
 * [Feathers vs.](versus.md)
 * [FAQ](faq.md)
 * [Getting Help](getting-help.md)
