@@ -43,10 +43,10 @@
 * [API](api.md)
    * [App](api.app.md)
    * [Service](api.service.md)
+* Feathers vs.
 * [FAQ](faq.md)
 * [Getting Help](getting-help.md)
 * [Contributing](contributing.md)
 * [Changelog](changelog.md)
 * [License](license.md)
-* Feathers vs.
 
