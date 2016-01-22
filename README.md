@@ -16,12 +16,12 @@ There is a lot to building a modern application. Here are the most important thi
 
 - __REST APIs__ - Feathers automatically provides REST APIs for all your services. That makes it easy for mobile applications, a web-frontend and other developers to communicate with your application.
 - __Real-Time__ - Real-time shouldn't be an afterthought. It should come for free. Feathers services can notify clients when something has been created, updated or removed. To get even better performance, service methods can also be directly accessed through real-time channels.
-- __Cross-Cutting Concerns__ - Need to send an email when creating a new user? Get some additional data from somewhere else? [Service Hooks]() are a powerful way to add that functionality and still keep it separated from the rest of your application.
+- __Cross-Cutting Concerns__ - Need to send an email after creating a new user? Get some additional data from somewhere else? [Service Hooks]() are a powerful way to add that functionality and still keep it separated from the rest of your application.
 - __Universal usage__ - We think services and hooks are a great way to build applications. That's why Feathers works the same in NodeJS and on clients like the Browser, other Node servers or React-Native.
 
-## Not Just Another Node Web Framework
+## Not Just Another Framework
 
-We know! Oh God another NodeJS framework! We really didn't want to add another name to the long list of NodeJS web frameworks but also wanted to explore a different approach than any other library we have seen. We strongly believe that data is the core of the web and should be the focus of web applications.
+We know! Oh God another JavaScript framework! We really didn't want to add another name to the long list but also wanted to explore a different approach than any other library we have seen. We strongly believe that data is the core of the web and should be the focus of web applications.
 
 Many web frameworks focus on things like rendering views, defining routes and handling HTTP requests and responses without providing a structure for implementing application logic separate from those secondary concerns. The result - even when using the MVC pattern - are big monolithic controllers where your actual application logic and how it is accessed - usually via HTTP - are all mixed up together.
 
