@@ -12,6 +12,7 @@
    * [In Memory](adapters.server.memory.md)
    * [NeDB](adapters.server.nedb.md)
    * [Mongoose](adapters.server.mongoose.md)
+   * [feathers-knex](adapters.server.knex.md)
    * [Server-Side](adapters.server.md)
        * [feathers-knex](adapters.server.knex.md)
        * [feathers-sequelize](adapters.server.sequelize.md)
