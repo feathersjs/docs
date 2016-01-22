@@ -13,7 +13,7 @@
    * [NeDB](db.nedb.md)
    * [Mongoose](db.mongoose.md)
    * [Sequelize](db.sequelize.md)
-   * KnexJS
+   * [KnexJS](db.knexjs.md)
    * [Waterline](db.waterline.md)
 * [Hooks](hooks.md)
 * [Middleware](middleware.md)
