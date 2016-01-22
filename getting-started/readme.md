@@ -7,7 +7,7 @@ In short, Feathers is a service-oriented framework for modern applications that 
 
 ### Service oriented
 
-The heart of every Feathers application are your [Services](services). Services are small, data-oriented objects that can be used to perform create, update and delete functionality on a database, another server or somewhere entirely different.
+The heart of every Feathers application are your [Services](../services). Services are small, data-oriented objects that can be used to perform create, update and delete functionality on a database, another server or somewhere entirely different.
 
 ### Modern Applications
 
