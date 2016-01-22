@@ -32,7 +32,6 @@
        * [Angular](frontend.angular.md)
        * [CanJS](frontend.frameworks.canjs.md)
 * [Mobile](mobile.md)
-   * [React Native](mobile.react-native.md)
    * [iOS](mobile.ios.md)
 * [Microservices](microservices.md)
 * [Performance](performance.md)
