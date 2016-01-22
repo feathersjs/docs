@@ -10,6 +10,7 @@
    * [Events](events.md)
 * [Databases](adapters.md)
    * [In Memory](adapters.server.memory.md)
+   * [feathers-mongoose](adapters.server.mongoose.md)
    * [Server-Side](adapters.server.md)
        * [feathers-mongoose](adapters.server.mongoose.md)
        * [feathers-nedb](adapters.server.nedb.md)
