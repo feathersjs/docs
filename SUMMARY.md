@@ -13,6 +13,7 @@
    * [NeDB](adapters.server.nedb.md)
    * [Mongoose](adapters.server.mongoose.md)
    * [Knex](adapters.server.knex.md)
+   * [feathers-sequelize](adapters.server.sequelize.md)
    * [Server-Side](adapters.server.md)
        * [feathers-sequelize](adapters.server.sequelize.md)
        * [feathers-waterline](adapters.server.waterline.md)
