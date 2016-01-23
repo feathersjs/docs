@@ -1,5 +1,6 @@
 {
   "styles": {
     "website": "styles/website.css"
-  }
+  },
+  "plugins": ["collapsible-menu"]
 }
