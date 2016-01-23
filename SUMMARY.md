@@ -44,7 +44,7 @@
    * Creating a plugin
    * React and React Native
    * CanJS
-* Help[help/readme.md]
+* [Help](help/readme.md)
    * [FAQ](faq.md)
 * [Contributing](contributing.md)
 * [Changelog](changelog.md)
