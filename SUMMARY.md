@@ -20,7 +20,9 @@
        * [Socket.io](providers/real-time/socket-io.md)
        * [Primus](providers/real-time/primus.md)
 * [Databases](databases/readme.md)
-   * [Querying and Pagination](databases/querying.md)
+   * [Pagination and sorting](databases/pagination.md)
+   * [Querying](databases/querying.md)
+   * [Extending adapters](databases/extending.md)
    * [In Memory](databases/in_memory.md)
    * [NeDB](databases/nedatabases/md)
    * [Mongoose](databases/mongoose.md)
@@ -49,4 +51,3 @@
 * [Contributing](contributing.md)
 * [Changelog](changelog.md)
 * [License](license.md)
-
