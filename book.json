@@ -2,5 +2,15 @@
   "styles": {
     "website": "styles/website.css"
   },
-  "plugins": ["collapsible-menu"]
+  "plugins": [
+    "collapsible-menu",
+    "heading-anchors",
+    "edit-link"
+  ],
+  "pluginsConfig": {
+    "edit-link": {
+      "base": "https://github.com/feathersjs/feathers-docs/edit/master",
+      "label": "Edit This Page"
+    }
+  }
 }
