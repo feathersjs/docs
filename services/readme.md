@@ -69,7 +69,7 @@ Service methods should return a [Promise](https://developer.mozilla.org/en-US/do
 
 Below is a more detailed description of the purpose of each service method. Consider the `send` method as a placeholder for the [real-time API socket](real-time.html) (e.g. `socket.emit` for Socket.io).
 
-### find
+### The `find` method
 
 `find(params [, callback])` retrieves a list of all resources from the service. Provider parameters will be passed as `params.query` to the service.
 
@@ -89,7 +89,7 @@ send('todo::find', {
 
 Will call .create with `params` as `{ query: { status: 'completed', user: 10 } }`
 
-### get
+### The `get` method
 
 `get(id, params [, callback])` retrieves a single resource with the given `id` from the service.
 
@@ -105,7 +105,7 @@ send('todo::get', 1, {}, function(error, data) {
 });
 ```
 
-### create
+### The `create` method
 
 `create(data, params [, callback])` creates a new resource with `data`. The callback should be called with the newly created resource data.
 
@@ -125,7 +125,7 @@ send('todo::create', {
 });
 ```
 
-### update
+### The `update` method
 
 `update(id, data, params [, callback])` replaces the resource identified by `id` with `data`. The callback should be called with the updated resource data.
 
@@ -144,7 +144,7 @@ send('todo::update', 2, {
 });
 ```
 
-### patch
+### The `patch` method
 
 `patch(id, data, params [, callback])` merges the existing data of the resource identified by `id` with the new `data`. The callback should be called with the updated resource data. Implement `patch` additionally to `update` if you want to separate between partial and full updates and support the `PATCH` HTTP method.
 
@@ -163,7 +163,7 @@ send('todo::patch', 2, {
 });
 ```
 
-### remove
+### The `remove` method
 
 `remove(id, params [, callback])` removes the resource with `id`. The callback should be called with the removed resource.
 
