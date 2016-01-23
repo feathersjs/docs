@@ -9,7 +9,23 @@
   color: #333333;
 }
 
+/* Sidebar Title */
 .book .book-summary ul.summary li a.custom-link {
   font-size: 24px;
   font-weight: 600;
+}
+
+.book .book-body .page-wrapper .page-inner section.normal blockquote,
+.book .book-body .page-wrapper .page-inner section.normal dl,
+.book .book-body .page-wrapper .page-inner section.normal ol,
+.book .book-body .page-wrapper .page-inner section.normal p,
+.book .book-body .page-wrapper .page-inner section.normal table,
+.book .book-body .page-wrapper .page-inner section.normal ul {
+  font-size: 1.8rem;
+  color: #555;
+}
+
+/* Page Titles */
+.book .book-body .page-wrapper .page-inner section.normal h1 {
+  color: #E05264;
 }
