@@ -1,5 +1,10 @@
 # Middleware
 
+Two kinds of Middleware
+
+Service middleware (aka Hooks) run before or after a service methods executes. This is a great place for input valiation, authorization, data pre-and post-processing or sending notifications like emails or text messages after something happened.
+
+A hook is *provider independent* which means it does not matter if it has been called through REST, Socket.io, Primus or any other provider Feathers may support in the future.
 
 ## Custom service middleware
 

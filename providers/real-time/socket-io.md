@@ -1,54 +1,82 @@
 # The Socket.io Provider
 
-To expose services via [SocketIO](http://socket.io/) call `app.configure(feathers.socketio())`. It is also possible pass a `function(io) {}` when initializing the provider where `io` is the main SocketIO object. Since Feathers is only using the SocketIO default configuration, this is a good spot to initialize the [recommended production settings](https://github.com/LearnBoost/Socket.IO/wiki/Configuring-Socket.IO#recommended-production-settings):
+The [feathers-socketio](https://github.com/feathersjs/feathers-socketio) provider adds support for [Socket.io](http://socket.io/) which enables real-time bidirectional event-based communication. It works on every platform, browser or device, focusing equally on reliability and speed.
 
-```js
-app.configure(feathers.socketio(function(io) {
-  io.enable('browser client minification');  // send minified client
-  io.enable('browser client etag');          // apply etag caching logic based on version number
-  io.enable('browser client gzip');          // gzip the file
+## Usage
 
-  // enable all transports (optional if you want flashsocket support, please note that some hosting
-  // providers do not allow you to create servers that listen on a port different than 80 or their
-  // default port)
-  io.set('transports', [
-      'websocket'
-    , 'flashsocket'
-    , 'htmlfile'
-    , 'xhr-polling'
-    , 'jsonp-polling'
-  ]);
-}));
+Install the provider module with:
+
+```
+npm install feathers-socketio --save
 ```
 
-> Note: io.set is deprecated in Socket.IO 1.0. The above configuration will still work but will be replaced with the recommended production configuration for version 1.0 (which isn't available at the moment).
-
-This is also the place to listen to custom events or add [authorization](https://github.com/LearnBoost/socket.io/wiki/Authorizing):
+Then import the module and pass it to `app.configure`. The following example will start a server on port 3030 and also set up Socket.io:
 
 ```js
-app.configure(feathers.socketio(function(io) {
-  io.on('connection', function(socket) {
-    socket.emit('news', { hello: 'world' });
-    socket.on('my other event', function (data) {
-      console.log(data);
+import feathers from 'feathers';
+import socketio from 'feathers-socketio';
+
+const app = feathers().configure(socketio());
+
+app.listen(3030);
+```
+
+In the Browser you can connect, call service methods and listen to events like this:
+
+```html
+<script src="socket.io/socket.io.js"></script>
+<script>
+  var socket = io();
+
+  socket.on('todos created', function(todo) {
+    console.log('Got a new Todo!', todo);
+  });
+
+  socket.emit('todos::create', { description: 'Do something' }, {}, function() {
+    socket.emit('todos::find', {}, function(error, todos) {
+      console.log(todos);
     });
   });
-
-  io.use(function (socket, next) {
-    // Authorize using the /users service
-    app.service('users').find({
-      username: socket.request.username,
-      password: socket.request.password
-    }, next);
-  });
-}));
+</script>
 ```
 
-Similar than the REST middleware, the SocketIO socket `feathers` property will be extended
-for service parameters:
+> A detailed description of the usage on a client can be found in [the Feathers client](../../clients/readme.md) chapter.
+
+## Configuration
+
+Once the server has been started with `app.listen()` the Socket.io object is available as `app.io`. It is also possible to pass a function that gets called with the initialized `io` server object (for more details see the [Socket.io server documentation](http://socket.io/docs/server-api/)). This is a good place to listen to custom events or add [authorization](https://github.com/LearnBoost/socket.io/wiki/Authorizing):
 
 ```js
-app.configure(feathers.socketio(function(io) {
+import feathers from 'feathers';
+import socketio from 'feathers-socketio';
+
+const app = feathers()
+  .configure(socketio(function(io) {
+    io.on('connection', function(socket) {
+      socket.emit('news', { hello: 'world' });
+      socket.on('my other event', function (data) {
+        console.log(data);
+      });
+    });
+
+    io.use(function (socket, next) {
+      // Authorize using the /users service
+      app.service('users').find({
+        username: socket.request.username,
+        password: socket.request.password
+      }, next);
+    });
+  }));
+
+app.listen(3030);
+```
+
+## Middleware and service parameters
+
+Similar to [REST provider](../rest.md) middleware, Socket.io middleware can modify the `feathers` property on the `socket` which will then be used as the service parameters:
+
+```js
+app.configure(socketio(function(io) {
   io.use(function (socket, next) {
     socket.feathers.user = { name: 'David' };
     next();
@@ -56,11 +84,10 @@ app.configure(feathers.socketio(function(io) {
 }));
 
 app.use('todos', {
-  create: function(data, params, callback) {
+  create(data, params, callback) {
     // When called via SocketIO:
+    params.provider // -> socketio
     params.user // -> { name: 'David' }
   }
 });
 ```
-
-Once the server has been started with `app.listen()` the SocketIO object is available as `app.io`.
