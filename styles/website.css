@@ -29,3 +29,7 @@
 .book .book-body .page-wrapper .page-inner section.normal h1 {
   color: #E05264;
 }
+
+.book .book-body .page-wrapper .page-inner section.normal h2 {
+  font-size: 1.65em;
+}
