@@ -1,8 +1,8 @@
 # Feathers vs. Meteor
 
-Both Feathers and Meteor are real-time JavaScript platforms that provide front end and back end support. However in addition to allowing clients to subscribe to events Feathers allows clients to push data to the server over websockets. Meteor only allows clients to receive messages over websockets.
+Both Feathers and Meteor are real-time JavaScript platforms that provide front end and back end support. However, in addition to allowing clients to subscribe to events, Feathers allows clients to push data to the server over websockets. Meteor only allows clients to receive messages over websockets.
 
-Feathers is completely open source and is community supported, whereas Meteor is venture backed and has raised $31.2 million to date.
+Feathers is completely open source and is community supported, whereas Meteor, although open source, is venture backed and has raised $31.2 million to date.
 
 Meteor only has official support for MongoDB but there are some community modules of various levels of quality that support other databases. Meteor has it's own package manager and package ecosystem. They also have their own template engine based off of Mustache, but have guides for Angular and React, and their own build tools.
 
