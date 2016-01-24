@@ -75,12 +75,14 @@ Below is a more detailed description of the purpose of each service method. Cons
 
 __REST__
 
-    GET todo?status=completed&user=10
+```
+GET /todos?status=completed&user=10
+```
 
 __Websockets__
 
 ```js
-send('todo::find', {
+send('todos::find', {
   status: 'completed'
   user: 10
 }, function(error, data) {
@@ -95,31 +97,43 @@ Will call .create with `params` as `{ query: { status: 'completed', user: 10 } }
 
 __REST__
 
-    GET todo/1
+```
+GET /todos/1
+```
 
 __Websockets__
 
 ```js
-send('todo::get', 1, {}, function(error, data) {
+send('todos::get', 1, {}, function(error, data) {
 
 });
 ```
 
 ### The `create` method
 
-`create(data, params [, callback])` creates a new resource with `data`. The callback should be called with the newly created resource data.
+`create(data, params [, callback])` creates a new resource with `data`. The method should return a Promise with the newly created data. `data` may also be an array which creates and returns a list of resources.
 
 __REST__
 
-    POST todo
-    { "description": "I really have to iron" }
+```
+POST /todos
+{ "description": "I really have to iron" }
+```
+
+```
+POST /todos
+[
+  { "description": "I really have to iron" },
+  { "description": "Do laundry" }
+]
+```
 
 The body type is determined by the Express [body-parser](https://github.com/expressjs/body-parser) middleware which has to be registered before every service.
 
 __Websockets__
 
 ```js
-send('todo::create', {
+send('todos::create', {
   description: 'I really have to iron'
 }, {}, function(error, data) {
 });
@@ -127,17 +141,19 @@ send('todo::create', {
 
 ### The `update` method
 
-`update(id, data, params [, callback])` replaces the resource identified by `id` with `data`. The callback should be called with the updated resource data.
+`update(id, data, params [, callback])` replaces the resource identified by `id` with `data`. The method should return a Promise with the complete updated resource data. `id` can also be `null` when updating multiple records.
 
 __REST__
 
-    PUT todo/2
-    { "description": "I really have to do laundry" }
+```
+PUT /todos/2
+{ "description": "I really have to do laundry" }
+```
 
 __Websockets__
 
 ```js
-send('todo::update', 2, {
+send('todos::update', 2, {
   description: 'I really have to do laundry'
 }, {}, function(error, data) {
   // data -> { id: 2, description: "I really have to do laundry" }
@@ -146,35 +162,64 @@ send('todo::update', 2, {
 
 ### The `patch` method
 
-`patch(id, data, params [, callback])` merges the existing data of the resource identified by `id` with the new `data`. The callback should be called with the updated resource data. Implement `patch` additionally to `update` if you want to separate between partial and full updates and support the `PATCH` HTTP method.
+`patch(id, data, params [, callback])` merges the existing data of the resource identified by `id` with the new `data`. `id` can also be `null` indicating that multiple resources should be patched. The method should return with the complete updated resource data. Implement `patch` additionally to `update` if you want to separate between partial and full updates and support the `PATCH` HTTP method.
 
 __REST__
 
-    PATCH todo/2
-    { "description": "I really have to do laundry" }
+```
+PATCH /todos/2
+{ "description": "I really have to do laundry" }
+```
+
+For our [database adapters](databases/readme.md) the following updates all todos that are not completed:
+
+```
+PATCH /todos?completed=false
+{ "completed": true }
+```
 
 __Websockets__
 
 ```js
-send('todo::patch', 2, {
+send('todos::patch', 2, {
   description: 'I really have to do laundry'
 }, {}, function(error, data) {
   // data -> { id: 2, description: "I really have to do laundry" }
 });
 ```
 
+```js
+send('todos::patch', null,
+  { completed: true },
+  { "completed": false },
+  function(error, data) {
+    // data -> { id: 2, description: "I really have to do laundry" }
+  });
+```
+
 ### The `remove` method
 
-`remove(id, params [, callback])` removes the resource with `id`. The callback should be called with the removed resource.
+`remove(id, params [, callback])` removes the resource with `id`. The method should return a Promise with the removed resource. `id` can also be `null` indicating to delete multiple resources.
 
 __REST__
 
-    DELETE todo/2
+```
+DELETE /todos/2
+```
+
+For our [database adapters](databases/readme.md) the following deletes all completed todos:
+
+```
+DELETE /todos?completed=true
+```
 
 __Websockets__
 
 ```js
-send('todo::remove', 2, {}, function(error, data) {
+send('todos::remove', 2, {}, function(error, data) {
+});
+
+send('todos::remove', null, { completed: true }, function(error, data) {
 });
 ```
 
@@ -194,16 +239,16 @@ class TodoService {
 
 class MyService {
   setup: function(app) {
-    this.todo = app.service('todo');
+    this.todos = app.service('todos');
   }
 
   get(name, params) {
-    return this.todo.get('take out trash')
+    return this.todos.get('take out trash')
       .then(todo => ({ name, todo }));
   }
 }
 
-feathers().use('/todo', new TodoService())
+feathers().use('/todos', new TodoService())
     .use('/my-service', new MyService())
     .listen(8000);
 ```
