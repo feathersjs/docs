@@ -30,6 +30,7 @@
    * [KnexJS](databases/knexjs.md)
    * [Waterline](databases/waterline.md)
 * [Hooks](hooks/readme.md)
+   * [Bundled Hooks](hooks/bundled-hooks.md)
 * [Middleware](middleware/readme.md)
    * [Express middleware](middleware/express.md)
    * [Versioning](versioning.md)
