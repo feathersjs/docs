@@ -37,7 +37,7 @@
    * [Versioning](routing/versioning.md)
 * [Authentication](authentication/readme.md)
    * [Local (username & password)](authentication/local.md)
-   * Oauth (Twitter, Facebook, etc)
+   * OAuth (Twitter, Facebook, etc)
    * Two-Factor (MFA)
 * [Authorization / Access Control](authorization/readme.md)
 * [Front End Clients](clients/readme.md)
