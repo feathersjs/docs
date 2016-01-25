@@ -40,6 +40,7 @@
    * OAuth (Twitter, Facebook, etc)
    * Two-Factor (MFA)
 * [Authorization / Access Control](authorization/readme.md)
+   * [Bundled Auth Hooks](authorization/bundled-hooks.md)
 * [Front End Clients](clients/readme.md)
 * [API](api/readme.md)
 * [Guides](guides/readme.md)
