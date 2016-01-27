@@ -2,7 +2,7 @@
 
 Well alright! Let's build your first Feathers app! We're going to build a real-time chat app with MongoDB as the database. It's a great way to cover all the things that you'd need to do in a real world application and how Feathers can help. It also makes a lot more sense to have a real-time component than a Todo list. 😉
 
-If you've already gone through the [Quick Start](quick-start.md) section you can skip ahead to [What Just Happened?](#what-just-happened).
+If you've already gone through the [Quick Start](../quick-start.md) section you can skip ahead to [What Just Happened?](#what-just-happened).
 
 ## Generate Your App
 
@@ -30,7 +30,7 @@ Enter in a short description of your app.
 
 You can now choose which providers you want to support. Since we're setting up a real-time REST API we'll go with the default REST and Socket.io. So just hit enter.
 
-You can learn more about Feathers providers in [Providers chapter](providers/readme.md).
+You can learn more about Feathers providers in [Providers chapter](../../providers/readme.md).
 
 <img src="./assets/step3.png" alt="Transport Prompt">
 
@@ -38,13 +38,13 @@ Next we'll be prompted to support [CORs](https://developer.mozilla.org/en-US/doc
 
 <img src="./assets/step4.png" alt="CORs Prompt">
 
-Now let's choose our database. You can see that Feathers supports a bunch through the generator and we support even more outside the generator. Let's choose MongoDB. You can find out more about our database adapters in the [Databases chapter](databases/readme.md).
+Now let's choose our database. You can see that Feathers supports a bunch through the generator and we support even more outside the generator. Let's choose MongoDB. You can find out more about our database adapters in the [Databases chapter](../../databases/readme.md).
 
 <img src="./assets/step5.png" alt="Database Prompt">
 
 Since pretty much every app needs authentication of some sort we generate almost everything you need to get going. We currently only support local authentication but have plans for social auth as well.
 
-You can learn more about authentication in Feathers by reading the [Authentication chapter](authentication/readme.md).
+You can learn more about authentication in Feathers by reading the [Authentication chapter](../../authentication/readme.md).
 
 <img src="./assets/step6.png" alt="Authentication Prompt">
 
