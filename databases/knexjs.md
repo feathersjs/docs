@@ -1,2 +1,100 @@
 # KnexJS
 
+[feathers-knex](https://github.com/feathersjs/feathers-knex) is a database adapter for [KnexJS](http://knexjs.org/), an SQL query builder for Postgres, MySQL, MariaDB, SQLite3, and Oracle designed to be flexible, portable, and fun to use.
+
+```bash
+npm install knex feathers-knex --save
+```
+
+## Getting Started
+
+You can create a \*SQL Knex service like this:
+
+```js
+import knex from 'knex';
+import knexService from 'feathers-knex';
+
+const db = knex({
+  client: 'sqlite3',
+  connection: {
+    filename: './db.sqlite'
+  }
+});
+
+// Create the schema
+db.schema.createTable('people', table => {
+  table.increments('id');
+  table.string('name');
+  table.integer('age');
+});
+
+app.use('/todos', knexService({
+  Model: db,
+  name: 'people'
+}));
+```
+
+This will create a `todos` endpoint and connect to a local `todos` table on an SQLite database in `data.db`.
+
+## Options
+
+The following options can be passed when creating a Knex service:
+
+- `Model` **required** - The KnexJS database instance
+- `name` **required** - The name of the table
+- `id` - The name of the id property (default: `id`)
+- `paginate` - A pagination object containing a `default` and `max` page size (see the [Pagination chapter](databases/pagination.md))
+
+## Complete Example
+
+Here's a complete example of a Feathers server with a `todos` SQLite service. We are using the [Knex schema builder](http://knexjs.org/#Schema)
+
+```js
+import feathers from 'feathers';
+import rest from 'feathers-rest';
+import bodyParser from 'body-parser';
+import knexService from '../lib';
+
+const knex = require('knex')({
+  client: 'sqlite3',
+  connection: {
+    filename: './db.sqlite'
+  }
+});
+
+// Clean up our data. This is optional and is here
+// because of our integration tests
+knex.schema.dropTableIfExists('todos').then(function() {
+  console.log('Dropped todos table');
+
+  // Initialize your table
+  return knex.schema.createTable('todos', function(table) {
+    console.log('Creating todos table');
+    table.increments('id');
+    table.string('text');
+    table.boolean('complete');
+  });
+});
+
+// Create a feathers instance.
+const app = feathers()
+  // Enable REST services
+  .configure(rest())
+  // Turn on JSON parser for REST services
+  .use(bodyParser.json())
+  // Turn on URL-encoded parser for REST services
+  .use(bodyParser.urlencoded({ extended: true }));
+
+// Create Knex Feathers service with a default page size of 2 items
+// and a maximum size of 4
+app.use('/todos', knexService({
+  Model: knex,
+  name: 'todos',
+  paginate: {
+    default: 2,
+    max: 4
+  }
+}));
+
+console.log('Feathers Todo Knex service running on 127.0.0.1:3030');
+```

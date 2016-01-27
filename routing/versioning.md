@@ -1,6 +1,16 @@
 # Versioning Your API
 
-TODO: Make sense of these snippets
+TODO: Make sense of these snippets.  
+
+Note that there are two ways to version your API.  
+
+Directly on the services (`app.use('/api/v1/todos', memory())`)
+ - Good if you want to be able to access services from other versions of your API inside hooks.
+ - Bad if you want each version of your API to have its own plugins and configuration. All versions will have to use the same setup.
+ 
+Using sub-apps, as described in the next section.
+ - Good if you want to have a custom set of plugins and configuration for each version of your API.
+ - Bad if you want to be able to access services from other versions of your API inside hooks.
  
 <hr>
 **Snippets from here:** https://github.com/feathersjs/feathers/issues/207#issuecomment-172619648
@@ -20,7 +30,7 @@ var api = require('./api');
 main.use('/api', api);
 ```
 
-Now your service will be exposed at /api/todos.
+Now your service will be exposed at /api/todos.  Internally, in hooks, you will still use `hook.app.service('todos')` to lookup services. It won't be possible to lookup services on other versions of the API using this type of versioning.  The advantage to doing versioning as shown above (as opposed to doing it directly on the service) is that you will be able to use custom plugins and a custom configuration in each version of your API.
 
 <hr>
 
