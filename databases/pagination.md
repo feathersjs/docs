@@ -1,4 +1,4 @@
-# Sorting an Pagination
+# Pagination and Sorting
 
 All official database adapters support a common way for sorting, limiting and paginating `find` method calls as part of `params.query`.
 
