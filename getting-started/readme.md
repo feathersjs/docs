@@ -29,7 +29,7 @@ Out of the box Feathers provides a lot of what you need to build a modern app. A
 - **Logging** - Feathers comes with a very simplistic logger that has sane defaults for production. However, it is easily swappable to allow you to customize to your needs.
 
 ### First Class Websockets
-Most real-time frameworks only emit messages over websockets. You interact with your server over REST and then receive events over websockets. Feathers allows you to **send** and **receive** data over websockets, so you could even remove REST altogether and simply use websockets to communicate with your app.
+Most real-time frameworks only clients to **receive** messages over websockets. You interact with your server over REST and then receive events over websockets. Feathers allows you to **send** and **receive** data over websockets, so you could even remove REST altogether and simply use websockets to communicate with your app.
 
 ## Built on the Shoulders of Giants
 Because we utilize some already proven modules, we spend less time re-inventing the wheel, are able to move incredibly fast, and have small well-tested, stable modules.
