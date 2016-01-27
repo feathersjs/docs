@@ -156,7 +156,7 @@ const userSchema = new Schema({
 const User = mongoose.model('user', userSchema);
 ```
 
-## Modifying retrieved data
+## Modifying results with the `toObject` hook
 
 The records returned from a query are Mongoose documents, so they can't be modified directly (You won't be able to delete properties from them).  To get around this, you can use the included `toObject` hook to convert the Mongoose documents into plain objects.  Let's modify the before-hooks setup in the feathers-hooks example, above, to this:
 
