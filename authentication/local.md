@@ -45,7 +45,7 @@ let app = feathers()
   .use(bodyParser.json())
   .use(bodyParser.urlencoded({ extended: true }))
   // Configure feathers-authentication
-  .configure(feathersAuth({
+  .configure(authentication({
     secret: 'feathers-rocks'
   }));
 
