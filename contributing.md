@@ -31,4 +31,4 @@ So that's it. You make your edits, keep your files and the Table of Contents org
 Moments after your edits are merged, they will be automatically published to the web, as a downloadable PDF, .mobi file (Kindle compatible), and ePub file (iBooks compatible).
 
 ### Share
-We take pride in having great documentation and we are very appreciative of any help we can get. Please, let the world know you've contributed to the Feathers Book or give [@FeathersJS](https://twitter.com/feathersjs) a shout out on [Twitter](https://twitter.com/feathersjs) when your changes are merged.
+We take pride in having great documentation and we are very appreciative of any help we can get. Please, let the world know you've contributed to the Feathers Book or give [@FeathersJS](https://twitter.com/feathersjs) a shout out on Twitter when your changes are merged.
