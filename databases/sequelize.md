@@ -1,6 +1,6 @@
 # Sequelize
 
-[feathers-sequelize](https://github.com/feathersjs/feathers-sequelize) is a database adapter for Sequelize](http://sequelizejs.com), and ORM for Node.js. It supports the dialects PostgreSQL, MySQL, MariaDB, SQLite and MSSQL and features solid transaction support, relations, read replication and more.
+[feathers-sequelize](https://github.com/feathersjs/feathers-sequelize) is a database adapter for [Sequelize](http://sequelizejs.com), and ORM for Node.js. It supports the dialects PostgreSQL, MySQL, MariaDB, SQLite and MSSQL and features solid transaction support, relations, read replication and more.
 
 ```bash
 npm install feathers-sequelize --save
