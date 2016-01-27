@@ -13,7 +13,7 @@ The [feathers-authentication](https://github.com/feathersjs/feathers-authenticat
 If you are using the default options, setting up JWT auth for your Feathers app is as simple as the below example.  Note: You must set up the `body-parser` module before setting up `feathers-authentication`.
 
 ```js
-var app = feathers()
+let app = feathers()
   .configure(feathers.rest())
   .configure(feathers.socketio())
   .configure(hooks())
