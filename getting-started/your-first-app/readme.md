@@ -62,7 +62,19 @@ Once your dependencies have been installed you can start your brand new app! ðŸ’
 
 `npm start`
 
+Now open up [localhost:3030](http://localhost:3030) in your browser and you will see your app running.
+
 ## What Just Happened
 
+A lot stuff just happened there very quickly. We automatically generated a basic application with a REST and real time API for both [messages](http://localhost:3030/messages) and [users](http://localhost:3030/users). So you now have full CRUD capability using MongoDB for both your `/messages` and `/users` endpoints.
 
+- Show generated folder structure
+- Modify user model to support email and password
+- Talk about login route
+    - We also have set up an authentication service so that you can login by POSTing to `/login`.
+- Introduce concept of hooks for hash password
+- trying logging (should fail with invalid login)
+- Sign up (ie. create a user). This calls the hash password function.
+- Use generator to add another before hook to update `updatedAt` for update, patch methods?
+- Start coding up the front end. Introduce feathers client, and real-time
 
