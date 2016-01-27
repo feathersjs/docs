@@ -11,7 +11,7 @@
        * [Parse](getting-started/vs/parse.md)
        * [Pusher](getting-started/vs/pusher.md)
    * [Quick Start](getting-started/quick-start.md)
-   * [Your First App](getting-started/your-first-app.md)
+   * [Your First App](getting-started/your-first-app/readme.md)
 * [Services](services/readme.md)
 * [REST](providers/rest.md)
 * [Real-Time](providers/real-time/readme.md)
@@ -48,7 +48,7 @@
    * React and React Native
    * CanJS
 * [Help](help/readme.md)
-   * [FAQ](faq.md)
+   * [FAQ](help/faq.md)
 * [Contributing](contributing.md)
 * [Changelog](changelog.md)
 * [License](license.md)

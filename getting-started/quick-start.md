@@ -1,63 +1,29 @@
 # Quick Start
 
-The following guide will walk through creating a basic Todo REST and websocket API with Feathers. To get started, lets create a new folder and in it run
+You can quickly scaffold your first app by running by following these few simple steps:
 
-> `npm install feathers`
+Install the Yeoman and the Feathers generator.
 
-## Your first service
+> `npm install -g yeoman generator-feathers`
 
-The most important concept Feathers adds to Express is that of *services*. Services can be used just like an Express middleware function but instead are JavaScript objects that provide at least one of the following methods:
+Create a directory for your new app.
 
-```js
-var myService = {
-  find: function(params, callback) {},
-  get: function(id, params, callback) {},
-  create: function(data, params, callback) {},
-  update: function(id, data, params, callback) {},
-  patch: function(id, data, params, callback) {},
-  remove: function(id, params, callback) {},
-  setup: function(app, path) {}
-}
-```
+> `mkdir my-new-app; cd my-new-app/`
 
-This object can be registered like `app.use('/my-service', myService)` which - if configured - makes it available as a REST endpoint at `/my-service` and also through websockets. As usual in NodeJS, `callback` has to be called with the error (if any) first and the data as the second parameter.
+Generate your app and follow the prompts.
 
-## Simple Todo
+`yo feathers`
 
-With those methods available we can implement a very basic Todo service that returns a single Todo using the id passed to the `get` method:
+Start your brand new app! 💥
 
-```js
-// app.js
-var feathers = require('feathers');
-var app = feathers();
-var todoService = {
-  get: function(id, params, callback) {
-    // Call back with no error and the Todo object
-    callback(null, {
-      id: id,
-      text: 'You have to do ' + id + '!'
-    });
-  }
-};
+`npm start`
 
-app.configure(feathers.rest())
-  .use('/todos', todoService)
-  .listen(3000);
-```
+---
 
-After running
-
-> `node app.js`
-
-You can go to [localhost:3000/todos/dishes](http://localhost:3000/todos/dishes) and should see the following JSON response:
-
-```js
-{
-  "id": "dishes",
-  "text": "You have to do dishes!"
-}
-```
+> **ProTip:** Based on the database you chose you may have to start the database before you run `npm start` otherwise you will get a connection error.
 
 ## What's next?
 
-This are the basics of Feathers. We created a todos API that is accessible via REST and websockets and built a real-time jQuery frontend. Now, head over to the **[Learn section](/learn)** to learn more about things like Databases, how to integrate other frontend frameworks, Validation, Authentication or Authorization and get familiar with the **[API documentation](/api/)**.
+In just a couple minutes we created a real-time API that is accessible via REST and websockets! Based on the options you chose it connected to your database, already provides CORs, authentication, sane rate limiting, pagination, logging, error handling, and a few other goodies.
+
+This is a great start! Let's take this a bit further and [build your first real application](your-first-app/readme.md).

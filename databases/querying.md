@@ -8,7 +8,7 @@ query: {
 }
 ```
 
-Additionally, the following special criteria are supported.
+Additionally, the following advanced criteria are supported for each property.
 
 ### $in, $nin
 
