@@ -14,7 +14,7 @@ Generate your app and follow the prompts.
 
 `yo feathers`
 
-Start your brand new app! :boom:
+Start your brand new app! 💥
 
 `npm start`
 
@@ -26,4 +26,4 @@ Start your brand new app! :boom:
 
 In just a couple minutes we created a real-time API that is accessible via REST and websockets! Based on the options you chose it connected to your database, already provides CORs, authentication, sane rate limiting, pagination, logging, error handling, and a few other goodies.
 
-This is a great start! Let's take this a bit further and [build your first real application](your-first-app.md).
+This is a great start! Let's take this a bit further and [build your first real application](your-first-app/readme.md).
