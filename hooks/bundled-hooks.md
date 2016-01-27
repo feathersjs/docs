@@ -3,8 +3,8 @@
 When it makes sense to do so, some plugins include their own hooks. The following plugins come bundled with useful hooks:
 
 - `feathers-hooks` (see below)
-- [`feathers-mongoose`](/databases/mongoose.md)
-- [`feathers-authentication`](/authorization/bundled-hooks.md)
+- [`feathers-mongoose`](../databases/mongoose.md)
+- [`feathers-authentication`](../authorization/bundled-hooks.md)
 
 
 You can import the hooks from a plugin like this:
