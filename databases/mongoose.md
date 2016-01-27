@@ -121,7 +121,7 @@ app.use('/todos', mongooseService({
 
 ## Validation
 
-Mongoose by default gives you the ability to add [validations at the model level](http://mongoosejs.com/docs/validation.html). Using an error handler like the [middleware that comes with Feathers](https://github.com/feathersjs/generator-feathers/blob/master/app/templates/src/middleware/error-handler.js) your validation errors will be formatted nicely right out of the box!
+Mongoose by default gives you the ability to add [validations at the model level](http://mongoosejs.com/docs/validation.html). Using an error handler like the [middleware that comes with Feathers](https://github.com/feathersjs/generator-feathers/blob/master/generators/app/templates/static/src/middleware/error-handler.js) your validation errors will be formatted nicely right out of the box!
 
 For more complex validations you really have two options. You can combine Mongoose's validation mechanism with a validation library like [validator.js](https://github.com/chriso/validator.js) or you can do your validations at the service level using [feathers-hooks](https://github.com/feathersjs/feathers-hooks).
 
