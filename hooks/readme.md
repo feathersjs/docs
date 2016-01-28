@@ -1,5 +1,10 @@
 # Feathers Hooks
 
+Service middleware (called __Hooks__) run before or after a service methods executes. This is a great place for input valiation, authorization, data pre-and post-processing or sending notifications like emails or text messages after something happened.
+
+A hook is *provider independent* which means it does not matter if it has been called through REST, Socket.io, Primus or any other provider Feathers may support in the future.
+
+
 ## Getting Started
 
 `feathers-hooks` allows you to register composable middleware functions **before** or **after** a Feathers service method executes. This makes it easy to decouple things like authorization and pre- or post processing from your service logic.

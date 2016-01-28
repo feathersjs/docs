@@ -114,8 +114,6 @@ app.use('/users/:userId/todos', {
 });
 ```
 
-> __Pro tip:__ Although it may be convenient to set `req.feathers.req = req;` to have access to the request object in the service, we recommend keeping your services as provider independent as possible. There usually is a way to pre-process your data in a middleware so that the service does not need to know about the HTTP request or response.
-
 ## Formatting the response
 
 The default REST handler is a middleware that formats the data retrieved by the service as JSON. If you would like to configure your own `handler` middleware just pass it to `rest(handler)`. This middleware will have access to `res.data` which is the data returned by the service. [res.format](http://expressjs.com/en/4x/api.html#res.format) can be used for content negotiation. For example, a middleware that just renders plain text with the todo description:
