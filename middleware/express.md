@@ -2,6 +2,46 @@
 
 In Express [middleware functions](http://expressjs.com/en/guide/writing-middleware.html) are functions that have access to the request object (`req`), the response object (`res`), and the next middleware function in the application’s request-response cycle. The next middleware function is commonly denoted by a variable named `next`. How this middleware plays with Feathers [services](../services/readme.md) is outline below.
 
+## Rendering views
+
+While services primarily provide APIs for a client side application to use, they also play well with [rendering views on the server with Express](http://expressjs.com/en/guide/using-template-engines.html). In an Express middleware, simply use `req.app.service('<servicepath>')` to get the service, retrieve the data and then use it in `res.render`.
+
+For example, to use [EJS](https://www.npmjs.com/package/ejs), after running `npm install ejs --save` in `app.js` we can set:
+
+```js
+app.set('view engine', 'ejs');
+
+app.get('/', function (req, res) {
+  // find all todos
+  req.app.service('todos').find({}).then(todos => 
+    res.render('todos', {
+      title: 'Todos',
+      todos
+    })
+  );
+});
+```
+
+With `views/index.ejs` like this:
+
+```html
+<html>
+  <head>
+    <title><%= title %>
+  </head>
+  <body>
+    <h1>My todos</h1>
+    <ul>
+      <% todos.forEach(function(todo) { %>
+        <li><%= todo.description %></li>
+      <% }); %>
+    </ul>
+  </body>
+</html>
+```
+
+We can see the list of todos from our service when going to the root url.
+
 ## Custom service middleware
 
 Custom Express middleware that only should run before or after a specific service can be passed to `app.use` in the order it should run:
