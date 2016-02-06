@@ -42,7 +42,7 @@ const myService = {
 app.use('/my-service', myService);
 ```
 
-Or as an instance of an ES6 class:
+Or as an instance of an [ES6 class](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Classes):
 
 ```js
 class MyService {
@@ -58,14 +58,22 @@ class MyService {
 app.use('/my-service', new MyService());
 ```
 
+Once registered the wrapped service object (the service with all of Feathers functionality added) can be retrieved like this:
+
+```js
+app.use('my-service').create(data);
+// also works with leading/trailing slashes
+app.use('/my-service').create(data);
+```
+
 ## Service methods
 
 Service methods should return a [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) and use the following parameters:
 
-- `id` is the unique identifier for the resource. A resource is the data identified by a unique id.
+- `id` the identifier for the resource. A resource is the data identified by a unique id.
 - `data` is the resource data
 - `params` can contain any extra parameters, for example the authenticated user. `params.query` contains the query parameters from the client (see the [REST](rest.html) and [real-time](real-time.html) providers).
-- `callback` can be called instead of returning a Promise. It is a Node-style callback function following the `function(error, data)` convention.
+- `callback` can be called instead of returning a Promise. It is a Node-style callback function following the `function(error, data) {}` convention.
 
 Below is a more detailed description of the purpose of each service method. Consider the `send` method as a placeholder for the [real-time API socket](real-time.html) (e.g. `socket.emit` for Socket.io).
 
