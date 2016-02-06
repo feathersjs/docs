@@ -70,7 +70,7 @@ function updateData(req, res, next) {
 
 Keep in mind that shared authentication (between REST and websockets) should use a service based approach as described in the [authentication guide](../authentication/readme.md).
 
-Information about how to use a custom formatter (e.g. to send something other than JSON) can be found in the [REST provider](../providers/rest.md) chapter.
+Information about how to use a custom formatter (e.g. to send something other than JSON) can be found in the [REST provider](../rest/readme.md) chapter.
 
 ## Setting service parameters
 

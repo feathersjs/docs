@@ -1,6 +1,6 @@
 # Primus client use
 
-Primus works very similar to [Socket.io](socket-io.md) but supports a number of different real-time libraries. [Once configured on the server](../providers/real-time/primus.md) service methods and events will be available through a Primus socket connection. 
+Primus works very similar to [Socket.io](socket-io.md) but supports a number of different real-time libraries. [Once configured on the server](..//real-time/primus.md) service methods and events will be available through a Primus socket connection. 
 
 ## Establishing the connection
 
@@ -39,7 +39,7 @@ A service can also be used by sending and receiving events through the Primus co
 
 Service methods can be called by emitting a `<servicepath>::<methodname>` event with the method parameters. `servicepath` is the name the service has been registered with (in `app.use`) without leading or trailing slashes. An optional callback following the `function(error, data)` Node convention will be called with the result of the method call or any errors that might have occurred.
 
-`params` will be set as `params.query` in the service method call. Other service parameters can be set through a [Primus middleware](../providers/primus.md).
+`params` will be set as `params.query` in the service method call. Other service parameters can be set through a [Primus middleware](../real-time/primus.md).
 
 #### `find`
 
@@ -169,7 +169,7 @@ Will call `todos.remove(null, { query: { completed: 'true' } })` to delete all c
 
 ### Listening to events
 
-Listening to service events allows real-time behaviour in an application. [Service events](../providers/real-time/readme.md) are sent to the socket in the form of `servicepath eventname`.
+Listening to service events allows real-time behaviour in an application. [Service events](..//real-time/readme.md) are sent to the socket in the form of `servicepath eventname`.
 
 #### created
 

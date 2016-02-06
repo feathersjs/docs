@@ -1,6 +1,6 @@
 # REST
 
-Once [set up on the server](../providers/rest.md), there are several ways to connect to the REST API of a Feathers service. Keep in mind that while clients connected via websockets will receive real-time events from other REST API calls, the HTTP API itself does not provide any real-time functionality.
+Once [set up on the server](../rest/readme.md), there are several ways to connect to the REST API of a Feathers service. Keep in mind that while clients connected via websockets will receive real-time events from other REST API calls, the HTTP API itself does not provide any real-time functionality.
 
 ## feathers-rest clients
 

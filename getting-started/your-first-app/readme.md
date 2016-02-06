@@ -30,7 +30,7 @@ Enter in a short description of your app.
 
 You can now choose which providers you want to support. Since we're setting up a real-time REST API we'll go with the default REST and Socket.io. So just hit enter.
 
-You can learn more about Feathers providers in [Providers chapter](../../providers/readme.md).
+You can learn more about Feathers providers in [Providers chapter](../../real-time/readme.md).
 
 <img src="./assets/step3.png" alt="Transport Prompt">
 

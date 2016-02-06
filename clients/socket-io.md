@@ -1,6 +1,6 @@
 # Socket.io client use
 
-[With Socket.io configured on the server](../providers/socket-io.md) service methods and events will be available through a websocket connection. While using the REST API and just listening to real-time events on a socket is possible, Feathers also allows to call service methods through a  websocket which in most cases will be faster than REST HTTP.
+[With Socket.io configured on the server](../real-time/socket-io.md) service methods and events will be available through a websocket connection. While using the REST API and just listening to real-time events on a socket is possible, Feathers also allows to call service methods through a  websocket which in most cases will be faster than REST HTTP.
 
 ## Establishing the connection
 
@@ -51,7 +51,7 @@ A service can also be used by sending and receiving events through a plain Socke
 
 Service methods can be called by emitting a `<servicepath>::<methodname>` event with the method parameters. `servicepath` is the name the service has been registered with (in `app.use`) without leading or trailing slashes. An optional callback following the `function(error, data)` Node convention will be called with the result of the method call or any errors that might have occurred.
 
-`params` will be set as `params.query` in the service method call. Other service parameters can be set through a [Socket.io middleware](../providers/socket-io.md).
+`params` will be set as `params.query` in the service method call. Other service parameters can be set through a [Socket.io middleware](../real-time/socket-io.md).
 
 #### `find`
 
@@ -181,7 +181,7 @@ Will call `todos.remove(null, { query: { completed: 'true' } })` to delete all c
 
 ### Listening to events
 
-Listening to service events allows real-time behaviour in an application. [Service events](../providers/real-time/readme.md) are sent to the socket in the form of `servicepath eventname`.
+Listening to service events allows real-time behaviour in an application. [Service events](..//real-time/readme.md) are sent to the socket in the form of `servicepath eventname`.
 
 #### created
 

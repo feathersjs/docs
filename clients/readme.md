@@ -6,6 +6,34 @@ Even better, Feathers itself can be used as a universal (isomorphic) client. Tha
 
 In this chapter we will talk about how to use the [universal Feathers client](feathers.md) and how to talk to the [REST HTTP](rest.md) and websocket ([Socket.io](socket-io.md) and [Primus](primus.md)) APIs directly.
 
+## No custom methods
+
+One important thing to know about Feathers is that it only exposes the official [service methods](../services/readme.md) to clients. While you can add and use any service method on the server, it is __not__ possible to expose those custom methods to clients.
+
+In the [Why Feathers](../why/readme.md) chapter we discussed how the _uniform interface_ of services naturally translates into a REST API and also makes it easy to hook into the execution of known methods and emit events when they return.
+
+In general, almost anything that may require custom methods can also be done by creating other services. For example, a `userService.forgotPassword` method can also be implemented as a password service that resets the password in the `create`:
+
+```js
+class PasswordService {
+  create(data) {
+    const userId = data.user_id;
+    const userService = this.app.service('user');
+    
+    userService.resetPassword(userId).then(user => {
+      // Send an email with the new password
+      return sendEmail(user);
+    })
+  }
+  
+  setup(app) {
+    this.app = app;
+  }
+}
+```
+
+## Framework support
+
 Because it is easy to integrate, Feathers does not have any official framework specific bindings. To give a better idea on how the Feathers client plays with other frameworks here are some [TodoMVC](http://todomvc.com/) examples that all connect to the same Feathers real-time API ([todos.feathersjs.com](http://todos.feathersjs.com)):
 
 - [jQuery](http://feathersjs.github.io/todomvc/feathers/jquery/)

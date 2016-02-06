@@ -1,23 +1,20 @@
 # Summary
 
-* [Getting Started](README.md)
-   * [Introduction](getting-started/readme.md)
-   * [Feathers vs. Other Software](getting-started/vs/readme.md)
-       * [Meteor](getting-started/vs/meteor.md)
-       * [Sails](getting-started/vs/sails.md)
-       * [Derby](getting-started/vs/derby.md)
-       * [Express + Socket.io](getting-started/vs/express-socketio.md)
-       * [Firebase](getting-started/vs/firebase.md)
-       * [Parse](getting-started/vs/parse.md)
-       * [Pusher](getting-started/vs/pusher.md)
+* [Introduction](readme.md)
+* [Getting Started](getting-started/readme.md)
    * [Quick Start](getting-started/quick-start.md)
    * [Your First App](getting-started/your-first-app/readme.md)
+* [Why Feathers](why/readme.md)
+   * [Express + Socket.io](why/express-socketio.md)
+   * [Feathers vs Meteor](why/meteor.md)
+   * [Feathers vs Sails](why/sails.md)
+   * [Feathers vs Firebase](why/firebase.md)
 * [Services](services/readme.md)
-* [REST](providers/rest.md)
-* [Real-Time](providers/real-time/readme.md)
-   * [Socket.io](providers/real-time/socket-io.md)
-   * [Primus](providers/real-time/primus.md)
-   * [Event Filtering](providers/real-time/event-filtering.md)
+* [REST](rest/readme.md)
+* [Real-Time](real-time/readme.md)
+   * [Socket.io](real-time/socket-io.md)
+   * [Primus](real-time/primus.md)
+   * [Event Filtering](real-time/event-filtering.md)
 * [Databases](databases/readme.md)
    * [Pagination and sorting](databases/pagination.md)
    * [Querying](databases/querying.md)
@@ -46,6 +43,7 @@
    * [Primus](clients/primus.md)
 * [API Documentation](api/readme.md)
 * [Guides](guides/readme.md)
+   * Migrating to Feathers 2
    * Creating a plugin
    * React and React Native
    * CanJS

@@ -6,7 +6,7 @@ In this chapter we will look at custom URL routes and different ways for version
 
 A quite common question is how to provide nested routes for Feathers services. In general, Feathers does not know about associations between your services. Services are usually connected by their ids so any nested route can also be expressed by query parameters. For example if you have a user service and would like to get all todos (assuming the associated user id is stored in each todo), for that user the url would be `/todos?user_id=<userid>`. This approach also makes it easier to use by non REST providers like websockets and any other protocols Feathers might support in the future.
 
-You can however add Express style parameters to your routes when you register a service (for additional information also see the [REST chapter](../providers/rest.md)). This will then be set in the `params` object in each service call. For example a `/users/:user_id/todos` route can be provided like this:
+You can however add Express style parameters to your routes when you register a service (for additional information also see the [REST chapter](../rest/readme.md)). This will then be set in the `params` object in each service call. For example a `/users/:user_id/todos` route can be provided like this:
 
 ```js
 app.use('/users/:user_id/todos', {
@@ -40,7 +40,7 @@ Now all `GET /users/<id>/todos` requests will make a `find` query limited to the
 
 > __Note:__ Think of Feathers services as their own router that can only be used directly on an application. Services can *not* be used with instances of [Express router](http://expressjs.com/en/4x/api.html#router) (`feathers.Router`).
 
-It is important to keep in mind that those routes are only possible for the REST API of a service. The actual service name is still `users/:userId/todos`. This means that [Socket.io](../providers/real-time/socket-io.md) and [Primus](../providers/real-time/primus.md) connections need to provide the parameter in their query:
+It is important to keep in mind that those routes are only possible for the REST API of a service. The actual service name is still `users/:userId/todos`. This means that [Socket.io](..//real-time/socket-io.md) and [Primus](..//real-time/primus.md) connections need to provide the parameter in their query:
 
 ```js
 // Using the socket directly
@@ -131,6 +131,6 @@ const app = feathers()
   .use('/v2', v2app);
 ```
 
-Now `/v1/todos/dishes` and `/v2/todos/dishes` will show a different response. For [websocket services](../providers/real-time/readme.md), the path to listen and send events on will now be `v1/todos` and `v2/todos`. The advantage to doing versioning as shown above (as opposed to doing it directly on the service) is that you will be able to use custom plugins and a custom configuration in each version of your API.
+Now `/v1/todos/dishes` and `/v2/todos/dishes` will show a different response. For [websocket services](..//real-time/readme.md), the path to listen and send events on will now be `v1/todos` and `v2/todos`. The advantage to doing versioning as shown above (as opposed to doing it directly on the service) is that you will be able to use custom plugins and a custom configuration in each version of your API.
 
 > __Note:__ Currently, using `app.service('v1/todos')` does not work. You will have to use the imported applications like `v1app.service('todos')` or `v2app.service('todos')`
