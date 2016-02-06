@@ -1,6 +1,5 @@
 # Summary
 
-* [Introduction](readme.md)
 * [Getting Started](getting-started/readme.md)
    * [Quick Start](getting-started/quick-start.md)
    * [Your First App](getting-started/your-first-app/readme.md)
@@ -15,6 +14,11 @@
    * [Socket.io](real-time/socket-io.md)
    * [Primus](real-time/primus.md)
    * [Event Filtering](real-time/event-filtering.md)
+* [Client Use](clients/readme.md)
+   * [Universal Feathers](clients/feathers.md)
+   * [REST](clients/rest.md)
+   * [Socket.io](clients/socket-io.md)
+   * [Primus](clients/primus.md)
 * [Databases](databases/readme.md)
    * [Pagination and sorting](databases/pagination.md)
    * [Querying](databases/querying.md)
@@ -36,11 +40,6 @@
    * Two-Factor (MFA)
 * [Authorization / Access Control](authorization/readme.md)
    * [Bundled Auth Hooks](authorization/bundled-hooks.md)
-* [Client Use](clients/readme.md)
-   * [Universal Feathers](clients/feathers.md)
-   * [REST](clients/rest.md)
-   * [Socket.io](clients/socket-io.md)
-   * [Primus](clients/primus.md)
 * [API Documentation](api/readme.md)
 * [Guides](guides/readme.md)
    * Migrating to Feathers 2
