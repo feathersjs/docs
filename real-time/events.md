@@ -1,6 +1,6 @@
 # Service Events
 
-Once registered through `app.use` or `app.service` (see the [API documentation](api.md) for more details), a Feathers service gets turned into an [EventEmitter](https://nodejs.org/api/events.html) that sends `created`, `updated`, `patched` and `removed` events when the respective service method returns successfully. On the server and [Feathers as the client](../clients/feathers.md) you can listen to them by retrieving the wrapped service object and using it like a normal event emitter.
+Once registered through `app.use` or `app.service` (see the [API documentation](api.md) for more details), a Feathers service gets turned into an [EventEmitter](https://nodejs.org/api/events.html) that sends `created`, `updated`, `patched` and `removed` events when the respective service method returns successfully. On the server and [Feathers as the client](../clients/feathers.md) you can listen to them by getting the service object with `app.service('<servicepath>')` and using it like a normal event emitter.
 
 ### created
 
@@ -75,7 +75,7 @@ app.use('/messages', {
 const messages = app.service('messages');
 
 messages.on('removed', messages => console.log('removed', messages));
-messages.remove(1));
+messages.remove(1);
 ```
 
 ## Client-side events

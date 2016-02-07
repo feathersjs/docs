@@ -54,9 +54,11 @@ app.service('todos').before({
 
 ### Classes (ES6)
 
-All modules also export a [Babel](http://babeljs.io) transpiled ES6 class as `Service` that can be directly extended like this:
+All modules also export an ES6 class as `Service` that can be directly extended like this:
 
 ```js
+'use strict';
+
 import { Service } from 'feathers-<database>';
 
 class MyService extends Service {

@@ -7,14 +7,14 @@ The [feathers-socketio](https://github.com/feathersjs/feathers-socketio) provide
 Install the provider module with:
 
 ```
-npm install feathers-socketio --save
+npm install feathers-socketio
 ```
 
 Then import the module and pass it to `app.configure`. The following example will start a server on port 3030 and also set up Socket.io:
 
 ```js
-import feathers from 'feathers';
-import socketio from 'feathers-socketio';
+const feathers = require('feathers');
+const socketio = require('feathers-socketio');
 
 const app = feathers().configure(socketio());
 
@@ -40,15 +40,15 @@ In the Browser you can connect, call service methods and listen to events like t
 </script>
 ```
 
-> A detailed description of the usage on a client can be found in [the Feathers client](../../clients/readme.md) chapter.
+A detailed description of the usage on a client can be found in [Socket.io Feathers client](../clients/socket-io.md) chapter.
 
 ## Configuration
 
 Once the server has been started with `app.listen()` the Socket.io object is available as `app.io`. It is also possible to pass a function that gets called with the initialized `io` server object (for more details see the [Socket.io server documentation](http://socket.io/docs/server-api/)). This is a good place to listen to custom events or add [authorization](https://github.com/LearnBoost/socket.io/wiki/Authorizing):
 
 ```js
-import feathers from 'feathers';
-import socketio from 'feathers-socketio';
+const feathers = require('feathers');
+const socketio = require('feathers-socketio');
 
 const app = feathers()
   .configure(socketio(function(io) {
@@ -73,7 +73,7 @@ app.listen(3030);
 
 ## Middleware and service parameters
 
-Similar to [REST provider](../rest.md) middleware, Socket.io middleware can modify the `feathers` property on the `socket` which will then be used as the service parameters:
+Similar to [REST provider](../rest/readme.md) middleware, Socket.io middleware can modify the `feathers` property on the `socket` which will then be used as the service parameters:
 
 ```js
 app.configure(socketio(function(io) {

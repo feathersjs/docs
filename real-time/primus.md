@@ -7,18 +7,18 @@
 Install the provider module with:
 
 ```
-npm install feathers-primus ws --save
+npm install feathers-primus ws
 ```
 
-Then import the module and pass `primus(configuration [, fn])` to `app.configure`. The following example will start a server on port 3030 and also set up Primus using the 'ws' websocket module.
+Here we also installed the `ws` module which will let us use plain websockets. Now import the module and pass `primus(configuration [, fn])` to `app.configure`. The following example will start a server on port 3030 and also set up Primus using the `ws` websocket module.
 
 ```js
-import feathers from 'feathers';
-import primus from 'feathers-primus';
+const feathers = require('feathers');
+const primuse = require('feathers-primus');
 
 const app = feathers().configure(primus({
   transformer: 'websockets'
-},));
+}));
 
 app.listen(3030);
 ```
@@ -42,6 +42,8 @@ In the Browser you can connect, call service methods and listen to events like t
 </script>
 ```
 
+A detailed description of the usage on a client can be found in [Primus Feathers client](../clients/primus.md) chapter.
+
 ## Configuration
 
 The second parameter to the configuration function can be a callback that gets called with the Primus server instance that can e.g. be used for setting up [authorization](https://github.com/primus/primus#authorization):
@@ -53,20 +55,21 @@ app.configure(feathers.primus({
 }, function(primus) {
   // Set up Primus authorization here
   primus.authorize(function (req, done) {
-    var auth;
-
-    try { auth = authParser(req.headers['authorization']) }
-    catch (ex) { return done(ex) }
-
-    // Do some async auth check
-    authCheck(auth, done);
+    try { 
+      const auth = authParser(req.headers['authorization']);
+      // Do some async auth check
+      authCheck(auth, done);
+    }
+    catch (error) {
+      return done(error);
+    }
   });
 }));
 ```
 
 ## Middleware and service parameters
 
-Just like [REST](../rest.md) and [SocketIO](socket-io.md), the Primus request object has a `feathers` property that can be extended with additional service `params` during authorization:
+Just like [REST](../rest/readme.md) and [SocketIO](socket-io.md), the Primus request object has a `feathers` property that can be extended with additional service `params` during authorization:
 
 ```js
 app.configure(primus({

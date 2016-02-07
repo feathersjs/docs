@@ -8,11 +8,15 @@ Using [the Feathers client](feathers.md), the `feathers-rest/client` module allo
 
 > __Important__: REST client services do emit `created`, `updated`, `patched` and `removed` events but only _locally for their own instance_. Real-time events from other clients can only be received by using a websocket connection.
 
+```
+$ npm install feathers feathers-rest
+```
+
 The REST client wrapper is initialized using a base URL:
 
 ```js
-import feathers from 'feathers';
-import restClient from 'feathers-rest/client';
+const feathers = require('feathers');
+const restClient = require('feathers-rest/client');
 
 const rest = restClient('http://my-feathers-server.com');
 const app = feathers()
@@ -74,6 +78,7 @@ const app = feathers()
 Fetch also uses a default configuration:
 
 ```js
+const fetch = require('node-fetch');
 const app = feathers()
   .configure(feathers.fetch(fetch));
 ```
@@ -86,7 +91,7 @@ All query parameters in a URL will be set as `params.query`. Other service param
 
 The body type for `POST`, `PUT` and `PATCH` requests is determined by the Express [body-parser](https://github.com/expressjs/body-parser) middleware which has to be registered *before* any service.
 
-### `find`
+### find
 
 Retrieves a list of all matching resources from the service
 
@@ -96,7 +101,7 @@ GET /todos?status=completed&user=10
 
 Will call `todos.find({ query: { status: 'completed', user: '10' } })`.
 
-### `get`
+### get
 
 Retrieve a single resource from the service.
 
@@ -112,7 +117,7 @@ GET /todos/1?fetch=all
 
 Will call `todos.get(1, { query: { fetch: 'all' } })`.
 
-### `create`
+### create
 
 Create a new resource with `data` which may also be an array.
 
@@ -131,7 +136,7 @@ POST /todos
 ]
 ```
 
-### `update`
+### update
 
 Completely replace a single or multiple resources.
 
@@ -151,7 +156,7 @@ Will call `todos.update(null, { "complete": true }, { query: { complete: 'false'
 
 > __Note:__ `update` is normally expected to replace an entire resource which is why the database adapters only support `patch` for multiple records.
 
-### `patch`
+### patch
 
 Merge the existing data of a single or multiple resources with the new `data`.
 
@@ -171,7 +176,7 @@ Will call `todos.patch(null, { complete: true }, { query: { complete: 'false' } 
 
 This is supported out of the box by the Feathers [database adapters](../databases/readme.md) 
 
-### `remove`
+### remove
 
 Remove a single or multiple resources:
 

@@ -20,8 +20,8 @@ More details, like how to establish a connection between NodeJS servers can be f
 Using [the Feathers client](feathers.md), the `feathers-primus/client` module can now be configured to use the Primus connection:
 
 ```js
-import feathers from 'feathers';
-import primus from 'feathers-primus/client';
+const feathers = require('feathers');
+const primus = require('feathers-primus/client');
 
 const app = feathers().configure(primus(primus));
 

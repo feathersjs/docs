@@ -1,6 +1,6 @@
 # Event Filtering
 
-By default all service events will be sent to *all* connected clients. In many cases you probably want to be able to only send events to certain clients. Both, the [Socket.io](socket-io.md) and [Primus](primus.md) provider add a `.filter` service method which can be used to filter events. A filter is a `function(data, connection, hook)` which gets passed
+By default all service events will be sent to *all* connected clients. In many cases you probably want to be able to only send events to certain clients. Both, the [Socket.io](socket-io.md) and [Primus](primus.md) provider add a `.filter` service method which can be used to filter events. A filter is a `function(data, connection, hook)` function which gets passed
 
 - the `data` to dispatch
 - the `connection` for which the data is being filtered. This is the `feathers` property from the Socket.io and Primus middleware and usually contains information like the connected user
@@ -59,7 +59,7 @@ todos.filter('created', function(data, connection, hook) {
 });
 ```
 
-[Custom events](events.md) can be filtered the same way:
+[Custom events](../clients/readme.md) can be filtered the same way:
 
 ```js
 app.service('payments').filter('status', function(data, connection, hook) {

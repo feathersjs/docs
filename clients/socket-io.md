@@ -7,7 +7,7 @@
 Feathers sets up a normal Socket.io server that you can connect to using the [Socket.io client](http://socket.io/docs/client-api/) either by loading the `socket.io-client` module or `/socket.io/socket.io.js` from the server. Unlike HTTP calls, websockets do not have a cross-origin restriction in the browser so it is possible to connect to any Feathers server.
 
 ```js
-import io from 'socket.io-client';
+const io = require('socket.io-client');
 
 const socket = io();
 // Or to connect to another server
@@ -30,9 +30,9 @@ const socket = io('http://api.my-feathers-server.com');
 Using [the Feathers client](feathers.md), the `feathers-socketio/client` module can now be configured to use that socket as the connection:
 
 ```js
-import feathers from 'feathers';
-import socketio from 'feathers-socketio/client';
-import io from 'socket.io-client';
+const feathers = require('feathers');
+const socketio = require('feathers-socketio/client');
+const io = require('socket.io-client');
 
 const socket = io();
 const app = feathers().configure(socketio(socket));
@@ -189,7 +189,7 @@ The `created` event will be published with the callback data when a service `cre
 
 ```html
 <script>
-  var socket = io.connect('http://localhost:8000/');
+  var socket = io('http://localhost:8000/');
 
   socket.on('todos created', function(todo) {
     console.log('Got a new Todo!', todo);
@@ -203,7 +203,7 @@ The `updated` and `patched` events will be published with the callback data when
 
 ```html
 <script>
-  var socket = io.connect('http://localhost:8000/');
+  var socket = io('http://localhost:8000/');
 
   socket.on('my/todos updated', function(todo) {
     console.log('Got an updated Todo!', todo);
@@ -223,7 +223,7 @@ The `removed` event will be published with the callback data when a service `rem
 
 ```html
 <script>
-  var socket = io.connect('http://localhost:8000/');
+  var socket = io('http://localhost:8000/');
 
   socket.on('todos removed', function(todo) {
     // Remove element showing the Todo from the page

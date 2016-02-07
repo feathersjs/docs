@@ -27,8 +27,8 @@ app.listen(3030);
 After running
 
 ```
-npm install feathers feathers-rest
-node app.js
+$ npm install feathers feathers-rest
+$ node app.js
 ```
 
 When going to [localhost:3030/todos/dishes](http://localhost:3030/todos/dishes) you will see:

@@ -1,6 +1,6 @@
 # Universal Feathers
 
-The Feathers client (`feathers/client`) module provides Feathers core functionality (registering and retrieving services, events etc.) without relying on Express. This makes it possible to use Feathers in any JavaScript environment like the browser, React Native or other NodeJS servers and to transparently connect to and use services from a Feathers API server.
+The Feathers client (`feathers/client`) module provides Feathers core functionality (registering and retrieving services, events etc.) without relying on Express. This makes it possible to use Feathers in any JavaScript environment like the browser, [React Native](https://facebook.github.io/react-native/) or other NodeJS servers and to transparently connect to and use services from a Feathers API server.
 
 If they are not universally usable already (like [feathers-hooks](../hooks/readme.md)), many plugins provide their own client modules (e.g. `feathers-socketio/client`, `feathers-rest/client` or `feathers-primus/client`). The following REST and websocket client connection libraries are supported:
 
@@ -17,20 +17,24 @@ If they are not universally usable already (like [feathers-hooks](../hooks/readm
 
 In NodeJS or module loaders that support [NPM](https://www.npmjs.com/) like [Browserify](http://browserify.org/), [Webpack](https://webpack.github.io/) or [StealJS](http://stealjs.com) the Feathers client modules can be loaded individually. The following example sets up a Feathers client that uses a local Socket.io connection to communicate with remote services:
 
-```js
-import feathers from 'feathers/client';
-import socketio from 'feathers-socketio/client';
-import hooks from 'feathers-hooks';
-import io from 'socket.io-client';
+```
+$ npm install feathers feathers-socketio feathers-hooks socket.io-client
+```
 
-const socket = io('http://my-feathers-server.com');
+```js
+const feathers = require('feathers/client')
+const socketio = require('feathers-socketio/client');
+const hooks = require('feathers-hooks');
+const io = require('socket.io-client');
+
+const socket = io('http://api.my-feathers-server.com');
 const app = feathers()
   .configure(hooks())
   .configure(socketio(socket));
 
 const todoService = app.service('todos');
 
-todoService.on('created', todo => console.log('Someone created a todo', todo));
+todoService.on('created', todo => console.log('Created a todo', todo));
 
 // Use the todos service from the server
 todoService.create({

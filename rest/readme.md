@@ -26,15 +26,15 @@ A full overview of which HTTP method call belongs to which service method call a
 
 ## Usage
 
-Install the provider module with:
+Install the provider with:
 
 ```
-npm install feathers-rest body-parser
+$ npm install feathers-rest body-parser
 ```
 
 We will have to provide our own body parser middleware (here the standard [Express 4 body-parser](https://github.com/expressjs/body-parser)) to make REST `.create`, `.update` and `.patch` calls parse the data in the HTTP body.
 
-> __Note:__ The body-parser middleware has to be registered *before* any service (otherwise the service method will throw a `No data provided` or `First parameter for 'create' must be an object` error).
+> __Note:__ The body-parser middleware has to be registered *before* any service. Otherwise the service method will throw a `No data provided` or `First parameter for 'create' must be an object` error.
 
 If you would like to add other middleware *before* the REST handler, simply call `app.use(middleware)` before registering any services. The following example creates a messages service that can save a new message and return all messages:
 
@@ -86,7 +86,7 @@ After starting the application, we can now use CURL to create a new message:
 curl 'http://localhost:3030/messages/' -H 'Content-Type: application/json' --data-binary '{ "text": "Learning Feathers!" }'
 ```
 
-You should see the created message logged on the console and when going to [localhost:3030/messages/](http://localhost:3030/messages/) see the newly created message.
+And should see the created message logged on the console. When going to [localhost:3030/messages/](http://localhost:3030/messages/) we see the newly created message.
 
 ## Query, route and middleware parameters
 
@@ -106,7 +106,7 @@ Will set `params.query` to
 }
 ```
 
-Since the URL is just a string, there will be *no type conversion*. This can be done manually in a [before hook](../hooks/readme.md).
+Since the URL is just a string, there will be *no type conversion*. This can be done manually in a [hook](../hooks/readme.md).
 
 For REST calls, `params.provider` will be set to `rest` (so you know where the service call came from). It is also possible to add information directly to the service `params` by registering Express middleware before a service that modifies the `req.feathers` property and to use URL parameters for REST API calls which will also be added to the params object:
 
@@ -120,14 +120,14 @@ app.configure(rest())
   });
 
 app.use('/users/:userId/todos', {
-  get: function(id, params) {
+  get(id, params) {
     console.log(params.query); // -> ?query
     console.log(params.provider); // -> 'rest'
     console.log(params.fromMiddleware); // -> 'Hello world'
     console.log(params.userId); // will be `1` for GET /users/1/todos
 
     return Promise.resolve({
-      id, name, params,
+      id, params,
       description: `You have to do ${id}!`
     });
   }
