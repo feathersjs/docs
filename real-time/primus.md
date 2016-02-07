@@ -7,7 +7,7 @@
 Install the provider module with:
 
 ```
-npm install feathers-primus --save
+npm install feathers-primus ws --save
 ```
 
 Then import the module and pass `primus(configuration [, fn])` to `app.configure`. The following example will start a server on port 3030 and also set up Primus using the 'ws' websocket module.

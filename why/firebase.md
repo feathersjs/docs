@@ -1,4 +1,4 @@
-## Feathers vs. Firebase
+# Feathers vs. Firebase
 
 Firebase is a hosted platform for mobile or web applications. Just like Feathers Firebase provides REST and real-time APIs but also includes CDN support.
 

@@ -1,6 +1,6 @@
 # Event Filtering
 
-By default all service events will be sent to all connected clients. In many cases you probably want to be able to only send events to certain clients. Both, the [Socket.io](socket-io.md) and [Primus](primus.md) provider add a `.filter` service method which can be used to filter events. A filter is a `function(data, connection, hook)` which gets passed
+By default all service events will be sent to *all* connected clients. In many cases you probably want to be able to only send events to certain clients. Both, the [Socket.io](socket-io.md) and [Primus](primus.md) provider add a `.filter` service method which can be used to filter events. A filter is a `function(data, connection, hook)` which gets passed
 
 - the `data` to dispatch
 - the `connection` for which the data is being filtered. This is the `feathers` property from the Socket.io and Primus middleware and usually contains information like the connected user
@@ -12,13 +12,25 @@ Filter functions run for every connected client on every event and should be opt
 
 ## Filter examples
 
-The following example filters all events on the `todos` service if the todo and the connection user do not belong to the same company:
+The following example filters all events on the `messages` service if the connection does not have an [authenticated user](../authentication/readme.md): 
 
 ```js
-const todos = app.service('todos');
+const messages = app.service('messages');
 
+messages.filter(function(data, connection) {
+  if(!connection.user) {
+    return false;
+  }
+  
+  return data;
+});
+```
+
+As mentioned, filters can be chained. So once the previous filter passes (the connection has an authenticated user) we can now filter all connections where the data and the user do not belong to the same company:
+
+```js
 // Blanket filter out all connections that don't belong to the same company
-todos.filter(function(data, connection) {
+messages.filter(function(data, connection) {
   if(data.company_id !== connection.user.company_id) {
     return false;
   }
@@ -27,7 +39,7 @@ todos.filter(function(data, connection) {
 });
 ```
 
-As mentioned, filters can be chained. For example, we now know the todo and the connection user belong to the same company. Now we can filter the `created` event to only be sent if the connections user and the user that created the todo are friends with each other:
+Now that we know the connection has an authenticated user and the data and the user belong to the same company, we can filter the `created` event to only be sent if the connections user and the user that created the todo are friends with each other:
 
 
 ```js
@@ -50,7 +62,6 @@ todos.filter('created', function(data, connection, hook) {
 ## Registering filters
 
 There are several ways of registering filter functions, very similar to how [hooks](hooks.md) can be registered.
-
 
 ```js
 const todos = app.service('todos');

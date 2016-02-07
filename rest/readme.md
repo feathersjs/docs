@@ -1,55 +1,58 @@
 # The REST API Provider
 
-The [feathers-rest](https://github.com/feathersjs/feathers-rest) provider allows to expose services through a [RESTful](https://en.wikipedia.org/wiki/Representational_state_transfer) interface on the services path. This means that you can call a service method through the `GET`, `POST`, `PUT`, `PATCH` and `DELETE` [HTTP methods](https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol):
+As we have already seen in the [service chapter](../services/readme.md) the [feathers-rest](https://github.com/feathersjs/feathers-rest) module allows to expose services through a [RESTful](https://en.wikipedia.org/wiki/Representational_state_transfer) interface on the services path. This means that you can call a service method through the `GET`, `POST`, `PUT`, `PATCH` and `DELETE` [HTTP methods](https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol):
 
 ```js
-const myService = {
+const messages = {
   // GET /todos
-  find: function(params [, callback]) {},
+  find(params [, callback]) {},
   // GET /todos/<id>
-  get: function(id, params [, callback]) {},
+  get(id, params [, callback]) {},
   // POST /todos
-  create: function(data, params [, callback]) {},
+  create(data, params [, callback]) {},
   // PUT /todos[/<id>]
-  update: function(id, data, params [, callback]) {},
+  update(id, data, params [, callback]) {},
   // PATCH /todos[/<id>]
-  patch: function(id, data, params [, callback]) {},
+  patch(id, data, params [, callback]) {},
   // DELETE /todos[/<id>]
-  remove: function(id, params [, callback]) {},
-  setup: function(app, path) {}
+  remove(id, params [, callback]) {},
+  setup(app, path) {}
 }
 
-app.service('/todos', myService);
+app.service('/messages', messages);
 ```
 
-A full overview of which HTTP method call belongs to which service method call can be found in the [services](services.md) chapter.
+A full overview of which HTTP method call belongs to which service method call and parameters can be found in the [REST client use](../clients/rest.md) chapter.
 
 ## Usage
 
 Install the provider module with:
 
 ```
-npm install feathers-rest --save
+npm install feathers-rest body-parser
 ```
 
-We will have to provide our own body parser middleware like the standard [Express 4 body-parser](https://github.com/expressjs/body-parser) to make REST `.create`, `.update` and `.patch` calls parse the data in the HTTP body. This middleware has to be registered *before* any service (otherwise the service method will throw a `No data provided` or `First parameter for 'create' must be an object` error). If you would like to add other middleware *before* the REST handler, simply call `app.use(middleware)` before configuring the provider. The following example creates a Todo service that can save a new todo and return all todos:
+We will have to provide our own body parser middleware (here the standard [Express 4 body-parser](https://github.com/expressjs/body-parser)) to make REST `.create`, `.update` and `.patch` calls parse the data in the HTTP body. This middleware has to be registered *before* any service (otherwise the service method will throw a `No data provided` or `First parameter for 'create' must be an object` error). If you would like to add other middleware *before* the REST handler, simply call `app.use(middleware)` before adding services. The following example creates a messages service that can save a new message and return all messages:
 
 ```js
-import feathers from 'feathers';
-import rest from 'feathers-rest';
-import bodyParser from 'body-parser';
+// app.js
+'use strict';
 
-class TodoService {
+const feathers = require('feathers');
+const rest = require('rest');
+const bodyParser = require('body-parser');
+
+class MessageService {
   constructor() {
-    this.todos = [];
+    this.messages = [];
   }
 
   find(params) {
-    return Promise.resolve(this.todos);
+    return Promise.resolve(this.messages);
   }
 
   create(data, params) {
-    this.todos.push(data);
+    this.messages.push(data);
 
     return Promise.resolve(data);
   }
@@ -63,10 +66,18 @@ const app = feathers()
   // Turn on URL-encoded parser for REST services
   .use(bodyParser.urlencoded({ extended: true }));
 
-app.use('/todos', new TodoService());
+app.use('/messages', new MessageService());
 
 app.listen(3030);
 ```
+
+After starting the application, we can no use CURL to create a new message:
+
+```
+curl 'http://localhost:3030/messages/' -H 'Content-Type: application/json' --data-binary '{ "text": "Learn Feathers!" }'
+```
+
+When going to `http://localhost:3030/messages/` we will see the newly created message.
 
 ## Query, route and middleware parameters
 
@@ -86,7 +97,7 @@ Will set `params.query` to
 }
 ```
 
-Since the URL is just a string, there will be *no type conversion*. This can be done manually in a [before hook](hooks.md).
+Since the URL is just a string, there will be *no type conversion*. This can be done manually in a [before hook](../hooks/readme.md).
 
 For REST calls, `params.provider` will be set to `rest` (so you know where the service call came from). It is also possible to add information directly to the service `params` by registering Express middleware before a service that modifies the `req.feathers` property and to use URL parameters for REST API calls which will also be added to the params object:
 
@@ -113,6 +124,8 @@ app.use('/users/:userId/todos', {
   }
 });
 ```
+
+More information on how services play with Express middleware can be found in the [middleware chapter](../middleware/readme.md).
 
 ## Formatting the response
 

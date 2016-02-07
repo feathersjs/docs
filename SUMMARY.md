@@ -11,6 +11,7 @@
 * [Services](services/readme.md)
 * [REST](rest/readme.md)
 * [Real-Time](real-time/readme.md)
+   * [Service events](real-time/events.md)
    * [Socket.io](real-time/socket-io.md)
    * [Primus](real-time/primus.md)
    * [Event Filtering](real-time/event-filtering.md)
