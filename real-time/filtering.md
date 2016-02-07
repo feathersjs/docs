@@ -59,6 +59,14 @@ todos.filter('created', function(data, connection, hook) {
 });
 ```
 
+[Custom events](events.md) can be filtered the same way:
+
+```js
+app.service('payments').filter('status', function(data, connection, hook) {
+  
+});
+```
+
 ## Registering filters
 
 There are several ways of registering filter functions, very similar to how [hooks](hooks.md) can be registered.

@@ -61,12 +61,15 @@ Adding query parameters, e.g. [localhost:3030/todos/dishes?name=David](http://lo
 
 ## Retrieving services
 
-When registering a service with `app.use('/my-service', myService)` Feathers makes a shallow copy of that object and adds its own functionality. This means that to use Feathers functionality (like [real-time events](../real-time/readme), [hooks](../hooks/readme.md) etc.) that new object has to be used. That object can be retrieved with `app.service` like this:
+When registering a service with `app.use('/my-service', myService)` Feathers makes a shallow copy of that object and adds its own functionality. This means that to use Feathers functionality (like [real-time events](../real-time/readme.md), [hooks](../hooks/readme.md) etc.) this object has to be used. It can be retrieved using `app.service` like this:
 
 ```js
-const myService = app.service('my-service');
+const todos = app.service('todos');
 // also works with leading/trailing slashes
-const myService = app.service('/my-service');
+const todos = app.service('/todos/');
+
+// Now we can use it on the server
+todos.get('laundry').then(todo => console.log(todo.description));
 ```
 
 > __Important:__ The original service object will not be modified and will never have any Feathers functionality.
@@ -89,9 +92,11 @@ const myService = {
 app.use('/my-service', myService);
 ```
 
-Or as an [ES6 class](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Classes) (in NodeJS possible by adding the `'use strict';` statement at the beginning of the file):
+Or as an [ES6 class](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Classes):
 
 ```js
+'use strict';
+
 class MyService {
   find(params [, callback]) {}
   get(id, params [, callback]) {}
@@ -105,7 +110,7 @@ class MyService {
 app.use('/my-service', new MyService());
 ```
 
-Service methods should return a [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) and use the following parameters:
+Service methods should return a [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) and have the following parameters:
 
 - `id` the identifier for the resource. A resource is the data identified by a unique id.
 - `data` is the resource data
@@ -150,7 +155,9 @@ class MyService {
     const todos = this.app.service('todos');
     
     return todos.get('take out trash')
-      .then(todo => ({ name, todo }));
+      .then(todo => {
+        return { name, todo };
+      });
   }
 }
 
@@ -162,7 +169,7 @@ const app = feathers()
 app.listen(8000);
 ```
 
-You can see the combination when going to [localhost:8000/my-service/test](http://localhost:8000/my-service/test).
+You can see the combined response when going to [localhost:8000/my-service/test](http://localhost:8000/my-service/test).
 
 ## Events
 

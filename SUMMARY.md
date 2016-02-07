@@ -14,7 +14,7 @@
    * [Service events](real-time/events.md)
    * [Socket.io](real-time/socket-io.md)
    * [Primus](real-time/primus.md)
-   * [Event Filtering](real-time/event-filtering.md)
+   * [Event Filtering](real-time/filtering.md)
 * [Client Use](clients/readme.md)
    * [Universal Feathers](clients/feathers.md)
    * [REST](clients/rest.md)

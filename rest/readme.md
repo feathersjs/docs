@@ -1,9 +1,9 @@
 # The REST API Provider
 
-As we have already seen in the [service chapter](../services/readme.md) the [feathers-rest](https://github.com/feathersjs/feathers-rest) module allows to expose services through a [RESTful](https://en.wikipedia.org/wiki/Representational_state_transfer) interface on the services path. This means that you can call a service method through the `GET`, `POST`, `PUT`, `PATCH` and `DELETE` [HTTP methods](https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol):
+We have already seen in the [services chapter](../services/readme.md) that the [feathers-rest](https://github.com/feathersjs/feathers-rest) module allows to expose services through a [RESTful](https://en.wikipedia.org/wiki/Representational_state_transfer) interface on the services path. This means that you can call a service method through the `GET`, `POST`, `PUT`, `PATCH` and `DELETE` [HTTP methods](https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol):
 
 ```js
-const messages = {
+const messageService = {
   // GET /todos
   find(params [, callback]) {},
   // GET /todos/<id>
@@ -19,10 +19,10 @@ const messages = {
   setup(app, path) {}
 }
 
-app.service('/messages', messages);
+app.service('/messages', messageService);
 ```
 
-A full overview of which HTTP method call belongs to which service method call and parameters can be found in the [REST client use](../clients/rest.md) chapter.
+A full overview of which HTTP method call belongs to which service method call and parameters can be found in the [REST client use](../clients/rest.md) chapter. This chapter will talk about how to use and configure the provider module on the server.
 
 ## Usage
 
@@ -32,14 +32,18 @@ Install the provider module with:
 npm install feathers-rest body-parser
 ```
 
-We will have to provide our own body parser middleware (here the standard [Express 4 body-parser](https://github.com/expressjs/body-parser)) to make REST `.create`, `.update` and `.patch` calls parse the data in the HTTP body. This middleware has to be registered *before* any service (otherwise the service method will throw a `No data provided` or `First parameter for 'create' must be an object` error). If you would like to add other middleware *before* the REST handler, simply call `app.use(middleware)` before adding services. The following example creates a messages service that can save a new message and return all messages:
+We will have to provide our own body parser middleware (here the standard [Express 4 body-parser](https://github.com/expressjs/body-parser)) to make REST `.create`, `.update` and `.patch` calls parse the data in the HTTP body.
+
+> __Note:__ The body-parser middleware has to be registered *before* any service (otherwise the service method will throw a `No data provided` or `First parameter for 'create' must be an object` error).
+
+If you would like to add other middleware *before* the REST handler, simply call `app.use(middleware)` before registering any services. The following example creates a messages service that can save a new message and return all messages:
 
 ```js
 // app.js
 'use strict';
 
 const feathers = require('feathers');
-const rest = require('rest');
+const rest = require('feathers-rest');
 const bodyParser = require('body-parser');
 
 class MessageService {
@@ -68,16 +72,21 @@ const app = feathers()
 
 app.use('/messages', new MessageService());
 
+// Log newly created messages on the server
+app.service('messages').on('created', message => 
+  console.log('Created message', message)
+);
+
 app.listen(3030);
 ```
 
-After starting the application, we can no use CURL to create a new message:
+After starting the application, we can now use CURL to create a new message:
 
 ```
-curl 'http://localhost:3030/messages/' -H 'Content-Type: application/json' --data-binary '{ "text": "Learn Feathers!" }'
+curl 'http://localhost:3030/messages/' -H 'Content-Type: application/json' --data-binary '{ "text": "Learning Feathers!" }'
 ```
 
-When going to `http://localhost:3030/messages/` we will see the newly created message.
+You should see the created message logged on the console and when going to [localhost:3030/messages/](http://localhost:3030/messages/) see the newly created message.
 
 ## Query, route and middleware parameters
 
@@ -125,7 +134,7 @@ app.use('/users/:userId/todos', {
 });
 ```
 
-More information on how services play with Express middleware can be found in the [middleware chapter](../middleware/readme.md).
+More information on how services play with Express middleware, routing and versioning can be found in the [middleware chapter](../middleware/readme.md).
 
 ## Formatting the response
 
