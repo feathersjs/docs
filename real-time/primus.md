@@ -7,7 +7,7 @@
 Install the provider module with:
 
 ```
-npm install feathers-primus ws
+$ npm install feathers-primus ws
 ```
 
 Here we also installed the `ws` module which will let us use plain websockets. Now import the module and pass `primus(configuration [, fn])` to `app.configure`. The following example will start a server on port 3030 and also set up Primus using the `ws` websocket module.
@@ -42,7 +42,7 @@ In the Browser you can connect, call service methods and listen to events like t
 </script>
 ```
 
-A detailed description of the usage on a client can be found in [Primus Feathers client](../clients/primus.md) chapter.
+A detailed description of the usage on a client can be found in the [Primus Feathers client](../clients/primus.md) chapter.
 
 ## Configuration
 

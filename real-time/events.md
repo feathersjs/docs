@@ -85,6 +85,30 @@ To publish those events to other clients, Feathers currently supports two real-t
 * [Socket.io](socket-io.md) - Probably the most commonly used real-time library for NodeJS. It works on every platform, browser or device, focusing equally on reliability and speed.
 * [Primus](primus.md) - Is a universal wrapper for real-time frameworks that supports Engine.IO, WebSockets, Faye, BrowserChannel, SockJS and Socket.IO
 
+## Custom events
+
+By default, real-time clients will only receive the standard service events. It is however possible to define a list of custom events on a service as `service.events` that should also be passed. For example, a payment service that sends status events to the client while processing a payment could look like this:
+
+```js
+class PaymentService {
+  constructor() {
+    this.events = ['status'];
+  },
+  
+  create(data, params) {
+    createStripeCustomer(params.user).then(customer => {
+      this.emit('status', { status: 'created' });
+      return createPayemnt(data).then(result => {
+        this.emit('status', { status: 'completed' });
+      });
+    });
+    createPayment(data)
+  }
+}
+```
+
+Now clients can listen to the `<servicepath> status` event. Custom events can be [filtered](filtering.md) just like standard events.
+
 ## Hooks vs events
 
 Binding to service events is great for logging or updating internal state. However, things like sending an email when creating a new user should be implemented through [hooks](../hooks/readme.md).

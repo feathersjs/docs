@@ -3,7 +3,7 @@
 [feathers-sequelize](https://github.com/feathersjs/feathers-sequelize) is a database adapter for [Sequelize](http://sequelizejs.com), and ORM for Node.js. It supports the dialects PostgreSQL, MySQL, MariaDB, SQLite and MSSQL and features solid transaction support, relations, read replication and more.
 
 ```bash
-npm install feathers-sequelize --save
+npm install feathers-sequelize
 ```
 
 ## Getting Started
@@ -11,12 +11,10 @@ npm install feathers-sequelize --save
 `feathers-sequelize` hooks a [Sequelize Model](http://docs.sequelizejs.com/en/latest/docs/models-definition/) up as a service. For more information about models and general Sequelize usage, follow up in the [Sequelize documentation](http://docs.sequelizejs.com/en/latest/).
 
 ```js
-var SequelizeModel = require('./models/mymodel');
-var sequelize = require('feathers-sequelize');
+const Model = require('./models/mymodel');
+const sequelize = require('feathers-sequelize');
 
-app.use('/todos', sequelize({
-  Model: SequelizeModel
-}));
+app.use('/todos', sequelize({ Model }));
 ```
 
 ## Options
@@ -31,13 +29,18 @@ Creating a new Sequelize service currently offers the following options:
 
 Here is an example of a Feathers server with a `todos` SQLite Sequelize Model:
 
+```
+$ npm install feathers feathers-rest body-parser sequelize feathers-sequelize sqlite3
+```
+
 ```js
-import path from 'path';
-import feathers from 'feathers';
-import rest from 'feathers-rest';
-import bodyParser from 'body-parser';
-import Sequelize from 'sequelize';
-import service from 'feathers-sequelize';
+// app.js
+const path = require('path');
+const feathers = require('feathers');
+const rest = require('feathers-rest');
+const bodyParser = require('body-parser');
+const Sequelize = require('sequelize');
+const service = require('feathers-sequelize');
 
 const sequelize = new Sequelize('sequelize', '', '', {
   dialect: 'sqlite',
@@ -79,10 +82,23 @@ app.use('/todos', service({
   }
 }));
 
-// Start the server
-app.listen(3030);
+// This clears the database
+Todo.sync({ force: true }).then(() => {
+  // Create a dummy Todo
+  app.service('todos').create({
+    text: 'Server todo',
+    complete: false
+  }).then(function(todo) {
+    console.log('Created todo', todo.toJSON());
+  });
+});
 
-console.log('Feathers Todo Sequelize service running on 127.0.0.1:3030');
+// Start the server
+const port = 3030;
+
+app.listen(port, function() {
+  console.log(`Feathers server listening on port ${port}`);
+});
 ```
 
 Now there is an SQLite todos API running at `http://localhost:3030/todos`, including validation according to the model definition.

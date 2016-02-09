@@ -7,7 +7,7 @@ The [feathers-socketio](https://github.com/feathersjs/feathers-socketio) provide
 Install the provider module with:
 
 ```
-npm install feathers-socketio
+$ npm install feathers-socketio
 ```
 
 Then import the module and pass it to `app.configure`. The following example will start a server on port 3030 and also set up Socket.io:
@@ -40,7 +40,7 @@ In the Browser you can connect, call service methods and listen to events like t
 </script>
 ```
 
-A detailed description of the usage on a client can be found in [Socket.io Feathers client](../clients/socket-io.md) chapter.
+A detailed description of the usage on a client can be found in [Feathers Socket.io client](../clients/socket-io.md) chapter.
 
 ## Configuration
 

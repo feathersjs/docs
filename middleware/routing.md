@@ -21,7 +21,7 @@ app.use('/users/:user_id/todos', {
 });
 ```
 
-> __Note:__ This route has to be registered before the `/users` service otherwise the `get` route from the user service will always be called first.
+> __Note:__ This route should be registered after the `/users` service.
 
 To make the user id part of `params.query` we can use a [before hook](../middleware/hooks.md):
 

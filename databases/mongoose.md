@@ -3,7 +3,7 @@
 [feathers-mongoose](https://github.com/feathersjs/feathers-mongoose) is a database adapter for [Mongoose](http://mongoosejs.com/), an object modeling tool for [MongoDB](https://www.mongodb.org/). Mongoose provides a straight-forward, schema-based solution to model your application data. It includes built-in type casting, validation, query building, business logic hooks and more.
 
 ```bash
-npm install mongoose feathers-mongoose --save
+$ npm install mongoose feathers-mongoose
 ```
 
 ## Getting Started
@@ -11,19 +11,19 @@ npm install mongoose feathers-mongoose --save
 We can create Mongoose services like this:
 
 ```js
-import mongoose from 'mongoose';
-// A file that exports a Mongoose model
-import MongooseModel from './models/mymodel';
-import service from 'feathers-mongoose';
+const mongoose = require('mongoose');
+const service = require('feathers-mongoos');
+
+// A module that exports your Mongoose model
+const Model = require('./models/mymodel');
 
 // Make Mongoose use the ES6 promise
 mongoose.Promise = global.Promise;
+
 // Connect to a local database called `feathers`
 mongoose.connect('mongodb://localhost:27017/feathers');
 
-app.use('/todos', mongooseService({
-  Model: MongooseModel
-}));
+app.use('/todos', service({ Model }));
 ```
 
 See the [Mongoose Guide](http://mongoosejs.com/docs/guide.html) for more information on defining your model.
@@ -38,33 +38,43 @@ The following options can be passed when creating a new Mongoose service:
 
 ### Complete Example
 
-Here's a complete example of a Feathers server with a `todos` mongoose-service. In `models/todo.js`:
+Here's a complete example of a Feathers server with a `todos` Mongoose service.
+
+```
+$ npm install feathers feathers-rest body-parser mongoose feathers-mongoose
+```
+
+In `todo-model.js`:
 
 ```js
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 const TodoSchema = new Schema({
-  text: {type: String, required: true},
-  complete: {type: Boolean, 'default': false},
-  createdAt: {type: Date, 'default': Date.now},
-  updatedAt: {type: Date, 'default': Date.now}
+  text: {
+    type: String,
+    required: true
+  },
+  complete: {
+    type: Boolean,
+    'default': false
+  }
 });
 const Model = mongoose.model('Todo', TodoSchema);
 
-export default Model;
+module.exports = Model;
 ```
 
-Then in `server.js`:
+Then in `app.js`:
 
 ```js
-import feathers from 'feathers';
-import rest from 'feathers-rest';
-import bodyParser from 'bodyParser';
-import mongoose from 'mongoose';
-import service from 'feathers-mongoose';
-// Load the Model
-import Model from './models/todo';
+const feathers = require('feathers');
+const rest = require('feathers-rest');
+const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
+const service = require('feathers-mongoose');
+
+const Model = require('./todo-model');
 
 // Tell mongoose to use native promises
 // See http://mongoosejs.com/docs/promises.html
@@ -83,7 +93,21 @@ const app = feathers()
   .use(bodyParser.urlencoded({extended: true}))
 
 // Connect to the db, create and register a Feathers service.
-app.use('/todos', service({ Model }));
+app.use('/todos', service({
+  Model,
+  paginate: {
+    default: 2,
+    max: 4
+  }
+}));
+
+// Create a dummy Todo
+app.service('todos').create({
+  text: 'Server todo',
+  complete: false
+}).then(function(todo) {
+  console.log('Created todo', todo);
+});
 
 // Start the server.
 const port = 3030;
@@ -92,7 +116,7 @@ app.listen(port, function() {
 });
 ```
 
-You can run this example by using `node examples/app` and going to [localhost:3030/todos](http://localhost:3030/todos). You should see an empty array. That's because you don't have any Todos yet but you now have full CRUD for your new todos service, including mongoose validations!
+You can run this example by using `node examples/app` and going to [localhost:3030/todos](http://localhost:3030/todos). You should see a paginated object with the todo that we created on the server.
 
 ## Migrating
 
@@ -130,8 +154,8 @@ __With Validator.js__
 Here's an example of doing more complex validations at the model level with the [validator.js](https://github.com/guillaumepotier/validator.js) validation library.
 
 ```js
-import validator from 'validator.js';
-import mongoose from 'mongoose';
+const validator = require('validator.js');
+const mongoose = reqiure('mongoose');
 
 const Schema = mongoose.Schema;
 const userSchema = new Schema({
@@ -162,7 +186,7 @@ The records returned from a query are Mongoose documents, so they can't be modif
 
 ```js
 app.service('todos').before({
-  all: [feathersMongoose.hooks.toObject({})]
+  all: [service.hooks.toObject({})]
 });
 ```
 

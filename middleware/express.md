@@ -86,7 +86,7 @@ app.configure(rest())
   });
 
 app.use('/todos', {
-  get: function(id, params) {
+  get(id, params) {
     console.log(params.provider); // -> 'rest'
     console.log(params.fromMiddleware); // -> 'Hello world'
 
@@ -101,3 +101,52 @@ app.use('/todos', {
 We recommend not setting `req.feathers = something` directly since it may already contain information that other Feathers plugins rely on. Adding individual properties or using `Object.assign(req.feathers, something)` is the more reliable option.
 
 > __Pro tip:__ Although it may be convenient to set `req.feathers.req = req;` to have access to the request object in the service, we recommend keeping your services as provider independent as possible. There usually is a way to pre-process your data in a middleware so that the service does not need to know about the HTTP request or response.
+
+## Error handling
+
+Just like Express, Feathers does not include an [error handler](http://expressjs.com/en/guide/error-handling.html). The error handler from our [generated app](../getting-started/quick-start.md) looks like this:
+
+```js
+const errors = require('feathers-errors');
+
+app.use(function(error, req, res, next) {
+  if (typeof error === 'string') {
+    error = new errors.GeneralError(error);
+  } else if ( !(error instanceof errors.FeathersError) ) {
+    let oldError = error;
+    error = new errors.GeneralError(oldError.message, {errors: oldError.errors});
+
+    if (oldError.stack) {
+      error.stack = oldError.stack;
+    }
+  }
+
+  const code = !isNaN( parseInt(error.code, 10) ) ? parseInt(error.code, 10) : 500;
+
+  // Don't show stack trace if it is a 404 error
+  if (code === 404) {
+    error.stack = null;
+  }
+
+  res.status(code);
+
+  res.format({
+    'text/html': function() {
+      const file = code === 404 ? '404.html' : '500.html';
+      res.sendFile(path.join(req.app.get('public'), file));
+    },
+
+    'application/json': function () {
+      let output = Object.assign({}, error.toJSON());
+
+      if (req.app.settings.env === 'production') {
+        delete output.stack;
+      }
+
+      res.json(output);
+    }
+  });
+});
+```
+
+Many Feathers plugins (like the [database adapters](../databases/readme.md)) already throw [feathers-errors](https://github.com/feathersjs/feathers-errors) which include their status codes. This sends a JSON representation of the error (without the stacktrace in production) or sends the `404.html` or `500.html` error page when visited in the browser.

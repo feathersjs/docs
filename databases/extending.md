@@ -6,15 +6,16 @@ Now that we talked about [pagination, sorting](pagination.md) and [querying](que
 
 ### Hooks
 
-The most flexible option is weaving in functionality through hooks. For a more detailed explanation about hook, go to the [Hooks chapter]](hooks.html). For example, `createdAt` and `updatedAt` timestamps could be added like this:
+The most flexible option is weaving in functionality through hooks. For a more detailed explanation about hook, go to the [hooks chapter](../hooks/readme.md). For example, `createdAt` and `updatedAt` timestamps could be added like this:
 
 ```js
-import feathers from 'feathers';
-import hooks from 'feathers-hooks';
-// Import the database adapter of choice
-import service from 'feathers-<adapter>';
+const feathers = require('feathers');
+const hooks = require('feathers-hooks');
 
-var app = feathers()
+// Import the database adapter of choice
+const service = require('feathers-<adapter>');
+
+const app = feathers()
   .configure(hooks())
   .use('/todos', service({
     paginate: {
@@ -24,12 +25,10 @@ var app = feathers()
   }));
 
 app.service('todos').before({
-  // You can create a single hook like this
   create(hook) {
     hook.data.createdAt = new Date();
   },
-
-  // Or you can chain multiple hooks like this
+  
   update(hook) {
     hook.data.updatedAt = new Date();
   }
@@ -38,7 +37,7 @@ app.service('todos').before({
 app.listen(3030);
 ```
 
-Another important hook that you will probably use eventually is limiting the query for the current user (which is set in `params.user` by the [authentication](authentication/readme.html)):
+Another important hook that you will probably use eventually is limiting the query for the current user (which is set in `params.user` by [authentication](../authentication/readme.html)):
 
 ```js
 app.service('todos').before({
@@ -59,7 +58,7 @@ All modules also export an ES6 class as `Service` that can be directly extended 
 ```js
 'use strict';
 
-import { Service } from 'feathers-<database>';
+const Service = require( 'feathers-<database>').Service;
 
 class MyService extends Service {
   create(data, params) {
@@ -88,13 +87,13 @@ app.use('/todos', new MyService({
 You can also use `.extend` on a service instance (extension is provided by [Uberproto](https://github.com/daffl/uberproto)):
 
 ```js
-var myService = memory({
+const myService = memory({
   paginate: {
     default: 2,
     max: 4
   }
 }).extend({
-  create: function(data) {
+  create(data) {
     data.created_at = new Date();
     return this._super.apply(this, arguments);
   }

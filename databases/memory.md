@@ -1,9 +1,9 @@
 # In Memory
 
-[feathers-memory](https://github.com/feathersjs/feathers-memory/) is a service adapters that stores its data in-memory. It is normally used for testing and demo purposes and for smaller amounts of data that don't need to be persisted and only exist during application runtime. It also works with client-side Feathers applications.
+[feathers-memory](https://github.com/feathersjs/feathers-memory/) is a service adapters that stores its data in-memory. It can be used for temporary data that doesn't need to be persisted and testing purposes. It also works great with [client-side Feathers](../clients/readme.md) applications.
 
 ```bash
-npm install feathers-memory --save
+$ npm install feathers-memory
 ```
 
 ## Getting Started
@@ -11,7 +11,8 @@ npm install feathers-memory --save
 You can create an in-memory service with no options:
 
 ```js
-var memory = require('feathers-memory');
+const memory = require('feathers-memory');
+
 app.use('/todos', memory());
 ```
 
@@ -30,11 +31,16 @@ The following options can be passed when creating a new memory service:
 
 Here is an example of a Feathers server with a `todos` in-memory service that supports pagination:
 
+```
+$ npm install feathers body-parser feathers-rest feathers-memory
+```
+
 ```js
-import feathers from 'feathers';
-import bodyParser from 'body-parser';
-import rest from 'feathers-rest';
-import memory from 'feathers-memory';
+// app.js
+const feathers = require('feathers');
+const bodyParser = require('body-parser');
+const rest = require('feathers-rest');
+const memory = require('feathers-memory');
 
 // Create a feathers instance.
 const app = feathers()
@@ -63,11 +69,11 @@ app.service('todos').create({
 });
 
 // Start the server.
-var port = 3030;
+const port = 3030;
 
 app.listen(port, function() {
   console.log(`Feathers server listening on port ${port}`);
 });
 ```
 
-You can run this example [from GitHub](https://github.com/feathersjs/feathers-memory/blob/master/example/app.js) by using `node examples/app` and going to [localhost:3030/todos](http://localhost:3030/todos). You will see the test Todo that we created at the end of that file.
+Run the example with `node app.js` and go to [localhost:3030/todos](http://localhost:3030/todos). You will see the test Todo that we created at the end of that file.

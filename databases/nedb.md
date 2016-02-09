@@ -3,7 +3,7 @@
 [feathers-nedb](https://github.com/feathersjs/feathers-nedb) is a database adapter for [NeDB](https://github.com/louischatriot/nedb), an embedded datastore with a [MongoDB](https://www.mongodb.org/) like API. By default NeDB persists data locally to a file. This is very useful if you do not want to run a separate database server. To use the adapter we have to install both, `feahters-nedb` and the `nedb` package itself:
 
 ```bash
-npm install nedb feathers-nedb --save
+$ npm install nedb feathers-nedb
 ```
 
 ## Getting Started
@@ -11,8 +11,8 @@ npm install nedb feathers-nedb --save
 The following example creates an NeDB `todos` service. It will create a `todos.db` datastore file in the `db-data` directory and automatically load it. If you delete that file, the data will be deleted. For the complete available options when creating an NeDB instance please follow up in the [NeDB documentation](https://github.com/louischatriot/nedb#creatingloading-a-database).
 
 ```js
-import NeDB from 'nedb';
-import service from 'feathers-nedb';
+const NeDB = require('nedb');
+const service = require('feathers-nedb');
 
 // Create a NeDB instance
 const db = new NeDB({
@@ -40,11 +40,20 @@ The following options can be passed when creating a new memory service:
 
 ## Complete Example
 
+To run the complete NeDB example we need to install
+
+```
+$ npm install feathers feathers-rest feathers-nedb nedb body-parser
+```
+
+Then add the following into `app.js`:
+
 ```js
-import NeDB from 'nedb';
-import feathers from 'feathers';
-import bodyParser from 'body-parser';
-import service from '../lib';
+const NeDB = require('nedb');
+const feathers = require('feathers');
+const rest = require('feathers-rest');
+const bodyParser = require('body-parser');
+const service = require('feathers-nedb');
 
 const db = new NeDB({
   filename: './db-data/todos',
@@ -61,7 +70,7 @@ var app = feathers()
   .use(bodyParser.urlencoded({extended: true}));
 
 // Connect to the db, create and register a Feathers service.
-app.use('todos', service({
+app.use('/todos', service({
   Model: db,
   paginate: {
     default: 2,
@@ -69,8 +78,17 @@ app.use('todos', service({
   }
 }));
 
+// Create a dummy Todo
+app.service('todos').create({
+  text: 'Server todo',
+  complete: false
+}).then(function(todo) {
+  console.log('Created todo', todo);
+});
+
 // Start the server.
-var port = 3030;
+const port = 3030;
+
 app.listen(port, function() {
   console.log(`Feathers server listening on port ${port}`);
 });

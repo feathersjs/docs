@@ -115,7 +115,7 @@ Service methods should return a [Promise](https://developer.mozilla.org/en-US/do
 - `id` the identifier for the resource. A resource is the data identified by a unique id.
 - `data` is the resource data
 - `params` can contain any extra parameters, for example the authenticated user. `params.query` contains the query parameters from the client (see the [REST](../rest/readme.md) and [real-time](../real-time/readme.md) providers).
-- `callback` is an optional callback that can be called instead of returning a Promise. It is a Node-style callback function following the `function(error, data) {}` convention.
+- `callback` is an optional callback that can be called instead of returning a Promise. It is a Node-style callback function following the `function(error, result) {}` convention.
 
 These methods basically reflect a [CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete) interface:
 

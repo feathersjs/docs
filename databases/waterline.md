@@ -31,10 +31,10 @@ npm install waterline feathers-waterline --save
 `feathers-waterline` hooks a Waterline Model up to a configured data store as a feathers service.
 
 ```js
-import Todo from './models/todo';
-import config from './config/waterline';
-import Waterline from 'waterline';
-import waterlineService from 'feathers-waterline';
+const Todo = require('./models/todo');
+const config = require('./config/waterline');
+const Waterline = require('waterline');
+const service = require('feathers-waterline');
 
 const ORM = new Waterline();
 
@@ -58,13 +58,17 @@ Creating a new Waterline service currently offers the following options:
 
 Here is an example of a Feathers server with a `todos` Waterline Model using the [Disk](https://github.com/balderdashy/sails-disk) store:
 
+```
+$ npm install feathers feathers-rest body-parser waterline sails-disk feathers-waterline
+```
+
 ```js
-import feathers from 'feathers';
-import rest from 'feathers-rest';
-import bodyParser from 'body-parser';
-import Waterline from 'waterline';
-import diskAdapter from 'sails-disk';
-import waterlineService from 'feathers-waterline';
+const feathers = require('feathers');
+const rest = require('feathers-rest');
+const bodyParser = require('body-parser');
+const Waterline = require('waterline');
+const diskAdapter = require('sails-disk');
+const service = require('feathers-waterline');
 
 const ORM = new Waterline();
 const config = {
@@ -106,33 +110,39 @@ const app = feathers()
   // Turn on URL-encoded parser for REST services
   .use(bodyParser.urlencoded({ extended: true }));
 
-module.exports = new Promise(function(resolve) {
-  ORM.loadCollection(Todo);
-  ORM.initialize(config, (error, data) => {
-    if (error) {
-      console.error(error);
+ORM.loadCollection(Todo);
+ORM.initialize(config, (error, data) => {
+  if (error) {
+    console.error(error);
+  }
+
+  // Create a Waterline Feathers service with a default page size of 2 items
+  // and a maximum size of 4
+  app.use('/todos', service({
+    Model: data.collections.todo,
+    paginate: {
+      default: 2,
+      max: 4
     }
+  }));
 
-    // Create a Waterline Feathers service with a default page size of 2 items
-    // and a maximum size of 4
-    app.use('/todos', waterline({
-      Model: data.collections.todo,
-      paginate: {
-        default: 2,
-        max: 4
-      }
-    }));
+  app.use(function(error, req, res, next){
+    res.json(error);
+  });
+  
+  // Create a dummy Todo
+  app.service('todos').create({
+    text: 'Server todo',
+    complete: false
+  }).then(function(todo) {
+    console.log('Created todo', todo.toJSON());
+  });
 
-    app.use(function(error, req, res, next){
-      res.json(error);
-    });
-
-    // Start the server
-    const server = app.listen(3030);
-    server.on('listening', function() {
-      console.log('Feathers Todo waterline service running on 127.0.0.1:3030');
-      resolve(server);
-    });
+  // Start the server
+  const server = app.listen(3030);
+  server.on('listening', function() {
+    console.log('Feathers Todo waterline service running on 127.0.0.1:3030');
+    resolve(server);
   });
 });
 ```

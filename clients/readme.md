@@ -1,6 +1,6 @@
 # Feathers on the client
 
-Feathers works great with any client that can connect through HTTP/HTTPS to a REST API or websockets. Sometimes it is just a few lines of code to make an existing front-end turn real-time. 
+Now that we went over how to set up [REST](../rest/readme.md) and [real-time](../real-time/readme.md) APIs on the server we can look at using Feathers on the client. Feathers works great with any client that can connect through HTTP/HTTPS to a REST API or websockets. Sometimes it is just a few lines of code to make an existing front-end turn real-time. 
 
 Even better, Feathers itself can be used as a universal (isomorphic) client. That means that you can transparently connect to remote services and register your own services and hooks in the browser with any frontend framework like React, Angular, CanJS or Ember or non-browser JavaScript environments like React Native and other NodeJS servers.
 
@@ -16,30 +16,6 @@ Because it is easy to integrate, Feathers does not have any official framework s
 - [CanJS](http://feathersjs.github.io/todomvc/feathers/canjs/)
 
 You may also find more details on integrating the Feathers client [in the guides section](../guides/readme.md). If you are having any trouble with your framework of choice, [create an issue](https://github.com/feathersjs/feathers/issues/new) and we'll try our best to help out.
-
-## Custom events
-
-By default, real-time clients will only receive the standard [service events](../real-time/events.md). It is however possible to define a list of custom events on a service as `service.events` that should also be passed. For example, a payment service that sends status events to the client while processing a payment could look like this:
-
-```js
-class PaymentService {
-  constructor() {
-    this.events = ['status'];
-  },
-  
-  create(data, params) {
-    createStripeCustomer(params.user).then(customer => {
-      this.emit('status', { status: 'created' });
-      return createPayemnt(data).then(result => {
-        this.emit('status', { status: 'completed' });
-      });
-    });
-    createPayment(data)
-  }
-}
-```
-
-Now clients can listen to `<servicepath> status` event. Custom events can be [filtered](../real-time/filtering.md) just like standard events.
 
 ## No custom methods
 
