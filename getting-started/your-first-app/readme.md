@@ -10,7 +10,7 @@ Make sure you have NodeJS and npm installed. You can grab these from the [NodeJS
 
 Install the Yeoman and the Feathers generator.
 
-> `npm install -g yeoman generator-feathers`
+> `npm install -g yo generator-feathers`
 
 Create a directory for your new app.
 

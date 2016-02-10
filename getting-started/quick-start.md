@@ -4,7 +4,7 @@ You can quickly scaffold your first app by running by following these few simple
 
 Install the Yeoman and the Feathers generator.
 
-> `npm install -g yeoman generator-feathers`
+> `npm install -g yo generator-feathers`
 
 Create a directory for your new app.
 
