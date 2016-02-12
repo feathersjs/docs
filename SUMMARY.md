@@ -39,8 +39,8 @@
    * [Local (username & password)](authentication/local.md)
    * OAuth (Twitter, Facebook, etc)
    * Two-Factor (MFA)
-* [Authorization / Access Control](authorization/readme.md)
-   * [Bundled Auth Hooks](authorization/bundled-hooks.md)
+   * [Authorization / Access Control](authentication/authorization.md)
+   * [Bundled Auth Hooks](authentication/bundled-hooks.md)
 * [API](api/readme.md)
 * [Guides](guides/readme.md)
    * Migrating to Feathers 2
