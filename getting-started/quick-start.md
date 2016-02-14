@@ -1,8 +1,8 @@
 # Quick Start
 
-You can quickly scaffold your first app by running by following these few simple steps:
+You can quickly scaffold your first real-time API by following these few simple steps:
 
-Install the Yeoman and the Feathers generator.
+Install Yeoman and the Feathers generator.
 
 > `npm install -g yo generator-feathers`
 

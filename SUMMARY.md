@@ -4,10 +4,13 @@
    * [Quick Start](getting-started/quick-start.md)
    * [Your First App](getting-started/your-first-app/readme.md)
 * [Why Feathers](why/readme.md)
-   * [Express + Socket.io](why/express-socketio.md)
-   * [Feathers vs Meteor](why/meteor.md)
-   * [Feathers vs Sails](why/sails.md)
-   * [Feathers vs Firebase](why/firebase.md)
+   * [Philosophy](why/philosophy.md)
+   * [Features](why/vs/readme.md)
+   * [Feathers vs Express + Socket.io](why/vs/express-socketio.md)
+   * [Feathers vs Meteor](why/vs/meteor.md)
+   * [Feathers vs Sails](why/vs/sails.md)
+   * [Feathers vs Firebase](why/vs/firebase.md)
+   * [Feathers vs Parse](why/vs/parse.md)
 * [Services](services/readme.md)
 * [REST](rest/readme.md)
 * [Real-Time](real-time/readme.md)
@@ -39,16 +42,27 @@
    * [Routing and Versioning](middleware/routing.md)
 * [Authentication](authentication/readme.md)
    * [Local (username & password)](authentication/local.md)
-   * OAuth (Twitter, Facebook, etc)
-   * Two-Factor (MFA)
+   * [Token (JWT)](authentication/token.md)
+   * [Oauth1 (Twitter, etc)](authentication/oauth1.md)
+   * [OAuth2 (Facebook, etc)](authenication/oauth2.md)
+   * [Two Factor](authentication/two-factor.md)
    * [Authorization / Access Control](authentication/authorization.md)
    * [Bundled Auth Hooks](authentication/bundled-hooks.md)
-* [API](api/readme.md)
+* [Authorization](hooks/authorization.md)
+* [Error Handling](middleware/error-handling.md)
+* [Logging](middleware/logging.md)
+* [Core API](api/readme.md)
 * [Guides](guides/readme.md)
    * [Migrating to Feathers 2](guides/migrating.md)
    * Creating a plugin
-   * React and React Native
+   * React
+   * React Native
+   * jQuery
    * CanJS
+   * Angular
+   * VueJS
+   * iOS
+   * Android
 * [Help](help/readme.md)
    * [FAQ](help/faq.md)
    * [Contributing](contributing.md)
