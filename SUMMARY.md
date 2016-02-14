@@ -43,7 +43,7 @@
    * [Bundled Auth Hooks](authentication/bundled-hooks.md)
 * [API](api/readme.md)
 * [Guides](guides/readme.md)
-   * Migrating to Feathers 2
+   * [Migrating to Feathers 2](guides/migrating.md)
    * Creating a plugin
    * React and React Native
    * CanJS
