@@ -1,21 +1,11 @@
 ## Feathers vs. Express + Socket.io
 
-Express is awesome! It does much of the heavy lifting behind Feathers; routing, content-negotiation, middleware support, etc. In fact, you can simply replace Express with Feathers in any existing application and start adding new microservices.
+Express is a minimalist web application framework for NodeJS. It was originally inspired by Sinatra and currently does much of the heavy lifting behind Feathers; routing, content-negotiation, middleware support, etc. You can actually just replace Express with Feathers in any existing application and start adding new Feathers services and hooks. All the same middleware that works with Express works with Feathers.
 
-Feathers eliminates a lot of the common boilerplate and gives you helpful plug-ins to make implementing common features easier, while also providing some convention. This includes stuff like managing permissions, CRUD for multiple databases, and real-time APIs using web sockets. Just like Express, Feathers gives you just enough to build your web app quickly but gets out of your way when you need to customize something.
+Because Express is so minimalist you still have to write a lot of code yourself to get things like RESTful routes mapped to a database resource, validation, authentication, authorization, rate limiting, logging, hooking up websockets for real-time support, etc.
 
-If you are not familiar with Express head over to the [Express Guides](http://expressjs.com/guide.html) to get an idea. Feathers works the exact same way and supports the same functionality except that
+Feathers eliminates all of that common boilerplate. It provides [Services](../../services/) that give you CRUD methods for the most common [databases](../../databases/), instant REST APIs and real-time compatibility. It sets up all the real-time events for you and sends messages when CRUD actions are performed. There are also core plugins that provide things like authentication services and [hooks](../../hooks/) that make things like authorization just a few lines of code.
 
-```js
-var express = require('express');
-var app = express();
-```
+In addition to the server, Feathers also can be used in the browser and React Native.
 
-is replaced with
-
-```js
-var feathers = require('feathers');
-var app = feathers();
-```
-
-This means that you can literally drop Feathers into your existing Express 4 application and start adding new services right away without having to change anything.
+You can think of Express as an abstraction over top of core low level NodeJS functionality that makes it easier to build web applications. Feathers is another thin abstraction over top of Express that brings together engineering patterns from [Aspect Oriented Programming](https://en.wikipedia.org/wiki/Aspect-oriented_programming) and [Service Oriented Architecture](https://en.wikipedia.org/wiki/Service-oriented_architecture) along with some of the most popular Express middleware to make building web and mobile apps even faster and easier.
