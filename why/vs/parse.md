@@ -1,6 +1,6 @@
 # Feathers vs. Parse
 
-Like Firebase, Parse is a mobile backend as a service (MBaaS) that was acquired by Facebook in 2013. Recently (Jan. 2016) Parse announced it was shutting down and it open sourced a Parse API compatible Express server.
+Like Firebase, Parse is a mobile backend as a service (MBaaS). It was acquired by Facebook in 2013 but recently (Jan. 2016) announced it was shutting down and it open sourced a Parse API compatible Express server.
 
 Prior to being open sourced Parse was a hosted service and wasn't available locally. Now that it is open source, like Feathers, it can be hosted anywhere that NodeJS can be run. This is left up to the developer to manage.
 
