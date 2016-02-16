@@ -44,7 +44,7 @@
    * [Local (username & password)](authentication/local.md)
    * [Token (JWT)](authentication/token.md)
    * [Oauth1 (Twitter, etc)](authentication/oauth1.md)
-   * [OAuth2 (Facebook, etc)](authenication/oauth2.md)
+   * [OAuth2 (Facebook, etc)](authentication/oauth2.md)
    * [Two Factor](authentication/two-factor.md)
    * [Authorization / Access Control](authentication/authorization.md)
    * [Bundled Auth Hooks](authentication/bundled-hooks.md)
