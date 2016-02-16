@@ -2,7 +2,7 @@
 
 We know! You're probably screaming _"Not another JavaScript framework!"_. We've also become frustrated with all the Rails clones and MVC frameworks that don't do anything different. Instead, a few years ago we started to explore a different approach to building web applications using services and cross cutting concerns while also being careful not to reinvent the wheel.
 
-This tinkering has now grown into what Feathers is today and our core philosophy that has guides Feathers is still the same as it was years ago:
+With this experimentation Feathers has grown into what it is today. Our core philosophy that guides Feathers is still the same as it was years ago:
 
 > _"Monolithic apps fall apart at scale. What if we could make it easy to build service oriented applications from day one rather than having to start with a large application and go through the painful process of breaking it apart? This is usually a result of inflexible frameworks and technical debt._
 > 
