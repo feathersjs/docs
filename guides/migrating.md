@@ -54,11 +54,11 @@ app.configure(primus());
 
 All configuration options are still the same.
 
-> __Note:__ One additional small difference is that `feathers-socketio` now sets up the connection as a service mixin in the services `setup`. This means `app.configure(socketio())` has to be called _before_ registering any services.
+> __Note:__ One additional small difference is that `feathers-socketio` now sets up the connection as a service mixin in the services `setup`. This means `app.configure(socketio())` has to be called **before** registering any services.
 
 ## Database adapters
 
-The usage of the latest database adapters has been unified to support a common way for [extension](../databases/extending.md), [querying](../databases/querying.md) and [pagination](../databases/pagination.md). They now require establishing a connection outside of the adapter and to only pass the database connection instance or ORM model. For detailed information follow up in the adapter, ORM or database chapters below:
+The usage of the latest database adapters has been unified to support a common way for [extension](../databases/extending.md), [querying](../databases/querying.md) and [pagination](../databases/pagination.md). They now require establishing a connection outside of the adapter and you now pass the database connection instance or ORM model to the service. For detailed information follow up in the adapter, ORM or database chapters below:
 
 - **Memory** - [feathers-memory](../databases/memory.md)
 - **MongoDB** - [feathers-mongoose](../databases/mongoose.md)
@@ -72,7 +72,7 @@ The usage of the latest database adapters has been unified to support a common w
 
 ## Feathers client
 
-[feathers-client](https://github.com/feathersjs/feathers-client) can still be used much the same way but is now a module that consolidates all the individual client side modules of [Feathers 2 which is universally usable](../clients/feathers.md).
+[Feathers client](https://github.com/feathersjs/feathers-client) is now universal! Meaning it can be used in in the browser, NodeJS, and in React Native. However, it can still be used almost the same way but it is now a module that consolidates all the individual [client side modules of Feathers 2](../clients/feathers.md).
 
 The main API difference is that [REST clients](../clients/rest.md) changed from an initialization like:
 
