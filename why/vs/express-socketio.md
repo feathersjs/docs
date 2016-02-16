@@ -4,7 +4,7 @@ Express is a minimalist web application framework for NodeJS. It was originally 
 
 Because Express is so minimalist you still have to write a lot of code yourself to get things like RESTful routes mapped to a database resource, validation, authentication, authorization, rate limiting, logging, hooking up websockets for real-time support, etc.
 
-Feathers eliminates all of that common boilerplate. It provides [Services](../../services/) that give you CRUD methods for the most common [databases](../../databases/), instant REST APIs and real-time compatibility. It sets up all the real-time events for you and sends messages when CRUD actions are performed. There are also core plugins that provide things like authentication services and [hooks](../../hooks/) that make things like authorization just a few lines of code.
+Feathers eliminates all of that common boilerplate. It provides [Services](../../services/readme.md) that give you CRUD methods for the most common [databases](../../databases/readme.md), instant REST APIs and real-time compatibility. It sets up all the real-time events for you and sends messages when CRUD actions are performed. There are also core plugins that provide things like authentication services and [hooks](../../hooks/readme.md) that make things like authorization just a few lines of code.
 
 In addition to the server, Feathers also can be used in the browser and React Native.
 

@@ -1,10 +1,10 @@
 # Why Feathers
 
-If you went through the [Getting Started](../getting-started) section you probably saw just how quick it is to get an application off the ground. 
+If you went through the [Getting Started](../getting-started/readme.md) section you probably saw just how quick it is to get an application off the ground. 
 
 Feathers is quite simply the fastest way to build scalable, real-time web and mobile applications. You can literally build prototypes in minutes and production ready applications in days.
 
-We achieve this by being a thin wrapper over top of some amazing battle tested open source technologies and adding a few core pieces like [Hooks](../hooks) and [Services](../services).
+We achieve this by being a thin wrapper over top of some amazing battle tested open source technologies and adding a few core pieces like [Hooks](../hooks/readme.md) and [Services](../services/readme.md).
 
 Here are some of the things that you get out of the box with Feathers. All of them are optional. We like to think of Feathers as a _"batteries included but easily swappable"_ framework.
 
@@ -55,4 +55,4 @@ Here are some of the things that you get out of the box with Feathers. All of th
   </tr>
 </table>
 
-If you've decided that Feathers might be for you, you can learn more about the [Feathers philosophy](./philosophy.md), check out [some of our features](./vs), or [dive right in](../getting-started/).
+If you've decided that Feathers might be for you, you can learn more about the [Feathers philosophy](./philosophy.md), check out [some of our features](./vs/readme.md), or [dive right in](../getting-started/readme.md).

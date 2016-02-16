@@ -8,6 +8,6 @@ Firebase has JavaScript and mobile clients and also provides framework specific 
 
 Firebase currently supports offline mode whereas that is currently left up to the developer with Feathers. We do however have [a proposal](https://github.com/feathersjs/feathers-client/issues/29) for this feature.
 
-Both Firebase and Feathers support email/password, token, and OAuth authentication. Firebase has not publicly disclosed the database technology the use to store your data behind their API but seems to be an SQL variant. Feathers supports [multiple databases](../../databases/), NoSQL and SQL alike.
+Both Firebase and Feathers support email/password, token, and OAuth authentication. Firebase has not publicly disclosed the database technology the use to store your data behind their API but seems to be an SQL variant. Feathers supports [multiple databases](../../databases/readme.md), NoSQL and SQL alike.
 
 For more technical details on the difference and how to potentially migrate an application you can read [how to use Feathers as an open source alternative to Firebase](https://medium.com/all-about-feathersjs/using-feathersjs-as-an-open-source-alternative-to-firebase-b5d93c200cee#.olu25brld).

@@ -6,11 +6,11 @@ Feathers is a minimalist, service-oriented, real-time web framework for modern a
 
 ### Minimalist
 
-Built on top of [Express](http://expressjs.com/) Feathers has embodied the same spirit. It is compromised of a bunch of small modules that are all completely optional and the core weighs in at just a few hundred lines of code. How's that for light weight?!
+Built on top of [Express](http://expressjs.com/), Feathers has embodied the same spirit. It is compromised of a bunch of small modules that are all completely optional and the core weighs in at just a few hundred lines of code. How's that for light weight?! Now you can see where Feathers got it's name.
 
 ### Service oriented
 
-[Services](../services) are the heart of every Feathers application. They are small, data-oriented objects that can be used to perform [CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete) operations on a resource. A resource could be stored in a database, on another server or somewhere entirely different.
+[Services](../services/readme.md) are the heart of every Feathers application. They are small, data-oriented objects that can be used to perform [CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete) operations on a resource. A resource could be stored in a database, on another server or somewhere entirely different.
 
 ### Modern Applications
 
@@ -18,7 +18,7 @@ There is a lot to think about when building a modern application speed, maintain
 
 We've tried to ease that pain by wrapping industry best practices into a _"Batteries included but easily swappable"_ package.
 
-Out of the box Feathers provides a lot of [what you need](../why/) to build a modern web app or API. All of this is completely optional so you can pick and choose what you want to include and what you don't.
+Out of the box Feathers provides a lot of [what you need](../why/readme.md) to build a modern web app or API. All of this is completely optional so you can pick and choose what you want to include and what you don't.
 
 ### Real-time At The Core
 
@@ -26,4 +26,4 @@ Most real-time frameworks only allow clients to be pushed data in real time. You
 
 Feathers is different. Feathers allows you to send **and** receive data over websockets, bringing real-time to the forefront and making your apps incredibly snappy. All of the Feathers ecosystem has been modeled around supporting real-time communication and making it a first class citizen instead of an hacky add on. You can even forgo REST altogether and simply use websockets to communicate with your app, making it ideal for IoT devices.
 
-Interested in learning more? Quickly [create a real-time Feathers API](./quick-start.md) or dive a bit deeper into [what Feathers is all about](../why/).
+Interested in learning more? Quickly [create a real-time Feathers API](./quick-start.md) or dive a bit deeper into [what Feathers is all about](../why/readme.md).
