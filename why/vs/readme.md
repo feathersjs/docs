@@ -8,110 +8,155 @@ If you find something invalid or out of date in the comparisons, please [create 
 
 ## Feature Comparison
 
-Because the ease of implementation is subjective based on a developer's skill set and experience we only consider a feature supported if it is officially supported, regardless of how easy it is.
+> Due to the fact that the ease of implementation is subjective based on a developer's skill set and experience we only consider a feature supported if it is officially supported by the framework or platform, regardless of how easy it is (ie. there are official plugins, guides or SDKs).
 
 <table>
     <thead>
         <tr>
-            <th><strong>Framework</strong></th>
-            <th><strong>REST API</strong></th>
-            <th><strong>Real Time</strong></th>
-            <th><strong>Universal</strong></th>
-            <th><strong>CLI Tool</strong></th>
-            <th><strong>Authentication</strong></th>
-            <th><strong>Self Hosted</strong></th>
-            <th><strong>Pagination</strong></th>
-            <th><strong>Rate Limiting</strong></th>
+            <th><strong>Feature</strong></th>
+            <th><strong>Feathers</strong></th>
+            <th><strong>Express</strong></th>
+            <th><strong>Meteor</strong></th>
+            <th><strong>Sails</strong></th>
+            <th><strong>Firebase</strong></th>
+            <th><strong>Parse</strong></th>
         </tr>
     </thead>
     <tbody>
         <tr>
-            <td><strong>Feathers</strong></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td><strong>REST API</strong></td>
+            <td>Yes</td>
+            <td>Yes</td>
+            <td>Yes</td>
+            <td>Yes</td>
+            <td>Yes</td>
+            <td>Yes</td>
         </tr>
         <tr>
-            <td><strong>Express</strong></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td><strong>Real Time From Server</strong></td>
+            <td>Yes</td>
+            <td>No. Left to developer</td>
+            <td>Yes</td>
+            <td>Yes</td>
+            <td>Yes</td>
+            <td>No</td>
         </tr>
         <tr>
-            <td><strong>Meteor</strong></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td><strong>Real Time From Client</strong></td>
+            <td>Yes</td>
+            <td>No. Left to developer</td>
+            <td>Yes. Called DDP.</td>
+            <td>No. Left to developer</td>
+            <td>Yes</td>
+            <td>No</td>
         </tr>
         <tr>
-            <td><strong>Sails</strong></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td><strong>Universal JavaScript</strong></td>
+            <td>Yes</td>
+            <td>No</td>
+            <td>No</td>
+            <td>No</td>
+            <td>No</td>
+            <td>No</td>
         </tr>
         <tr>
-            <td><strong>Strongloop</strong></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td><strong>Client Agnostic</strong></td>
+            <td>Yes</td>
+            <td>Yes</td>
+            <td>Yes and No. Can be hacked</td>
+            <td>Yes</td>
+            <td>Yes via SDKs and bindings</td>
+            <td>Yes</td>
         </tr>
         <tr>
-            <td><strong>Derby</strong></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td><strong>Email/Password Auth</strong></td>
+            <td>Yes</td>
+            <td>No. Left to developer</td>
+            <td>Yes</td>
+            <td>No. Left to developer</td>
+            <td>Yes</td>
+            <td>Yes</td>
         </tr>
         <tr>
-            <td><strong>Firebase</strong></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td><strong>Token Auth</strong></td>
+            <td>Yes</td>
+            <td>No. Left to developer</td>
+            <td>Yes</td>
+            <td>No. Left to developer</td>
+            <td>Yes</td>
+            <td>Yes</td>
         </tr>
         <tr>
-            <td><strong>Parse</strong></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td><strong>OAuth</strong></td>
+            <td>Yes</td>
+            <td>No. Left to developer</td>
+            <td>Yes</td>
+            <td>No. Left to developer</td>
+            <td>Yes</td>
+            <td>No</td>
+        </tr>
+        <tr>
+            <td><strong>Self Hosted</strong></td>
+            <td>Yes</td>
+            <td>Yes</td>
+            <td>Yes</td>
+            <td>Yes</td>
+            <td>No</td>
+            <td>Yes</td>
+        </tr>
+        <tr>
+            <td><strong>Hosting Support</strong></td>
+            <td>No</td>
+            <td>No</td>
+            <td>Yes</td>
+            <td>No</td>
+            <td>Yes</td>
+            <td>No</td>
+        </tr>
+        <tr>
+            <td><strong>Pagination</strong></td>
+            <td>Yes</td>
+            <td>No. Left to developer</td>
+            <td>No. Left to developer</td>
+            <td>Yes</td>
+            <td>Yes</td>
+            <td>Yes</td>
+        </tr>
+        <tr>
+            <td><strong>Databases</strong></td>
+            <td>10+ databases. Multiple ORMs</td>
+            <td>No official. Many community modules and examples</td>
+            <td>MongoDB</td>
+            <td>10+ databases. 1 ORM</td>
+            <td>Unknown</td>
+            <td>MongoDB</td>
+        </tr>
+        <tr>
+            <td><strong>Analytics</strong></td>
+            <td>No. Left to developer</td>
+            <td>No. Left to developer</td>
+            <td>No. Left to developer</td>
+            <td>No. Left to developer</td>
+            <td>Yes</td>
+            <td>Yes</td>
+        </tr>
+        <tr>
+            <td><strong>Admin Dashboard</strong></td>
+            <td>No. Left to developer</td>
+            <td>No. Left to developer</td>
+            <td>No. Left to developer</td>
+            <td>No. Left to developer</td>
+            <td>Yes</td>
+            <td>No. Left to developer</td>
+        </tr>
+        <tr>
+            <td><strong>Push Notifications</strong></td>
+            <td>No. Left to developer</td>
+            <td>No. Left to developer</td>
+            <td>No. Left to developer</td>
+            <td>No. Left to developer</td>
+            <td>No</td>
+            <td>Yes</td>
         </tr>
     </tbody>
 </table>
