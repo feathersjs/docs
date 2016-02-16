@@ -2,11 +2,11 @@
 
 ## What is Feathers?
 
-Feathers is a minimalist, service-oriented, real-time web framework for modern applications that puts real-time at the forefront rather than an afterthought. What do we mean by that?
+Feathers is a minimalist, service-oriented, real-time web framework for modern applications that puts real-time communication at the forefront rather than as an afterthought. What do we mean by that?
 
 ### Minimalist
 
-Built on top of [Express](http://expressjs.com/), Feathers has embodied the same spirit. It is compromised of a bunch of small modules that are all completely optional and the core weighs in at just a few hundred lines of code. How's that for light weight?! Now you can see where Feathers got it's name.
+Built on top of [Express](http://expressjs.com/), Feathers has embodied the same spirit. It is compromised of a bunch of small modules that are all completely optional and the core weighs in at just a few hundred lines of code. How's that for light weight?! Now you can see where Feathers got it's name. 😉
 
 ### Service oriented
 
@@ -24,6 +24,8 @@ Out of the box Feathers provides a lot of [what you need](../why/readme.md) to b
 
 Most real-time frameworks only allow clients to be pushed data in real time. You interact with your server over REST and then receive events over websockets or, even worse, the client polls for changes.
 
-Feathers is different. Feathers allows you to send **and** receive data over websockets, bringing real-time to the forefront and making your apps incredibly snappy. All of the Feathers ecosystem has been modeled around supporting real-time communication and making it a first class citizen instead of an hacky add on. You can even forgo REST altogether and simply use websockets to communicate with your app, making it ideal for IoT devices.
+Feathers is different. Feathers allows you to send **and** receive data over websockets, bringing real-time to the forefront and making your apps incredibly snappy.
+
+All of the Feathers ecosystem has been modeled around supporting real-time communication and making it a first class citizen instead of a hacky add on. You can even forgo REST altogether and simply use websockets to communicate with your app, making it ideal for real-time IoT devices, among other things.
 
 Interested in learning more? Quickly [create a real-time Feathers API](./quick-start.md) or dive a bit deeper into [what Feathers is all about](../why/readme.md).

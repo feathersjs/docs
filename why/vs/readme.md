@@ -8,7 +8,7 @@ If you find something invalid or out of date in the comparisons, please [create 
 
 ## Feature Comparison
 
-> Due to the fact that the ease of implementation is subjective based on a developer's skill set and experience we only consider a feature supported if it is officially supported by the framework or platform, regardless of how easy it is (ie. there are official plugins, guides or SDKs).
+> Due to the fact that ease of implementation is subjective and primarily related to a developer's skill set and experience we only consider a feature supported if it is officially supported by the framework or platform, regardless of how easy it is to implement (aka. are there official plugins, guides or SDKs?).
 
 <table>
     <thead>
@@ -157,6 +157,24 @@ If you find something invalid or out of date in the comparisons, please [create 
             <td>No. Left to developer</td>
             <td>No</td>
             <td>Yes</td>
+        </tr>
+        <tr>
+            <td><strong>Offline Mode</strong></td>
+            <td>No. Left to developer</td>
+            <td>No. Left to developer</td>
+            <td>Yes</td>
+            <td>No. Left to developer</td>
+            <td>Yes</td>
+            <td>Yes</td>
+        </tr>
+        <tr>
+            <td><strong>Hot Code Push</strong></td>
+            <td>No. Left to developer</td>
+            <td>No. Left to developer</td>
+            <td>Yes</td>
+            <td>No. Left to developer</td>
+            <td>No</td>
+            <td>No</td>
         </tr>
     </tbody>
 </table>
