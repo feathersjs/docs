@@ -6,7 +6,7 @@ Feathers is quite simply the fastest way to build scalable, real-time web and mo
 
 We achieve this by being a thin wrapper over top of some amazing battle tested open source technologies and adding a few core pieces like [Hooks](../hooks) and [Services](../services).
 
-Here are some of the things that you get out of the box with Feathers. All of them are optional. We like to thinks of Feathers as a _"batteries included but easily swappable"_ framework.
+Here are some of the things that you get out of the box with Feathers. All of them are optional. We like to think of Feathers as a _"batteries included but easily swappable"_ framework.
 
 <table>
   <tr>
@@ -55,4 +55,4 @@ Here are some of the things that you get out of the box with Feathers. All of th
   </tr>
 </table>
 
-If you've decided that Feathers might be for you, you can learn more about the [Feathers philosophy](./philosophy.md), check out some of our [features](./vs), or [dive right in](../getting-started/).
+If you've decided that Feathers might be for you, you can learn more about the [Feathers philosophy](./philosophy.md), check out [some of our features](./vs), or [dive right in](../getting-started/).
