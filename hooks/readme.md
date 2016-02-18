@@ -4,7 +4,7 @@
 
 A hook is *provider independent* which means it does not matter if it has been called through REST, Socket.io, Primus or any other provider Feathers may support in the future.
 
-If you would like to learn more about the design patterns behind hooks read up in [API service composition with hooks](https://medium.com/all-about-feathersjs/api-service-composition-with-hooks-47af13aa6c01). In this chapter we will look at the [usage of hooks](usage.md), some [examples](examples.md) and the [built-in hooks](bundled.md).
+If you would like to learn more about the design patterns behind hooks read up on [API service composition with hooks](https://medium.com/all-about-feathersjs/api-service-composition-with-hooks-47af13aa6c01). In this chapter we will look at the [usage of hooks](usage.md), some [examples](examples.md) and the [built-in hooks](bundled.md).
 
 ## Getting Started
 

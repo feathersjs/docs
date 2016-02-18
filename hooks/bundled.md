@@ -25,7 +25,7 @@ app.service('users').before({
 })
 ```
 
-> __Note:__ Service methods that are not implemented to not need to be disabled.
+> __ProTip:__ Service methods that are not implemented do not need to be disabled.
 
 ## `remove(fields)`
 
@@ -43,4 +43,17 @@ app.service('users').before({
   update: hooks.remove('_id'),
   patch: hooks.remove('_id')
 })
+```
+
+## `lowerCase(fields)`
+
+Lowercase the given fields either in the data submitted (as a `before` hook for `create`, `update` or `patch`) or in the result (as an `after` hook). If the data is an array or a paginated `find` result the hook will lower case the field for every item.
+
+```js
+const hooks = require('feathers-hooks');
+
+// lowercase the `email` and `and password` field before a user is created
+app.service('users').before({
+  create: hooks.lowerCase('email', 'username')
+});
 ```
