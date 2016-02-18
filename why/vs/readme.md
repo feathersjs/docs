@@ -56,6 +56,15 @@ If you find something invalid or out of date in the comparisons, please [create 
             <td>No</td>
             <td>No</td>
             <td>No</td>
+            <td>Yes</td>
+            <td>No</td>
+        </tr>
+        <tr>
+            <td><strong>React Native Support</strong></td>
+            <td>Yes</td>
+            <td>No</td>
+            <td>No</td>
+            <td>No</td>
             <td>No</td>
             <td>No</td>
         </tr>
