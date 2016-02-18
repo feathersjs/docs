@@ -33,7 +33,17 @@ If you don't have a model or schema you're left with option 2 or some other way 
 
 ## How do I return related entities?
 
-Similar to validation, it depends on if your database/ORM supports models or not. With mongoose you can use the `$populate` query param to populate nested documents.
+Similar to validation, it depends on if your database/ORM supports models or not.
+
+#### The preferred way
+
+Alternatively for Mongoose, Sequelize or any other adapter you can just use hooks to fetch data from other services [as described here](http://docs.feathersjs.com/hooks/examples.html#fetching-related-items).
+
+This is a better approach because it keeps your application database agnostic and service oriented. By referencing the services (using `app.service().find()`, etc.) you can still decouple your app and have these services live on entirely separate machines or use entirely different databases without having to change any of your fetching code.
+
+#### The ORM way
+
+With mongoose you can use the `$populate` query param to populate nested documents.
 
 ```js
 // Find Hulk Hogan and include all the messages he sent
@@ -58,11 +68,6 @@ app.service('user').find({
 });
 ```
 
-#### The preferred way
-
-Alternatively for Mongoose, Sequelize or any other adapter you can just use hooks to fetch data from other services [as described here](http://docs.feathersjs.com/hooks/examples.html#fetching-related-items).
-
-This is a better approach because it keeps your app database agnostic and service oriented. By referencing the services (`app.service().find()`, etc.) you can still decouple your app and have these services live on entirely separate machines or use entirely different databases without having to change any of your fetching code.
 
 ## How do I mount sub apps?
 
