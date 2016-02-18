@@ -102,3 +102,7 @@ app.listen(port, function() {
 ```
 
 Now there is an SQLite todos API running at `http://localhost:3030/todos`, including validation according to the model definition.
+
+## Validation
+
+Sequelize by default gives you the ability to add [validations at the model level](http://docs.sequelizejs.com/en/latest/docs/models-definition/#validations). Using an error handler like the one that comes with [comes with Feathers](https://github.com/feathersjs/feathers-errors/blob/master/src/error-handler.js) your validation errors will be formatted nicely right out of the box!
