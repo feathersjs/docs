@@ -53,15 +53,16 @@
 * [Core API](api/readme.md)
 * [Guides](guides/readme.md)
    * [Migrating to Feathers 2](guides/migrating.md)
-   * Creating a plugin
-   * React
-   * React Native
-   * jQuery
-   * CanJS
-   * Angular
-   * VueJS
-   * iOS
-   * Android
+   * [Creating a plugin](guides/creating-a-plugin.md)
+   * [React](guides/react.md)
+   * [React Native](guides/react-native.md)
+   * [jQuery](guides/jquery.md)
+   * [CanJS](guides/canjs.md)
+   * [Angular](guides/angular.md)
+   * [Angular 2](guides/angular2.md)
+   * [Vue.js](guides/vuejs.md)
+   * [iOS](guides/ios.md)
+   * [Android](guides/android.md)
 * [Help](help/readme.md)
    * [FAQ](help/faq.md)
    * [Contributing](contributing.md)
