@@ -46,6 +46,58 @@ app.service('users').after({
 });
 ```
 
+## Validation
+
+For a production app you need to do validation. With hooks it's actually pretty easy and validation methods can easily be reused.
+
+```js
+app.service('users').before({
+  create(hook) {
+    // Don't create a user unless they accept our terms
+    if (!hook.data.acceptedTerms) {
+      throw new errors.BadRequest(`Invalid request`, {
+        errors: [
+          {
+            path: 'acceptedTerms',
+            value: hook.data.acceptedTerms,
+            message: `You must accept the terms`
+          }
+        ]
+      });
+    }
+  }
+});
+
+```
+
+## Sanitization
+
+You might also need to correct or sanitize data that is sent to your app. Also pretty easy and you can check out some of our [bundled hooks](./bundled.md) that cover some common use cases.
+
+```js
+app.service('users').before({
+  update(hook) {
+    // Convert the user's age to an integer
+    const sanitizedAge = parseInt(hook.data.age, 10);
+
+    if (isNaN(age)) {
+      throw new errors.BadRequest(`Invalid 'age' value ${hook.data.age}`, {
+        errors: [
+          {
+            path: 'age',
+            value: hook.data.age,
+            message: `Invalid 'age' value ${hook.data.age}`
+          }
+        ]
+      });
+    }
+
+    hook.data.age = sanitizedAge;
+  }
+});
+
+```
+
 ## Soft delete
 
 Sometimes you might not want to actually delete items in the database but just mark them as deleted. We can do this by adding a `remove` *before* hook, marking the todo as deleted and then setting `hook.result`. That way we can completely skip the original service method.
