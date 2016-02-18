@@ -7,7 +7,7 @@ If you already have an app started, you can simply add the following line to you
 ```js
 app.configure(authentication({
     token: {
-        secretL 'my-secret'
+        secret: 'my-secret'
     }
 }));
 ```
