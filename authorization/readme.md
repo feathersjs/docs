@@ -6,17 +6,17 @@ Once we know which user is logged in, we need to know which parts of the app the
 
 By default Feathers is pretty loose and is not locked down. This is to allow for rapid prototyping. Before you go to production there are a few things you should do.
 
-### Remove passwords from responses
+#### Remove passwords from responses
 
 Make sure that your user's passwords are not being sent to the client. There could very likely be a password on your `user` object. Read the [section on bundled auth hooks](bundled-hooks.md) to find out how to make sure passwords don't go out to the public.
 
 > **ProTip:** Feathers authentication automatically removes the password field from the user object that is sent in the response to a successful login.
 
-### Lock down restricted services
+#### Lock down restricted services
 
 Make sure any restricted endpoints are actually locked down appropriately by adding appropriate hooks to your services. Check out the [bundled authentication hooks](bundled-hooks.md). They probably do most of what you need.
 
-### Filter socket events
+#### Filter socket events
 
 [Filter socket events](http://docs.feathersjs.com/real-time/filtering.html) so only authenticated and authorized users get can receive restricted ones.
 
