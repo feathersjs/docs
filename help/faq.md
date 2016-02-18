@@ -18,6 +18,12 @@ Normally we find that they actually aren't needed and that it's much better to k
 
 See [this section](http://docs.feathersjs.com/real-time/filtering.html).
 
+## How do I access the request object in hooks or services?
+
+In short, you shouldn't need to. If you look at the [hooks chapter](../hooks.readme.md) you'll see all the params that are available on a hook.
+
+If you still need something from the request object (for example, the requesting IP address) you can simply tack it on to the `req.feathers` object [as described here](http://docs.feathersjs.com/middleware/express.html#setting-service-parameters).
+
 ## How do I do validation?
 
 If your database/ORM supports a model or schema (ie. Mongoose or Sequelize) then you have 2 options:
@@ -37,7 +43,7 @@ Similar to validation, it depends on if your database/ORM supports models or not
 
 #### The preferred way
 
-Alternatively for Mongoose, Sequelize or any other adapter you can just use hooks to fetch data from other services [as described here](http://docs.feathersjs.com/hooks/examples.html#fetching-related-items).
+For any of the feathers database/ORM adapters you can just use hooks to fetch data from other services [as described here](http://docs.feathersjs.com/hooks/examples.html#fetching-related-items).
 
 This is a better approach because it keeps your application database agnostic and service oriented. By referencing the services (using `app.service().find()`, etc.) you can still decouple your app and have these services live on entirely separate machines or use entirely different databases without having to change any of your fetching code.
 
