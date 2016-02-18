@@ -34,9 +34,7 @@ $ npm install feathers-rest body-parser
 
 We will have to provide our own body parser middleware (here the standard [Express 4 body-parser](https://github.com/expressjs/body-parser)) to make REST `.create`, `.update` and `.patch` calls parse the data in the HTTP body.
 
----
 > __ProTip:__ The body-parser middleware has to be registered *before* any service. Otherwise the service method will throw a `No data provided` or `First parameter for 'create' must be an object` error.
----
 
 If you would like to add other middleware *before* the REST handler, simply call `app.use(middleware)` before registering any services. The following example creates a messages service that can save a new message and return all messages:
 
@@ -108,9 +106,8 @@ Will set `params.query` to
 }
 ```
 
----
+
 > **ProTip:** Since the URL is just a string, there will be **no type conversion**. This can be done manually in a [hook](../hooks/readme.md).
----
 
 For REST calls, `params.provider` will be set to `rest` (so you know where the service call came from). It is also possible to add information directly to the service `params` by registering Express middleware before a service that modifies the `req.feathers` property and to use URL parameters for REST API calls which will also be added to the params object:
 
