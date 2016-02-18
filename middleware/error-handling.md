@@ -2,7 +2,9 @@
 
 By default Feathers just uses the default [error handler](http://expressjs.com/en/guide/error-handling.html) that comes with Express. It's pretty basic so the [feathers-errors](https://github.com/feathersjs/feathers-errors) module comes bundled with a more robust [error handler](https://github.com/feathersjs/feathers-errors/blob/master/src/error-handler.js) that you can use in your app. This error handler is the one that is included in a generated Feathers app by default.
 
+---
 > **ProTip:** Because Feathers extends Express you can use any Express compatible [error middleware](http://expressjs.com/en/guide/error-handling.html) with Feathers. In fact, the error handler bundled with `feathers-errors` is just a slightly customized one. 
+---
 
 Many Feathers plugins (like the [database adapters](../databases/readme.md) and [authentication](../authentication/readme.md)) already throw Feathers errors, which include their status codes. The default error handler sends a JSON representation of the error (without the stacktrace in production) or sends a default `404.html` or `500.html` error page when visited in the browser.
 
@@ -26,7 +28,9 @@ app.use(error({
 
 `feathers-errors` currently provides the following error types, all of which are instances of `FeathersError`:
 
+---
 > **ProTip:** All of the feathers plugins will automatically emit the appropriate Feathers errors for you.
+---
 
 - `BadRequest`: 400
 - `NotAuthenticated`: 401
