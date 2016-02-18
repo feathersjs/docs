@@ -10,6 +10,8 @@ query: {
 
 Additionally, the following advanced criteria are supported for each property.
 
+> **ProTip:** Just like with sorting and pagination you won't want to use these special attributes field names in your documents in your database.
+
 ### $in, $nin
 
 Find all records where the property does (`$in`) or does not (`$nin`) contain the given values. For example, the following query finds every user with the name of `Alice` or `Bob`:

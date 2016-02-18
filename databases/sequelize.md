@@ -1,10 +1,12 @@
 # Sequelize
 
-[feathers-sequelize](https://github.com/feathersjs/feathers-sequelize) is a database adapter for [Sequelize](http://sequelizejs.com), and ORM for Node.js. It supports the dialects PostgreSQL, MySQL, MariaDB, SQLite and MSSQL and features solid transaction support, relations, read replication and more.
+[feathers-sequelize](https://github.com/feathersjs/feathers-sequelize) is a database adapter for [Sequelize](http://sequelizejs.com), and ORM for Node.js. It supports the PostgreSQL, MySQL, MariaDB, SQLite and MSSQL dialects and features solid transaction support, relations, read replication and more.
 
 ```bash
-npm install feathers-sequelize
+npm install --save pg pg-hstore feathers-sequelize
 ```
+
+> **ProTip:** You also need to [install the database driver](http://docs.sequelizejs.com/en/latest/docs/getting-started/) for the DB you want to use. If you used the Feathers generator then this was already done for you. 
 
 ## Getting Started
 
@@ -105,4 +107,4 @@ Now there is an SQLite todos API running at `http://localhost:3030/todos`, inclu
 
 ## Validation
 
-Sequelize by default gives you the ability to add [validations at the model level](http://docs.sequelizejs.com/en/latest/docs/models-definition/#validations). Using an error handler like the one that comes with [comes with Feathers](https://github.com/feathersjs/feathers-errors/blob/master/src/error-handler.js) your validation errors will be formatted nicely right out of the box!
+Sequelize by default gives you the ability to [add validations at the model level](http://docs.sequelizejs.com/en/latest/docs/models-definition/#validations). Using an error handler like the one that comes with [comes with Feathers](https://github.com/feathersjs/feathers-errors/blob/master/src/error-handler.js) your validation errors will be formatted nicely right out of the box!

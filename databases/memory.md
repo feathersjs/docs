@@ -3,7 +3,7 @@
 [feathers-memory](https://github.com/feathersjs/feathers-memory/) is a service adapters that stores its data in-memory. It can be used for temporary data that doesn't need to be persisted and testing purposes. It also works great with [client-side Feathers](../clients/readme.md) applications.
 
 ```bash
-$ npm install feathers-memory
+$ npm install --save feathers-memory
 ```
 
 ## Getting Started

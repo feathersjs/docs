@@ -1,14 +1,14 @@
 # NeDB
 
-[feathers-nedb](https://github.com/feathersjs/feathers-nedb) is a database adapter for [NeDB](https://github.com/louischatriot/nedb), an embedded datastore with a [MongoDB](https://www.mongodb.org/) like API. By default NeDB persists data locally to a file. This is very useful if you do not want to run a separate database server. To use the adapter we have to install both, `feahters-nedb` and the `nedb` package itself:
+[feathers-nedb](https://github.com/feathersjs/feathers-nedb) is a database adapter for [NeDB](https://github.com/louischatriot/nedb), an embedded datastore with a [MongoDB](https://www.mongodb.org/) like API. By default NeDB persists data locally to a file. This is very useful if you do not want to run a separate database server. To use the adapter we have to install both, `feathers-nedb` and the `nedb` package itself:
 
 ```bash
-$ npm install nedb feathers-nedb
+$ npm install --save nedb feathers-nedb
 ```
 
 ## Getting Started
 
-The following example creates an NeDB `todos` service. It will create a `todos.db` datastore file in the `db-data` directory and automatically load it. If you delete that file, the data will be deleted. For the complete available options when creating an NeDB instance please follow up in the [NeDB documentation](https://github.com/louischatriot/nedb#creatingloading-a-database).
+The following example creates an NeDB `todos` service. It will create a `todos.db` datastore file in the `db-data` directory and automatically load it. If you delete that file, the data will be deleted. For a list of all the available options when creating an NeDB instance check out the [NeDB documentation](https://github.com/louischatriot/nedb#creatingloading-a-database).
 
 ```js
 const NeDB = require('nedb');
@@ -33,7 +33,7 @@ app.use('/todos', service({
 
 ## Options
 
-The following options can be passed when creating a new memory service:
+The following options can be passed when creating a new NeDB service:
 
 - `Model` - The NeDB database instance
 - `paginate` - A pagination object containing a `default` and `max` page size (see the [Pagination chapter](databases/pagination.md))
@@ -94,4 +94,4 @@ app.listen(port, function() {
 });
 ```
 
-You can run this example [from the GitHub repository](https://github.com/feathersjs/feathers-nedb/blob/master/example/app.js) with `npm run example` and going to [localhost:3030/todos](http://localhost:3030/todos). You should see an empty array. That's because you don't have any Todos yet but you now have full CRUD for your new todos service.
+You can run this example [from the GitHub repository](https://github.com/feathersjs/feathers-nedb/blob/master/examples/app.js) with `npm run example` and going to [localhost:3030/todos](http://localhost:3030/todos). You should see an empty array. That's because you don't have any Todos yet but you now have full CRUD for your new todos service.

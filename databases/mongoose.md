@@ -3,7 +3,7 @@
 [feathers-mongoose](https://github.com/feathersjs/feathers-mongoose) is a database adapter for [Mongoose](http://mongoosejs.com/), an object modeling tool for [MongoDB](https://www.mongodb.org/). Mongoose provides a straight-forward, schema-based solution to model your application data. It includes built-in type casting, validation, query building, business logic hooks and more.
 
 ```bash
-$ npm install mongoose feathers-mongoose
+$ npm install --save mongoose feathers-mongoose
 ```
 
 ## Getting Started
@@ -149,7 +149,7 @@ app.use('/todos', mongooseService({
 
 Mongoose by default gives you the ability to add [validations at the model level](http://mongoosejs.com/docs/validation.html). Using an error handler like the one [comes with Feathers](https://github.com/feathersjs/feathers-errors/blob/master/src/error-handler.js) your validation errors will be formatted nicely right out of the box!
 
-For more complex validations you really have two options. You can combine Mongoose's validation mechanism with a validation library like [validator.js](https://github.com/chriso/validator.js) or you can do your validations at the service level using [feathers-hooks](https://github.com/feathersjs/feathers-hooks).
+For more complex validations you really have two options. You can combine Mongoose's validation mechanism with a validation library like [validator.js](https://github.com/chriso/validator.js) or you can do your validations at the service level [using hooks](http://docs.feathersjs.com/hooks/examples.html#validation).
 
 __With Validator.js__
 

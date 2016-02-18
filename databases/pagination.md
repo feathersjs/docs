@@ -31,7 +31,7 @@ The `find` API allows the use of `$limit`, `$skip`, `$sort`, and `$select` in th
 GET /?ingredients=salt&$limit=10&$select[]=name // HTTP
 ```
 
-As a result of allowing these to be put directly into the query string, you won't want to use `$limit`, `$skip`, `$sort`, or `$select` as the name of fields in your document schema.
+> **ProTip:** As a result of allowing these to be put directly into the query string, you won't want to use `$limit`, `$skip`, `$sort`, or `$select` as field names for documents in your database.
 
 ### `$limit`
 

@@ -23,8 +23,10 @@
 ## Installation
 
 ```bash
-npm install waterline feathers-waterline --save
+npm install --save sails-postgresql waterline feathers-waterline
 ```
+
+> **ProTip:** You also need to install the waterline database adapter for the DB you want to use.
 
 ## Getting Started
 

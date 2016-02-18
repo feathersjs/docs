@@ -3,8 +3,10 @@
 [feathers-knex](https://github.com/feathersjs/feathers-knex) is a database adapter for [KnexJS](http://knexjs.org/), an SQL query builder for Postgres, MySQL, MariaDB, SQLite3, and Oracle designed to be flexible, portable, and fun to use.
 
 ```bash
-npm install knex feathers-knex
+npm install --save mysql knex feathers-knex
 ```
+
+> **ProTip:** You also need to [install the database driver](http://knexjs.org/#Installation-node) for the DB you want to use. If you used the Feathers generator then this was already done for you. 
 
 ## Getting Started
 

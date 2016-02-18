@@ -1,8 +1,8 @@
 # Extending Database Adapters
 
-Now that we talked about [pagination, sorting](pagination.md) and [querying](querying.md) we can look at different ways on how to extend the functionality of the existing database adapters.
+Now that we talked about [pagination, sorting](pagination.md) and [querying](querying.md) we can look at different ways you can extend the functionality of the existing database adapters.
 
-> Keep in mind that calling the original service methods will return a Promise that resolves with the value.
+> **ProTip:** Keep in mind that calling the original service methods will return a Promise that resolves with the value.
 
 ### Hooks
 
