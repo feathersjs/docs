@@ -35,6 +35,8 @@ The following options can be passed when creating a new Mongoose service:
 - `Model` (**required**) - The Mongoose model definition
 - `id` (default: `_id`) [optional] - The name of the id property
 - `paginate` - A pagination object containing a `default` and `max` page size (see the [Pagination chapter](databases/pagination.md))
+- `lean` (default: `false`) [optional] - When set to true runs queries faster by returning plain mongodb objects instead of mongoose models.
+- `overwrite` (default: `true`) [optional] - Updates completely replace existing documents.
 
 ### Complete Example
 
@@ -145,7 +147,7 @@ app.use('/todos', mongooseService({
 
 ## Validation
 
-Mongoose by default gives you the ability to add [validations at the model level](http://mongoosejs.com/docs/validation.html). Using an error handler like the [middleware that comes with Feathers](https://github.com/feathersjs/generator-feathers/blob/master/generators/app/templates/static/src/middleware/error-handler.js) your validation errors will be formatted nicely right out of the box!
+Mongoose by default gives you the ability to add [validations at the model level](http://mongoosejs.com/docs/validation.html). Using an error handler like the one [comes with Feathers](https://github.com/feathersjs/feathers-errors/blob/master/src/error-handler.js) your validation errors will be formatted nicely right out of the box!
 
 For more complex validations you really have two options. You can combine Mongoose's validation mechanism with a validation library like [validator.js](https://github.com/chriso/validator.js) or you can do your validations at the service level using [feathers-hooks](https://github.com/feathersjs/feathers-hooks).
 
@@ -155,7 +157,7 @@ Here's an example of doing more complex validations at the model level with the 
 
 ```js
 const validator = require('validator.js');
-const mongoose = reqiure('mongoose');
+const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 const userSchema = new Schema({
@@ -182,7 +184,9 @@ const User = mongoose.model('user', userSchema);
 
 ## Modifying results with the `toObject` hook
 
-The records returned from a query are Mongoose documents, so they can't be modified directly (You won't be able to delete properties from them).  To get around this, you can use the included `toObject` hook to convert the Mongoose documents into plain objects.  Let's modify the before-hooks setup in the feathers-hooks example, above, to this:
+Unless you passed `lean: true` when initializing your service, the records returned from a query are Mongoose documents, so they can't be modified directly (You won't be able to delete properties from them).
+
+To get around this, you can use the included `toObject` hook to convert the Mongoose documents into plain objects.  Let's modify the before hook's setup in the feathers-hooks example, above, to this:
 
 ```js
 app.service('todos').before({
