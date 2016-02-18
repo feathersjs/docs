@@ -1,10 +1,10 @@
 # Error Handling
 
-By default Feathers just uses the Express default [error handler](http://expressjs.com/en/guide/error-handling.html). It's pretty basic so the `feathers-errors` module comes with a more robust [error handler](https://github.com/feathersjs/feathers-errors/blob/master/src/error-handler.js) that you can use in your app. This error handler is the one that is included in a generated Feathers app by default.
+By default Feathers just uses the default [error handler](http://expressjs.com/en/guide/error-handling.html) that comes with Express. It's pretty basic so the [feathers-errors](https://github.com/feathersjs/feathers-errors) module comes bundled with a more robust [error handler](https://github.com/feathersjs/feathers-errors/blob/master/src/error-handler.js) that you can use in your app. This error handler is the one that is included in a generated Feathers app by default.
 
-> **ProTip:** Because Feathers extends Express the default feathers-errors handler is just some slightly customized [Express error middleware](http://expressjs.com/en/guide/error-handling.html). You can use any Express compatible error handler with Feathers.
+> **ProTip:** Because Feathers extends Express you can use any Express compatible [error middleware](http://expressjs.com/en/guide/error-handling.html) with Feathers. In fact, the error handler bundled with `feathers-errors` is just a slightly customized one. 
 
-Many Feathers plugins (like the [database adapters](../databases/readme.md)) already throw [feathers-errors](https://github.com/feathersjs/feathers-errors) which include their status codes. The default error handler sends a JSON representation of the error (without the stacktrace in production) or sends a default `404.html` or `500.html` error page when visited in the browser.
+Many Feathers plugins (like the [database adapters](../databases/readme.md) and [authentication](../authentication/readme.md)) already throw Feathers errors, which include their status codes. The default error handler sends a JSON representation of the error (without the stacktrace in production) or sends a default `404.html` or `500.html` error page when visited in the browser.
 
 If you want to use your own custom error pages you can do so like this:
 
@@ -24,7 +24,7 @@ app.use(error({
 
 ## Feathers Error Types
 
-`feathers-errors` currently provides the following error types:
+`feathers-errors` currently provides the following error types, all of which are instances of `FeathersError`:
 
 > **ProTip:** All of the feathers plugins will automatically emit the appropriate Feathers errors for you.
 
@@ -58,7 +58,7 @@ var existing = new errors.GeneralError(new Error('I exist'));
 // You can also pass additional data
 var data = new errors.BadRequest('Invalid email', {email: 'sergey@google.com'});
 
-// You can also pass additional data
+// You can also pass additional data without a message
 var dataWithoutMessage = new errors.BadRequest({email: 'sergey@google.com'});
 
 // If you need to pass multiple errors
