@@ -70,6 +70,7 @@ If you are using the default options setting up Feathers authentication client s
 
 ```js
 // Set up socket.io
+const host = 'http://localhost:3030';
 let socket = io(host, {
   transport: ['websockets']
 });
