@@ -196,7 +196,7 @@ todoService.before({
   find(hook, next) {
     this.find().then(data => {
       hook.params.message = 'Ran through promise hook';
-      hook.data.result = result;
+      hook.data.result = data;
       // With no error
       callback();
       // or to change the hook object
