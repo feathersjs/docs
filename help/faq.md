@@ -30,7 +30,7 @@ If your database/ORM supports a model or schema (ie. Mongoose or Sequelize) then
 
 #### The preferred way
 
-You perform validation at the service level [using hooks](http://docs.feathersjs.com/hooks/examples.html#validation). This is better because it keeps you database agnostic so you can easily swap databases without having to change your validations much.
+You perform validation at the service level [using hooks](http://docs.feathersjs.com/hooks/examples.html#validation). This is better because it keeps your app database agnostic so you can easily swap databases without having to change your validations much.
 
 If you write a bunch of small hooks that validate specific things it is easier to test and also slightly more performant because you can exit out of the validation chain early instead of having to go all the way to the point of inserting data into the database to find out if that data is invalid.
 
