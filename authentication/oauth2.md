@@ -8,7 +8,9 @@ To solve this problem, Feathers redirects to a `successRedirect` route (see belo
 
 > **ProTip:** Many other frameworks either use sessions for auth or if using a token + OAuth just shove the token in the query string. This is potentially insecure as a intermediary could be logging these URLs with the token in them. Even over HTTPS this is not secure.
 
-## Server Options
+## Usage
+
+### Server Side
 
 This is what a typical server setup looks like:
 
@@ -28,41 +30,26 @@ app.configure(authentication({
 }));
 ```
 
-If you need to customize your configuration in any way you can use the following options:
+#### OAuth2 Service Specific Options
+
+All of the top level authentication options are passed to an OAuth2 authentication service and the passport strategies. If you need to customize your OAuth2 specific configuration you can use these options:
 
 - `clientID` (**required**) - Your OAuth2 clientID
 - `clientSecret` (**required**) - Your OAuth2 clientSecret
 - `permissions` (**required**) - An object with the permissions you are requesting. See your passport provider docs for details.
 - `strategy` (**required**) - The Passport OAuth strategy for your oauth provider (ie. passport-facebook)
 - `tokenStrategy` [optional] - The Passport OAuth token strategy if you want to support mobile authentication without a browser.
-- `successRedirect` (default: '/auth/success') [optional] - The endpoint to redirect to after successful authentication or signup.
-- `userEndpoint` (default: '/users') [optional] - The user service endpoint
-- `tokenEndpoint` (default: '/auth/token') [optional] - The JWT auth service endpoint
 - `passReqToCallback` (default: true) [optional] - A Passport option to pass the request object to the oauth callback handler.
 - `callbackSuffix` (default: 'callback') [optional] - This gets added to the provider endpoint to form the callback url. For example `/auth/facebook/callback`.
 
 > **ProTip:** Feathers just uses [Passport](http://passportjs.org/) authentication strategies so you can pass any strategy specific options in your provider config and it will be automatically passed on to the strategy you are using.
 
-## Client Options
+### Client Side
 
-Normally you don't need to pass any options when registering the `feathers-authentication` module client side. However, if you need to customize your configuration on the client you can do this:
-
-```js
-app.configure(authentication({
-    tokenEndpoint: '/token',
-    localEndpoint: '/login'
-}));
-```
-
-- `tokenEndpoint` (default: '/auth/token') [optional] - The JWT auth service endpoint.
-- `localEndpoint` (default: '/auth/local') [optional] - The local auth service endpoint
-
-TODO (EK): Document mobile authentication
-
-### Using Feathers Client
+#### Using Feathers Client
 
 The Feathers authentication module has a client side component that makes it very easy for you to add authentication to your app. It can be used in the browser, NodeJS and React Native. Refer to the [feathers client authentication section](./client.md) for more detail.
 
-### Other Clients
+#### Other Clients
 
 Of course, if you don't want to use the feathers authentication client you can also just use vanilla sockets or ajax. It's a bit more work but honestly, not much more. We have some examples [here](https://github.com/feathersjs/feathers-authentication/tree/master/examples/basic).

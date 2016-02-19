@@ -1,30 +1,30 @@
 # Authentication
 
-At some point, you are probably going to put information in your databases that you want to keep private. You'll need to implement an _authentication_ scheme to identify your users, and _authorization_ to control access to resources.  
+At some point, you are probably going to put information in your databases that you want to keep private. You'll need to implement an _authentication_ scheme to identify your users, and _authorization_ to control access to resources. 
 
 Cookie based and token based authentication are the two most common methods of putting server side authentication into practice. Cookie based authentication relies on server side cookies to remember the user. Token based authentication requires an encrypted auth token with each request. While cookie based authentication is the most common, token based authentication offers several advantages for modern web apps. Two primary advantages are security and scalability.
 
 The Auth0 blog has a [great article on the advantages that token authentication offers](https://auth0.com/blog/2014/01/07/angularjs-authentication-with-cookies-vs-token/).
 
-## Feathers Authentication
-
 The [feathers-authentication](https://github.com/feathersjs/feathers-authentication) plugin makes it easy to add token-based auth to your app.
 
-### Usage
+## Usage
+
+### Server Side
 
 If you are using the default options, setting up JWT auth for your Feathers app is as simple as the example below.
 
-> **ProTip:** You must set up the `body-parser`, `feathers-hooks` and possibly `cors` modules before setting up `feathers-authentication`. The Feathers generator does this for you already.
-
 ```js
 let app = feathers()
-  .configure(feathers.rest())
-  .configure(feathers.socketio())
+  .configure(rest())
+  .configure(socketio())
   .configure(hooks())
   .use(bodyParser.json())
   .use(bodyParser.urlencoded({ extended: true }))
   .configure(authentication());
 ```
+
+> **ProTip:** You must set up the `body-parser`, `feathers-hooks` and possibly `cors` modules before setting up `feathers-authentication`. The Feathers generator does this for you already.
 
 #### Options
 
@@ -32,11 +32,18 @@ The options passed to the authentication plugin are wrapped in an object with th
 
 - `local` (default: [see options](./local.md#server-options)) [optional] - The local auth provider config. By default this is included in a Feathers app. If set to `false` it will not be initialized.
 - `token` (default: [see options](./token.md#server-options)) [optional] - The JWT auth provider config. By default this is included in a Feathers app even if you don't pass in any options. You can't disable it like `local` auth.
-- `<oauth-provider>` [optional] - A lowercased oauth provider name (ie. `facebook` or `github`)
+- `<oauth-provider>` (default: [see options](./oauth2.md#server-options)) [optional] - A lowercased oauth provider name (ie. `facebook` or `github`)
+- `successRedirect` (default: '/auth/success') [optional] - The endpoint to redirect to after successful authentication or signup. Only for requests not over Ajax or sockets.
+- `failureRedirect` (default: '/auth/failure') [optional] - The endpoint to redirect to for a failed authentication or signup. Only for requests not over Ajax or sockets.
+- `userEndpoint` (default: '/users') [optional] - The user service endpoint
+- `tokenEndpoint` (default: '/auth/token') [optional] - The JWT auth service endpoint
+- `header` (default: 'authorization') [optional] - The header field to check for the token. **This is case sensitive**.
+- `cookie` (default: 'feathers-jwt') [optional] - The cookie field to check for the token. **This is case sensitive**.
+- `idField` (default: '_id') [optional] - the id field for you user's id.
 
 #### Example Configuration
 
-Below is an example config providing some common override options.
+Below is an example config providing some common override options:
 
 ```js
 {
@@ -59,9 +66,64 @@ Below is an example config providing some common override options.
 }
 ```
 
+### Client Side
+
+If you are using the default options setting up Feathers authentication client side is a breeze.
+
+```js
+// Set up socket.io
+let socket = io(host, {
+  transport: ['websockets']
+});
+
+// Set up Feathers client side
+let app = feathers()
+  .configure(feathers.socketio(socket))
+  .configure(hooks())
+  .configure(authentication());
+
+// Wait for socket connection
+app.io.on('connect', function(){
+  // Authenticate. Normally you'd grab these from a login form rather than hard-coding them
+  app.authenticate({
+    type: 'local',
+    'email': 'admin@feathersjs.com',
+    'password': 'admin'
+  }).then(function(result){
+    console.log('Authenticated!', result);
+  }).catch(function(error){
+    console.error('Error authenticating!', error);
+  });
+});
+```
+
+> **ProTip:** You can also use Primus or a handful of Ajax providers over REST instead of Socket.io. Check out the [Feathers client authentication](./client.md) section for more detail.
+
+> **ProTip:** You can only have one provider client side per "app". For example if you want to use both Socket.io and a REST Ajax provider then you need to configure two apps.
+
+#### Options
+
+- `tokenEndpoint` (default: '/auth/token') [optional] - The JWT auth service endpoint.
+- `localEndpoint` (default: '/auth/local') [optional] - The local auth service endpoint
+- `header` (default: 'Authorization') [optional] - The header field to set the token. **This is case sensitive**.
+- `cookie` (default: 'feathers-jwt') [optional] - The cookie field to check for the token. **This is case sensitive**.
+
+#### Example Configuration
+
+Below is an example config providing some common override options:
+
+```js
+app.configure(authentication({
+  tokenEndpoint: '/token',
+  localEndpoint: '/login',
+  header: 'X-Authorization',
+  cookie: 'app-token'
+}));
+```
+
 ## How does it work?
 
-Regardless of whether you use OAuth, a token, or email + password the `feathers-authentication` plugin, upon successful login, gives back an encrypted JSON web token containing the user `id` as the payload and the user object associated with that id.
+Regardless of whether you use OAuth, a token, or email + password even if you don't use the client side piece, after successful login the `feathers-authentication` plugin gives back an encrypted JSON web token containing the user `id` as the payload and the user object associated with that id.
 
 ```js
 // successful auth response
@@ -81,10 +143,20 @@ For REST the token needs to be passed with each request. Therefore if you did `.
 
 This middleware uses graceful fall-back to check for a token in order from most secure/appropriate to least secure:
 
-1. Authorization header
+1. Authorization header (recommended)
 2. Cookie
 3. The request body
 4. The query string (not recommended but supported)
+
+So you can send your token using any of those methods. Using the `Authorization` header it should look like this:
+
+```
+Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IklseWEgRmFkZWV2IiwiYWRtaW4iOnRydWV9.YiG9JdVVm6Pvpqj8jDT5bMxsm0gwoQTOaZOLI-QfSNc
+```
+
+> **ProTip:** The `Bearer` part can be omitted and the case doesn't matter.
+
+> **ProTip:** You can use a custom header name for your token by passing a `header` option as described above.
 
 ### Authentication Over Sockets
 

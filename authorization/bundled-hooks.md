@@ -20,7 +20,7 @@ The `verifyToken` hook will attempt to verify a token if it is present. If no to
 
 #### Options
 
-- `secret` (**required**) - Your secret used to encrypt and decrypt JWT's. If this gets compromised you need to rotate it immediately!
+- `secret` (default: the one from your config) [optional] - Your secret used to encrypt and decrypt JWT's. If this gets compromised you need to rotate it immediately!
 - `issuer` (default: 'feathers') [optional] - The JWT issuer field
 - `algorithms` (default: ['HS256']) [optional] - The accepted JWT hash algorithms
 - `expiresIn` (default: '1d') [optional] - The time a token is valid for
