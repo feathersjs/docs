@@ -39,8 +39,9 @@ If you don't have a model or schema then validating with hooks is currently your
 #### The ORM way
 
 With ORM adapters you can perform validation at the model level:
-    - [Using Mongoose](http://docs.feathersjs.com/databases/mongoose.html#validation)
-    - [Using Sequelize](http://docs.sequelizejs.com/en/latest/docs/models-definition/#validations)
+
+- [Using Mongoose](http://docs.feathersjs.com/databases/mongoose.html#validation)
+- [Using Sequelize](http://docs.sequelizejs.com/en/latest/docs/models-definition/#validations)
 
 The nice thing about the model level validations is Feathers will return the validation errors to the client in a nice consistent format for you.
 
