@@ -1,6 +1,6 @@
 # Authorization / Access Control
 
-Once we know which user is logged in, we need to know which parts of the app they can access. This is called Authorization, and it's where hooks really come in handy.
+Once we know which user is logged in, we need to know which parts of the app they can access. This is called Authorization, and it's where [hooks](../hooks/readme.md) really come in handy.
 
 ## Security
 
