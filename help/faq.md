@@ -26,16 +26,24 @@ If you still need something from the request object (for example, the requesting
 
 ## How do I do validation?
 
-If your database/ORM supports a model or schema (ie. Mongoose or Sequelize) then you have 2 options:
+If your database/ORM supports a model or schema (ie. Mongoose or Sequelize) then you have 2 options.
 
-1. you can perform validation at the model level
+#### The preferred way
+
+You perform validation at the service level [using hooks](http://docs.feathersjs.com/hooks/examples.html#validation). This is better because it keeps you database agnostic so you can easily swap databases without having to change your validations much.
+
+If you write a bunch of small hooks that validate specific things it is easier to test and also slightly more performant because you can exit out of the validation chain early instead of having to go all the way to the point of inserting data into the database to find out if that data is invalid.
+
+If you don't have a model or schema then validating with hooks is currently your only option. If you come up with something different feel free to submit a PR!
+
+#### The ORM way
+
+With ORM adapters you can perform validation at the model level:
     - [Using Mongoose](http://docs.feathersjs.com/databases/mongoose.html#validation)
     - [Using Sequelize](http://docs.sequelizejs.com/en/latest/docs/models-definition/#validations)
-2. you do them at the service level [using hooks](http://docs.feathersjs.com/hooks/examples.html#validation).
 
 The nice thing about the model level validations is Feathers will return the validation errors to the client in a nice consistent format for you.
 
-If you don't have a model or schema you're left with option 2 or some other way that we haven't had the need to try yet. If you come up with something different feel free to submit a PR!
 
 ## How do I return related entities?
 
