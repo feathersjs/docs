@@ -153,10 +153,10 @@ For more complex validations you really have two options. You can combine Mongoo
 
 __With Validator.js__
 
-Here's an example of doing more complex validations at the model level with the [validator.js](https://github.com/guillaumepotier/validator.js) validation library.
+Here's an example of doing more complex validations at the model level with the [validator.js](https://github.com/chriso/validator.js)  validation library.
 
 ```js
-const validator = require('validator.js');
+const validator = require('validator');
 const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
@@ -164,7 +164,7 @@ const userSchema = new Schema({
   email: {
     type: String,
     validate: {
-      validator: validator.email,
+      validator: validator.isEmail,
       message: '{VALUE} is not a valid email!'
     }
   },
