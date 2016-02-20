@@ -20,42 +20,27 @@ Make sure any restricted endpoints are actually locked down appropriately by add
 
 [Filter socket events](http://docs.feathersjs.com/real-time/filtering.html) so only authenticated and authorized users get can receive restricted ones.
 
+To make this easy we've created [a bunch of hooks](./bundled-hooks.md) to help you out. Their interface's are documented so if you are unsure how to use hooks check out the [Hooks chapter](../hooks/usage.md). Below is an example of how you can create your own.
 
 ## Creating an authorization hook
-In the example below, only a logged-in user would be able to create a todo.  The other methods on the `todos` service continue to be unprotected.  The `orders` service requires an authenticated user to perform any of its methods because it uses the `all` key to register the hook.
+
+In the example below, only a user in the `feathers` group can delete messages.
 
 ```js
 // Create a hook that requires that a user is logged in.
-var requireAuth = function(hook) {
-  if(!hook.params.user) {
-    throw new Error('You must be logged in to do that.');
-  }
-};
-// Create a hook that requires a user who is an admin.
-var requireAdmin = function(hook) {
-  if (!hook.params.user) {
-    throw new Error('You must be logged in to do that.');
-  }
-  if(!hook.params.user.admin) {
-    throw new Error('Only admins can do that.');
-  }
+var isFeathersUser = function(options = {}) {
+  return function(hook) {
+    // We can assume hook.params.user exists because the requireAuth()
+    // hook is called before this and will throw an error if it doesn't
+    if (hook.params.user.group !== 'feathers') {
+      throw new Error('You must be a feathers user to do that.');
+    }
+  };
 };
 
-
-// Must be logged in to create a todo.
-app.service('todos').before({
-  create: [requireAuth]
-});
-// Must be logged in to do anything with orders.
-app.service('orders').before({
-  all: [requireAuth]
-});
-// Must be a logged-in administrator to do anything with secrets.
-app.service('secrets').before({
-  all: [requireAdmin]
+// Must be logged in to do anything a feathers user to delete a message.
+app.service('messages').before({
+  all: [requireAuth()],
+  remove: [isFeathersUser()]
 });
 ```
-
-We created two simple hooks in the above example. The `requireAuth` hook simply checks for a logged-in user at `hook.params.user` and throws an error if there's no user data.  The `requireAdmin` hook is similar, but does an extra check for if the user has an `admin = true` attribute.
-
-We have prepared some useful hooks for you to use in your Authorization schema.  Keep reading to learn about them.
