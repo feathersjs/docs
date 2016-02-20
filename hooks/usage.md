@@ -177,7 +177,7 @@ todoService.before({
   find(hook) {
     return this.find().then(data => {
       hook.params.message = 'Ran through promise hook';
-      hook.data.result = result;
+      hook.data.result = data;
       // Always return the hook object
       return hook;
     });
@@ -198,9 +198,9 @@ todoService.before({
       hook.params.message = 'Ran through promise hook';
       hook.data.result = data;
       // With no error
-      callback();
+      next();
       // or to change the hook object
-      callback(null, hook);
+      next(null, hook);
     });
   }
 });
