@@ -57,7 +57,7 @@ app.authenticate({
 
 ```js
 let app = feathers()
-  .configure(socketio())
+  .configure(rest())
   .configure(hooks())
   .use(bodyParser.json())
   .use(bodyParser.urlencoded({ extended: true }))
