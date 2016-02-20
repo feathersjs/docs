@@ -52,7 +52,7 @@ Lowercase the given fields either in the data submitted (as a `before` hook for 
 ```js
 const hooks = require('feathers-hooks');
 
-// lowercase the `email` and `and password` field before a user is created
+// lowercase the `email` and `password` field before a user is created
 app.service('users').before({
   create: hooks.lowerCase('email', 'username')
 });
