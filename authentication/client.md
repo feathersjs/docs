@@ -22,7 +22,7 @@ Then you pass whatever other fields you need to send to authenticate. See below 
 
 ### user
 
-`app.token()` is a convenience method to get the user. Currently it only pulls from your local store. In the future it may fall back to fetching from the server if the user isn't available in the client.
+`app.user()` is a convenience method to get the user. Currently it only pulls from your local store. In the future it may fall back to fetching from the server if the user isn't available in the client.
 
 ## Usage
 
