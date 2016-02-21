@@ -13,14 +13,15 @@ let error = require('feathers-errors').handler;
 let app = feathers();
 
 app.use(error({
-    public: 'path/to/public/dir',
-    files: {
-        401: '401.html',
-        404: '404.html',
-        500: '500.html'
+    html: {
+        401: 'path/to/401.html',
+        404: 'path/to/404.html',
+        default: 'path/to/default.html'
     }
 }))
 ```
+
+You can also set `html: false` to disable HTML error pages.
 
 ## Feathers Error Types
 
