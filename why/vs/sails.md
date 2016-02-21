@@ -1,6 +1,6 @@
 # Feathers vs. Sails
 
-From a feature standpoint Feathers and Sails are probably the closest. Both provide real-time REST API's, multiple DB support, and are client agnostic. Sails is bound to the server whereas Feathers can also be used in the browser and in React Native apps. Both frameworks use Express Feathers supporting the latest Express 4, while Sails supports Express 3.
+From a feature standpoint Feathers and Sails are probably the closest. Both provide real-time REST API's, multiple DB support, and are client agnostic. Sails is bound to the server whereas Feathers can also be used in the browser and in React Native apps. Both frameworks use Express, with Feathers supporting the latest Express 4, while Sails supports Express 3.
 
 Sails follows the MVC pattern while Feathers provides lightweight services to define your resources. Feathers uses hooks to define your business logic including validations, security policies and serialization in reusable, chainable modules, whereas with Sails these reside in more of a configuration file format.
 
