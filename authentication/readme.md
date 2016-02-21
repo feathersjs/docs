@@ -37,7 +37,7 @@ The options passed to the authentication plugin are wrapped in an object with th
 - `tokenEndpoint` (default: '/auth/token') [optional] - The JWT auth service endpoint
 - `header` (default: 'authorization') [optional] - The header field to check for the token. **This is case sensitive**.
 - `cookie` (default: 'feathers-jwt') [optional] - The cookie field to check for the token. **This is case sensitive**.
-- `idField` (default: '_id') [optional] - the id field for you user's id.
+- `idField` (default: '_id') [optional] - the id field for you user's id. This is primarily used by the `populateUser` hook after a JWT is created by the token service.
 
 #### Example Configuration
 
