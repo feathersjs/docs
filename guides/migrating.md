@@ -1,6 +1,6 @@
 # Migrating to Feathers 2
 
-Feathers 2 has become even smaller and more modular. There are no changes in the service API although we recommend using ES6 Promises instead of callbacks. This guide describes how to migrate to Feathers v2.
+Feathers 2 has become even smaller and more modular. There are no changes in the service API although we recommend using ES6 Promises instead of callbacks. This guide describes how to migrate from previous versions to Feathers v2.
 
 ## Provider modules
 
@@ -57,6 +57,8 @@ All configuration options are still the same.
 > __Note:__ One additional small difference is that `feathers-socketio` now sets up the connection as a service mixin in the services `setup`. This means `app.configure(socketio())` has to be called **before** registering any services.
 
 ## Database adapters
+
+If you are using an older version of a database adapter, it will continue to work just the same with Feathers 2 since the service interface didn't change.
 
 The usage of the latest database adapters has been unified to support a common way for [extension](../databases/extending.md), [querying](../databases/querying.md) and [pagination](../databases/pagination.md). They now require establishing a connection outside of the adapter and you now pass the database connection instance or ORM model to the service. For detailed information follow up in the adapter, ORM or database chapters below:
 
