@@ -1,4 +1,4 @@
-# Your First App
+# Creating A Feathers app
 
 Well alright! Let's build our first Feathers app! We're going to build a real-time chat app with MongoDB as the database. It's a great way to cover all the things that you'd need to do in a real world application and how Feathers can help. It also makes a lot more sense to have a real-time component than a Todo list. 😉
 
@@ -103,7 +103,7 @@ With the server running we have a full CRUD API available at the `/messages` end
 $ curl 'http://localhost:3030/messages/' -H 'Content-Type: application/json' --data-binary '{ "text": "Hello Feathers!" }'
 ```
 
-You can also connect to the real-time API via Socket.io. Add the following to `public/index.html` before the closing `<body>` tag:
+You can also connect to the real-time API via [Socket.io](http://socket.io/). Add the following to `public/index.html` before the closing `<body>` tag:
 
 ```html
 <script src="socket.io/socket.io.js"></script>
@@ -124,4 +124,8 @@ Open the console and [localhost:3030](http://localhost:3030) and you will see th
 $ curl 'http://localhost:3030/messages/' -H 'Content-Type: application/json' --data-binary '{ "text": "Hello again!" }'
 ```
 
-Will also log the new message on the console in the browser. This is how Feathers does real-time and you can learn more about it in the [Real-Time chapter](../real-time/readme.md).
+Will also log the new message on the console in the browser. This is basically how Feathers does real-time and you can learn more about it in the [Real-Time chapter](../real-time/readme.md).
+
+## What's next?
+
+We already have a fully usable CRUD API for chat messages and local authentication set up. In the [next chapter](authentication.md) we will create a new user and restrict access to our messages service.
