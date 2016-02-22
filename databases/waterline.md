@@ -33,17 +33,17 @@ npm install --save sails-postgresql waterline feathers-waterline
 `feathers-waterline` hooks a Waterline Model up to a configured data store as a feathers service.
 
 ```js
-const Todo = require('./models/todo');
+const Message = require('./models/message');
 const config = require('./config/waterline');
 const Waterline = require('waterline');
 const service = require('feathers-waterline');
 
 const ORM = new Waterline();
 
-ORM.loadCollection(Todo);
+ORM.loadCollection(Message);
 ORM.initialize(config, function(error, data) {
-    app.use('/todos', waterlineService({
-      Model: data.collections.todo
+    app.use('/messages', waterlineService({
+      Model: data.collections.message
     }));
 });
 ```
@@ -58,15 +58,16 @@ Creating a new Waterline service currently offers the following options:
 
 ## Complete Example
 
-Here is an example of a Feathers server with a `todos` Waterline Model using the [Disk](https://github.com/balderdashy/sails-disk) store:
+Here is an example of a Feathers server with a `messages` Waterline Model using the [Disk](https://github.com/balderdashy/sails-disk) store:
 
 ```
-$ npm install feathers feathers-rest body-parser waterline sails-disk feathers-waterline
+$ npm install feathers feathers-rest feathers-socketio body-parser waterline sails-disk feathers-waterline
 ```
 
 ```js
 const feathers = require('feathers');
 const rest = require('feathers-rest');
+const socketio = require('feathers-socketio');
 const bodyParser = require('body-parser');
 const Waterline = require('waterline');
 const diskAdapter = require('sails-disk');
@@ -87,8 +88,8 @@ const config = {
     migrate: 'alter'
   }
 };
-const Todo = Waterline.Collection.extend({
-  identity: 'todo',
+const Message = Waterline.Collection.extend({
+  identity: 'message',
   schema: true,
   connection: 'myLocalDisk',
   attributes: {
@@ -107,12 +108,14 @@ const Todo = Waterline.Collection.extend({
 const app = feathers()
   // Enable REST services
   .configure(rest())
+  // Enable Socket.io services
+  .configure(socketio())
   // Turn on JSON parser for REST services
   .use(bodyParser.json())
   // Turn on URL-encoded parser for REST services
   .use(bodyParser.urlencoded({ extended: true }));
 
-ORM.loadCollection(Todo);
+ORM.loadCollection(Message);
 ORM.initialize(config, (error, data) => {
   if (error) {
     console.error(error);
@@ -120,8 +123,8 @@ ORM.initialize(config, (error, data) => {
 
   // Create a Waterline Feathers service with a default page size of 2 items
   // and a maximum size of 4
-  app.use('/todos', service({
-    Model: data.collections.todo,
+  app.use('/messages', service({
+    Model: data.collections.message,
     paginate: {
       default: 2,
       max: 4
@@ -132,18 +135,18 @@ ORM.initialize(config, (error, data) => {
     res.json(error);
   });
   
-  // Create a dummy Todo
-  app.service('todos').create({
-    text: 'Server todo',
+  // Create a dummy Message
+  app.service('messages').create({
+    text: 'Server message',
     complete: false
-  }).then(function(todo) {
-    console.log('Created todo', todo.toJSON());
+  }).then(function(message) {
+    console.log('Created message', message.toJSON());
   });
 
   // Start the server
   const server = app.listen(3030);
   server.on('listening', function() {
-    console.log('Feathers Todo waterline service running on 127.0.0.1:3030');
+    console.log('Feathers Message waterline service running on 127.0.0.1:3030');
     resolve(server);
   });
 });
