@@ -25,6 +25,7 @@
    * [In Memory](databases/memory.md)
    * [NeDB](databases/nedb.md)
    * [Mongoose](databases/mongoose.md)
+   * [MongoDB](databases/mongodb.md)
    * [Sequelize](databases/sequelize.md)
    * [KnexJS](databases/knexjs.md)
    * [Waterline](databases/waterline.md)
