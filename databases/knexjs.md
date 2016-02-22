@@ -10,7 +10,7 @@ npm install --save mysql knex feathers-knex
 
 ## Getting Started
 
-You can create a \*SQL Knex service like this:
+You can create a SQL Knex service like this:
 
 ```js
 const knex = require('knex');
@@ -24,19 +24,19 @@ const db = knex({
 });
 
 // Create the schema
-db.schema.createTable('people', table => {
+db.schema.createTable('messages', table => {
   table.increments('id');
-  table.string('name');
-  table.integer('age');
+  table.string('text');
+  table.boolean('read');
 });
 
-app.use('/todos', service({
+app.use('/messages', service({
   Model: db,
-  name: 'people'
+  name: 'messages'
 }));
 ```
 
-This will create a `todos` endpoint and connect to a local `todos` table on an SQLite database in `data.db`.
+This will create a `messages` endpoint and connect to a local `messages` table on an SQLite database in `data.db`.
 
 ## Options
 
@@ -49,16 +49,17 @@ The following options can be passed when creating a Knex service:
 
 ## Complete Example
 
-Here's a complete example of a Feathers server with a `todos` SQLite service. We are using the [Knex schema builder](http://knexjs.org/#Schema)
+Here's a complete example of a Feathers server with a `messages` SQLite service. We are using the [Knex schema builder](http://knexjs.org/#Schema)
 
 ```
-$ npm install feathers feathers-rest body-parser feathers-knex knex sqlite3
+$ npm install feathers feathers-rest feathers-socketio body-parser feathers-knex knex sqlite3
 ```
 
 ```js
 // app.js
 const feathers = require('feathers');
 const rest = require('feathers-rest');
+const socketio = require('feathers-socketio');
 const bodyParser = require('body-parser');
 const service = require('feathers-knex');
 const knex = require('knex');
@@ -74,6 +75,8 @@ const db = knex({
 const app = feathers()
   // Enable REST services
   .configure(rest())
+  // Enable Socket.io services
+  .configure(socketio())
   // Turn on JSON parser for REST services
   .use(bodyParser.json())
   // Turn on URL-encoded parser for REST services
@@ -81,9 +84,9 @@ const app = feathers()
 
 // Create Knex Feathers service with a default page size of 2 items
 // and a maximum size of 4
-app.use('/todos', service({
+app.use('/messages', service({
   Model: db,
-  name: 'todos',
+  name: 'messages',
   paginate: {
     default: 2,
     max: 4
@@ -92,23 +95,23 @@ app.use('/todos', service({
 
 // Clean up our data. This is optional and is here
 // because of our integration tests
-db.schema.dropTableIfExists('todos').then(function() {
-  console.log('Dropped todos table');
+db.schema.dropTableIfExists('messages').then(function() {
+  console.log('Dropped messages table');
 
   // Initialize your table
-  return db.schema.createTable('todos', function(table) {
-    console.log('Creating todos table');
+  return db.schema.createTable('messages', function(table) {
+    console.log('Creating messages table');
     table.increments('id');
     table.string('text');
     table.boolean('complete');
   });
 }).then(function() {
-  // Create a dummy Todo
-  app.service('todos').create({
-    text: 'Server todo',
+  // Create a dummy Message
+  app.service('messages').create({
+    text: 'Server message',
     complete: false
-  }).then(function(todo) {
-    console.log('Created todo', todo);
+  }).then(function(message) {
+    console.log('Created message', message);
   });
 });
 
