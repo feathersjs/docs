@@ -13,10 +13,10 @@ You can create an in-memory service with no options:
 ```js
 const memory = require('feathers-memory');
 
-app.use('/todos', memory());
+app.use('/messages', memory());
 ```
 
-This will create a `todos` datastore with the default configuration.
+This will create a `messages` datastore with the default configuration.
 
 ## Options
 
@@ -29,10 +29,10 @@ The following options can be passed when creating a new memory service:
 
 ## Complete Example
 
-Here is an example of a Feathers server with a `todos` in-memory service that supports pagination:
+Here is an example of a Feathers server with a `messages` in-memory service that supports pagination:
 
 ```
-$ npm install feathers body-parser feathers-rest feathers-memory
+$ npm install feathers body-parser feathers-rest feathers-socketio feathers-memory
 ```
 
 ```js
@@ -40,12 +40,15 @@ $ npm install feathers body-parser feathers-rest feathers-memory
 const feathers = require('feathers');
 const bodyParser = require('body-parser');
 const rest = require('feathers-rest');
+const socketio = require('feathers-socketio');
 const memory = require('feathers-memory');
 
 // Create a feathers instance.
 const app = feathers()
   // Enable REST services
   .configure(rest())
+  // Enable REST services
+  .configure(socketio())
   // Turn on JSON parser for REST services
   .use(bodyParser.json())
   // Turn on URL-encoded parser for REST services
@@ -53,19 +56,19 @@ const app = feathers()
 
 // Create an in-memory Feathers service with a default page size of 2 items
 // and a maximum size of 4
-app.use('/todos', memory({
+app.use('/messages', memory({
   paginate: {
     default: 2,
     max: 4
   }
 }));
 
-// Create a dummy Todo
-app.service('todos').create({
-  text: 'Server todo',
+// Create a dummy Message
+app.service('messages').create({
+  text: 'Server message',
   complete: false
-}).then(function(todo) {
-  console.log('Created todo', todo);
+}).then(function(message) {
+  console.log('Created message', message);
 });
 
 // Start the server.
@@ -76,4 +79,4 @@ app.listen(port, function() {
 });
 ```
 
-Run the example with `node app.js` and go to [localhost:3030/todos](http://localhost:3030/todos). You will see the test Todo that we created at the end of that file.
+Run the example with `npm start` and go to [localhost:3030/messages](http://localhost:3030/messages). You will see the test Message that we created at the end of that file.
