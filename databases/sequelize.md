@@ -16,7 +16,7 @@ npm install --save pg pg-hstore feathers-sequelize
 const Model = require('./models/mymodel');
 const sequelize = require('feathers-sequelize');
 
-app.use('/todos', sequelize({ Model }));
+app.use('/messages', sequelize({ Model }));
 ```
 
 ## Options
@@ -29,10 +29,10 @@ Creating a new Sequelize service currently offers the following options:
 
 ### Complete Example
 
-Here is an example of a Feathers server with a `todos` SQLite Sequelize Model:
+Here is an example of a Feathers server with a `messages` SQLite Sequelize Model:
 
 ```
-$ npm install feathers feathers-rest body-parser sequelize feathers-sequelize sqlite3
+$ npm install feathers feathers-rest feathers-socketio body-parser sequelize feathers-sequelize sqlite3
 ```
 
 ```js
@@ -40,6 +40,7 @@ $ npm install feathers feathers-rest body-parser sequelize feathers-sequelize sq
 const path = require('path');
 const feathers = require('feathers');
 const rest = require('feathers-rest');
+const socketio = require('feathers-socketio');
 const bodyParser = require('body-parser');
 const Sequelize = require('sequelize');
 const service = require('feathers-sequelize');
@@ -49,12 +50,12 @@ const sequelize = new Sequelize('sequelize', '', '', {
   storage: path.join(__dirname, 'db.sqlite'),
   logging: false
 });
-const Todo = sequelize.define('todo', {
+const Message = sequelize.define('message', {
   text: {
     type: Sequelize.STRING,
     allowNull: false
   },
-  complete: {
+  read: {
     type: Sequelize.BOOLEAN,
     defaultValue: false
   }
@@ -66,18 +67,20 @@ const Todo = sequelize.define('todo', {
 const app = feathers()
   // Enable REST services
   .configure(rest())
+  // Enable Socket.io services
+  .configure(socketio())
   // Turn on JSON parser for REST services
   .use(bodyParser.json())
   // Turn on URL-encoded parser for REST services
   .use(bodyParser.urlencoded({ extended: true }));
 
 // Removes all database content
-Todo.sync({ force: true });
+Message.sync({ force: true });
 
 // Create an in-memory Feathers service with a default page size of 2 items
 // and a maximum size of 4
-app.use('/todos', service({
-  Model: Todo,
+app.use('/messages', service({
+  Model: Message,
   paginate: {
     default: 2,
     max: 4
@@ -85,13 +88,13 @@ app.use('/todos', service({
 }));
 
 // This clears the database
-Todo.sync({ force: true }).then(() => {
-  // Create a dummy Todo
-  app.service('todos').create({
-    text: 'Server todo',
-    complete: false
-  }).then(function(todo) {
-    console.log('Created todo', todo.toJSON());
+Message.sync({ force: true }).then(() => {
+  // Create a dummy Message
+  app.service('messages').create({
+    text: 'Server message',
+    read: false
+  }).then(function(message) {
+    console.log('Created message', message.toJSON());
   });
 });
 
@@ -103,7 +106,7 @@ app.listen(port, function() {
 });
 ```
 
-Now there is an SQLite todos API running at `http://localhost:3030/todos`, including validation according to the model definition.
+Now there is an SQLite messages API running at `http://localhost:3030/messages`, including validation according to the model definition.
 
 ## Validation
 
