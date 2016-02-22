@@ -42,10 +42,10 @@ This will create a `todos` endpoint and connect to a local `todos` table on an S
 
 The following options can be passed when creating a Knex service:
 
-- `Model` **required** - The KnexJS database instance
-- `name` **required** - The name of the table
-- `id` - The name of the id property (default: `id`)
-- `paginate` - A pagination object containing a `default` and `max` page size (see the [Pagination chapter](databases/pagination.md))
+- `Model` (**required**) - The KnexJS database instance
+- `name` (**required**) - The name of the table
+- `id` (default: `id`) [optional] - The name of the id property.
+- `paginate` [optional] - A pagination object containing a `default` and `max` page size (see the [Pagination chapter](databases/pagination.md))
 
 ## Complete Example
 

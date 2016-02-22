@@ -22,10 +22,10 @@ This will create a `todos` datastore with the default configuration.
 
 The following options can be passed when creating a new memory service:
 
-- `idField` - The name of the id field property. Default is `id`
-- `startId` - An id number to start with that will be incremented for new record (default: `0`)
-- `store` - An object with id to item assignments to pre-initialize the data store
-- `paginate` - A pagination object containing a `default` and `max` page size (see the [Pagination chapter](databases/pagination.md))
+- `idField` (default: 'id') [optional] - The name of the id field property.
+- `startId` (default: 0) [optional] - An id number to start with that will be incremented for new record.
+- `store` [optional] - An object with id to item assignments to pre-initialize the data store
+- `paginate` [optional] - A pagination object containing a `default` and `max` page size (see the [Pagination chapter](databases/pagination.md))
 
 ## Complete Example
 

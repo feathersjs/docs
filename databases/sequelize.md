@@ -25,7 +25,7 @@ Creating a new Sequelize service currently offers the following options:
 
 - `Model` (**required**) - The Sequelize model definition
 - `id` (default: `id`) [optional] - The name of the id property
-- `paginate` - A pagination object containing a `default` and `max` page size (see the [Pagination chapter](databases/pagination.md))
+- `paginate` [optional] - A pagination object containing a `default` and `max` page size (see the [Pagination chapter](databases/pagination.md))
 
 ### Complete Example
 

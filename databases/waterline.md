@@ -52,9 +52,9 @@ ORM.initialize(config, function(error, data) {
 
 Creating a new Waterline service currently offers the following options:
 
-- `Model` - The Waterline model definition
-- `id` (default: `id`) - The name of the id property
-- `paginate` - A pagination object containing a `default` and `max` page size (see the [Pagination chapter](databases/pagination.md))
+- `Model` (**required**) - The Waterline model definition
+- `id` (default: `id`) [optional] - The name of the id property
+- `paginate` [optional] - A pagination object containing a `default` and `max` page size (see the [Pagination chapter](databases/pagination.md))
 
 ## Complete Example
 
