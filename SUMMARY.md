@@ -2,7 +2,9 @@
 
 * [Getting Started](getting-started/readme.md)
    * [Quick Start](getting-started/quick-start.md)
-   * [Your First App](getting-started/your-first-app/readme.md)
+   * [Your First App](getting-started/first-app.md)
+   * [Authentication](getting-started/authentication.md)
+   * [Frontend apps](getting-started/frontend.md)
 * [Why Feathers](why/readme.md)
    * [Philosophy](why/philosophy.md)
    * [Features](why/vs/readme.md)
