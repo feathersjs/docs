@@ -15,7 +15,7 @@ const mongoose = require('mongoose');
 const service = require('feathers-mongoos');
 
 // A module that exports your Mongoose model
-const Model = require('./models/mymodel');
+const Message = require('./models/message');
 
 // Make Mongoose use the ES6 promise
 mongoose.Promise = global.Promise;
@@ -23,7 +23,7 @@ mongoose.Promise = global.Promise;
 // Connect to a local database called `feathers`
 mongoose.connect('mongodb://localhost:27017/feathers');
 
-app.use('/todos', service({ Model }));
+app.use('/messages', service({ Model: Message }));
 ```
 
 See the [Mongoose Guide](http://mongoosejs.com/docs/guide.html) for more information on defining your model.
@@ -40,29 +40,29 @@ The following options can be passed when creating a new Mongoose service:
 
 ### Complete Example
 
-Here's a complete example of a Feathers server with a `todos` Mongoose service.
+Here's a complete example of a Feathers server with a `messages` Mongoose service.
 
 ```
 $ npm install feathers feathers-rest body-parser mongoose feathers-mongoose
 ```
 
-In `todo-model.js`:
+In `message-model.js`:
 
 ```js
 const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
-const TodoSchema = new Schema({
+const MessageSchema = new Schema({
   text: {
     type: String,
     required: true
   },
-  complete: {
+  read: {
     type: Boolean,
     'default': false
   }
 });
-const Model = mongoose.model('Todo', TodoSchema);
+const Model = mongoose.model('Message', MessageSchema);
 
 module.exports = Model;
 ```
@@ -76,7 +76,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const service = require('feathers-mongoose');
 
-const Model = require('./todo-model');
+const Model = require('./message-model');
 
 // Tell mongoose to use native promises
 // See http://mongoosejs.com/docs/promises.html
@@ -95,7 +95,7 @@ const app = feathers()
   .use(bodyParser.urlencoded({extended: true}))
 
 // Connect to the db, create and register a Feathers service.
-app.use('/todos', service({
+app.use('/messages', service({
   Model,
   paginate: {
     default: 2,
@@ -103,12 +103,11 @@ app.use('/todos', service({
   }
 }));
 
-// Create a dummy Todo
-app.service('todos').create({
-  text: 'Server todo',
-  complete: false
-}).then(function(todo) {
-  console.log('Created todo', todo);
+// Create a dummy Message
+app.service('messages').create({
+  text: 'Server message'
+}).then(function(message) {
+  console.log('Created message', message);
 });
 
 // Start the server.
@@ -118,7 +117,7 @@ app.listen(port, function() {
 });
 ```
 
-You can run this example by using `node examples/app` and going to [localhost:3030/todos](http://localhost:3030/todos). You should see a paginated object with the todo that we created on the server.
+You can run this example by using `npm start` and going to [localhost:3030/messages](http://localhost:3030/messages). You should see a paginated object with the message that we created on the server.
 
 ## Migrating
 
@@ -127,7 +126,7 @@ Version 3 of this adapter no longer brings its own Mongoose dependency, only acc
 ```js
 var MySchema = require('./models/mymodel')
 var mongooseService = require('feathers-mongoose');
-app.use('todos', mongooseService('todo', MySchema, options));
+app.use('messages', mongooseService('message', MySchema, options));
 ```
 
 To
@@ -140,7 +139,7 @@ var mongooseService = require('feathers-mongoose');
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost:27017/feathers');
 
-app.use('/todos', mongooseService({
+app.use('/messages', mongooseService({
   Model: MongooseModel
 }));
 ```
@@ -189,7 +188,7 @@ Unless you passed `lean: true` when initializing your service, the records retur
 To get around this, you can use the included `toObject` hook to convert the Mongoose documents into plain objects.  Let's modify the before hook's setup in the feathers-hooks example, above, to this:
 
 ```js
-app.service('todos').before({
+app.service('messages').before({
   all: [service.hooks.toObject({})]
 });
 ```

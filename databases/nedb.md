@@ -8,7 +8,7 @@ $ npm install --save nedb feathers-nedb
 
 ## Getting Started
 
-The following example creates an NeDB `todos` service. It will create a `todos.db` datastore file in the `db-data` directory and automatically load it. If you delete that file, the data will be deleted. For a list of all the available options when creating an NeDB instance check out the [NeDB documentation](https://github.com/louischatriot/nedb#creatingloading-a-database).
+The following example creates a NeDB `messages` service. It will create a `messages.db` datastore file in the `db-data` directory and automatically load it. If you delete that file, the data will be deleted. For a list of all the available options when creating an NeDB instance check out the [NeDB documentation](https://github.com/louischatriot/nedb#creatingloading-a-database).
 
 ```js
 const NeDB = require('nedb');
@@ -16,11 +16,11 @@ const service = require('feathers-nedb');
 
 // Create a NeDB instance
 const db = new NeDB({
-  filename: './data/todos.db',
+  filename: './data/messages.db',
   autoload: true
 });
 
-app.use('/todos', service({
+app.use('/messages', service({
   // Use it as the service `Model`
   Model: db,
   // Enable pagination
@@ -35,15 +35,15 @@ app.use('/todos', service({
 
 The following options can be passed when creating a new NeDB service:
 
-- `Model` - The NeDB database instance
-- `paginate` - A pagination object containing a `default` and `max` page size (see the [Pagination chapter](databases/pagination.md))
+- `Model` (**required**) - The NeDB database instance
+- `paginate` [optional] - A pagination object containing a `default` and `max` page size (see the [Pagination chapter](databases/pagination.md))
 
 ## Complete Example
 
 To run the complete NeDB example we need to install
 
 ```
-$ npm install feathers feathers-rest feathers-nedb nedb body-parser
+$ npm install feathers feathers-rest feathers-socketio feathers-nedb nedb body-parser
 ```
 
 Then add the following into `app.js`:
@@ -52,11 +52,12 @@ Then add the following into `app.js`:
 const NeDB = require('nedb');
 const feathers = require('feathers');
 const rest = require('feathers-rest');
+const socketio = require('feathers-socketio');
 const bodyParser = require('body-parser');
 const service = require('feathers-nedb');
 
 const db = new NeDB({
-  filename: './db-data/todos',
+  filename: './db-data/messages',
   autoload: true
 });
 
@@ -64,13 +65,15 @@ const db = new NeDB({
 var app = feathers()
   // Enable REST services
   .configure(rest())
+  // Enable Socket.io services
+  .configure(socketio())
   // Turn on JSON parser for REST services
   .use(bodyParser.json())
   // Turn on URL-encoded parser for REST services
   .use(bodyParser.urlencoded({extended: true}));
 
 // Connect to the db, create and register a Feathers service.
-app.use('/todos', service({
+app.use('/messages', service({
   Model: db,
   paginate: {
     default: 2,
@@ -78,12 +81,12 @@ app.use('/todos', service({
   }
 }));
 
-// Create a dummy Todo
-app.service('todos').create({
-  text: 'Server todo',
+// Create a dummy Message
+app.service('messages').create({
+  text: 'Oh hai!',
   complete: false
-}).then(function(todo) {
-  console.log('Created todo', todo);
+}).then(function(message) {
+  console.log('Created message', message);
 });
 
 // Start the server.
@@ -94,4 +97,4 @@ app.listen(port, function() {
 });
 ```
 
-You can run this example [from the GitHub repository](https://github.com/feathersjs/feathers-nedb/blob/master/examples/app.js) with `npm run example` and going to [localhost:3030/todos](http://localhost:3030/todos). You should see an empty array. That's because you don't have any Todos yet but you now have full CRUD for your new todos service.
+You can run this example [from the GitHub repository](https://github.com/feathersjs/feathers-nedb/blob/master/examples/app.js) with `npm start` and going to [localhost:3030/messages](http://localhost:3030/messages). You should see an empty array. That's because you don't have any messages yet but you now have full CRUD for your new messages service.
