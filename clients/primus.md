@@ -1,34 +1,98 @@
 # Primus client use
 
-Primus works very similar to [Socket.io](socket-io.md) but supports a number of different real-time libraries. [Once configured on the server](..//real-time/primus.md) service methods and events will be available through a Primus socket connection. 
+Primus works very similar to [Socket.io](socket-io.md) but supports a number of different real-time libraries. [Once configured on the server](../real-time/primus.md) service methods and events will be available through a Primus socket connection. 
 
 ## Establishing the connection
 
-In the browser, the connection can be established by loading the client from `primus/primus.js` and instantiating a new `Primus` instance:
+In the browser, the connection can be established by loading the client from `primus/primus.js` and instantiating a new `Primus` instance. Unlike HTTP calls, websockets do not have a cross-origin restriction in the browser so it is possible to connect to any Feathers server. See below for platform specific examples.
+
+> **ProTip**: The socket connection URL has to point to the server root which is where Feathers will set up Primus.
+
+## Browser Usage
+
+Using [the Feathers client](feathers.md), the `feathers-primus/client` module can be configured to use the Primus connection:
 
 ```html
 <script type="text/javascript" src="primus/primus.js"></script>
+<script type="text/javascript" src="node_modules/feathers-client/dist/feathers.js"></script>
 <script type="text/javascript">
   var primus = new Primus('http://api.my-feathers-server.com');
+  var app = feathers()
+    .configure(feathers.hooks())
+    .configure(feathers.primus(primus));
+
+  var messageService = app.service('messages');
+  
+  messageService.on('created', function(message) {
+    console.log('Someone created a message', message);
+  });
+  
+  messageService.create({
+    text: 'Message from client'
+  });
 </script>
 ```
 
-More details, like how to establish a connection between NodeJS servers can be found in the [Primus documentation](https://github.com/primus/primus#connecting-from-the-server).
+## Server Usage
 
-## feathers-primus client
+This sets up Primus as a stand alone client in NodeJS using the websocket transport. If you are integrating with a separate server instance you can also connect without needing to require `primus-emitter`. You can read more in the [Primus documentation](https://github.com/primus/primus#connecting-from-the-server).
 
-Using [the Feathers client](feathers.md), the `feathers-primus/client` module can now be configured to use the Primus connection:
+```bash
+$ npm install feathers feathers-primus feathers-hooks primus primus-emitter ws
+```
 
 ```js
 const feathers = require('feathers');
 const primus = require('feathers-primus/client');
+const Primus = require('primus');
+const Emitter = require('primus-emitter');
+const Socket = Primus.createSocket({
+  transformer: 'websockets',
+  plugin: {
+    'emitter': Emitter
+  }
+});
+const socket = new Socket('http://api.feathersjs.com');
+const app = feathers()
+  .configure(feathers.hooks())
+  .configure(primus(socket));
 
-const app = feathers().configure(primus(primus));
+// Get the message service that uses a websocket connection
+const messageService = app.service('messages');
 
-// Get the todo service that uses a websocket connection
-const todoService = app.service('todos');
+messageService.on('created', message => console.log('Someone created a message', message));
+```
 
-todoService.on('created', todo => console.log('Someone created a todo', todo));
+## React Native Usage
+
+TODO (EK): Add some of the specific React Native things we needed to change to properly support websockets. I'm pretty sure this doesn't work so it's still a WIP.
+
+```bash
+$ npm install feathers feathers-primus feathers-hooks primus
+```
+
+```js
+import React from 'react-native';
+import hooks from 'feathers-hooks';
+import {client as feathers} from 'feathers';
+import {client as primus} from 'feathers-primus';
+
+let Socket = primus.socket;
+
+// A hack so that you can still debug. Required because react native debugger runs in a web worker, which doesn't have a window.navigator attribute.
+if (window.navigator && Object.keys(window.navigator).length === 0) {
+  window.navigator.userAgent = 'ReactNative';
+}
+
+const socket = new Socket('http://api.feathersjs.com');
+const app = feathers()
+  .configure(feathers.hooks())
+  .configure(primus(socket));
+
+// Get the message service that uses a websocket connection
+const messageService = app.service('messages');
+
+messageService.on('created', message => console.log('Someone created a message', message));
 ```
 
 ## Direct socket events
@@ -46,77 +110,77 @@ Service methods can be called by emitting a `<servicepath>::<methodname>` event 
 Retrieves a list of all matching resources from the service
 
 ```js
-primus.send('todos::find', { status: 'completed', user: 10 }, (error, data) => {
-  console.log('Found all todos', data);
+primus.send('messages::find', { status: 'read', user: 10 }, (error, data) => {
+  console.log('Found all messages', data);
 });
 ```
 
-Will call `todos.find({ query: { status: 'completed', user: 10 } })`.
+Will call `messages.find({ query: { status: 'read', user: 10 } })`.
 
 #### `get`
 
 Retrieve a single resource from the service.
 
 ```js
-primus.send('todos::get', 1, (error, todo) => {
-  console.log('Found todo', todo);
+primus.send('messages::get', 1, (error, message) => {
+  console.log('Found message', message);
 });
 ```
 
-Will call `todos.get(1, {})`.
+Will call `messages.get(1, {})`.
 
 ```js
-primus.send('todos::get', 1, { fetch: 'all' }, (error, todo) => {
-  console.log('Found todo', todo);
+primus.send('messages::get', 1, { fetch: 'all' }, (error, message) => {
+  console.log('Found message', message);
 });
 ```
 
-Will call `todos.get(1, { query: { fetch: 'all' } })`.
+Will call `messages.get(1, { query: { fetch: 'all' } })`.
 
 #### `create`
 
 Create a new resource with `data` which may also be an array.
 
 ```js
-primus.send('todos::create', {
-  "description": "I really have to iron"
-}, (error, todo) => {
-  console.log('Todo created', todo);
+primus.send('messages::create', {
+  "text": "I really have to iron"
+}, (error, message) => {
+  console.log('Message created', message);
 });
 ```
 
-Will call `todos.create({ "description": "I really have to iron" }, {})`.
+Will call `messages.create({ "text": "I really have to iron" }, {})`.
 
 ```js
-primus.send('todos::create', [
-  { "description": "I really have to iron" },
-  { "description": "Do laundry" }
+primus.send('messages::create', [
+  { "text": "I really have to iron" },
+  { "text": "Do laundry" }
 ]);
 ```
 
-Will call `todos.create` with the array.
+Will call `messages.create` with the array.
 
 ### `update`
 
 Completely replace a single or multiple resources.
 
 ```js
-primus.send('todos::update', 2, {
-  "description": "I really have to do laundry"
-}, (error, todo) => {
-  console.log('Todo updated', todo);
+primus.send('messages::update', 2, {
+  "text": "I really have to do laundry"
+}, (error, message) => {
+  console.log('Message updated', message);
 });
 ```
 
-Will call `todos.update(2, { "description": "I really have to do laundry" }, {})`. The `id` can also be `null` to update multiple resources:
+Will call `messages.update(2, { "text": "I really have to do laundry" }, {})`. The `id` can also be `null` to update multiple resources:
 
 ```js
-primus.send('todos::update', null, {
+primus.send('messages::update', null, {
   complete: true
 }, { complete: false });
 ```
 
-Will call `todos.update(null, { "complete": true }, { query: { complete: 'false' } })`.
+Will call `messages.update(null, { "complete": true }, { query: { complete: 'false' } })`.
 
 > __Note:__ `update` is normally expected to replace an entire resource which is why the database adapters only support `patch` for multiple records.
 
@@ -125,26 +189,26 @@ Will call `todos.update(null, { "complete": true }, { query: { complete: 'false'
 Merge the existing data of a single or multiple resources with the new `data`.
 
 ```js
-primus.send('todos::patch', 2, {
-  completed: true
-}, (error, todo) => {
-  console.log('Patched todo', todo);
+primus.send('messages::patch', 2, {
+  read: true
+}, (error, message) => {
+  console.log('Patched message', message);
 });
 ```
 
-Will call `todos.patch(2, { "completed": true }, {})`. The `id` can also be `null` to update multiple resources:
+Will call `messages.patch(2, { "read": true }, {})`. The `id` can also be `null` to update multiple resources:
 
 ```js
-primus.send('todos::patch', null, {
+primus.send('messages::patch', null, {
   complete: true
 }, {
   complete: false
-}, (error, todo) => {
-  console.log('Patched todo', todo);
+}, (error, message) => {
+  console.log('Patched message', message);
 });
 ```
 
-Will call `todos.patch(null, { complete: true }, { query: { complete: false } })` to change the status for all completed todos.
+Will call `messages.patch(null, { complete: true }, { query: { complete: false } })` to change the status for all read messages.
 
 This is supported out of the box by the Feathers [database adapters](../databases/readme.md) 
 
@@ -153,18 +217,18 @@ This is supported out of the box by the Feathers [database adapters](../database
 Remove a single or multiple resources:
 
 ```js
-primus.send('todos::remove', 2, { cascade: true }, (error, todo) => {
-  console.log('Removed a todo', todo);
+primus.send('messages::remove', 2, { cascade: true }, (error, message) => {
+  console.log('Removed a message', message);
 });
 ```
 
-Will call `todos.remove(2, { query: { cascade: true } })`. The `id` can also be `null` to remove multiple resources:
+Will call `messages.remove(2, { query: { cascade: true } })`. The `id` can also be `null` to remove multiple resources:
 
 ```js
-primus.send('todos::remove', null, { completed: true });
+primus.send('messages::remove', null, { read: true });
 ```
 
-Will call `todos.remove(null, { query: { completed: 'true' } })` to delete all completed todos.
+Will call `messages.remove(null, { query: { read: 'true' } })` to delete all read messages.
 
 
 ### Listening to events
@@ -177,8 +241,8 @@ The `created` event will be published with the callback data when a service `cre
 
 ```html
 <script>
-  primus.on('todos created', function(todo) {
-    console.log('Got a new Todo!', todo);
+  primus.on('messages created', function(message) {
+    console.log('Got a new Message!', message);
   });
 </script>
 ```
@@ -189,12 +253,12 @@ The `updated` and `patched` events will be published with the callback data when
 
 ```html
 <script>
-  primus.on('my/todos updated', function(todo) {
-    console.log('Got an updated Todo!', todo);
+  primus.on('my/messages updated', function(message) {
+    console.log('Got an updated Message!', message);
   });
 
-  primus.send('my/todos::update', 1, {
-    description: 'Updated description'
+  primus.send('my/messages::update', 1, {
+    text: 'Updated text'
   }, {}, function(error, callback) {
    // Do something here
   });
@@ -207,9 +271,9 @@ The `removed` event will be published with the callback data when a service `rem
 
 ```html
 <script>
-  primus.on('todos removed', function(todo) {
-    // Remove element showing the Todo from the page
-    $('#todo-' + todo.id).remove();
+  primus.on('messages removed', function(message) {
+    // Remove element showing the Message from the page
+    $('#message-' + message.id).remove();
   });
 </script>
 ```

@@ -4,43 +4,86 @@
 
 ## Establishing the connection
 
-Feathers sets up a normal Socket.io server that you can connect to using the [Socket.io client](http://socket.io/docs/client-api/) either by loading the `socket.io-client` module or `/socket.io/socket.io.js` from the server. Unlike HTTP calls, websockets do not have a cross-origin restriction in the browser so it is possible to connect to any Feathers server.
+Feathers sets up a normal Socket.io server that you can connect to using the [Socket.io client](http://socket.io/docs/client-api/) either by loading the `socket.io-client` module or `/socket.io/socket.io.js` from the server. Unlike HTTP calls, websockets do not have a cross-origin restriction in the browser so it is possible to connect to any Feathers server. See below for platform specific examples.
 
-```js
-const io = require('socket.io-client');
+> **ProTip**: The socket connection URL has to point to the server root which is where Feathers will set up Socket.io.
 
-const socket = io();
-// Or to connect to another server
-const socket = io('http://api.my-feathers-server.com');
-```
+## Browser Usage
+
+Using [the Feathers client](feathers.md), the `feathers-socketio/client` module can be configured to use that socket as the connection:
 
 ```html
 <script type="text/javascript" src="socket.io/socket.io.js"></script>
+<script type="text/javascript" src="node_modules/feathers-client/dist/feathers.js"></script>
 <script type="text/javascript">
-  var socket = io();
-  // Or to connect to another server
-  var socket = io('http://api.my-feathers-server.com');
+  var socket = io('http://api.feathersjs.com');
+  var app = feathers()
+    .configure(feathers.hooks())
+    .configure(feathers.socketio(socket));
+  
+  var messageService = app.service('messages');
+  
+  messageService.on('created', function(message) {
+    console.log('Someone created a message', message);
+  });
+  
+  messageService.create({
+    text: 'Message from client'
+  });
 </script>
 ```
 
-> __Note__: The socket connection URL has to point to the server root which is where Feathers will set up Socket.io.
+## Server Usage
 
-## feathers-socketio client
+Here's how to use the Feathers socket.io client in NodeJS. A great use case would be workers that need to update the server or broadcast to all connected clients.
 
-Using [the Feathers client](feathers.md), the `feathers-socketio/client` module can now be configured to use that socket as the connection:
+```bash
+$ npm install feathers feathers-socketio feathers-hooks socket.io-client
+```
 
 ```js
-const feathers = require('feathers');
+const feathers = require('feathers/cli');
 const socketio = require('feathers-socketio/client');
 const io = require('socket.io-client');
 
-const socket = io();
+const socket = io('http://api.feathersjs.com');
 const app = feathers().configure(socketio(socket));
 
-// Get the todo service that uses a websocket connection
-const todoService = app.service('todos');
+// Get the message service that uses a websocket connection
+const messageService = app.service('messages');
 
-todoService.on('created', todo => console.log('Someone created a todo', todo));
+messageService.on('created', message => console.log('Someone created a message', message));
+```
+
+## React Native Usage
+
+TODO (EK): Add some of the specific React Native things we needed to change to properly support websockets. Make sure this example actually works.
+
+```bash
+$ npm install feathers feathers-socketio feathers-hooks socket.io-client
+```
+
+```js
+import React from 'react-native';
+import hooks from 'feathers-hooks';
+import {client as feathers} from 'feathers';
+import {client as socketio} from 'feathers-socketio';
+import {socket.io as io} from 'socket.io-client';
+
+// A hack so that you can still debug. Required because react native debugger runs in a web worker, which doesn't have a window.navigator attribute.
+if (window.navigator && Object.keys(window.navigator).length === 0) {
+  window.navigator.userAgent = 'ReactNative';
+}
+
+const socket = io('http://api.feathersjs.com', { transports: ['websocket'] });
+const app = feathers()
+  .configure(feathers.hooks())
+  .configure(socketio(socket));
+
+// Get the message service that uses a websocket connection
+const messageService = app.service('messages');
+
+messageService.on('created', message => console.log('Someone created a message', message));
 ```
 
 ## Direct socket events
@@ -58,77 +101,77 @@ Service methods can be called by emitting a `<servicepath>::<methodname>` event 
 Retrieves a list of all matching resources from the service
 
 ```js
-socket.emit('todos::find', { status: 'completed', user: 10 }, (error, data) => {
-  console.log('Found all todos', data);
+socket.emit('messages::find', { status: 'read', user: 10 }, (error, data) => {
+  console.log('Found all messages', data);
 });
 ```
 
-Will call `todos.find({ query: { status: 'completed', user: 10 } })`.
+Will call `messages.find({ query: { status: 'read', user: 10 } })`.
 
 #### `get`
 
 Retrieve a single resource from the service.
 
 ```js
-socket.emit('todos::get', 1, (error, todo) => {
-  console.log('Found todo', todo);
+socket.emit('messages::get', 1, (error, message) => {
+  console.log('Found message', message);
 });
 ```
 
-Will call `todos.get(1, {})`.
+Will call `messages.get(1, {})`.
 
 ```js
-socket.emit('todos::get', 1, { fetch: 'all' }, (error, todo) => {
-  console.log('Found todo', todo);
+socket.emit('messages::get', 1, { fetch: 'all' }, (error, message) => {
+  console.log('Found message', message);
 });
 ```
 
-Will call `todos.get(1, { query: { fetch: 'all' } })`.
+Will call `messages.get(1, { query: { fetch: 'all' } })`.
 
 #### `create`
 
 Create a new resource with `data` which may also be an array.
 
 ```js
-socket.emit('todos::create', {
-  "description": "I really have to iron"
-}, (error, todo) => {
-  console.log('Todo created', todo);
+socket.emit('messages::create', {
+  "text": "I really have to iron"
+}, (error, message) => {
+  console.log('Todo created', message);
 });
 ```
 
-Will call `todos.create({ "description": "I really have to iron" }, {})`.
+Will call `messages.create({ "text": "I really have to iron" }, {})`.
 
 ```js
-socket.emit('todos::create', [
-  { "description": "I really have to iron" },
-  { "description": "Do laundry" }
+socket.emit('messages::create', [
+  { "text": "I really have to iron" },
+  { "text": "Do laundry" }
 ]);
 ```
 
-Will call `todos.create` with the array.
+Will call `messages.create` with the array.
 
 ### `update`
 
 Completely replace a single or multiple resources.
 
 ```js
-socket.emit('todos::update', 2, {
-  "description": "I really have to do laundry"
-}, (error, todo) => {
-  console.log('Todo updated', todo);
+socket.emit('messages::update', 2, {
+  "text": "I really have to do laundry"
+}, (error, message) => {
+  console.log('Todo updated', message);
 });
 ```
 
-Will call `todos.update(2, { "description": "I really have to do laundry" }, {})`. The `id` can also be `null` to update multiple resources:
+Will call `messages.update(2, { "text": "I really have to do laundry" }, {})`. The `id` can also be `null` to update multiple resources:
 
 ```js
-socket.emit('todos::update', null, {
+socket.emit('messages::update', null, {
   complete: true
 }, { complete: false });
 ```
 
-Will call `todos.update(null, { "complete": true }, { query: { complete: 'false' } })`.
+Will call `messages.update(null, { "complete": true }, { query: { complete: 'false' } })`.
 
 > __Note:__ `update` is normally expected to replace an entire resource which is why the database adapters only support `patch` for multiple records.
 
@@ -137,26 +180,26 @@ Will call `todos.update(null, { "complete": true }, { query: { complete: 'false'
 Merge the existing data of a single or multiple resources with the new `data`.
 
 ```js
-socket.emit('todos::patch', 2, {
-  completed: true
-}, (error, todo) => {
-  console.log('Patched todo', todo);
+socket.emit('messages::patch', 2, {
+  read: true
+}, (error, message) => {
+  console.log('Patched message', message);
 });
 ```
 
-Will call `todos.patch(2, { "completed": true }, {})`. The `id` can also be `null` to update multiple resources:
+Will call `messages.patch(2, { "read": true }, {})`. The `id` can also be `null` to update multiple resources:
 
 ```js
-socket.emit('todos::patch', null, {
+socket.emit('messages::patch', null, {
   complete: true
 }, {
   complete: false
-}, (error, todo) => {
-  console.log('Patched todo', todo);
+}, (error, message) => {
+  console.log('Patched message', message);
 });
 ```
 
-Will call `todos.patch(null, { complete: true }, { query: { complete: false } })` to change the status for all completed todos.
+Will call `messages.patch(null, { complete: true }, { query: { complete: false } })` to change the status for all read messages.
 
 This is supported out of the box by the Feathers [database adapters](../databases/readme.md) 
 
@@ -165,18 +208,18 @@ This is supported out of the box by the Feathers [database adapters](../database
 Remove a single or multiple resources:
 
 ```js
-socket.emit('todos::remove', 2, { cascade: true }, (error, todo) => {
-  console.log('Removed a todo', todo);
+socket.emit('messages::remove', 2, { cascade: true }, (error, message) => {
+  console.log('Removed a message', message);
 });
 ```
 
-Will call `todos.remove(2, { query: { cascade: true } })`. The `id` can also be `null` to remove multiple resources:
+Will call `messages.remove(2, { query: { cascade: true } })`. The `id` can also be `null` to remove multiple resources:
 
 ```js
-socket.emit('todos::remove', null, { completed: true });
+socket.emit('messages::remove', null, { read: true });
 ```
 
-Will call `todos.remove(null, { query: { completed: 'true' } })` to delete all completed todos.
+Will call `messages.remove(null, { query: { read: 'true' } })` to delete all read messages.
 
 
 ### Listening to events
@@ -191,8 +234,8 @@ The `created` event will be published with the callback data when a service `cre
 <script>
   var socket = io('http://localhost:8000/');
 
-  socket.on('todos created', function(todo) {
-    console.log('Got a new Todo!', todo);
+  socket.on('messages created', function(message) {
+    console.log('Got a new Todo!', message);
   });
 </script>
 ```
@@ -205,12 +248,12 @@ The `updated` and `patched` events will be published with the callback data when
 <script>
   var socket = io('http://localhost:8000/');
 
-  socket.on('my/todos updated', function(todo) {
-    console.log('Got an updated Todo!', todo);
+  socket.on('my/messages updated', function(message) {
+    console.log('Got an updated Todo!', message);
   });
 
-  socket.emit('my/todos::update', 1, {
-    description: 'Updated description'
+  socket.emit('my/messages::update', 1, {
+    text: 'Updated text'
   }, {}, function(error, callback) {
    // Do something here
   });
@@ -225,9 +268,9 @@ The `removed` event will be published with the callback data when a service `rem
 <script>
   var socket = io('http://localhost:8000/');
 
-  socket.on('todos removed', function(todo) {
+  socket.on('messages removed', function(message) {
     // Remove element showing the Todo from the page
-    $('#todo-' + todo.id).remove();
+    $('#message-' + message.id).remove();
   });
 </script>
 ```
