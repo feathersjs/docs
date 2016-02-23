@@ -1,6 +1,6 @@
 # LocalStorage or AsyncStorage
 
-[feathers-localstorage](https://github.com/feathersjs/feathers-localstorage/) is a service adapters that stores its data in localstorage in the browser or NodeJS (using a shim) or [AsyncStorage](https://facebook.github.io/react-native/docs/asyncstorage.html) in React Native. It is great for storing temporary data and can be used server side as well as in [client-side Feathers](../clients/readme.md) applications.
+[feathers-localstorage](https://github.com/feathersjs/feathers-localstorage/) is a service adapter that stores its data in localstorage in the browser or NodeJS (using a shim) or [AsyncStorage](https://facebook.github.io/react-native/docs/asyncstorage.html) in React Native. It is great for storing temporary data and can be used server side as well as in [client-side Feathers](../clients/readme.md) applications.
 
 ```bash
 $ npm install --save feathers-localstorage
