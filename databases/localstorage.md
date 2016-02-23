@@ -1,6 +1,6 @@
-# In Memory
+# LocalStorage or AsyncStorage
 
-[feathers-localstorage](https://github.com/feathersjs/feathers-localstorage/) is a service adapters that stores its data in-localstorage. It can be used for temporary data that doesn't need to be persisted and testing purposes. It also works great with [client-side Feathers](../clients/readme.md) applications.
+[feathers-localstorage](https://github.com/feathersjs/feathers-localstorage/) is a service adapters that stores its data in localstorage in the browser or NodeJS (using a shim) or [AsyncStorage](https://facebook.github.io/react-native/docs/asyncstorage.html) in React Native. It is great for storing temporary data and can be used server side as well as in [client-side Feathers](../clients/readme.md) applications.
 
 ```bash
 $ npm install --save feathers-localstorage
@@ -8,11 +8,10 @@ $ npm install --save feathers-localstorage
 
 ## Getting Started
 
-You can create an localstorage service with no options:
+You can easily create an localstorage service with no options:
 
 ```js
 const localstorage = require('feathers-localstorage');
-
 app.use('/messages', localstorage());
 ```
 
@@ -29,13 +28,36 @@ The following options can be passed when creating a new localstorage service:
 - `store` [optional] - An object with id to item assignments to pre-initialize the data store
 - `paginate` [optional] - A pagination object containing a `default` and `max` page size (see the [Pagination chapter](databases/pagination.md))
 
-## Usage
+## Browser Usage
 
-### Server Side
+```html
+<script type="text/javascript" src="socket.io/socket.io.js"></script>
+<script type="text/javascript" src="node_modules/feathers-client/dist/feathers.js"></script>
+<script type="text/javascript" src="node_modules/feathers-localstorage/dist/localstorage.js"></script>
+<script type="text/javascript">
+  var socket = io('http://api.my-feathers-server.com');
+  var app = feathers()
+    .configure(feathers.hooks())
+    .configure(feathers.socketio(socket))
+    .use('messages', localstorage());
+
+  var localMessageService = app.service('messages');
+
+  localMessageService.on('created', function(message) {
+    console.log('Someone created a message', message);
+  });
+
+  localMessageService.create({
+    text: 'Message from client'
+  });
+</script>
+```
+
+## Server Usage
 
 Here is an example of a Feathers server with a `messages` localstorage service that supports pagination:
 
-```
+```bash
 $ npm install feathers body-parser feathers-rest feathers-socketio feathers-localstorage localstorage-memory
 ```
 
@@ -44,7 +66,7 @@ var feathers = require('feathers');
 var bodyParser = require('body-parser');
 var rest = require('feathers-rest');
 var socketio = require('feathers-socketio');
-var localstorage from 'feathers-localstorage';
+var localstorage = require('feathers-localstorage');
 var storage = require('localstorage-memory');
 
 // Create a feathers instance.
@@ -77,30 +99,43 @@ app.listen(port, function() {
 
 Run the example with `npm start` and go to [localhost:3030/messages](http://localhost:3030/messages). You will see the test Message that we created at the end of that file.
 
-### Client Side
+## React Native Usage
 
-```html
-<script type="text/javascript" src="socket.io/socket.io.js"></script>
-<script type="text/javascript" src="node_modules/feathers-client/dist/feathers.js"></script>
-<script type="text/javascript">
-  var socket = io('http://api.my-feathers-server.com');
-  var app = feathers()
-    .configure(feathers.hooks())
-    .configure(feathers.socketio(socket))
-    .use('messages', localstorage());
+TODO (EK): Make sure this actually works. Still a WIP.
 
-  var localMessageService = app.service('messages');
-
-  localMessageService.on('created', function(message) {
-    console.log('Someone created a message', message);
-  });
-
-  localMessageService.create({
-    text: 'Message from client'
-  });
-</script>
+```bash
+$ npm install feathers feathers-socketio feathers-hooks feathers-localstorage socket.io-client
 ```
 
-### React Native
+```js
+import React from 'react-native';
+import localstorage from 'feathers-localstorage';
+import feathers from 'feathers';
+import hooks from 'feathers-hooks';
+import localstorage from 'feathers-localstorage';
+import {client as socketio} from 'feathers-socketio';
+import {socket.io as io} from 'socket.io-client';
 
-TODO
+let { AsyncStorage } = React;
+
+// A hack so that you can still debug. Required because react native debugger runs in a web worker, which doesn't have a window.navigator attribute.
+if (window.navigator && Object.keys(window.navigator).length === 0) {
+  window.navigator.userAgent = 'ReactNative';
+}
+
+const socket = io('http://api.feathersjs.com', { transports: ['websocket'] });
+const app = feathers()
+  .configure(feathers.hooks())
+  .configure(socketio(socket))
+  .use('messages', localstorage({ storage: AsyncStorage }));
+
+const localMessageService = app.service('messages');
+
+localMessageService.on('created', function(message) {
+  console.log('Someone created a message', message);
+});
+
+localMessageService.create({
+  text: 'Message from client'
+});
+```
