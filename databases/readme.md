@@ -4,6 +4,8 @@ The [service interface](../services/readme.md) makes it easy to implement a wrap
 
 Instead of coming up with our own ORM and validation system our official database adapters simply wrap many of the great ORM/ODM solutions that already exist. Feathers currently supports [Mongoose](mongoose.md), [Sequelize](sequelize.md), [KnexJS](knexjs.md) and [Waterline](waterline.md) as well as standalone adapters for [in-memory](memory.md) and [NeDB](nedb.md). This allows you to use the following databases:
 
+- **AsyncStorage** - [feathers-localstorage](localstorage.md)
+- **localStorage** - [feathers-localstorage](localstorage.md)
 - **Memory** - [feathers-memory](memory.md)
 - **MongoDB**
   - [feathers-mongoose](mongoose.md)
