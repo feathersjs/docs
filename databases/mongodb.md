@@ -17,7 +17,7 @@ var app = feathers();
 
 MongoClient.connect('mongodb://localhost:27017/feathers').then(function(db){
   app.use('/messages', service({
-    Model: db
+    Model: db.collection('messages')
   }));
 
   app.listen(3030);
