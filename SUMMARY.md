@@ -43,6 +43,7 @@
 * [Middleware](middleware/readme.md)
    * [Express Middleware](middleware/express.md)
    * [Routing and Versioning](middleware/routing.md)
+   * [HTTPS, VHost, sub-apps](middleware/mounting.md)
 * [Authentication](authentication/readme.md)
    * [Token (JWT)](authentication/token.md)
    * [Local (username & password)](authentication/local.md)

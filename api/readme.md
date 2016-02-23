@@ -24,43 +24,7 @@ app.configure(setupService);
 `app.setup(server)` is used to initialize all services by calling each services `.setup(app, path)` method (if available).
 It will also use the `server` instance passed (e.g. through `http.createServer`) to set up SocketIO (if enabled) and any other provider that might require the server instance.
 
-Normally `app.setup` will be called automatically when starting the application via `app.listen([port])` but there are cases when you need to initialize the server separately:
-
-__HTTPS__
-
-With your Feathers application initialized it is easy to set up an HTTPS REST and SocketIO server:
-
-```js
-import fs from 'fs';
-import https from 'https';
-
-app.configure(socketio()).use('/todos', todoService);
-
-const server = https.createServer({
-  key: fs.readFileSync('privatekey.pem'),
-  cert: fs.readFileSync('certificate.pem')
-}, app).listen(443);
-
-// Call app.setup to initialize all services and SocketIO
-app.setup(server);
-```
-
-__Virtual Hosts__
-
-You can use the [vhost](https://github.com/expressjs/vhost) middleware to run your Feathers app on a virtual host:
-
-```js
-import vhost from 'vhost';
-
-app.use('/todos', todoService);
-
-const host = feathers().use(vhost('foo.com', app));
-const server = host.listen(8080);
-
-// Here we need to call app.setup because .listen on our virtal hosted
-// app is never called
-app.setup(server);
-```
+Normally `app.setup` will be called automatically when starting the application via `app.listen([port])` but there are cases when you need to initialize the server separately as described in the [VHost, SSL and sub-app chapter](../middleware/mounting.md).
 
 ## use
 

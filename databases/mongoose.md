@@ -26,6 +26,8 @@ mongoose.connect('mongodb://localhost:27017/feathers');
 app.use('/messages', service({ Model: Message }));
 ```
 
+> __Important:__ To avoid odd error handling behaviour, always set `mongoose.Promise = global.Promise`. If not available already, Feathers comes with a polyfill for native Promises.
+
 See the [Mongoose Guide](http://mongoosejs.com/docs/guide.html) for more information on defining your model.
 
 ## Options
