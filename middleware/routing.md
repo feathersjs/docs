@@ -47,9 +47,9 @@ It is important to keep in mind that those routes are only possible for the REST
 socket.send('users/:userId/todos::find', { user_id: 1234 }, function(error, todos) {});
 
 // Or with a feathers client
-import feathers from 'feathers/client';
-import socketio from 'feathers-socketio/client';
-import io from 'socket.io-client';
+const feathers = require('feathers/client');
+const socketio = require('feathers-socketio/client');
+const io = require('socket.io-client');
 
 const socket = io();
 const app = feathers().configure(socketio(socket));
@@ -79,7 +79,7 @@ Another way is to use entirely separate sub-apps on versioned paths in a parent 
 
 ```js
 // v1/todos.js
-export default {
+module.exports = {
   get(id) {
     return Promise.resolve({
       id,
@@ -89,19 +89,19 @@ export default {
 }
 
 // v1/app1.js
-import feathers from 'feathers';
-import todoService from './todos';
+const feathers = require('feathers');
+const todoService = require('./todos');
 
 const app = feathers().use('/todos', todoService);
 
-export default app;
+module.exports = app;
 ```
 
 And a different application in the `/v2` folder:
 
 ```js
 // v2/todos.js
-export default {
+module.exports = {
   get(id) {
     return Promise.resolve({
       id,
@@ -111,20 +111,20 @@ export default {
 }
 
 // v2/app1.js
-import feathers from 'feathers';
-import todoService from './todos';
+const feathers = require('feathers');
+const todoService = require('./todos');
 
 const app = feathers().use('/todos', todoService);
 
-export default app;
+module.exports = app;
 ```
 
 Both applications can be versioned in a top-level `app.js` with:
 
 ```js
-import feathers from 'feathers';
-import v1app from './v1/app';
-import v2app from './v2/app';
+const feathers = require('feathers');
+const v1app = require('./v1/app');
+const v2app = require('./v2/app');
 
 const app = feathers()
   .use('/v1', v1app)
