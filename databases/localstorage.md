@@ -23,7 +23,7 @@ The following options can be passed when creating a new localstorage service:
 
 - `idField` (default: 'id') [optional] - The name of the id field property.
 - `startId` (default: 0) [optional] - An id number to start with that will be incremented for new record.
-- `storageKey` (default: 'feathers') [optional] - The key to store data under in local or async storage.
+- `name` (default: 'feathers') [optional] - The key to store data under in local or async storage.
 - `storage` (default: 'window.localStorage') [optional] - The local storage engine. You can pass in a server side localstorage module or AsyncStorage on React Native.
 - `store` [optional] - An object with id to item assignments to pre-initialize the data store
 - `paginate` [optional] - A pagination object containing a `default` and `max` page size (see the [Pagination chapter](databases/pagination.md))
