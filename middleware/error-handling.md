@@ -1,6 +1,6 @@
 # Error Handling
 
-By default Feathers just uses the default [error handler](http://expressjs.com/en/guide/error-handling.html) that comes with Express. It's pretty basic so the [feathers-errors](https://github.com/feathersjs/feathers-errors) module comes bundled with a more robust [error handler](https://github.com/feathersjs/feathers-errors/blob/master/src/error-handler.js) that you can use in your app. This error handler is the one that is included in a generated Feathers app by default.
+By default Feathers just uses the default [error handler](http://expressjs.com/en/guide/error-handling.html) that comes with Express. It's pretty basic so the [feathers-errors](https://github.com/feathersjs/feathers-errors) module comes bundled with a more robust [error handler](https://github.com/feathersjs/feathers-errors/blob/master/src/handler.js) that you can use in your app. This error handler is the one that is included in a generated Feathers app by default.
 
 > **ProTip:** Because Feathers extends Express you can use any Express compatible [error middleware](http://expressjs.com/en/guide/error-handling.html) with Feathers. In fact, the error handler bundled with `feathers-errors` is just a slightly customized one.
 
@@ -9,7 +9,7 @@ Many Feathers plugins (like the [database adapters](../databases/readme.md) and 
 If you want to use your own custom error pages you can do so like this:
 
 ```js
-const error = require('feathers-errors').handler;
+const error = require('feathers-errors/handler');
 const app = feathers();
 
 app.use(error({
