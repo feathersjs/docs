@@ -119,8 +119,8 @@ import {socket.io as io} from 'socket.io-client';
 let { AsyncStorage } = React;
 
 // A hack so that you can still debug. Required because react native debugger runs in a web worker, which doesn't have a window.navigator attribute.
-if (window.navigator && Object.keys(window.navigator).length === 0) {
-  window.navigator.userAgent = 'ReactNative';
+if (window.navigator && Object.keys(window.navigator).length == 0) {
+  window = Object.assign(window, { navigator: { userAgent: 'ReactNative' }});
 }
 
 const socket = io('http://api.feathersjs.com', { transports: ['websocket'] });
