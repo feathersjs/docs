@@ -12,7 +12,7 @@ You can easily create an localstorage service with no options:
 
 ```js
 const localstorage = require('feathers-localstorage');
-app.use('/messages', localstorage());
+app.use('/messages', localstorage(storage: window.localStorage));
 ```
 
 This will create a `messages` datastore with the default configuration.
@@ -24,7 +24,7 @@ The following options can be passed when creating a new localstorage service:
 - `idField` (default: 'id') [optional] - The name of the id field property.
 - `startId` (default: 0) [optional] - An id number to start with that will be incremented for new record.
 - `name` (default: 'feathers') [optional] - The key to store data under in local or async storage.
-- `storage` (default: 'window.localStorage') [optional] - The local storage engine. You can pass in a server side localstorage module or AsyncStorage on React Native.
+- `storage` (**required**) - The local storage engine. You can pass in a server side localstorage module, the browser's `localStorage` or AsyncStorage on React Native.
 - `store` [optional] - An object with id to item assignments to pre-initialize the data store
 - `paginate` [optional] - A pagination object containing a `default` and `max` page size (see the [Pagination chapter](databases/pagination.md))
 
@@ -39,7 +39,7 @@ The following options can be passed when creating a new localstorage service:
   var app = feathers()
     .configure(feathers.hooks())
     .configure(feathers.socketio(socket))
-    .use('messages', localstorage());
+    .use('messages', localstorage(storage: window.localStorage));
 
   var localMessageService = app.service('messages');
 
@@ -100,8 +100,6 @@ app.listen(port, function() {
 Run the example with `npm start` and go to [localhost:3030/messages](http://localhost:3030/messages). You will see the test Message that we created at the end of that file.
 
 ## React Native Usage
-
-TODO (EK): Make sure this actually works. Still a WIP.
 
 ```bash
 $ npm install feathers feathers-socketio feathers-hooks feathers-localstorage socket.io-client
