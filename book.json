@@ -5,7 +5,8 @@
   "plugins": [
     "collapsible-menu",
     "heading-anchors",
-    "edit-link"
+    "edit-link",
+    "ga"
   ],
   "pluginsConfig": {
     "edit-link": {
@@ -14,6 +15,9 @@
     "edit-link": {
       "base": "https://github.com/feathersjs/feathers-docs/edit/master",
       "label": "Edit This Page"
+    },
+    "ga": {
+     "token": "UA-64904930-1"   
     }
   }
 }
