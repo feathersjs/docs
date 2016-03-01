@@ -12,7 +12,7 @@ We can create Mongoose services like this:
 
 ```js
 const mongoose = require('mongoose');
-const service = require('feathers-mongoos');
+const service = require('feathers-mongoose');
 
 // A module that exports your Mongoose model
 const Message = require('./models/message');
