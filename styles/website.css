@@ -1,6 +1,13 @@
 /* CSS for website */
-.book .boom-summary {
+
+/* Sidebar background */
+.book .book-summary {
   background: linear-gradient(200deg, #7AD3B7 0%, #31D895 100%);
+}
+
+/* Sidebar Links */
+.book .book-summary ul.summary li a {
+  color: rgba(0, 0, 0, 0.3);
 }
 
 .book .book-summary ul.summary li a:hover,
@@ -9,9 +16,10 @@
 }
 
 .book .book-body .page-wrapper .page-inner section.normal a {
-  color: rgba(0, 0, 0, 0.3);
+  color: #43CEA2;
 }
 
+/* Title Links that pop up on hover */
 .book .book-body .page-wrapper .page-inner section.normal a.anchorjs-link {
   color: #43CEA2;
 }
@@ -20,6 +28,7 @@
 .book .book-summary ul.summary li a.custom-link {
   font-size: 24px;
   font-weight: 600;
+  color: rgba(0, 0, 0, 0.3);
 }
 
 .book .book-body .page-wrapper .page-inner section.normal blockquote,
@@ -29,7 +38,7 @@
 .book .book-body .page-wrapper .page-inner section.normal table,
 .book .book-body .page-wrapper .page-inner section.normal ul {
   font-size: 1.8rem;
-  color: #43CEA2;
+  color: #4A4A4A;
 }
 
 /* Block Quotes */
