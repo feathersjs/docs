@@ -1,12 +1,19 @@
 /* CSS for website */
+.book .boom-summary {
+  background: linear-gradient(200deg, #7AD3B7 0%, #31D895 100%);
+}
+
 .book .book-summary ul.summary li a:hover,
-.book .book-summary ul.summary li.active>a,
+.book .book-summary ul.summary li.active>a {
+  color: #f8f8f8;
+}
+
 .book .book-body .page-wrapper .page-inner section.normal a {
-  color: #E05264;
+  color: rgba(0, 0, 0, 0.3);
 }
 
 .book .book-body .page-wrapper .page-inner section.normal a.anchorjs-link {
-  color: #333333;
+  color: #43CEA2;
 }
 
 /* Sidebar Title */
@@ -22,14 +29,25 @@
 .book .book-body .page-wrapper .page-inner section.normal table,
 .book .book-body .page-wrapper .page-inner section.normal ul {
   font-size: 1.8rem;
-  color: #555;
+  color: #43CEA2;
+}
+
+/* Block Quotes */
+.book .book-body .page-wrapper .page-inner section.normal blockquote {
+  border: 5px solid #43CEA2;
 }
 
 /* Page Titles */
 .book .book-body .page-wrapper .page-inner section.normal h1 {
-  color: #E05264;
+  color: #43CEA2;
 }
 
 .book .book-body .page-wrapper .page-inner section.normal h2 {
-  font-size: 1.65em;
+  font-size: 1.7em;
+  color: #4A4A4A;
+}
+
+.book .book-body .page-wrapper .page-inner section.normal h3 {
+  font-size: 1.4em;
+  color: #969C9A;
 }
