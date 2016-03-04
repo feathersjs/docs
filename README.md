@@ -1,4 +1,4 @@
-# Feathers
+## Feathers
 
 > A minimalist real-time framework for tomorrow's apps.
 
