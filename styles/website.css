@@ -55,8 +55,13 @@
 
 /* Block Quotes */
 .book .book-body .page-wrapper .page-inner section.normal blockquote {
-  border: 4px solid #43CEA2;
+  border: 2px solid #E4E4E4;
   padding: 15px;
+  border-radius: 10px;
+}
+
+.book .book-body .page-wrapper .page-inner section.normal blockquote strong {
+  color: #43CEA2;
 }
 
 .book .book-body .page-wrapper .page-inner section.normal blockquote p {
