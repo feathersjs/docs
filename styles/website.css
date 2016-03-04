@@ -2,21 +2,35 @@
 
 /* Sidebar background */
 .book .book-summary {
-  background: linear-gradient(200deg, #7AD3B7 0%, #31D895 100%);
+  background: #F6F6F6;
+  // background: linear-gradient(200deg, #7AD3B7 0%, #31D895 100%);
 }
 
 /* Sidebar Links */
 .book .book-summary ul.summary li a {
-  color: rgba(0, 0, 0, 0.3);
+  font-size: 1.2em;
+  color: #4A4A4A;
+  // color: rgba(0, 0, 0, 0.3);
 }
 
 .book .book-summary ul.summary li a:hover,
 .book .book-summary ul.summary li.active>a {
-  color: #f8f8f8;
+  // color: #f8f8f8;
+  color: #43CEA2;
 }
 
-.book .book-body .page-wrapper .page-inner section.normal a {
-  color: #43CEA2;
+/* Sidebar Title */
+.book .book-summary ul.summary li a.custom-link {
+  color: rgba(0, 0, 0, 0);
+  background-image: url('http://feathersjs.com/images/feathers-logov2.png');
+  background-size: 90%;
+  background-repeat: no-repeat;
+  margin: 10px;
+  min-height: 50px;
+  // font-size: 24px;
+  // font-weight: 600;
+  // color: #4A4A4A;
+  // color: rgba(0, 0, 0, 0.3);
 }
 
 /* Title Links that pop up on hover */
@@ -24,11 +38,9 @@
   color: #43CEA2;
 }
 
-/* Sidebar Title */
-.book .book-summary ul.summary li a.custom-link {
-  font-size: 24px;
-  font-weight: 600;
-  color: rgba(0, 0, 0, 0.3);
+/* Main links */
+.book .book-body .page-wrapper .page-inner section.normal a {
+  color: #26C693;
 }
 
 .book .book-body .page-wrapper .page-inner section.normal blockquote,
@@ -43,7 +55,12 @@
 
 /* Block Quotes */
 .book .book-body .page-wrapper .page-inner section.normal blockquote {
-  border: 5px solid #43CEA2;
+  border: 4px solid #43CEA2;
+  padding: 15px;
+}
+
+.book .book-body .page-wrapper .page-inner section.normal blockquote p {
+  margin: 0;
 }
 
 /* Page Titles */
