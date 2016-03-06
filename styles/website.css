@@ -32,6 +32,10 @@
   // color: #4A4A4A;
   // color: rgba(0, 0, 0, 0.3);
 }
+.color-theme-1 a.custom-link, .color-theme-2 a.custom-link {
+  filter: invert(100%);
+  -webkit-filter: invert(100%);
+}
 
 /* Title Links that pop up on hover */
 .book .book-body .page-wrapper .page-inner section.normal a.anchorjs-link {
