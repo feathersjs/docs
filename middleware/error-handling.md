@@ -12,6 +12,8 @@ If you want to use your own custom error pages you can do so like this:
 const error = require('feathers-errors/handler');
 const app = feathers();
 
+// Just like Express your error middleware needs to be
+// set up last in your middleware chain.
 app.use(error({
     html: {
         401: 'path/to/401.html',
@@ -20,8 +22,11 @@ app.use(error({
     }
 }))
 ```
+## Options
 
-You can also set `html: false` to disable HTML error pages.
+The following options can be passed when creating a new localstorage service:
+
+- `html` (default: 'Object') [optional] - An object that contains the path to your custom html error pages.**It can also be set to `false` to disable html error pages so that only JSON is returned.**
 
 ## Feathers Error Types
 
