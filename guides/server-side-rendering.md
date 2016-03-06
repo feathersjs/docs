@@ -11,7 +11,7 @@ You probably already know that when you register a Feathers service, Feathers cr
 Let's say you want to render a list of messages from most recent to oldest using the Jade template engine.
 
 ```js
-// You've set up your feathers app already
+// You've set up your main Feathers app already
 
 // Register your view engine
 app.set('view engine', 'jade');
@@ -30,20 +30,21 @@ app.get('/messages', function(req, res, next){
 });
 ```
 
-Simple right? All your hooks will get triggered just like they would normally.
+Simple right? We've now rendered a list of messages. All your hooks will get triggered just like they would normally so you can use hooks to pre-filter your data and keep your template rendering routes super tight.
 
 > **ProTip:** If you call a Feathers service "internally" (ie. not over sockets or REST) you won't have a `hook.params.provider` attribute. This allows you to have hooks only execute when services are called externally vs. from your own code. See [bundled hooks](../hooks/bundled.md#disableproviders) for an example.
 
 ## Feathers As A Sub-App
 
-Sometimes a better way to break up your Feathers app is to separate your API into a sub-app. This is just like you would do with Express. If you do this, it's only a slight change to get data from your services.
+Sometimes a better way to break up your Feathers app is to put your services into an API and mount your API as a sub-app. This is just like you would do with Express. If you do this, it's only a slight change to get data from your services.
 
 ```js
-// You've set up your feathers app already
+// You've set up your main Feathers app already
 
 // Register your view engine
 app.set('view engine', 'jade');
 
+// Require your configured API sub-app
 const api = require('./api');
 
 // Register your API sub app
@@ -87,4 +88,5 @@ app.get('/messages', function(req, res, next){
 ```
 
 > **ProTip:** In the above example we set up sockets. Alternatively you could use a [Feathers client REST provider](../clients/rest.md).
+
 And with that, we've shown 3 different ways that you use a template engine with Feathers to render service data.
