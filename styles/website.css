@@ -32,6 +32,7 @@
   // color: #4A4A4A;
   // color: rgba(0, 0, 0, 0.3);
 }
+// Invert the Feathers logo in sepia and night modes.
 .color-theme-1 a.custom-link, .color-theme-2 a.custom-link {
   filter: invert(100%);
   -webkit-filter: invert(100%);
