@@ -237,7 +237,7 @@ userService.before({
 
 You can also register multiple hooks at the same time, in the order that you want them executed, when you are registering your service.
 
-> **Pro Tip:** _This is the preferred method because it is bit cleaner and execution order is more apparent._
+> **Pro Tip:** This is the preferred method because it is bit cleaner and execution order is more apparent.
 
 
 ```js
