@@ -59,6 +59,7 @@
 * [Core API](api/readme.md)
 * [Guides](guides/readme.md)
    * [Migrating to Feathers 2](guides/migrating.md)
+   * [Server Side Rendering](guides/server-side-rendering.md)
    * [Creating a plugin](guides/creating-a-plugin.md)
    * [React](guides/react.md)
    * [React Native](guides/react-native.md)
