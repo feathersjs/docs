@@ -42,7 +42,7 @@ $ npm install feathers feathers-socketio feathers-hooks socket.io-client
 ```
 
 ```js
-const feathers = require('feathers/cli');
+const feathers = require('feathers/client');
 const socketio = require('feathers-socketio/client');
 const io = require('socket.io-client');
 
