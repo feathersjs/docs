@@ -14,6 +14,10 @@ Yes and no. You can create custom methods but they won't be exposed over sockets
 
 Normally we find that they actually aren't needed and that it's much better to keep your routes as flat as possible. However, if the need arises there are a couple different ways. Refer to [this section](http://docs.feathersjs.com/middleware/routing.html#nested-routes) for details.
 
+## How do I do I render templates?
+
+Feathers works just like Express so it's the exact same. We've created a [helpful little guide right here](../guides/server-side-rendering.md).
+
 ## How do I filter emitted service events?
 
 See [this section](http://docs.feathersjs.com/real-time/filtering.html).
