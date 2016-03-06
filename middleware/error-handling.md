@@ -26,7 +26,9 @@ app.use(error({
 
 The following options can be passed when creating a new localstorage service:
 
-- `html` (default: 'Object') [optional] - An object that contains the path to your custom html error pages.**It can also be set to `false` to disable html error pages so that only JSON is returned.**
+- `html` (default: 'Object') [optional] - An object that contains the path to your custom html error pages.
+
+> **ProTip:** `html` can also be set to `false` to disable html error pages altogether so that only JSON is returned.
 
 ## Feathers Error Types
 
