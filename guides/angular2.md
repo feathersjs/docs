@@ -12,7 +12,7 @@ If you're using TypeScript to develop with Angular 2, Feathers and its related m
 npm install feathers feathers-hooks feathers-rest feathers-socketio socket.io-client feathers-authentication
 ```
 
-You'll also need a module loader, a commonly used one is [Webpack](). If you've gone through the [Angular 2 quickstart](https://angular.io/docs/ts/latest/quickstart.html) you should be good to go.
+You'll also need a module loader, a commonly used one is [Webpack](https://webpack.github.io/). If you've gone through the [Angular 2 quickstart](https://angular.io/docs/ts/latest/quickstart.html) you should be good to go.
 
 Finally you'll need to load the feathers modules you need in a TypeScript file. Make a new file (I called mine `feathers.service.ts`) and include the following.
 
@@ -143,7 +143,7 @@ Think you're done? **Not so fast!**
 If we run our code now, we're going to get an error. In Angular, we have to instantiate our services somewhere, and right now we have nothing creating our RestService or SocketService (if you're wondering about MessageService, sit tight)! 
 Add them to your bootstrap call.
 
-```ts
+```js
 bootstrap(YourMainComponent, [
   SocketService,
   RestService
@@ -235,6 +235,7 @@ And that's it! Our component now has access to our messages via `_messages`. Fro
     `,
 })
 ```
+
 There are nicer ways of doing this, but you get the idea. What if we want to remove a message when a user clicks it?
 
 ```ts
