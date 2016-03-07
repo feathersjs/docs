@@ -45,8 +45,10 @@ Below is an example config providing some common override options:
 
 ```js
 {
+  userEndpoint: '/api/users',
+  tokenEndpoint: 'api/tokens',
+  idField: 'id',
   local: {
-    userEndpoint: '/api/users',
     usernameField: 'username'
   },
   token: {
