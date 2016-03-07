@@ -6,7 +6,7 @@ Because OAuth relies on a series of redirects we need to get the user their JWT 
 
 To solve this problem, Feathers redirects to a configurable `successRedirect` route and puts the user's JWT token in a cookie with the default name `feathers-jwt`. Your client side app can then parse the cookie for the token and use it to further authenticate. This is exactly what the client side component of the Feathers authentication module does for you automatically.
 
-> **ProTip:** Many other frameworks either use sessions for auth or if using a token + OAuth just shove the token in the query string. This is potentially insecure as a intermediary could be logging these URLs with the token in them. Even over HTTPS this is not secure.
+> **ProTip:** Many other frameworks either use sessions for auth or if using a token + OAuth just shove the token in the query string. This is potentially insecure as an intermediary could be logging these URLs with the token in them, even over HTTPS.
 
 ## Usage
 
