@@ -180,4 +180,4 @@ let app = feathers()
   .configure(authentication());
 ```
 
-You find working examples of all these in the [feathers-authentication repo](https://github.com/feathersjs/feathers-authentication/tree/master/examples).
+Now that you've setup authentication you'll probably want to start locking down your application. Head on over to the [Authorization](../authorization/readme.md) chapter to get started.
