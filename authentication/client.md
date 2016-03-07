@@ -30,11 +30,15 @@ Then you pass whatever other fields you need to send to authenticate. See below 
 
 ## Usage
 
-> **ProTip:** All the client examples below are showing how it works in the browser without a module loader. You can also use Feathers client with a module loader like Webpack, browserify, React Native packager and also in NodeJS. See the [Feathers client section](../clients/readme.md) for more detail.
+> **ProTip:** All the client examples below demonstrate how it works in the browser without a module loader. You can also use Feathers client with a module loader like Webpack, browserify, React Native packager and also in NodeJS. See the [Feathers client section](../clients/readme.md) for more detail.
 
 <!-- -->
 
 > **ProTip:** `feathers-localstorage` provides a localstorage abstraction for the browser, React Native, and NodeJS that `feathers-authentication` uses on the client to persist your `user` and `token`. Therefore, you need to provide a different storage engine depending on your platform. See the [section on setting up Feathers localstorage](../databases/localstorage.md).
+
+<!-- -->
+
+> **ProTip:** `feathers-localstorage` must be set up before `feathers-authentication`.
 
 ### REST
 
