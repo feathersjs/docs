@@ -51,6 +51,7 @@
    * [Oauth1 (Twitter, etc)](authentication/oauth1.md)
    * [OAuth2 (Facebook, etc)](authentication/oauth2.md)
    * [Two Factor](authentication/two-factor.md)
+   * [Password Management](authentication/password.md)
    * [Feathers Client](authentication/client.md)
 * [Authorization](authorization/readme.md)
    * [Bundled Hooks](authorization/bundled-hooks.md)
