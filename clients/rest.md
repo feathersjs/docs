@@ -8,7 +8,11 @@ Using [the Feathers client](feathers.md), the `feathers-rest/client` module allo
 
 > **ProTip:** REST client services do emit `created`, `updated`, `patched` and `removed` events but only _locally for their own instance_. Real-time events from other clients can only be received by using a websocket connection.
 
+<!-- -->
+
 > **ProTip:** The base URL is relative from where services are registered. That means that a service at `http://api.feathersjs.com/api/v1/messages` with a base URL of `http://api.feathersjs.com` would be available as `app.service('api/v1/messages')`. With a base URL of `http://api.feathersjs.com/api/v1` it would be `app.service('messages')`.
+
+<!-- -->
 
 > **ProTip:** Notice how the REST client wrapper is always initialized using a base URL: `.configure(rest('http://api.feathersjs.com').superagent(superagent));`
 
