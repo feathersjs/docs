@@ -57,7 +57,7 @@ messageService.on('created', message => console.log('Someone created a message',
 
 ## React Native Usage
 
-TODO (EK): Add some of the specific React Native things we needed to change to properly support websockets. Make sure this example actually works.
+Here's how you can use Feathers client with websockets in React Native.
 
 ```bash
 $ npm install feathers feathers-socketio feathers-hooks socket.io-client

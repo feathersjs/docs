@@ -65,7 +65,7 @@ messageService.on('created', message => console.log('Someone created a message',
 
 ## React Native Usage
 
-TODO (EK): Add some of the specific React Native things we needed to change to properly support websockets. I'm pretty sure this doesn't work so it's still a WIP.
+TODO (EK): Add some of the specific React Native things we needed to change to properly support websockets. I'm pretty sure this doesn't completely work so it's still a WIP. PR's welcome!
 
 ```bash
 $ npm install feathers feathers-primus feathers-hooks primus

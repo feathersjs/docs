@@ -1,6 +1,6 @@
 # REST
 
-Once [set up on the server](../rest/readme.md), there are several ways to connect to the REST API of a Feathers service. Keep in mind that while clients connected via websockets will receive real-time events from other REST API calls, the HTTP API itself does not provide any real-time functionality.
+Once [set up on the server](../rest/readme.md), there are several ways to connect to the REST API of a Feathers service. Keep in mind that while clients connected via websockets will receive real-time events from other REST API calls, you can't get real-time updates over the HTTP API without resorting to polling.
 
 ## feathers-rest clients
 
@@ -128,7 +128,7 @@ messageService.create({ text: 'Oh hai!'}).then(result => {
 
 ## React Native Usage
 
-TODO (EK): Make sure this example actually works still a WIP.
+Here's how you can use Feathers client with the Fetch provider in React Native.
 
 ```bash
 $ npm install feathers feathers-rest feathers-hooks
