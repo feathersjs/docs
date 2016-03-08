@@ -14,7 +14,7 @@ npm install --save sqlite3
 npm install --save tedious // MSSQL
 ```
 
-> **ProTip:** Full list of available drivers available at [Sequelize documentation](http://docs.sequelizejs.com/en/latest/docs/getting-started/). 
+> **ProTip:** Full list of available drivers check out [Sequelize documentation](http://docs.sequelizejs.com/en/latest/docs/getting-started/). 
 
 ## Getting Started
 
