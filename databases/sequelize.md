@@ -14,7 +14,7 @@ npm install --save sqlite3
 npm install --save tedious // MSSQL
 ```
 
-> **ProTip:** For a full list of available drivers, check out [Sequelize documentation](http://docs.sequelizejs.com/en/latest/docs/getting-started/). 
+> **ProTip:** If you are using the Feathers generator this has already been done for you. For a full list of available drivers, check out [Sequelize documentation](http://docs.sequelizejs.com/en/latest/docs/getting-started/).
 
 ## Getting Started
 
