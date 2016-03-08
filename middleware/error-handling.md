@@ -64,7 +64,7 @@ const notFound = new errors.NotFound('User does not exist'));
 const existing = new errors.GeneralError(new Error('I exist'));
 
 // You can also pass additional data
-v data = new errors.BadRequest('Invalid email', {email: 'sergey@google.com'});
+const data = new errors.BadRequest('Invalid email', {email: 'sergey@google.com'});
 
 // You can also pass additional data without a message
 const dataWithoutMessage = new errors.BadRequest({email: 'sergey@google.com'});
