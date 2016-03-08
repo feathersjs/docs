@@ -3,10 +3,18 @@
 [feathers-sequelize](https://github.com/feathersjs/feathers-sequelize) is a database adapter for [Sequelize](http://sequelizejs.com), and ORM for Node.js. It supports the PostgreSQL, MySQL, MariaDB, SQLite and MSSQL dialects and features solid transaction support, relations, read replication and more.
 
 ```bash
-npm install --save pg pg-hstore feathers-sequelize
+npm install --save feathers-sequelize
 ```
 
-> **ProTip:** You also need to [install the database driver](http://docs.sequelizejs.com/en/latest/docs/getting-started/) for the DB you want to use. If you used the Feathers generator then this was already done for you. 
+And one of the following:
+```bash
+npm install --save pg pg-hstore
+npm install --save mysql // For both mysql and mariadb dialects
+npm install --save sqlite3
+npm install --save tedious // MSSQL
+```
+
+> **ProTip:** For a full list of available drivers, check out [Sequelize documentation](http://docs.sequelizejs.com/en/latest/docs/getting-started/). 
 
 ## Getting Started
 
