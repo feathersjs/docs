@@ -22,6 +22,9 @@ app.use(error({
     }
 }))
 ```
+
+> **ProTip:** If you want to have the response in json format be sure to set the `Accept` header in your request to `application/json` otherwise the default error handler will return HTML.
+
 ## Options
 
 The following options can be passed when creating a new localstorage service:
