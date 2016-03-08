@@ -6,7 +6,15 @@
 npm install --save feathers-sequelize
 ```
 
-> **ProTip:** You also need to [install the database driver](http://docs.sequelizejs.com/en/latest/docs/getting-started/) for the DB you want to use. If you used the Feathers generator then this was already done for you. 
+And one of the following:
+```bash
+npm install --save pg pg-hstore
+npm install --save mysql // For both mysql and mariadb dialects
+npm install --save sqlite3
+npm install --save tedious // MSSQL
+```
+
+> **ProTip:** Full list of available drivers available at [Sequelize documentation](http://docs.sequelizejs.com/en/latest/docs/getting-started/). 
 
 ## Getting Started
 
