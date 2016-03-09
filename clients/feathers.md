@@ -60,7 +60,7 @@ In the browser a client that connects to the local server via websockets can be 
 
 ```html
 <script type="text/javascript" src="socket.io/socket.io.js"></script>
-<script type="text/javascript" src="node_modules/feathers-client/dist/feathers.js"></script>
+<script type="text/javascript" src="https://rawgit.com/feathersjs/feathers-client/master/dist/feathers.js"></script>
 <script type="text/javascript">
   var socket = io('http://api.my-feathers-server.com');
   var app = feathers()
