@@ -22,7 +22,7 @@ Make sure any restricted endpoints are actually locked down appropriately by add
 
 To make this easy we've created [a bunch of hooks](./bundled-hooks.md) to help you out. Their interface's are documented so if you are unsure how to use hooks check out the [Hooks chapter](../hooks/usage.md). Below is an example of how you can create your own.
 
-## Creating an authorization hook
+## Creating a custom authorization hook
 
 In the example below, only a user in the `feathers` group can delete messages.
 
