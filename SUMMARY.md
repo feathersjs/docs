@@ -62,6 +62,7 @@
    * [Migrating to Feathers 2](guides/migrating.md)
    * [Server Side Rendering](guides/server-side-rendering.md)
    * [Creating a plugin](guides/creating-a-plugin.md)
+   * [Creating a /me endpoint](guides/me-endpoint.md)
    * [React](guides/react.md)
    * [React Native](guides/react-native.md)
    * [jQuery](guides/jquery.md)
