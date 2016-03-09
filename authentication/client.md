@@ -55,7 +55,7 @@ Then you pass whatever other fields you need to send to authenticate. See below 
   var app = feathers()
     .configure(feathers.rest(host).jquery(jQuery))
     .configure(feathers.hooks())
-    .use('storage', localstorage({ storage: window.localStorage }))
+    .use('storage', feathers.localstorage({ storage: window.localStorage }))
     .configure(feathers.authentication());
 
   // Authenticate. Normally you'd grab these from a login form rather than hard coding them
@@ -103,7 +103,7 @@ let app = feathers()
   var app = feathers()
     .configure(feathers.socketio(socket))
     .configure(feathers.hooks())
-    .use('storage', localstorage({ storage: window.localStorage }))
+    .use('storage', feathers.localstorage({ storage: window.localStorage }))
     .configure(feathers.authentication());
 
   // Wait for socket connection
@@ -150,7 +150,7 @@ let app = feathers()
   var app = feathers()
     .configure(feathers.primus(primus))
     .configure(feathers.hooks())
-    .use('storage', localstorage({ storage: window.localStorage }))
+    .use('storage', feathers.localstorage({ storage: window.localStorage }))
     .configure(feathers.authentication());
 
   // Wait for socket connection
