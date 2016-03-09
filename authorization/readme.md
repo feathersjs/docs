@@ -10,11 +10,11 @@ By default Feathers is pretty loose and is not locked down. This is to allow for
 
 Make sure that your user's passwords are not being sent to the client. There could very likely be a password on your `user` object. Read the [section on bundled auth hooks](bundled-hooks.md) to find out how to make sure passwords don't go out to the public.
 
-> **ProTip:** Feathers authentication automatically removes the password field from the user object that is sent in the response to a successful login.
+> **ProTip:** Feathers authentication automatically removes the password field from the user object that is sent in the response to a successful login and if you used the generator we've already set up the hook to remove passwords on the user service for you.
 
 #### Lock down restricted services
 
-Make sure any restricted endpoints are actually locked down appropriately by adding appropriate hooks to your services. Check out the [bundled authentication hooks](bundled-hooks.md). They probably do most of what you need.
+Make sure any restricted endpoints are actually locked down appropriately by adding the appropriate hooks to your services. Check out the [bundled authentication hooks](bundled-hooks.md). They probably do most of what you need.
 
 #### Filter socket events
 
