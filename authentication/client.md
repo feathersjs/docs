@@ -46,8 +46,8 @@ Then you pass whatever other fields you need to send to authenticate. See below 
 
 ```html
 <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
-<script type="text/javascript" src="node_modules/feathers-localstorage/dist/localstorage.js"></script>
-<script type="text/javascript" src="node_modules/feathers-client/dist/feathers.js"></script>
+<script type="text/javascript" src="https://rawgit.com/feathersjs/feathers-client/master/dist/feathers.js"></script>
+<script type="text/javascript" src="https://rawgit.com/feathersjs/feathers-localstorage/master/dist/localstorage.js"></script>
 <script type="text/javascript">
   var host = 'http://localhost:3030';
 
@@ -90,8 +90,8 @@ let app = feathers()
 
 ```html
 <script type="text/javascript" src="socket.io/socket.io.js"></script>
-<script type="text/javascript" src="node_modules/feathers-localstorage/dist/localstorage.js"></script>
-<script type="text/javascript" src="node_modules/feathers-client/dist/feathers.js"></script>
+<script type="text/javascript" src="https://rawgit.com/feathersjs/feathers-client/master/dist/feathers.js"></script>
+<script type="text/javascript" src="https://rawgit.com/feathersjs/feathers-localstorage/master/dist/localstorage.js"></script>
 <script type="text/javascript">
   // Set up socket.io
   var host = 'http://localhost:3030';
@@ -137,10 +137,9 @@ let app = feathers()
 #### On the client
 
 ```html
-<script type="text/javascript" src="socket.io/socket.io.js"></script>
 <script type="text/javascript" src="primus/primus.js"></script>
-<script type="text/javascript" src="node_modules/feathers-localstorage/dist/localstorage.js"></script>
-<script type="text/javascript" src="node_modules/feathers-client/dist/feathers.js"></script>
+<script type="text/javascript" src="https://rawgit.com/feathersjs/feathers-client/master/dist/feathers.js"></script>
+<script type="text/javascript" src="https://rawgit.com/feathersjs/feathers-localstorage/master/dist/localstorage.js"></script>
 <script type="text/javascript">
   // Set up primus
   var host = 'http://localhost:3030';
