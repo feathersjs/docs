@@ -98,7 +98,7 @@ class PaymentService {
   create(data, params) {
     createStripeCustomer(params.user).then(customer => {
       this.emit('status', { status: 'created' });
-      return createPayemnt(data).then(result => {
+      return createPayment(data).then(result => {
         this.emit('status', { status: 'completed' });
       });
     });
