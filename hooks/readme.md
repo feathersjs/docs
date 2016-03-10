@@ -31,7 +31,7 @@ const service = require('feathers-memory');
 // Initialize our service
 app.use('/users', service());
 
-// Get our initialized service to that we can bind hooks
+// Get our initialized service so that we can bind hooks
 const userService = app.service('/users');
 
 // Set up our before hook
