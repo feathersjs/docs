@@ -8,7 +8,7 @@
 * [Why Feathers](why/readme.md)
    * [Philosophy](why/philosophy.md)
    * [Features](why/vs/readme.md)
-   * [Feathers vs Express + Socket.io](why/vs/express-socketio.md)
+   * [Express + Socket.io](why/vs/express-socketio.md)
    * [Feathers vs Meteor](why/vs/meteor.md)
    * [Feathers vs Sails](why/vs/sails.md)
    * [Feathers vs Firebase](why/vs/firebase.md)

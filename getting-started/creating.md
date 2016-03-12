@@ -103,22 +103,34 @@ With the server running we have a full CRUD API available at the `/messages` end
 $ curl 'http://localhost:3030/messages/' -H 'Content-Type: application/json' --data-binary '{ "text": "Hello Feathers!" }'
 ```
 
-You can also connect to the real-time API via [Socket.io](http://socket.io/). Add the following to `public/index.html` before the closing `<body>` tag:
+You can also connect to the real-time API using [Socket.io](../real-time/socket-io.md). The easiest way to do so is using the [Feathers client](./clients/feathers.md). You can learn more about using Feathers on the client in the [Client chapter](../clients/readme.md).
+
+Add the following to `public/index.html` before the `</body>` tag:
 
 ```html
+<script src="//cdn.rawgit.com/feathersjs/feathers-client/master/dist/feathers.js"></script>
 <script src="socket.io/socket.io.js"></script>
 <script type="text/javascript">
+  // Establish a Socket.io connection to the local server
   var socket = io();
+  // Create a client side Feathers application that uses the socket
+  // for connecting to services
+  var app = feathers().configure(feathers.socketio(socket));
+  // Retrieve a connection to the /messages service on the server
+  // This service will use websockets for all communication
+  var messages = app.service('messages');
   
-  socket.on('messages created', function(message) {
+  // Listen for when a new message has been created
+  messages.on('created', function(message) {
     console.log('Someone created a message', message);
   });
   
-  socket.emit('messages::create', { text: 'Hello from websocket!' });
+  // Create a new message on the service
+  messages.create({ text: 'Hello from websocket!' });
 </script>
 ```
 
-Open the console and [localhost:3030](http://localhost:3030) and you will see the new message. Those events also work for REST calls, for example, with the page open, running
+Open the console, then go to [localhost:3030](http://localhost:3030) and you will see the new message. Those events also work for REST calls, for example, with the page open, running
 
 ```
 $ curl 'http://localhost:3030/messages/' -H 'Content-Type: application/json' --data-binary '{ "text": "Hello again!" }'
