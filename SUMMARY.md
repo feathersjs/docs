@@ -4,6 +4,7 @@
    * [Quick Start](getting-started/quick-start.md)
    * [Creating a Feathers app](getting-started/creating.md)
    * [Authentication](getting-started/authentication.md)
+   * [Creating messages](getting-started/messages.md)
    * [Building a Frontend](getting-started/frontend.md)
 * [Why Feathers](why/readme.md)
    * [Philosophy](why/philosophy.md)
