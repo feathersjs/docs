@@ -103,6 +103,8 @@ With the server running we have a full CRUD API available at the `/messages` end
 $ curl 'http://localhost:3030/messages/' -H 'Content-Type: application/json' --data-binary '{ "text": "Hello Feathers!" }'
 ```
 
+> **ProTip:** If you are making requests from a browser or Postman you want to make sure you set the the `Accepts` header to `application/json` otherwise you will get HTML errors back. For more information see the [Error Handling section](../middleware/error-handling.md).
+
 You can also connect to the real-time API using [Socket.io](../real-time/socket-io.md). The easiest way to do so is using the [Feathers client](./clients/feathers.md). You can learn more about using Feathers on the client in the [Client chapter](../clients/readme.md).
 
 Add the following to `public/index.html` before the `</body>` tag:
@@ -115,7 +117,8 @@ Add the following to `public/index.html` before the `</body>` tag:
   var socket = io();
   // Create a client side Feathers application that uses the socket
   // for connecting to services
-  var app = feathers().configure(feathers.socketio(socket));
+  var app = feathers();
+  app.configure(feathers.socketio(socket));
   // Retrieve a connection to the /messages service on the server
   // This service will use websockets for all communication
   var messages = app.service('messages');
@@ -130,13 +133,13 @@ Add the following to `public/index.html` before the `</body>` tag:
 </script>
 ```
 
-Open the console, then go to [localhost:3030](http://localhost:3030) and you will see the new message. Those events also work for REST calls, for example, with the page open, running
+Open the console, then go to [localhost:3030](http://localhost:3030) and you will see the new message. Those events also work for REST calls, for example, with the page open, running the command below will also log the new message on the console in the browser.
 
 ```
 $ curl 'http://localhost:3030/messages/' -H 'Content-Type: application/json' --data-binary '{ "text": "Hello again!" }'
 ```
 
-Will also log the new message on the console in the browser. This is basically how Feathers does real-time and you can learn more about it in the [Real-Time chapter](../real-time/readme.md).
+This is basically how Feathers does real-time and you can learn more about it in the [Real-Time chapter](../real-time/readme.md).
 
 ## What's next?
 
