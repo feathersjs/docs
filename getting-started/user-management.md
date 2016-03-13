@@ -1,14 +1,16 @@
-# User authentication
+# Users Management
 
-In [the previous section](first-app.md) we set up a REST and real-time API at the `/messages` endpoint. Our generated app also comes with a `/users` endpoint and local authentication. In this chapter we will add a signup endpoint and user specific restrictions to posting and editing messages.
+In [the previous section](scaffolding.md) we set up a Message service with a `/messages` endpoint. The app we generated also comes with a `/users` endpoint and local authentication. In this chapter we will add a `/signup` endpoint that uses our User service and user specific restrictions for posting and editing messages.
 
 ## Creating and authenticating users
 
-A new user for local authentication can be created by POSTing to the `/users` endpoint. The fields required are `email` for the email (which is also the username) and `password` for the password. Passwords will be automatically hashed when creating a new user using [bcrypt](https://www.npmjs.com/package/bcryptjs).
+Even though we are going to create a separate `/signup` endpoint, new user can be created by POSTing to the `/users` endpoint. The fields required are `email` and `password`. Passwords are automatically hashed when creating a new user using [bcrypt](https://www.npmjs.com/package/bcryptjs).
 
-Feathers Authentication uses [JSON webtoken (JWT)](https://jwt.io/). To obtain a token for the user we created we need to POST the login information to the `http://localhost:3030/auth/local` endpoint set up by Feathers authentication. The returned token then needs to be set in the `Authorization` header for requests that require authentication. You can find more details in the [authentication chapter](../authentication/readme.md)/
+Feathers Authentication uses [JSON webtoken (JWT)](https://jwt.io/) for secure authentication between a client and server as opposed to cookies and sessions. To obtain a token for the user we created we first need to POST the `email` and `password` to the `http://localhost:3030/auth/local` endpoint set up by Feathers authentication. The response will return the authenticated user and their token.
 
-When we create a frontend for our chat API this will all be done automatically for us by the [Feathers client](../clients/feathers.md) by calling `app.authenticate()`.
+This token needs to be set in the `Authorization` header for any subsequent requests that require authentication. You can find more details in the [authentication chapter](../authentication/readme.md).
+
+When we create a front-end for our chat API this will all be done automatically for us by the [Feathers client](../clients/feathers.md) by calling `app.authenticate()`.
 
 ### Adding HTML pages
 
@@ -196,7 +198,7 @@ module.exports = function() {
 };
 ```
 
-> __Note:__ Most middleware should be registered before the `notFound` middleware.
+> **ProTip:** Just like Express most middleware should be registered before the `notFound` middleware.
 
 The last step is to change the standard success redirect to `/chat.html` which will show the frontend for our chat application. We can do that by adding `successRedirect` to the `auth` section in `config/default.json`:
 
@@ -216,12 +218,12 @@ The last step is to change the standard success redirect to `/chat.html` which w
 }
 ```
 
-After stopping (CTRL + C) and starting the server (`npm start`) again we can go to the signup page, sign up with a uername and password which will redirect us to the login page. There we can log in with the information we used to sign up and will get redirected to `chat.html` which currently shows authentication success page with the JWT.
+After stopping (CTRL + C) and starting the server (`npm start`) again we can go to the signup page, sign up with an email and password which will redirect us to the login page. There we can log in with the information we used to sign up and will get redirected to `chat.html` which currently shows authentication success page with the JWT.
 
 
 ## Authorization
 
-Now that we have a user that we can use to authenticate we want to restrict the messages service only to authenticated users. We could have done that already in the service generator by answering yes when asked if we need authentication but we can also easily add it manually by changing `src/services/message/hooks/index.js` to:
+Now that we have a user that we can use to authenticate we want to restrict the Message service to only authenticated users. We could have done that already in the service generator by answering _yes_ when asked if we need authentication but we can also easily add it manually by changing `src/services/message/hooks/index.js` to:
 
 ```js
 'use strict';

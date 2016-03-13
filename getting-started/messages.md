@@ -1,6 +1,6 @@
 # Creating messages
 
-In the [previous section](./authentication.md) we set up authentication and a user signup and login page. We also restricted the message service only to authenticated users. Now we can add additional information, like the user who sent it and the creation time to a new message.
+In the [previous section](./user-management.md) we set up authentication, a signup and login page, and we restricted the message service to only authenticated users. Now we can add additional information, like the user who sent it and the creation time to a new message.
 
 ## Adding information with hooks
 
@@ -10,11 +10,9 @@ Adding information like the current user and the creation time can be done by cr
 $ yo feathers:hook
 ```
 
-It will be a `before` hook called `process` for the `message` service on the `create` method:
+It will be a `before` hook called `process` for the `message` service on the `create` method.
 
-![addUser Hook](./assets/adduser.png)
-
-In that hook we can now modify the data before sending them to the database. Although we could split each functionality into its own hook, the process hook will do three things at once:
+In this hook we will modify the data before sending it to the database. We'll do three things:
 
 1. Add the `_id` of the user that created the message as `userId`
 2. Add a `createdAt` timestamp with the current time
@@ -70,8 +68,7 @@ module.exports = function(options) {
 };
 ```
 
-This hook pre-processes our message data, adds the current user information, the users Gravatar image and the time the message was created before it gets sent to the datbaase.
-
+As you can see, manipulating data is pretty easy with hooks. To improve portability, if we wanted to, we could break this hook up into multiple smaller hooks and chain them. A good candidate might be to move manipulating the `createdAt` attribute into it's own hook so that it can be shared across multiple services.
 
 ## Message authorization
 
@@ -111,6 +108,6 @@ module.exports = function(options) {
 };
 ```
 
-That's it (for now)! We created a database backed REST and Socket.io real-time chat API with local user authentication and authorization. We used [services](../services/readme.md) and [hooks](../hooks/readme.md) which is almost everything there is to Feathers.
+That's it! We now have a fully functional real-time chat API complete with user signup, local authentication, and authorization. We had an introduction to [services](../services/readme.md), [hooks](../hooks/readme.md) and middleware, which is almost everything there is to Feathers.
 
-We already set up an index, login and signup page. In the next chapter we will briefly talk about [building a chat frontend](frontend.md) before learning more about [services](../services/readme.md) and diving into the [guides](../guides/readme.md).
+In the next chapter we will briefly talk about [building a chat frontend](frontend.md) before learning more about some of the finer details of Feathers and diving into the [guides](../guides/readme.md).

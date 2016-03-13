@@ -4,7 +4,7 @@
 
 With Feathers it's easy to create scalable real-time applications. This guide will tell you everything you need to know about creating web and mobile apps with Feathers.
 
-We have an [introductory tutorial](getting-started/your-first-app/readme.md) to get you ramped up quickly and some [helpful guides](guides/readme.md) to do more advanced things. Beyond that, this guide can be used as a general reference.
+We have an [introductory tutorial](getting-started/scaffolding.md) to get you ramped up quickly and some [helpful guides](guides/readme.md) to do more advanced things. Beyond that, this guide can be used as a general reference.
 
 Sounds good? [Let's get started](getting-started/readme.md)!
 

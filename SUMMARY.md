@@ -1,10 +1,10 @@
 # Summary
 
-* [Getting Started](getting-started/readme.md)
-   * [Quick Start](getting-started/quick-start.md)
-   * [Creating a Feathers app](getting-started/creating.md)
-   * [Authentication](getting-started/authentication.md)
-   * [Creating messages](getting-started/messages.md)
+* [Quick Start](getting-started/quick-start.md)
+* [Your First App](getting-started/readme.md)
+   * [Creating a Feathers app](getting-started/scaffolding.md)
+   * [User Management](getting-started/user-management.md)
+   * [Sending messages](getting-started/messages.md)
    * [Building a Frontend](getting-started/frontend.md)
 * [Why Feathers](why/readme.md)
    * [Philosophy](why/philosophy.md)
