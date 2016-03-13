@@ -1,6 +1,6 @@
-# Creating messages
+# Using Hooks and Manipulating Data
 
-In the [previous section](./user-management.md) we set up authentication, a signup and login page, and we restricted the message service to only authenticated users. Now we can add additional information, like the user who sent it and the creation time to a new message.
+In the [previous section](user-management.md) we set up authentication, a signup and login page, and we restricted the message service to only authenticated users. Now we can add additional information, like the user who sent it and the creation time to a new message.
 
 ## Adding information with hooks
 

@@ -1,4 +1,4 @@
-# Users Management
+# User Management
 
 In [the previous section](scaffolding.md) we set up a Message service with a `/messages` endpoint. The app we generated also comes with a `/users` endpoint and local authentication. In this chapter we will add a `/signup` endpoint that uses our User service and user specific restrictions for posting and editing messages.
 
@@ -256,4 +256,4 @@ exports.after = {
 };
 ```
 
-That's it for authentication. We now have a home, login and signup page. We can sign up as a new user and log in with that signup information. In the [next section](./messages.md) we will look at creating new messages and adding additional information to them using the authenticated user information.
+That's it for authentication. We now have a home, login and signup page. We can sign up as a new user and log in with that signup information. In the [next section](formatting-and-hooks.md) we will look at creating new messages and adding additional information to them using the authenticated user information.

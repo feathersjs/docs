@@ -1,4 +1,4 @@
-# Creating A Feathers app
+# Scaffolding and Services
 
 In this part we're going to scaffold an Feathers app, create our first service, send some data to the service and see it in real time! If you've already gone through the [Quick Start](quick-start.md) section you can skip ahead to [What Just Happened?](#what-just-happened).
 
