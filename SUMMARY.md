@@ -1,6 +1,6 @@
 # Summary
 
-* [Introduction](getting-started/introduction.md)
+* [What is Feathers](getting-started/introduction.md)
 * [Quick Start](getting-started/quick-start.md)
 * [Your First App](getting-started/readme.md)
    * [Creating a Feathers app](getting-started/scaffolding.md)
