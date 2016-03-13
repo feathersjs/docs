@@ -1,6 +1,6 @@
 # User authentication
 
-In [the previous section](first-app.md) we set up a REST and real-time API at the `/messages` endpoint. Our generated app also comes with a `/users` endpoint and local authentication. In this chapter we will add a singup endpoint and user specific restrictions to posting and editing messages.
+In [the previous section](first-app.md) we set up a REST and real-time API at the `/messages` endpoint. Our generated app also comes with a `/users` endpoint and local authentication. In this chapter we will add a signup endpoint and user specific restrictions to posting and editing messages.
 
 ## Creating and authenticating users
 
