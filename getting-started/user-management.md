@@ -4,7 +4,7 @@ In [the previous section](scaffolding.md) we set up a Message service with a `/m
 
 ## Creating and authenticating users
 
-Even though we are going to create a separate `/signup` endpoint, new user can be created by POSTing to the `/users` endpoint. The fields required are `email` and `password`. Passwords are automatically hashed when creating a new user using [bcrypt](https://www.npmjs.com/package/bcryptjs).
+Even though we are going to create a separate `/signup` endpoint, a new user can be created by POSTing to the `/users` endpoint. The fields required are `email` and `password`. Passwords are automatically hashed when creating a new user using [bcrypt](https://www.npmjs.com/package/bcryptjs).
 
 Feathers Authentication uses [JSON webtoken (JWT)](https://jwt.io/) for secure authentication between a client and server as opposed to cookies and sessions. To obtain a token for the user we created we first need to POST the `email` and `password` to the `http://localhost:3030/auth/local` endpoint set up by Feathers authentication. The response will return the authenticated user and their token.
 
@@ -223,7 +223,7 @@ After stopping (CTRL + C) and starting the server (`npm start`) again we can go 
 
 ## Authorization
 
-Now that we have a user that we can use to authenticate we want to restrict the Message service to only authenticated users. We could have done that already in the service generator by answering _yes_ when asked if we need authentication but we can also easily add it manually by changing `src/services/message/hooks/index.js` to:
+Now that we have a user that we can use to authenticate we want to restrict the Message service to only authenticated users. We could have done that already in the service generator by answering _"yes"_ when asked if we need authentication but we can also easily add it manually by changing `src/services/message/hooks/index.js` to:
 
 ```js
 'use strict';
