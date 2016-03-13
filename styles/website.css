@@ -3,19 +3,16 @@
 /* Sidebar background */
 .book .book-summary {
   background: #FFFFFF;
-  // background: linear-gradient(200deg, #7AD3B7 0%, #31D895 100%);
 }
 
 /* Sidebar Links */
 .book .book-summary ul.summary li a {
   font-size: 1.2em;
   color: #4A4A4A;
-  // color: rgba(0, 0, 0, 0.3);
 }
 
 .book .book-summary ul.summary li a:hover,
 .book .book-summary ul.summary li.active>a {
-  // color: #f8f8f8;
   color: #43CEA2;
 }
 
@@ -27,10 +24,6 @@
   background-repeat: no-repeat;
   margin: 10px;
   min-height: 50px;
-  // font-size: 24px;
-  // font-weight: 600;
-  // color: #4A4A4A;
-  // color: rgba(0, 0, 0, 0.3);
 }
 // Invert the Feathers logo in sepia and night modes.
 .color-theme-1 a.custom-link, .color-theme-2 a.custom-link {
