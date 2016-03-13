@@ -1,10 +1,8 @@
 # Creating A Feathers app
 
-Well alright! Let's build our first Feathers app! We're going to build a real-time chat app with NeDB as the database. It's a great way to cover all the things that you'd need to do in a real world application and how Feathers can help. It also makes a lot more sense to have a real-time component than a Todo list. 😉
+In this part we're going to scaffold an Feathers app, create our first service, send some data to the service and see it in real time! If you've already gone through the [Quick Start](quick-start.md) section you can skip ahead to [What Just Happened?](#what-just-happened).
 
-If you've already gone through the [Quick Start](quick-start.md) section you can skip ahead to [What Just Happened?](#what-just-happened).
-
-## Generate Then App
+## Generate The App
 
 Make sure you have [NodeJS](https://nodejs.org) and [NPM](http://npmjs.org) installed and available on the command line as `node` and `npm`. Then we can install the Yeoman and the Feathers generator.
 
