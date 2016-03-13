@@ -26,6 +26,8 @@ Feathers is different. Feathers allows you to send **and** receive data over web
 
 All of the Feathers ecosystem has been modeled around supporting real-time communication and making it a first class citizen instead of a hacky add on. You can even forgo REST altogether and simply use websockets to communicate with your app, making it ideal for real-time IoT devices, among other things.
 
+---
+
 Ready to get started? Choose your own adventure:
 
 - Quickly [scaffold a real-time Feathers API](./quick-start.md)
