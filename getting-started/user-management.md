@@ -25,8 +25,8 @@ Let's replace `public/index.html` with the following welcome page:
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=0" />
     <title>Feathers Chat</title>
     <link rel="shortcut icon" href="img/favicon.png">
-    <link rel="stylesheet" href="//cdn.rawgit.com/feathersjs/feathers-demos/master/examples/chat/public/base.css">
-    <link rel="stylesheet" href="//cdn.rawgit.com/feathersjs/feathers-demos/master/examples/chat/public/chat.css">
+    <link rel="stylesheet" href="//cdn.rawgit.com/feathersjs/feathers-chat/master/examples/chat/public/base.css">
+    <link rel="stylesheet" href="//cdn.rawgit.com/feathersjs/feathers-chat/master/examples/chat/public/chat.css">
   </head>
   <body>
     <main class="home container">
@@ -71,8 +71,8 @@ Let's replace `public/index.html` with the following welcome page:
     <meta name="keywords" content="Feathers, chat, real-time" />
 
     <link rel="shortcut icon" href="img/favicon.png">
-    <link rel="stylesheet" href="//cdn.rawgit.com/feathersjs/feathers-demos/master/examples/chat/public/base.css">
-    <link rel="stylesheet" href="//cdn.rawgit.com/feathersjs/feathers-demos/master/examples/chat/public/chat.css">
+    <link rel="stylesheet" href="//cdn.rawgit.com/feathersjs/feathers-chat/master/examples/chat/public/base.css">
+    <link rel="stylesheet" href="//cdn.rawgit.com/feathersjs/feathers-chat/master/examples/chat/public/chat.css">
   </head>
   <body>
     <main class="login container">
@@ -114,8 +114,8 @@ Finally, `public/signup.html` looks like this:
     <meta name="keywords" content="Feathers, chat, real-time" />
 
     <link rel="shortcut icon" href="img/favicon.png">
-    <link rel="stylesheet" href="//cdn.rawgit.com/feathersjs/feathers-demos/master/examples/chat/public/base.css">
-    <link rel="stylesheet" href="//cdn.rawgit.com/feathersjs/feathers-demos/master/examples/chat/public/chat.css">
+    <link rel="stylesheet" href="//cdn.rawgit.com/feathersjs/feathers-chat/master/examples/chat/public/base.css">
+    <link rel="stylesheet" href="//cdn.rawgit.com/feathersjs/feathers-chat/master/examples/chat/public/chat.css">
   </head>
   <body>
     <main class="login container">
