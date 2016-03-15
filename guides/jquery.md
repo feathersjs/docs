@@ -1,8 +1,10 @@
 # Feathers + jQuery
 
-You don't always need a full on framework. Feathers and the [Feathers client](../clients/feathers.md) also work great to add real-time capabilities to a plain JavaScript or [jQuery](http://jquery.com/) application. In this guide we will create a jQuery frontend for the chat API from the [Getting Started guide](../getting-started/readme.md) so make sure the chat application running.
+You don't always need a full on framework. Feathers and the [Feathers client](../clients/feathers.md) also work great to add real-time capability to a vanilla JavaScript or [jQuery](http://jquery.com/) application. In this guide we will create a jQuery front-end for the chat API from the [Your First App](../getting-started/readme.md) section.
 
-> __Note:__ This guide uses ES6 syntax which is only available in newer versions of evergreen browsers and IE edge. If you want to use the app in older browsers you need to include a transpiler like [Babel](https://babeljs.io/).
+If you haven't done so you'll want to go through that tutorial or you can find a [working example here](https://github.com/feathersjs/feathers-chat).
+
+> __Note:__ This guide uses ES6 syntax which is only available in newer browsers and IE edge. If you want to use the app in older browsers you need to include a transpiler like [Babel](https://babeljs.io/).
 
 
 ## Setting up the HTML page
@@ -16,9 +18,9 @@ The first step is getting the HTML skeleton for the chat application up. You can
     <meta name="viewport"
       content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=0" />
     <title>Feathers Chat</title>
-    <link rel="shortcut icon" href="img/favicon.png">
-    <link rel="stylesheet" href="../base.css">
-    <link rel="stylesheet" href="../chat.css">
+    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="stylesheet" href="//cdn.rawgit.com/feathersjs/feathers-chat/v0.1.0/public/base.css">
+    <link rel="stylesheet" href="//cdn.rawgit.com/feathersjs/feathers-chat/v0.1.0/public/chat.css">
   </head>
   <body>
     <div id="app" class="flex flex-column">
@@ -59,9 +61,8 @@ The first step is getting the HTML skeleton for the chat application up. You can
     <script src="//code.jquery.com/jquery-2.2.1.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.12.0/moment.js">
     </script>
-    <script src="//rawgit.com/feathersjs/feathers-client/master/dist/feathers.js">
+    <script src="//cdn.rawgit.com/feathersjs/feathers-client/v1.0.0/dist/feathers.js">
     </script>
-    <!-- <script src="//cdn.rawgit.com/feathersjs/feathers-client/master/dist/feathers.js"></script> -->
     <script src="/socket.io/socket.io.js"></script>
     <script src="app.js"></script>
   </body>
@@ -163,7 +164,7 @@ $('.logout').on('click', function() {
 
 When submitting the form, we create a new message with the text from the input field. When clicking the logout button we will call `app.logout()` and then redirect back to the login page.
 
-The chat application is set up to redirect from `login.html` to our `chat.html` page on successfull login. This means that we already know what user is logged in so finally we just have to call [app.authenticate](../authentication/client.md) to authenticate that user (and redirect back to the login page if it fails). Then we retrieve the 25 newest messages and users and listen to events to make real-time updates:
+The chat application is set up to redirect from `login.html` to our `chat.html` page on successful login. This means that we already know what user is logged in so we just have to call [app.authenticate](../authentication/client.md) to authenticate that user (and redirect back to the login page if it fails). Then we retrieve the 25 newest messages, all the users and listen to events to make real-time updates:
 
 ```js
 app.authenticate().then(() => {
@@ -198,4 +199,4 @@ app.authenticate().then(() => {
 });
 ```
 
-That's it. We now have a real-time chat application frontend built in jQuery.
+That's it. We now have a real-time chat application front-end built in jQuery.
