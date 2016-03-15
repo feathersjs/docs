@@ -14,7 +14,7 @@ When we create a front-end for our chat API this will all be done automatically 
 
 ### Adding HTML pages
 
-For our chat app we will create a static `signup.html` and `login.html` page that show a form. The form in `signup.html` will POST to the `/signup` entpoint which we will create later and `login.html` will submit to `auth/local` which already exists.
+For our chat app we will create a static `signup.html` and `login.html` page that shows a form. The form in `signup.html` will POST to the `/signup` entpoint which we will create later and `login.html` will submit to `auth/local` which already exists.
 
 Let's replace `public/index.html` with the following welcome page:
 
@@ -22,7 +22,8 @@ Let's replace `public/index.html` with the following welcome page:
 <html>
   <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=0" />
+    <meta name="viewport" 
+      content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=0" />
     <title>Feathers Chat</title>
     <link rel="shortcut icon" href="img/favicon.png">
     <link rel="stylesheet" href="//cdn.rawgit.com/feathersjs/feathers-chat/master/examples/chat/public/base.css">
@@ -32,7 +33,9 @@ Let's replace `public/index.html` with the following welcome page:
     <main class="home container">
       <div class="row">
         <div class="col-12 col-8-tablet push-2-tablet text-center">
-          <img class="logo center-item" src="http://feathersjs.com/img/feathers-logo-wide.png" alt="Feathers Logo">
+          <img class="logo center-item" 
+            src="http://feathersjs.com/img/feathers-logo-wide.png"
+            alt="Feathers Logo">
           <h3 class="title">Chat</h3>
         </div>
       </div>
@@ -41,13 +44,17 @@ Let's replace `public/index.html` with the following welcome page:
         <div class="col-12 push-4-tablet col-4-tablet">
           <div class="row">
             <div class="col-12">
-              <a href="login.html" class="button button-primary block login">Login</a>  
+              <a href="login.html" class="button button-primary block login">
+                Login
+              </a>
             </div>
           </div>
 
           <div class="row">
             <div class="col-12">
-              <a href="signup.html" class="button button-primary block signup">Signup</a>  
+              <a href="signup.html" class="button button-primary block signup">
+                Signup
+              </a>  
             </div>
           </div>
         </div>
@@ -64,11 +71,9 @@ Let's replace `public/index.html` with the following welcome page:
 <html>
   <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=0" />
+    <meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=0" />
     <title>Feathers Chat</title>
-    <meta name="description" content="an example real-time chat app built with Feathers" />
-    <meta name="author" content="Feathers Contributors">
-    <meta name="keywords" content="Feathers, chat, real-time" />
 
     <link rel="shortcut icon" href="img/favicon.png">
     <link rel="stylesheet" href="//cdn.rawgit.com/feathersjs/feathers-chat/master/examples/chat/public/base.css">
@@ -89,10 +94,12 @@ Let's replace `public/index.html` with the following welcome page:
             </fieldset>
             
             <fieldset>
-              <input class="block" type="password" name="password" placeholder="password">
+              <input class="block" type="password"name="password" placeholder="password">
             </fieldset>
 
-            <button type="submit" class="button button-primary block login">Login</button>
+            <button type="submit" class="button button-primary block login">
+              Login
+            </button>
           </form>
         </div>
       </div>
@@ -109,10 +116,7 @@ Finally, `public/signup.html` looks like this:
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=0" />
     <title>Feathers Chat</title>
-    <meta name="description" content="an example real-time chat app built with Feathers" />
-    <meta name="author" content="Feathers Contributors">
-    <meta name="keywords" content="Feathers, chat, real-time" />
-
+    
     <link rel="shortcut icon" href="img/favicon.png">
     <link rel="stylesheet" href="//cdn.rawgit.com/feathersjs/feathers-chat/master/examples/chat/public/base.css">
     <link rel="stylesheet" href="//cdn.rawgit.com/feathersjs/feathers-chat/master/examples/chat/public/chat.css">
@@ -135,7 +139,9 @@ Finally, `public/signup.html` looks like this:
               <input class="block" type="password" name="password" placeholder="password">
             </fieldset>
 
-            <button type="submit" class="button button-primary block signup">Signup</button>
+            <button type="submit" class="button button-primary block signup">
+              Signup
+            </button>
           </form>
         </div>
       </div>
@@ -146,13 +152,15 @@ Finally, `public/signup.html` looks like this:
 
 ### Signing up new users
 
-Now we have a welcome, login and signup page and we can create a `signup` endpoint that creates a new user from the `signup.html` form submission and then redirects to `login.html`. Feathers works just like [Express](http://expressjs.com/) so we can just create an [Express middleware](http://expressjs.com/en/guide/using-middleware.html) called `signup` like this:
+Now we have a welcome, login and signup page and we can create a `signup` endpoint that creates a new user from the `signup.html` form submission and then redirects to `login.html`. Because Feathers works just like [Express](http://expressjs.com/) we can just create an [Express middleware](http://expressjs.com/en/guide/using-middleware.html) called `signup` that does that.
 
 ```
 $ yo feathers:middleware
 ```
 
-`src/middleware/signup.js` takes the `users` service and creates a new user from the submitted form data:
+![Generating the signup middleware](./assets/signup-middleware.png)
+
+`src/middleware/signup.js` takes the `users` service and creates a new user from the submitted form data. Then redirects to `login.html`:
 
 ```js
 'use strict';
