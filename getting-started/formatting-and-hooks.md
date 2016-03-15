@@ -59,6 +59,8 @@ The next hook will also be a `before` hook for a `create` method but this time f
 1. Add the `_id` of the user that created the message as `sentBy`
 2. Add a `createdAt` timestamp with the current time
 
+Let's generate that hook!
+
 ![Generating the message processing](./assets/process-hook.png)
 
 Now we can update `src/services/message/hooks/process.js` to:
@@ -96,11 +98,11 @@ module.exports = function(options) {
 
 ### Serializing Messages
 
-So far we've seen a couple `before` hooks but we can also format our data using `after` hooks, which get called after a service method returns.
+So far we've implemented a couple `before` hooks but we can also format our data using `after` hooks, which get called after a service method returns.
 
-Let's say that we populate the sender of each message so that we can display them in our UI. We've shown you how you can create your own hooks, but Feathers and some of it's plug-ins come bundled with a few common hooks. In this case we'll use the `populate` hook that comes bundled with `feathers-hooks`.
+Let's say that we want to populate the sender of each message so that we can display them in our UI. Instead of creating one of your own hooks, this time we'll use one of the ones that comes [bundled with Feathers](../hooks/bundled.md). In this case we'll use the `populate` hook that comes bundled with `feathers-hooks`.
 
-We need to make a small change our `src/services/message/hooks/index.js` file so that it now looks like this:
+We need to make a small change to our `src/services/message/hooks/index.js` file so that it now looks like this:
 
 ```js
 'use strict';
@@ -109,8 +111,9 @@ const restrictToSender = require('./restrict-to-sender');
 const process = require('./process');
 
 const globalHooks = require('../../../hooks');
-const hooks = require('feathers-hooks').hooks;
 const auth = require('feathers-authentication').hooks;
+// Include the feathers-hooks, hooks
+const hooks = require('feathers-hooks').hooks;
 
 exports.before = {
   all: [
@@ -127,7 +130,7 @@ exports.before = {
 };
 
 exports.after = {
-  all: [],
+  all: [], // Add our populate hook
   find: [hooks.populate({ service: 'users', attribute: 'sentBy' })],
   get: [hooks.populate({ service: 'users', attribute: 'sentBy' })],
   create: [hooks.populate({ service: 'users', attribute: 'sentBy' })],
@@ -138,7 +141,7 @@ exports.after = {
 
 ```
 
-This will take the ID stored at `sentBy` attribute on our Message, query the `users` service to find a User with that ID and replace the ID with the User object.
+This will take the ID stored at the `sentBy` attribute on our Message, query the `users` service to find a User with that ID, and replace the ID with the User object.
 
 As you can see, manipulating data is pretty easy with hooks. To improve portability, we could break our hooks up into multiple smaller hooks and chain them. A good candidate might be to move manipulating the `createdAt` attribute into it's own hook so that it can be shared across multiple services.
 
@@ -183,4 +186,4 @@ module.exports = function(options) {
 
 That's it! We now have a fully functional real-time chat API complete with user signup, local authentication, and authorization. You've now had an introduction to [services](../services/readme.md), [hooks](../hooks/readme.md) and [middleware](../middleware/readme.md), which is almost everything there is to Feathers.
 
-In the next chapter we will briefly talk about [building a chat frontend](frontend.md) before learning more about some of the finer details of Feathers and diving into the [guides](../guides/readme.md).
+In the next chapter we will briefly talk about [building a frontend](frontend.md) for our Chat app before learning more about Feathers and diving into the [guides](../guides/readme.md).
