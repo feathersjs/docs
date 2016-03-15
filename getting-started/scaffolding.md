@@ -39,7 +39,7 @@ Since pretty much every app needs authentication of some sort we generate almost
 
 Your options should all look like this and you should have seen that a whole bunch of files were created.
 
-![Final Configuration](./assets/step7.png)
+![Final Configuration](./assets/generator-summary.png)
 
 NPM will do it's thing and install all our dependencies. This can take a minute or two based on your Internet connection speed.
 
@@ -51,7 +51,7 @@ $ yo feathers:service
 
 The name should be `message` and the other options can be accepted with their default value (we will add authorization in the [next chapter](authentication.md)):
 
-![Final Service Configuration](./assets/step8.png)
+![Final Service Configuration](./assets/message-service.png)
 
 We can now start our app with:
 
@@ -85,9 +85,9 @@ With the server running let's create our first message by sending a POST request
 $ curl 'http://localhost:3030/messages/' -H 'Content-Type: application/json' --data-binary '{ "text": "Hello Feathers!" }'
 ```
 
-You can also connect to the real-time API using [Socket.io](../real-time/socket-io.md). The easiest way to do so is using the [Feathers client](./clients/feathers.md). You can learn more about using Feathers on the client in the [Client chapter](../clients/readme.md).
-
 > **ProTip:** If you are making requests from a browser or Postman you want to make sure you set the the `Accepts` header to `application/json` otherwise you will get HTML errors back. For more information see the [Error Handling section](../middleware/error-handling.md).
+
+You can also connect to the real-time API using [Socket.io](../real-time/socket-io.md). The easiest way to do so is using the [Feathers client](./clients/feathers.md). You can learn more about using Feathers on the client in the [Client chapter](../clients/readme.md).
 
 Add the following to `public/index.html` before the `</body>` tag:
 

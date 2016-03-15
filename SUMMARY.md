@@ -5,7 +5,7 @@
 * [Your First App](getting-started/readme.md)
    * [Scaffolding and Services](getting-started/scaffolding.md)
    * [User Management](getting-started/user-management.md)
-   * [Using Hooks](getting-started/formatting-and-hooks.md)
+   * [Manipulating data](getting-started/formatting-and-hooks.md)
    * [Building a Frontend](getting-started/frontend.md)
 * [Why Feathers](why/readme.md)
    * [Philosophy](why/philosophy.md)

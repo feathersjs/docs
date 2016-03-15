@@ -1,6 +1,6 @@
 # Using Hooks and Manipulating Data
 
-In the [previous section](user-management.md) we set up authentication, a signup and login page, and we restricted the message service to only authenticated users. Now we can add additional information, like the user who sent it and the creation time to a new message.
+In the [previous section](user-management.md) we set up authentication, a signup and login page, and restricted the message service to only authenticated users. Now we can add additional information, like the user who sent it and the creation time to a new message.
 
 ## Adding information with hooks
 
@@ -10,20 +10,19 @@ Adding information like the current user and the creation time can be done by cr
 $ yo feathers:hook
 ```
 
-It will be a `before` hook called `process` for the `message` service on the `create` method.
+### Gravatar profile images
 
-In this hook we will modify the data before sending it to the database. We'll do three things:
+Our first hook will be a `before` hook for the `create` method on the `user` service called `gravatar`:
 
-1. Add the `_id` of the user that created the message as `userId`
-2. Add a `createdAt` timestamp with the current time
-3. Add an `image` for that message. It will be the [Gravatar](http://en.gravatar.com/) image for the users email address (or their placeholder)
+![Generating the Gravatar hook](./assets/gravatar-hook.png)
 
+In this hook we will modify the data before sending it to the database and add the [Gravatar](http://en.gravatar.com/) image from a users email address when someone signs up. Change `src/services/user/hooks/gravatar.js` to:
 
 ```js
 'use strict';
 
-// src/services/message/hooks/process.js
-// 
+// src/services/user/hooks/gravatar.js
+//
 // Use this hook to manipulate incoming or outgoing data.
 // For more information on hooks see: http://docs.feathersjs.com/hooks/readme.html
 
@@ -39,9 +38,38 @@ const query = `s=60`;
 const gravatarImage = email => {
   // Gravatar uses MD5 hashes from an email address to get the image
   const hash = crypto.createHash('md5').update(email).digest('hex');
-  
+
   return `${gravatarUrl}/${hash}?${query}`;
 };
+
+module.exports = function() {
+  return function(hook) {
+    // Assign the new data with the Gravatar image
+    hook.data = Object.assign({}, hook.data, {
+      image: gravatarImage(hook.data.email)
+    });
+  };
+};
+```
+
+### Processing messages
+
+The next hook will also be a `before` hook for a `create` method but this time for the `message` service.  We'll do two things:
+
+1. Add the `_id` of the user that created the message as `userId`
+2. Add a `createdAt` timestamp with the current time
+
+![Generating the message processing](./assets/process-hook.png)
+
+Now we can update `src/services/message/hooks/process.js` to:
+
+```js
+'use strict';
+
+// src/services/message/hooks/process.js
+// 
+// Use this hook to manipulate incoming or outgoing data.
+// For more information on hooks see: http://docs.feathersjs.com/hooks/readme.html
 
 module.exports = function(options) {
   return function(hook) {
@@ -60,9 +88,7 @@ module.exports = function(options) {
       // Set the user id
       userId: user._id,
       // Add the current time via `getTime`
-      createdAt: new Date().getTime(),
-      // Add the Gravatar image
-      image: gravatarImage(user.email)
+      createdAt: new Date().getTime()
     };
   };
 };
@@ -70,15 +96,16 @@ module.exports = function(options) {
 
 As you can see, manipulating data is pretty easy with hooks. To improve portability, if we wanted to, we could break this hook up into multiple smaller hooks and chain them. A good candidate might be to move manipulating the `createdAt` attribute into it's own hook so that it can be shared across multiple services.
 
+
 ## Message authorization
 
 Finally, we need one more hook that makes sure that users can only `remove`, `update` and `patch` their own message (see [the services chapter](../services/readme.md) for more information about those methods).
 
 Let's create a `verify` *before* hook for the `message` service that runs before those methods:
 
-![verifyUser Hook](./assets/verifyuser.png)
+![Generating the verify hook](./assets/verify-hook.png)
 
-And change the file at `src/services/message/hook/verifyUser.js` to:
+And change the file at `src/services/message/hook/verify.js` to:
 
 ```js
 'use strict';
