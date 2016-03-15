@@ -56,7 +56,7 @@ module.exports = function() {
 
 The next hook will also be a `before` hook for a `create` method but this time for the `message` service.  We'll do two things:
 
-1. Add the `_id` of the user that created the message as `sentBy`
+1. Add the `_id` of the user that created the message as `userId`
 2. Add a `createdAt` timestamp with the current time
 
 Let's generate that hook!
@@ -88,7 +88,7 @@ module.exports = function(options) {
     hook.data = {
       text,
       // Set the user id
-      sentBy: user._id,
+      userId: user._id,
       // Add the current time via `getTime`
       createdAt: new Date().getTime()
     };
@@ -100,20 +100,27 @@ module.exports = function(options) {
 
 So far we've implemented a couple `before` hooks but we can also format our data using `after` hooks, which get called after a service method returns.
 
-Let's say that we want to populate the sender of each message so that we can display them in our UI. Instead of creating one of your own hooks, this time we'll use one of the ones that comes [bundled with Feathers](../hooks/bundled.md). In this case we'll use the `populate` hook that comes bundled with `feathers-hooks`.
+Let's say that we want to populate the sender of each message so that we can display them in our UI. Instead of creating one of your own hooks, this time we'll use one of the ones that comes [bundled with Feathers](../hooks/bundled.md). In this case we'll use the `populate`and `remove` hook that comes bundled with `feathers-hooks`.
 
 We need to make a small change to our `src/services/message/hooks/index.js` file so that it now looks like this:
 
 ```js
 'use strict';
 
-const restrictToSender = require('./restrict-to-sender');
-const process = require('./process');
-
-const globalHooks = require('../../../hooks');
+const hooks = require('feathers-hooks');
 const auth = require('feathers-authentication').hooks;
 // Include the feathers-hooks bundled hooks
 const hooks = require('feathers-hooks').hooks;
+
+const restrictToSender = require('./restrict-to-sender');
+const process = require('./process');
+const globalHooks = require('../../../hooks');
+// Use the userId field in a message to get the user from
+// the users service and then add it as sentBy to the message.
+const populateSender = hooks.populate('sentBy', {
+  service: 'users',
+  field: 'userId'
+});
 
 exports.before = {
   all: [
@@ -124,16 +131,17 @@ exports.before = {
   find: [],
   get: [],
   create: [process()],
-  update: [restrictToSender()],
-  patch: [restrictToSender()],
+  // Remove the sentBy field
+  update: [hooks.remove('sentBy'), restrictToSender()],
+  patch: [hooks.remove('sentBy'), restrictToSender()],
   remove: [restrictToSender()]
 };
 
 exports.after = {
-  all: [], // populate the sentBy property on the message with the sender
-  find: [hooks.populate('sentBy', { service: 'users' })],
-  get: [hooks.populate('sentBy', { service: 'users' })],
-  create: [hooks.populate('sentBy', { service: 'users' })],
+  all: [],
+  find: [populateSender],
+  get: [populateSender],
+  create: [populateSender],
   update: [],
   patch: [],
   remove: []

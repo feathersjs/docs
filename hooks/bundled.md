@@ -8,6 +8,21 @@ When it makes sense to do so, some plugins include their own hooks. The followin
 
 There are two hooks included in the `feathers-hooks` module that are available on the hooks module.
 
+## `populate(fieldName, { service: service, field: sourceField })
+
+The `populate` after hook uses a property from the result (or every item if it is a list) to retrieve a single related entry from a service.
+
+```
+const hooks = require('feathers-hooks');
+
+// Given a `user_id` in a message, retrieve the user and
+// add it in the `user` field.
+app.service('messages').after(hooks.populate('user', {
+  service: 'users',
+  field: 'user_id'  
+}));
+```
+
 ## `disable(providers)`
 
 Disable access to a service method completely or for a specific provider. All providers ([REST](../rest/readme.md), [Socket.io](../real-time/socket-io.md) and [Primus](../real-time/primus.md)) set the `params.provider` property which is what `disable` checks for. `disable('external')`  will disable access from all providers making a service method only usable internally.
@@ -55,19 +70,5 @@ const hooks = require('feathers-hooks');
 // lowercase the `email` and `password` field before a user is created
 app.service('users').before({
   create: hooks.lowerCase('email', 'username')
-});
-```
-
-## `populate(options)`
-
-Populate related objects by ID onto other objects. Can be used either as a before hook or an after hook. `field` is optional and will fallback default to the field name that will be populated.
-
-```js
-const hooks = require('feathers-hooks');
-
-// populate the user `sentBy` attribute by looking
-// up a user in the `users` service by `userId`.
-app.service('messages').after({
-  get: hooks.populate('sentBy', { service: 'users', field: 'userId' })
 });
 ```
