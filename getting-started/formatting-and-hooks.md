@@ -112,7 +112,7 @@ const process = require('./process');
 
 const globalHooks = require('../../../hooks');
 const auth = require('feathers-authentication').hooks;
-// Include the feathers-hooks, hooks
+// Include the feathers-hooks bundled hooks
 const hooks = require('feathers-hooks').hooks;
 
 exports.before = {
@@ -130,10 +130,10 @@ exports.before = {
 };
 
 exports.after = {
-  all: [], // Add our populate hook
-  find: [hooks.populate({ service: 'users', attribute: 'sentBy' })],
-  get: [hooks.populate({ service: 'users', attribute: 'sentBy' })],
-  create: [hooks.populate({ service: 'users', attribute: 'sentBy' })],
+  all: [], // populate the sentBy property on the message with the sender
+  find: [hooks.populate('sentBy', { service: 'users' })],
+  get: [hooks.populate('sentBy', { service: 'users' })],
+  create: [hooks.populate('sentBy', { service: 'users' })],
   update: [],
   patch: [],
   remove: []
@@ -141,7 +141,7 @@ exports.after = {
 
 ```
 
-This will take the ID stored at the `sentBy` attribute on our Message, query the `users` service to find a User with that ID, and replace the ID with the User object.
+This will take the ID stored at the `sentBy` attribute on our Message, query the `users` service to find a User with that ID, and set the User object on the `sentBy` attribute (replacing the ID).
 
 As you can see, manipulating data is pretty easy with hooks. To improve portability, we could break our hooks up into multiple smaller hooks and chain them. A good candidate might be to move manipulating the `createdAt` attribute into it's own hook so that it can be shared across multiple services.
 
