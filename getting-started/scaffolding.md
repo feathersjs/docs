@@ -27,11 +27,11 @@ When presented with the project name just hit enter.
 
 Next, enter in a short description of your app.
 
-You're now presented with the option to choose which providers you want to support. Since we're setting up a real-time REST API we'll go with the default REST and Socket.io. So just hit enter. You can learn more about Feathers providers in the [Providers chapter](../../real-time/readme.md).
+You're now presented with the option to choose which providers you want to support. Since we're setting up a real-time REST API we'll go with the default REST and Socket.io. So just hit enter. You can learn more about Feathers providers in the [Providers chapter](../real-time/readme.md).
 
 Next we'll be prompted to support [CORs](https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS). This basically allows your client to connect to the server from wherever. You can whitelist specific domains but again, just hit enter for now.
 
-Now let's choose our database. You can see that Feathers supports a bunch through the generator and even more outside the generator. Let's use the default [NeDB](https://github.com/louischatriot/nedb). NeDB is a local file-system based database so we don't have to start a separate database server. You can find out more about our database adapters in the [Databases chapter](../../databases/readme.md).
+Now let's choose our database. You can see that Feathers supports a bunch through the generator and even more outside the generator. Let's use the default [NeDB](https://github.com/louischatriot/nedb). NeDB is a local file-system based database so we don't have to start a separate database server. You can find out more about our database adapters in the [Databases chapter](../databases/readme.md).
 
 Since pretty much every app needs authentication of some sort we generate almost everything you need to get going. You can learn more about authentication in Feathers by reading the [Authentication chapter](../../authentication/readme.md). In our case we will just use the default local authentication.
 
