@@ -14,7 +14,7 @@ Using [the Feathers client](feathers.md), the `feathers-primus/client` module ca
 
 ```html
 <script type="text/javascript" src="primus/primus.js"></script>
-<script type="text/javascript" src="https://rawgit.com/feathersjs/feathers-client/master/dist/feathers.js"></script>
+<script type="text/javascript" src="//cdn.rawgit.com/feathersjs/feathers-client/v1.0.0/dist/feathers.js"></script>
 <script type="text/javascript">
   var primus = new Primus('http://api.my-feathers-server.com');
   var app = feathers()

@@ -14,7 +14,7 @@ Using [the Feathers client](feathers.md), the `feathers-socketio/client` module 
 
 ```html
 <script type="text/javascript" src="socket.io/socket.io.js"></script>
-<script type="text/javascript" src="https://rawgit.com/feathersjs/feathers-client/master/dist/feathers.js"></script>
+<script type="text/javascript" src="//cdn.rawgit.com/feathersjs/feathers-client/v1.0.0/dist/feathers.js"></script>
 <script type="text/javascript">
   var socket = io('http://api.feathersjs.com');
   var app = feathers()
