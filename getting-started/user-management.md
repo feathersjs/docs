@@ -4,7 +4,7 @@ In [the previous section](scaffolding.md) we set up a Message service with a `/m
 
 ## Creating and authenticating users
 
-Although a new user can be easily be created by POSTing to the `/users` endpoint, we're going to create a separate `/signup` endpoint to keep things explicit and also show how you mix regular Express middleware with Feathers.
+Although a new user can be created by POSTing to the `/users` endpoint, we're going to create a separate `/signup` endpoint to keep things explicit and also show how you mix regular Express middleware with Feathers.
 
 In this example the fields required for creating a user are `email` and `password`. Passwords are automatically hashed using [bcrypt](https://www.npmjs.com/package/bcryptjs).
 
@@ -225,7 +225,7 @@ After stopping (CTRL + C) and starting the server (`npm start`) again we can go 
 
 ## Authorization
 
-Now that we have a user that we can use to authenticate we want to restrict the Message service to only authenticated users. We could have done that already in the service generator by answering _"yes"_ when asked if we need authentication but we can also easily add it manually by changing `src/services/message/hooks/index.js` to:
+Now that we can authenticate we want to restrict the Message service to only authenticated users. We could have done that already in the service generator by answering _"yes"_ when asked if we need authentication but we can also easily add it manually by changing `src/services/message/hooks/index.js` to:
 
 ```js
 'use strict';
@@ -258,4 +258,4 @@ exports.after = {
 };
 ```
 
-That's it for authentication. We now have a home, login and signup page. We can sign up as a new user and log in with that signup information. In the [next section](formatting-and-hooks.md) we will look at creating new messages and adding additional information to them using the authenticated user information.
+That's it for authentication! We now have a home, login and signup page. We can sign up as a new user and log in with their email and password. In the [next section](formatting-and-hooks.md) we will look at creating new messages and adding additional information to them using the authenticated user information.

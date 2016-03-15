@@ -113,7 +113,7 @@ Add the following to `public/index.html` before the `</body>` tag:
 </script>
 ```
 
-Open the console, then go to [localhost:3030](http://localhost:3030) and you will see the new message. Those events also work for REST calls, for example, with the page open, running the command below will also log the new message on the console in the browser.
+Open the console, then go to [localhost:3030](http://localhost:3030) and you will see the new message. Those events also work for REST calls. Try running the command below and you will see a new message show up your browser's console.
 
 ```
 $ curl 'http://localhost:3030/messages/' -H 'Content-Type: application/json' --data-binary '{ "text": "Hello again!" }'
