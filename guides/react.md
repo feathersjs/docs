@@ -1,6 +1,8 @@
 # Feathers + React
 
-[React](https://facebook.github.io/react/) is *a JavaScript library for building user interfaces* which makes it ideal for real-time applications with Feathers and the [Feathers client](../clients/feathers.md) doing the heavy lifting for getting and updating data. In this guide we will create a plain React web front-end for the chat API from the [Your First App](../getting-started/readme.md) section.
+[React](https://facebook.github.io/react/) is *a JavaScript library for building user interfaces*, which makes it ideal for building real-time applications with Feathers. Let React take care of the view rendering and let [Feathers client](../clients/feathers.md) do the heavy lifting for communicating with your server and managing your data.
+
+In this guide we will create a plain React web front-end for the chat API built in the [Your First App](../getting-started/readme.md) section.
 
 If you haven't done so you'll want to go through that tutorial or you can find a [working example here](https://github.com/feathersjs/feathers-chat).
 
@@ -32,11 +34,11 @@ React and the Feathers client modules can be loaded individually via [npm](https
 </html>
 ```
 
-This setup is not recommended for a production environment however because [Babel](https://babeljs.io/) will transpile our `public/app.jsx` every time on the fly in the browser. Follow up how to use React with NPM [in the React documentation](https://facebook.github.io/react/docs/getting-started.html#using-react-from-npm) and how to use the Feathers client modules in the [client chapter](../clients/feathers.md).
+> **ProTip:** This setup is not recommended for a production environment because [Babel](https://babeljs.io/) will transpile our `public/app.jsx` every time on the fly in the browser. Follow up how to use React with NPM [in the React documentation](https://facebook.github.io/react/docs/getting-started.html#using-react-from-npm) and how to use the Feathers client modules in the [client chapter](../clients/feathers.md).
 
 ## Application Bootstrap
 
-All of the following code should go in `public/app.jsx` which the HTML file already loads. The first step is to add some placeholder boilerplate if a user image or other user information doesn't exist:
+All of the following code should go in `public/app.jsx` which the HTML file already loads. The first step is to add a placeholder user in the event that a user image or other user information doesn't exist:
 
 ```js
 // A placeholder image if the user does not have one
@@ -66,7 +68,7 @@ const app = feathers()
 
 ## Adding components
 
-Components will use the Feathers application we initialized above. The first component shows a form that when submitted creates a new message on the `messages` service:
+Each of your components will use the Feathers application we initialized above. The first component shows a form that when submitted creates a new message on the `messages` service:
 
 ```html
 const ComposeMessage = React.createClass({
@@ -225,7 +227,7 @@ const ChatApp = React.createClass({
 
 ## Rendering and authenticating
 
-The chat application is set up to redirect from `login.html` to our `chat.html` page on successful login. This means that we already know what user is logged in so we just have to call [app.authenticate](../authentication/client.md) to authenticate that user. Once authenticated successfully we render the main layout with the `ChatApp` component:
+The chat application is set up to redirect from `login.html` to our `chat.html` page on successful login. The Feathers server has already authenticated the user with email and password and put a JWT in a cookie. Feathers client detects this token for us so we just have to call [app.authenticate](../authentication/client.md) to authenticate that user using the token. Once authenticated successfully we render the main layout with the `ChatApp` component:
 
 ```html
 app.authenticate().then(() => {

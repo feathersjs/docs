@@ -1,6 +1,6 @@
 # Feathers + jQuery
 
-You don't always need a full on framework. Feathers and the [Feathers client](../clients/feathers.md) also work great to add real-time capability to a vanilla JavaScript or [jQuery](http://jquery.com/) application. In this guide we will create a jQuery front-end for the chat API from the [Your First App](../getting-started/readme.md) section.
+You don't always need a full on framework. Feathers and the [Feathers client](../clients/feathers.md) also work great to add real-time capability to a vanilla JavaScript or [jQuery](http://jquery.com/) application. In this guide we will create a jQuery front-end for the chat API built in the [Your First App](../getting-started/readme.md) section.
 
 If you haven't done so you'll want to go through that tutorial or you can find a [working example here](https://github.com/feathersjs/feathers-chat).
 
