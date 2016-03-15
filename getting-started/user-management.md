@@ -27,7 +27,7 @@ Let's replace `public/index.html` with the following welcome page:
     <meta name="viewport" 
       content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=0" />
     <title>Feathers Chat</title>
-    <link rel="shortcut icon" href="img/favicon.png">
+    <link rel="shortcut icon" href="favicon.ico">
     <link rel="stylesheet" href="//cdn.rawgit.com/feathersjs/feathers-chat/v0.1.0/public/base.css">
     <link rel="stylesheet" href="//cdn.rawgit.com/feathersjs/feathers-chat/v0.1.0/public/chat.css">
   </head>
@@ -73,7 +73,7 @@ Let's replace `public/index.html` with the following welcome page:
     <meta name="viewport"
       content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=0" />
     <title>Feathers Chat</title>
-    <link rel="shortcut icon" href="img/favicon.png">
+    <link rel="shortcut icon" href="favicon.ico">
     <link rel="stylesheet" href="//cdn.rawgit.com/feathersjs/feathers-chat/v0.1.0/public/base.css">
     <link rel="stylesheet" href="//cdn.rawgit.com/feathersjs/feathers-chat/v0.1.0/public/chat.css">
   </head>
