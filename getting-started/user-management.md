@@ -1,10 +1,12 @@
 # User Management
 
-In [the previous section](scaffolding.md) we set up a Message service with a `/messages` endpoint. The app we generated also comes with a `/users` endpoint and local authentication. In this chapter we will create a `/signup` endpoint that uses our User service and add user specific restrictions for posting and editing messages.
+In [the previous section](scaffolding.md) we set up a Message service with a `/messages` endpoint. The app we generated also comes with a `/users` endpoint and local authentication. Now we're going learn how we can create users and authenticate them.
 
 ## Creating and authenticating users
 
-Even though we are going to create a separate `/signup` endpoint, a new user can be created by POSTing to the `/users` endpoint. The fields required are `email` and `password`. Passwords are automatically hashed when creating a new user using [bcrypt](https://www.npmjs.com/package/bcryptjs).
+Although a new user can be easily be created by POSTing to the `/users` endpoint, we're going to create a separate `/signup` endpoint to keep things explicit and also show how you mix regular Express middleware with Feathers.
+
+In this example the fields required for creating a user are `email` and `password`. Passwords are automatically hashed using [bcrypt](https://www.npmjs.com/package/bcryptjs).
 
 Feathers Authentication uses [JSON webtoken (JWT)](https://jwt.io/) for secure authentication between a client and server as opposed to cookies and sessions. To obtain a token for the user we created we first need to POST the `email` and `password` to the `http://localhost:3030/auth/local` endpoint set up by Feathers authentication. The response will return the authenticated user and their token.
 
@@ -39,7 +41,6 @@ Let's replace `public/index.html` with the following welcome page:
           <h3 class="title">Chat</h3>
         </div>
       </div>
-
       <div class="row">
         <div class="col-12 push-4-tablet col-4-tablet">
           <div class="row">
@@ -49,7 +50,6 @@ Let's replace `public/index.html` with the following welcome page:
               </a>
             </div>
           </div>
-
           <div class="row">
             <div class="col-12">
               <a href="signup.html" class="button button-primary block signup">
@@ -59,7 +59,6 @@ Let's replace `public/index.html` with the following welcome page:
           </div>
         </div>
       </div>
-      
     </main>
   </body>
 </html>
@@ -74,7 +73,6 @@ Let's replace `public/index.html` with the following welcome page:
     <meta name="viewport"
       content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=0" />
     <title>Feathers Chat</title>
-
     <link rel="shortcut icon" href="img/favicon.png">
     <link rel="stylesheet" href="//cdn.rawgit.com/feathersjs/feathers-chat/master/examples/chat/public/base.css">
     <link rel="stylesheet" href="//cdn.rawgit.com/feathersjs/feathers-chat/master/examples/chat/public/chat.css">
@@ -92,11 +90,9 @@ Let's replace `public/index.html` with the following welcome page:
             <fieldset>
               <input class="block" type="email" name="email" placeholder="email">
             </fieldset>
-            
             <fieldset>
               <input class="block" type="password"name="password" placeholder="password">
             </fieldset>
-
             <button type="submit" class="button button-primary block login">
               Login
             </button>
@@ -132,13 +128,11 @@ Finally, `public/signup.html` looks like this:
         <div class="col-12 col-6-tablet push-3-tablet col-4-desktop push-4-desktop text-center">
           <form class="form" method="post" action="/signup">
             <fieldset>
-              <input class="block" type="text" name="email" placeholder="email">  
+              <input class="block" type="email" name="email" placeholder="email">  
             </fieldset>
-            
             <fieldset>
               <input class="block" type="password" name="password" placeholder="password">
             </fieldset>
-
             <button type="submit" class="button button-primary block signup">
               Signup
             </button>
