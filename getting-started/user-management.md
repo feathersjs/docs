@@ -258,4 +258,4 @@ exports.after = {
 };
 ```
 
-That's it for authentication! We now have a home, login and signup page. We can sign up as a new user and log in with their email and password. In the [next section](formatting-and-hooks.md) we will look at creating new messages and adding additional information to them using the authenticated user information.
+That's it for authentication! We now have a _home_, _login_ and _signup_ page. We can sign up as a new user and log in with their email and password. In the [next section](formatting-and-hooks.md) we will look at creating new messages and adding additional information to them using the authenticated user information.
