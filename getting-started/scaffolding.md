@@ -27,7 +27,7 @@ When presented with the project name just hit enter.
 
 Next, enter in a short description of your app.
 
-Next, you can now choose which providers you want to support. Since we're setting up a real-time REST API we'll go with the default REST and Socket.io. So just hit enter. You can learn more about Feathers providers in [Providers chapter](../../real-time/readme.md).
+You're now presented with the option to choose which providers you want to support. Since we're setting up a real-time REST API we'll go with the default REST and Socket.io. So just hit enter. You can learn more about Feathers providers in the [Providers chapter](../../real-time/readme.md).
 
 Next we'll be prompted to support [CORs](https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS). This basically allows your client to connect to the server from wherever. You can whitelist specific domains but again, just hit enter for now.
 

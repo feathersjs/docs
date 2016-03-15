@@ -4,15 +4,15 @@ In [the previous section](scaffolding.md) we set up a Message service with a `/m
 
 ## Creating and authenticating users
 
-Although a new user can be created by POSTing to the `/users` endpoint, we're going to create a separate `/signup` endpoint to keep things explicit and also show how you mix regular Express middleware with Feathers.
+Although a new user can be created by POSTing to the `/users` endpoint, we're going to create a separate `/signup` endpoint to keep things explicit and also show how you can use regular Express middleware with Feathers.
 
-In this example the fields required for creating a user are `email` and `password`. Passwords are automatically hashed using [bcrypt](https://www.npmjs.com/package/bcryptjs).
+In this example the fields required for creating a user are `email` and `password`. Feathers automatically hashes passwords using [bcrypt](https://www.npmjs.com/package/bcryptjs).
 
-Feathers Authentication uses [JSON webtoken (JWT)](https://jwt.io/) for secure authentication between a client and server as opposed to cookies and sessions. To obtain a token for the user we created we first need to POST the `email` and `password` to the `http://localhost:3030/auth/local` endpoint set up by Feathers authentication. The response will return the authenticated user and their token.
+Feathers Authentication uses [JSON webtoken (JWT)](https://jwt.io/) for secure authentication between a client and server as opposed to cookies and sessions. After we create a user, we'll need to POST the `email` and `password` to the `http://localhost:3030/auth/local` endpoint set up by Feathers authentication. The response will return the authenticated user and their token.
 
 This token needs to be set in the `Authorization` header for any subsequent requests that require authentication. You can find more details in the [authentication chapter](../authentication/readme.md).
 
-When we create a front-end for our chat API this will all be done automatically for us by the [Feathers client](../clients/feathers.md) by calling `app.authenticate()`.
+When we create a front-end for our chat API this will all be done automatically for us when using the [Feathers client](../clients/feathers.md) by calling `app.authenticate()`.
 
 ### Adding HTML pages
 
