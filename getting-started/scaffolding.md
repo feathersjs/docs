@@ -47,7 +47,7 @@ Now our app is ready to go but let's add a Message service for our chat app:
 $ yo feathers:service
 ```
 
-The name should be `message` and the other options can be accepted with their default value (we will add authorization in the [next chapter](authentication.md)):
+The name should be `message` and the other options can be accepted with their default value (we will add authorization in the next chapter):
 
 ![Final Service Configuration](./assets/message-service.png)
 
@@ -85,7 +85,7 @@ $ curl 'http://localhost:3030/messages/' -H 'Content-Type: application/json' --d
 
 > **ProTip:** If you are making requests from a browser or Postman you want to make sure you set the the `Accepts` header to `application/json` otherwise you will get HTML errors back. For more information see the [Error Handling section](../middleware/error-handling.md).
 
-You can also connect to the real-time API using [Socket.io](../real-time/socket-io.md). The easiest way to do so is using the [Feathers client](./clients/feathers.md). You can learn more about using Feathers on the client in the [Client chapter](../clients/readme.md).
+You can also connect to the real-time API using [Socket.io](../real-time/socket-io.md). The easiest way to do so is using the [Feathers client](../clients/feathers.md). You can learn more about using Feathers on the client in the [Client chapter](../clients/readme.md).
 
 Add the following to `public/index.html` before the `</body>` tag:
 
