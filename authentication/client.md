@@ -8,11 +8,11 @@ Feathers authentication adds a few methods to a client side Feathers app. They a
 
 ### authenticate
 
-`app.authenticate()` attempts to authenticate with the server using the data you passed it. It returns a promise.
+`app.authenticate()` attempts to authenticate with the server using the data you passed it. If you don't provide any options it will attempt to authenticate using a token stored in memory or in your `storage` engine. It returns a promise.
 
 #### Options
 
-- `type` (**required**) - Either `local` or `token`.
+- `type` (optional) - Either `local` or `token`.
 
 Then you pass whatever other fields you need to send to authenticate. See below for examples.
 
@@ -22,11 +22,11 @@ Then you pass whatever other fields you need to send to authenticate. See below 
 
 ### user
 
-`app.user()` is a convenience method to get the user. Currently it only pulls from your local store. In the future it may fall back to fetching from the server if the user isn't available in the client. It returns a promise.
+`app.get('user')` is a convenience method to get the user. Currently it only pulls from your local store. In the future it may fall back to fetching from the server if the user isn't available in the client.
 
 ### token
 
-`app.token()` is a convenience method to get your access token. Currently it only pulls from your local store. It returns a promise.
+`app.get('token')` is a convenience method to get your access token. Currently it only pulls from your local store.
 
 ## Usage
 
@@ -34,20 +34,16 @@ Then you pass whatever other fields you need to send to authenticate. See below 
 
 <!-- -->
 
-> **ProTip:** `feathers-localstorage` provides a localstorage abstraction for the browser, React Native, and NodeJS that `feathers-authentication` uses on the client to persist your `user` and `token`. Therefore, you need to provide a different storage engine depending on your platform. See the [section on setting up Feathers localstorage](../databases/localstorage.md).
+> **ProTip:** If you pass a `storage` engine when configuring `feathers-authentication` it will persist your token there, otherwise it will just store it in memory. This is highly recommended to use a storage engine as it allows you to refresh without having to authenticate.
 
-<!-- -->
-
-> **ProTip:** `feathers-localstorage` must be set up before `feathers-authentication`.
 
 ### REST
 
 #### On the client
 
 ```html
-<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
-<script type="text/javascript" src="https://rawgit.com/feathersjs/feathers-client/master/dist/feathers.js"></script>
-<script type="text/javascript" src="https://rawgit.com/feathersjs/feathers-localstorage/master/dist/localstorage.js"></script>
+<script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
+<script type="text/javascript" src="//cdn.rawgit.com/feathersjs/feathers-client/v1.0.0/dist/feathers.js"></script>
 <script type="text/javascript">
   var host = 'http://localhost:3030';
 
@@ -55,8 +51,7 @@ Then you pass whatever other fields you need to send to authenticate. See below 
   var app = feathers()
     .configure(feathers.rest(host).jquery(jQuery))
     .configure(feathers.hooks())
-    .use('storage', feathers.localstorage({ storage: window.localStorage }))
-    .configure(feathers.authentication());
+    .configure(feathers.authentication({ storage: window.localStorage }));
 
   // Authenticate. Normally you'd grab these from a login form rather than hard coding them
   app.authenticate({
@@ -64,7 +59,7 @@ Then you pass whatever other fields you need to send to authenticate. See below 
     'email': 'admin@feathersjs.com',
     'password': 'admin'
   }).then(function(result){
-    console.log('Authenticated!', result);
+    console.log('Authenticated!', app.get('token'));
   }).catch(function(error){
     console.error('Error authenticating!', error);
   });
@@ -89,34 +84,27 @@ let app = feathers()
 #### On the client
 
 ```html
-<script type="text/javascript" src="socket.io/socket.io.js"></script>
-<script type="text/javascript" src="https://rawgit.com/feathersjs/feathers-client/master/dist/feathers.js"></script>
-<script type="text/javascript" src="https://rawgit.com/feathersjs/feathers-localstorage/master/dist/localstorage.js"></script>
+<script type="text/javascript" src="/socket.io/socket.io.js"></script>
+<script type="text/javascript" src="//cdn.rawgit.com/feathersjs/feathers-client/v1.0.0/dist/feathers.js"></script>
 <script type="text/javascript">
   // Set up socket.io
   var host = 'http://localhost:3030';
-  var socket = io(host, {
-    transport: ['websockets']
-  });
+  var socket = io(host);
 
   // Set up Feathers client side
   var app = feathers()
     .configure(feathers.socketio(socket))
     .configure(feathers.hooks())
-    .use('storage', feathers.localstorage({ storage: window.localStorage }))
-    .configure(feathers.authentication());
+    .configure(feathers.authentication({ storage: window.localStorage }));
 
-  // Wait for socket connection
-  app.io.on('connect', function(){
-    // Authenticating using a token instead
-    app.authenticate({
-      type: 'token',
-      'token': 'your token'
-    }).then(function(result){
-      console.log('Authenticated!', result);
-    }).catch(function(error){
-      console.error('Error authenticating!', error);
-    });
+  // Authenticating using a token instead
+  app.authenticate({
+    type: 'token',
+    'token': 'your token'
+  }).then(function(result){
+    console.log('Authenticated!', app.get('token'));
+  }).catch(function(error){
+    console.error('Error authenticating!', error);
   });
 </script>
 ```
@@ -137,9 +125,8 @@ let app = feathers()
 #### On the client
 
 ```html
-<script type="text/javascript" src="primus/primus.js"></script>
-<script type="text/javascript" src="https://rawgit.com/feathersjs/feathers-client/master/dist/feathers.js"></script>
-<script type="text/javascript" src="https://rawgit.com/feathersjs/feathers-localstorage/master/dist/localstorage.js"></script>
+<script type="text/javascript" src="/primus/primus.js"></script>
+<script type="text/javascript" src="//cdn.rawgit.com/feathersjs/feathers-client/v1.0.0/dist/feathers.js"></script>
 <script type="text/javascript">
   // Set up primus
   var host = 'http://localhost:3030';
@@ -149,21 +136,17 @@ let app = feathers()
   var app = feathers()
     .configure(feathers.primus(primus))
     .configure(feathers.hooks())
-    .use('storage', feathers.localstorage({ storage: window.localStorage }))
-    .configure(feathers.authentication());
+    .configure(feathers.authentication({ storage: window.localStorage }));
 
-  // Wait for socket connection
-  app.primus.on('connect', function(){
-    // Authenticate. Normally you'd grab these from a login form rather than hard-coding them
-    app.authenticate({
-      type: 'local',
-      'email': 'admin@feathersjs.com',
-      'password': 'admin'
-    }).then(function(result){
-      console.log('Authenticated!', result);
-    }).catch(function(error){
-      console.error('Error authenticating!', error);
-    });
+  // Authenticate. Normally you'd grab these from a login form rather than hard-coding them
+  app.authenticate({
+    type: 'local',
+    'email': 'admin@feathersjs.com',
+    'password': 'admin'
+  }).then(function(result){
+    console.log('Authenticated!', app.get('token'));
+  }).catch(function(error){
+    console.error('Error authenticating!', error);
   });
 </script>
 ```

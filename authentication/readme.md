@@ -73,9 +73,7 @@ If you are using the default options setting up Feathers authentication client s
 ```js
 // Set up socket.io
 const host = 'http://localhost:3030';
-let socket = io(host, {
-  transport: ['websockets']
-});
+let socket = io(host);
 
 // Set up Feathers client side
 let app = feathers()
@@ -83,22 +81,21 @@ let app = feathers()
   .configure(hooks())
   .configure(authentication());
 
-// Wait for socket connection
-app.io.on('connect', function(){
-  // Authenticate. Normally you'd grab these from a login form rather than hard-coding them
-  app.authenticate({
-    type: 'local',
-    'email': 'admin@feathersjs.com',
-    'password': 'admin'
-  }).then(function(result){
-    console.log('Authenticated!', result);
-  }).catch(function(error){
-    console.error('Error authenticating!', error);
-  });
+// Authenticate. Normally you'd grab these from a login form rather than hard-coding them
+app.authenticate({
+  type: 'local',
+  'email': 'admin@feathersjs.com',
+  'password': 'admin'
+}).then(function(result){
+  console.log('Authenticated!', result);
+}).catch(function(error){
+  console.error('Error authenticating!', error);
 });
 ```
 
-> **ProTip:** You can also use Primus or a handful of Ajax providers over REST instead of Socket.io. Check out the [Feathers client authentication](./client.md) section for more detail.
+> **ProTip:** You can also use Primus or a handful of Ajax providers instead of Socket.io. Check out the [Feathers client authentication](./client.md) section for more detail.
+
+<!-- -->
 
 > **ProTip:** You can only have one provider client side per "app". For example if you want to use both Socket.io and a REST Ajax provider then you need to configure two apps.
 
@@ -124,7 +121,7 @@ app.configure(authentication({
 
 ## How does it work?
 
-Regardless of whether you use OAuth, a token, or email + password even if you don't use the client side piece, after successful login the `feathers-authentication` plugin gives back an encrypted JSON web token containing the user `id` as the payload and the user object associated with that id.
+Regardless of whether you use OAuth, a token, or email + password to authenticate (even if you don't use the Feathers client), after successful login the `feathers-authentication` plugin gives back an encrypted JSON web token containing the user `id` as the payload and the user object associated with that id.
 
 ```js
 // successful auth response
@@ -157,15 +154,17 @@ Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6
 
 > **ProTip:** The `Bearer` part can be omitted and the case doesn't matter.
 
+<!-- -->
+
 > **ProTip:** You can use a custom header name for your token by passing a `header` option as described above.
 
 ### Authentication Over Sockets
 
-After a socket is connected an `authenticate` event needs to be emitted from the client to initiate the socket authentication. The data passed with it can either be a username and password, a JWT or OAuth access tokens. After successful authentication an `authenticated` event is emitted from the server and just like with REST you get back a JWT and the current user. From then on you are now using an authenticated socket until that socket is disconnected, the token expires, or you log out.
+After a socket is connected an `authenticate` event needs to be emitted from the client to initiate the socket authentication. The data passed with it can either be an email and password, a JWT or OAuth access tokens. After successful authentication an `authenticated` event is emitted from the server and just like with REST you get back a JWT and the current user. From then on you are now using an authenticated socket until that socket is disconnected, the token expires, or you log out.
 
 ### What Happens During Authentication?
 
-Regardless of the mechanism the person used to authenticate and no matter if it was over sockets or REST, the high level order of execution is as follows:
+Regardless of the mechanism, the credentials used to authenticate, and the transport, the high level order of execution is as follows:
 
 1. The credentials passed in are verified or you go through a series of OAuth redirects and are verified by the OAuth provider.
 2. Once credentials are verified the user associated with those credentials is looked up and if a user does not exist they are created by calling your `user` service.
