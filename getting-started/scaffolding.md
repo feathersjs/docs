@@ -1,6 +1,6 @@
 # Scaffolding and Services
 
-In this part we're going to scaffold an Feathers app, create our first service, send some data to the service and see it in real time! If you've already gone through the [Quick Start](quick-start.md) section you can skip ahead to [What Just Happened?](#what-just-happened).
+In this part we're going to scaffold a Feathers app, create our first service, send some data to the service and see it in real time! If you've already gone through the [Quick Start](quick-start.md) section you can skip ahead to [What Just Happened?](#what-just-happened).
 
 ## Generate The App
 
@@ -27,9 +27,7 @@ When presented with the project name just hit enter.
 
 Next, enter in a short description of your app.
 
-Next, you can now choose which providers you want to support. Since we're setting up a real-time REST API we'll go with the default REST and Socket.io. So just hit enter.
-
-You can learn more about Feathers providers in [Providers chapter](../../real-time/readme.md).
+Next, you can now choose which providers you want to support. Since we're setting up a real-time REST API we'll go with the default REST and Socket.io. So just hit enter. You can learn more about Feathers providers in [Providers chapter](../../real-time/readme.md).
 
 Next we'll be prompted to support [CORs](https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS). This basically allows your client to connect to the server from wherever. You can whitelist specific domains but again, just hit enter for now.
 
@@ -59,7 +57,7 @@ We can now start our app with:
 $ npm start
 ```
 
-Open up [localhost:3030](http://localhost:3030) in your browser and you will see it running. The endpoint for the Message service you just created is [localhost:3030/messages](http://localhost:3030/messages).
+Open up [localhost:3030](http://localhost:3030) in your browser and you will see your new feathers app running. The endpoint for the Message service you just created is [localhost:3030/messages](http://localhost:3030/messages).
 
 ## What Just Happened
 
