@@ -1,4 +1,4 @@
-# Building a Frontend
+# Building a Front-end
 
 A Feathers server works great with any client that can connect through HTTP(S) or websockets to a REST API. Sometimes it is just a few lines of code to make an existing front-end turn real-time.
 

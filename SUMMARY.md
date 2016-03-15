@@ -6,7 +6,7 @@
    * [Scaffolding and Services](getting-started/scaffolding.md)
    * [User Management](getting-started/user-management.md)
    * [Manipulating data](getting-started/formatting-and-hooks.md)
-   * [Building a Frontend](getting-started/frontend.md)
+   * [Building a Front-end](getting-started/frontend.md)
 * [Why Feathers](why/readme.md)
    * [Philosophy](why/philosophy.md)
    * [Features](why/vs/readme.md)
