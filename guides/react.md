@@ -40,7 +40,7 @@ React and the Feathers client modules can be loaded individually via [npm](https
 
 All of the following code should go in `public/app.jsx` which the HTML file already loads. The first step is to add a placeholder user in the event that a user image or other user information doesn't exist:
 
-```js
+```javascript
 // A placeholder image if the user does not have one
 const PLACEHOLDER = 'placeholder.png';
 // An anonymous user if the message does not have that information
@@ -52,7 +52,7 @@ const dummyUser = {
 
 Now we can set up the Socket.io connection and the Feathers app:
 
-```js
+```javascript
 // Establish a Socket.io connection
 const socket = io();
 // Initialize our Feathers client application through Socket.io
@@ -70,7 +70,7 @@ const app = feathers()
 
 Each of your components will use the Feathers application we initialized above. The first component shows a form that when submitted creates a new message on the `messages` service:
 
-```html
+```javascript
 const ComposeMessage = React.createClass({
   getInitialState() {
     return { text: '' };
@@ -104,7 +104,7 @@ const ComposeMessage = React.createClass({
 
 The next component shows a list of user and allows to log out of the application;
 
-```html
+```javascript
 const UserList = React.createClass({
   logout() {
     app.logout().then(() => window.location.href = '/index.html');
@@ -142,7 +142,7 @@ const UserList = React.createClass({
 
 Now want to display a list of messages:
 
-```html
+```javascript
 const MessageList = React.createClass({
   // Render a single message
   renderMessage(message) {
@@ -174,7 +174,7 @@ const MessageList = React.createClass({
 
 Finally we need a main component that retrieves all messages and users, listens to [real-time events](../real-time/events.md) and passes the data to the components we previously created:
 
-```html
+```javascript
 const ChatApp = React.createClass({
   getInitialState() {
     return {
@@ -229,7 +229,7 @@ const ChatApp = React.createClass({
 
 The chat application is set up to redirect from `login.html` to our `chat.html` page on successful login. The Feathers server has already authenticated the user with email and password and put a JWT in a cookie. Feathers client detects this token for us so we just have to call [app.authenticate](../authentication/client.md) to authenticate that user using the token. Once authenticated successfully we render the main layout with the `ChatApp` component:
 
-```html
+```javascript
 app.authenticate().then(() => {
   ReactDOM.render(<div id="app" className="flex flex-column">
     <header className="title-bar flex flex-row flex-center">
