@@ -90,7 +90,8 @@ const ComposeMessage = React.createClass({
   },
 
   render() {
-    return <form className="flex flex-row flex-space-between" onSubmit={this.sendMessage}>
+    return <form className="flex flex-row flex-space-between"
+        onSubmit={this.sendMessage}>
       <input type="text" name="text" className="flex flex-1"
         value={this.state.text} onChange={this.updateText} />
       <button className="button-primary" type="submit">Send</button>
@@ -128,7 +129,9 @@ const UserList = React.createClass({
         )}
       </ul>
       <footer className="flex flex-row flex-center">
-        <a href="#" className="logout button button-primary" onClick={this.logout}>Sign Out</a>
+        <a href="#" className="logout button button-primary" onClick={this.logout}>
+          Sign Out
+        </a>
       </footer>
     </aside>;
   }
@@ -229,7 +232,8 @@ app.authenticate().then(() => {
   ReactDOM.render(<div id="app" className="flex flex-column">
     <header className="title-bar flex flex-row flex-center">
       <div className="title-wrapper block center-element">
-        <img className="logo" src="http://feathersjs.com/img/feathers-logo-wide.png" alt="Feathers Logo" />
+        <img className="logo" src="http://feathersjs.com/img/feathers-logo-wide.png" 
+          alt="Feathers Logo" />
         <span className="title">Chat</span>
       </div>
     </header>
