@@ -138,7 +138,6 @@ exports.after = {
   patch: [],
   remove: []
 };
-
 ```
 
 This will take the ID stored at the `sentBy` attribute on our Message, query the `users` service to find a User with that ID, and set the User object on the `sentBy` attribute (replacing the ID).

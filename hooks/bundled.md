@@ -57,3 +57,17 @@ app.service('users').before({
   create: hooks.lowerCase('email', 'username')
 });
 ```
+
+## `populate(options)`
+
+Populate related objects by ID onto other objects. Can be used either as a before hook or an after hook. `field` is optional and will fallback default to the field name that will be populated.
+
+```js
+const hooks = require('feathers-hooks');
+
+// populate the user `sentBy` attribute by looking
+// up a user in the `users` service by `userId`.
+app.service('messages').after({
+  get: hooks.populate('sentBy', { service: 'users', field: 'userId' })
+});
+```
