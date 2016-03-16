@@ -8,7 +8,7 @@ When it makes sense to do so, some plugins include their own hooks. The followin
 
 There are two hooks included in the `feathers-hooks` module that are available on the hooks module.
 
-## `populate(fieldName, { service: service, field: sourceField })
+## `populate(fieldName, { service: service, field: sourceField })`
 
 The `populate` after hook uses a property from the result (or every item if it is a list) to retrieve a single related entry from a service.
 
