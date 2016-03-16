@@ -108,13 +108,10 @@ We need to make a small change to our `src/services/message/hooks/index.js` file
 'use strict';
 
 const auth = require('feathers-authentication').hooks;
-// Include the feathers-hooks bundled hooks
 const hooks = require('feathers-hooks');
 
 const process = require('./process');
 const globalHooks = require('../../../hooks');
-// Use the userId field in a message to get the user from
-// the users service and then add it as sentBy to the message.
 const populateSender = hooks.populate('sentBy', {
   service: 'users',
   field: 'userId'
@@ -129,7 +126,6 @@ exports.before = {
   find: [],
   get: [],
   create: [process()],
-  // Remove the sentBy field
   update: [hooks.remove('sentBy')],
   patch: [hooks.remove('sentBy')],
   remove: []
