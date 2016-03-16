@@ -66,9 +66,9 @@ The usage of the latest database adapters has been unified to support a common w
 - **MongoDB** - [feathers-mongoose](../databases/mongoose.md)
 - **NeDB** - [feathers-nedb](../databases/nedb.md)
 - **PostgreSQL, MySQL, MariaDB, and SQLite**
-  - [feathers-knex](../databases/knex.md)
+  - [feathers-knex](../databases/knexjs.md)
   - [feathers-sequelize](../databases/sequelize.md)
-- **Oracle** - [feathers-knex](../databases/knex.md)
+- **Oracle** - [feathers-knex](../databases/knexjs.md)
 - **Microsoft SQL Server** - [feathers-sequelize](../databases/sequelize.md)
 - **Waterline** - [feathers-waterline](../databases/waterline.md)
 
