@@ -107,7 +107,6 @@ We need to make a small change to our `src/services/message/hooks/index.js` file
 ```js
 'use strict';
 
-const hooks = require('feathers-hooks');
 const auth = require('feathers-authentication').hooks;
 // Include the feathers-hooks bundled hooks
 const hooks = require('feathers-hooks').hooks;
