@@ -55,7 +55,17 @@ The following options can be passed when creating a new localstorage service:
 
 ## FeathersError API
 
-Feathers errors are pretty flexible. Here are a few ways that you can use them:
+Feathers errors are pretty flexible. They contain the following fields:
+
+- `type` - `FeathersError`
+- `name` - The error name (ie. "BadRequest", "ValidationError", etc.)
+- `message` - The error message string
+- `code` - The HTTP status code
+- `className` - A CSS class name that can be handy for styling errors based on the error type. (ie. "bad-request" , etc.)
+- `data` - An object containing anything you passed to a Feathers error except for the `errors` object.
+- `errors` - An object containing whatever was passed to a Feathers error inside `errors`. This is typically validation errors or if you want to group multiple errors together.
+
+Here are a few ways that you can use them:
 
 ```js
 const errors = require('feathers-errors');
