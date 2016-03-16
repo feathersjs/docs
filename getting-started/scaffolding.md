@@ -83,7 +83,7 @@ With the server running let's create our first message by sending a POST request
 $ curl 'http://localhost:3030/messages/' -H 'Content-Type: application/json' --data-binary '{ "text": "Hello Feathers!" }'
 ```
 
-> **ProTip:** If you are making requests from a browser or Postman you want to make sure you set the the `Accepts` header to `application/json` otherwise you will get HTML errors back. For more information see the [Error Handling section](../middleware/error-handling.md).
+> **ProTip:** If you are making requests from a browser or Postman you want to make sure you set the the `Accept` header to `application/json` otherwise you will get HTML errors back. For more information see the [Error Handling section](../middleware/error-handling.md).
 
 You can also connect to the real-time API using [Socket.io](../real-time/socket-io.md). The easiest way to do so is using the [Feathers client](../clients/feathers.md). You can learn more about using Feathers on the client in the [Client chapter](../clients/readme.md).
 
