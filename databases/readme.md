@@ -12,9 +12,9 @@ Instead of coming up with our own ORM and validation system our official databas
   - [feathers-mongodb](mongodb.md)
 - **NeDB** - [feathers-nedb](nedb.md)
 - **PostgreSQL, MySQL, MariaDB, and SQLite**
-  - [feathers-knex](knex.md)
+  - [feathers-knex](knexjs.md)
   - [feathers-sequelize](sequelize.md)
-- **Oracle** - [feathers-knex](knex.md)
+- **Oracle** - [feathers-knex](knexjs.md)
 - **Microsoft SQL Server** - [feathers-sequelize](sequelize.md)
 - **Waterline** - [feathers-waterline](waterline.md) adds support for the following data stores (among others):
   - Redis
