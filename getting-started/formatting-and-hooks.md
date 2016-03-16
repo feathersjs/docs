@@ -111,7 +111,6 @@ const auth = require('feathers-authentication').hooks;
 // Include the feathers-hooks bundled hooks
 const hooks = require('feathers-hooks').hooks;
 
-const restrictToSender = require('./restrict-to-sender');
 const process = require('./process');
 const globalHooks = require('../../../hooks');
 // Use the userId field in a message to get the user from
@@ -131,9 +130,9 @@ exports.before = {
   get: [],
   create: [process()],
   // Remove the sentBy field
-  update: [hooks.remove('sentBy'), restrictToSender()],
-  patch: [hooks.remove('sentBy'), restrictToSender()],
-  remove: [restrictToSender()]
+  update: [hooks.remove('sentBy')],
+  patch: [hooks.remove('sentBy')],
+  remove: []
 };
 
 exports.after = {
@@ -156,11 +155,7 @@ As you can see, manipulating data is pretty easy with hooks. To improve portabil
 
 We've seen how Hooks can be used to manipulate data but they can also be used for permissions and validations. We need one last hook that makes sure that users can only `remove`, `update` and `patch` their own message (see [the services chapter](../services/readme.md) for more information about those methods). 
 
-Let's create a `restrict-to-sender` _before_ hook for the `message` service that runs before those methods:
-
-![Generating the restrict-to-sender hook](./assets/verify-hook.png)
-
-Now change the file at `src/services/message/hook/restrict-to-sender.js` to:
+Let's create a `restrict-to-sender` _before_ hook for the `message` service that runs before those methods. Now change the file at `src/services/message/hook/restrict-to-sender.js` to:
 
 ```js
 'use strict';
