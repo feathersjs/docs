@@ -173,9 +173,9 @@ Regardless of the mechanism, the credentials used to authenticate, and the trans
 
 ### Authorizing Future Requests
 
-Regardless of the protocol, once a valid auth token as been returned to the client, for any subsequent request the token (if present) is normalized and the `[verifyToken()](../authorization/bundled-hooks.md#verifyToken)` hook should be called by you prior to any restricted service methods. 
+Regardless of the protocol, once a valid auth token as been returned to the client, for any subsequent request the token (if present) is normalized and the [verifyToken()](../authorization/bundled-hooks.md#verifyToken) hook should be called by you prior to any restricted service methods. 
 
-This hook decrypts the token found in `hook.params.token`. After the JWT is decrypted, the `[populateUser()](../authorization/bundled-hooks.md#populateUser)` hook should be called. This is used to look up the user by id in the database and attach them to `hook.params.user` so that any other hooks in the chain can reference the current user, for example the `[requireAuth()](../authorization/bundled-hooks.md#requireAuth)` hook.
+This hook decrypts the token found in `hook.params.token`. After the JWT is decrypted, the [populateUser()](../authorization/bundled-hooks.md#populateUser) hook should be called. This is used to look up the user by id in the database and attach them to `hook.params.user` so that any other hooks in the chain can reference the current user, for example the [requireAuth()](../authorization/bundled-hooks.md#requireAuth) hook.
 
 For more information on refer to the [Authorization chapter](../authorization/readme.md).
 
