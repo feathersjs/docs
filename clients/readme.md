@@ -8,7 +8,7 @@ In this chapter we will talk about how to use the [universal Feathers client](fe
 
 ## Framework support
 
-Because it is easy to integrate, Feathers does not have any official framework specific bindings. To give a better idea on how the Feathers client plays with other frameworks here are some [TodoMVC](http://todomvc.com/) examples that all connect to the same Feathers real-time API ([todos.feathersjs.com](http://todos.feathersjs.com)):
+Because it is easy to integrate, Feathers does not have any official framework specific bindings. To give a better idea on how the Feathers client plays with other frameworks here are some [TodoMVC](http://todomvc.com/) examples that all connect to the same Feathers real-time API ([demo.feathersjs.com](http://demo.feathersjs.com)):
 
 - [jQuery](http://feathersjs.github.io/todomvc/feathers/jquery/)
 - [React](http://feathersjs.github.io/todomvc/feathers/react/)
