@@ -1,6 +1,6 @@
 # MongoDB Native
 
-[feathers-mongodb](https://github.com/feathersjs/feathers-mongdb) is a database adapter for [MongoDB](https://www.mongodb.org/). Unlike [Mongoose](./mongoose.md) this is does not have an ORM. You deal with the database directly.
+[feathers-mongodb](https://github.com/feathersjs/feathers-mongodb) is a database adapter for [MongoDB](https://www.mongodb.org/). Unlike [Mongoose](./mongoose.md) this is does not have an ORM. You deal with the database directly.
 
 ```bash
 $ npm install --save mongodb feathers-mongodb
@@ -86,4 +86,4 @@ MongoClient.connect('mongodb://localhost:27017/feathers').then(function(db){
 });
 ```
 
-You can run this example [from the GitHub repository](https://github.com/feathersjs/feathers-nedb/blob/master/examples/app.js) with `npm start` and going to [localhost:3030/messages](http://localhost:3030/messages). You should see an empty array. That's because you don't have any messages yet but you now have full CRUD for your new messages service.
+You can run this example [from the GitHub repository](https://github.com/feathersjs/feathers-nedb/blob/master/example/app.js) with `npm start` and going to [localhost:3030/messages](http://localhost:3030/messages). You should see an empty array. That's because you don't have any messages yet but you now have full CRUD for your new messages service.
