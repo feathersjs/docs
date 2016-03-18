@@ -43,7 +43,7 @@ With [NodeJS](https://nodejs.org) installed, you can quickly scaffold your first
 
 ## What's next?
 
-In just a couple minutes we created a real-time API that is accessible via REST and websockets! We now have a database backed API that already provides CORs, authentication, pagination, logging, error handling and a few other goodies.
+In just a couple minutes we created a real-time API that is accessible via REST and websockets! We now have a database backed API that already provides CORS, authentication, pagination, logging, error handling and a few other goodies.
 
 This is a great start! Let's take this a bit further and [build our first real application](readme.md).
 
