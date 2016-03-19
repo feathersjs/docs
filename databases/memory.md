@@ -25,7 +25,7 @@ The following options can be passed when creating a new memory service:
 - `idField` (default: 'id') [optional] - The name of the id field property.
 - `startId` (default: 0) [optional] - An id number to start with that will be incremented for new record.
 - `store` [optional] - An object with id to item assignments to pre-initialize the data store
-- `paginate` [optional] - A pagination object containing a `default` and `max` page size (see the [Pagination chapter](databases/pagination.md))
+- `paginate` [optional] - A pagination object containing a `default` and `max` page size (see the [Pagination chapter](pagination.md))
 
 ## Complete Example
 
