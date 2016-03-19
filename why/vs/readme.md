@@ -64,16 +64,16 @@ If you find something invalid or out of date in the comparisons, please [create 
             <td><strong>Universal JavaScript</strong></td>
             <td>✅</td>
             <td>❌</td>
+            <td>✅ (sort of)</td>
             <td>❌</td>
             <td>❌</td>
-            <td>✅</td>
             <td>❌</td>
         </tr>
         <tr>
             <td><strong>React Native Support</strong></td>
             <td>✅</td>
             <td>❌</td>
-            <td>❌</td>
+            <td>❌ 🤓</td>
             <td>❌</td>
             <td>❌</td>
             <td>❌</td>
