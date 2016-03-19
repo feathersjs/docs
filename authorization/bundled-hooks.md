@@ -2,7 +2,7 @@
 
 These hooks come bundled with the [Feathers authentication](https://github.com/feathersjs/feathers-authentication) plugin.
 
-Implementing authorization is not automatic, but is easy to set up with the included hooks.  You can also create your own hooks to handle your app's custom business logic.  For more information about hooks, refer to the [chapter on hooks](hooks/readme.md).
+Implementing authorization is not automatic, but is easy to set up with the included hooks.  You can also create your own hooks to handle your app's custom business logic.  For more information about hooks, refer to the [chapter on hooks](../hooks/readme.md).
 
 The `feathers-authentication` plugin includes the following hooks to help with the authorization process. The most common scenario is that you simply want to restrict a service to only authenticated users. That can be done like so:
 
