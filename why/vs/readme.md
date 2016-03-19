@@ -14,11 +14,11 @@ If you find something invalid or out of date in the comparisons, please [create 
 
 #### Legend
 
-✅: Officially supported with a guide or core module
+✅ : Officially supported with a guide or core module
 
-❌: Not supported
+❌ : Not supported
 
-🤓: Community supported or left to developer
+🤓 : Community supported or left to developer
 
 <table>
     <thead>
