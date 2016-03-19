@@ -24,7 +24,7 @@ See [this section](http://docs.feathersjs.com/real-time/filtering.html).
 
 ## How do I access the request object in hooks or services?
 
-In short, you shouldn't need to. If you look at the [hooks chapter](../hooks.readme.md) you'll see all the params that are available on a hook.
+In short, you shouldn't need to. If you look at the [hooks chapter](../hooks/readme.md) you'll see all the params that are available on a hook.
 
 If you still need something from the request object (for example, the requesting IP address) you can simply tack it on to the `req.feathers` object [as described here](http://docs.feathersjs.com/middleware/express.html#setting-service-parameters).
 
