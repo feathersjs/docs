@@ -10,6 +10,16 @@ If you find something invalid or out of date in the comparisons, please [create 
 
 > Due to the fact that ease of implementation is subjective and primarily related to a developer's skill set and experience we only consider a feature supported if it is officially supported by the framework or platform, regardless of how easy it is to implement (aka. are there official plugins, guides or SDKs?).
 
+<!-- -->
+
+#### Legend
+
+✅: Officially supported with a guide or core module
+
+❌: Not supported
+
+🤓: Community supported or left to developer
+
 <table>
     <thead>
         <tr>
@@ -25,116 +35,116 @@ If you find something invalid or out of date in the comparisons, please [create 
     <tbody>
         <tr>
             <td><strong>REST API</strong></td>
-            <td>Yes</td>
-            <td>Yes</td>
-            <td>Yes</td>
-            <td>Yes</td>
-            <td>Yes</td>
-            <td>Yes</td>
+            <td>✅</td>
+            <td>✅</td>
+            <td>✅</td>
+            <td>✅</td>
+            <td>✅</td>
+            <td>✅</td>
         </tr>
         <tr>
             <td><strong>Real Time From Server</strong></td>
-            <td>Yes</td>
-            <td>No. Left to developer</td>
-            <td>Yes</td>
-            <td>Yes</td>
-            <td>Yes</td>
-            <td>No</td>
+            <td>✅</td>
+            <td>❌ 🤓</td>
+            <td>✅</td>
+            <td>✅</td>
+            <td>✅</td>
+            <td>❌</td>
         </tr>
         <tr>
             <td><strong>Real Time From Client</strong></td>
-            <td>Yes</td>
-            <td>No. Left to developer</td>
-            <td>Yes. Called DDP.</td>
-            <td>No. Left to developer</td>
-            <td>Yes</td>
-            <td>No</td>
+            <td>✅</td>
+            <td>❌ 🤓</td>
+            <td>✅ (DDP)</td>
+            <td>❌ 🤓</td>
+            <td>✅</td>
+            <td>❌</td>
         </tr>
         <tr>
             <td><strong>Universal JavaScript</strong></td>
-            <td>Yes</td>
-            <td>No</td>
-            <td>No</td>
-            <td>No</td>
-            <td>Yes</td>
-            <td>No</td>
+            <td>✅</td>
+            <td>❌</td>
+            <td>❌</td>
+            <td>❌</td>
+            <td>✅</td>
+            <td>❌</td>
         </tr>
         <tr>
             <td><strong>React Native Support</strong></td>
-            <td>Yes</td>
-            <td>No</td>
-            <td>No</td>
-            <td>No</td>
-            <td>No</td>
-            <td>No</td>
+            <td>✅</td>
+            <td>❌</td>
+            <td>❌</td>
+            <td>❌</td>
+            <td>❌</td>
+            <td>❌</td>
         </tr>
         <tr>
             <td><strong>Client Agnostic</strong></td>
-            <td>Yes</td>
-            <td>Yes</td>
-            <td>Yes and No. Can be hacked</td>
-            <td>Yes</td>
-            <td>Yes via SDKs and bindings</td>
-            <td>Yes</td>
+            <td>✅</td>
+            <td>✅</td>
+            <td>❌ 🤓</td>
+            <td>✅</td>
+            <td>✅ 🤓 (SDKs)</td>
+            <td>✅</td>
         </tr>
         <tr>
             <td><strong>Email/Password Auth</strong></td>
-            <td>Yes</td>
-            <td>No. Left to developer</td>
-            <td>Yes</td>
-            <td>No. Left to developer</td>
-            <td>Yes</td>
-            <td>Yes</td>
+            <td>✅</td>
+            <td>❌ 🤓</td>
+            <td>✅</td>
+            <td>❌ 🤓</td>
+            <td>✅</td>
+            <td>✅</td>
         </tr>
         <tr>
             <td><strong>Token Auth</strong></td>
-            <td>Yes</td>
-            <td>No. Left to developer</td>
-            <td>Yes</td>
-            <td>No. Left to developer</td>
-            <td>Yes</td>
-            <td>Yes</td>
+            <td>✅</td>
+            <td>❌ 🤓</td>
+            <td>✅</td>
+            <td>❌ 🤓</td>
+            <td>✅</td>
+            <td>✅</td>
         </tr>
         <tr>
             <td><strong>OAuth</strong></td>
-            <td>Yes</td>
-            <td>No. Left to developer</td>
-            <td>Yes</td>
-            <td>No. Left to developer</td>
-            <td>Yes</td>
-            <td>No</td>
+            <td>✅</td>
+            <td>❌ 🤓</td>
+            <td>✅</td>
+            <td>❌ 🤓</td>
+            <td>✅</td>
+            <td>❌</td>
         </tr>
         <tr>
             <td><strong>Self Hosted</strong></td>
-            <td>Yes</td>
-            <td>Yes</td>
-            <td>Yes</td>
-            <td>Yes</td>
-            <td>No</td>
-            <td>Yes</td>
+            <td>✅</td>
+            <td>✅</td>
+            <td>✅</td>
+            <td>✅</td>
+            <td>❌</td>
+            <td>✅</td>
         </tr>
         <tr>
             <td><strong>Hosting Support</strong></td>
-            <td>No</td>
-            <td>No</td>
-            <td>Yes</td>
-            <td>No</td>
-            <td>Yes</td>
-            <td>No</td>
+            <td>❌</td>
+            <td>❌</td>
+            <td>✅</td>
+            <td>❌</td>
+            <td>✅</td>
+            <td>❌</td>
         </tr>
         <tr>
             <td><strong>Pagination</strong></td>
-            <td>Yes</td>
-            <td>No. Left to developer</td>
-            <td>No. Left to developer</td>
-            <td>Yes</td>
-            <td>Yes</td>
-            <td>Yes</td>
+            <td>✅</td>
+            <td>❌ 🤓</td>
+            <td>❌ 🤓</td>
+            <td>✅</td>
+            <td>✅</td>
+            <td>✅</td>
         </tr>
         <tr>
             <td><strong>Databases</strong></td>
             <td>10+ databases. Multiple ORMs</td>
-            <td>No official. Many community modules and examples</td>
+            <td>❌ 🤓</td>
             <td>MongoDB</td>
             <td>10+ databases. 1 ORM</td>
             <td>Unknown</td>
@@ -142,48 +152,48 @@ If you find something invalid or out of date in the comparisons, please [create 
         </tr>
         <tr>
             <td><strong>Analytics</strong></td>
-            <td>No. Left to developer</td>
-            <td>No. Left to developer</td>
-            <td>No. Left to developer</td>
-            <td>No. Left to developer</td>
-            <td>Yes</td>
-            <td>Yes</td>
+            <td>❌ 🤓</td>
+            <td>❌ 🤓</td>
+            <td>❌ 🤓</td>
+            <td>❌ 🤓</td>
+            <td>✅</td>
+            <td>✅</td>
         </tr>
         <tr>
             <td><strong>Admin Dashboard</strong></td>
-            <td>No. Left to developer</td>
-            <td>No. Left to developer</td>
-            <td>No. Left to developer</td>
-            <td>No. Left to developer</td>
-            <td>Yes</td>
-            <td>No. Left to developer</td>
+            <td>❌ 🤓</td>
+            <td>❌ 🤓</td>
+            <td>❌ 🤓</td>
+            <td>❌ 🤓</td>
+            <td>✅</td>
+            <td>❌ 🤓</td>
         </tr>
         <tr>
             <td><strong>Push Notifications</strong></td>
-            <td>No. Left to developer</td>
-            <td>No. Left to developer</td>
-            <td>No. Left to developer</td>
-            <td>No. Left to developer</td>
-            <td>No</td>
-            <td>Yes</td>
+            <td>❌ 🤓</td>
+            <td>❌ 🤓</td>
+            <td>❌ 🤓</td>
+            <td>❌ 🤓</td>
+            <td>❌</td>
+            <td>✅</td>
         </tr>
         <tr>
             <td><strong>Offline Mode</strong></td>
-            <td>No. Left to developer</td>
-            <td>No. Left to developer</td>
-            <td>Yes</td>
-            <td>No. Left to developer</td>
-            <td>Yes</td>
-            <td>Yes</td>
+            <td>❌ 🤓</td>
+            <td>❌ 🤓</td>
+            <td>✅</td>
+            <td>❌ 🤓</td>
+            <td>✅</td>
+            <td>✅</td>
         </tr>
         <tr>
             <td><strong>Hot Code Push</strong></td>
-            <td>No. Left to developer</td>
-            <td>No. Left to developer</td>
-            <td>Yes</td>
-            <td>No. Left to developer</td>
-            <td>No</td>
-            <td>No</td>
+            <td>❌ 🤓</td>
+            <td>❌ 🤓</td>
+            <td>✅</td>
+            <td>❌ 🤓</td>
+            <td>❌</td>
+            <td>❌</td>
         </tr>
     </tbody>
 </table>
