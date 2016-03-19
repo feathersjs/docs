@@ -158,7 +158,7 @@ messageService.create({ text: 'Oh hai!'}).then(result => {
 
 A Feathers service can also be used with any other HTTP REST client. The following section describes what HTTP method, body and query parameters belong to which service method call.
 
-All query parameters in a URL will be set as `params.query`. Other service parameters can be set through [hooks](../hooks/readme.md) and [Express middleware](../middleware/exprss.md). URL query parameter values will always be strings. Conversion (e.g. the string `'true'` to boolean `true`) can be done in a hook as well.
+All query parameters in a URL will be set as `params.query`. Other service parameters can be set through [hooks](../hooks/readme.md) and [Express middleware](../middleware/express.md). URL query parameter values will always be strings. Conversion (e.g. the string `'true'` to boolean `true`) can be done in a hook as well.
 
 The body type for `POST`, `PUT` and `PATCH` requests is determined by the Express [body-parser](https://github.com/expressjs/body-parser) middleware which has to be registered *before* any service.
 
