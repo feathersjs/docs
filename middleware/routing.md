@@ -10,7 +10,7 @@ You can however add Express style parameters to your routes when you register a 
 
 ```js
 app.use('/users/:user_id/todos', {
-  find: function(params, calllback) {
+  find: function(params, callback) {
     // params.user_id == current user id
     // e.g. 1234 for /users/1234/todos
   },
