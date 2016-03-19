@@ -1,6 +1,6 @@
 # Real-time
 
-In Feathers, real-time means that [services](services.md) automatically send `created`, `updated`, `patched` and `removed` events when a `create`, `update`, `patch` or `remove` [service method](../services/readme.md) is complete. Clients can subscribe to those events via websockets through [Socket.io](socket-io.md) or [Primus](primus.md) and update themselves accordingly.
+In Feathers, real-time means that [services](../services/readme.md) automatically send `created`, `updated`, `patched` and `removed` events when a `create`, `update`, `patch` or `remove` [service method](../services/readme.md) is complete. Clients can subscribe to those events via websockets through [Socket.io](socket-io.md) or [Primus](primus.md) and update themselves accordingly.
 
 > **ProTip:** Events are not fired until all of your _after_ hooks have executed.
 
