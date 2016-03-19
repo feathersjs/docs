@@ -33,7 +33,7 @@ Next we'll be prompted to support [CORs](https://developer.mozilla.org/en-US/doc
 
 Now let's choose our database. You can see that Feathers supports a bunch through the generator and even more outside the generator. Let's use the default [NeDB](https://github.com/louischatriot/nedb). NeDB is a local file-system based database so we don't have to start a separate database server. You can find out more about our database adapters in the [Databases chapter](../databases/readme.md).
 
-Since pretty much every app needs authentication of some sort we generate almost everything you need to get going. You can learn more about authentication in Feathers by reading the [Authentication chapter](../../authentication/readme.md). In our case we will just use the default local authentication.
+Since pretty much every app needs authentication of some sort we generate almost everything you need to get going. You can learn more about authentication in Feathers by reading the [Authentication chapter](../../authentication/readme.html). In our case we will just use the default local authentication.
 
 Your options should all look like this and you should have seen that a whole bunch of files were created.
 
