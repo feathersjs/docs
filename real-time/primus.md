@@ -14,7 +14,7 @@ Here we also installed the `ws` module which will let us use plain websockets. N
 
 ```js
 const feathers = require('feathers');
-const primuse = require('feathers-primus');
+const primus = require('feathers-primus');
 
 const app = feathers().configure(primus({
   transformer: 'websockets'
