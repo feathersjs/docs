@@ -24,7 +24,7 @@ Most real-time frameworks only allow clients to be pushed data in real time. You
 
 Feathers is different. Feathers allows you to send **and** receive data over websockets, bringing real-time to the forefront and making your apps incredibly snappy.
 
-All of the Feathers ecosystem has been modeled around supporting real-time communication and making it a first class citizen instead of a hacky add on. You can even forgo REST altogether and simply use websockets to communicate with your app, making it ideal for real-time IoT devices, among other things.
+The whole Feathers ecosystem has been modeled around supporting real-time communication and making it a first class citizen instead of a hacky add-on. You can even forgo REST altogether and simply use websockets to communicate with your app, making it ideal for real-time IoT devices, among other things.
 
 ---
 
