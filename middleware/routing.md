@@ -23,7 +23,7 @@ app.use('/users/:user_id/todos', {
 
 > __Note:__ This route should be registered after the `/users` service.
 
-To make the user id part of `params.query` we can use a [before hook](../middleware/hooks.md):
+To make the user id part of `params.query` we can use a [before hook](../hooks/readme.md):
 
 ```js
 app.service('users/:user_id/todos').before({
