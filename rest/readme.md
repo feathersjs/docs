@@ -140,7 +140,7 @@ app.use('/users/:userId/todos', {
 app.listen(3030);
 ```
 
-You can see all the passed parameters by going to something like [localhost:3030/users/213/todos/23?complete=true&user\[\]=David&user\[\]=Eric&sort\[name\]=1](http://localhost:3030/users/213/todos/23?complete=true&user\[\]=David&user\[\]=Eric&sort\[name\]=1). More information on how services play with Express middleware, routing and versioning can be found in the [middleware chapter](../middleware/readme.md).
+You can see all the passed parameters by going to something like `http://localhost:3030/users/213/todos/23?complete=true&user[]=David&user[]=Eric&sort[name]=1`. More information on how services play with Express middleware, routing and versioning can be found in the [middleware chapter](../middleware/readme.md).
 
 ## Formatting the response
 
