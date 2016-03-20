@@ -1,4 +1,4 @@
-# Feathers + Socket.io
+# Feathers Client + Socket.io
 
 [With Socket.io configured on the server](../real-time/socket-io.md) service methods and events will be available through a websocket connection. While using the REST API and just listening to real-time events on a socket is possible, Feathers also allows to call service methods through a websocket which, in most cases will be faster than REST HTTP.
 

@@ -1,4 +1,4 @@
-# Primus + Feathers Client
+# Feathers Client + Primus
 
 Primus works very similar to [Socket.io](socket-io.md) but supports a number of different real-time libraries. [Once configured on the server](../real-time/primus.md) service methods and events will be available through a Primus socket connection. 
 

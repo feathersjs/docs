@@ -1,4 +1,4 @@
-# REST with Feathers Client
+# Feathers Client + REST
 
 Once [set up on the server](../rest/readme.md), there are several ways to connect to the REST API of a Feathers service. Keep in mind that while clients connected via websockets will receive real-time events from other REST API calls, you can't get real-time updates over the HTTP API without resorting to polling.
 
