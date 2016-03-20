@@ -1,6 +1,6 @@
 # Features
 
-Feathers provides a lot of the things that you need for building modern wweb and mobile applications. Here are some of the things that you get out of the box with Feathers. All of them are optional so you can choose exactly what yu need. No more, no less.
+Feathers provides a lot of the things that you need for building modern web and mobile applications. Here are some of the things that you get out of the box with Feathers. All of them are optional so you can choose exactly what you need. No more, no less.
 
 We like to think of Feathers as a _"batteries included but easily swappable"_ framework.
 
@@ -11,7 +11,7 @@ We like to think of Feathers as a _"batteries included but easily swappable"_ fr
   </tr>
   <tr>
     <td width="30%"><strong>Unparalleled Database Support</strong></td>
-    <td width="70%">With Feathers service adapters you can connect to all of the most popular databases, and query them with a unified interface no matter which one you use. You can even use entirely different DBs in the same app.</td>
+    <td width="70%">With Feathers service adapters you can connect to all of the most popular databases, and query them with a unified interface no matter which one you use. This makes it easy to swap databases and use entirely different DBs in the same app without changing your application code.</td>
   </tr>
   <tr>
     <td width="30%"><strong>Real Time</strong></td>
@@ -39,7 +39,7 @@ We like to think of Feathers as a _"batteries included but easily swappable"_ fr
   </tr>
   <tr>
     <td width="30%"><strong>Rate Limiting</strong></td>
-    <td width="70%">When an app goes to production you'll need to have some protection against denial of service attacks. With Feathers it's easy to add rate limiting at a service level.</td>
+    <td width="70%">When an app goes to production you'll need to have some protection against denial of service attacks. With Feathers it's easy to add Express middleware to do rate limiting at a service level.</td>
   </tr>
   <tr>
     <td width="30%"><strong>Error Handling</strong></td>

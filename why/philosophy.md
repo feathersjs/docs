@@ -57,6 +57,6 @@ Here's how we use some of the tech under the hood:
 - We wrap [Socket.io](http://socket.io/) or [Primus](https://github.com/primus/primus) as your websocket transport.
 - Our service adapters typically wrap mature ORMs like [mongoose](http://mongoosejs.com/), [sequelize](http://docs.sequelizejs.com/), [knex](http://knexjs.org/), or [waterline](https://github.com/balderdashy/waterline).
 - [npm](http://npmjs.org) for package management.
-- [passport](http://passportjs.org/) for much of [feathers-authentication](https://github.com/feathersjs/feathers-authentication) work.
+- [passport](http://passportjs.org/) for much of the [feathers-authentication](https://github.com/feathersjs/feathers-authentication) work.
 
-Now that you know a bit about where Feathers comes from [let's look at what Feathers provides](./vs/readme.md).
+Now that you know a bit about where Feathers comes from [let's look at what Feathers provides](fatures.md).

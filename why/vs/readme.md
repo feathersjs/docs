@@ -8,7 +8,7 @@ If you find something invalid or out of date in the comparisons, please [create 
 
 ## Feature Comparison
 
-> Due to the fact that ease of implementation is subjective and primarily related to a developer's skill set and experience we only consider a feature supported if it is officially supported by the framework or platform, regardless of how easy it is to implement (aka. are there official plugins, guides or SDKs?).
+> Due to the fact that ease of implementation is subjective and primarily related to a developer's skill-set and experience we only consider a feature supported if it is officially supported by the framework or platform, regardless of how easy it is to implement (aka. are there official plugins, guides or SDKs?).
 
 <!-- -->
 
