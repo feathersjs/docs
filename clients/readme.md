@@ -1,4 +1,4 @@
-# Feathers on the client
+# Connecting to a Feathers Server
 
 Now that we went over how to set up [REST](../rest/readme.md) and [real-time](../real-time/readme.md) APIs on the server we can look at how you can interact with a Feathers server from various clients. Feathers works great with any client that can connect through HTTP(S) to a REST API or websockets. It doesn't just have to be the [official Feathers client](feathers.md).
 
