@@ -15,7 +15,7 @@ To give you a better idea of how the Feathers client plays with other frameworks
 - [jQuery](../guides/jquery.md)
 - [React](../guides/react.md)
 
-You may find more details on integrating the Feathers client with other front-end frameworks[in the guides section](../guides/readme.md). We are adding new ones all the time! If you are having any trouble with your framework of choice, [create an issue](https://github.com/feathersjs/feathers/issues/new) and we'll try our best to help out.
+We are adding new [guides](../guides/readme.md) for new frameworks all the time! If you are having any trouble with your framework of choice, [create an issue](https://github.com/feathersjs/feathers/issues/new) and we'll try our best to help out.
 
 ### Caveats
 
