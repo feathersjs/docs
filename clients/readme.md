@@ -1,23 +1,23 @@
 # Feathers on the client
 
-Now that we went over how to set up [REST](../rest/readme.md) and [real-time](../real-time/readme.md) APIs on the server we can look at using Feathers on the client. Feathers works great with any client that can connect through HTTP/HTTPS to a REST API or websockets. Sometimes it is just a few lines of code to make an existing front-end turn real-time. 
+Now that we went over how to set up [REST](../rest/readme.md) and [real-time](../real-time/readme.md) APIs on the server we can look at how you can interact with a Feathers server from various clients. Feathers works great with any client that can connect through HTTP(S) to a REST API or websockets. It doesn't just have to be the [official Feathers client](feathers.md).
 
-Even better, Feathers itself can be used as a universal (isomorphic) client. That means that you can transparently connect to remote services and register your own services and hooks in the browser with any frontend framework like React, Angular, CanJS or Ember or non-browser JavaScript environments like React Native and other NodeJS servers.
+Even better, Feathers itself can be used as a universal (isomorphic) client. That means that you can easily connect to remote services, register your own client side services and hooks. The Feathers client works in the browser with any front-end framework or in any non-browser JavaScript environment like React Native and other NodeJS servers.
 
-In this chapter we will talk about how to use the [universal Feathers client](feathers.md) and how to talk to the [REST HTTP](rest.md) and websocket ([Socket.io](socket-io.md) and [Primus](primus.md)) APIs directly.
+In this chapter we will talk about the various ways you can talk to a Feathers server, either with the [universal Feathers client](feathers.md) or without.
 
 ## Framework support
 
-Because it is easy to integrate, Feathers does not have any official framework specific bindings. To give a better idea on how the Feathers client plays with other frameworks here are some [TodoMVC](http://todomvc.com/) examples that all connect to the same Feathers real-time API ([demo.feathersjs.com](http://demo.feathersjs.com)):
+Because it is easy to integrate, Feathers does not currently have any official framework specific bindings. Work on [iOS](https://github.com/feathersjs/feathers-ios) and [Android](https://github.com/feathersjs/feathers-android) SDKs are in progress.
 
-- [jQuery](http://feathersjs.github.io/todomvc/feathers/jquery/)
-- [React](http://feathersjs.github.io/todomvc/feathers/react/)
-- [Angular](http://feathersjs.github.io/todomvc/feathers/angularjs/)
-- [CanJS](http://feathersjs.github.io/todomvc/feathers/canjs/)
+To give you a better idea of how the Feathers client plays with other frameworks we've written some guides:
 
-You may also find more details on integrating the Feathers client [in the guides section](../guides/readme.md). If you are having any trouble with your framework of choice, [create an issue](https://github.com/feathersjs/feathers/issues/new) and we'll try our best to help out.
+- [jQuery](../guides/jquery.md)
+- [React](../guides/react.md)
 
-## No custom methods
+You may find more details on integrating the Feathers client with other front-end frameworks[in the guides section](../guides/readme.md). We are adding new ones all the time! If you are having any trouble with your framework of choice, [create an issue](https://github.com/feathersjs/feathers/issues/new) and we'll try our best to help out.
+
+### Caveats
 
 One important thing to know about Feathers is that it only exposes the official [service methods](../services/readme.md) to clients. While you can add and use any service method on the server, it is __not__ possible to expose those custom methods to clients.
 

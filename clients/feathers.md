@@ -2,7 +2,7 @@
 
 The Feathers client (`feathers/client`) module provides Feathers core functionality (registering and retrieving services, events etc.) without relying on Express. This makes it possible to use Feathers in any JavaScript environment like the browser, [React Native](https://facebook.github.io/react-native/) or other NodeJS servers and to transparently connect to and use services from a Feathers API server.
 
-If they are not universally usable already (like [feathers-hooks](../hooks/readme.md)), many plugins provide their own client modules:
+If they are not universally usable already (like [feathers-hooks](../hooks/readme.md)), many plug-ins provide their own client modules:
 
 - [`feathers-socketio/client`](socket-io.md)
 - [`feathers-primus/client`](primus.md)
@@ -16,7 +16,7 @@ If they are not universally usable already (like [feathers-hooks](../hooks/readm
   - [request](https://github.com/request/request)
   - Fetch: works in supported browsers, React Native or modules like [node-fetch](https://github.com/bitinn/node-fetch).
 
-## Usage in NodeJS or React Native
+## Usage in NodeJS, React Native or with Module Loaders
 
 For module loaders that support [NPM](https://www.npmjs.com/) like [Browserify](http://browserify.org/), [Webpack](https://webpack.github.io/) or [StealJS](http://stealjs.com) the Feathers client modules can be loaded individually. The following example sets up a Feathers client that uses a local Socket.io connection to communicate with remote services:
 
