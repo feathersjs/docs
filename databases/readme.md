@@ -27,4 +27,4 @@ Instead of coming up with our own ORM and validation system our official databas
 
 Every database adapter supports a common syntax for [pagination, sorting and selecting](pagination.md) and [advanced querying](querying.md) out of the box and can be [easily extended](extending.md) with custom functionality. Errors from the adapters (like ORM validation errors) will be passed seamlessly to clients.
 
-**This allows you to swap databases whenever the need arises without having to change any of your querying code and you can even use multiple databases within the same app!**
+This allows you to swap databases whenever the need arises **without having to change any of your querying code or validation hooks** and you can even use multiple databases within the same app!
