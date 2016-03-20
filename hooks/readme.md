@@ -1,6 +1,6 @@
 # Feathers Hooks
 
-`feathers-hooks` is a powerful plugin that allows to register composable middleware functions **before** or **after** a Feathers service method executes. This makes it easy to decouple things like authorization, data pre- or post processing or sending notifications like emails or text messages after something happened from the actual service logic.
+`feathers-hooks` is a powerful plug-in that allows you to register composable middleware functions **before** or **after** a Feathers service method executes. This makes it easy to decouple things like authorization, data pre-processing (sanitization), data post processing (serialization), or sending notifications like emails or text messages after something happened from the actual service logic.
 
 A hook is *provider independent* which means it does not matter if it has been called through REST, Socket.io, Primus or any other provider Feathers may support in the future.
 
