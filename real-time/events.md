@@ -1,6 +1,8 @@
 # Service Events
 
-Once registered through `app.use` or `app.service` (see the [API documentation](api.md) for more details), a Feathers service gets turned into an [EventEmitter](https://nodejs.org/api/events.html) that sends `created`, `updated`, `patched` and `removed` events when the respective service method returns successfully. On the server and [Feathers as the client](../clients/feathers.md) you can listen to them by getting the service object with `app.service('<servicepath>')` and using it like a normal event emitter.
+Once registered through `app.use`, a [Feathers service](../services/readme.md) gets turned into an [EventEmitter](https://nodejs.org/api/events.html) that sends `created`, `updated`, `patched` and `removed` events when the respective service method returns successfully. On the server and with the [Feathers client](../clients/feathers.md) you can listen to them by getting the service object with `app.service('<servicepath>')` and using it like a normal event emitter.
+
+> **ProTip:** Events are not fired until all of your _after_ hooks have executed.
 
 ### created
 
@@ -22,7 +24,7 @@ const messages = app.service('messages');
 messages.on('created', message => console.log('created', message));
 
 messages.create({
-  description: 'We have to do something!'
+  text: 'We have to do something!'
 });
 ```
 
@@ -50,11 +52,11 @@ messages.on('updated', message => console.log('updated', message));
 messages.on('patched', message => console.log('patched', message));
 
 messages.update(0, {
-  description: 'updated todo'
+  text: 'updated message'
 });
 
 messages.patch(0, {
-  description: 'patched todo'
+  text: 'patched message'
 });
 ```
 
@@ -78,16 +80,13 @@ messages.on('removed', messages => console.log('removed', messages));
 messages.remove(1);
 ```
 
-## Client-side events
+## Listening For Events
 
-To publish those events to other clients, Feathers currently supports two real-time providers (follow the links for the detailed documentation).
-
-* [Socket.io](socket-io.md) - Probably the most commonly used real-time library for NodeJS. It works on every platform, browser or device, focusing equally on reliability and speed.
-* [Primus](primus.md) - Is a universal wrapper for real-time frameworks that supports Engine.IO, WebSockets, Faye, BrowserChannel, SockJS and Socket.IO
+It is easy to listen for these events on the client or the server. Depending on the socket library you are using it is a bit different so refer to either the [Socket.io](socket-io.md) or [Primus](primus.md) docs.
 
 ## Custom events
 
-By default, real-time clients will only receive the standard service events. It is however possible to define a list of custom events on a service as `service.events` that should also be passed. For example, a payment service that sends status events to the client while processing a payment could look like this:
+By default, real-time clients will only receive the standard service events. However, it is possible to define a list of custom events on a service as `service.events` that should also be passed. For example, a payment service that sends status events to the client while processing a payment could look like this:
 
 ```js
 class PaymentService {
@@ -113,4 +112,6 @@ Now clients can listen to the `<servicepath> status` event. Custom events can be
 
 Binding to service events is great for logging or updating internal state. However, things like sending an email when creating a new user should be implemented through [hooks](../hooks/readme.md).
 
-The reason is that when scaling an application to multiple instances and synchronizing service events across those instances, listening to the event would execute the same action on every instance. With hooks it is also more easily possible to give feedback to the user when an error happened.
+The reason is that if you have multiple application instances of the same app, they will **all** be listening for, in this example, a `user created` event. All of their event handlers would be triggered and each app would send an email. Sending multiple emails to your user when they sign up (N X # of apps) is definitely not intended and not very scalable.
+
+Furthermore, with hooks it is much easier to give feedback to the user when an error happened.

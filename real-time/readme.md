@@ -1,9 +1,12 @@
 # Real-time
 
-In Feathers, real-time means that [services](../services/readme.md) automatically send `created`, `updated`, `patched` and `removed` events when a `create`, `update`, `patch` or `remove` [service method](../services/readme.md) is complete. Clients can subscribe to those events via websockets through [Socket.io](socket-io.md) or [Primus](primus.md) and update themselves accordingly.
+In Feathers, real-time means that [services](../services/readme.md) automatically send `created`, `updated`, `patched` and `removed` events when a `create`, `update`, `patch` or `remove` [service method](../services/readme.md) is complete. Clients can listen for these events and then react accordingly.
 
-> **ProTip:** Events are not fired until all of your _after_ hooks have executed.
+With Feathers websockets aren't just used for sending events from server to client. It is also possible to call service methods and send data over sockets, either from server-to-server or client-to-server. This is often much faster than going through the [REST](../rest/readme.md) API and results in a snappier app.
 
-Another great thing about Feathers is that websockets aren't just used for sending events. It is also possible to call service methods and send data over sockets. This is often much faster than going through the [REST](../rest/readme.md) API and results in a snappier app.
+Currently Feathers supports two websocket transport libraries:
 
-In this chapter we will look at how to use [Service events](events.md), how to configure the [Socket.io](socket-io.md) and [Primus](primus.md) real-time libraries and about how to [only send events to specific clients](filtering.md).
+- [Socket.io](socket-io.md) - Probably the most commonly used real-time library for NodeJS. It works on every platform, browser or device, focusing equally on reliability and speed.
+- [Primus](primus.md) - Is a universal wrapper for real-time frameworks that supports Engine.IO, WebSockets, Faye, BrowserChannel, SockJS and Socket.IO
+
+In this chapter we will look at how to use [Service events](events.md), how to configure the [Socket.io](socket-io.md) and [Primus](primus.md) real-time libraries and about how to [restrict sending events to specific clients](filtering.md).
