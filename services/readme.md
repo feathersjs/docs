@@ -2,6 +2,8 @@
 
 Services are the heart of every Feathers application. A service is simply a JavaScript object that offers one or more of the `find`, `get`, `create`, `update`, `remove` and `setup` service methods and can be used just like an [Express middleware](http://expressjs.com/en/guide/using-middleware.html) with `app.use('/path', serviceObject)`.
 
+## A Basic Example
+
 A Feathers application with a very simple service and the [REST provider](../rest/readme.md) set up can look like this:
 
 ```js
@@ -11,12 +13,13 @@ const rest = require('feathers-rest');
 const app = feathers();
 
 app.configure(rest());
-app.use('/todos', {
+app.use('/messages', {
   get(id, params) {
     return Promise.resolve({
       id,
-      params,
-      description: `You have to do ${id}!`
+      read: false,
+      text: `Feathers is great!`,
+      createdAt: new Date().getTime()
     });
   }
 });
@@ -31,52 +34,44 @@ $ npm install feathers feathers-rest
 $ node app.js
 ```
 
-When going to [localhost:3030/todos/dishes](http://localhost:3030/todos/dishes) you will see:
+When going to [localhost:3030/messages/1](http://localhost:3030/messages/1) you will see:
 
 ```json
 {
-  "id": "dishes",
-  "description": "You have to do dishes!",
-  "params": {
-    "provider": "rest",
-    "query": {}
-  }
+  "id": 1,
+  "read": false,
+  "text": "Feathers is great!",
+  "createdAt": 1458490631911
 }
 ```
 
-Adding query parameters, e.g. [localhost:3030/todos/dishes?name=David](http://localhost:3030/todos/dishes?name=David) will return this:
+Adding query parameters, e.g. [localhost:3030/messages?read=false](http://localhost:3030/messages?read=false) will return this:
 
 ```json
-{
-  "id": "dishes",
-  "description": "You have to do dishes!",
-  "params": {
-    "provider": "rest",
-    "query": {
-      "name": "David"
-    }
-  }
-}
+[{
+  "id": 1,
+  "read": false,
+  "text": "Feathers is great!",
+  "createdAt": 1458490631911
+}]
 ```
 
 ## Retrieving services
 
-When registering a service with `app.use('/my-service', myService)` Feathers makes a shallow copy of that object and adds its own functionality. This means that to use Feathers functionality (like [real-time events](../real-time/readme.md), [hooks](../hooks/readme.md) etc.) this object has to be used. It can be retrieved using `app.service` like this:
+When registering a service with `app.use('/messages', messageService)` Feathers makes a shallow copy of that object and adds its own functionality. This means that to use Feathers functionality (like [real-time events](../real-time/readme.md), [hooks](../hooks/readme.md) etc.) this object has to be used. It can be retrieved using `app.service` like this:
 
 ```js
-const todos = app.service('todos');
+const messages = app.service('messages');
 // also works with leading/trailing slashes
-const todos = app.service('/todos/');
+const messages = app.service('/messages/');
 
 // Now we can use it on the server
-todos.get('laundry').then(todo => console.log(todo.description));
+messages.get(1).then(message => console.log(message.text));
 ```
-
-> __Important:__ The original service object will not be modified and will never have any Feathers functionality.
 
 ## Service methods
 
-The complete list of service method signatures is as follows:
+Below is a description of the complete interface for a Feathers service:
 
 ```js
 const myService = {
@@ -110,25 +105,31 @@ class MyService {
 app.use('/my-service', new MyService());
 ```
 
+> **ProTip:** Methods are optional, and if a method is not implemented Feathers will automatically emit a `NotImplemented` error.
+
 Service methods should return a [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) and have the following parameters:
 
-- `id` the identifier for the resource. A resource is the data identified by a unique id.
-- `data` is the resource data
-- `params` can contain any extra parameters, for example the authenticated user. `params.query` contains the query parameters from the client (see the [REST](../rest/readme.md) and [real-time](../real-time/readme.md) providers).
-- `callback` is an optional callback that can be called instead of returning a Promise. It is a Node-style callback function following the `function(error, result) {}` convention.
+- `id` - the identifier for the resource. A resource is the data identified by a unique id.
+- `data` - is the resource data.
+- `params` - can contain any extra parameters, for example the authenticated user.
+- `callback` - is an optional callback that can be called instead of returning a Promise. It is a Node-style callback function following the `function(error, result) {}` convention.
+
+> **ProTip:** `params.query` contains the query parameters from the client (see the [REST](../rest/readme.md) and [real-time](../real-time/readme.md) providers), `params.data` contains any data submitted in a request body, and `params.result` contains any data returned from a data store after a service method has been called.
 
 These methods basically reflect a [CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete) interface:
 
-- `find(params [, callback])` retrieves a list of all resources from the service. Provider parameters will be passed as `params.query`.
-- `get(id, params [, callback])` retrieves a single resource with the given `id` from the service.
-- `create(data, params [, callback])` creates a new resource with `data`. The method should return a Promise with the newly created data. `data` may also be an array which creates and returns a list of resources.
-- `update(id, data, params [, callback])` replaces the resource identified by `id` with `data`. The method should return a Promise with the complete updated resource data. `id` can also be `null` when updating multiple records.
-- `patch(id, data, params [, callback])` merges the existing data of the resource identified by `id` with the new `data`. `id` can also be `null` indicating that multiple resources should be patched. The method should return with the complete updated resource data. Implement `patch` additionally to `update` if you want to separate between partial and full updates and support the `PATCH` HTTP method.
-- `remove(id, params [, callback])` removes the resource with `id`. The method should return a Promise with the removed resource. `id` can also be `null` indicating to delete multiple resources.
+- `find(params [, callback])` - retrieves a list of all resources from the service. Provider parameters will be passed as `params.query`.
+- `get(id, params [, callback])` - retrieves a single resource with the given `id` from the service.
+- `create(data, params [, callback])` - creates a new resource with `data`. The method should return a Promise with the newly created data. `data` may also be an array which creates and returns a list of resources.
+- `update(id, data, params [, callback])` - replaces the resource identified by `id` with `data`. The method should return a Promise with the complete updated resource data. `id` can also be `null` when updating multiple records.
+- `patch(id, data, params [, callback])` - merges the existing data of the resource identified by `id` with the new `data`. `id` can also be `null` indicating that multiple resources should be patched. The method should return with the complete updated resource data. Implement `patch` additionally to `update` if you want to separate between partial and full updates and support the `PATCH` HTTP method.
+- `remove(id, params [, callback])` - removes the resource with `id`. The method should return a Promise with the removed resource. `id` can also be `null` indicating to delete multiple resources.
 
 ## The `setup` method
 
-`setup(app, path)` initializes the service, passing an instance of the Feathers application and the path it has been registered on. `setup` is a great way to connect services:
+`setup(app, path)` is a special method that initializes the service, passing an instance of the Feathers application and the path it has been registered on. It is called automatically by Feathers when a service is registered.
+
+`setup` is a great place to initialize your service with any special configuration or if connecting services that are very tightly coupled (see below), as opposed to using [hooks](../hooks/readme.md).
 
 ```js
 // app.js
@@ -137,11 +138,13 @@ These methods basically reflect a [CRUD](https://en.wikipedia.org/wiki/Create,_r
 const feathers = require('feathers');
 const rest = require('feathers-rest');
 
-class TodoService {
+class MessageService {
   get(id, params) {
     return Promise.resolve({
       id,
-      description: `You have to ${id}!`
+      read: false,
+      text: `Feathers is great!`,
+      createdAt: new Date.getTime()
     });
   }
 }
@@ -152,25 +155,38 @@ class MyService {
   }
 
   get(name, params) {
-    const todos = this.app.service('todos');
+    const messages = this.app.service('messages');
     
-    return todos.get('take out trash')
-      .then(todo => {
-        return { name, todo };
+    return messages.get(1)
+      .then(message => {
+        return { name, message };
       });
   }
 }
 
 const app = feathers()
   .configure(rest())
-  .use('/todos', new TodoService())
+  .use('/messages', new MessageService())
   .use('/my-service', new MyService())
 
-app.listen(8000);
+app.listen(3030);
 ```
 
-You can see the combined response when going to [localhost:8000/my-service/test](http://localhost:8000/my-service/test).
+You can see the combined response when going to [localhost:3030/my-service/test](http://localhost:3030/my-service/test).
 
 ## Events
 
 Any registered service will automatically turn into an event emitter that emits events when a resource has changed, that is a `create`, `update`, `patch` or `remove` service call returned successfully. For more information about events, please follow up in the [real-time events chapter](../real-time/events.md).
+
+## Protecting Service Methods
+
+There are some times where you may want to use a service method inside your application or allow other servers in your cluster access to a method, but you don't want to expose a service method publicly. We've created [a bundled hook](../hooks/bundled.md#disable) that makes this really easy.
+
+```js
+const hooks = require('feathers-hooks');
+
+app.service('users').before({
+  // Users can not be created by external access
+  create: hooks.disable('external'),
+});
+```
