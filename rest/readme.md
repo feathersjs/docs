@@ -4,22 +4,22 @@ We have already seen in the [services chapter](../services/readme.md) that the [
 
 ```js
 const messageService = {
-  // GET /todos
+  // GET /messages
   find(params [, callback]) {},
-  // GET /todos/<id>
+  // GET /messages/<id>
   get(id, params [, callback]) {},
-  // POST /todos
+  // POST /messages
   create(data, params [, callback]) {},
-  // PUT /todos[/<id>]
+  // PUT /messages[/<id>]
   update(id, data, params [, callback]) {},
-  // PATCH /todos[/<id>]
+  // PATCH /messages[/<id>]
   patch(id, data, params [, callback]) {},
-  // DELETE /todos[/<id>]
+  // DELETE /messages[/<id>]
   remove(id, params [, callback]) {},
   setup(app, path) {}
 }
 
-app.service('/messages', messageService);
+app.use('/messages', messageService);
 ```
 
 A full overview of which HTTP method call belongs to which service method call and parameters can be found in the [REST client use](../clients/rest.md) chapter. This chapter will talk about how to use and configure the provider module on the server.
@@ -34,9 +34,9 @@ $ npm install feathers-rest body-parser
 
 We will have to provide our own body parser middleware (here the standard [Express 4 body-parser](https://github.com/expressjs/body-parser)) to make REST `.create`, `.update` and `.patch` calls parse the data in the HTTP body.
 
-> __ProTip:__ The body-parser middleware has to be registered *before* any service. Otherwise the service method will throw a `No data provided` or `First parameter for 'create' must be an object` error.
+> **ProTip:** The body-parser middleware has to be registered _before_ any service. Otherwise the service method will throw a `No data provided` or `First parameter for 'create' must be an object` error.
 
-If you would like to add other middleware *before* the REST handler, simply call `app.use(middleware)` before registering any services. The following example creates a messages service that can save a new message and return all messages:
+If you would like to add other middleware _before_ the REST handler, simply call `app.use(middleware)` before registering any services. The following example creates a messages service that can save a new message and return all messages:
 
 ```js
 // app.js
@@ -90,26 +90,34 @@ And should see the created message logged on the console. When going to [localho
 
 ## Query, route and middleware parameters
 
-URL query parameters will be parsed and passed to the service as `params.query`. For example
+URL query parameters will be parsed and passed to the service as `params.query`. For example:
 
 ```
-GET /todos?complete=true&user[]=David&user[]=Eric&sort[name]=1
+GET /messages?read=true&$sort[createdAt]=-1
 ```
 
 Will set `params.query` to
 
 ```js
 {
-  "complete": "true",
-  "user": [ "David", "Eric" ],
-  "sort": { "name": "1" }
+  "read": "true",
+  "$sort": { "createdAt": "-1" }
 }
 ```
 
-
 > **ProTip:** Since the URL is just a string, there will be **no type conversion**. This can be done manually in a [hook](../hooks/readme.md).
 
-For REST calls, `params.provider` will be set to `rest` (so you know where the service call came from). It is also possible to add information directly to the service `params` by registering Express middleware before a service that modifies the `req.feathers` property and to use URL parameters for REST API calls which will also be added to the params object:
+<!-- -->
+
+> **ProTip:** For REST calls, `params.provider` will be set to `rest` so you know which provider the service call came in on.
+
+<!-- -->
+
+> **ProTip:** It is also possible to add information directly to the `params` object by registering an Express middleware that modifies the `req.feathers` property. It must be registered **before** your services are.
+
+<!-- -->
+
+> **ProTip:** Route params will automatically be added to the `params` object.
 
 ```js
 const feathers = require('feathers');
@@ -123,16 +131,19 @@ app.configure(rest())
     next();
   });
 
-app.use('/users/:userId/todos', {
+app.use('/users/:userId/messages', {
   get(id, params) {
     console.log(params.query); // -> ?query
     console.log(params.provider); // -> 'rest'
     console.log(params.fromMiddleware); // -> 'Hello world'
-    console.log(params.userId); // will be `1` for GET /users/1/todos
+    console.log(params.userId); // will be `1` for GET /users/1/messages
 
     return Promise.resolve({
-      id, params,
-      description: `You have to do ${id}!`
+      id,
+      params,
+      read: false,
+      text: `Feathers is great!`,
+      createdAt: new Date.getTime()
     });
   }
 });
@@ -140,11 +151,11 @@ app.use('/users/:userId/todos', {
 app.listen(3030);
 ```
 
-You can see all the passed parameters by going to something like `http://localhost:3030/users/213/todos/23?complete=true&user[]=David&user[]=Eric&sort[name]=1`. More information on how services play with Express middleware, routing and versioning can be found in the [middleware chapter](../middleware/readme.md).
+You can see all the passed parameters by going to something like `localhost:3030/users/213/messages/23?read=false&$sort[createdAt]=-1]`. More information on how services play with Express middleware, routing and versioning can be found in the [middleware chapter](../middleware/readme.md).
 
-## Formatting the response
+## Customizing The Response Format
 
-The default REST handler is a middleware that formats the data retrieved by the service as JSON. If you would like to configure your own `handler` middleware just pass it to `rest(handler)`. This middleware will have access to `res.data` which is the data returned by the service. [res.format](http://expressjs.com/en/4x/api.html#res.format) can be used for content negotiation. For example, a middleware that just renders plain text with the todo description:
+The default REST response formatter is a middleware that formats the data retrieved by the service as JSON. If you would like to configure your own `formatter` middleware just pass it to `rest(formatter)`. This middleware will have access to `res.data` which is the data returned by the service. [res.format](http://expressjs.com/en/4x/api.html#res.format) can be used for content negotiation. For example, a middleware that just renders plain text with the Message text:
 
 ```js
 const feathers = require('feathers');
@@ -155,16 +166,16 @@ const app = feathers();
 function restFormatter(req, res) {
   res.format({
     'text/plain': function() {
-      res.end(`The todo is: ${res.data.description}`);
+      res.end(`The Message is: "${res.data.text}"`);
     }
   });
 }
   
 app.configure(rest(restFormatter))
-  .use('/todos', {
+  .use('/messages', {
     get(id, params) {
       return Promise.resolve({
-        description: `You have to do ${id}`
+        text: `Feathers is great!`
       });
     }
   });
@@ -172,4 +183,4 @@ app.configure(rest(restFormatter))
 app.listen(3030);
 ```
 
-Now going to [localhost:3030/todos/laundry](http://localhost:3030/todos/laundry) will print the plain text `The todo is: You have to do laundry`.
+Now going to [localhost:3030/messages/1](http://localhost:3030/messages/1) will print the plain text `The message is: "Feathers is great!"`.
