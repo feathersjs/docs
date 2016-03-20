@@ -8,4 +8,4 @@ Feathers is also universally usable and provides a [JavaScript client](../client
 - [React Feathers Chat](../guides/react.md)
 - [Feathers and Angular 2](../guides/angular2.md)
 
-If you don't see your favourite framework, do not despair! We have more information how to use a Feathers API on the client in the [Client Use chapter](../clients/readme.md) and we're always open for [suggestions and questions](../help/readme.md). If you think you can help write a guide, we'd also love to hear from you!
+If you don't see your favourite framework, do not despair! We have more information on how to use a Feathers API on the client in the [Client Use chapter](../clients/readme.md) and we're always open for [suggestions and questions](../help/readme.md). If you think you can help write a guide, we'd love to hear from you!

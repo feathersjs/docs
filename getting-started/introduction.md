@@ -12,7 +12,7 @@ Built on top of [Express](http://expressjs.com/), Feathers has embodied the same
 
 ## Modern Applications
 
-There is a lot to think about when building a modern application speed, maintainability, flexibility, accessibility, scalability, the list goes on.
+There is a lot to think about when building a modern application; speed, maintainability, flexibility, accessibility, scalability, the list goes on.
 
 We've tried to ease that pain by wrapping industry best practices into a _"Batteries included but easily swappable"_ package.
 
@@ -20,11 +20,13 @@ Out of the box Feathers provides a lot of [what you need](../why/readme.md) to b
 
 ## Real-time At The Core
 
-Most real-time frameworks only allow clients to be pushed data in real time. You interact with your server over REST and then receive events over websockets or, even worse, the client polls for changes.
+Most real-time* web frameworks only allow clients to be pushed data in real time. You interact with your server over REST and then receive events over websockets or, even worse, the client polls for changes (which isn't really real-time).
 
 Feathers is different. Feathers allows you to send **and** receive data over websockets, bringing real-time to the forefront and making your apps incredibly snappy.
 
 The whole Feathers ecosystem has been modeled around supporting real-time communication and making it a first class citizen instead of a hacky add-on. You can even forgo REST altogether and simply use websockets to communicate with your app, making it ideal for real-time IoT devices, among other things.
+
+> *We're not talking about [real-time computing](https://en.wikipedia.org/wiki/Real-time_computing) in the traditional sense, we're talking about being able to push and pull data without making multiple HTTP requests. Like every other "real time" web framework Feathers does not guarantee a response time.
 
 ---
 
