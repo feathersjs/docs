@@ -16,7 +16,7 @@ Retrieves a list of all matching resources from the service
 GET /messages?status=read&user=10
 ```
 
-Will call `messages.find({ query: { status: 'read', user: '10' } })`.
+Will call `messages.find({ query: { status: 'read', user: '10' } })` on the server.
 
 ### get
 
@@ -26,13 +26,13 @@ Retrieve a single resource from the service.
 GET /messages/1
 ```
 
-Will call `messages.get(1, {})`.
+Will call `messages.get(1, {})` on the server.
 
 ```
 GET /messages/1?fetch=all
 ```
 
-Will call `messages.get(1, { query: { fetch: 'all' } })`.
+Will call `messages.get(1, { query: { fetch: 'all' } })` on the server.
 
 ### create
 
@@ -43,7 +43,7 @@ POST /messages
 { "text": "I really have to iron" }
 ```
 
-Will call `messages.create({ "text": "I really have to iron" }, {})`.
+Will call `messages.create({ "text": "I really have to iron" }, {})` on the server.
 
 ```
 POST /messages
@@ -62,16 +62,16 @@ PUT /messages/2
 { "text": "I really have to do laundry" }
 ```
 
-Will call `messages.update(2, { "text": "I really have to do laundry" }, {})`. When no `id` is given by sending the request directly to the endpoint something like:
+Will call `messages.update(2, { "text": "I really have to do laundry" }, {})` on the server. When no `id` is given by sending the request directly to the endpoint something like:
 
 ```
 PUT /messages?complete=false
 { "complete": true }
 ```
 
-Will call `messages.update(null, { "complete": true }, { query: { complete: 'false' } })`.
+Will call `messages.update(null, { "complete": true }, { query: { complete: 'false' } })` on the server.
 
-> __Note:__ `update` is normally expected to replace an entire resource which is why the database adapters only support `patch` for multiple records.
+> **ProTip:** `update` is normally expected to replace an entire resource which is why the database adapters only support `patch` for multiple records.
 
 ### patch
 
@@ -82,14 +82,14 @@ PATCH /messages/2
 { "read": true }
 ```
 
-Will call `messages.patch(2, { "read": true }, {})`. When no `id` is given by sending the request directly to the endpoint something like:
+Will call `messages.patch(2, { "read": true }, {})` on the server. When no `id` is given by sending the request directly to the endpoint something like:
 
 ```
 PATCH /messages?complete=false
 { "complete": true }
 ```
 
-Will call `messages.patch(null, { complete: true }, { query: { complete: 'false' } })` to change the status for all read messages.
+Will call `messages.patch(null, { complete: true }, { query: { complete: 'false' } })` on the server to change the status for all read messages.
 
 This is supported out of the box by the Feathers [database adapters](../databases/readme.md) 
 

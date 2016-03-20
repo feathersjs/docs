@@ -26,7 +26,7 @@ primus.send('messages::find', { status: 'read', user: 10 }, (error, data) => {
 });
 ```
 
-Will call `messages.find({ query: { status: 'read', user: 10 } })`.
+Will call `messages.find({ query: { status: 'read', user: 10 } })` on the server.
 
 ### `get`
 
@@ -38,7 +38,7 @@ primus.send('messages::get', 1, (error, message) => {
 });
 ```
 
-Will call `messages.get(1, {})`.
+Will call `messages.get(1, {})` on the server.
 
 ```js
 primus.send('messages::get', 1, { fetch: 'all' }, (error, message) => {
@@ -46,7 +46,7 @@ primus.send('messages::get', 1, { fetch: 'all' }, (error, message) => {
 });
 ```
 
-Will call `messages.get(1, { query: { fetch: 'all' } })`.
+Will call `messages.get(1, { query: { fetch: 'all' } })` on the server.
 
 ### `create`
 
@@ -60,7 +60,7 @@ primus.send('messages::create', {
 });
 ```
 
-Will call `messages.create({ "text": "I really have to iron" }, {})`.
+Will call `messages.create({ "text": "I really have to iron" }, {})` on the server.
 
 ```js
 primus.send('messages::create', [
@@ -69,7 +69,7 @@ primus.send('messages::create', [
 ]);
 ```
 
-Will call `messages.create` with the array.
+Will call `messages.create` on the server with the array.
 
 ### `update`
 
@@ -83,7 +83,7 @@ primus.send('messages::update', 2, {
 });
 ```
 
-Will call `messages.update(2, { "text": "I really have to do laundry" }, {})`. The `id` can also be `null` to update multiple resources:
+Will call `messages.update(2, { "text": "I really have to do laundry" }, {})` on the server. The `id` can also be `null` to update multiple resources:
 
 ```js
 primus.send('messages::update', null, {
@@ -91,7 +91,7 @@ primus.send('messages::update', null, {
 }, { complete: false });
 ```
 
-Will call `messages.update(null, { "complete": true }, { query: { complete: 'false' } })`.
+Will call `messages.update(null, { "complete": true }, { query: { complete: 'false' } })` on the server.
 
 > __Note:__ `update` is normally expected to replace an entire resource which is why the database adapters only support `patch` for multiple records.
 
@@ -107,7 +107,7 @@ primus.send('messages::patch', 2, {
 });
 ```
 
-Will call `messages.patch(2, { "read": true }, {})`. The `id` can also be `null` to update multiple resources:
+Will call `messages.patch(2, { "read": true }, {})` on the server. The `id` can also be `null` to update multiple resources:
 
 ```js
 primus.send('messages::patch', null, {
@@ -119,7 +119,7 @@ primus.send('messages::patch', null, {
 });
 ```
 
-Will call `messages.patch(null, { complete: true }, { query: { complete: false } })` to change the status for all read messages.
+Will call `messages.patch(null, { complete: true }, { query: { complete: false } })` on the server to change the status for all read messages.
 
 This is supported out of the box by the Feathers [database adapters](../databases/readme.md) 
 
@@ -133,13 +133,13 @@ primus.send('messages::remove', 2, { cascade: true }, (error, message) => {
 });
 ```
 
-Will call `messages.remove(2, { query: { cascade: true } })`. The `id` can also be `null` to remove multiple resources:
+Will call `messages.remove(2, { query: { cascade: true } })` on the server. The `id` can also be `null` to remove multiple resources:
 
 ```js
 primus.send('messages::remove', null, { read: true });
 ```
 
-Will call `messages.remove(null, { query: { read: 'true' } })` to delete all read messages.
+Will call `messages.remove(null, { query: { read: 'true' } })` on the server to delete all read messages.
 
 
 ### Listening to events
