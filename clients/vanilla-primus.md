@@ -93,7 +93,7 @@ primus.send('messages::update', null, {
 
 Will call `messages.update(null, { "complete": true }, { query: { complete: 'false' } })` on the server.
 
-> __Note:__ `update` is normally expected to replace an entire resource which is why the database adapters only support `patch` for multiple records.
+> **ProTip:** `update` is normally expected to replace an entire resource which is why the database adapters only support `patch` for multiple records.
 
 ### `patch`
 
