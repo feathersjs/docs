@@ -1,6 +1,10 @@
 # Services
 
-Services are the heart of every Feathers application. A service is simply a JavaScript object that offers one or more of the `find`, `get`, `create`, `update`, `remove` and `setup` service methods and can be used just like an [Express middleware](http://expressjs.com/en/guide/using-middleware.html) with `app.use('/path', serviceObject)`.
+Services are the heart of every Feathers application. A service is simply a JavaScript object that offers one or more of the `find`, `get`, `create`, `update`, `remove` and `setup` service methods and can be used just like an [Express middleware](http://expressjs.com/en/guide/using-middleware.html) with:
+
+```js
+ app.use('/path', serviceObject)
+```
 
 ## A Basic Example
 
