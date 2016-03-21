@@ -14,7 +14,7 @@ There are a few hooks included in the `feathers-hooks` module that are available
 
 The `populate` after hook uses a property from the result (or every item if it is a list) to retrieve a single related entry from a service.
 
-```
+```js
 const hooks = require('feathers-hooks');
 
 // Given a `user_id` in a message, retrieve the user and
