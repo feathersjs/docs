@@ -1,4 +1,4 @@
-# Server Side Rendering With Feathers
+# Using A View Engine
 
 Since Feathers is just an extension of Express it's really simple to do server side rendering. There are a few different ways that you can structure your app so this guide will show you 3 typical ways you might have your Feathers app organized.
 
