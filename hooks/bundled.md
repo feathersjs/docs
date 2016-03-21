@@ -68,15 +68,15 @@ app.service('users').before({
 
 ## Lowercase
 
-`lowercase(fields)`
+`lowerCase(fields)`
 
-Lowercase the given fields either in the data submitted (as a `before` hook for `create`, `update` or `patch`) or in the result (as an `after` hook). If the data is an array or a paginated `find` result the hook will lower case the field for every item.
+Lowercase the given fields either in the data submitted (as a `before` hook for `create`, `update` or `patch`) or in the result (as an `after` hook). If the data is an array or a paginated `find` result the hook will lowercase the field for every item.
 
 ```js
 const hooks = require('feathers-hooks');
 
 // lowercase the `email` and `password` field before a user is created
 app.service('users').before({
-  create: hooks.lowercase('email', 'username')
+  create: hooks.lowerCase('email', 'username')
 });
 ```
