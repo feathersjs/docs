@@ -49,7 +49,7 @@ If you find something invalid or out of date in the comparisons, please [create 
             <td>✅</td>
             <td>✅</td>
             <td>✅</td>
-            <td>❌</td>
+            <td>✅</td>
         </tr>
         <tr>
             <td><strong>Real Time From Client</strong></td>
@@ -76,7 +76,7 @@ If you find something invalid or out of date in the comparisons, please [create 
             <td>❌ 🤓</td>
             <td>❌</td>
             <td>❌</td>
-            <td>❌</td>
+            <td>✅</td>
         </tr>
         <tr>
             <td><strong>Client Agnostic</strong></td>
