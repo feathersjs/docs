@@ -166,7 +166,7 @@ If you find something invalid or out of date in the comparisons, please [create 
             <td>❌ 🤓</td>
             <td>❌ 🤓</td>
             <td>✅</td>
-            <td>❌ 🤓</td>
+            <td>✅</td>
         </tr>
         <tr>
             <td><strong>Push Notifications</strong></td>
