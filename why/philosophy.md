@@ -59,4 +59,4 @@ Here's how we use some of the tech under the hood:
 - [npm](http://npmjs.org) for package management.
 - [passport](http://passportjs.org/) for much of the [feathers-authentication](https://github.com/feathersjs/feathers-authentication) work.
 
-Now that you know a bit about where Feathers comes from [let's look at what Feathers provides](fatures.md).
+Now that you know a bit about where Feathers comes from [let's look at what Feathers provides](features.md).
