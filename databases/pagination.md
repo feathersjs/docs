@@ -77,18 +77,14 @@ query: {
 
 ### `$select`
 
-`$select` support in a query allows you to pick which fields to include or exclude in the results.
+`$select` support in a query allows you to pick which fields to include in the results.
 
 ```
-// Only retrieve name.
+// Only retrieve `name` and `id`
 query: {
   name: 'Alice',
-  $select: {'name': 1}
-}
-
-// Retrieve everything except age.
-query: {
-  name: 'Alice',
-  $select: {'age': 0}
+  $select: ['id', 'name']
 }
 ```
+
+To exclude fields from a result the [remove hook](../hooks/bundled.md#remove) can be used.
