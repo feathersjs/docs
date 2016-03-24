@@ -2,7 +2,9 @@
 
 {% youtube %}https://www.youtube.com/watch?v=CuM4vLkBaik{% endyoutube %}
 
-> Mad ❤️ to [Chris Pena](https://twitter.com/dev_coffee) for putting together the video.
+> Mad ♥️ to [Chris Pena](https://twitter.com/dev_coffee) for putting together the video.
+
+---
 
 With [NodeJS](https://nodejs.org) installed, you can quickly scaffold your first REST and real-time API by following these few steps:
 
