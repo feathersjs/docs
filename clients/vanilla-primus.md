@@ -1,6 +1,6 @@
 # Vanilla Primus
 
-Primus works very similar to [Socket.io](socket-io.md) but supports a number of different real-time libraries. [Once configured on the server](../real-time/primus.md) service methods and events will be available through a Primus socket connection. 
+Primus works very similar to [Socket.io](vanilla-socket-io.md) but supports a number of different real-time libraries. [Once configured on the server](../real-time/primus.md) service methods and events will be available through a Primus socket connection. 
 
 ## Establishing the connection
 

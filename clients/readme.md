@@ -1,10 +1,16 @@
 # Connecting to a Feathers Server
 
-Now that we went over how to set up [REST](../rest/readme.md) and [real-time](../real-time/readme.md) APIs on the server we can look at how you can interact with a Feathers server from various clients. Feathers works great with any client that can connect through HTTP(S) to a REST API or websockets. It doesn't just have to be the [official Feathers client](feathers.md).
+Now that we went over how to set up [REST](../rest/readme.md) and [real-time](../real-time/readme.md) APIs on the server we can look at how you can interact with a Feathers server from various clients. 
 
-Even better, Feathers itself can be used as a universal (isomorphic) client. That means that you can easily connect to remote services, register your own client side services and hooks. The Feathers client works in the browser with any front-end framework or in any non-browser JavaScript environment like React Native and other NodeJS servers.
+## Feathers as the client
 
-In this chapter we will talk about the various ways you can talk to a Feathers server, either with the [universal Feathers client](feathers.md) or without.
+Feathers itself can be used as a universal (isomorphic) client. That means that you can easily connect to remote services and register your own client side services and hooks. The Feathers client works in the browser with any front-end framework or in non-browser JavaScript environments like React Native and other NodeJS servers.
+
+In the [Feathers client chapter](feathers.md) we will talk about how to use Feathers as a client in different environments and get it to connect to a Feathers server via [REST](rest.md), [Socket.io](socket-io.md) and [Primus](primus.md).
+
+## Direct communication
+
+In order to communicate with a Feathers API you don't need to use Feathers as the client. A Feathers server works great with any client that can connect through HTTP(S) to a REST API or - to also get real-time events - websockets. In the chapter for [direct communication](vanilla.md) we will look at how to directly communicate with a Feathers API via [REST](vanilla-rest.md), [Socket.io](vanilla-socket-io.md) and [Primus](primus.md).
 
 ## Framework support
 
