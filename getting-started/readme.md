@@ -7,3 +7,8 @@ Well alright! Let's build our first Feathers app! We're going to build a real-ti
 In this tutorial you go from nothing to a real-time chat app complete with signup, login, token based authentication, authorization, with a RESTful API and a working front-end. [Let's get started](./scaffolding.md).
 
 You can find a complete working example [here](https://github.com/feathersjs/feathers-chat).
+
+[Chris Pena](https://twitter.com/dev_coffee) also put together a little video introducing Feathers.
+
+
+{% youtube %}https://www.youtube.com/watch?v=CuM4vLkBaik{% endyoutube %}
