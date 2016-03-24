@@ -79,4 +79,4 @@ In the browser a client that connects to the local server via websockets can be 
 </script>
 ```
 
-In the following chapters we will discuss the different ways to use the Feathers as a client via [REST](rest.md), [Socket.io](socket-io.md) and [Primus](primus.md).
+In the following chapters we will discuss the different ways to connect to a Feathers server via [REST](rest.md), [Socket.io](socket-io.md) and [Primus](primus.md).

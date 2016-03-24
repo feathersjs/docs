@@ -10,7 +10,7 @@ In the [Feathers client chapter](feathers.md) we will talk about how to use Feat
 
 ## Direct communication
 
-Feathers as the client is not required to use a Feathers API. A Feathers server works great with any client that can connect through HTTP(S) to a REST API or - to also get real-time events - websockets. In the chapter for [direct communication](vanilla.md) we will look at how to directly communicate with a Feathers API via [REST](vanilla-rest.md), [Socket.io](vanilla-socket-io.md) and [Primus](primus.md).
+In order to communicate with a Feathers API you don't need to use Feathers as the client. A Feathers server works great with any client that can connect through HTTP(S) to a REST API or - to also get real-time events - websockets. In the chapter for [direct communication](vanilla.md) we will look at how to directly communicate with a Feathers API via [REST](vanilla-rest.md), [Socket.io](vanilla-socket-io.md) and [Primus](primus.md).
 
 ## Framework support
 
