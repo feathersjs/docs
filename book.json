@@ -6,7 +6,8 @@
     "collapsible-menu",
     "heading-anchors",
     "edit-link",
-    "ga"
+    "ga",
+    "youtube"
   ],
   "pluginsConfig": {
     "edit-link": {
