@@ -1,10 +1,10 @@
 # LevelUP
 
-[feathers-levelup](https://github.com/feathersjs/feathers-levelup) is a database adapter for the fast and simple [LevelDB](https://github.com/google/leveldb), though many other backing stores are supported by supplying alternate backing stores to your [LevelUP](https://github.com/Level/levelup) instances. 
+[feathers-levelup](https://github.com/feathersjs/feathers-levelup) is a database adapter for the fast and simple [LevelDB](https://github.com/google/leveldb), though many other backing stores are supported by supplying options to your [LevelUP](https://github.com/Level/levelup) instances.
 
 LevelUP backing store &rarr; LevelUP instance &rarr; Feathers service
 
-LevelDB is a key-value database that stores its keys in lexicographical order, allowing for efficient range queries over keys. Because LevelDB can only stream results in the order they are stored, avoid using `$sort` in your `find` calls, as the entire keyspace may be loaded in order to perform an in-memory sort. Read further to learn about ordering your LevelDB keys and designing your application around efficient range queries.
+LevelDB is a key-value database that stores its keys in lexicographical order, allowing for efficient range queries. Because LevelDB can only stream results in the order they are stored, avoid using `$sort` in your `find` calls, as the entire keyspace may be loaded for an in-memory sort. Read further to learn about ordering your LevelDB keys and designing your application around efficient range queries.
 
 LevelUP currently supports the following backing stores:
 
