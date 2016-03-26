@@ -12,7 +12,7 @@ You can easily create an localstorage service with no options:
 
 ```js
 const localstorage = require('feathers-localstorage');
-app.use('/messages', localstorage(storage: window.localStorage));
+app.use('/messages', localstorage({ storage: window.localStorage }));
 ```
 
 This will create a `messages` datastore with the default configuration.
@@ -39,7 +39,7 @@ The following options can be passed when creating a new localstorage service:
   var app = feathers()
     .configure(feathers.hooks())
     .configure(feathers.socketio(socket))
-    .use('messages', localstorage(storage: window.localStorage));
+    .use('messages', localstorage({ storage: window.localStorage }));
 
   var localMessageService = app.service('messages');
 
