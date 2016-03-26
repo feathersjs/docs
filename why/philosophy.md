@@ -5,7 +5,7 @@ We know! You're probably screaming _"Not another JavaScript framework!"_. We've 
 With this experimentation Feathers has grown into what it is today. Our core philosophy that guides Feathers is still the same as it was years ago:
 
 > _"Monolithic apps fall apart at scale. What if we could make it easy to build service oriented applications from day one rather than having to start with a large application and go through the painful process of breaking it apart? This is usually a result of inflexible frameworks and technical debt._
-> 
+>
 > _A framework itself should not be opinionated. It should be made up of small, reusable, optional components that do one thing well but are combined in an opinionated way. By keeping the components of your application small, flexible and optional you eliminate much of the engineering obstacles that prevent moving fast and scaling."_
 
 We strongly believe that your UI, data and business logic are the core of any web or mobile application and your framework should take care of the rest so you can focus on the things that matter.
@@ -53,7 +53,7 @@ Because we utilize some already proven modules, we spend less time re-inventing 
 Here's how we use some of the tech under the hood:
 
 - Feathers extends [Express 4](http://expressjs.com), the most popular web framework for [NodeJS](http://nodejs.org/).
-- Our CLI tool extends [Yeoman](http://yeoman.io/)
+- Our CLI tool extends [Vorpal](vorpal.js.org), its generators are built with [Yeoman](http://yeoman.io/).
 - We wrap [Socket.io](http://socket.io/) or [Primus](https://github.com/primus/primus) as your websocket transport.
 - Our service adapters typically wrap mature ORMs like [mongoose](http://mongoosejs.com/), [sequelize](http://docs.sequelizejs.com/), [knex](http://knexjs.org/), or [waterline](https://github.com/balderdashy/waterline).
 - [npm](http://npmjs.org) for package management.

@@ -7,7 +7,7 @@ In the [previous section](user-management.md) we set up authentication, a signup
 Adding information like the current user and the creation time can be done by creating our own `before` hook. Hooks are a powerful way to register composable middleware before and after a service method runs. You can learn more about it in the [hooks chapter](../hooks/readme.md). To generate a new hook run:
 
 ```
-$ yo feathers:hook
+$ feathers generate hook
 ```
 
 ### Gravatar profile images
@@ -69,7 +69,7 @@ Now we can update `src/services/message/hooks/process.js` to:
 'use strict';
 
 // src/services/message/hooks/process.js
-// 
+//
 // Use this hook to manipulate incoming or outgoing data.
 // For more information on hooks see: http://docs.feathersjs.com/hooks/readme.html
 
@@ -149,7 +149,7 @@ As you can see, manipulating data is pretty easy with hooks. To improve portabil
 
 ## Message authorization
 
-We've seen how Hooks can be used to manipulate data but they can also be used for permissions and validations. We need one last hook that makes sure that users can only `remove`, `update` and `patch` their own message (see [the services chapter](../services/readme.md) for more information about those methods). 
+We've seen how Hooks can be used to manipulate data but they can also be used for permissions and validations. We need one last hook that makes sure that users can only `remove`, `update` and `patch` their own message (see [the services chapter](../services/readme.md) for more information about those methods).
 
 Let's create a `restrict-to-sender` _before_ hook for the `message` service that runs before those methods. Now change the file at `src/services/message/hook/restrict-to-sender.js` to:
 
