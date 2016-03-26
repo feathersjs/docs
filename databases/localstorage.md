@@ -39,7 +39,7 @@ The following options can be passed when creating a new localstorage service:
   var app = feathers()
     .configure(feathers.hooks())
     .configure(feathers.socketio(socket))
-    .use('messages', localstorage({ storage: window.localStorage }));
+    .use('messages', feathers.localstorage({ storage: window.localStorage }));
 
   var localMessageService = app.service('messages');
 
