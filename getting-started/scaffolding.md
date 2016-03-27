@@ -7,7 +7,7 @@ In this part we're going to scaffold a Feathers app, create our first service, s
 Make sure you have [NodeJS](https://nodejs.org) and [NPM](http://npmjs.org) installed and available on the command line as `node` and `npm`. Then we can install the Yeoman and the Feathers generator.
 
 ```
-$ npm install -g yo generator-feathers
+$ npm install -g feathers-cli
 ```
 
 Create a directory for our new app:
@@ -20,7 +20,7 @@ $ cd feathers-chat/
 Generate your app and follow the prompts.
 
 ```
-$ yo feathers
+$ feathers generate
 ```
 
 When presented with the project name just hit enter.
@@ -44,7 +44,7 @@ NPM will do it's thing and install all our dependencies. This can take a minute 
 Now our app is ready to go but let's add a Message service for our chat app:
 
 ```
-$ yo feathers:service
+$ feathers generate service
 ```
 
 The name should be `message` and the other options can be accepted with their default value (we will add authorization in the next chapter):
@@ -102,12 +102,12 @@ Add the following to `public/index.html` before the `</body>` tag:
   // Retrieve a connection to the /messages service on the server
   // This service will use websockets for all communication
   var messages = app.service('messages');
-  
+
   // Listen for when a new message has been created
   messages.on('created', function(message) {
     console.log('Someone created a message', message);
   });
-  
+
   // Create a new message on the service
   messages.create({ text: 'Hello from websocket!' });
 </script>

@@ -11,7 +11,7 @@ With [NodeJS](https://nodejs.org) installed, you can quickly scaffold your first
 1. Install Yeoman and the Feathers generator.
 
     ```
-    $ npm install -g yo generator-feathers
+    $ npm install -g feathers-cli
     ```
 
 2. Create a directory for your new app.
@@ -24,13 +24,13 @@ With [NodeJS](https://nodejs.org) installed, you can quickly scaffold your first
 3. Generate the app and confirm all the prompts with the default by pressing enter:
 
     ```
-    $ yo feathers
+    $ feathers generate
     ```
 
 4. Generate a new service. When asked `What do you want to call your service?`, type `message` and confirm the other prompts with the default:
 
     ```
-    $ yo feathers:service
+    $ feathers generate service
     ```
 
 5. Start your brand new app! 💥
