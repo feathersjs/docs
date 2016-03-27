@@ -11,7 +11,7 @@ Koa is a *"next generation web framework for Node.JS"* using ES6 generator funct
 Yes and no. You can create custom methods but they won't be exposed over sockets automatically and they won't be mapped to a REST verb (GET, POST, PUT, PATCH, DELETE). See [this section](http://docs.feathersjs.com/clients/readme.html#no-custom-methods) for more detail.
 
 ## How can I do custom methods like `findOrCreate`?
-Custom functionality can almost always be mapped to a REST verb.  For example, `findOrCreate` can be implemented as a before-hook on the service's `get` method.  See this gist for an example of how to implement this in a before-hook: https://gist.github.com/marshallswain/9fa3b1e855633af00998
+Custom functionality can almost always be mapped to an existing service method using hooks.  For example, `findOrCreate` can be implemented as a before-hook on the service's `get` method.  See this gist for an example of how to implement this in a before-hook: https://gist.github.com/marshallswain/9fa3b1e855633af00998
 
 ## How do I do nested routes?
 
