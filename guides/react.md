@@ -42,7 +42,7 @@ All of the following code should go in `public/app.jsx` which the HTML file alre
 
 ```javascript
 // A placeholder image if the user does not have one
-const PLACEHOLDER = 'placeholder.png';
+const PLACEHOLDER = 'https://placeimg.com/60/60/people';
 // An anonymous user if the message does not have that information
 const dummyUser = {
   avatar: PLACEHOLDER,
@@ -234,7 +234,7 @@ app.authenticate().then(() => {
   ReactDOM.render(<div id="app" className="flex flex-column">
     <header className="title-bar flex flex-row flex-center">
       <div className="title-wrapper block center-element">
-        <img className="logo" src="http://feathersjs.com/img/feathers-logo-wide.png" 
+        <img className="logo" src="http://feathersjs.com/img/feathers-logo-wide.png"
           alt="Feathers Logo" />
         <span className="title">Chat</span>
       </div>
