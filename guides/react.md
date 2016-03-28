@@ -38,7 +38,7 @@ React and the Feathers client modules can be loaded individually via [npm](https
 
 ## Application Bootstrap
 
-All of the following code should go in `public/app.jsx` which the HTML file already loads. The first step is to add a placeholder user in the event that a user image or other user information doesn't exist:
+All of the code examples that follow should be appended to the `public/app.jsx` file, which the HTML file already loads. The first step is to add a placeholder user in the event that a user image or other user information doesn't exist:
 
 ```javascript
 // A placeholder image if the user does not have one
@@ -50,7 +50,7 @@ const dummyUser = {
 };
 ```
 
-Now we can set up the Socket.io connection and the Feathers app:
+Now we can add this code to set up the Socket.io connection and the Feathers app:
 
 ```javascript
 // Establish a Socket.io connection
