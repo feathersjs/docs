@@ -194,3 +194,7 @@ app.service('users').before({
   create: hooks.disable('external'),
 });
 ```
+
+## Extending or Customizing Services
+
+Services are really easy to create on their own but you can also customize an existing service by extending it in a few different ways. You can learn more by checking out the [Extending Database Adapters](../databases/extending.md) section.
