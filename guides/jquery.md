@@ -80,10 +80,10 @@ Our chat functionality will live in `public/app.js`. First, let's create some fu
 'use strict';
 
 // A placeholder image if the user does not have one
-const PLACEHOLDER = 'placeholder.png';
+const PLACEHOLDER = 'https://placeimg.com/60/60/people';
 // An anonymous user if the message does not have that information
 const dummyUser = {
-  avatar: PLACEHOLDER,
+  image: PLACEHOLDER,
   email: 'Anonymous'
 };
 // The total number of users
