@@ -8,7 +8,7 @@ Although a new user can be created by POSTing to the `/users` endpoint, we're go
 
 In this example the fields required for creating a user are `email` and `password`. Feathers automatically hashes passwords using [bcrypt](https://www.npmjs.com/package/bcryptjs).
 
-Feathers Authentication uses [JSON webtoken (JWT)](https://jwt.io/) for secure authentication between a client and server as opposed to cookies and sessions. After we create a user, we'll need to POST the `email` and `password` to the `http://localhost:3030/auth/local` endpoint set up by Feathers authentication. The response will return the authenticated user and their token.
+Feathers Authentication uses [JSON webtoken (JWT)](https://jwt.io/) for secure authentication between a client and server as opposed to cookies and sessions. After we create a user, we'll be able to login.  All we'll need to do is POST the `email` and `password` to the `http://localhost:3030/auth/local` endpoint set up by Feathers authentication. The response will return the authenticated user and their token.
 
 This token needs to be set in the `Authorization` header for any subsequent requests that require authentication. You can find more details in the [authentication chapter](../authentication/readme.md).
 
