@@ -4,7 +4,7 @@ In [the previous section](scaffolding.md) we set up a Message service with a `/m
 
 ## Creating and authenticating users
 
-Although a new user can be created by POSTing to the `/users` endpoint, we're going to create a separate `/signup` endpoint to keep things explicit and also show how you can use regular Express middleware with Feathers.
+Although a new user can be created by POSTing to the `/users` endpoint, we're going to create a separate `/signup` endpoint.  This will keep things explicit and also show how you can use regular Express middleware with Feathers.
 
 In this example the fields required for creating a user are `email` and `password`. Feathers automatically hashes passwords using [bcrypt](https://www.npmjs.com/package/bcryptjs).
 
