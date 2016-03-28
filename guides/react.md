@@ -124,7 +124,7 @@ const UserList = React.createClass({
         {users.map(user =>
           <li>
             <a className="block relative" href="#">
-              <img src={user.avatar || PLACEHOLDER} className="avatar" />
+              <img src={user.image || PLACEHOLDER} className="avatar" />
               <span className="absolute username">{user.email}</span>
             </a>
           </li>
