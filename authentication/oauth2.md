@@ -40,11 +40,16 @@ All of the top level authentication options are passed to an OAuth2 authenticati
 - `strategy` (**required**) - The Passport OAuth strategy for your oauth provider (ie. passport-facebook)
 - `tokenStrategy` [optional] - The Passport OAuth token strategy if you want to support mobile authentication without a browser.
 - `passReqToCallback` (default: true) [optional] - A Passport option to pass the request object to the oauth callback handler.
+- `endPoint` (default: '/auth/<provider_name>') [optional] - This is the endpoint that your OAuth2 provider service is located at. For example, `/auth/facebook`.
 - `callbackSuffix` (default: 'callback') [optional] - This gets added to the provider endpoint to form the callback url. For example `/auth/facebook/callback`.
 
 > **ProTip:** Feathers just uses [Passport](http://passportjs.org/) authentication strategies so you can pass any strategy specific options in your provider config and it will be automatically passed on to the strategy you are using.
 
 ### Client Side
+
+Typically the only thing you need to do client-side is have a link or a redirect to your authentication provider's endpoint (ie. `/auth/facebook`). 
+
+The Feathers server will handle all the OAuth2 redirects, verification and will do a final redirect to the `successRedirect` endpoint, which by default is `/auth/success`. From there you would load your client side app and read the JWT token from the cookie and use it to authenticate. Using the Feathers client this all handled for you. It parses the JWT out of the cookie and places it in local storage. You simply need to call `app.authenticate()`.
 
 #### Using Feathers Client
 
