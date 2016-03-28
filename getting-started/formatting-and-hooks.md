@@ -100,7 +100,7 @@ module.exports = function(options) {
 
 So far we've implemented a couple `before` hooks but we can also format our data using `after` hooks, which get called after a service method returns.
 
-Let's say that we want to populate the sender of each message so that we can display them in our UI. Instead of creating one of your own hooks, this time we'll use one of the ones that comes [bundled with Feathers](../hooks/bundled.md). In this case we'll use the `populate`and `remove` hook that comes bundled with `feathers-hooks`.
+Let's say that we want to populate the sender of each message so that we can display them in our UI. Instead of creating one of your own hooks, this time we'll some that come [bundled with Feathers](../hooks/bundled.md). Specifically, we'll use the `populate` and `remove` hooks that come bundled with `feathers-hooks`.
 
 We need to make a small change to our `src/services/message/hooks/index.js` file so that it now looks like this:
 
@@ -121,7 +121,7 @@ exports.before = {
   all: [
     auth.verifyToken(),
     auth.populateUser(),
-    auth.requireAuth()
+    auth.restrictToAuthenticated()
   ],
   find: [],
   get: [],
@@ -144,14 +144,14 @@ exports.after = {
 
 This will take the ID stored at the `sentBy` attribute on our Message, query the `users` service to find a User with that ID, and set the User object on the `sentBy` attribute (replacing the ID).
 
-As you can see, manipulating data is pretty easy with hooks. To improve portability, we could break our hooks up into multiple smaller hooks and chain them. A good candidate might be to move manipulating the `createdAt` attribute into it's own hook so that it can be shared across multiple services.
+As you can see, manipulating data is pretty easy with hooks. To improve portability, we could break our hooks up into multiple smaller hooks and chain them. A good candidate might be to move manipulating the `createdAt` attribute into it's own hook so that it can be shared across multiple services. For this tutorial, we will leave it as it is.
 
 
 ## Message authorization
 
-We've seen how Hooks can be used to manipulate data but they can also be used for permissions and validations. We need one last hook that makes sure that users can only `remove`, `update` and `patch` their own message (see [the services chapter](../services/readme.md) for more information about those methods). 
+We've seen how Hooks can be used to manipulate data but they can also be used for permissions and validations. We need one last hook that makes sure that users can only `remove`, `update` and `patch` their own message (see [the services chapter](../services/readme.md) for more information about those methods).
 
-Let's create a `restrict-to-sender` _before_ hook for the `message` service that runs before those methods. Now change the file at `src/services/message/hook/restrict-to-sender.js` to:
+We need a `restrict-to-sender` _before_ hook for the `message` service that runs before those methods. Go ahead and use the generator to create it.  Once you've generated the hook, change the file at `src/services/message/hook/restrict-to-sender.js` to:
 
 ```js
 'use strict';
@@ -181,6 +181,6 @@ module.exports = function(options) {
 };
 ```
 
-That's it! We now have a fully functional real-time chat API complete with user signup, local authentication, and authorization. You've now had an introduction to [services](../services/readme.md), [hooks](../hooks/readme.md) and [middleware](../middleware/readme.md), which is almost everything there is to Feathers.
+That's it! We now have a fully-functional, real-time chat API complete with user signup, local authentication, and authorization. You've now had an introduction to [services](../services/readme.md), [hooks](../hooks/readme.md) and [middleware](../middleware/readme.md), which is almost everything there is to Feathers.
 
 In the next chapter we will briefly talk about [building a frontend](frontend.md) for our Chat app before learning more about Feathers and diving into the [guides](../guides/readme.md).
