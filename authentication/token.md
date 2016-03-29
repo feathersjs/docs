@@ -24,7 +24,7 @@ Normally the only option you might want to pass when registering the `feathers-a
 
 All of the top level authentication options are passed to the token authentication service. If you need to customize your token specific configuration further you can use these options:
 
-- `secret` (**required**) (default: a strong auto generated one) - Your secret used to encrypt and decrypt JWT's. If this gets compromised you need to rotate it immediately!
+- `secret` (**required**) (default: a strong auto generated one) - Your secret used to sign JWT's. If this gets compromised you need to rotate it immediately!
 - `passwordField` (default: 'password') [optional] - The database field containing the password on the user service.
 - `issuer` (default: 'feathers') [optional] - The JWT issuer field
 - `algorithms` (default: ['HS256']) [optional] - The accepted JWT hash algorithms
