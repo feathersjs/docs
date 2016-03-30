@@ -24,7 +24,7 @@ Let's replace `public/index.html` with the following welcome page:
 <html>
   <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
-    <meta name="viewport" 
+    <meta name="viewport"
       content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=0" />
     <title>Feathers Chat</title>
     <link rel="shortcut icon" href="favicon.ico">
@@ -35,7 +35,7 @@ Let's replace `public/index.html` with the following welcome page:
     <main class="home container">
       <div class="row">
         <div class="col-12 col-8-tablet push-2-tablet text-center">
-          <img class="logo center-item" 
+          <img class="logo center-item"
             src="http://feathersjs.com/img/feathers-logo-wide.png"
             alt="Feathers Logo">
           <h3 class="title">Chat</h3>
@@ -54,7 +54,7 @@ Let's replace `public/index.html` with the following welcome page:
             <div class="col-12">
               <a href="signup.html" class="button button-primary block signup">
                 Signup
-              </a>  
+              </a>
             </div>
           </div>
         </div>
@@ -112,7 +112,7 @@ Finally, `public/signup.html` looks like this:
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=0" />
     <title>Feathers Chat</title>
-    
+
     <link rel="shortcut icon" href="img/favicon.png">
     <link rel="stylesheet" href="//cdn.rawgit.com/feathersjs/feathers-chat/v0.1.0/public/base.css">
     <link rel="stylesheet" href="//cdn.rawgit.com/feathersjs/feathers-chat/v0.1.0/public/chat.css">
@@ -128,7 +128,7 @@ Finally, `public/signup.html` looks like this:
         <div class="col-12 col-6-tablet push-3-tablet col-4-desktop push-4-desktop text-center">
           <form class="form" method="post" action="/signup">
             <fieldset>
-              <input class="block" type="email" name="email" placeholder="email">  
+              <input class="block" type="email" name="email" placeholder="email">
             </fieldset>
             <fieldset>
               <input class="block" type="password" name="password" placeholder="password">
@@ -149,7 +149,7 @@ Finally, `public/signup.html` looks like this:
 Now we have a welcome, login and signup page and we can create a `signup` endpoint that creates a new user from the `signup.html` form submission and then redirects to `login.html`. Because Feathers works just like [Express](http://expressjs.com/) we can just create an [Express middleware](http://expressjs.com/en/guide/using-middleware.html) called `signup` that does that.
 
 ```
-$ yo feathers:middleware
+$ feathers generate middleware
 ```
 
 ![Generating the signup middleware](./assets/signup-middleware.png)

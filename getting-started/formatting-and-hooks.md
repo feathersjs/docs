@@ -7,7 +7,7 @@ In the [previous section](user-management.md) we set up authentication, a signup
 Adding information like the current user and the creation time can be done by creating our own `before` hook. Hooks are a powerful way to register composable middleware before and after a service method runs. You can learn more about it in the [hooks chapter](../hooks/readme.md). To generate a new hook run:
 
 ```
-$ yo feathers:hook
+$ feathers generate hook
 ```
 
 ### Gravatar profile images
@@ -69,7 +69,7 @@ Now we can update `src/services/message/hooks/process.js` to:
 'use strict';
 
 // src/services/message/hooks/process.js
-// 
+//
 // Use this hook to manipulate incoming or outgoing data.
 // For more information on hooks see: http://docs.feathersjs.com/hooks/readme.html
 
