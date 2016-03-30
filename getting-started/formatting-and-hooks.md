@@ -100,7 +100,7 @@ module.exports = function(options) {
 
 So far we've implemented a couple `before` hooks but we can also format our data using `after` hooks, which get called after a service method returns.
 
-Let's say that we want to populate the sender of each message so that we can display them in our UI. Instead of creating one of your own hooks, this time we'll some that come [bundled with Feathers](../hooks/bundled.md). Specifically, we'll use the `populate` and `remove` hooks that come bundled with `feathers-hooks`.
+Let's say that we want to populate the sender of each message so that we can display them in our UI. Instead of creating one of your own hooks, this time we'll use some that come [bundled with Feathers](../hooks/bundled.md). Specifically, we'll use the `populate` and `remove` hooks that come bundled with `feathers-hooks`.
 
 We need to make a small change to our `src/services/message/hooks/index.js` file so that it now looks like this:
 
