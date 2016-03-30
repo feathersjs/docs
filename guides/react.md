@@ -34,7 +34,7 @@ React and the Feathers client modules can be loaded individually via [npm](https
 </html>
 ```
 
-> **ProTip:** This setup is not recommended for a production environment because [Babel](https://babeljs.io/) will transpile our `public/app.jsx` every time on the fly in the browser. Follow up how to use React with NPM [in the React documentation](https://facebook.github.io/react/docs/getting-started.html#using-react-from-npm) and how to use the Feathers client modules in the [client chapter](../clients/feathers.md).
+> **ProTip:** This setup is not recommended for a production environment because [Babel](https://babeljs.io/) will transpile our `public/app.jsx` every time on the fly in the browser. Find out how to use React with NPM [in the React documentation](https://facebook.github.io/react/docs/getting-started.html#using-react-from-npm) and how to use the Feathers client modules [in the client chapter](../clients/feathers.md).
 
 ## Application Bootstrap
 
