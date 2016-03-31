@@ -40,7 +40,11 @@ var isFeathersUser = function(options = {}) {
 
 // Must be logged in to do anything a feathers user to delete a message.
 app.service('messages').before({
-  all: [requireAuth()],
+  all: [
+    auth.verifyToken(),
+    auth.populateUser(),
+    auth.restrictToAuthenticated()
+  ],
   remove: [isFeathersUser()]
 });
 ```

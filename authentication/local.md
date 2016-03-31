@@ -20,6 +20,7 @@ All of the top level authentication options are passed to the local authenticati
 
 - `usernameField` (default: 'email') [optional] - The database field on the user service you want to use as the username.
 - `passwordField` (default: 'password') [optional] - The database field containing the password on the user service.
+- `session` (default: 'false') [optional] - Whether the local Passport auth strategy should use sessions.
 
 ### Client Side
 

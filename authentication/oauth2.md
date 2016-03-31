@@ -36,7 +36,7 @@ All of the top level authentication options are passed to an OAuth2 authenticati
 
 - `clientID` (**required**) - Your OAuth2 clientID
 - `clientSecret` (**required**) - Your OAuth2 clientSecret
-- `permissions` (**required**) - An object with the permissions you are requesting. See your passport provider docs for details.
+- `permissions` (**required**) - An object with the permissions you are requesting. See your passport provider docs for details. `state` is set to `true` and `session` is set to `false` by default.
 - `strategy` (**required**) - The Passport OAuth strategy for your oauth provider (ie. passport-facebook)
 - `tokenStrategy` [optional] - The Passport OAuth token strategy if you want to support mobile authentication without a browser.
 - `passReqToCallback` (default: true) [optional] - A Passport option to pass the request object to the oauth callback handler.

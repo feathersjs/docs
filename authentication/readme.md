@@ -31,13 +31,22 @@ The options passed to the authentication plugin are wrapped in an object with th
 - `local` (default: [see options](./local.md#server-options)) [optional] - The local auth provider config. By default this is included in a Feathers app. If set to `false` it will not be initialized.
 - `token` (default: [see options](./token.md#server-options)) [optional] - The JWT auth provider config. By default this is included in a Feathers app even if you don't pass in any options. You can't disable it like `local` auth.
 - `<oauth-provider>` (default: [see options](./oauth2.md#server-options)) [optional] - A lowercased oauth provider name (ie. `facebook` or `github`)
-- `successRedirect` (default: '/auth/success') [optional] - The endpoint to redirect to after successful authentication or signup. Only for requests not over Ajax or sockets.
-- `failureRedirect` (default: '/auth/failure') [optional] - The endpoint to redirect to for a failed authentication or signup. Only for requests not over Ajax or sockets.
+- `successRedirect` (default: '/auth/success') [optional] - The endpoint to redirect to after successful authentication or signup. Only used for requests not over Ajax or sockets. Can be set to `false` to disable redirects.
+- `failureRedirect` (default: '/auth/failure') [optional] - The endpoint to redirect to for a failed authentication or signup. Only used for requests not over Ajax or sockets. Can be set to `false` to disable redirects.
+- `idField` (default: '_id') [optional] - the id field for you user's id. This is use by many of the [authorization hooks](../authorization/bundled-hooks.md).
 - `userEndpoint` (default: '/users') [optional] - The user service endpoint
 - `tokenEndpoint` (default: '/auth/token') [optional] - The JWT auth service endpoint
 - `header` (default: 'authorization') [optional] - The header field to check for the token. **This is case sensitive**.
-- `cookie` (default: 'feathers-jwt') [optional] - The cookie field to check for the token. **This is case sensitive**.
-- `idField` (default: '_id') [optional] - the id field for you user's id. This is primarily used by the `populateUser` hook after a JWT is created by the token service.
+- `cookie` (default: [see options](#cookie-options)) [optional] - The cookie options used when sending the JWT in a cookie for OAuth or plain form posts. You can disable sending the cookie by setting this to `false`.
+
+#### Cookie Options
+
+All the options get passed to Express' `res.cookie` function. See the [Express docs](http://expressjs.com/en/4x/api.html#res.cookie) for more detail.
+
+- `name` (default: 'feathers-jwt') [optional] - The cookie name. **This is case sensitive**.
+- `httpOnly` (default: 'false') [optional] - Prevents JavaScript from accessing the cookie on the client. Should be set to `true` if you are not using OAuth or Form Posts for authentication.
+- `secure` (default: 'true' in production) [optional] - Marks the cookie to be used with HTTPS only.
+- `expires` (default: 30 seconds from current time) [optional] - The time when the cookie should expire. Must be a valid `Date` object.
 
 #### Example Configuration
 
@@ -105,6 +114,7 @@ app.authenticate({
 - `localEndpoint` (default: '/auth/local') [optional] - The local auth service endpoint
 - `header` (default: 'Authorization') [optional] - The header field to set the token. **This is case sensitive**.
 - `cookie` (default: 'feathers-jwt') [optional] - The cookie field to check for the token. **This is case sensitive**.
+- `tokenKey` (default: 'feathers-jwt') [optional] - The key to use to store the JWT in localStorage. **This is case sensitive**.
 
 #### Example Configuration
 
@@ -115,7 +125,8 @@ app.configure(authentication({
   tokenEndpoint: '/token',
   localEndpoint: '/login',
   header: 'X-Authorization',
-  cookie: 'app-token'
+  cookie: 'app-token',
+  tokenKey: 'app-token'
 }));
 ```
 

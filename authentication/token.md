@@ -25,10 +25,15 @@ Normally the only option you might want to pass when registering the `feathers-a
 All of the top level authentication options are passed to the token authentication service. If you need to customize your token specific configuration further you can use these options:
 
 - `secret` (**required**) (default: a strong auto generated one) - Your secret used to sign JWT's. If this gets compromised you need to rotate it immediately!
+- `payload` (default: '[]') [optional] - An array of fields from your user object that should be included in the JWT payload.
 - `passwordField` (default: 'password') [optional] - The database field containing the password on the user service.
 - `issuer` (default: 'feathers') [optional] - The JWT issuer field
-- `algorithms` (default: ['HS256']) [optional] - The accepted JWT hash algorithms
+- `algorithm` (default: 'HS512') [optional] - The accepted JWT hash algorithm
 - `expiresIn` (default: '1d') [optional] - The time a token is valid for
+
+You can view additional available JWT signing options in the [node-jsonwebtoken](https://github.com/auth0/node-jsonwebtoken) repo.
+
+> **ProTip:** JWT payloads can be decoded on the client. Do not store sensitive information in the JWT payload. If you must then it should be encrypted before the JWT is signed in the token service using your secret.
 
 ### Client Side
 
