@@ -28,7 +28,7 @@ All of the top level authentication options are passed to the token authenticati
 - `payload` (default: '[]') [optional] - An array of fields from your user object that should be included in the JWT payload.
 - `passwordField` (default: 'password') [optional] - The database field containing the password on the user service.
 - `issuer` (default: 'feathers') [optional] - The JWT issuer field
-- `algorithm` (default: 'HS512') [optional] - The accepted JWT hash algorithm
+- `algorithm` (default: 'HS256') [optional] - The accepted JWT hash algorithm
 - `expiresIn` (default: '1d') [optional] - The time a token is valid for
 
 You can view additional available JWT signing options in the [node-jsonwebtoken](https://github.com/auth0/node-jsonwebtoken) repo.
