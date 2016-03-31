@@ -36,7 +36,7 @@ const myService = {
   update(id, data, params, callback) {},
   // PATCH /path/<id>
   patch(id, data, params, callback) {},
-  // DELETE /patch/<id>
+  // DELETE /path/<id>
   remove(id, params, callback) {}
 }
 ```
