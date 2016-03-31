@@ -23,7 +23,7 @@ app.service('messages').before({
 
 ## hashPassword
 
-The `hashPassword` hook will automatically hash the data coming in on the provided `passwordField`. It is intended to be used as _before_ hook on the user service for the `create`, `update`, or `patch` methods.
+The `hashPassword` hook will automatically hash the data coming in on the provided `passwordField`. It is intended to be used as a **before** hook on the user service for the `create`, `update`, or `patch` methods.
 
 ```js
 const hooks = require('feathers-authentication').hooks;
@@ -41,7 +41,7 @@ app.service('user').before({
 
 ## verifyToken
 
-The `verifyToken` hook will attempt to verify a token. If the token is missing or is invalid it returns an error. If the token is valid it adds the decrypted payload to `hook.params.payload` which contains the user id. It is intended to be used as _before_ hook on any of the service methods.
+The `verifyToken` hook will attempt to verify a token. If the token is missing or is invalid it returns an error. If the token is valid it adds the decrypted payload to `hook.params.payload` which contains the user id. It is intended to be used as a **before** hook on **any** of the service methods.
 
 ```js
 const hooks = require('feathers-authentication').hooks;
@@ -64,7 +64,7 @@ You can view the all available options in the [node-jsonwebtoken](https://github
 
 ## populateUser
 
-The `populateUser` hook is for populating a user based on an id. It can be used on all service method as either a _before_ or _after_ hook. It is called internally after a token is created.
+The `populateUser` hook is for populating a user based on an id. It can be used on **any** service method as either a **before** or **after** hook. It is called internally after a token is created.
 
 ```js
 const hooks = require('feathers-authentication').hooks;
@@ -83,7 +83,7 @@ app.service('user').before({
 
 ## restrictToAuthenticated
 
-The `restrictToAuthenticated` hook throws an error if there isn't a logged-in user by checking for the `hook.params.user` object. It can be used on any service method and is intended to be used as a _before_ hook. It doesn't take any arguments.
+The `restrictToAuthenticated` hook throws an error if there isn't a logged-in user by checking for the `hook.params.user` object. It can be used on **any** service method and is intended to be used as a **before** hook. It doesn't take any arguments.
 
 ```js
 const hooks = require('feathers-authentication').hooks;
@@ -97,7 +97,7 @@ app.service('user').before({
 
 ## queryWithCurrentUser
 
-The `queryWithCurrentUser` _before_ hook will automatically add the user's `id` as a parameter in the query. This is useful when you want to only return data, for example "messages", that were sent by the current user.
+The `queryWithCurrentUser` **before** hook will automatically add the user's `id` as a parameter in the query. This is useful when you want to only return data, for example "messages", that were sent by the current user.
 
 ```js
 const hooks = require('feathers-authentication').hooks;
@@ -118,7 +118,7 @@ When using this hook with the default options the `User._id` will be copied into
 
 ## associateCurrentUser
 
-The `associateCurrentUser` _before_ hook is similar to the `queryWithCurrentUser`, but works on the incoming **data** instead of the **query** params. It's useful for automatically adding the userId to any resource being created. It can be used on `create`, `update`, or `patch` methods.
+The `associateCurrentUser` **before** hook is similar to the `queryWithCurrentUser`, but works on the incoming **data** instead of the **query** params. It's useful for automatically adding the userId to any resource being created. It can be used on `create`, `update`, or `patch` methods.
 
 ```js
 const hooks = require('feathers-authentication').hooks;
@@ -137,7 +137,7 @@ app.service('messages').before({
 
 ## restrictToOwner
 
-`restrictToOwner` is meant to be used as a _before_ hook. It only allows the user to retrieve resources that are owned by them. It will return a _Forbidden_ error without the proper permissions. It can be used on `get`, `create`, `update`, `patch` or `remove` methods.
+`restrictToOwner` is meant to be used as a **before** hook. It only allows the user to retrieve resources that are owned by them. It will return a _Forbidden_ error without the proper permissions. It can be used on `get`, `create`, `update`, `patch` or `remove` methods.
 
 ```js
 const hooks = require('feathers-authentication').hooks;
@@ -156,7 +156,7 @@ app.service('messages').before({
 
 ## restrictToRoles
 
-`restrictToRoles` is meant to be used as a _before_ hook. It only allows the user to retrieve resources that are owned by them or protected by certain roles. It will return a _Forbidden_ error without the proper permissions. It can be used on `get`, `create`, `update`, `patch` or `remove` methods.
+`restrictToRoles` is meant to be used as a **before** hook. It only allows the user to retrieve resources that are owned by them or protected by certain roles. It will return a _Forbidden_ error without the proper permissions. It can be used on `get`, `create`, `update`, `patch` or `remove` methods.
 
 ```js
 const hooks = require('feathers-authentication').hooks;
