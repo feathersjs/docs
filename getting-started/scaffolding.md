@@ -4,7 +4,7 @@ In this part we're going to scaffold a Feathers app, create our first service, s
 
 ## Generate The App
 
-Make sure you have [NodeJS](https://nodejs.org) and [NPM](http://npmjs.org) installed and available on the command line as `node` and `npm`. Then we can install the Feathers CLI.
+Make sure you have [NodeJS](https://nodejs.org) and [npm](http://npmjs.org) installed and available on the command line as `node` and `npm`. Then we can install the Feathers CLI.
 
 ```
 $ npm install -g feathers-cli
@@ -39,7 +39,7 @@ Your options should all look like this and you should have seen that a whole bun
 
 ![Final Configuration](./assets/generator-summary.png)
 
-NPM will do it's thing and install all our dependencies. This can take a minute or two based on your Internet connection speed.
+Next, npm will do it's thing and install all our dependencies. This can take a minute or two based on your Internet connection speed.
 
 Now our app is ready to go but let's add a Message service for our chat app:
 
