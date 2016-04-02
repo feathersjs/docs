@@ -92,9 +92,7 @@ r.dbList().contains('feathers')
     app.service('messages').create({
       text: 'Oh hai!',
       complete: false
-    }).then(function(message) {
-      console.log('Created message', message);
-    });
+    }).then(message => console.log('Created message', message));
   })
   .catch(err => console.log(err));
 
