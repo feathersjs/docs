@@ -1,6 +1,6 @@
 # Express middleware
 
-In Express [middleware functions](http://expressjs.com/en/guide/writing-middleware.html) are functions that have access to the request object (`req`), the response object (`res`), and the next middleware function in the application’s request-response cycle. The next middleware function is commonly denoted by a variable named `next`. How this middleware plays with Feathers [services](../services/readme.md) is outline below.
+In Express [middleware functions](http://expressjs.com/en/guide/writing-middleware.html) are functions that have access to the request object (`req`), the response object (`res`), and the next middleware function in the application’s request-response cycle. The next middleware function is commonly denoted by a variable named `next`. How this middleware plays with Feathers [services](../services/readme.md) is outlined below.
 
 ## Rendering views
 
