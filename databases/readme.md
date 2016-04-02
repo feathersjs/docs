@@ -11,6 +11,7 @@ Instead of coming up with our own ORM and validation system our official databas
   - [feathers-mongoose](mongoose.md)
   - [feathers-mongodb](mongodb.md)
 - **NeDB** - [feathers-nedb](nedb.md)
+- **RethinkDB** - [feathers-rethinkdb](rethinkdb.md)
 - **PostgreSQL, MySQL, MariaDB, and SQLite**
   - [feathers-knex](knexjs.md)
   - [feathers-sequelize](sequelize.md)
