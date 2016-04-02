@@ -97,4 +97,4 @@ app.listen(port, function() {
 });
 ```
 
-You can run this example [from the GitHub repository](https://github.com/feathersjs/feathers-nedb/blob/master/examples/app.js) with `npm start` and going to [localhost:3030/messages](http://localhost:3030/messages). You should see an empty array. That's because you don't have any messages yet but you now have full CRUD for your new messages service.
+You can run this example [from the GitHub repository](https://github.com/feathersjs/feathers-nedb/blob/master/example/app.js) with `npm start` and going to [localhost:3030/messages](http://localhost:3030/messages). You should see an empty array. That's because you don't have any messages yet but you now have full CRUD for your new messages service.
