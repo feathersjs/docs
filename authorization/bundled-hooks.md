@@ -163,7 +163,7 @@ const hooks = require('feathers-authentication').hooks;
 
 app.service('messages').before({
   remove: [
-    hooks.restrictToOwner({
+    hooks.restrictToRoles({
         roles: ['admin', 'super-admin'],
         fieldName: 'permissions',
         idField: 'id',
