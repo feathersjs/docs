@@ -25,7 +25,7 @@ const app = feathers()
   }));
 
 app.service('todos').before({
-  create(hook) {
+  create: function(hook) {
     hook.data.createdAt = new Date();
   },
   

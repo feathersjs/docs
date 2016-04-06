@@ -42,7 +42,7 @@ const userService = app.service('/users');
 
 // Set up our before hook
 userService.before({
-  find(hook) {
+  find: function(hook) {
     console.log('My custom hook ran');
   }
 });

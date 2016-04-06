@@ -50,7 +50,7 @@ The following example adds an authorization check (if a user has been provided i
 
 ```js
 todoService.before({
-  all(hook) {
+  all: function(hook) {
     if(!hook.params.user) {
       throw new Error('You need to be logged in');
     }
@@ -176,7 +176,7 @@ All hooks can return a [Promise](http://promises-aplus.github.io/promises-spec/)
 
 ```js
 todoService.before({
-  find(hook) {
+  find: function(hook) {
     return new Promise((resolve, reject) => {
 
     });
@@ -188,7 +188,7 @@ If you want to change the hook object just chain the returned promise using `.th
 
 ```js
 todoService.before({
-  find(hook) {
+  find: function(hook) {
     return this.find().then(data => {
       hook.params.message = 'Ran through promise hook';
       hook.data.result = data;
@@ -207,7 +207,7 @@ Another way is to pass `next` callback as the second parameter that has to be ca
 
 ```js
 todoService.before({
-  find(hook, next) {
+  find: function(hook, next) {
     this.find().then(data => {
       hook.params.message = 'Ran through promise hook';
       hook.data.result = data;
@@ -263,7 +263,7 @@ const userService = app.service('users');
 
 userService.before({
   // Auth is required.  No exceptions
-  create : [hooks.requireAuth, hooks.setUserID, hooks.setCreatedAt]
+  create: [hooks.requireAuth, hooks.setUserID, hooks.setCreatedAt]
 });
 ```
 
