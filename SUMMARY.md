@@ -38,6 +38,7 @@
    * [Sequelize](databases/sequelize.md)
    * [Waterline](databases/waterline.md)
    * [LevelUP](databases/levelup.md)
+   * [RethinkDB](databases/rethinkdb.md)
 * [Hooks](hooks/readme.md)
    * [Usage](hooks/usage.md)
    * [Examples](hooks/examples.md)
