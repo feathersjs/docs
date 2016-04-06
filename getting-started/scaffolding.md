@@ -90,7 +90,7 @@ You can also connect to the real-time API using [Socket.io](../real-time/socket-
 Add the following to `public/index.html` before the `</body>` tag:
 
 ```html
-<script src="//cdn.rawgit.com/feathersjs/feathers-client/v1.0.0/dist/feathers.js"></script>
+<script src="//npmcdn.com/feathers-client@^1.0.0/dist/feathers.js"></script>
 <script src="socket.io/socket.io.js"></script>
 <script type="text/javascript">
   // Establish a Socket.io connection to the local server
