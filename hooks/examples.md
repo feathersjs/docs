@@ -8,7 +8,7 @@ If the [database adapter](../databases/readme.md) does not support it already, t
 
 ```js
 app.service('todos').before({
-  create(hook) {
+  create: function(hook) {
     hook.data.created_at = new Date();
   },
   
@@ -52,7 +52,7 @@ For a production app you need to do validation. With hooks it's actually pretty 
 
 ```js
 app.service('users').before({
-  create(hook) {
+  create: function(hook) {
     // Don't create a user unless they accept our terms
     if (!hook.data.acceptedTerms) {
       throw new errors.BadRequest(`Invalid request`, {
@@ -76,7 +76,7 @@ You might also need to correct or sanitize data that is sent to your app. Also p
 
 ```js
 app.service('users').before({
-  update(hook) {
+  update: function(hook) {
     // Convert the user's age to an integer
     const sanitizedAge = parseInt(hook.data.age, 10);
 
@@ -104,7 +104,7 @@ Sometimes you might not want to actually delete items in the database but just m
 
 ```js
 app.service('todos').before({
-  remove(hook) {
+  remove: function(hook) {
     // Instead of calling the service remote, call `patch` and set deleted to `true`
     return this.patch(hook.id, { deleted: true }, hook.params).then(data => {
       // Set the result from `patch` as the method call result
