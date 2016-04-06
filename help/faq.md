@@ -93,4 +93,4 @@ app.service('user').find({
 
 ## How do I mount sub apps?
 
-It's pretty much exactly the same as Express. There is an example of how to do this in the [Feathers authentication plugin](https://github.com/feathersjs/feathers-authentication/tree/master/example).
+It's pretty much exactly the same as Express. There is an example of how to do this in our [Examples repository](https://github.com/feathersjs/feathers-demos/tree/master/examples/app-structure).
