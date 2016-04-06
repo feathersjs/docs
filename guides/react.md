@@ -25,7 +25,7 @@ React and the Feathers client modules can be loaded individually via [npm](https
     <script src="//fb.me/react-dom-0.14.7.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.12.0/moment.js"></script>
-    <script src="//rawgit.com/feathersjs/feathers-client/master/dist/feathers.js"></script>
+    <script src="//npmcdn.com/feathers-client@^1.0.0/dist/feathers.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script type="text/babel" src="app.jsx"></script>
   </head>
