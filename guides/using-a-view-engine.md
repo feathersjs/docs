@@ -2,6 +2,8 @@
 
 Since Feathers is just an extension of Express it's really simple to render templated views on the server with data from your Feathers services. There are a few different ways that you can structure your app so this guide will show you 3 typical ways you might have your Feathers app organized.
 
+You can see a basic working example [here](https://github.com/feathersjs/feathers-demos/).
+
 ## A Single "Monolithic" App
 
 You probably already know that when you register a Feathers service, Feathers creates RESTful endpoints for that service automatically. Well, really those are just Express routes, so you can define your own as well.
