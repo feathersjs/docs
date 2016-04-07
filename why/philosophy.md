@@ -53,7 +53,7 @@ Because we utilize some already proven modules, we spend less time re-inventing 
 Here's how we use some of the tech under the hood:
 
 - Feathers extends [Express 4](http://expressjs.com), the most popular web framework for [NodeJS](http://nodejs.org/).
-- Our CLI tool extends [Vorpal](vorpal.js.org), its generators are built with [Yeoman](http://yeoman.io/).
+- Our CLI tool extends [Vorpal](http://vorpal.js.org), its generators are built with [Yeoman](http://yeoman.io/).
 - We wrap [Socket.io](http://socket.io/) or [Primus](https://github.com/primus/primus) as your websocket transport.
 - Our service adapters typically wrap mature ORMs like [mongoose](http://mongoosejs.com/), [sequelize](http://docs.sequelizejs.com/), [knex](http://knexjs.org/), or [waterline](https://github.com/balderdashy/waterline).
 - [npm](http://npmjs.org) for package management.
