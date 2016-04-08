@@ -33,6 +33,8 @@ The options passed to the authentication plugin are wrapped in an object with th
 - `<oauth-provider>` (default: [see options](./oauth2.md#server-options)) [optional] - A lowercased oauth provider name (ie. `facebook` or `github`)
 - `successRedirect` (default: '/auth/success') [optional] - The endpoint to redirect to after successful authentication or signup. Only used for requests not over Ajax or sockets. Can be set to `false` to disable redirects.
 - `failureRedirect` (default: '/auth/failure') [optional] - The endpoint to redirect to for a failed authentication or signup. Only used for requests not over Ajax or sockets. Can be set to `false` to disable redirects.
+- `shouldSetupSuccessRoute` (default: `true`) [optional] - Can be set to `false` to disable setting up the default success redirect route handler. **Required** if you want to render your own custom page on auth success.
+- `shouldSetupFailureRoute` (default: `true`) [optional] - Can be set to `false` to disable setting up the default failure redirect route handler. **Required** if you want to render your own custom page on auth failure.
 - `idField` (default: '_id') [optional] - the id field for you user's id. This is use by many of the [authorization hooks](../authorization/bundled-hooks.md).
 - `userEndpoint` (default: '/users') [optional] - The user service endpoint
 - `tokenEndpoint` (default: '/auth/token') [optional] - The JWT auth service endpoint
