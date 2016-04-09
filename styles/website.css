@@ -40,12 +40,6 @@
   background-image: url('http://feathersjs.com/img/feathers-wide-logo-white.png');
 }
 
-// Invert the Feathers logo in sepia and night modes.
-.color-theme-1 a.custom-link, .color-theme-2 a.custom-link {
-  filter: invert(100%);
-  -webkit-filter: invert(100%);
-}
-
 /* Title Links that pop up on hover */
 .book .book-body .page-wrapper .page-inner section.normal a.anchorjs-link {
   color: #43CEA2;
@@ -64,6 +58,15 @@
 .book .book-body .page-wrapper .page-inner section.normal ul {
   font-size: 1.8rem;
   color: #4A4A4A;
+}
+
+.book.color-theme-2 .book-body .page-wrapper .page-inner section.normal blockquote,
+.book.color-theme-2 .book-body .page-wrapper .page-inner section.normal dl,
+.book.color-theme-2 .book-body .page-wrapper .page-inner section.normal ol,
+.book.color-theme-2 .book-body .page-wrapper .page-inner section.normal p,
+.book.color-theme-2 .book-body .page-wrapper .page-inner section.normal table,
+.book.color-theme-2 .book-body .page-wrapper .page-inner section.normal ul {
+  color: #bdcadb;
 }
 
 /* Block Quotes */
