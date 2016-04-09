@@ -26,6 +26,14 @@
   min-height: 50px;
 }
 
+.book .book-summary ul.summary li a.custom-link:hover {
+  color: rgba(0, 0, 0, 0);
+  background-size: 90%;
+  background-repeat: no-repeat;
+  margin: 10px;
+  min-height: 50px;
+}
+
 /* Sepia and dark themes */
 .book.color-theme-1 .book-summary ul.summary li a.custom-link,
 .book.color-theme-2 .book-summary ul.summary li a.custom-link {
