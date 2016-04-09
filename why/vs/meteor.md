@@ -12,6 +12,6 @@ Feathers uses the defacto JavaScript package manager [npm](http://npmjs.org). As
 
 Meteor has optimistic UI rendering and oplog tailing whereas currently Feathers leaves that up to the developer. However, we've found that being universal and utilizing websockets for both sending and receiving data alleviates the need for optimistic UI rendering and complex data diffing in most cases.
 
-Both Meteor and Feathers provide support for email/password and OAuth authentication. Once authenticated Meteor uses sessions maintain a logged in state, whereas Feathers keeps things stateless and uses [JSON Web Tokens](https://jwt.io/) (JWT) to assess authentication state.
+Both Meteor and Feathers provide support for email/password and OAuth authentication. Once authenticated Meteor uses sessions to maintain a logged in state, whereas Feathers keeps things stateless and uses [JSON Web Tokens](https://jwt.io/) (JWT) to assess authentication state.
 
 One big distinction is how Feathers and Meteor provide real-time across a cluster of apps. Feathers does it at the service layer or using another pub-sub service like Redis whereas Meteor relies on having access to and monitoring MongoDB operation logs as the central hub for real-time communication.
