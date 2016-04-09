@@ -25,6 +25,13 @@
   margin: 10px;
   min-height: 50px;
 }
+
+/* Sepia and dark themes */
+.book.color-theme-1 .book-summary ul.summary li a.custom-link,
+.book.color-theme-2 .book-summary ul.summary li a.custom-link {
+  background-image: url('http://feathersjs.com/img/feathers-wide-logo-white.png');
+}
+
 // Invert the Feathers logo in sepia and night modes.
 .color-theme-1 a.custom-link, .color-theme-2 a.custom-link {
   filter: invert(100%);
