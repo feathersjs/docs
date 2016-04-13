@@ -49,17 +49,6 @@ When going to [localhost:3030/messages/1](http://localhost:3030/messages/1) you 
 }
 ```
 
-Adding query parameters, e.g. [localhost:3030/messages?read=false](http://localhost:3030/messages?read=false) will return this:
-
-```json
-[{
-  "id": 1,
-  "read": false,
-  "text": "Feathers is great!",
-  "createdAt": 1458490631911
-}]
-```
-
 ## Retrieving services
 
 When registering a service with `app.use('/messages', messageService)` Feathers makes a shallow copy of that object and adds its own functionality. This means that to use Feathers functionality (like [real-time events](../real-time/readme.md), [hooks](../hooks/readme.md) etc.) this object has to be used. It can be retrieved using `app.service` like this:
