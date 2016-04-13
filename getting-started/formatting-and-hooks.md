@@ -183,4 +183,4 @@ module.exports = function(options) {
 
 That's it! We now have a fully-functional, real-time chat API complete with user signup, local authentication, and authorization. You've now had an introduction to [services](../services/readme.md), [hooks](../hooks/readme.md) and [middleware](../middleware/readme.md), which is almost everything there is to Feathers.
 
-In the next chapter we will briefly talk about [building a frontend](frontend.md) for our Chat app before learning more about Feathers and diving into the [guides](../guides/readme.md).
+In the next chapter we will briefly talk about [building a frontend](frontend.md) for our Chat app before learning more about Feathers and diving into the [specific framework guides](../frameworks/readme.md).

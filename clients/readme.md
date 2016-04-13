@@ -16,12 +16,7 @@ In order to communicate with a Feathers API you don't need to use Feathers as th
 
 Because it is easy to integrate, Feathers does not currently have any official framework specific bindings. Work on [iOS](https://github.com/feathersjs/feathers-ios) and [Android](https://github.com/feathersjs/feathers-android) SDKs are in progress.
 
-To give you a better idea of how the Feathers client plays with other frameworks we've written some guides:
-
-- [jQuery](../guides/jquery.md)
-- [React](../guides/react.md)
-
-We are adding new [guides](../guides/readme.md) for new frameworks all the time! If you are having any trouble with your framework of choice, [create an issue](https://github.com/feathersjs/feathers/issues/new) and we'll try our best to help out.
+To give you a better idea of how the Feathers client plays with other frameworks we've written some guides in the [frameworks chapter](../frameworks/readme.md). We are adding new ones all the time! If you are having any trouble with your framework of choice, [create an issue](https://github.com/feathersjs/feathers/issues/new) and we'll try our best to help out.
 
 ### Caveats
 
