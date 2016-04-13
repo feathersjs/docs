@@ -16,6 +16,8 @@ If they are not universally usable already (like [feathers-hooks](../hooks/readm
   - [request](https://github.com/request/request)
   - Fetch: works in supported browsers, React Native or modules like [node-fetch](https://github.com/bitinn/node-fetch).
 
+> __Important:__ The Feathers client libraries come transpiled to ES5 but require ES6 shims either through the [babel-polyfill](https://www.npmjs.com/package/babel-polyfill) module or by including [core.js](https://github.com/zloirock/core-js) in older browsers e.g. via `<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/core-js/2.1.4/core.min.js"></script>`
+
 ## Usage in NodeJS, React Native or with Module Loaders
 
 For module loaders that support [NPM](https://www.npmjs.com/) like [Browserify](http://browserify.org/), [Webpack](https://webpack.github.io/) or [StealJS](http://stealjs.com) the Feathers client modules can be loaded individually. The following example sets up a Feathers client that uses a local Socket.io connection to communicate with remote services:
@@ -60,6 +62,7 @@ In the browser a client that connects to the local server via websockets can be 
 
 ```html
 <script type="text/javascript" src="socket.io/socket.io.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/core-js/2.1.4/core.min.js"></script>
 <script type="text/javascript" src="//npmcdn.com/feathers-client@^1.0.0/dist/feathers.js"></script>
 <script type="text/javascript">
   var socket = io('http://api.my-feathers-server.com');
