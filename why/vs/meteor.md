@@ -6,7 +6,7 @@ Feathers is community supported, whereas Meteor is venture backed and has raised
 
 Meteor only has official support for MongoDB but there are some community modules of various levels of quality that support other databases. Meteor has it's own package manager and package ecosystem. They have their own template engine called Blaze which is based off of Mustache along with their own build system, but also have guides for Angular and React.
 
-Feathers has official support for [many more databases](../../databases/readme.md) and supports any front-end framework or view engine that you want. We have [guides](../../guides/readme.md) for integrating Feathers with many of the most popular.
+Feathers has official support for [many more databases](../../databases/readme.md) and supports any front-end framework or view engine that you want. We have [framework guides](../../frameworks/readme.md) for integrating Feathers with many of the most popular.
 
 Feathers uses the defacto JavaScript package manager [npm](http://npmjs.org). As a result you can utilize the hundreds of thousands of modules published to npm. Feathers lets you decide whether you want to use Gulp, Grunt, Browserify, Webpack or any other build tool.
 
