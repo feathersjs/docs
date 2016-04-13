@@ -61,6 +61,7 @@ The first step is getting the HTML skeleton for the chat application up. You can
     <script src="//code.jquery.com/jquery-2.2.1.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.12.0/moment.js">
     </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/core-js/2.1.4/core.min.js"></script>
     <script src="//npmcdn.com/feathers-client@^1.0.0/dist/feathers.js">
     </script>
     <script src="/socket.io/socket.io.js"></script>
