@@ -1,6 +1,6 @@
 # Feathers vs. Meteor
 
-Both Feathers and Meteor are open source real-time JavaScript platforms that provide front end and back end support. They both allow clients to send and receive messages over websockets. Feathers lets you choose which real-time transport(s) you want to use via [socket.io](../../real-time/socket-io.md) or [Primus](../../real-time/socket-io.md), while Meteor relies on SockJS.
+Both Feathers and Meteor are open source real-time JavaScript platforms that provide front end and back end support. They both allow clients to send and receive messages over websockets. Feathers lets you choose which real-time transport(s) you want to use via [socket.io](../../real-time/socket-io.md) or [Primus](../../real-time/primus.md), while Meteor relies on SockJS.
 
 Feathers is community supported, whereas Meteor is venture backed and has raised $31.2 million to date.
 
