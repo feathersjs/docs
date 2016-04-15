@@ -202,7 +202,7 @@ module.exports = function() {
 
 > **ProTip:** Just like Express, most middleware should be registered before the `notFound` middleware.
 
-The last step is to change the standard success redirect to `/chat.html` which will show the frontend for our chat application. We can do that by adding `successRedirect` to the `auth` section in `config/default.json`:
+The last step is to change the standard success redirect to `/chat.html`. This page will contain the actual frontend for our chat application. Because there are so many different frameworks we won't create that page yet and instead implement it in the [framework guides](../frameworks/readme.md) for your favourite framework after finishing this tutorial. We set up the redirect by adding `successRedirect` to the `auth` section in `config/default.json`:
 
 ```json
 {
