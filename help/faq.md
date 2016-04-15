@@ -81,9 +81,9 @@ app.service('user').find({
 });
 ```
 
-## I heard Express is dying. What about Koa/Hapi/X?
+## What about Koa/Hapi/X?
 
-Koa is a *"next generation web framework for Node.JS"* using ES6 generator functions instead of Express middleware. This approach unfortunately does not  play well with current Feathers services. However, we have discussed making Feathers framework agnostic in v3.0, especially considering what is occurring with Express, so we are watching [this issue](https://github.com/strongloop/express/issues/2844) closely.
+There are many other Node server frameworks out there like Koa, a *"next generation web framework for Node.JS"* using ES6 generator functions instead of Express middleware or HapiJS etc. Because Feathers 2 is already [univerally usable](../clients/feathers.md) we are planning the ability for it to hook into other frameworks on the server as well. More information can be found in [this issue](https://github.com/feathersjs/feathers/issues/258).
 
 ## How do I filter emitted service events?
 
