@@ -32,7 +32,7 @@ const myService = {
   get(id, params, callback) {},
   // POST /path
   create(data, params, callback) {},
-  // POST /path/<id>
+  // PUT /path/<id>
   update(id, data, params, callback) {},
   // PATCH /path/<id>
   patch(id, data, params, callback) {},
