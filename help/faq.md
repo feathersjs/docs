@@ -2,15 +2,12 @@
 
 We've been collecting some commonly asked questions here. We'll either be updating the guide directly, providing answers here, or both.
 
-## I heard Express is dying. What about Koa/Hapi/X?
-
-Koa is a *"next generation web framework for Node.JS"* using ES6 generator functions instead of Express middleware. This approach unfortunately does not  play well with current Feathers services. However, we have discussed making Feathers framework agnostic in v3.0, especially considering what is occurring with Express, so we are watching [this issue](https://github.com/strongloop/express/issues/2844) closely.
-
 ## Can I expose custom service methods?
 
-Yes and no. You can create custom methods but they won't be exposed over sockets automatically and they won't be mapped to a REST verb (GET, POST, PUT, PATCH, DELETE). See [this section](http://docs.feathersjs.com/clients/readme.html#no-custom-methods) for more detail.
+Yes and no. You can create custom methods but they won't be exposed over sockets automatically and they won't be mapped to a REST verb (GET, POST, PUT, PATCH, DELETE). See [this section](../clients/readme.html#no-custom-methods) for more detail.
 
 ## How can I do custom methods like `findOrCreate`?
+
 Custom functionality can almost always be mapped to an existing service method using hooks.  For example, `findOrCreate` can be implemented as a before-hook on the service's `get` method.  [See this gist](https://gist.github.com/marshallswain/9fa3b1e855633af00998) for an example of how to implement this in a before-hook.
 
 ## How do I do nested routes?
@@ -19,17 +16,11 @@ Normally we find that they actually aren't needed and that it's much better to k
 
 ## How do I do I render templates?
 
-Feathers works just like Express so it's the exact same. We've created a [helpful little guide right here](../guides/server-side-rendering.md).
+Feathers works just like Express so it's the exact same. We've created a [helpful little guide right here](../guides/using-a-view-engine.md).
 
-## How do I filter emitted service events?
+## I got a `possible EventEmitter memory leak detected` warning
 
-See [this section](http://docs.feathersjs.com/real-time/filtering.html).
-
-## How do I access the request object in hooks or services?
-
-In short, you shouldn't need to. If you look at the [hooks chapter](../hooks/readme.md) you'll see all the params that are available on a hook.
-
-If you still need something from the request object (for example, the requesting IP address) you can simply tack it on to the `req.feathers` object [as described here](http://docs.feathersjs.com/middleware/express.html#setting-service-parameters).
+This warning is not as bad as it sounds. If you got it from Feathers you most likely registered more than 64 services and/or event listeners on a Socket. If you don't think there are that many services or event listeners you may have a memory leak. Otherwise you can increase the number in the [Socket.io configuration](../real-time/socket-io.md) via `io.sockets.setMaxListeners(number)` and with [Primus](../real-time/primus.md) via `primus.setMaxListeners(number)`. `number` can be `0` for unlimited listeners or any other number of how many listeners you'd expect in the worst case.
 
 ## How do I do validation?
 
@@ -90,6 +81,19 @@ app.service('user').find({
 });
 ```
 
+## What about Koa/Hapi/X?
+
+There are many other Node server frameworks out there like Koa, a *"next generation web framework for Node.JS"* using ES6 generator functions instead of Express middleware or HapiJS etc. Because Feathers 2 is already [univerally usable](../clients/feathers.md) we are planning the ability for it to hook into other frameworks on the server as well. More information can be found in [this issue](https://github.com/feathersjs/feathers/issues/258).
+
+## How do I filter emitted service events?
+
+See [this section](http://docs.feathersjs.com/real-time/filtering.html).
+
+## How do I access the request object in hooks or services?
+
+In short, you shouldn't need to. If you look at the [hooks chapter](../hooks/readme.md) you'll see all the params that are available on a hook.
+
+If you still need something from the request object (for example, the requesting IP address) you can simply tack it on to the `req.feathers` object [as described here](http://docs.feathersjs.com/middleware/express.html#setting-service-parameters).
 
 ## How do I mount sub apps?
 
