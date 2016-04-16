@@ -59,6 +59,8 @@ $ npm start
 
 Open up [localhost:3030](http://localhost:3030) in your browser and you will see your new feathers app running. The endpoint for the Message service you just created is [localhost:3030/messages](http://localhost:3030/messages).
 
+**ProTip:** If you notice any errors when running `npm start`, make sure you have the latest versions of Node and NPM, otherwise you might run into issues such as [this](https://github.com/feathersjs/generator-feathers/issues/78).
+
 ## What Just Happened
 
 A lot of stuff just happened there very quickly. We automatically generated a basic application with a REST and real time API for both [messages](http://localhost:3030/messages), [users](http://localhost:3030/users) and local authentication. We now have full CRUD capability that uses a persistent datastore for both the `/messages` and `/users` endpoints. We also have local authentication fully configured and some basic authorization permissions on the user service.
