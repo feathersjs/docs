@@ -6,7 +6,7 @@ By default Feathers just uses the default [error handler](http://expressjs.com/e
 
 Many Feathers plugins (like the [database adapters](../databases/readme.md) and [authentication](../authentication/readme.md)) already throw Feathers errors, which include their status codes. The default error handler sends a JSON representation of the error (without the stacktrace in production) or sends a default `404.html` or `500.html` error page when visited in the browser.
 
-If you want to use your own custom error pages you can do so like this:
+If you want to use your own custom error pages you can do with a custom HTML formatter like this:
 
 ```js
 const error = require('feathers-errors/handler');
@@ -15,10 +15,9 @@ const app = feathers();
 // Just like Express your error middleware needs to be
 // set up last in your middleware chain.
 app.use(error({
-    html: {
-        401: 'path/to/401.html',
-        404: 'path/to/404.html',
-        default: 'path/to/default.html'
+    html: function(error, req, res, next) {
+      // render your error view with the error object
+      res.render('error', error);
     }
 }))
 ```
@@ -29,7 +28,7 @@ app.use(error({
 
 The following options can be passed when creating a new localstorage service:
 
-- `html` (default: 'Object') [optional] - An object that contains the path to your custom html error pages.
+- `html` (Function|Object) [optional] - A custom formatter function or an object that contains the path to your custom html error pages.
 
 > **ProTip:** `html` can also be set to `false` to disable html error pages altogether so that only JSON is returned.
 
