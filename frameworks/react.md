@@ -71,7 +71,7 @@ const app = feathers()
 
 Each of your components will use the Feathers application we initialized above. The first component shows a form that when submitted creates a new message on the `messages` service:
 
-```javascript
+```html
 const ComposeMessage = React.createClass({
   getInitialState() {
     return { text: '' };
@@ -105,7 +105,7 @@ const ComposeMessage = React.createClass({
 
 The next component shows a list of user and allows to log out of the application;
 
-```javascript
+```html
 const UserList = React.createClass({
   logout() {
     app.logout().then(() => window.location.href = '/index.html');
@@ -125,7 +125,7 @@ const UserList = React.createClass({
         {users.map(user =>
           <li>
             <a className="block relative" href="#">
-              <img src={user.image || PLACEHOLDER} className="avatar" />
+              <img src={user.avatar || PLACEHOLDER} className="avatar" />
               <span className="absolute username">{user.email}</span>
             </a>
           </li>
@@ -143,7 +143,7 @@ const UserList = React.createClass({
 
 Now want to display a list of messages:
 
-```javascript
+```html
 const MessageList = React.createClass({
   // Render a single message
   renderMessage(message) {
@@ -175,7 +175,7 @@ const MessageList = React.createClass({
 
 Finally we need a main component that retrieves all messages and users, listens to [real-time events](../real-time/events.md) and passes the data to the components we previously created:
 
-```javascript
+```html
 const ChatApp = React.createClass({
   getInitialState() {
     return {
@@ -230,7 +230,7 @@ const ChatApp = React.createClass({
 
 The chat application is set up to redirect from `login.html` to our `chat.html` page on successful login. The Feathers server has already authenticated the user with email and password and put a JWT in a cookie. Feathers client detects this token for us so we just have to call [app.authenticate](../authentication/client.md) to authenticate that user using the token. Once authenticated successfully we render the main layout with the `ChatApp` component:
 
-```javascript
+```html
 app.authenticate().then(() => {
   ReactDOM.render(<div id="app" className="flex flex-column">
     <header className="title-bar flex flex-row flex-center">
