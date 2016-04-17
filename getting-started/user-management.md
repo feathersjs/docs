@@ -91,7 +91,7 @@ Let's replace `public/index.html` with the following welcome page:
               <input class="block" type="email" name="email" placeholder="email">
             </fieldset>
             <fieldset>
-              <input class="block" type="password"name="password" placeholder="password">
+              <input class="block" type="password" name="password" placeholder="password">
             </fieldset>
             <button type="submit" class="button button-primary block login">
               Login
