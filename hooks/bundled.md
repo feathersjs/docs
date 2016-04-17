@@ -27,9 +27,14 @@ app.service('messages').after(hooks.populate('user', {
 
 ## Disable
 
-`disable(providers)`
+`disable(providers|callback)`
 
-Disable access to a service method completely or for a specific provider. All providers ([REST](../rest/readme.md), [Socket.io](../real-time/socket-io.md) and [Primus](../real-time/primus.md)) set the `params.provider` property which is what `disable` checks for. `disable('external')`  will disable access from all providers making a service method only usable internally.
+Disable access to a service method completely or for a specific provider. All providers ([REST](../rest/readme.md), [Socket.io](../real-time/socket-io.md) and [Primus](../real-time/primus.md)) set the `params.provider` property which is what `disable` checks for. There are several ways to use the disable hook:
+
+- `disable()` will disable the service method completely
+- `disable('rest')` will disable the method for the REST provider
+- `disable('external')` will disable access from all providers making a service method only usable internally.
+- `disable(function(hook) {})` will run the function with the hook object. It should return a boolean value or a promise that resolves with a boolean.
 
 ```js
 const hooks = require('feathers-hooks');
@@ -40,7 +45,15 @@ app.service('users').before({
   // A user can not be deleted through the REST provider
   remove: hooks.disable('rest'),
   // Disable calling `update` completely (e.g. to only support `patch`)
-  update: hooks.disable()
+  update: hooks.disable(),
+  // Disable the remove hook if the user is not an admin
+  remove: hooks.disable(function(hook) {
+    if(!hook.params.user.isAdmin) {
+      return false;
+    }
+
+    return true;
+  })
 });
 ```
 
