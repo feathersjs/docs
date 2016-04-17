@@ -25,7 +25,7 @@ Let's replace `public/index.html` with the following welcome page:
   <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <meta name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=0" />
+      content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=0">
     <title>Feathers Chat</title>
     <link rel="shortcut icon" href="favicon.ico">
     <link rel="stylesheet" href="//cdn.rawgit.com/feathersjs/feathers-chat/v0.1.0/public/base.css">
@@ -71,7 +71,7 @@ Let's replace `public/index.html` with the following welcome page:
   <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <meta name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=0" />
+      content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=0">
     <title>Feathers Chat</title>
     <link rel="shortcut icon" href="favicon.ico">
     <link rel="stylesheet" href="//cdn.rawgit.com/feathersjs/feathers-chat/v0.1.0/public/base.css">
@@ -91,7 +91,7 @@ Let's replace `public/index.html` with the following welcome page:
               <input class="block" type="email" name="email" placeholder="email">
             </fieldset>
             <fieldset>
-              <input class="block" type="password"name="password" placeholder="password">
+              <input class="block" type="password" name="password" placeholder="password">
             </fieldset>
             <button type="submit" class="button button-primary block login">
               Login
@@ -110,7 +110,8 @@ Finally, `public/signup.html` looks like this:
 <html>
   <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=0" />
+    <meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=0">
     <title>Feathers Chat</title>
 
     <link rel="shortcut icon" href="img/favicon.png">
