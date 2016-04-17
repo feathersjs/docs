@@ -6,6 +6,10 @@ We've been collecting some commonly asked questions here. We'll either be updati
 
 Yes and no. You can create custom methods but they won't be exposed over sockets automatically and they won't be mapped to a REST verb (GET, POST, PUT, PATCH, DELETE). See [this section](../clients/readme.html#no-custom-methods) for more detail.
 
+## I am getting plain text errors with a 500 status code
+
+If you get a plain text error and a 500 status code for errors that should return different status codes, make sure you have `feathers-errors/handler` configured as described in the [error handling](../middleware/error-handling.md) chapter.
+
 ## How can I do custom methods like `findOrCreate`?
 
 Custom functionality can almost always be mapped to an existing service method using hooks.  For example, `findOrCreate` can be implemented as a before-hook on the service's `get` method.  [See this gist](https://gist.github.com/marshallswain/9fa3b1e855633af00998) for an example of how to implement this in a before-hook.
