@@ -46,7 +46,7 @@ module.exports = function() {
   return function(hook) {
     // Assign the new data with the Gravatar image
     hook.data = Object.assign({}, hook.data, {
-      image: gravatarImage(hook.data.email)
+      avatar: gravatarImage(hook.data.email)
     });
   };
 };
