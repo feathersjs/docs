@@ -6,7 +6,9 @@
 
 ---
 
-With [NodeJS](https://nodejs.org) installed, you can quickly scaffold your first REST and real-time API by following these few steps:
+With [NodeJS](https://nodejs.org) installed, you can quickly scaffold your first REST and real-time API by following these few steps.
+
+> __Note:__ Make sure to check the [setting up guide](../guides/setting-up.md) for more information about the recommended version and setup for NodeJS.
 
 1. Install the Feathers CLI.
 
