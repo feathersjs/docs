@@ -120,7 +120,7 @@ All of the code examples that follow should be appended to the `public/vue-chat/
 
 ```javascript
 // A placeholder image if the user does not have one
-const PLACEHOLDER = '/placeholder.png';
+const PLACEHOLDER = 'https://placeimg.com/60/60/people';
 
 // An anonymous user if the message does not have that information
 const dummyUser = {
@@ -165,12 +165,13 @@ var vm = new Vue({
     // On errors we just redirect back to the login page
     .catch(error => {
       if (error.code === 401) window.location.href = '/login.html'
-    })
+    });
   }
 })
-``` 
+```
 
 ## Adding components
+
 In `index.html`, we added some custom components and their corresponding templates, all with unique `id` attributes. If you are unsure of the usage of `<slots>`, please check the [Vue Documentation](http://vuejs.org/guide/components.html#Content-Distribution-with-Slots) on the subject. For those that are familiar with Angular, Vue calls this *content distribution*, otherwise known as *transclusion* in Angular.
 
 As you can see in the below markup, within `index.html` we have a main parent component and some nested components. Also note that within the `<message-list>` template, we loop over a `message` component and bind `message` to a `message` prop which gets passed into the `message` component. 
@@ -188,8 +189,6 @@ As you can see in the below markup, within `index.html` we have a main parent co
 <div class="message flex flex-row" v-for="message in messages" track-by="$index" v-cloak>
     <message :message=message></message>
 </div>
-
-
 ```
 
 Each of your components will use the Feathers application we initialized above. 
@@ -234,7 +233,6 @@ Vue.component('user-list', {
     }
   }
 })
-
 ```
 
 The `<message-list>` component is responsible for getting the messages from the Feathers server and much like the `<user-list>` componet, whenever a new message has been created on the backend, it's sent to the client via websockets and pushed on to the `messages` array.
@@ -326,3 +324,5 @@ The Vue documentation is a fantastic source of reference. As your app grows, you
 Below is an introduction to using Vuex with Vue and Feathers on the backend.
 
 [![Realtime Vue.js and Feathers.js Example](http://i.imgur.com/MhYLgxb.png)](https://www.youtube.com/watch?v=zbhYcxr5ldk "Realtime Vue.js and Feathers.js Example ")
+
+> Mad ♥️ to [Niall O'Brien](https://twitter.com/niall_obrien) for putting together the video.
