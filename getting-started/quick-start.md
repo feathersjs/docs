@@ -1,6 +1,6 @@
 # Quick Start
 
-{% youtube %}https://www.youtube.com/watch?v=CuM4vLkBaik{% endyoutube %}
+[![Intro to FeathersJS](http://i.imgur.com/MhYLgxb.png)](https://www.youtube.com/watch?v=CuM4vLkBaik "Intro to FeathersJS")
 
 > Mad ♥️ to [Chris Pena](https://twitter.com/dev_coffee) for putting together the video.
 
