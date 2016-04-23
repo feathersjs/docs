@@ -78,7 +78,7 @@ app.service('user').before({
 
 #### Options
 
-- `userEndpoint` (default: '/user') [optional] - The endpoint for the user service.
+- `userEndpoint` (default: '/users') [optional] - The endpoint for the user service.
 - `idField` (default: '_id') [optional] - The database field containing the user id.
 
 ## restrictToAuthenticated
