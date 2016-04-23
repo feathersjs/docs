@@ -194,7 +194,13 @@ As you can see in the below markup, within `index.html` we have a main parent co
 Each of your components will use the Feathers application we initialized above. 
 
 
-The first component is a wrapper for our app. By checking if the user is authenticated here, we ensure that the user doesn't see our page for a split-second before the JavaScript kicks in.
+The first component is a wrapper for our app. By checking if the user is authenticated here, we ensure that the user doesn't see our page for a split-second before the JavaScript kicks in. Other than that, this component doesn't do a whole lot but binds to its template in `index.html`.
+
+```js
+Vue.component('chat-app', {
+  template: '#chat-app-template'
+})
+```
 
 
 We then have a `<user-list>` component which fetches the users from the `users` Feathers service once the component is ready. We also listen for events coming from the server to know when a new user has been created and we add them to the `users` array (`this.users.push(user)`).
