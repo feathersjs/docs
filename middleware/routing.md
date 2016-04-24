@@ -21,7 +21,7 @@ app.use('/users/:user_id/todos', {
 });
 ```
 
-> __Note:__ This route should be registered after the `/users` service.
+> **ProTip:** This route should be registered after the `/users` service.
 
 To make the user id part of `params.query` we can use a [before hook](../hooks/readme.md):
 
@@ -38,7 +38,7 @@ app.service('users/:user_id/todos').before({
 
 Now all `GET /users/<id>/todos` requests will make a `find` query limited to the given user id.
 
-> __Note:__ Think of Feathers services as their own router that can only be used directly on an application. Services can *not* be used with instances of [Express router](http://expressjs.com/en/4x/api.html#router) (`feathers.Router`).
+> **ProTip:** Think of Feathers services as their own router that can only be used directly on an application. Services can *not* be used with instances of [Express router](http://expressjs.com/en/4x/api.html#router) (`feathers.Router`).
 
 It is important to keep in mind that those routes are only possible for the REST API of a service. The actual service name is still `users/:userId/todos`. This means that [Socket.io](..//real-time/socket-io.md) and [Primus](..//real-time/primus.md) connections need to provide the parameter in their query:
 
@@ -133,4 +133,4 @@ const app = feathers()
 
 Now `/v1/todos/dishes` and `/v2/todos/dishes` will show a different response. For [websocket services](..//real-time/readme.md), the path to listen and send events on will now be `v1/todos` and `v2/todos`. The advantage to doing versioning as shown above (as opposed to doing it directly on the service) is that you will be able to use custom plugins and a custom configuration in each version of your API.
 
-> __Note:__ Currently, using `app.service('v1/todos')` does not work. You will have to use the imported applications like `v1app.service('todos')` or `v2app.service('todos')`
+> **ProTip:** Currently, using `app.service('v1/todos')` does not work. You will have to use the imported applications like `v1app.service('todos')` or `v2app.service('todos')`
