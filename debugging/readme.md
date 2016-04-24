@@ -8,7 +8,7 @@ node debug src/
 
 ## Moar Logs!
 
-In addition to just setting breakpoints we also use the fabulous [debug](https://github.com/visionmedia/debug) module throughout Feathers core and many of the plug-ins. To get visibility into what is happening inside all of Feathers simply set a `DEBUG` environmental variable to the scope that you want visibility.
+In addition to setting breakpoints we also use the fabulous [debug](https://github.com/visionmedia/debug) module throughout Feathers core and many of the plug-ins. This allows you to get visibility into what is happening inside all of Feathers by simply setting a `DEBUG` environmental variable to the scope of modules that you want visibility into.
 
 - Debug logs for all the things
 
@@ -36,7 +36,7 @@ In addition to just setting breakpoints we also use the fabulous [debug](https:/
 
 ## Using Hooks
 
-Since [hooks](../hooks/readme.md) can be registered dynamically anywhere in your app using them to debug your state at any point in the hook the chain (either before or after a service call) is really handy. For example,
+Since [hooks](../hooks/readme.md) can be registered dynamically anywhere in your app, using them to debug your state at any point in the hook the chain (either before or after a service call) is really handy. For example,
 
 ```js
 const hooks = require('feathers-authentication').hooks;
@@ -57,3 +57,5 @@ app.service('messages').before({
   ]
 });
 ```
+
+You can then move that hook around the hook chain and inspect what your `hook` object looks like.
