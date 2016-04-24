@@ -32,6 +32,16 @@ The following options can be passed when creating a new localstorage service:
 
 > **ProTip:** `html` can also be set to `false` to disable html error pages altogether so that only JSON is returned.
 
+## Catching Global Server Side Errors
+
+Since promises swallow errors if you for get to add a `catch()` statement. Therefore you should make sure that you **always** call `.catch()` on your promises. To catch uncaught errors at a global level you can also the code below to your top most file.
+
+```js
+process.on('unhandledRejection', (reason, p) => {
+  console.log("Unhandled Rejection at: Promise ", p, " reason: ", reason);
+});
+```
+
 ## Feathers Error Types
 
 `feathers-errors` currently provides the following error types, all of which are instances of `FeathersError`:
