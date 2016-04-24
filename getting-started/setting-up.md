@@ -1,6 +1,6 @@
 # Setting up Your Environment
 
-Feathers and most plug-ins work on Node 0.12 and up but we recommend using the latest version or at least Node 5. All code samples in this documentation are written in [ES2015](https://nodejs.org/en/docs/es6/) which is not supported in Node versions prior to 5 without the use of a code transpiler like Babel (see below).
+Feathers and most plug-ins work on Node `v0.12.x` and up but we recommend using the latest version or at least Node `v5.x`. All code samples in this documentation are written in [ES2015](https://nodejs.org/en/docs/es6/) which is not supported in Node versions prior to `v5.0.0` without the use of a code transpiler like Babel (see below).
 
 ## Node Version Manager
 
