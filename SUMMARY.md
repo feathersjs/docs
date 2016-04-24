@@ -4,7 +4,7 @@
 * [What is Feathers](getting-started/introduction.md)
 * [Quick Start](getting-started/quick-start.md)
 * [Your First App](getting-started/readme.md)
-  * [Your Development Environment](getting-started/setting-up.md)
+  * [Getting Set Up](getting-started/setting-up.md)
   * [Scaffolding and Services](getting-started/scaffolding.md)
   * [User Management](getting-started/user-management.md)
   * [Manipulating data](getting-started/formatting-and-hooks.md)
