@@ -80,6 +80,7 @@
 * [Error Handling](middleware/error-handling.md)
 * [Logging](middleware/logging.md)
 * [Configuration](configuration/readme.md)
+* [Debugging](debugging/readme.md)
 * [Core API](api/readme.md)
 * [Guides](guides/readme.md)
   * [Migrating to Feathers 2](guides/migrating.md)
