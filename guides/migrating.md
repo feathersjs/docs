@@ -54,7 +54,7 @@ app.configure(primus());
 
 All configuration options are still the same.
 
-> __Note:__ One additional small difference is that `feathers-socketio` now sets up the connection as a service mixin in the services `setup`. This means `app.configure(socketio())` has to be called **before** registering any services.
+> **ProTip:** One additional small difference is that `feathers-socketio` now sets up the connection as a service mixin in the services `setup`. This means `app.configure(socketio())` has to be called **before** registering any services.
 
 ## Database adapters
 

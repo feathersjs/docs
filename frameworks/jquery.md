@@ -4,7 +4,7 @@ You don't always need a full on framework. Feathers and the [Feathers client](..
 
 If you haven't done so you'll want to go through that tutorial or you can find a [working example here](https://github.com/feathersjs/feathers-chat).
 
-> __Note:__ This guide uses ES6 syntax which is only available in newer browsers and IE edge. If you want to use the app in older browsers you need to include a transpiler like [Babel](https://babeljs.io/).
+> **ProTip:** This guide uses ES6 syntax which is only available in newer browsers and IE edge. If you want to use the app in older browsers you need to include a transpiler like [Babel](https://babeljs.io/).
 
 
 ## Setting up the HTML page

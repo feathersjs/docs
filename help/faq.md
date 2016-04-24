@@ -2,6 +2,10 @@
 
 We've been collecting some commonly asked questions here. We'll either be updating the guide directly, providing answers here, or both.
 
+## How do I debug my app
+
+It's really no different than debugging any other NodeJS app but you can refer to the [Debugging](../debugging/readme.md) section of the guide for more Feathers specific tips and tricks.
+
 ## Can I expose custom service methods?
 
 Yes and no. You can create custom methods but they won't be exposed over sockets automatically and they won't be mapped to a REST verb (GET, POST, PUT, PATCH, DELETE). See [this section](../clients/readme.html#no-custom-methods) for more detail.
