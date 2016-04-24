@@ -1,6 +1,6 @@
-# Setting up
+# Setting up Your Environment
 
-Feathers and most plugins work on Node 0.12 and up but we recommend using the latest version or at least Node 5. All code samples in this documentation are written in [ES2015](https://nodejs.org/en/docs/es6/) which is not supported in Node versions prior to 5 without the use of a code transpiler like Babel (see below).
+Feathers and most plug-ins work on Node 0.12 and up but we recommend using the latest version or at least Node 5. All code samples in this documentation are written in [ES2015](https://nodejs.org/en/docs/es6/) which is not supported in Node versions prior to 5 without the use of a code transpiler like Babel (see below).
 
 ## Node Version Manager
 
@@ -11,7 +11,7 @@ nvm install 5.10
 nvm alias default 5.10
 ```
 
-Now `node --version` should show `5.10.x`.
+Now `node --version` should show `5.10.x`. If it does then you can skip ahead to [building the app](./scaffolding.md) and not have to worry about Babel.
 
 ## Babel
 
@@ -37,6 +37,6 @@ Update your `package.json` start script:
 }
 ```
 
-Now the application will run using es ES2015 (including things like the `import` syntax which is not part of Node yet).
+Now the application will run using ES2015 (including things like the `import` syntax which is not part of Node yet).
 
-> __Note:__ Babel is not included by default because we found that it slows down startup time and memory consumption during development considerably and Node 5 already supports most ES2015 features.
+> **ProTip:** Babel is not included by default because we found that it slows down startup time and memory consumption during development considerably and Node 5 already supports most ES2015 features.

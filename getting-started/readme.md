@@ -4,8 +4,6 @@
 
 Well alright! Let's build our first Feathers app! We're going to build a real-time chat app with [NeDB](https://github.com/louischatriot/nedb) as the database. It's a great way to cover all the things that you'd need to do in a real world application and how Feathers can help. It also makes a lot more sense to have a real-time component than a Todo list. 😉
 
-In this tutorial you go from nothing to a real-time chat app complete with signup, login, token based authentication, authorization, with a RESTful API and a working front-end. [Let's get started](./scaffolding.md).
-
-> __Note:__ Make sure to check the [setting up guide](../guides/setting-up.md) for more information about the recommended version and setup for NodeJS.
+In this tutorial you go from nothing to a real-time chat app complete with signup, login, token based authentication, authorization, with a RESTful API and a working front-end. [Let's get started](./setting-up.md).
 
 You can find a complete working example [here](https://github.com/feathersjs/feathers-chat).
