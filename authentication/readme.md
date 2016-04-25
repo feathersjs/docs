@@ -134,7 +134,7 @@ app.configure(authentication({
 
 ## How does it work?
 
-Regardless of whether you use OAuth, a token, or email + password to authenticate (even if you don't use the Feathers client), after successful login the `feathers-authentication` plugin gives back an encrypted JSON web token containing the user `id` as the payload and the user object associated with that id.
+Regardless of whether you use OAuth, a token, or email + password to authenticate (even if you don't use the Feathers client), after successful login the `feathers-authentication` plugin gives back a signed JSON web token containing the user `id` as the payload and the user object associated with that id.
 
 ```js
 // successful auth response
@@ -148,7 +148,7 @@ Regardless of whether you use OAuth, a token, or email + password to authenticat
 
 ### Authentication Over REST
 
-For REST the token needs to be passed with each request. Therefore if you did `.configure(rest())` in your Feathers app, the auth plugin also includes a [special middleware](https://github.com/feathersjs/feathers-authentication/blob/master/src/middleware/index.js#L34-L73) that ensures that a token, if sent, is available on the Feathers `params` object by setting it on `req.feathers.token`.
+For REST the token needs to be passed with each request. Therefore if you did `.configure(rest())` in your Feathers app, the auth plugin also includes a [special middleware](https://github.com/feathersjs/feathers-authentication/blob/master/src/middleware/index.js#L34-L73) that ensures that a token, if sent, is available on the Feathers `params` object that is passed to services and hooks by setting it on `req.feathers.token`.
 
 > **ProTip:** The `req.feathers` object is special because its attributes are made available inside Feathers hooks on the `hook.params` object.
 
