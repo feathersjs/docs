@@ -103,7 +103,7 @@ The `queryWithCurrentUser` **before** hook will automatically add the user's `id
 const hooks = require('feathers-authentication').hooks;
 
 app.service('messages').before({
-  get: [
+  find: [
     hooks.queryWithCurrentUser({ idField: 'id', as: 'sentBy' })
   ]
 });
