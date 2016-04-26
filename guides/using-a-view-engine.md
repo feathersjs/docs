@@ -19,7 +19,7 @@ Let's say you want to render a list of messages from most recent to oldest using
 app.set('view engine', 'jade');
 
 // Register your message service
-app.configure('/api/messages', memory());
+app.use('/api/messages', memory());
 
 // Inside your main Feathers app
 app.get('/messages', function(req, res, next){
