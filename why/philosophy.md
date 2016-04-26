@@ -4,7 +4,11 @@ We know! You're probably screaming _"Not another JavaScript framework!"_. We've 
 
 With this experimentation Feathers has grown into what it is today. Our core philosophy that guides Feathers is still the same as it was years ago:
 
-> _"Monolithic apps fall apart at scale. What if we could make it easy to build service oriented applications from day one rather than having to start with a large application and go through the painful process of breaking it apart? This is usually a result of inflexible frameworks and technical debt._
+> _"Monolithic apps tend to fall apart at scale, either because of performance or because there are too many people in the code. What if we could make it easy to build applications that can naturally become service oriented from day one, rather than having to start with a large application and painfully tease it apart?_
+>
+> _What if we could make a framework that grows with you and your business and makes it easy for you to transition to a series of microservices, or easily change databases without ripping our code apart?_
+>
+> _What if we could make real-time less intimidating rather than a hacky, complex after thought? What if we could remove the boilerplate needed for building REST APIs? Could we build a framework that provides enough structure to get going easily and add all the common pieces that modern apps need, but still keep everything flexible and optional?_
 >
 > _A framework itself should not be opinionated. It should be made up of small, reusable, optional components that do one thing well but are combined in an opinionated way. By keeping the components of your application small, flexible and optional you eliminate much of the engineering obstacles that prevent moving fast and scaling."_
 
