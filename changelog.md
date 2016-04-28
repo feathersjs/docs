@@ -1,8 +1,13 @@
 # Changelog
 
+__2.0.1__
+
+- Allow services with only a `setup` method ([#285](https://github.com/feathersjs/feathers/issues/285), [#308](https://github.com/feathersjs/feathers/pull/308))
+- Remove JSON loading from the client version for better loader support ([#306](https://github.com/feathersjs/feathers/pull/306))
+
 __2.0.0__
 
-- Separate API providers into [feathers-rest](), [feathers-socketio]() and [feathers-primus]()
+- Separate API providers into [feathers-rest](https://github.com/feathersjs/feathers-rest), [feathers-socketio](https://github.com/feathersjs/feathers-socketio) and [feathers-primus](https://github.com/feathersjs/feathers-primus)
 - Make Feathers universal (isomorphic)
 - Change websocket service paths to use parent application mountpoint
 - Migrate codebase to ES6
