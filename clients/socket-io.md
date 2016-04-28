@@ -8,6 +8,12 @@ Feathers sets up a normal Socket.io server that you can connect to using the [So
 
 > **ProTip**: The socket connection URL has to point to the server root which is where Feathers will set up Socket.io.
 
+## Client options
+
+The Socket.io configuration (`socketio(socket [, options])`) can take settings which currently support:
+
+- __timeout__ (default: 5000ms) - The time after which a method call fails and times out. This usually happens when calling a service or service method that does not exist.
+
 ## Browser Usage
 
 Using [the Feathers client](feathers.md), the `feathers-socketio/client` module can be configured to use that socket as the connection:

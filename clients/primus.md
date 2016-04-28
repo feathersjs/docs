@@ -8,6 +8,12 @@ In the browser, the connection can be established by loading the client from `pr
 
 > **ProTip**: The socket connection URL has to point to the server root which is where Feathers will set up Primus.
 
+## Client options
+
+The Primus configuration (`primus(connection [, options])`) can take settings which currently support:
+
+- __timeout__ (default: 5000ms) - The time after which a method call fails and times out. This usually happens when calling a service or service method that does not exist.
+
 ## Browser Usage
 
 Using [the Feathers client](feathers.md), the `feathers-primus/client` module can be configured to use the Primus connection:
@@ -56,7 +62,8 @@ const Socket = Primus.createSocket({
 const socket = new Socket('http://api.feathersjs.com');
 const app = feathers()
   .configure(feathers.hooks())
-  .configure(primus(socket));
+  // Configure and change the default timeout to one second
+  .configure(primus(socket, { timeout: 1000 }));
 
 // Get the message service that uses a websocket connection
 const messageService = app.service('messages');
