@@ -12,7 +12,7 @@ Feathers sets up a normal Socket.io server that you can connect to using the [So
 
 The Socket.io configuration (`socketio(socket [, options])`) can take settings which currently support:
 
-- __timeout__ (default: 5000ms) - The time after which a method call fails and times out. This usually happens when calling a service or service method that does not exist.
+- `timeout` (default: 5000ms) - The time after which a method call fails and times out. This usually happens when calling a service or service method that does not exist.
 
 ## Browser Usage
 

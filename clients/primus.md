@@ -12,7 +12,7 @@ In the browser, the connection can be established by loading the client from `pr
 
 The Primus configuration (`primus(connection [, options])`) can take settings which currently support:
 
-- __timeout__ (default: 5000ms) - The time after which a method call fails and times out. This usually happens when calling a service or service method that does not exist.
+- `timeout` (default: 5000ms) - The time after which a method call fails and times out. This usually happens when calling a service or service method that does not exist.
 
 ## Browser Usage
 
