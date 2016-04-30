@@ -144,6 +144,10 @@ const app = feathers()
   .configure(feathers.authentication({
     storage: window.localStorage
   }))
+  
+  // Get the Feathers services we want to use
+const userService = app.service('users');
+const messageService = app.service('messages');
 ```
 
 ## Initialising our Vue instance
