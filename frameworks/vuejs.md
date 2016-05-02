@@ -144,14 +144,14 @@ const app = feathers()
   .configure(feathers.authentication({
     storage: window.localStorage
   }))
-  
+
   // Get the Feathers services we want to use
 const userService = app.service('users');
 const messageService = app.service('messages');
 ```
 
 ## Initialising our Vue instance
-We need to now initialise our Vue instance and handle authentication. If the user is authenticated, we set `this.user.authenticate = true` and the `v-if` directive on the `<chat-app>` component will evaluate to true, thus revealing the app.
+We need to now initialize our Vue instance and handle authentication. If the user is authenticated, we set `this.user.authenticate = true` and the `v-if` directive on the `<chat-app>` component will evaluate to true, thus revealing the app.
 
 ```js
 var vm = new Vue({
@@ -178,7 +178,7 @@ var vm = new Vue({
 
 In `index.html`, we added some custom components and their corresponding templates, all with unique `id` attributes. If you are unsure of the usage of `<slots>`, please check the [Vue Documentation](http://vuejs.org/guide/components.html#Content-Distribution-with-Slots) on the subject. For those that are familiar with Angular, Vue calls this *content distribution*, otherwise known as *transclusion* in Angular.
 
-As you can see in the below markup, within `index.html` we have a main parent component and some nested components. Also note that within the `<message-list>` template, we loop over a `message` component and bind `message` to a `message` prop which gets passed into the `message` component. 
+As you can see in the below markup, within `index.html` we have a main parent component and some nested components. Also note that within the `<message-list>` template, we loop over a `message` component and bind `message` to a `message` prop which gets passed into the `message` component.
 
 ```html
 <chat-app v-if="user.authenticated">
@@ -195,7 +195,7 @@ As you can see in the below markup, within `index.html` we have a main parent co
 </div>
 ```
 
-Each of your components will use the Feathers application we initialized above. 
+Each of your components will use the Feathers application we initialized above.
 
 
 The first component is a wrapper for our app. By checking if the user is authenticated here, we ensure that the user doesn't see our page for a split-second before the JavaScript kicks in. Other than that, this component doesn't do a whole lot but binds to its template in `index.html`.
@@ -245,7 +245,7 @@ Vue.component('user-list', {
 })
 ```
 
-The `<message-list>` component is responsible for getting the messages from the Feathers server and much like the `<user-list>` componet, whenever a new message has been created on the backend, it's sent to the client via websockets and pushed on to the `messages` array.
+The `<message-list>` component is responsible for getting the messages from the Feathers server and much like the `<user-list>` component, whenever a new message has been created on the backend, it's sent to the client via websockets and pushed on to the `messages` array.
 
 We then have a method that will scroll this view to the bottom after we've added a new message to the view.
 
@@ -293,7 +293,7 @@ Vue.component('message-list', {
 })
 ```
 
-Within the `<message-list>` component you'll notice that we have a `<message>` componet. Its job is to simply render each message correctly. As the `<message-list>` component loops over each message, it passes the current message into the `<message>` component as a prop and we use a Vue filter to format the date (refer to the `message-list-template` template.
+Within the `<message-list>` component you'll notice that we have a `<message>` component. Its job is to simply render each message correctly. As the `<message-list>` component loops over each message, it passes the current message into the `<message>` component as a prop and we use a Vue filter to format the date (refer to the `message-list-template` template.
 
 ```js
 Vue.component('message', {
