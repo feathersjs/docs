@@ -1,6 +1,6 @@
 # API
 
-Feathers core API is very small and an initialized application provides the same functionality as an [Express 4](http://expressjs.com/en/4x/api.html) application. The differences and additional methods and their usage are outlined in this chapter. For the service API refer to the [Services chapter](services.html).
+Feathers core API is very small and an initialized application provides the same functionality as an [Express 4](http://expressjs.com/en/4x/api.html) application. The differences and additional methods and their usage are outlined in this chapter. For the service API refer to the [Services chapter](../services/readme.md).
 
 ## configure
 
