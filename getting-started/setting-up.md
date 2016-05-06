@@ -32,7 +32,7 @@ Create a `.babelrc` file like this:
 Update your `package.json` start script:
 
 ```javascript
-"scripts" {
+"scripts": {
   "start": "babel-node src/app"
 }
 ```
