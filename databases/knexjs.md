@@ -45,7 +45,7 @@ The following options can be passed when creating a Knex service:
 - `Model` (**required**) - The KnexJS database instance
 - `name` (**required**) - The name of the table
 - `id` (default: `id`) [optional] - The name of the id property.
-- `paginate` [optional] - A pagination object containing a `default` and `max` page size (see the [Pagination chapter](databases/pagination.md))
+- `paginate` [optional] - A pagination object containing a `default` and `max` page size (see the [Pagination chapter](pagination.md))
 
 ## Complete Example
 
