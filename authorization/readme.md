@@ -30,7 +30,7 @@ In the example below, only a user in the `feathers` group can delete messages.
 // Create a hook that requires that a user is logged in.
 var isFeathersUser = function(options = {}) {
   return function(hook) {
-    // We can assume hook.params.user exists because the requireAuth()
+    // We can assume hook.params.user exists because the auth.restrictToAuthenticated()
     // hook is called before this and will throw an error if it doesn't
     if (hook.params.user.group !== 'feathers') {
       throw new Error('You must be a feathers user to do that.');
