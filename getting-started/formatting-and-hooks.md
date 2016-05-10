@@ -151,7 +151,7 @@ As you can see, manipulating data is pretty easy with hooks. To improve portabil
 
 We've seen how Hooks can be used to manipulate data but they can also be used for permissions and validations. We need one last hook that makes sure that users can only `remove`, `update` and `patch` their own message (see [the services chapter](../services/readme.md) for more information about those methods).
 
-We need a `restrict-to-sender` _before_ hook for the `message` service that runs before those methods. Go ahead and use the generator to create it.  Once you've generated the hook, change the file at `src/services/message/hook/restrict-to-sender.js` to:
+We need a `restrict-to-sender` _before_ hook for the `message` service that runs before those methods. Go ahead and use the generator to create it.  Once you've generated the hook, change the file at `src/services/message/hooks/restrict-to-sender.js` to:
 
 ```js
 'use strict';
