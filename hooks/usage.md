@@ -191,7 +191,6 @@ todoService.before({
   find(hook) {
     return this.find().then(data => {
       hook.params.message = 'Ran through promise hook';
-      hook.data.result = data;
       // Always return the hook object
       return hook;
     });
