@@ -53,6 +53,7 @@ const feathers = require('feathers');
 const primus = require('feathers-primus/client');
 const Primus = require('primus');
 const Emitter = require('primus-emitter');
+const hooks = require('feathers-hooks');
 const Socket = Primus.createSocket({
   transformer: 'websockets',
   plugin: {
@@ -61,7 +62,7 @@ const Socket = Primus.createSocket({
 });
 const socket = new Socket('http://api.feathersjs.com');
 const app = feathers()
-  .configure(feathers.hooks())
+  .configure(hooks())
   // Configure and change the default timeout to one second
   .configure(primus(socket, { timeout: 1000 }));
 
@@ -94,7 +95,7 @@ if (window.navigator && Object.keys(window.navigator).length === 0) {
 
 const socket = new Socket('http://api.feathersjs.com');
 const app = feathers()
-  .configure(feathers.hooks())
+  .configure(hooks())
   .configure(primus(socket));
 
 // Get the message service that uses a websocket connection
