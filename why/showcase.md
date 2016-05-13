@@ -11,7 +11,15 @@ Below are some of the amazing things built with Feathers or for the Feathers eco
 
 Submit yours by creating a pull request.
 
+- [A generic validation hook](https://github.com/kulakowka/feathers-validate-hook)
+- [A generic hook for adding virtual attributes](https://github.com/kulakowka/feathers-virtual-attribute-hook)
+
 
 ## Examples or Tutorials
 
 Submit yours by creating a pull request.
+
+- [A series of small, example apps](https://github.com/feathersjs/feathers-demos)
+- [Feathers + Apollo](https://github.com/swarthout/feathers-apollo)
+- [Feathers + React + Mobx](https://github.com/foxhound87/rfx-stack)
+- [Feathers + React + Webpack](https://github.com/sscaff1/feathers-webpack-react)
