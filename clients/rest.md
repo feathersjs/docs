@@ -19,7 +19,7 @@ Using [the Feathers client](feathers.md), the `feathers-rest/client` module allo
 jQuery [$.ajax](http://api.jquery.com/jquery.ajax/) requires an instance of jQuery passed to `feathers.jquery`. In most cases the global `jQuery`:
 
 ```js
-const feathers = require('feathers');
+const feathers = require('feathers/client');
 const rest = require('feathers-rest/client');
 const host = 'http://api.feathersjs.com';
 const app = feathers()
@@ -31,7 +31,7 @@ const app = feathers()
 The [request](https://github.com/request/request) object needs to be passed explicitly to `feathers.request`. Using [request.defaults](https://github.com/request/request#convenience-methods) - which creates a new request object - is a great way to set things like default headers or authentication information:
 
 ```js
-const feathers = require('feathers');
+const feathers = require('feathers/client');
 const rest = require('feathers-rest/client');
 const request = require('request');
 const host = 'http://api.feathersjs.com';
@@ -52,7 +52,7 @@ const app = feathers()
 [Superagent](http://visionmedia.github.io/superagent/) currently works with a default configuration:
 
 ```js
-const feathers = require('feathers');
+const feathers = require('feathers/client');
 const rest = require('feathers-rest/client');
 const superagent = require('superagent');
 const host = 'http://api.feathersjs.com';
@@ -65,7 +65,7 @@ const app = feathers()
 Fetch also uses a default configuration:
 
 ```js
-const feathers = require('feathers');
+const feathers = require('feathers/client');
 const rest = require('feathers-rest/client');
 const host = 'http://api.feathersjs.com';
 const fetch = require('node-fetch');
