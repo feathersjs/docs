@@ -85,6 +85,7 @@
 * [Guides](guides/readme.md)
   * [Migrating to Feathers 2](guides/migrating.md)
   * [Using A View Engine](guides/using-a-view-engine.md)
+  * [Uploading files](guides/file-uploading.md)
   * [Creating a plugin](guides/creating-a-plugin.md)
 * [Help](help/readme.md)
   * [FAQ](help/faq.md)

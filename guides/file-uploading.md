@@ -10,7 +10,7 @@ We want to implement an upload service in a way that it acomplishes these few im
 1. It has to handle large files (+10MB).
 2. Needs to work with the app's authetication and authorization.
 3. The files has to be validated.
-4. By the moment there is no third party storage service involved, but this will change in the near future, so it has to be prepared.
+4. At the moment there is no third party storage service involved, but this will change in the near future, so it has to be prepared.
 5. Has to show the upload progress.
  
 The plan is to upload the files to a feathers service, so we can take advantage of the hooks for authentication, authorization and validation, not to mention the service events.
@@ -235,7 +235,7 @@ app.service('/uploads').before({
 **Simply awesome.**
 
 
-# Furhter improvements
+# Further improvements
 
 The service always return the dataURI back to us, wich may not be neccesary as we'd just uploaded the file, also we need to validate the file and check for authorization. 
 
