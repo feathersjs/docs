@@ -29,7 +29,7 @@ With [NodeJS](https://nodejs.org) installed, you can quickly scaffold your first
     $ feathers generate
     ```
 
-4. Generate a new service. When asked `What do you want to call your service?`, type `message` and confirm the other prompts with the default:
+4. Generate a new service. When asked `What do you want to call your service?`, type `messages` and confirm the other prompts with the default:
 
     ```
     $ feathers generate service
