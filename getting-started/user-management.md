@@ -16,7 +16,7 @@ When we create a front-end for our chat API this will all be done automatically 
 
 ### Adding HTML pages
 
-For our chat app we will create a static `signup.html` and `login.html` page that shows a form. The form in `signup.html` will POST to the `/signup` entpoint which we will create later and `login.html` will submit to `auth/local` which already exists.
+For our chat app we will create a static `signup.html` and `login.html` page that shows a form. The form in `signup.html` will POST to the `/signup` endpoint which we will create later and `login.html` will submit to `auth/local` which already exists.
 
 Let's replace `public/index.html` with the following welcome page:
 
