@@ -329,7 +329,7 @@ Vue.component('compose-message', {
 ```
 
 ## Further study
-The Vue documentation is a fantastic source of reference. As your app grows, you may become interested in introducing Vuex, a state management library for Vue, and its based heavily on Redux.
+The Vue documentation is a fantastic source of reference. As your app grows, you may become interested in introducing Vuex, a state management library for Vue that's based heavily on Redux.
 
 Below is an introduction to using Vuex with Vue and Feathers on the backend.
 
