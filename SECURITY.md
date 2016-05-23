@@ -17,6 +17,7 @@ Here are some things that you should be aware of when writing your app to make s
 - Events are sent by default to any client listening for that event. Lock down any private events that should not be broadcast by adding [filters](http://docs.feathersjs.com/real-time/filtering.html). Feathers authentication does this for all auth services by default.
 - JSON Web Tokens (JWT's) are only signed, they are **not** encrypted. Therefore, the payload can be examined on the client. This is by design. **DO NOT** put anything that should be private in the JWT `payload` unless you encrypt it first.
 - Don't use a weak `secret` for you token service. The generator creates a strong one for you automatically. No need to change it.
+- Use hooks to check security roles to make sure users only have access to data they should access. We've provided some [built in authorization hooks](http://docs.feathersjs.com/authorization/bundled-hooks.html) to make this process easier (many of which are added by default to a generated app).
 
 ## Some of technologies we employ
 
@@ -27,7 +28,7 @@ Here are some things that you should be aware of when writing your app to make s
 
 ## XSS Attacks
 
-As with any web application **you** need to guard against XSS attacks. Since Feathers persists the JWT in localstorage in the browser if your app falls victim to a XSS attack your JWT could be used by an attacker to make malicious requests on your behalf. This is far from ideal so you need to take extra care in preventing XSS attacks. Our stance on this is that if you are susceptible to XSS attacks then a compromised JWT is the least of your worries because keystrokes could be logged and therefore attackers can just steal passwords, credit card numbers, etc.
+As with any web application **you** need to guard against XSS attacks. Since Feathers persists the JWT in localstorage in the browser, if your app falls victim to a XSS attack your JWT could be used by an attacker to make malicious requests on your behalf. This is far from ideal. Therefore you need to take extra care in preventing XSS attacks. Our stance on this particular attack vector is that if you are susceptible to XSS attacks then a compromised JWT is the least of your worries because keystrokes could be logged and attackers can just steal passwords, credit card numbers, directly etc.
 
 For more information see:
 
