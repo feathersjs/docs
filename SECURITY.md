@@ -22,6 +22,7 @@ Here are some things that you should be aware of when writing your app to make s
 
 - Password storage inside `feathers-authentication` uses [bcrypt](https://github.com/dcodeIO/bcrypt.js). We don't store the salts separately since they are included in the bcrypt hashes.
 - [JWT](https://jwt.io/) is used instead of cookies to avoid CSRF attacks. We use the `HS512` algorithm by default (HMAC using SHA-512 hash algorithm).
+- We run [nsp](https://github.com/nodesecurity/nsp) as part of our CI that gets run on every pull request.
 
 
 ## XSS Attacks
