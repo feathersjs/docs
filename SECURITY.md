@@ -17,7 +17,7 @@ Here are some things that you should be aware of when writing your app to make s
 - Events are sent by default to any client listening for that event. Lock down any private events that should not be broadcast by adding [filters](http://docs.feathersjs.com/real-time/filtering.html). Feathers authentication does this for all auth services by default.
 - JSON Web Tokens (JWT's) are only signed, they are **not** encrypted. Therefore, the payload can be examined on the client. This is by design. **DO NOT** put anything that should be private in the JWT `payload` unless you encrypt it first.
 - Don't use a weak `secret` for you token service. The generator creates a strong one for you automatically. No need to change it.
-- Use hooks to check security roles to make sure users only have access to data they should access. We've provided some [built in authorization hooks](http://docs.feathersjs.com/authorization/bundled-hooks.html) to make this process easier (many of which are added by default to a generated app).
+- Use hooks to check security roles to make sure users can only access data they should be permitted to. We've provided some [built in authorization hooks](http://docs.feathersjs.com/authorization/bundled-hooks.html) to make this process easier (many of which are added by default to a generated app).
 
 ## Some of technologies we employ
 
