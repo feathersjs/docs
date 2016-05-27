@@ -43,7 +43,7 @@ messages.create({
 });
 ```
 
-### updated and patched
+### updated, patched
 
 The `updated` and `patched` events will fire with the callback data when a service `update` or `patch` method calls back successfully.
 
