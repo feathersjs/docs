@@ -1,10 +1,25 @@
+![Realtime Events](/img/real-time-events.jpg)
+
 # Service Events
 
-Once registered through `app.use`, a [Feathers service](../services/readme.md) gets turned into an [EventEmitter](https://nodejs.org/api/events.html) that sends `created`, `updated`, `patched` and `removed` events when the respective service method returns successfully. On the server and with the [Feathers client](../clients/feathers.md) you can listen to them by getting the service object with `app.service('<servicepath>')` and using it like a normal event emitter.
+Once registered through `app.use`, a [Feathers service](../services/readme.md) gets turned into an [EventEmitter](https://nodejs.org/api/events.html) that sends `created`, `updated`, `patched` and `removed` events when the respective service method returns successfully. On the server and with the [Feathers client](../clients/feathers.md) you can listen to them by getting the service object with `app.service('<servicepath>')` and using it like a normal event emitter.  Event behavior can also be customized or disabled using [event filters](/real-time/filtering.md).
 
 > **ProTip:** Events are not fired until all of your _after_ hooks have executed.
 
-### created
+![Realtime Events Diagram](/img/real-time-events-flow.jpg)
+
+There are two types of events: Standard and Custom.
+
+## Standard Events
+
+Standard events are built in to every service and are enabled by default.  A standard event exists for each service method that affects data:
+
+ * `created`
+ * `updated`
+ * `patched`
+ * `removed`
+
+### `created`
 
 The `created` event will fire with the result data when a service `create` returns successfully.
 
@@ -28,7 +43,7 @@ messages.create({
 });
 ```
 
-### updated, patched
+### `updated` and `patched`
 
 The `updated` and `patched` events will fire with the callback data when a service `update` or `patch` method calls back successfully.
 
@@ -60,7 +75,7 @@ messages.patch(0, {
 });
 ```
 
-### removed
+### `removed`
 
 The `removed` event will fire with the callback data when a service `remove` calls back successfully.
 
@@ -80,9 +95,6 @@ messages.on('removed', messages => console.log('removed', messages));
 messages.remove(1);
 ```
 
-## Listening For Events
-
-It is easy to listen for these events on the client or the server. Depending on the socket library you are using it is a bit different so refer to either the [Socket.io](socket-io.md) or [Primus](primus.md) docs.
 
 ## Custom events
 
@@ -108,7 +120,13 @@ class PaymentService {
 
 Now clients can listen to the `<servicepath> status` event. Custom events can be [filtered](filtering.md) just like standard events.
 
-## Hooks vs events
+
+## Listening For Events
+
+It is easy to listen for these events on the client or the server. Depending on the socket library you are using it is a bit different so refer to either the [Socket.io](socket-io.md) or [Primus](primus.md) docs.
+
+
+## Hooks vs Events
 
 Binding to service events is great for logging or updating internal state. However, things like sending an email when creating a new user should be implemented through [hooks](../hooks/readme.md).
 
