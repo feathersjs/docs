@@ -1,10 +1,52 @@
+![Feathers Services](/img/header-services.jpg)
+
 # Services
 
-Services are the heart of every Feathers application. A service is simply a JavaScript object that offers one or more of the `find`, `get`, `create`, `update`, `patch`, `remove` and `setup` service methods and can be used just like an [Express middleware](http://expressjs.com/en/guide/using-middleware.html) with:
+Services are the heart of every Feathers application. They perform the application-level i/o, helping you get data into and out of your app.  
+
+A service is simply a JavaScript object that offers one or more of the available service methods:
+ * `find` 
+ * `get` 
+ * `create` 
+ * `update` 
+ * `patch` 
+ * `remove` 
+ * `setup` 
+
+Services can be used just like an [Express middleware](http://expressjs.com/en/guide/using-middleware.html):
 
 ```js
  app.use('/path', serviceObject)
 ```
+
+There are three common uses for services:
+
+ 1. Facilitating Data Storage
+ 2. Communicating with an External API
+ 3. Real-time proxying a legacy server.
+ 
+## Services for Data Storage
+The most common use for a service is data storage.  Thanks to its simple API and zealous community of developers, Feathers supports more data storage options than any other real-time framework.  It also features a familiar query syntax for working with any of the database adapters.  (See the section on [Databases](/databases/readme.md))
+
+![Use Services to connect to a Data Store](/img/services-data-store.jpg)
+
+## Services for External APIs
+Services can also be used to communicate with other API providers.  The community has published some great modules:
+
+* [feathers-twilio](https://github.com/feathersjs/feathers-twilio) for handling calls and SMS messages over the Twilio API.
+* [feathers-stripe](https://github.com/feathersjs/feathers-stripe) for processing financial transactions and managing customer data through the Stripe API.
+* [feathers-mailgun](https://github.com/feathersjs/feathers-mailgun) for sending transactional emails over the Mailgun API.
+
+![Use Services to connect to External APIs](/img/services-external-api.jpg)
+
+## Services that Real-time Proxy a Legacy Server
+Services provide an easy path for incrementally upgrading a legacy application to work with a modern API.  This is usually done in three steps:
+
+ 1. Logically map service methods to the existing legacy endpoints. This might involve using multiple services.
+ 2. Set up each service method to make the request to the legacy API, acting as proxy for the user.  
+ 3. Update client-side applications to use the Feathers service's endpoints.
+ 
+![Use Services as a Real-time Proxy for your Legacy Servers](/img/services-real-time-proxy.jpg)
 
 ## A Basic Example
 
