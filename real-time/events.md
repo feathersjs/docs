@@ -19,7 +19,7 @@ Standard events are built in to every service and are enabled by default.  A sta
  * `patched`
  * `removed`
 
-### `created`
+### created
 
 The `created` event will fire with the result data when a service `create` returns successfully.
 
@@ -43,7 +43,7 @@ messages.create({
 });
 ```
 
-### `updated` and `patched`
+### updated and patched
 
 The `updated` and `patched` events will fire with the callback data when a service `update` or `patch` method calls back successfully.
 
@@ -75,7 +75,7 @@ messages.patch(0, {
 });
 ```
 
-### `removed`
+### removed
 
 The `removed` event will fire with the callback data when a service `remove` calls back successfully.
 
