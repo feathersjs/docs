@@ -1,4 +1,4 @@
-![Realtime Events](/img/real-time-events.jpg)
+![Realtime Events](/img/header-real-time-events.jpg)
 
 # Service Events
 
@@ -55,7 +55,7 @@ app.use('/my/messages/', {
   update(id, data) {
     return Promise.resolve(data);
   },
-  
+
   patch(id, data) {
     return Promise.resolve(data);
   }
@@ -105,7 +105,7 @@ class PaymentService {
   constructor() {
     this.events = ['status'];
   },
-  
+
   create(data, params) {
     createStripeCustomer(params.user).then(customer => {
       this.emit('status', { status: 'created' });
