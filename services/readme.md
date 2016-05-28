@@ -104,6 +104,8 @@ const messages = app.service('/messages/');
 messages.get(1).then(message => console.log(message.text));
 ```
 
+![Basic flow of a Feathers Service](/img/service-diagram-basic.jpg)
+
 ## Service methods
 
 Below is a description of the complete interface for a Feathers service:
