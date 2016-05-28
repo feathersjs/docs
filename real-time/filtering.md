@@ -1,6 +1,10 @@
-# Event Filtering
+![Event Filter](/img/header-event-filters.jpg)
+
+# Event Filters
 
 By default all service events will be sent to **all** connected clients. In many cases you probably want to be able to only send events to certain clients, say maybe only ones that are authenticated.
+
+![Event Filter Diagram](/img/event-filter-diagram.jpg)
 
 Both, the [Socket.io](socket-io.md) and [Primus](primus.md) provider add a `.filter()` service method which can be used to filter events. A filter is a `function(data, connection, hook)` which gets passed
 
