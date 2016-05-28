@@ -162,6 +162,8 @@ These methods basically reflect a [CRUD](https://en.wikipedia.org/wiki/Create,_r
 - `patch(id, data, params [, callback])` - merges the existing data of the resource identified by `id` with the new `data`. `id` can also be `null` indicating that multiple resources should be patched. The method should return with the complete updated resource data. Implement `patch` additionally to `update` if you want to separate between partial and full updates and support the `PATCH` HTTP method.
 - `remove(id, params [, callback])` - removes the resource with `id`. The method should return a Promise with the removed resource. `id` can also be `null` indicating to delete multiple resources.
 
+![Restful Mapping of Feathers Service Methods](/img/services-restful-actions.jpg)
+
 ## The `setup` method
 
 `setup(app, path)` is a special method that initializes the service, passing an instance of the Feathers application and the path it has been registered on. It is called automatically by Feathers when a service is registered.
