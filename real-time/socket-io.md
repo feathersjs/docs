@@ -1,3 +1,5 @@
+![feathers-socketio](/img/header-provider-socketio.jpg)
+
 # The Socket.io Provider
 
 The [feathers-socketio](https://github.com/feathersjs/feathers-socketio) provider adds support for [Socket.io](http://socket.io/) which enables real-time bi-directional, event-based communication. It works on every platform, browser or device, focusing equally on reliability and speed.
