@@ -20,6 +20,7 @@
       * [Feathers vs Firebase](why/vs/firebase.md)
       * [Feathers vs Parse](why/vs/parse.md)
 * [Services](services/readme.md)
+* [Providers](providers/readme.md)
 * [REST](rest/readme.md)
 * [Realtime](real-time/readme.md)
   * [Socket.io](real-time/socket-io.md)
