@@ -1,3 +1,5 @@
+![feathers-primus](/img/header-provider-primus.jpg)
+
 # The Primus Provider
 
 [Primus](https://github.com/primus/primus) is a universal wrapper for real-time frameworks that supports Engine.IO, WebSockets, Faye, BrowserChannel, SockJS and Socket.IO.
