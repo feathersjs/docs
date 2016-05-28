@@ -1,6 +1,10 @@
-# Real-time
+![Feathers Real-time Providers](/img/header-realtime.jpg)
 
-In Feathers, real-time means that [services](../services/readme.md) automatically send `created`, `updated`, `patched` and `removed` events when a `create`, `update`, `patch` or `remove` [service method](../services/readme.md) is complete. Clients can listen for these events and then react accordingly.
+# Realtime
+
+In Feathers, realtime means that [services](../services/readme.md) automatically send `created`, `updated`, `patched` and `removed` events when a `create`, `update`, `patch` or `remove` [service method](../services/readme.md) is complete. Clients can listen for these events and then react accordingly.
+
+![Feathers Realtime](/img/real-time-events-flow.jpg)
 
 With Feathers websockets aren't just used for sending events from server to client. It is also possible to call service methods and send data over sockets, either from server-to-server or client-to-server. This is often much faster than going through the [REST](../rest/readme.md) API and results in a snappier app.
 
