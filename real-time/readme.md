@@ -1,7 +1,5 @@
 ![Feathers Real-time Providers](/img/header-realtime.jpg)
 
-# Realtime
-
 In Feathers, realtime means that [services](../services/readme.md) automatically send `created`, `updated`, `patched` and `removed` events when a `create`, `update`, `patch` or `remove` [service method](../services/readme.md) is complete. Clients can listen for these events and then react accordingly.
 
 ![Feathers Realtime](/img/real-time-events-flow.jpg)
