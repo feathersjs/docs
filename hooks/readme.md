@@ -1,3 +1,5 @@
+![Feathers Hooks](/img/header-hooks.jpg)
+
 # Feathers Hooks
 
 Hooks are just small middleware functions that get applied **before** and **after** a service method executes. The concept comes from [Aspect Oriented Programming](https://en.wikipedia.org/wiki/Aspect-oriented_programming) and they are construct for implementing [Cross Cutting Concerns](https://en.wikipedia.org/wiki/Cross-cutting_concern).
