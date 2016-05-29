@@ -141,9 +141,9 @@ import {client as rest} from 'feathers-rest';
 
 const app = feathers()
   .configure(feathers.hooks())
-  .configure(rest.fetch(fetch));
+  .configure(rest('http://my-feathers-server.com').fetch(fetch));
 
-// Get the message service that uses a websocket connection
+// Get the message service that uses a REST connection
 const messageService = app.service('messages');
 
 messageService.create({ text: 'Oh hai!'}).then(result => {
