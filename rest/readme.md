@@ -1,3 +1,5 @@
+![feathers-rest](/img/header-provider-rest.jpg)
+
 # The REST API Provider
 
 We have already seen in the [services chapter](../services/readme.md) that the [feathers-rest](https://github.com/feathersjs/feathers-rest) module allows to expose services through a [RESTful](https://en.wikipedia.org/wiki/Representational_state_transfer) interface on the services path. This means that you can call a service method through the `GET`, `POST`, `PUT`, `PATCH` and `DELETE` [HTTP methods](https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol):
