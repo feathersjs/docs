@@ -1,5 +1,7 @@
 ![Feathers Providers](/img/header-providers.jpg)
 
+# Providers
+
 Providers are plugins that handle data transfer.  They are the communication layer on top of which services operate.  There are currently three providers available:
 
  * [feathers-rest](/rest/readme.md) - enables standard HTTP communication.
