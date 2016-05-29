@@ -1,3 +1,5 @@
+![Feathers Quick Start](/img/header-quick-start.jpg)
+
 # Quick Start
 
 [![Intro to FeathersJS](http://i.imgur.com/MhYLgxb.png)](https://www.youtube.com/watch?v=CuM4vLkBaik "Intro to FeathersJS")
