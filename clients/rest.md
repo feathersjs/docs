@@ -136,8 +136,8 @@ $ npm install feathers feathers-rest feathers-hooks
 ```js
 import React from 'react-native';
 import hooks from 'feathers-hooks';
-import {client as feathers} from 'feathers';
-import {client as rest} from 'feathers-rest';
+import feathers from 'feathers/client';
+import rest from 'feathers-rest/client';
 
 const app = feathers()
   .configure(feathers.hooks())
@@ -146,9 +146,7 @@ const app = feathers()
 // Get the message service that uses a REST connection
 const messageService = app.service('messages');
 
-messageService.create({ text: 'Oh hai!'}).then(result => {
-  console.log(result);
-}).catch(error => {
-  console.error(error);
-});
+messageService.create({ text: 'Oh hai!'})
+  .then(result => console.log(result))
+  .catch(error => console.error(error));
 ```
