@@ -10,7 +10,7 @@ The Auth0 blog has a [great article on the advantages that token authentication 
 
 ### Server Side
 
-If you are using the default options, setting up [JSON Web Tokens](https://jwt.io/) auth for your Feathers app is as simple as the example below. This example would typically be used alongside a User Service to keep track of the users within your app.
+If you are using the default options, setting up [JSON Web Token](https://jwt.io/) auth for your Feathers app is as simple as the example below. This example would typically be used alongside a User Service to keep track of the users within your app.
 
 ```js
 let app = feathers()
