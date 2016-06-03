@@ -10,7 +10,7 @@ The Auth0 blog has a [great article on the advantages that token authentication 
 
 ### Server Side
 
-If you are using the default options, setting up JWT auth for your Feathers app is as simple as the example below.
+If you are using the default options, setting up [JSON Web Tokens](https://jwt.io/) auth for your Feathers app is as simple as the example below. This example would typically be used alongside a User Service to keep track of the users within your app.
 
 ```js
 let app = feathers()
@@ -36,6 +36,7 @@ The options passed to the authentication plugin are wrapped in an object with th
 - `shouldSetupSuccessRoute` (default: `true`) [optional] - Can be set to `false` to disable setting up the default success redirect route handler. **Required** if you want to render your own custom page on auth success.
 - `shouldSetupFailureRoute` (default: `true`) [optional] - Can be set to `false` to disable setting up the default failure redirect route handler. **Required** if you want to render your own custom page on auth failure.
 - `idField` (default: '_id') [optional] - the id field for you user's id. This is use by many of the [authorization hooks](../authorization/bundled-hooks.md).
+- `localEndpoint` (default: '/auth/local') [optional] - The local authentication endpoint used to create new tokens using [local auth](./local.md)
 - `userEndpoint` (default: '/users') [optional] - The user service endpoint
 - `tokenEndpoint` (default: '/auth/token') [optional] - The JWT auth service endpoint
 - `header` (default: 'authorization') [optional] - The header field to check for the token. **This is case sensitive**.
@@ -148,6 +149,24 @@ Regardless of whether you use OAuth, a token, or email + password to authenticat
 
 ### Authentication Over REST
 
+#### Creating Tokens
+
+To create a new token with an HTTP request make a `POST` request to the local authentication endpoint with a valid set of user credentials. By default this endpoint is `/auth/local`. If you have not already set up a User Service you should do that first. See the README for [a complete example](https://github.com/feathersjs/feathers-authentication#complete-example).
+
+The following cURL request can be used to authenticate a user from the command line using the default options. If the authentication request was successful you will receive a response back with your token.
+
+ ```bash
+ # Assuming a user exists with the following credentials
+$ curl -X POST \
+-H 'Content-Type: application/json' \
+-d '{ "email": "hulk@hogan.net", "password": "bandana" }' \
+http://127.0.0.1:3000
+ ```
+
+> **ProTip** These defaults can all be overridden as described in the [server-side config options](#options) and [local auth config options](./local.md#local-service-specific-options).
+
+#### Using Tokens
+
 For REST the token needs to be passed with each request. Therefore if you did `.configure(rest())` in your Feathers app, the auth plugin also includes a [special middleware](https://github.com/feathersjs/feathers-authentication/blob/master/src/middleware/index.js#L34-L73) that ensures that a token, if sent, is available on the Feathers `params` object that is passed to services and hooks by setting it on `req.feathers.token`.
 
 > **ProTip:** The `req.feathers` object is special because its attributes are made available inside Feathers hooks on the `hook.params` object.
@@ -159,7 +178,7 @@ This middleware uses graceful fall-back to check for a token in order from most 
 3. The request body
 4. The query string (not recommended but supported)
 
-So you can send your token using any of those methods. Using the `Authorization` header it should look like this:
+So you can send your token using any of those methods. Using the `authorization` header it should look like this:
 
 ```
 Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IklseWEgRmFkZWV2IiwiYWRtaW4iOnRydWV9.YiG9JdVVm6Pvpqj8jDT5bMxsm0gwoQTOaZOLI-QfSNc
