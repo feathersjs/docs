@@ -15,9 +15,8 @@ The Vue.js and Feathers client modules can be loaded individually via [npm](http
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=0"/>
   <title>Feathers Chat</title>
-  <link rel="shortcut icon" href="../favicon.png">
-  <link rel="stylesheet" href="../base.css">
-  <link rel="stylesheet" href="../chat.css">
+  <link rel="stylesheet" href="//cdn.rawgit.com/feathersjs/feathers-chat/v0.1.0/public/base.css">
+  <link rel="stylesheet" href="//cdn.rawgit.com/feathersjs/feathers-chat/v0.1.0/public/chat.css">
 </head>
 <body>
 
