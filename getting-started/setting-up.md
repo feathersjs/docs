@@ -29,11 +29,12 @@ Create a `.babelrc` file like this:
 { "presets": ["es2015"] }
 ```
 
-Update your `package.json` start script:
+Update your `package.json` start and test scripts:
 
 ```javascript
 "scripts": {
-  "start": "babel-node src/app"
+  "start": "babel-node src/app",
+  "test": "mocha test/ --recursive --compilers js:babel-register"
 }
 ```
 
