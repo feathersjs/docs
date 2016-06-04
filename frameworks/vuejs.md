@@ -115,7 +115,7 @@ The Vue.js and Feathers client modules can be loaded individually via [npm](http
 
 ## Application Bootstrap
 
-All of the code examples that follow should be appended to the `public/vue-chat/app.js` file, which the HTML file already loads. The first step is to add a placeholder user in the event that a user image or other user information doesn't exist:
+All of the code examples that follow should be appended to the `app.js` file, which the HTML file already loads. The first step is to add a placeholder user in the event that a user image or other user information doesn't exist:
 
 ```javascript
 // A placeholder image if the user does not have one
