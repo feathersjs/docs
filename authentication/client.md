@@ -18,7 +18,7 @@ Then you pass whatever other fields you need to send to authenticate. See below 
 
 ### logout
 
-`app.logout()` clears the token and the user from you local store. In the future it will call the server to invalidate the token.
+`app.logout()` clears the token and the user from your local store. In the future it will call the server to invalidate the token.
 
 ### user
 
