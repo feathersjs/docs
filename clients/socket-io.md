@@ -75,7 +75,7 @@ import React from 'react-native';
 import hooks from 'feathers-hooks';
 import {client as feathers} from 'feathers';
 import {client as socketio} from 'feathers-socketio';
-import {socket.io as io} from 'socket.io-client';
+import {socketio as io} from 'socket.io-client';
 
 // A hack so that you can still debug. Required because react native debugger runs in a web worker, which doesn't have a window.navigator attribute.
 if (window.navigator && Object.keys(window.navigator).length == 0) {
