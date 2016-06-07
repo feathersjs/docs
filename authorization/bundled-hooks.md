@@ -156,7 +156,7 @@ app.service('messages').before({
 
 ## restrictToRoles
 
-`restrictToRoles` is meant to be used as a **before** hook. It only allows the user to retrieve resources that are owned by them or protected by certain roles. It will return a _Forbidden_ error without the proper permissions. It can be used on `all` methods.
+`restrictToRoles` is meant to be used as a **before** hook. It only allows the user to retrieve resources that are owned by them or protected by certain roles. It will return a _Forbidden_ error without the proper permissions. It can be used on `all` methods when the **owner** option is set to 'false'.  When the **owner** option is set to `true` the hook can only be used on `get`, `update`, `patch`, and `remove` service methods.
 
 ```js
 const hooks = require('feathers-authentication').hooks;
