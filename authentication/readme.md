@@ -115,7 +115,7 @@ app.authenticate({
 
 - `tokenEndpoint` (default: '/auth/token') [optional] - The JWT auth service endpoint.
 - `localEndpoint` (default: '/auth/local') [optional] - The local auth service endpoint
-- `header` (default: 'Authorization') [optional] - The header field to set the token. **This is case sensitive**.
+- `header` (default: 'authorization') [optional] - The header field to set the token. **This is case sensitive**.
 - `cookie` (default: 'feathers-jwt') [optional] - The cookie field to check for the token. **This is case sensitive**.
 - `tokenKey` (default: 'feathers-jwt') [optional] - The key to use to store the JWT in localStorage. **This is case sensitive**.
 
