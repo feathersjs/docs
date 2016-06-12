@@ -69,8 +69,10 @@ With mongoose you can use the `$populate` query param to populate nested documen
 ```js
 // Find Hulk Hogan and include all the messages he sent
 app.service('user').find({
-  name: 'hulk@hogan.net',
-  $populate: ['sentMessages']
+  query: {
+    name: 'hulk@hogan.net',
+    $populate: ['sentMessages']
+  }
 });
 ```
 
