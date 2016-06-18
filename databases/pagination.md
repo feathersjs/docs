@@ -20,6 +20,32 @@ When `paginate.default` is set, `find` will return an object (instead of the nor
 }
 ```
 
+The pagination options can be set as follows:
+
+```js
+const service = require('feathers-<db-name>');
+
+// Set the `paginate` option during initialization
+app.use('/todos', service({
+  paginate: {
+    default: 5,
+    max: 25
+  }
+}));
+
+// override pagination in `params.paginate`
+app.service('todos').find({
+  paginate: {
+    default: 100,
+    max: 200
+  }
+});
+// disable pagination for this call
+app.service('todos').find({
+  paginate: false
+});
+```
+
 ## Sorting, limiting and selecting
 
 The `find` API allows the use of `$limit`, `$skip`, `$sort`, and `$select` in the query.  These special parameters can be passed directly inside the query object:
