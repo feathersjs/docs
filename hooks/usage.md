@@ -44,7 +44,7 @@ const todoService = app.service('todos');
 
 All properties of the hook object can be modified and the modified data will be used for the actual service method call. This is very helpful for pre-processing parameters and massaging data when creating or updating.
 
-`before` hooks can set `hook.result` which will skip the original service method. This can be used to override methods (see the [soft-delete example](examples.md).
+`before` hooks can set `hook.result` which will skip the original service method. This can be used to override methods (see the [soft-delete example](examples.md)).
 
 The following example adds an authorization check (if a user has been provided in the params) to *all* service methods and also adds a `createdAt` property to a newly created todo:
 
