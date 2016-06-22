@@ -18,7 +18,7 @@ If they are not universally usable already (like [feathers-hooks](../hooks/readm
 
 > __Important:__ The Feathers client libraries come transpiled to ES5 but require ES6 shims either through the [babel-polyfill](https://www.npmjs.com/package/babel-polyfill) module or by including [core.js](https://github.com/zloirock/core-js) in older browsers e.g. via `<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/core-js/2.1.4/core.min.js"></script>`
 
-## Usage in NodeJS, React Native or with Module Loaders
+## Usage in NodeJS and client Module Loaders
 
 For module loaders that support [NPM](https://www.npmjs.com/) like [Browserify](http://browserify.org/), [Webpack](https://webpack.github.io/) or [StealJS](http://stealjs.com) the Feathers client modules can be loaded individually. The following example sets up a Feathers client that uses a local Socket.io connection to communicate with remote services:
 
@@ -31,6 +31,44 @@ const feathers = require('feathers/client')
 const socketio = require('feathers-socketio/client');
 const hooks = require('feathers-hooks');
 const io = require('socket.io-client');
+
+const socket = io('http://api.my-feathers-server.com');
+const app = feathers()
+  .configure(hooks())
+  .configure(socketio(socket));
+
+const messageService = app.service('messages');
+
+messageService.on('created', message => console.log('Created a message', message));
+
+// Use the messages service from the server
+messageService.create({
+  text: 'Message from client'
+});
+```
+
+## Usage with React Native
+
+[React Native](https://facebook.github.io/react-native/) currently requires [a workaround](http://stackoverflow.com/a/32234446/120513) due to [an issue in Socket.io](https://github.com/socketio/engine.io-parser/pull/55).
+
+```bash
+$ npm install feathers feathers-socketio feathers-hooks socket.io-client
+```
+
+Create a `user-agent.js` with the following content:
+
+```js
+window.navigator.userAgent = 'react-native';
+```
+
+Then in the main application file:
+
+```js
+import './user-agent';
+import io from 'socket.io-client';
+import feathers from 'feathers/client';
+import socketio from 'feathers-socketio/client';
+import hooks from 'feathers-hooks';
 
 const socket = io('http://api.my-feathers-server.com');
 const app = feathers()
