@@ -262,7 +262,7 @@ const userService = app.service('users');
 
 userService.before({
   // Auth is required.  No exceptions
-  create : [hooks.requireAuth, hooks.setUserID, hooks.setCreatedAt]
+  create : [hooks.requireAuth(), hooks.setUserID(), hooks.setCreatedAt()]
 });
 ```
 
@@ -283,3 +283,46 @@ const myHook = function(hook) {
 ```
 
 Now that you know a bit about hooks work. Feel free to check out some [examples](examples.md) or some of the [bundled hooks](bundled.md) that we've already written for you to for common use cases.
+
+## Customizing Built In Hooks
+
+Sometimes you will only want to run a hook in certain circumstances or you wan to modify the functionality of the output of the hook without re-writing it. Since hooks are chainable you can simply wrap it in your own hook.
+
+```js
+import { hooks } from 'feathers-authentication';
+
+// Your custom hashPassword hook
+exports.hashPassword = function(options) {
+  // Add any custom options
+
+  function(hook) {
+    return new Promise((resolve, reject) => {
+      if (myCondition !== true) {
+        return resolve(hook);
+      }
+
+      // call the original hook
+      hooks.hashPassword(options)(hook)
+        .then(hook => {
+          // do something custom
+          resolve(hook);
+        })
+        .catch(error => {
+          // do any custom error handling
+          error.message = 'my custom message';
+          reject(error);
+        });
+    });
+  });
+}
+```
+
+Then simply use it like you normally would:
+
+```js
+import hashPassword from './hooks/myHashPassword';
+
+userService.before({
+  create : [hashPassword()]
+});
+```
