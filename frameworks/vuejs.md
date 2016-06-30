@@ -175,9 +175,9 @@ var vm = new Vue({
 
 ## Adding components
 
-In `index.html`, we added some custom components and their corresponding templates, all with unique `id` attributes. If you are unsure of the usage of `<slots>`, please check the [Vue Documentation](http://vuejs.org/guide/components.html#Content-Distribution-with-Slots) on the subject. For those that are familiar with Angular, Vue calls this *content distribution*, otherwise known as *transclusion* in Angular.
+In `chat.html`, we added some custom components and their corresponding templates, all with unique `id` attributes. If you are unsure of the usage of `<slots>`, please check the [Vue Documentation](http://vuejs.org/guide/components.html#Content-Distribution-with-Slots) on the subject. For those that are familiar with Angular, Vue calls this *content distribution*, otherwise known as *transclusion* in Angular.
 
-As you can see in the below markup, within `index.html` we have a main parent component and some nested components. Also note that within the `<message-list>` template, we loop over a `message` component and bind `message` to a `message` prop which gets passed into the `message` component.
+As you can see in the below markup, within `chat.html` we have a main parent component and some nested components. Also note that within the `<message-list>` template, we loop over a `message` component and bind `message` to a `message` prop which gets passed into the `message` component.
 
 ```html
 <chat-app v-if="user.authenticated">
@@ -197,7 +197,7 @@ As you can see in the below markup, within `index.html` we have a main parent co
 Each of your components will use the Feathers application we initialized above.
 
 
-The first component is a wrapper for our app. By checking if the user is authenticated here, we ensure that the user doesn't see our page for a split-second before the JavaScript kicks in. Other than that, this component doesn't do a whole lot but binds to its template in `index.html`.
+The first component is a wrapper for our app. By checking if the user is authenticated here, we ensure that the user doesn't see our page for a split-second before the JavaScript kicks in. Other than that, this component doesn't do a whole lot but binds to its template in `chat.html`.
 
 ```js
 Vue.component('chat-app', {
