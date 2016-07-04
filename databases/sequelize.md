@@ -145,7 +145,7 @@ Migrations with feathers and sequelize are quite simple and we have provided som
 	```
 1. Create the migrations config in `migrations/config/config.js`:
 
-	```
+	```js
 	const app = require('../../src/app');
 	const env = process.env.NODE_ENV || 'development';
 	
