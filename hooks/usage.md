@@ -295,7 +295,7 @@ import { hooks } from 'feathers-authentication';
 exports.hashPassword = function(options) {
   // Add any custom options
 
-  function(hook) {
+  return function(hook) {
     return new Promise((resolve, reject) => {
       if (myCondition !== true) {
         return resolve(hook);
@@ -313,7 +313,7 @@ exports.hashPassword = function(options) {
           reject(error);
         });
     });
-  });
+  };
 }
 ```
 
