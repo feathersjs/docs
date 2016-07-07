@@ -62,6 +62,51 @@ app.service('user').before({
 
 You can view the all available options in the [node-jsonwebtoken](https://github.com/auth0/node-jsonwebtoken) repo.
 
+
+
+
+
+## verifyOrRestrict
+
+The `verifyOrRestrict` is intended to be used as a **before** hook for any service on the **find** or **get** methods. The hook will attempt to verify a token. If the token is missing or is invalid it adds a restriction onto the query and calls find with that query. If the token is valid it adds the decrypted payload to `hook.params.payload` which contains the user id but does not add the restriction.
+
+```js
+const hooks = require('feathers-authentication').hooks;
+
+// If the user is not authorized they will only see comments that are approved
+const restriction = { approved: true };
+
+app.service('comments').before({
+  get: [
+    hooks.verifyOrRestrict({restrict: restriction})
+  ],
+  find: [
+    hooks.verifyOrRestrict({restrict: restriction})
+  ],
+});
+```
+
+For instance, if the client queries for all comments with a certain number of likes
+```js
+{ likes: {$gt: 50} }
+```
+but are not authenticated, then `verifyOrRestrict` will merge the restriction into the query.
+```js
+{ likes: {$gt: 50} , approved: true}
+```
+
+It hook will always call the **find** method even if a _get by id_ request was made so that if the document being requested was not approved then the query would not succeed.
+
+#### Options
+
+- `restrict` (default: undefined) [optional] - This is a query object that will merge into and override the query passed from the client.
+- `secret` (default: the one from your config) [optional] - Your secret used to encrypt and decrypt JWT's on the server. If this gets compromised you need to rotate it immediately!
+- `issuer` (default: 'feathers') [optional] - The JWT issuer field
+- `algorithm` (default: 'HS512') [optional] - The accepted JWT hash algorithm
+- `expiresIn` (default: '1d') [optional] - The time a token is valid for
+
+You can view the all available options in the [node-jsonwebtoken](https://github.com/auth0/node-jsonwebtoken) repo.
+
 ## populateUser
 
 The `populateUser` hook is for populating a user based on an id. It can be used on **any** service method as either a **before** or **after** hook. It is called internally after a token is created.
@@ -78,6 +123,27 @@ app.service('user').before({
 
 #### Options
 
+- `userEndpoint` (default: '/users') [optional] - The endpoint for the user service.
+- `idField` (default: '_id') [optional] - The database field containing the user id.
+
+## populateOrRestrict
+
+The `populateOrRestrict` hook is for populating a user based on an id. If the user it not found it adds a restriction on the query being passed from the client. It is intended to be used as a **before** hook for any service on the **find** or **get** methods. It is meant to be called after a token is verified.
+
+```js
+const hooks = require('feathers-authentication').hooks;
+
+app.service('user').before({
+  get: [
+    hooks.verifyOrRestrict({ restrict: {approved: true} }),
+    hooks.populateOrRestrict({ restrict: {approved: true} })
+  ]
+});
+```
+
+#### Options
+
+- `restrict` (default: undefined) [optional] - The restriction to merge into the query
 - `userEndpoint` (default: '/users') [optional] - The endpoint for the user service.
 - `idField` (default: '_id') [optional] - The database field containing the user id.
 
@@ -181,3 +247,28 @@ app.service('messages').before({
 - `idField` (default: '_id') [optional] - The id field on your user object.
 - `ownerField` (default: 'userId') [optional] - The id field for a user on your resource.
 - `owner` (default: 'false') [optional] - Denotes whether it should also allow owners regardless of their role (ie. the user has the role **or** is an owner).
+
+
+## hasRoleOrRestrict
+
+`hasRoleOrRestrict` is meant to be used as a **before** hook for any service on the **find** or **get** methods. Unless the user has one of the roles provided, it will add a restriction onto the query to limit what resources return.
+
+```js
+const hooks = require('feathers-authentication').hooks;
+
+app.service('messages').before({
+  find: [
+    hooks.hasRoleOrRestrict({
+        roles: ['admin', 'super-admin'],
+        fieldName: 'permissions',
+        restrict: { approved: true }
+    })
+  ]
+});
+```
+
+#### Options
+
+- `roles` (**required**) - An array of roles that a user must have at least one of in order to access the resource.
+- `fieldName` (default: 'roles') [optional] - The field on your user object that denotes their roles.
+- `restrict` (default: undefined) - The query to merge into the client query to limit what resources are accessed
