@@ -26,6 +26,46 @@ Normally we find that they actually aren't needed and that it's much better to k
 
 Feathers works just like Express so it's the exact same. We've created a [helpful little guide right here](../guides/using-a-view-engine.md).
 
+## How do I create channels or rooms
+
+Although Socket.io has a [concept of rooms](http://socket.io/docs/rooms-and-namespaces/) and you can always fall back to it other websocket libraries that Feathers supports do not. The Feathers way of letting a user listen to e.g. messages on a room is through [event filtering](http://docs.feathersjs.com/real-time/filtering.html). There are two ways:
+
+1. Update the user object with the rooms they are subscribed to and filter based on those
+
+```
+// On the client
+function joinRoom(roomId) {
+  const user = app.get('user');
+  
+  return app.service('users').patch(user.id, { rooms: user.rooms.concat(roomId) });
+}
+
+// On the server
+app.service('messages').filter(function(message, connection) {
+  return connection.user.rooms.indexOf(message.room_id) !== -1;
+});
+```
+
+The advantage of this method is that you can show offline/online users that are subscribed to a room.
+
+2. Create a custom `join` event with a room id and then filter based on it
+
+```js
+app.use(socketio(function(io) {
+  io.on('connection', function(socket) {
+    socket.on('join', function(roomId) {
+      socket.feathers.rooms.push(roomId);
+    });
+  });
+}));
+
+app.service('messages').filter(function(message, connection) {
+  return connection.rooms.indexOf(message.room_id) !== -1;
+});
+```
+
+The room assignment will persist only for the duration of the socket connection.
+
 ## I got a `possible EventEmitter memory leak detected` warning
 
 This warning is not as bad as it sounds. If you got it from Feathers you most likely registered more than 64 services and/or event listeners on a Socket. If you don't think there are that many services or event listeners you may have a memory leak. Otherwise you can increase the number in the [Socket.io configuration](../real-time/socket-io.md) via `io.sockets.setMaxListeners(number)` and with [Primus](../real-time/primus.md) via `primus.setMaxListeners(number)`. `number` can be `0` for unlimited listeners or any other number of how many listeners you'd expect in the worst case.
