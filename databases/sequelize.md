@@ -269,7 +269,7 @@ sequelize db:migrate
 > **ProTip:** You can add the migrations script to your application startup command to ensure that all migrations have run every time your app is started. Try updating your package.json `scripts` attribute and run `npm start`:
 
 > ```
-sripts: {
+scripts: {
     start: "sequelize db:migrate && node src/"
 }
 ```
