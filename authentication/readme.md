@@ -105,6 +105,42 @@ app.authenticate({
 });
 ```
 
+To store the token in localStorage and use that initially, use this:
+
+```js
+// Set up socket.io
+const host = 'http://localhost:3030';
+let socket = io(host);
+
+// Set up Feathers client side
+let app = feathers()
+  .configure(feathers.socketio(socket))
+  .configure(hooks())
+  .configure(authentication({
+    storage: window.localStorage
+  }));
+
+function showApplication() {
+  // Authentication was successfull, you can now render the application here
+}
+
+function showLogin() {
+  // Show the login screen, which calls the following at one point:
+  app.authenticate({
+    type: 'local',
+    'email': 'admin@feathersjs.com',
+    'password': 'admin'
+  }).then(showApplication).catch(function(error){
+    console.error('Error authenticating!', error);
+  });
+}
+
+// First try to authenticate with the token from localStorage.
+// If successful call `showApplication`, if not call `showLogin`
+app.authenticate().then(showApplication, showLogin);
+
+```
+
 > **ProTip:** You can also use Primus or a handful of Ajax providers instead of Socket.io. Check out the [Feathers client authentication](./client.md) section for more detail.
 
 <!-- -->
