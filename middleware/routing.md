@@ -40,12 +40,12 @@ Now all `GET /users/<id>/todos` requests will make a `find` query limited to the
 
 > **ProTip:** Think of Feathers services as their own router that can only be used directly on an application. Services can *not* be used with instances of [Express router](http://expressjs.com/en/4x/api.html#router) (`feathers.Router`).
 
-It is important to keep in mind that those routes are only possible for the REST API of a service. The actual service name is still `users/:userId/todos`. This means that [Socket.io](..//real-time/socket-io.md) and [Primus](..//real-time/primus.md) connections need to provide the parameter in their query. To be able to use those route parameters both, in Socket.io and REST you have to add a hook that maps those parameters to the query like this:
+It is important to keep in mind that those routes are only possible for the REST API of a service. The actual service name is still `users/:user_id/todos`. This means that [Socket.io](..//real-time/socket-io.md) and [Primus](..//real-time/primus.md) connections need to provide the parameter in their query. To be able to use those route parameters both, in Socket.io and REST you have to add a hook that maps those parameters to the query like this:
 
 ```js
-app.service('users/:userId/todos').before(function(hook) {
+app.service('users/:user_id/todos').before(function(hook) {
   if(hook.params.userId) {
-    hook.params.query.userId = hook.params.userId;
+    hook.params.query.user_id = hook.params.user_id;
   }
 });
 ```
@@ -54,7 +54,7 @@ Then it can be used via websockets like this:
 
 ```js
 // Using the socket directly
-socket.send('users/:userId/todos::find', { user_id: 1234 }, function(error, todos) {});
+socket.send('users/:user_id/todos::find', { user_id: 1234 }, function(error, todos) {});
 
 // Or with a feathers client
 const feathers = require('feathers/client');
@@ -64,8 +64,8 @@ const io = require('socket.io-client');
 const socket = io();
 const app = feathers().configure(socketio(socket));
 
-app.service('users/:userId/todos').find({
-  query: { userId: 1234 }
+app.service('users/:user_id/todos').find({
+  query: { user_id: 1234 }
 }).then(todos => console.log('Todos for user', todos));
 ```
 
