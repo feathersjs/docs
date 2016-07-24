@@ -52,7 +52,7 @@ messageService.create({
 [React Native](https://facebook.github.io/react-native/) currently requires [a workaround](http://stackoverflow.com/a/32234446/120513) due to [an issue in Socket.io](https://github.com/socketio/engine.io-parser/pull/55).
 
 ```bash
-$ npm install feathers feathers-socketio feathers-hooks socket.io-client
+$ npm install feathers feathers-socketio feathers-hooks socket.io-client babel-polyfill
 ```
 
 Create a `user-agent.js` with the following content:
@@ -64,6 +64,7 @@ window.navigator.userAgent = 'react-native';
 Then in the main application file:
 
 ```js
+import 'babel-polyfill';
 import './user-agent';
 import io from 'socket.io-client';
 import feathers from 'feathers/client';
