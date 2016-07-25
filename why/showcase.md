@@ -12,7 +12,10 @@ Below are some of the amazing things built with Feathers or for the Feathers eco
 Submit yours by creating a pull request.
 
 - [A generic validation hook](https://github.com/kulakowka/feathers-validate-hook)
+- [A generic validation hook using Joi](https://github.com/eddyystop/feathers-hooks-validate-joi)
 - [A generic hook for adding virtual attributes](https://github.com/kulakowka/feathers-virtual-attribute-hook)
+- [Some useful hooks](https://github.com/eddyystop/feathers-hooks-common)
+- [Add email verification and password reset capabilities to local feathers-authentication](https://github.com/eddyystop/feathers-service-verify-reset)
 
 
 ## Examples or Tutorials
