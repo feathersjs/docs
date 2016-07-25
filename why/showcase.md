@@ -10,7 +10,7 @@ Below are some of the amazing things built with Feathers or for the Feathers eco
 ## Community Plug-ins
 
 Submit yours by creating a pull request.
-
+- [A populate hook that supports multiple 1:m, m:1 and m:m relations](https://github.com/MichaelErmer/feathers-populate-hook)
 - [A generic validation hook](https://github.com/kulakowka/feathers-validate-hook)
 - [A generic validation hook using Joi](https://github.com/eddyystop/feathers-hooks-validate-joi)
 - [A generic hook for adding virtual attributes](https://github.com/kulakowka/feathers-virtual-attribute-hook)
