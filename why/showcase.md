@@ -37,6 +37,7 @@ Submit yours by creating a pull request.
 - [feathers-blob](https://www.npmjs.com/package/feathers-blob) - Feathers abstract blob store service (service)
 - [feathers-blueprints](https://www.npmjs.com/package/feathers-blueprints) - Add some of the Sails.js blueprints functionality to Feathers. (configure)
 - [feathers-bookshelf](https://www.npmjs.com/package/feathers-bookshelf) - A bookshelf ORM service adapter.  (service)
+- [feathers-objection](https://www.npmjs.com/package/feathers-objection) - An Objection.js ORM service adapter. (service)
 - [feathers-connect](https://www.npmjs.com/package/feathers-connect) - Feathers client library for DoneJS and can-connect (feathers-client)
 - [feathers-filemaker](https://www.npmjs.com/package/feathers-filemaker) - Filemaker adapter for feathers.js
 - [feathers-linvodb](https://www.npmjs.com/package/feathers-linvodb) - Create an LinvoDB Service for FeatherJS. (service)
