@@ -226,7 +226,7 @@ After stopping (CTRL + C) and starting the server (`npm start`) again we can go 
 
 ## Authorization
 
-Now that we can authenticate we want to restrict the Message service to only authenticated users. We could have done that already in the service generator by answering _"yes"_ when asked if we need authentication but we can also easily add it manually by changing `src/services/messages/hooks/index.js` to:
+Now that we can authenticate we want to restrict the Message service to only authenticated users. We could have done that already in the service generator by answering _"yes"_ when asked if we need authentication but we can also easily add it manually by changing `src/services/message/hooks/index.js` to:
 
 ```js
 'use strict';
