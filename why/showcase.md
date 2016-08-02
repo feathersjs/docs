@@ -58,6 +58,7 @@ Submit yours by creating a pull request.
 - [feathers-action-reducer](https://www.npmjs.com/package/feathers-action-reducer) - redux reducer for feathers service actions
 - [feathers-action-types](https://www.npmjs.com/package/feathers-action-types) - flux action types for feathers services (connector)
 - [feathers-react-redux](https://www.npmjs.com/package/feathers-react-redux) - Unofficial Feathers bindings for React-Redux.
+- [feathers-reduxify-services](https://github.com/eddyystop/feathers-reduxify-services) - Wrap Feathers services so they work transparently and perfectly with Redux.
 
 #### Testing
 - [feathers-tests-fake-app-users](https://www.npmjs.com/package/feathers-tests-fake-app-users) - Fake some feathers dependencies in service unit tests. Starter for your customized fakes (service)
