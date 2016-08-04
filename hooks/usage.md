@@ -189,7 +189,7 @@ If you want to change the hook object just chain the returned promise using `.th
 ```js
 todoService.before({
   find(hook) {
-    return this.find().then(data => {
+    return this.get().then(data => {
       hook.params.message = 'Ran through promise hook';
       // Always return the hook object
       return hook;
