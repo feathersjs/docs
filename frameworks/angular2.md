@@ -46,7 +46,7 @@ Make a `feathers.service.ts` file if you haven't already. This will contain the 
 Let's create a new Angular service that uses REST to communicate with our server. In addition to the packages we previously installed, we also have to include a client REST library. In this guide, we'll be using [Superagent](http://visionmedia.github.io/superagent/).
 
 ```ts
-import { Injectable } from 'angular2/core';
+import { Injectable } from '@angular/core';
 const superagent = require('superagent');
 
 const HOST = 'http://localhost:3000'; // Your base server URL here
@@ -164,7 +164,7 @@ import {MessageService} from '../services/message.service';
 Now let's add it as a *provider* to the Angular 2 App Component.
 
 ```ts
-import {Component} from 'angular2/core';
+import {Component} from '@angular/core';
 @Component({
     selector: 'my-app',
     template: '<h1>My First Angular 2 App</h1>',
@@ -228,7 +228,7 @@ And that's it! Our component now has access to our messages via `_messages`. Fro
 @Component({
     ...
     template: `
-      <div class="message" *ngFor="#message of _messages">
+      <div class="message" *ngFor="let message of _messages">
          <h1 class="title">{{message.title}}</h1>
          <div class="description">{{message.description}}</div>
       </div>
@@ -242,7 +242,7 @@ There are nicer ways of doing this, but you get the idea. What if we want to rem
 @Component({
     ...
     template: `
-      <div class="message" *ngFor="#message of _messages" (click)="removeMessage(message)">
+      <div class="message" *ngFor="let message of _messages" (click)="removeMessage(message)">
         ...
       </div>
     `,
