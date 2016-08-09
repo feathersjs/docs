@@ -34,7 +34,7 @@ The following options can be passed when creating a new localstorage service:
 
 ## Catching Global Server Side Errors
 
-Promises swallow errors if you for get to add a `catch()` statement. Therefore, you should make sure that you **always** call `.catch()` on your promises. To catch uncaught errors at a global level you can add the code below to your top-most file.
+Promises swallow errors if you forget to add a `catch()` statement. Therefore, you should make sure that you **always** call `.catch()` on your promises. To catch uncaught errors at a global level you can add the code below to your top-most file.
 
 ```js
 process.on('unhandledRejection', (reason, p) => {
