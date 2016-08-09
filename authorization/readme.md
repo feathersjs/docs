@@ -20,7 +20,7 @@ Make sure any restricted endpoints are actually locked down appropriately by add
 
 [Filter socket events](http://docs.feathersjs.com/real-time/filtering.html) so only authenticated and authorized users get can receive restricted ones.
 
-To make this easy we've created [a bunch of hooks](./bundled-hooks.md) to help you out. Their interface's are documented so if you are unsure how to use hooks check out the [Hooks chapter](../hooks/usage.md). Below is an example of how you can create your own.
+To make this easy we've created [a bunch of hooks](./bundled-hooks.md) to help you out. Their interfaces are documented so if you are unsure how to use hooks check out the [Hooks chapter](../hooks/usage.md). Below is an example of how you can create your own.
 
 ## Creating a custom authorization hook
 

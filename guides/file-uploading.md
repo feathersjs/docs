@@ -2,20 +2,20 @@
 
 Over the last months we at [ciancoders.com](https://ciancoders.com/) have been working in a new SPA project using Feathers and React, the combination of those two turns out to be **just amazing**.  
 
-Recently we where struggling to find a way to upload files whitout having to write a separate Express middleware or having to (re)write a complex Feathers service.
+Recently we where struggling to find a way to upload files without having to write a separate Express middleware or having to (re)write a complex Feathers service.
 
 # Our Goals
-We want to implement an upload service in a way that it acomplishes these few important things:
+We want to implement an upload service in a way that it accomplishes these few important things:
 
 1. It has to handle large files (+10MB).
-2. Needs to work with the app's authetication and authorization.
+2. Needs to work with the app's authentication and authorization.
 3. The files has to be validated.
 4. At the moment there is no third party storage service involved, but this will change in the near future, so it has to be prepared.
 5. Has to show the upload progress.
  
 The plan is to upload the files to a feathers service, so we can take advantage of the hooks for authentication, authorization and validation, not to mention the service events.
 
-Fortunately, there is an already developed file storage service: [feathers-blob](https://github.com/feathersjs/feathers-blob). With it we can easily archieve our goals, but (spoiler alert) it isn't the ideal solution, as it has some problems we will discuss below.
+Fortunately, there is an already developed file storage service: [feathers-blob](https://github.com/feathersjs/feathers-blob). With it we can easily achieve our goals, but (spoiler alert) it isn't the ideal solution, as it has some problems we will discuss below.
 
 
 ## Basic upload with feathers-blob and feathers-client
@@ -72,7 +72,7 @@ app.listen(3030, function(){
 });
 ```
 
-`feathers-blob` works over abstract-blob-store, wich is an abstract interface to various storage backends, such as filesystem, AWS, or Google Drive. It only accepts and retrieves files encoded as dataURI strings.
+`feathers-blob` works over abstract-blob-store, which is an abstract interface to various storage backends, such as filesystem, AWS, or Google Drive. It only accepts and retrieves files encoded as dataURI strings.
 
 Just like that we have our backend ready, go ahead and POST something to localhost:3030/uploads`, for example with postman:
 
@@ -163,15 +163,15 @@ Every file we select gets uploaded and saved to the `./uploads` directory.
 
 Work done!, let's call it a day, shall we?
 
-... But hey, there is somethiing that doesn't feels quite right ...right?
+... But hey, there is something that doesn't feels quite right ...right?
 
 ### DataURI upload problems
 
-It doesn't feels right because it is not. Let's imagine what would happen if we try to upload a large file, say 25MB or more: The entire file (plus some extra MB due to the encoding) has to be kept in memory for the entire upload proccess, this could look like nothing for a normal computer but for mobile devices it's a big deal. 
+It doesn't feels right because it is not. Let's imagine what would happen if we try to upload a large file, say 25MB or more: The entire file (plus some extra MB due to the encoding) has to be kept in memory for the entire upload process, this could look like nothing for a normal computer but for mobile devices it's a big deal. 
 
 We have a big RAM consumption problem. Not to mention we have to encode the file before sending it... 
 
-The solution would be to modify the service, adding support for splitting the dataURI into small chunks, then uploading one at a time, collecting and reasembling everything on the server. But hey, it's not that the same thing   browsers and web servers has been doing since maybe the very early days of the web?  maybe since Netscape Navigator?
+The solution would be to modify the service, adding support for splitting the dataURI into small chunks, then uploading one at a time, collecting and reassembling everything on the server. But hey, it's not that the same thing   browsers and web servers has been doing since maybe the very early days of the web?  maybe since Netscape Navigator?
 
 Well, actually it is, and doing a `multipart/form-data` post is still the easiest way to upload a file.
 
@@ -205,7 +205,7 @@ app.use('/uploads',
 
 ```
 
-Notice we kept the file field name as *uri* just to maintain uniformity, as the service will always work with that name anyways. But you can change it if you preffer.
+Notice we kept the file field name as *uri* just to maintain uniformity, as the service will always work with that name anyways. But you can change it if you prefer.
 
 Feathers-blob only understands files encoded as dataURI, so we need to convert them first. Let's make a Hook for that:
 
@@ -230,20 +230,20 @@ app.service('/uploads').before({
 });
 ```
 
-*Et voilà!*. Now we have a Feahtersjs file storage service working, with support for traditional multipart uploads, and a variety of storage options to choose. 
+*Et voilà!*. Now we have a FeathersJS file storage service working, with support for traditional multipart uploads, and a variety of storage options to choose. 
 
 **Simply awesome.**
 
 
 # Further improvements
 
-The service always return the dataURI back to us, wich may not be neccesary as we'd just uploaded the file, also we need to validate the file and check for authorization. 
+The service always return the dataURI back to us, which may not be necessary as we'd just uploaded the file, also we need to validate the file and check for authorization. 
 
-All those things can be easily done with more Hooks, and that's the benefit of keeping all inside feathersjs services. I left that to you.
+All those things can be easily done with more Hooks, and that's the benefit of keeping all inside FeathersJS services. I left that to you.
 
 For the frontend, there is a problem with the client: in order to show the upload progress it's stuck with only REST functionality and not real-time with socket.io. 
 
-The solution is to switch `feathers-client` from REST to `socket.io`, and just use wherever you like for uploading the files, thats an easy task now that we are able to do a traditional `form-multipart` upload.
+The solution is to switch `feathers-client` from REST to `socket.io`, and just use wherever you like for uploading the files, that's an easy task now that we are able to do a traditional `form-multipart` upload.
 
 Here is an example using dropzone:
 
