@@ -71,7 +71,7 @@ import feathers from 'feathers/client';
 import socketio from 'feathers-socketio/client';
 import hooks from 'feathers-hooks';
 
-const socket = io('http://api.my-feathers-server.com');
+const socket = io('http://api.my-feathers-server.com', { transports: ['websocket'], forceNew: true });
 const app = feathers()
   .configure(hooks())
   .configure(socketio(socket));
