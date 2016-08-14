@@ -26,7 +26,7 @@ MongoClient.connect('mongodb://localhost:27017/feathers').then(function(db){
 
 ## Options
 
-The following options can be passed when creating a new NeDB service:
+The following options can be passed when creating a new MongoDB service:
 
 - `Model` (**required**) - The MongoDB collection instance
 - `id` (default: '_id') [optional] - The id field for your documents for this service.
@@ -86,4 +86,4 @@ MongoClient.connect('mongodb://localhost:27017/feathers').then(function(db){
 });
 ```
 
-You can run this example [from the GitHub repository](https://github.com/feathersjs/feathers-nedb/blob/master/example/app.js) with `npm start` and going to [localhost:3030/messages](http://localhost:3030/messages). You should see an empty array. That's because you don't have any messages yet but you now have full CRUD for your new messages service.
+You can run this example [from the GitHub repository](https://github.com/feathersjs/feathers-mongodb/blob/master/example/app.js) with `npm start` and going to [localhost:3030/messages](http://localhost:3030/messages). You should see an empty array. That's because you don't have any messages yet but you now have full CRUD for your new messages service.
