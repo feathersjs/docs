@@ -266,4 +266,4 @@ mocha test/services/menu/index.test.js
 
 npm run test
 ```
-You can view a demo of the files in the following <a href="https://github.com/jayzamazing/feathers-demos/tree/master/examples/testing-mocha-chai-auth">link</a> . These files are based on using FeathersJS generate file structure.
+You can view a demo of the files in the following <a href="https://github.com/feathersjs/feathers-demos/examples/testing-mocha-chai-auth">link</a> . These files are based on using FeathersJS generate file structure.
