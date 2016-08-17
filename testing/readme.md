@@ -266,4 +266,68 @@ mocha test/services/menu/index.test.js
 
 npm run test
 ```
+#Testing Routes
+The above example showed how to make a post request. Included here are other code snippets for making requests to different routes:
+```js
+//test for put for /menuitem
+it('should update the menuitem data', function(done) {
+  //test for put for /menuitem
+  chai.request(app)
+      //request to /menuitem
+      .put('/menus/' + res.body.data[2]._id)
+      .set('Accept', 'application/json')
+      .set('Authorization', 'Bearer '.concat(token))
+      //attach data to request
+      .send({
+            name: 'steak sub',
+            price: 10.99,
+            categories: 'dinner, sandwhich'
+          }
+      )
+      //when finished do the following
+      .end(function(err, res) {
+          res.body.should.have.property('name');
+          res.body.name.should.equal('steak sub');
+        });
+      });
+```
+```js
+it('should delete the menu item data', function(done) {
+  //test for delete for /menuitem
+  chai.request(app)
+      //request to /menuitem
+      .delete('/menus/' + res.body.data[4]._id)
+      .set('Accept', 'application/json')
+      .set('Authorization', 'Bearer '.concat(token))
+      //when finished do the following
+      .end(function(err, res) {
+          //check returned json against expected value
+          res.body.name.should.be.a('string');
+          res.body.name.should.equal('soft drink');
+        });
+      });
+    });
+```
+```js
+//test for /menu get request
+it('should get menu items', (done) => {
+          //setup a request
+          chai.request(app)
+          //request to /menu
+          .get('/menus')
+          .set('Accept', 'application/json')
+          .set('Authorization', 'Bearer '.concat(token))
+          //when finished do the following
+          .end((err, res) => {
+              //ensure menu items have specific properties
+              res.body.data.should.be.a('array');
+              res.body.data[0].should.have.property('name');
+              res.body.data[0].name.should.equal('hamburger');
+            });
+          });
+```
+The following code denotes that I have gotten the id used in MongoDB and passed that value into the route:
+```js
+res.body.data[4]._id
+```
 You can view a demo of the files in the following <a href="https://github.com/feathersjs/feathers-demos/examples/testing-mocha-chai-auth">link</a> . These files are based on using FeathersJS generate file structure.
