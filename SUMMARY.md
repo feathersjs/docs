@@ -82,6 +82,7 @@
 * [Logging](middleware/logging.md)
 * [Configuration](configuration/readme.md)
 * [Debugging](debugging/readme.md)
+* [Testing](testing/readme.md)
 * [Security](SECURITY.md)
 * [Core API](api/readme.md)
 * [Guides](guides/readme.md)
