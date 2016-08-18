@@ -330,4 +330,4 @@ The following code denotes that I have gotten the id used in MongoDB and passed 
 ```js
 res.body.data[4]._id
 ```
-You can view a demo of the files in the following <a href="https://github.com/feathersjs/feathers-demos/examples/testing/testing-mocha-chai-auth">link</a> . These files are based on using FeathersJS generate file structure.
+You can view a demo of the files in [the following link](https://github.com/feathersjs/feathers-demos/tree/master/examples/testing/testing-mocha-chai-auth). These files are based on using FeathersJS generate file structure.
