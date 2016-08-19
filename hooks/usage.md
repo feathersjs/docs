@@ -289,30 +289,18 @@ Now that you know a bit about hooks work. Feel free to check out some [examples]
 Sometimes you will only want to run a hook in certain circumstances or you wan to modify the functionality of the output of the hook without re-writing it. Since hooks are chainable you can simply wrap it in your own hook.
 
 ```js
-import { hooks } from 'feathers-authentication';
+const { hooks } = require('feathers-authentication');
 
 // Your custom hashPassword hook
-exports.hashPassword = function(options) {
+exports.myHashPassword = function(options) {
+  const hashPassword = hooks.hashPassword(options);
+
   // Add any custom options
-
   return function(hook) {
-    return new Promise((resolve, reject) => {
-      if (myCondition !== true) {
-        return resolve(hook);
-      }
-
-      // call the original hook
-      hooks.hashPassword(options)(hook)
-        .then(hook => {
-          // do something custom
-          resolve(hook);
-        })
-        .catch(error => {
-          // do any custom error handling
-          error.message = 'my custom message';
-          reject(error);
-        });
-    });
+    if(myCondition) {
+      // Call the hashPassword hook
+      return hashPassword.call(this, hook);
+    }
   };
 }
 ```
@@ -320,9 +308,9 @@ exports.hashPassword = function(options) {
 Then simply use it like you normally would:
 
 ```js
-import hashPassword from './hooks/myHashPassword';
+const { myHashPassword } = require('./hooks/myHashPassword');
 
 userService.before({
-  create : [hashPassword()]
+  create : [ myHashPassword() ]
 });
 ```
