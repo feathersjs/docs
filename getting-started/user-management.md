@@ -1,6 +1,6 @@
 # User Management
 
-In [the previous section](scaffolding.md) we set up a Message service with a `/messages` endpoint. The app we generated also comes with a `/users` endpoint and local authentication. Now we're going learn how we can create users and authenticate them.
+In [the previous section](scaffolding.md) we set up a Message service with a `/messages` endpoint. The app we generated also comes with a `/users` endpoint and local authentication. Now we're going to learn how we can create users and authenticate them.
 
 ## Creating and authenticating users
 
