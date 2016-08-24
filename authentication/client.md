@@ -13,6 +13,7 @@ Feathers authentication adds a few methods to a client side Feathers app. They a
 #### Options
 
 - `type` (optional) - Either `local` or `token`.
+- `endpoint` (optional) - eg. `/auth/facebook` - especially helpful for mobile clients, this option allows (for example) the client to authenticate with Facebook via a native SDK, and post the `access_token` Facebook's returned to Feathers (for Feathers to communicate with Facebook using the FacebookTokenStrategy).
 
 Then you pass whatever other fields you need to send to authenticate. See below for examples.
 
