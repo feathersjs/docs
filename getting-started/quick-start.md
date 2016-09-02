@@ -49,6 +49,8 @@ With [NodeJS](https://nodejs.org) installed, you can quickly scaffold your first
     $ curl 'http://localhost:3030/messages/' -H 'Content-Type: application/json' --data-binary '{ "text": "Hello Feathers!" }'
     ```
 
+[![Run in Postman](https://run.pstmn.io/button.png)](https://www.getpostman.com/collections/f7b8680f320d698a6c15)
+
 ## What's next?
 
 In just a couple minutes we created a real-time API that is accessible via REST and websockets! We now have a database backed API that already provides CORS, authentication, pagination, logging, error handling and a few other goodies.
