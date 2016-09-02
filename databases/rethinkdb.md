@@ -32,6 +32,7 @@ app.use('/messages', service({
 The following options can be passed when creating a new RethinkDB service:
 
 - `Model` (**required**) - The `rethinkdbdash` instance, already initialized with a configuration object. [see options here](https://github.com/neumino/rethinkdbdash#importing-the-driver)
+- `id` (default: `id`) [optional] - The name of the id property
 - `name` (**required**) - The name of the database table.
 - `paginate` [optional] - A pagination object containing a `default` and `max` page size (see the [Pagination chapter](databases/pagination.md))
 
