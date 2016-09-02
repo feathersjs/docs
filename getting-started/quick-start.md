@@ -49,7 +49,7 @@ With [NodeJS](https://nodejs.org) installed, you can quickly scaffold your first
     $ curl 'http://localhost:3030/messages/' -H 'Content-Type: application/json' --data-binary '{ "text": "Hello Feathers!" }'
     ```
 
-[![Run in Postman](https://run.pstmn.io/button.png)](https://www.getpostman.com/run-collections/f7b8680f320d698a6c15)
+[![Run in Postman](https://run.pstmn.io/button.png)](https://www.getpostman.com/run-collection/39470d10b78a47070620)
 
 ## What's next?
 
