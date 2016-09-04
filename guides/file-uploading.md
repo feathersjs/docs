@@ -101,7 +101,7 @@ Or we can implement a very basic frontend with `feathers-client` and `jQuery`:
         <title>Feathersjs File Upload</title>
         <script   src="https://code.jquery.com/jquery-2.2.3.min.js"   integrity="sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo="   crossorigin="anonymous"></script>
         <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/core-js/2.1.4/core.min.js"></script>
-        <script type="text/javascript" src="//npmcdn.com/feathers-client@^1.0.0/dist/feathers.js"></script>
+        <script type="text/javascript" src="//unpkg.com/feathers-client@^1.0.0/dist/feathers.js"></script>
         <script type="text/javascript">
             // feathers client initialization
             const rest = feathers.rest('http://localhost:3030');
@@ -258,7 +258,7 @@ Here is an example using dropzone:
 
         <script type="text/javascript" src="socket.io/socket.io.js"></script>
         <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/core-js/2.1.4/core.min.js"></script>
-        <script type="text/javascript" src="//npmcdn.com/feathers-client@^1.0.0/dist/feathers.js"></script>
+        <script type="text/javascript" src="//unpkg.com/feathers-client@^1.0.0/dist/feathers.js"></script>
         <script type="text/javascript">
             // feathers client initialization
             var socket = io('http://localhost:3030');
