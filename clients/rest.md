@@ -11,8 +11,19 @@ Using [the Feathers client](feathers.md), the `feathers-rest/client` module allo
 > **ProTip:** The base URL is relative from where services are registered. That means that a service at `http://api.feathersjs.com/api/v1/messages` with a base URL of `http://api.feathersjs.com` would be available as `app.service('api/v1/messages')`. With a base URL of `http://api.feathersjs.com/api/v1` it would be `app.service('messages')`.
 
 
-Notice how the REST client wrapper is always initialized using a base URL: `.configure(rest('http://api.feathersjs.com').superagent(superagent [, options]));`.
-Default headers can be set in the options like `.configure(rest('http://api.feathersjs.com').superagent(superagent { headers: { 'X-Requested-With': 'FeathersJS' } }));`.
+Notice how the REST client wrapper is always initialized using a base URL:
+
+```js
+app.configure(rest('http://api.feathersjs.com').superagent(superagent [, options]));
+```
+
+Default headers can be set in the options like this:
+
+```js
+app.configure(rest('http://api.feathersjs.com').superagent(superagent, {
+  headers: { 'X-Requested-With': 'FeathersJS' }
+}));
+```
 
 ### jQuery
 
