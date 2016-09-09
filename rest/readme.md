@@ -121,6 +121,10 @@ Will set `params.query` to
 
 > **ProTip:** Route params will automatically be added to the `params` object.
 
+<!-- -->
+
+> **ProTip:** To get extended query parsing [set](http://expressjs.com/en/4x/api.html#app.set) `app.set('query parser', 'extended')` which will use the [qs](https://www.npmjs.com/package/qs) instead of the built-in [querystring](https://nodejs.org/api/querystring.html) module.
+
 ```js
 const feathers = require('feathers');
 const rest = require('feathers-rest');
