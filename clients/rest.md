@@ -17,7 +17,7 @@ Notice how the REST client wrapper is always initialized using a base URL:
 app.configure(rest('http://api.feathersjs.com').superagent(superagent [, options]));
 ```
 
-Default headers can be set in the options like this:
+Default headers can be set for all libaries (except [request](#request) which has its own defaults mechanism) in the options like this:
 
 ```js
 app.configure(rest('http://api.feathersjs.com').superagent(superagent, {
