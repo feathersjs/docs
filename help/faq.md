@@ -22,7 +22,7 @@ Custom functionality can almost always be mapped to an existing service method u
 
 Normally we find that they actually aren't needed and that it's much better to keep your routes as flat as possible. However, if the need arises there are a couple different ways. Refer to [this section](http://docs.feathersjs.com/middleware/routing.html#nested-routes) for details.
 
-## How do I do I render templates?
+## How do I render templates?
 
 Feathers works just like Express so it's the exact same. We've created a [helpful little guide right here](../guides/using-a-view-engine.md).
 
