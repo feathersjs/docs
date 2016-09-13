@@ -221,7 +221,7 @@ The last step is to change the standard success redirect to `/chat.html`. This p
 }
 ```
 
-After stopping (CTRL + C) and starting the server (`npm start`) again we can go to the signup page, sign up with an email and password which will redirect us to the login page. There we can log in with the information we used to sign up and will get redirected to `chat.html` which currently shows authentication success page with the JWT.
+After stopping (CTRL + C) and starting the server (`npm start`) again we can go to the signup page at [http://localhost:3030/signup.html](http://localhost:3030/signup.html), sign up with an email and password which will redirect us to the login page. There we can log in with the information we used to sign up and will get redirected to `chat.html` which currently shows authentication success page with the JWT.
 
 
 ## Authorization
