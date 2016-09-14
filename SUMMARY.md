@@ -64,6 +64,7 @@
   * [Vue.js](frameworks/vuejs.md)
   * [iOS](frameworks/ios.md)
   * [Android](frameworks/android.md)
+  * [Choo](frameworks/choo.md)
 * [Middleware](middleware/readme.md)
   * [Express Middleware](middleware/express.md)
   * [Routing and Versioning](middleware/routing.md)
@@ -95,4 +96,3 @@
   * [Contributing](contributing.md)
   * [Changelog](changelog.md)
 * [License](license.md)
-
