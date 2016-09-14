@@ -14,6 +14,12 @@ The Socket.io configuration (`socketio(socket [, options])`) can take settings w
 
 - `timeout` (default: 5000ms) - The time after which a method call fails and times out. This usually happens when calling a service or service method that does not exist.
 
+### Changing the default timeout value
+
+```javascript
+app.service('messages').timeout = 3000;
+```
+
 ## Browser Usage
 
 Using [the Feathers client](feathers.md), the `feathers-socketio/client` module can be configured to use that socket as the connection:
