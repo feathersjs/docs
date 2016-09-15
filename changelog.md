@@ -1,5 +1,9 @@
 # Changelog
 
+__2.0.2__
+
+- Create an app reference on service event hook object ([#406](https://github.com/feathersjs/feathers/pull/406))
+
 __2.0.1__
 
 - Allow services with only a `setup` method ([#285](https://github.com/feathersjs/feathers/issues/285), [#308](https://github.com/feathersjs/feathers/pull/308))
