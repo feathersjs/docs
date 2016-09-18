@@ -62,6 +62,13 @@ Submit yours by creating a pull request.
 - [feathers-cluster](https://www.npmjs.com/package/feathers-cluster) - Easily take advantage of multi-core systems for Featherjs. (configure)
 - [feathers-sync](https://www.npmjs.com/package/feathers-sync) - Synchronize service events between application instances using MongoDB publish/subscribe (configure)
 
+#### Mobile
+
+The Feathers client works with React Native but here is a collection of native libraries/SDKs.
+
+- [FeathersjsClientSwift](https://github.com/truebucha/FeathersjsClientSwift) - An iOS client written in Swift.
+- [feathers-android](https://github.com/feathersjs/feathers-android) - A native Android client.
+
 #### Email
 
 - [feathers-mailer](https://www.npmjs.com/package/feathers-mailer) - Feathers mailer service using nodemailer (service)
