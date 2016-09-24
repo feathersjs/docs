@@ -83,6 +83,8 @@ let app = feathers()
 
 ### Socket.io
 
+Socket.io is capable of using many different transports.  By default, upon connecting it will use XHR, then will progressively try to upgrade to "better" transports until it arrives at WebSockets.  If an older client doesn't support WebSockets, it will be able to stay connected over one of the lower transports.  **If the transport changes you have to call authenticate again.**
+
 #### On the client
 
 ```html
@@ -108,6 +110,12 @@ let app = feathers()
     console.log('Authenticated!', app.get('token'));
   }).catch(function(error){
     console.error('Error authenticating!', error);
+  });
+  
+  // If the transport changes, you have to call authenticate() again.
+  socket.io.engine.on('upgrade', function(transport) {
+    console.log('transport changed');
+    app.authenticate();
   });
 </script>
 ```
