@@ -99,6 +99,7 @@
   color: #969C9A;
 }
 
+/* Allow tables to scroll horizontally if they get too wide */
 table {
   display: block;
   overflow-x: auto;
