@@ -15,6 +15,7 @@ Submit yours by creating a pull request.
 - [Feathers + Apollo](https://github.com/swarthout/feathers-apollo)
 - [Feathers + React + Mobx](https://github.com/foxhound87/rfx-stack)
 - [Feathers + React + Webpack](https://github.com/sscaff1/feathers-webpack-react)
+- [Observables with Angular2 and FeathersJS](https://berndsgn.ch/angular2-and-feathersjs/)
 
 ## Community Plug-ins
 
