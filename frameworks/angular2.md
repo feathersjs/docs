@@ -4,6 +4,8 @@ Angular 2 and Feathers work together wonderfully through Angular's [services](ht
 
 We'll be setting up the basic service structure for an application that uses `feathers-socketio` but you should find this structure is flexible enough to accommodate other setups.
 
+> Note: If you're interested in learning about how to use RxJS Observables with Angular2 with Feathers, check out [this blog post](https://berndsgn.ch/angular2-and-feathersjs/).
+
 ## Using TypeScript
 
 If you're using TypeScript to develop with Angular 2, Feathers and its related modules should be loaded into your app through npm packages. `npm install` the ones you'll need:
