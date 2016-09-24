@@ -100,7 +100,7 @@
 }
 
 /* Allow tables to scroll horizontally if they get too wide */
-table {
+section.markdown-section table {
   display: block;
   overflow-x: auto;
 }
