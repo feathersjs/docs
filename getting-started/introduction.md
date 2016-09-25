@@ -4,7 +4,7 @@ Feathers is a minimalist, service-oriented, real-time web framework for modern a
 
 ## Minimalist
 
-Built on top of [Express](http://expressjs.com/), Feathers has embodied the same spirit. It is comprised of a bunch of small modules that are all completely optional and the core weighs in at just a few hundred lines of code. How's that for light weight?! Now you can see where Feathers got it's name. 😉
+Built on top of [Express](http://expressjs.com/), Feathers has embodied the same spirit. It is comprised of a bunch of small modules that are all completely optional and the core weighs in at just a few hundred lines of code. How's that for light weight?! Now you can see where Feathers got its name. 😉
 
 ## Service oriented
 
