@@ -35,7 +35,7 @@ With [NodeJS](https://nodejs.org) installed, you can quickly scaffold your first
     $ feathers generate service
     ```
 
-5. Start your brand new app! 💥
+5. Start your brand new app! :boom:
 
     ```
     $ npm start
