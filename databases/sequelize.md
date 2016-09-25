@@ -126,52 +126,55 @@ Migrations with feathers and sequelize are quite simple and we have provided som
 
 ### Initial Setup: one-time tasks
 
-1. Install the [sequelize CLI](https://github.com/sequelize/cli):
+- Install the [sequelize CLI](https://github.com/sequelize/cli):
 
-	```
-	npm install sequelize-cli --save
-	```
-1. Create a `.sequelizerc` file in your project root with the following content:
+```
+npm install sequelize-cli --save
+```
 
-	```js
-	const path = require('path');
-	
-	module.exports = {
-	  'config': path.resolve('migrations/config/config.js'),
-	  'migrations-path': path.resolve('migrations'),
-	  'seeders-path': path.resolve('migrations/seeders'),
-	  'models-path': path.resolve('migrations/models')
-	};
-	```
-1. Create the migrations config in `migrations/config/config.js`:
+- Create a `.sequelizerc` file in your project root with the following content:
 
-	```js
-	const app = require('../../src/app');
-	const env = process.env.NODE_ENV || 'development';
-	
-	module.exports = {
-		[env]: {
-			url: app.get('db_url'),
-			dialect: app.get('db_dialect'),
-			migrationStorageTableName: '_migrations'
-		}
-	};
-	```
-1. Register your models. The following assumes you have defined your models using the method [described here](https://github.com/feathersjs/generator-feathers/issues/94#issuecomment-204165134).
+```js
+const path = require('path');
 
-	```js
-	const Sequelize = require('sequelize');
-	const app = require('../../src/app');
-	const models = app.get('models');
-	const sequelize = app.get('sequelize');
-	
-	// The export object must be a dictionary of model names -> models
-	// It must also include sequelize (instance) and Sequelize (constructor) properties
-	module.exports = Object.assign({
-		Sequelize,
-		sequelize
-	}, models);
-	```
+module.exports = {
+  'config': path.resolve('migrations/config/config.js'),
+  'migrations-path': path.resolve('migrations'),
+  'seeders-path': path.resolve('migrations/seeders'),
+  'models-path': path.resolve('migrations/models')
+};
+```
+
+- Create the migrations config in `migrations/config/config.js`:
+
+```js
+const app = require('../../src/app');
+const env = process.env.NODE_ENV || 'development';
+
+module.exports = {
+  [env]: {
+    url: app.get('db_url'),
+    dialect: app.get('db_dialect'),
+    migrationStorageTableName: '_migrations'
+  }
+};
+```
+
+- Register your models. The following assumes you have defined your models using the method [described here](https://github.com/feathersjs/generator-feathers/issues/94#issuecomment-204165134).
+
+```js
+const Sequelize = require('sequelize');
+const app = require('../../src/app');
+const models = app.get('models');
+const sequelize = app.get('sequelize');
+
+// The export object must be a dictionary of model names -> models
+// It must also include sequelize (instance) and Sequelize (constructor) properties
+module.exports = Object.assign({
+  Sequelize,
+  sequelize
+}, models);
+```
 
 ___
 ### Migrations workflow
