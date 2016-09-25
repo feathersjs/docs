@@ -6,7 +6,8 @@
     "collapsible-menu",
     "heading-anchors",
     "edit-link",
-    "ga"
+    "ga",
+    "versions"
   ],
   "pluginsConfig": {
     "edit-link": {
@@ -18,6 +19,9 @@
     },
     "ga": {
      "token": "UA-64904930-1"   
+    },
+    "versions": {
+      "type": "tags"
     }
   }
 }
