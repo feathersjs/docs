@@ -6,8 +6,7 @@
     "collapsible-menu",
     "heading-anchors",
     "edit-link",
-    "ga",
-    "advanced-emoji"
+    "ga"
   ],
   "pluginsConfig": {
     "edit-link": {
