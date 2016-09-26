@@ -16,6 +16,7 @@ Submit yours by creating a pull request.
 - [Feathers + React + Mobx](https://github.com/foxhound87/rfx-stack)
 - [Feathers + React + Webpack](https://github.com/sscaff1/feathers-webpack-react)
 - [Observables with Angular2 and FeathersJS](https://berndsgn.ch/angular2-and-feathersjs/)
+- [Feathers + React + Redux + Webpack + local auth. Production quality.](https://github.com/eddyystop/feathers-starter-react-redux-login-roles)
 
 ## Community Plug-ins
 
@@ -84,6 +85,7 @@ The Feathers client works with React Native but here is a collection of native l
 - [feathers-action-types](https://www.npmjs.com/package/feathers-action-types) - flux action types for feathers services (connector)
 - [feathers-react-redux](https://www.npmjs.com/package/feathers-react-redux) - Unofficial Feathers bindings for React-Redux.
 - [feathers-reduxify-services](https://github.com/eddyystop/feathers-reduxify-services) - Wrap Feathers services so they work transparently and perfectly with Redux.
+- [feathers-reduxify-authentication](https://github.com/eddyystop/feathers-reduxify-authentication) - Wrap Feathers.authentication so it works with Redux, and with auth packages for React-Router. 
 
 #### Testing
 
