@@ -1,6 +1,6 @@
-# Pagination and Sorting
+# Pagination, Sorting, Limiting, and Selecting
 
-All official database adapters support a common way for sorting, limiting and paginating `find` method calls as part of `params.query`.
+All official database adapters support a common way for sorting, limiting, selecting, and paginating `find` method calls as part of `params.query`.
 
 ## Pagination
 
