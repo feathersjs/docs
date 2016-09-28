@@ -66,7 +66,7 @@ Then in the main application file:
 ```js
 import 'babel-polyfill';
 import './user-agent';
-import io from 'socket.io-client';
+import io from 'socket.io-client/socket.io';
 import feathers from 'feathers/client';
 import socketio from 'feathers-socketio/client';
 import hooks from 'feathers-hooks';
