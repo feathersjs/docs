@@ -24,7 +24,7 @@ app.service('todos').before({
 
 ## Fetching Related Items
 
-Hooks can also be used to fetch related items from other services. The following hook checks for a `related` query parameter in `get` and if it exists, includes all todos for the user in the response:
+Hooks can also be used to fetch related items from other services. The following hook checks for a `related` query parameter in `get` and if it exists, includes all todos for the user in the response.  Because it is an **after** hook, `hook.result` will already be populated with data from the original query.  In this case, it's on a `service.get` request, so `hook.result` will contain a user object.  The hook fetches data from the `todos` service and creates a `todos` property on the user object in hook.result:
 
 ```js
 app.service('users').after({
