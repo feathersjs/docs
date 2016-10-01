@@ -80,10 +80,6 @@ The Feathers client works with React Native but here is a collection of native l
 - [feathers-mailgun](https://www.npmjs.com/package/feathers-mailgun) - A Mailgun Service for FeatherJS. (service)
 - [feathers-sendgrid](https://www.npmjs.com/package/feathers-sendgrid) - A SendGrid Service for FeatherJS. (service)
 
-#### Vue
-
-- [vue-feathers](https://github.com/sunabozu/vue-feathers) - A plugin for Vuejs 1.x & 2.x to easily access your feathers services.
-
 #### React, Redux
 
 - [feathers-action](https://www.npmjs.com/package/feathers-action) - use feathers services with redux (connector)
@@ -125,4 +121,5 @@ The Feathers client works with React Native but here is a collection of native l
 - [feathers-reactive](https://www.npmjs.com/package/feathers-reactive) - Turns a Feathers service call into an RxJS observables that automatically updates on real-time events. (configure)
 - [ng-feathers](https://www.npmjs.com/package/ng-feathers) - Feathers client for AngularJS. FeatherJS for plain old AngularJS (1.X)
 - [vue-syncers-feathjers](https://www.npmjs.com/package/vue-syncers-feathers) - Synchronises feathers services with vue objects, updated in real time (connector)
+- [vue-feathers](https://github.com/sunabozu/vue-feathers) - A plugin for Vuejs 1.x & 2.x to easily access your feathers services.
 
