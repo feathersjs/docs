@@ -133,7 +133,7 @@ app.service('user').find({
 
 ## What about Koa/Hapi/X?
 
-There are many other Node server frameworks out there like Koa, a *"next generation web framework for Node.JS"* using ES6 generator functions instead of Express middleware or HapiJS etc. Because Feathers 2 is already [univerally usable](../clients/feathers.md) we are planning the ability for it to hook into other frameworks on the server as well. More information can be found in [this issue](https://github.com/feathersjs/feathers/issues/258).
+There are many other Node server frameworks out there like Koa, a *"next generation web framework for Node.JS"* using ES6 generator functions instead of Express middleware or HapiJS etc. Because Feathers 2 is already [universally usable](../clients/feathers.md) we are planning the ability for it to hook into other frameworks on the server as well. More information can be found in [this issue](https://github.com/feathersjs/feathers/issues/258).
 
 ## How do I filter emitted service events?
 
