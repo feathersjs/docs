@@ -35,6 +35,8 @@ With [NodeJS](https://nodejs.org) installed, you can quickly scaffold your first
     $ feathers generate service
     ```
 
+To exit the feathers command shell, press `CTRL+C`, twice.
+
 5. Start your brand new app! :boom:
 
     ```
@@ -43,7 +45,7 @@ With [NodeJS](https://nodejs.org) installed, you can quickly scaffold your first
 
 6. Go to [localhost:3030](http://localhost:3030) to see the homepage. The message [CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete) service is available at [localhost:3030/messages](http://localhost:3030/messages)
 
-6. Create a new message on the [localhost:3030/messages](http://localhost:3030/messages) endpoint. This can be done by sending a POST request with a REST client like [Postman](https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop?hl=en) or via CURL like this:
+7. Create a new message on the [localhost:3030/messages](http://localhost:3030/messages) endpoint. This can be done by sending a POST request with a REST client like [Postman](https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop?hl=en) or via CURL like this:
 
     ```
     $ curl 'http://localhost:3030/messages/' -H 'Content-Type: application/json' --data-binary '{ "text": "Hello Feathers!" }'
