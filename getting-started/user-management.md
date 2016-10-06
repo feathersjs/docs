@@ -232,6 +232,7 @@ Now that we can authenticate we want to restrict the Message service to only aut
 'use strict';
 
 const globalHooks = require('../../../hooks');
+const hooks = require('feathers-hooks');
 const auth = require('feathers-authentication').hooks;
 
 exports.before = {
