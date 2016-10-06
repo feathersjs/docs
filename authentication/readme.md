@@ -49,7 +49,7 @@ All the options get passed to Express' `res.cookie` function. See the [Express d
 - `name` (default: 'feathers-jwt') [optional] - The cookie name. **This is case sensitive**.
 - `httpOnly` (default: 'false') [optional] - Prevents JavaScript from accessing the cookie on the client. Should be set to `true` if you are not using OAuth or Form Posts for authentication.
 - `secure` (default: 'true' in production) [optional] - Marks the cookie to be used with HTTPS only.
-- `expires` (default: 30 seconds from current time) [optional] - The time when the cookie should expire. Must be a valid `Date` object.
+- `maxAge` (default: 3000 ms from current time) [optional] - The relative time in milliseconds when the cookie should expire.
 
 #### Example Configuration
 
