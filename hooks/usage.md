@@ -86,7 +86,7 @@ todoService.after({
   find(hook) {
     // Manually filter the find results
     hook.result = hook.result.filter(current => 
-      current.companyId === params.user.companyId
+      current.companyId === hook.params.user.companyId
     );
   },
 
