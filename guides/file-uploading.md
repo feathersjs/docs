@@ -5,17 +5,17 @@ Over the last months we at [ciancoders.com](https://ciancoders.com/) have been w
 Recently we where struggling to find a way to upload files without having to write a separate Express middleware or having to (re)write a complex Feathers service.
 
 # Our Goals
-We want to implement an upload service in a way that it accomplishes these few important things:
+We want to implement an upload service to accomplish a few important things:
 
 1. It has to handle large files (+10MB).
-2. Needs to work with the app's authentication and authorization.
-3. The files has to be validated.
+2. It needs to work with the app's authentication and authorization.
+3. The files need to be validated.
 4. At the moment there is no third party storage service involved, but this will change in the near future, so it has to be prepared.
-5. Has to show the upload progress.
+5. It has to show the upload progress.
  
-The plan is to upload the files to a feathers service, so we can take advantage of the hooks for authentication, authorization and validation, not to mention the service events.
+The plan is to upload the files to a feathers service so we can take advantage of hooks for authentication, authorization and validation, and for service events.
 
-Fortunately, there is an already developed file storage service: [feathers-blob](https://github.com/feathersjs/feathers-blob). With it we can easily achieve our goals, but (spoiler alert) it isn't the ideal solution, as it has some problems we will discuss below.
+Fortunately, there exists a file storage service: [feathers-blob](https://github.com/feathersjs/feathers-blob). With it we can meet our goals, but (spoiler alert) it isn't an ideal solution.  We discuss some of its problems below.
 
 
 ## Basic upload with feathers-blob and feathers-client
