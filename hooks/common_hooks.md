@@ -572,7 +572,7 @@ app.service('users').after({
 
 `replaceItems(hook: Hook, items: Item[]|Item): void`
 
-'getItems` gets the data items in a hook. The items may be `hook.data`, `hook.result` or `hook.result.data` depending on where the hook is used, the method its used with and if pagination is used. `undefined`, an object or an array of objects may be returned.
+`getItems` gets the data items in a hook. The items may be `hook.data`, `hook.result` or `hook.result.data` depending on where the hook is used, the method its used with and if pagination is used. `undefined`, an object or an array of objects may be returned.
 
 `replaceItems` is the companion to `getItems`. It updates the data items in the hook.
 
