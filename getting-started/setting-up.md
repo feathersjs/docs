@@ -4,14 +4,14 @@ Feathers and most plug-ins work on Node `v0.12.x` and up but we recommend using 
 
 ## Node Version Manager
 
-The easiest way to get the latest Node version and avoiding many problems especially around permissions is by using [nvm](https://github.com/creationix/nvm) or [nvm-windows](https://github.com/coreybutler/nvm-windows). Run the [installation script](https://github.com/creationix/nvm#install-script) and then, to see all available versions, run `nvm ls-remote`. To install e.g. Node 5.10 and set it as the default run:
+The easiest way to get the latest Node version and avoiding many problems especially around permissions is by using [nvm](https://github.com/creationix/nvm) or [nvm-windows](https://github.com/coreybutler/nvm-windows). Run the [installation script](https://github.com/creationix/nvm#install-script) and then, to see all available versions, run `nvm ls-remote`. To install the latest version of Node and set it as the default run:
 
 ```
-nvm install 5.10
-nvm alias default 5.10
+nvm install node
+nvm alias default node
 ```
 
-Now `node --version` should show `5.10.x`. If it does then you can skip ahead to [building the app](./scaffolding.md) and not have to worry about Babel.
+Since newer versions of Node (> `5.0`) support all ES6 features we are going to use you can skip ahead to [building the app](./scaffolding.md) and not have to worry about Babel.
 
 ## Babel
 
