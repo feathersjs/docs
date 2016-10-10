@@ -99,3 +99,7 @@ const messageService = app.service('messages');
 
 messageService.on('created', message => console.log('Someone created a message', message));
 ```
+
+## Debugging
+
+Socket.io and feathers uses [debug](https://github.com/visionmedia/debug) to deliver the messages. You can use it in the Browser by setting the filter in the localStorage: `localStorage.debug = '*';`
