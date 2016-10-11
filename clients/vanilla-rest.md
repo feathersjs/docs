@@ -21,7 +21,7 @@ Will call `messages.find({ query: { status: 'read', user: '10' } })` on the serv
 If you want to use any of the built-in find operands ($le, $lt, $ne, $eq, $in, etc.) the general format is as follows:
 
 ```
-GET /messages?field[$operand]=value[,value2,value3,...]
+GET /messages?field[$operand]=value&field[$operand]=value2
 ```
 
 For example, to find the records where field _status_ is not equal to **active** you could do
