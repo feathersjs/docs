@@ -106,7 +106,7 @@ updatedAt: {
   'default': Date.now
 }
 ```
-Now update the src/services/menu/user-models.js to the following:
+Now update the src/services/user/user-models.js to the following:
 ```js
 username: {
   type: String,
