@@ -82,7 +82,7 @@ exports.before = {
   ]
 };
 ```
-You can also add role based authentication to the user hook if you want to additional restrictions. Go ahead and update src/services/menu/menu-models.js to the following:
+You can also add role based authentication to the user hook if you want to additional restrictions. Go ahead and update src/services/menu/menu-model.js to the following:
 ```js
 name: {
   type: String,
@@ -106,7 +106,7 @@ updatedAt: {
   'default': Date.now
 }
 ```
-Now update the src/services/menu/user-models.js to the following:
+Now update the src/services/menu/user-model.js to the following:
 ```js
 username: {
   type: String,
@@ -130,7 +130,7 @@ type: Date,
 'default': Date.now
 }
 ```
-Due to the change of the name field in the user-models.js you will also need to update the config/default.json file to the following:
+Due to the change of the name field in the user-model.js you will also need to update the config/default.json file to the following:
 ```js
 "local": {
   "usernameField": "username"
