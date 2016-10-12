@@ -45,6 +45,8 @@ app.service('todos').find({
   paginate: false
 });
 ```
+Note: Disabling the pagination is not available in the client. Only `query` is passed to the server. ([Workaround](https://github.com/feathersjs/feathers/issues/382#issuecomment-238407741))
+
 
 ## Sorting, limiting and selecting
 
