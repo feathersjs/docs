@@ -1,6 +1,6 @@
 # Querying
 
-In addition to [sorting and pagination](pagination.md), data can also be filtered by criteria. Standard criteria can just be added to the query. For example, the following finds all users with the name `Alice`:
+In addition to [Pagination and Sorting](pagination.md), data can also be filtered by criteria. Standard criteria can just be added to the query. For example, the following finds all users with the name `Alice`:
 
 ```js
 query: {
@@ -10,7 +10,7 @@ query: {
 
 Additionally, the following advanced criteria are supported for each property.
 
-> **ProTip:** Just like with sorting and pagination you won't want to use these special attributes field names in your documents in your database.
+> **ProTip:** Just like with [Pagination and Sorting](pagination.md) you won't want to use `$in`, `$nin`, `$lt`, `$lte`, `$gt`, `$gte`, `$ne` and `$or` as field names for documents in your database.
 
 ### $in, $nin
 
@@ -72,3 +72,4 @@ query: {
   ]
 }
 ```
+bran
