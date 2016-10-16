@@ -200,9 +200,11 @@ todoService.before({
 
 > **ProTip:** If a promise fails, the error will be propagated immediately and will exit out of the promise chain.
 
-### Continuation passing
+### Callbacks
 
 Another way is to pass `next` callback as the second parameter that has to be called with `(error, data)`.
+
+> **ProTip:** This is going to be removed in Feathers v3 in 2017. Please use promises.
 
 ```js
 todoService.before({
