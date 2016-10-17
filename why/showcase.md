@@ -19,7 +19,8 @@ Submit yours by creating a pull request.
 - [Feathers + React + Mobx](https://github.com/foxhound87/rfx-stack)
 - [Feathers + React + Webpack](https://github.com/sscaff1/feathers-webpack-react)
 - [Observables with Angular2 and FeathersJS](https://berndsgn.ch/angular2-and-feathersjs/)
-- [Feathers + React + Redux + Webpack + local auth. Production quality.](https://github.com/eddyystop/feathers-starter-react-redux-login-roles)
+- [Feathers + React + Redux + Webpack + local auth. Production quality](https://github.com/eddyystop/feathers-starter-react-redux-login-roles).
+- [Live query. Mirror part of a DB on the client.](https://github.com/eddyystop/feathers-live-query)
 
 ## Community Plug-ins
 
@@ -27,7 +28,7 @@ Submit yours by creating a pull request.
 
 #### Authentication
 
-- [feathers-accounts](https://www.npmjs.com/package/feathers-accounts) - Token-Based User Account System for FeathersJS (configure)
+- [feathers-accounts](https://www.npmjs.com/package/feathers-accounts) - Token-Based User Account System for FeathersJS (configure).
 - [feathers-service-verify-reset](https://www.npmjs.com/package/feathers-service-verify-reset) - Adds user email verification and password reset capabilities to local feathers-authentication (service)
 
 #### Communications
