@@ -47,9 +47,16 @@ Make a `feathers.service.ts` file if you haven't already. This will contain the 
 
 Let's create a new Angular service that uses REST to communicate with our server. In addition to the packages we previously installed, we also have to include a client REST library. In this guide, we'll be using [Superagent](http://visionmedia.github.io/superagent/).
 
+Install Superagent:
+
+```bash
+npm install superagent --save
+npm install @types/superagent --save-dev
+```
+
 ```ts
 import { Injectable } from '@angular/core';
-const superagent = require('superagent');
+import * as superagent from 'superagent';
 
 const HOST = 'http://localhost:3000'; // Your base server URL here
 @Injectable()
@@ -79,7 +86,7 @@ export class SocketService extends Service {
   
   constructor() {
   	super();
-  	
+
     this.socket = io(HOST);
     this._app = feathers()
       .configure(socketio(this.socket))
