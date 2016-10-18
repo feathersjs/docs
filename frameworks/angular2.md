@@ -53,9 +53,12 @@ const superagent = require('superagent');
 
 const HOST = 'http://localhost:3000'; // Your base server URL here
 @Injectable()
-export class RestService {
+export class RestService extends Service {
   private _app: any;
+
   constructor() {
+  	super();
+
     this._app = feathers() // Initialize feathers
       .configure(rest(HOST).superagent(superagent)) // Fire up rest
       .configure(hooks()) // Configure feathers-hooks
@@ -75,6 +78,8 @@ export class SocketService extends Service {
   private _app: any;
   
   constructor() {
+  	super();
+  	
     this.socket = io(HOST);
     this._app = feathers()
       .configure(socketio(this.socket))
