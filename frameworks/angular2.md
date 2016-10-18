@@ -155,13 +155,16 @@ Notice that in these methods we're essentially just returning the promise that f
 
 Think you're done? **Not so fast!**
 If we run our code now, we're going to get an error. In Angular, we have to instantiate our services somewhere, and right now we have nothing creating our RestService or SocketService (if you're wondering about MessageService, sit tight)! 
-Add them to your bootstrap call.
+Add them to NgModule.
 
-```js
-bootstrap(YourMainComponent, [
-  SocketService,
-  RestService
-])
+```ts
+@NgModule({
+  // ...
+  providers: [
+  	SocketService,
+  	RestService
+  ]
+})
 ```
 
 We'll explain more later, but believe it or not, that's all we need for our components to start handling our data!
@@ -178,7 +181,8 @@ import {MessageService} from '../services/message.service';
 Now let's add it as a *provider* to the Angular 2 App Component.
 
 ```ts
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
+
 @Component({
     selector: 'my-app',
     template: '<h1>My First Angular 2 App</h1>',
@@ -186,14 +190,18 @@ import {Component} from '@angular/core';
 })
 export class AppComponent { }
 ```
-So what does `providers` do? Every time you add MessageService as a provider to a component, **a new instance of the service is created.** In our application, in all likelihood we only ever need one instance of MessageService, so this should be **the only time we provide it**. If you want to make this service accessible globally throughout our application, rather than tying the service to a specific component, we can *bootstrap* it in our `main.ts`.
+
+So what does `providers` do? Every time you add MessageService as a provider to a component, **a new instance of the service is created.** In our application, in all likelihood we only ever need one instance of MessageService, so this should be **the only time we provide it**. If you want to make this service accessible globally throughout our application, rather than tying the service to a specific component, we can add it in the NgModule.
 
 ```ts
-bootstrap(AppComponent, [
-    SocketService,
-    RestService,
+@NgModule({
+  // ...
+  providers: [
+  	SocketService,
+  	RestService,
     MessageService
-])
+  ]
+})
 ```
 
 That's what we did earlier! We created a global instance of RestService and SocketService, since we won't be providing them directly in any component (they're just for MessageService).
@@ -206,7 +214,7 @@ Now that we've created an instance of our service, let's give our component acce
 
 ```ts
   constructor (
-    private _messageService: MessageService
+    private messageService: MessageService
   ) { }
 ```
 Adding that type information, `: MessageService` gives Angular the information it needs to inject our service into the component!
@@ -214,8 +222,8 @@ Adding that type information, `: MessageService` gives Angular the information i
 Declaring our reference to the service instance private does a couple things. First, TypeScript's compiler will throw an error if we're trying to access this reference to the service from outside our component. Second, it is equivalent to writing the following 
 
 ```ts
-constructor (_messageService: MessageService) {
-   this._messageService = _messageService;
+constructor (messageService: MessageService) {
+   this.messageService = messageService;
 }
 ```
 
@@ -227,11 +235,12 @@ Now we can access the service methods from our component. Let's get a list of al
 
 ```ts
 export class AppComponent {
-  private _messages: any[] = [];
+  private messages: any[] = [];
+  
   // Called once when the component is early in its creation
   ngOnInit() {
-    this._messageService.find().then(messages => {
-       this._messages = messages;
+    this.messageService.find().then(messages => {
+       this.messages = messages;
     });
   }
 }
@@ -242,7 +251,7 @@ And that's it! Our component now has access to our messages via `_messages`. Fro
 @Component({
     ...
     template: `
-      <div class="message" *ngFor="let message of _messages">
+      <div class="message" *ngFor="let message of messages">
          <h1 class="title">{{message.title}}</h1>
          <div class="description">{{message.description}}</div>
       </div>
@@ -256,14 +265,14 @@ There are nicer ways of doing this, but you get the idea. What if we want to rem
 @Component({
     ...
     template: `
-      <div class="message" *ngFor="let message of _messages" (click)="removeMessage(message)">
+      <div class="message" *ngFor="let message of messages" (click)="removeMessage(message)">
         ...
       </div>
     `,
 })
 export class AppComponent () {
-  removeMessage (message) {
-    this._messageService.remove(message.id);
+  removeMessage(message) {
+    this.messageService.remove(message.id);
   }
 }
 ```
