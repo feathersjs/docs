@@ -122,3 +122,19 @@ app.listen(port, function() {
   console.log(`Feathers server listening on port ${port}`);
 });
 ```
+
+## Extra query operations
+
+This DB adapter supports some extra query operations along with [regular ones](querying.md).
+
+### $like
+
+Find all records where the value matches the given string pattern. The following query retrieves all users with names ending with "lice".
+
+```js
+query: {
+  name: {
+    $like: '%lice'
+  }
+}
+```
