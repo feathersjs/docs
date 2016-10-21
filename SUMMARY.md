@@ -45,7 +45,7 @@
   * [Usage](hooks/usage.md)
   * [Examples](hooks/examples.md)
   * [Built-in hooks](hooks/bundled.md)
-  * [Common hooks](hooks/common_hooks.md)
+  * [Common hooks](hooks/common.md)
 * [Client Use](clients/readme.md)
   * [Feathers Client](clients/feathers.md)
       * [REST](clients/rest.md)
