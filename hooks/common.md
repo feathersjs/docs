@@ -2,6 +2,7 @@
 
 When it makes sense to do so, some plug-ins include their own hooks. The following plug-ins come bundled with useful hooks:
 
+
 - `feathers-hooks` (see note below)
 - [`feathers-mongoose`](../databases/mongoose.md)
 - [`feathers-authentication`](../authorization/bundled-hooks.md)
