@@ -4,7 +4,7 @@
 
 Here is what it does:
 
-- Given a root and configuration path load a `default.json` in that path
+- Given a `NODE_CONFIG_DIR` environment variable it will load a `default.json` in that path, the default here is `./config`.
 - When the `NODE_ENV` is not `development`, also try to load `<NODE_ENV>.json` in that path and merge both configurations (with `<NODE_ENV>.json` taking precedence)
 - Go through each configuration value and sets it on the application (via `app.set(name, value)`).
   - If the value is a valid environment variable (e.v. `NODE_ENV`), use its value instead
@@ -75,7 +75,14 @@ node app
 // -> path/to/templates
 ```
 
-Or with a different environment and variables:
+Or via custom environment variables by setting them in `config/custom-environment-variables.json`:
+
+```js
+{
+  "port": "PORT",
+  "mongodb": "MONGOHQ_URL"
+}
+```
 
 ```
 PORT=8080 MONGOHQ_URL=mongodb://localhost:27017/production NODE_ENV=production node app
@@ -85,3 +92,5 @@ PORT=8080 MONGOHQ_URL=mongodb://localhost:27017/production NODE_ENV=production n
 // -> mongodb://localhost:27017/production
 // -> path/to/templates
 ```
+
+You can also override these variables with arguments. Read more about how with [node-config](https://github.com/lorenwest/node-config)
