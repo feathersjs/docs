@@ -74,7 +74,7 @@ The usage of the latest database adapters has been unified to support a common w
 
 ## Feathers client
 
-[Feathers client](https://github.com/feathersjs/feathers-client) is now universal! Meaning it can be used in in the browser, NodeJS, and in React Native. However, it can still be used almost the same way but it is now a module that consolidates all the individual [client side modules of Feathers 2](../clients/feathers.md).
+[Feathers client](https://github.com/feathersjs/feathers-client) is now universal! Meaning it can be used in the browser, NodeJS, and in React Native. However, it can still be used almost the same way but it is now a module that consolidates all the individual [client side modules of Feathers 2](../clients/feathers.md).
 
 The main API difference is that [REST clients](../clients/rest.md) changed from an initialization like:
 
