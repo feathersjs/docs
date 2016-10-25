@@ -28,6 +28,8 @@ app.use('/messages', service({ Model: Message }));
 
 > __Important:__ To avoid odd error handling behaviour, always set `mongoose.Promise = global.Promise`. If not available already, Feathers comes with a polyfill for native Promises.
 
+> You can get aceess to Mongoose model via `this.Model` inside any hook and use it as usual.
+
 See the [Mongoose Guide](http://mongoosejs.com/docs/guide.html) for more information on defining your model.
 
 ## Options
