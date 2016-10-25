@@ -2,7 +2,6 @@
 
 When it makes sense to do so, some plug-ins include their own hooks. The following plug-ins come bundled with useful hooks:
 
-
 - `feathers-hooks` (see note below)
 - [`feathers-mongoose`](../databases/mongoose.md)
 - [`feathers-authentication`](../authorization/bundled-hooks.md)
@@ -326,3 +325,321 @@ app.service('stockItems').before({
 #### Options
 
 - `fieldName` [optional. default: `deleted`] - The name of the field holding the deleted flag.
+
+## Utilities
+
+### setSlug
+`setSlug(slug: string, fieldName = 'query.' + slug): HookFunc`
+
+A service may have a slug in its URL, e.g. `storeId` in
+`app.use('/stores/:storeId/candies', new Service());`.
+The service gets slightly different values depending on the transport used by the client.
+
+| transport | `hook.data.storeId` | `hook.params.query` | code run on client |
+| -- | -- | -- | -- |
+| socketio | `undefined` | `{ size: 'large', storeId: '123' }` | `candies.create({ name: 'Gummi', qty: 100 }, { query: { size: 'large', storeId: '123' } })` |
+| rest | `:storeId` | ... same as above | ... same as above |
+| raw HTTP | `123` | `{ size: 'large' }` | `fetch('/stores/123/candies?size=large', ..` |
+
+This hook normalizes the difference between the transports. A hook of
+`all: [ hooks.setSlug('storeId') ]`
+provides a normalized `hook.params.query` of
+`{ size: 'large', storeId: '123' }` for the above cases.
+
+- Used as a `before` hook.
+- Field names support dot notation.
+
+```js
+const hooks = require('feathers-hooks-common');
+
+app.service('stores').before({
+  create: [ hooks.setSlug('storeId') ]
+});
+```
+#### Options
+
+- `slug` [required] - The slug as it appears in the route, e.g. `storeId` for `/stores/:storeId/candies` .
+- `fieldName` [optional. default: `query[slugId]`] - The field to contain the slug value.
+
+### debug
+`debug(label?: string)`
+
+Display current info about the hook to console.
+
+- Used as a `before` or `after` hook.
+
+```javascript
+const hooks = require('feathers-hooks-common');
+
+hooks.debug('step 1')
+// * step 1
+// type: before, method: create
+// data: { name: 'Joe Doe' }
+// query: { sex: 'm' }
+// result: { assigned: true }
+```
+
+#### Options
+
+- `label` [optional] - Label to identify the debug listing.
+
+### Utilities to promisify functions
+
+Wrap functions so they return Promises.
+
+#### fnPromisifyCallback
+`fnPromisifyCallback(callbackFunc: CallbackFunc, paramsCount?: number): PromiseFunc`
+
+Wrap a function calling a callback into one that returns a Promise.
+
+- Promise is rejected if the function throws.
+
+```javascript
+const fnPromisifyCallback = require('feathers-hooks-common/promisify').fnPromisifyCallback;
+
+function tester(data, a, b, cb) {
+  if (data === 3) { throw new Error('error thrown'); }
+  cb(data === 1 ? null : 'bad', data);
+} 
+const wrappedTester = fnPromisifyCallback(tester, 3); // because func call requires 3 params
+
+wrappedTester(1, 2, 3); // tester(1, 2, 3, wrapperCb)
+wrappedTester(1, 2); // tester(1, 2, undefined, wrapperCb)
+wrappedTester(); // tester(undefined, undefined undefined, wrapperCb)
+wrappedTester(1, 2, 3, 4, 5); // tester(1, 2, 3, wrapperCb)
+
+wrappedTester(1, 2, 3).then( ... )
+  .catch(err => { console.log(err instanceof Error ? err.message : err); });
+```
+
+#### Options
+
+- `callbackFunc` [required] - A function which uses a callback as its last param.
+- `paramsCount` [optional. default: count is obtained by parsing func signature] - The number of parameters `callbackFunc` expects. This count does not include the callback param itself.
+
+The wrapped function will always be called with that many params, preventing potential bugs.
+
+The function signature is parsed to obtain the count if the number of params is not provided.
+
+#### Parsing function signatures
+
+Parsing function signatures turns out to be surprisingly difficult. We are using the best signature parser as of Oct 2016. It however has problems with some situations which are unlikely to occur in practice.
+
+These bugs all involve params which have defaults, when their calculation involves parenthesis or commas, e.g.
+
+```javascript
+function abc(a, b = () => {}, c) {}
+function abc(a, b = (x, y) => {}, c) {}
+function abc(a, b = 5 * (1 + 2), c) {}
+const abc = (a, b = 'x,y'.indexOf('y'), c) {};
+```
+
+As an aside, these cases all go away if you transpile your code with Babel.
+
+## Running hooks conditionally
+
+There are times when you may want to run a hook conditionally,
+perhaps depending on the provider, the user authorization,
+if the user created the record, etc.
+
+A custom service may be designed to always be called with the `create` method,
+with a data value specifying the action the service is to perform.
+Certain actions may require authentication or authorization,
+while others do not.
+
+### iff
+`iff(predicateFunc: function, hookFunc: HookFunc): HookFunc`
+
+Run a predicate function,
+which returns either a boolean, or a Promise which evaluates to a boolean.
+Run the hook if the result is truesy.
+
+- Used as a `before` or `after` hook.
+- Predicate may be a sync or async function.
+- Hook to run may be sync or async.
+- `feathers-hooks` catches any errors thrown in the predicate or hook.
+
+```javascript
+const hooks = require('feathers-hooks-common');
+const isNotAdmin = adminRole => hook => hook.params.user.roles.indexOf(adminRole || 'admin') === -1;
+
+app.service('workOrders').after({
+  // async predicate and hook
+  create: hooks.iff(
+    () => new Promise((resolve, reject) => { ... }),
+    hooks.populate('user', { field: 'authorisedByUserId', service: 'users' })
+  )
+});
+
+app.service('workOrders').after({
+  // sync predicate and hook
+  find: [ hooks.iff(isNotAdmin(), hooks.remove('budget')) ]
+});
+```
+
+#### Options
+
+- `predicateFunc` [required] - Function to determine if hookFunc should be run or not. `predicateFunc` is called with the hook as its param. It returns either a boolean or a Promise that evaluates to a boolean.
+- `hookFunc` [required] - A hook function.
+
+### isNot
+`isNot(predicateFunc: function)`
+
+Negate the `predicateFunc`.
+
+- Used with `hooks.iff`.
+- Predicate may be a sync or async function.
+- `feathers-hooks` catches any errors thrown in the predicate.
+
+```javascript
+import hooks, { iff, isNot, isProvider } from 'feathers-hooks-common';
+const isRequestor = () => hook => new Promise(resolve, reject) => ... );
+
+app.service('workOrders').after({
+  iff(isNot(isRequestor()), hooks.remove( ... ))
+});
+```
+
+#### Options
+
+- `predicateFunc` [required] - A function which returns either a boolean or a Promise that resolves to a boolean.
+
+### isProvider
+`isProvider(provider: string, providers?: string[])`
+
+Check which transport called the service method.
+All providers ([REST](../rest/readme.md), [Socket.io](../real-time/socket-io.md) and [Primus](../real-time/primus.md)) set the `params.provider` property which is what `isProvider` checks for.
+
+ - Used as a predicate function with `hooks.iff`.
+ - 
+
+```javascript
+import hooks, { iff, isProvider } from 'feathers-hooks-common';
+
+app.service('users').after({
+  iff(isProvider('external'), hooks.remove( ... ))
+});
+```
+
+#### Options
+
+- `provider` [required] - The transport that you want this hook to run for. Options are:
+  - `server` - Run the hook if the server called the service method.
+  - `external` - Run the hook if any transport other than the server called the service method.
+  - `socketio` - Run the hook if the Socket.IO provider called the service method.
+  - `primus` - If the Primus provider.
+  - `rest` - If the REST provider.
+- `providers` [optional] - Other transports that you want this hook to run for.
+  
+## Utilities for Writing Hooks
+
+These utilities may be useful when you are writing your own hooks.
+You can import them from `feathers-hooks-common/lib/utils`.
+
+### checkContext
+`checkContext(hook: Hook, type: string|null, methods?: string[]|string, label: string): void`
+
+Restrict the hook to a hook type (before, after) and a set of
+hook methods (find, get, create, update, patch, remove).
+
+```javascript
+const checkContext = require('feathers-hooks-common/lib/utils').checkContext;
+
+function myHook(hook) {
+  checkContext(hook, 'before', ['create', 'remove']);
+  ...
+}
+
+app.service('users').after({
+  create: [ myHook ] // throws
+});
+
+// checkContext(hook, 'before', ['update', 'patch'], 'hookName');
+// checkContext(hook, null, ['update', 'patch']);
+// checkContext(hook, 'before', null, 'hookName');
+// checkContext(hook, 'before');
+```
+
+#### Options
+
+- `hook` [required] - The hook provided to the hook function.
+- `type` [optional] - The hook may be run in `before` or `after`. `null` allows the hook to be run in either.
+- `methods` [optional] - The hook may be run for these methods.
+- `label` [optional] - The label to identify the hook in error messages, e.g. its name.
+
+### getItems, replaceItems
+`getItems(hook: Hook): Item[]|Item
+
+`replaceItems(hook: Hook, items: Item[]|Item): void`
+
+`getItems` gets the data items in a hook. The items may be `hook.data`, `hook.result` or `hook.result.data` depending on where the hook is used, the method its used with and if pagination is used. `undefined`, an object or an array of objects may be returned.
+
+`replaceItems` is the companion to `getItems`. It updates the data items in the hook.
+
+- Handles before and after hooks.
+- Handles paginated and non-paginated results from `find`.
+
+```javascript
+import { getItems, replaceItems } from 'feathers-hooks-common/lib/utils';
+
+const insertCode = (code) => (hook) {
+    const items = getItems(hook);
+    !Array.isArray(items) ? items.code = code : (items.forEach(item => { item.code = code; }));
+    replaceItems(hook, items);
+  }
+
+app.service('messages').before = { 
+  create: insertCode('a')
+};
+```
+
+#### Options
+
+- `hook` [required] - The hook provided to the hook function.
+- `items` [required] - The updated item or array of items.
+
+### getByDot, setByDot
+`getByDot(obj: object, path: string): any`
+
+`setByDot(obj: object, path: string, value: any, ifDelete: boolean): void`
+
+`getItems` gets a value from an object using dot notation, e.g. `employee.address.city`. It does not differentiate between non-existent paths and a value of `undefined`.
+
+`setByDot` is the companion to `getByDot`. It sets a value in an object using dot notation.
+
+- Optionally deletes properties in object.
+
+```javascript
+import { getByDot, setByDot } from 'feathers-hooks-common/lib/utils';
+
+const setHomeCity = () => (hook) => {
+  const city = getByDot(hook.data, 'person.address.city');
+  setByDot(hook, 'data.person.home.city', city);
+}
+
+app.service('directories').before = {
+  create: setHomeCity()
+};
+```
+
+#### Options
+
+- `obj` [required] - The object we get data from or set data in.
+- `path` [required] - The path to the data, e.g. `person.address.city`. Array notion is _not_ supported, e.g. `order.lineItems[1].quantity`.
+- `value` [required] - The value to set the data to.
+- `ifDelete` [optional. default: `false`] - Delete the property at the end of the path if `value` is `undefined`. Note that
+new empty inner objects will still be created,
+e.g. `setByDot({}, 'a.b.c', undefined, true)` will result in `{a: b: {} }`.
+
+
+## Things that are deprecated
+
+A few things from `feathers-hooks` have been deprecated and will be removed in a future version of `feathers-hooks-common`.
+
+- The hooks bundled with `feathers-hooks` are deprecated. Use `feathers-hooks-common` instead.
+- Many hooks allowed a predicate function as their last param, e.g. `remove('name', () => true)`. This allowed the hook to be conditionally run. `iff(predicate, hookFunc)` should be used instead.
+- Instead of `restrictToRoles` use the expanded hooks bundled with the next version of `feathers-authentication`.
+- The several validation hooks are deprecated. Use validate instead.
+
+
+
