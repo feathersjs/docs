@@ -384,25 +384,23 @@ hooks.debug('step 1')
 
 - `label` [optional] - Label to identify the debug listing.
 
-### Utilities to promisify functions
+### Utilities to wrap functions
 
-Wrap functions so they return Promises.
-
-#### fnPromisifyCallback
-`fnPromisifyCallback(callbackFunc: CallbackFunc, paramsCount?: number): PromiseFunc`
+#### callbackToPromise
+`callbackToPromise(callbackFunc: CallbackFunc, paramsCount?: number): PromiseFunc`
 
 Wrap a function calling a callback into one that returns a Promise.
 
 - Promise is rejected if the function throws.
 
 ```javascript
-const fnPromisifyCallback = require('feathers-hooks-common/promisify').fnPromisifyCallback;
+const callbackToPromise = require('feathers-hooks-common/promisify').callbackToPromise;
 
 function tester(data, a, b, cb) {
   if (data === 3) { throw new Error('error thrown'); }
   cb(data === 1 ? null : 'bad', data);
 } 
-const wrappedTester = fnPromisifyCallback(tester, 3); // because func call requires 3 params
+const wrappedTester = callbackToPromise(tester, 3); // because func call requires 3 params
 
 wrappedTester(1, 2, 3); // tester(1, 2, 3, wrapperCb)
 wrappedTester(1, 2); // tester(1, 2, undefined, wrapperCb)
@@ -411,6 +409,24 @@ wrappedTester(1, 2, 3, 4, 5); // tester(1, 2, 3, wrapperCb)
 
 wrappedTester(1, 2, 3).then( ... )
   .catch(err => { console.log(err instanceof Error ? err.message : err); });
+```
+
+#### promiseToCallback
+`promiseToCallback(promise: Promise)(callbackFunc: CallbackFunc)`
+
+Wrap a Promise into a function that calls a callback.
+
+- The callback does not run in the Promise's scope. The Promise's `catch` chain is not invoked if the callback throws.
+
+```javascript
+import { promiseToCallback } from 'feathers-hooks-common/promisify'
+
+function (cb) {
+  const promise = new Promise( ...).then( ... ).catch( ... );
+  ...
+  promiseToCallback(promise)(cb);
+  promise.then( ... ); // this is still possible
+}
 ```
 
 #### Options
