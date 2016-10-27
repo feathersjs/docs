@@ -142,17 +142,13 @@ class MyService {
 app.use('/my-service', new MyService());
 ```
 
-All of the database adapters are simply wrapper functions that accept a configuration and return an object or class that implements the `service interface`.  Here's a simplified example of what a database adapter looks like.  The callbacks are optional, so they've been removed.  Also, it's using a fake `awesomeDb` package with fake methods for demonstration purposes. Keep in mind that services don't have to use databases.  You could easily replace the database in the following example with a package that uses some API, like pulling in GitHub stars or stock ticker data.
+All of the database adapters are simply wrapper functions that accept a configuration and return an object or class that implements the `service interface`.  The next two snippets show a simplified example of what it would look like to create and use a database adapter.  It's using a fake `awesomeDb` package with fake methods for demonstration purposes.
 
 ```js
-// Bring in the db package.
-const awesomeDb = require('some-awesome-db-package-from-node');
-const awesomeDbConnection = awesomeDb({
-  url: 'https://my-awesome-db-host.com/myDbName'
-});
+/* awesome-db-adapter.js */
 
 // Create an adapter based on the service interface
-const awesomeDatabaseAdapter = function (options) {
+const awesomeDbAdapter = function (options) {
 
   // Model represents the connection to the datasource.
   const Model = options.model;
@@ -172,11 +168,27 @@ const awesomeDatabaseAdapter = function (options) {
   }
 }
 
+module.exports = awesomeDbAdapter;
+```
+
+Now here's how it would be used:
+```js
+// Bring in the packages for the db and the adapter we just created.
+const awesomeDb = require('some-awesome-db-package-from-node');
+const awesomeDbAdapter = require('./awesome-db-adapter');
+
+// Initialize the db.
+const awesomeDbConnection = awesomeDb({
+  url: 'https://my-awesome-db-host.com/myDbName'
+});
+
 // Pass some options into the adapter.  Use the adapter in an API endpoint.
 app.use('/my-service', awesomeDatabaseAdapter({
   Model: awesomeDbConnection.useThisTableName('awesome-stuff')
 });
 ```
+
+Since using callbacks is optional, in the above example they've been removed.  Keep in mind that services don't have to use databases.  You could easily replace the database in the example with a package that uses some API, like pulling in GitHub stars or stock ticker data.
 
 > **ProTip:** Methods are optional, and if a method is not implemented Feathers will automatically emit a `NotImplemented` error.
 
