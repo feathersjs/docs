@@ -142,7 +142,7 @@ class MyService {
 app.use('/my-service', new MyService());
 ```
 
-All of the database adapters are simply wrapper functions that accept a configuration and return an object or class that implements the above `service interface`.  The next two snippets show a simplified example of what it would look like to create and use a database adapter.
+All of the database adapters are simply wrapper functions.  They accept a configuration object and return an implementation of the above `service interface`.  The next two snippets show a simplified example of what it would look like to create and use a database adapter.
 
 ```js
 /* awesome-db-adapter.js */
