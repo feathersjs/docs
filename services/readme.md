@@ -142,6 +142,39 @@ class MyService {
 app.use('/my-service', new MyService());
 ```
 
+All of the database adapters are simply wrapper functions that accept a configuration and return an object or class that implements the `service interface`.  Here's a simplified example of what a database adapter looks like.  The callbacks are optional, so they've been removed.  Also, it's using a fake `awesomeDb` package with fake methods for demonstration purposes.
+
+```js
+// Bring in the db package.
+const awesomeDb = require('some-awesome-db-package-from-node');
+const awesomeDbConnection = awesomeDb({
+  url: 'https://my-awesome-db-host.com/myDbName'
+});
+
+// Create an adapter based on the service interface
+const awesomeDatabaseAdapter = function (options) {
+  // Model represents the connection to the datasource.
+  const Model = options.model;
+  return {
+    find(params) {
+      // Do something with the Model, return a promise.
+      return Model.findAll();
+    },
+    get(id, params) {},
+    create(data, params) {},
+    update(id, data, params) {},
+    patch(id, data, params) {},
+    remove(id, params) {},
+    setup(app, path) {}
+  }
+}
+
+// Pass some options into the adapter.  Use the adapter in an API endpoint.
+app.use('/my-service', awesomeDatabaseAdapter({
+  Model: awesomeDbConnection.useThisTableName('awesome-stuff')
+});
+```
+
 > **ProTip:** Methods are optional, and if a method is not implemented Feathers will automatically emit a `NotImplemented` error.
 
 Service methods should return a [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) and have the following parameters:
