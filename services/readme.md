@@ -142,7 +142,7 @@ class MyService {
 app.use('/my-service', new MyService());
 ```
 
-All of the database adapters are simply wrapper functions that accept a configuration and return an object or class that implements the `service interface`.  Here's a simplified example of what a database adapter looks like.  The callbacks are optional, so they've been removed.  Also, it's using a fake `awesomeDb` package with fake methods for demonstration purposes.
+All of the database adapters are simply wrapper functions that accept a configuration and return an object or class that implements the `service interface`.  Here's a simplified example of what a database adapter looks like.  The callbacks are optional, so they've been removed.  Also, it's using a fake `awesomeDb` package with fake methods for demonstration purposes. Keep in mind that services don't have to use databases.  You could easily replace the database in the following example with a package that uses some API, like pulling in GitHub stars or stock ticker data.
 
 ```js
 // Bring in the db package.
@@ -153,8 +153,11 @@ const awesomeDbConnection = awesomeDb({
 
 // Create an adapter based on the service interface
 const awesomeDatabaseAdapter = function (options) {
+
   // Model represents the connection to the datasource.
   const Model = options.model;
+  
+  // Return an object that implements the service interface.
   return {
     find(params) {
       // Do something with the Model, return a promise.
