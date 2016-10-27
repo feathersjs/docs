@@ -142,7 +142,7 @@ class MyService {
 app.use('/my-service', new MyService());
 ```
 
-All of the database adapters are simply wrapper functions that accept a configuration and return an object or class that implements the `service interface`.  The next two snippets show a simplified example of what it would look like to create and use a database adapter.  It's using a fake `awesomeDb` package with fake methods for demonstration purposes.
+All of the database adapters are simply wrapper functions that accept a configuration and return an object or class that implements the `service interface`.  The next two snippets show a simplified example of what it would look like to create and use a database adapter.
 
 ```js
 /* awesome-db-adapter.js */
@@ -171,7 +171,8 @@ const awesomeDbAdapter = function (options) {
 module.exports = awesomeDbAdapter;
 ```
 
-Now here's how it would be used:
+Now here's how it would be used.  Remember, it's using a fake `awesomeDb` package with fake methods for demonstration purposes.
+
 ```js
 // Bring in the packages for the db and the adapter we just created.
 const awesomeDb = require('some-awesome-db-package-from-node');
