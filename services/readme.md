@@ -108,7 +108,7 @@ messages.get(1).then(message => console.log(message.text));
 
 ## Service methods
 
-Below is a description of the complete interface for a Feathers service:
+Below is a complete example of the Feathers `service interface`.
 
 ```js
 const myService = {
@@ -142,7 +142,7 @@ class MyService {
 app.use('/my-service', new MyService());
 ```
 
-All of the database adapters are simply wrapper functions that accept a configuration and return an object or class that implements the `service interface`.  The next two snippets show a simplified example of what it would look like to create and use a database adapter.
+All of the database adapters are simply wrapper functions that accept a configuration and return an object or class that implements the above `service interface`.  The next two snippets show a simplified example of what it would look like to create and use a database adapter.
 
 ```js
 /* awesome-db-adapter.js */
@@ -184,7 +184,7 @@ const awesomeDbConnection = awesomeDb({
 });
 
 // Pass some options into the adapter.  Use the adapter in an API endpoint.
-app.use('/my-service', awesomeDatabaseAdapter({
+app.use('/my-service', awesomeDbAdapter({
   Model: awesomeDbConnection.useThisTableName('awesome-stuff')
 });
 ```
