@@ -101,6 +101,7 @@ const app = feathers()
 // Connect to the db, create and register a Feathers service.
 app.use('/messages', service({
   Model,
+  lean: true, // set to false if you want Mongoose documents returned
   paginate: {
     default: 2,
     max: 4
