@@ -215,7 +215,9 @@ These methods basically reflect a [CRUD](https://en.wikipedia.org/wiki/Create,_r
 
 ## The `setup` method
 
-`setup(app, path)` is a special method that initializes the service, passing an instance of the Feathers application and the path it has been registered on. It is called automatically by Feathers when a service is registered.
+`setup(app, path)` is a special method that initializes the service, passing an instance of the Feathers application and the path it has been registered on. 
+
+For services registered before `app.listen` is invoked, the `setup` function of each registered service is called upon invoking `app.listen`.  For services registered after `app.listen` is invoked, `setup` is called automatically by Feathers when a service is registered.
 
 `setup` is a great place to initialize your service with any special configuration or if connecting services that are very tightly coupled (see below), as opposed to using [hooks](../hooks/readme.md).
 
