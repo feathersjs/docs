@@ -148,3 +148,25 @@ If you still need something from the request object (for example, the requesting
 ## How do I mount sub apps?
 
 It's pretty much exactly the same as Express. There is an example of how to do this in our [Examples repository](https://github.com/feathersjs/feathers-demos/tree/master/examples/app-structure).
+
+## How do I do some processing after sending the response to the user?
+
+The hooks workflow allows you to handle these situations quite gracefully.  It depends on the promise that you return in your hook.  Here's an example of a hook that sends an email, but doesn't wait for a success message.
+
+```js
+function (hook) {
+  
+  // Send an email by calling to the email service.
+  hook.app.service('emails').create({
+    to: 'user@email.com',
+    body: 'You are so great!'
+  });
+  
+  // Send a message to some logging service.
+  hook.app.service('logging').create(hook.data);
+  
+  // Return a resolved promise to immediately move to the next hook
+  // and not wait for the two previous promises to resolve.
+  return Promise.resolve(hook);
+}
+```
