@@ -1,6 +1,6 @@
 # Built-in hooks
 
-> **ProTip:** The built-in hooks are being deprecated in favor of [Common Hooks](./common_hooks.md). Please start using Common Hooks.
+> **ProTip:** The built-in hooks are being deprecated in favor of [Common Hooks](./common.md). Please start using Common Hooks.
 
 When it makes sense to do so, some plug-ins include their own hooks. The following plug-ins come bundled with useful hooks:
 
