@@ -13,6 +13,8 @@ Feathers-hooks in Feathers 3.0 will become part of core and you will have to imp
 
 dr;tl Start using feathers-hooks-common now.
 
+> **ProTip** Database adapters that use an ORM like `feathers-sequelize` and `feathers-mongoose` return ORM instances instead of plain objects.  You may need to convert them to plain objects for some hooks to work properly.  Check the documentation for your database adapter to see how to get plain objects.
+
 # feathers-hooks-common
 
 Useful hooks for use with Feathersjs services.
