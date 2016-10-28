@@ -10,7 +10,7 @@ When it makes sense to do so, some plug-ins include their own hooks. The followi
 
 There are a few hooks included in the `feathers-hooks` module that are available on the hooks module.
 
-> **ProTip** Database adapters that use an ORM like `feathers-sequelize` and `feathers-mongoose` return ORM instances instead of plain objects.  Check the documentation for your database adapter to see how to get plain objects.
+> **ProTip** Database adapters that use an ORM like `feathers-sequelize` and `feathers-mongoose` return ORM instances instead of plain objects.  You may need to convert them to plain objects for some hooks to work properly.  Check the documentation for your database adapter to see how to get plain objects.
 
 ## populate
 
