@@ -5,7 +5,6 @@ When it makes sense to do so, some plug-ins include their own hooks. The followi
 
 - `feathers-hooks` (see note below)
 - [`feathers-mongoose`](../databases/mongoose.md)
-- [`feathers-authentication`](../authorization/bundled-hooks.md)
 
 The next version of feathers-hooks (1.6.0) will export feathers-hooks-common instead of the previous bundled hooks. This will provide backward compatibility.
 
@@ -21,7 +20,6 @@ Useful hooks for use with Feathersjs services.
 
 * [Data Items](#data-items)
 * [Query Params](#query-params)
-* [Authorization](#authorization)
 * [Database](#database)
 * [Utilities](#utilities)
 * [Running hooks conditionally](#running-hooks-conditionally)
@@ -263,43 +261,6 @@ app.service('users').before({
 #### Options
 
 - `fieldNames` [optional] - The fields that you want to retain from the query object. All other fields will be discarded.
-
-
-## Authorization
-
-Most hooks dealing with authentication and authorization come bundled with `feathers-authentication`.
-
-### disable
-`disable(provider?: string, ...providers: string[]): HookFunc`
-
-Disables access to a service method completely or for specific providers. All providers ([REST](../rest/readme.md), [Socket.io](../real-time/socket-io.md) and [Primus](../real-time/primus.md)) set the `params.provider` property which is what `disable` checks for.
-
-- Used as a `before` hook.
-- Disable service completely, for all external providers, or for certain providers.
-
-```js
-const hooks = require('feathers-hooks-common');
-
-app.service('users').before({
-  // Users can not be created by external access
-  create: hooks.disable('external'),
-  // A user can not be deleted through these two web socket providers
-  remove: hooks.disable('socketio', 'primus'),
-  // Disable calling `update` completely (e.g. to only support `patch`)
-  update: hooks.disable(),
-});
-```
-
-> **ProTip:** Service methods that are not implemented do not need to be disabled.
-
-#### Options
-
-- `provider` [optional. default: _disables everything] - The transport that you want to disable this service method for. Options are:
-  - `socketio` - will disable the method for the Socket.IO provider
-  - `primus` - will disable the method for the Primus provider
-  - `rest` - will disable the method for the REST provider
-  - `external` - will disable access from all providers making a service method only usable internally.
-- `providers` [optional] - Other transports you want to disable.
 
 ## Database
 
