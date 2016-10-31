@@ -12,7 +12,7 @@ Using hooks allows you to easily decouple the actual service logic from things l
 
 That way you can swap databases or ORMs with minimal application code changes. You can also share validations for multiple databases in the same app, across multiple apps, and with your client. If hooks weren't completely independent of the service this would be extremely difficult to accomplish.
 
-If you would like to learn more about the design patterns behind hooks read up on [API service composition with hooks](https://medium.com/all-about-feathersjs/api-service-composition-with-hooks-47af13aa6c01). In this chapter we will look at the [usage of hooks](usage.md), some [examples](examples.md) and the [built-in hooks](bundled.md).
+If you would like to learn more about the design patterns behind hooks read up on [API service composition with hooks](https://medium.com/all-about-feathersjs/api-service-composition-with-hooks-47af13aa6c01). In this chapter we will look at the [usage of hooks](usage.md) and some [commonly used hooks](common.md).
 
 ## Getting Started
 
@@ -42,10 +42,18 @@ app.use('/users', service());
 // Get our initialized service so that we can bind hooks
 const userService = app.service('/users');
 
+const myHook = options => { // always wrap in a function so you can pass options and for consistency.
+  return hook => {
+    console.log('My custom hook ran');
+    return Promise.resolve(hook); // A good convention is to always return a promise.
+  };
+};
+
 // Set up our before hook
 userService.before({
-  find(hook) {
-    console.log('My custom hook ran');
-  }
+  all: [] // run hooks for all service methods
+  find: [myHook()] // run hook on before a find. You can chain multiple hooks.
 });
 ```
+
+To learn more about the different ways you can register hooks view the [Usage section](usage.md).
