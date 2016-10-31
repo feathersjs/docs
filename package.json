@@ -1,0 +1,38 @@
+{
+  "name": "feathers-docs",
+  "description": "Feathers documentation",
+  "version": "1.0.0",
+  "private": true,
+  "homepage": "https://github.com/feathersjs/feathers-docs",
+  "main": "",
+  "keywords": [
+    "feathers",
+    "feathers-docs"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/feathersjs/feathers-docs.git"
+  },
+  "author": {
+    "name": "Feathers contributors",
+    "email": "hello@feathersjs.com",
+    "url": "https://feathersjs.com"
+  },
+  "contributors": [],
+  "bugs": {
+    "url": "https://github.com/feathersjs/feathers-docs/issues"
+  },
+  "engines": {
+    "node": ">= 0.12.0"
+  },
+  "scripts": {
+    "publish": "git push origin && git push origin --tags",
+    "release:patch": "npm version patch && npm run publish",
+    "release:minor": "npm version minor && npm run publish",
+    "release:major": "npm version major && npm run publish"
+  },
+  "directories": {},
+  "dependencies": {},
+  "devDependencies": {}
+}
