@@ -7,22 +7,36 @@ When it makes sense to do so, some plug-ins include their own hooks. We have als
 <!-- - [`feathers-permissions`](../authentication/readme.md) -->
 
 > **ProTip:** Some of the common hooks used to belong to `feathers-hooks`. As of v1.6.0, `feathers-hooks` exports `feathers-hooks-common` instead of the previous bundled hooks. This will provide backward compatibility.
-> `feathers-hooks` will become part of core in Feathers 3.0 and you will have to import `feathers-hooks-common` separately. **Start using feathers-hooks-common now.**
+> `feathers-hooks` will become part of core in Feathers 3.0 and you will have to import `feathers-hooks-common` separately. So **Start using feathers-hooks-common now!**
+
+<!-- -->
 
 > **ProTip** Database adapters that use an ORM like `feathers-sequelize` and `feathers-mongoose` return ORM instances instead of plain objects.  You may need to convert them to plain objects for some hooks to work properly.  Check the documentation for your database adapter to see how to get plain objects.
+> 
 
 The following hooks all reside in the `feathers-hooks-common` module.
 
-* [Data Items](#data-items)
+* [Deprecations](#deprecations)
+* [Altering Data](#altering-data)
 * [Query Params](#query-params)
 * [Database](#database)
 * [Validation](#validation)
 * [Utilities](#utilities)
 * [Running hooks conditionally](#running-hooks-conditionally)
 * [Utilities for Writing Hooks](#utilities-for-writing-hooks)
-* [Things that are deprecated](#things-that-are-deprecated)
 
-## Data items
+## Deprecations
+
+A few things from `feathers-hooks` have been deprecated and will be removed in a future version of `feathers-hooks-common`.
+
+- The hooks bundled with `feathers-hooks` are deprecated. Use `feathers-hooks-common` instead.
+- Many hooks allowed a predicate function as their last param, e.g. `remove('name', () => true)`. This allowed the hook to be conditionally run. `iff(predicate, hookFunc)` should be used instead.
+- Instead of `restrictToRoles` use the expanded hooks bundled with the next version of `feathers-authentication`.
+- The several validation hooks are deprecated. Use validate instead.
+
+## Altering Data
+
+These hooks are used to manipulate your data before it is sent to the database or after it retrieved.
 
 ### populate
 `populate(fieldName: string, { service: ServiceName, field = fieldName }): HookFunc`
@@ -845,16 +859,6 @@ app.service('directories').before = {
 - `ifDelete` [optional. default: `false`] - Delete the property at the end of the path if `value` is `undefined`. Note that
 new empty inner objects will still be created,
 e.g. `setByDot({}, 'a.b.c', undefined, true)` will result in `{a: b: {} }`.
-
-
-## Things that are deprecated
-
-A few things from `feathers-hooks` have been deprecated and will be removed in a future version of `feathers-hooks-common`.
-
-- The hooks bundled with `feathers-hooks` are deprecated. Use `feathers-hooks-common` instead.
-- Many hooks allowed a predicate function as their last param, e.g. `remove('name', () => true)`. This allowed the hook to be conditionally run. `iff(predicate, hookFunc)` should be used instead.
-- Instead of `restrictToRoles` use the expanded hooks bundled with the next version of `feathers-authentication`.
-- The several validation hooks are deprecated. Use validate instead.
 
 
 
