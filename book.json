@@ -18,10 +18,29 @@
       "label": "Edit This Page"
     },
     "ga": {
-     "token": "UA-64904930-1"   
+      "token": "UA-64904930-1"
     },
     "versions": {
-     "type": "tags"
+      "gitbookConfigURL": "https://raw.githubusercontent.com/feathersjs/feathers-docs/master/book.json",
+      "options": [
+        {
+          "value": "https://docs.feathersjs.com/v/master",
+          "text": "latest"
+        },
+        {
+          "value": "https://docs.feathersjs.com/v/auk/",
+          "text": "Auk"
+        },
+        {
+          "value": "https://docs.feathersjs.com/v/pre-auk/",
+          "text": "Pre-Auk",
+          "selected": true
+        },
+        {
+          "value": "https://docs.feathersjs.com/v/buzzard/",
+          "text": "Buzzard"
+        }
+      ]
     }
   }
 }
