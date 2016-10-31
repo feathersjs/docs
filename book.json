@@ -25,15 +25,11 @@
       "options": [
         {
           "value": "https://docs.feathersjs.com/v/master",
-          "text": "latest"
+          "text": "Latest Stable"
         },
         {
           "value": "https://docs.feathersjs.com/v/auk/",
           "text": "Auk"
-        },
-        {
-          "value": "https://docs.feathersjs.com/v/pre-auk/",
-          "text": "Pre-Auk"
         },
         {
           "value": "https://docs.feathersjs.com/v/buzzard/",
