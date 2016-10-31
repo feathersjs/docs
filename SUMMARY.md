@@ -43,8 +43,6 @@
    * [RethinkDB](databases/rethinkdb.md)
 * [Hooks](hooks/readme.md)
    * [Usage](hooks/usage.md)
-   * [Examples](hooks/examples.md)
-   * [Built-in hooks](hooks/bundled.md)
    * [Common hooks](hooks/common.md)
 * [Client Use](clients/readme.md)
    * [Feathers Client](clients/feathers.md)
