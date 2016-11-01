@@ -44,6 +44,7 @@
 * [Hooks](hooks/readme.md)
    * [Usage](hooks/usage.md)
    * [Common hooks](hooks/common.md)
+   * [Deprecated Bundled hooks](hooks/bundled-deprecated.md)
 * [Client Use](clients/readme.md)
    * [Feathers Client](clients/feathers.md)
        * [REST](clients/rest.md)
