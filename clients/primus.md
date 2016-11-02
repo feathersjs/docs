@@ -74,7 +74,7 @@ messageService.on('created', message => console.log('Someone created a message',
 
 ## React Native Usage
 
-TODO (EK): Add some of the specific React Native things we needed to change to properly support websockets. I'm pretty sure this doesn't completely work so it's still a WIP. PR's welcome!
+TODO (EK): Add some of the specific React Native things we needed to change to properly support websockets. I'm pretty sure this doesn't completely work so it's still a WIP. PR's welcome if you want to try primus out on React Native!
 
 ```bash
 $ npm install feathers feathers-primus feathers-hooks primus
@@ -87,11 +87,6 @@ import {client as feathers} from 'feathers';
 import {client as primus} from 'feathers-primus';
 
 let Socket = primus.socket;
-
-// A hack so that you can still debug. Required because react native debugger runs in a web worker, which doesn't have a window.navigator attribute.
-if (window.navigator && Object.keys(window.navigator).length === 0) {
-  window.navigator.userAgent = 'ReactNative';
-}
 
 const socket = new Socket('http://api.feathersjs.com');
 const app = feathers()

@@ -81,14 +81,10 @@ import React from 'react-native';
 import hooks from 'feathers-hooks';
 import feathers from 'feathers/client';
 import socketio from 'feathers-socketio/client';
+import io from 'socket.io-client/socket.io';
 
 if(!global._babelPolyfill) { require('babel-polyfill'); }
 
-// A hack so that you can still debug. Required because react native debugger runs in a web worker, which doesn't have a window.navigator attribute.
-window.navigator.userAgent = 'ReactNative';
-
-// Need to require instead of import so we can set the user agent first
-const io = require('socket.io-client/socket.io');
 const socket = io('http://api.feathersjs.com', { transports: ['websocket'] });
 const app = feathers()
   .configure(feathers.hooks())
