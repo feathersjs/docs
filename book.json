@@ -1,21 +1,5 @@
 {
   "styles": {
     "website": "styles/website.css"
-  },
-  "plugins": [
-    "collapsible-menu",
-    "heading-anchors",
-    "edit-link",
-    "ga"
-  ],
-  "pluginsConfig": {
-    "edit-link": {
-      "placement": "left",
-      "base": "https://github.com/feathersjs/feathers-docs/edit/master",
-      "label": "Edit This Page"
-    },
-    "ga": {
-      "token": "UA-64904930-1"
-    }
   }
 }
