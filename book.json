@@ -10,7 +10,7 @@
   ],
   "pluginsConfig": {
     "edit-link": {
-      "placement": "left"
+      "placement": "left",
       "base": "https://github.com/feathersjs/feathers-docs/edit/master",
       "label": "Edit This Page"
     },
