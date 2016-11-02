@@ -1,40 +1,42 @@
 # Common hooks
 
-When it makes sense to do so, some plug-ins include their own hooks. We have also abstracted commonly used hooks into the [`feathers-common-hooks`]() module. The following plug-ins come bundled with useful hooks:
+Some plug-ins include their own hooks when it makes sense to do so.
+[`feathers-common-hooks`]() contains other useful hooks.
+
+The following plug-ins come bundled with their own hooks:
 
 - [`feathers-mongoose`](../databases/mongoose.md)
 - [`feathers-authentication`](../authentication/readme.md)
 <!-- - [`feathers-permissions`](../authentication/readme.md) -->
 
-> **ProTip:** Some of the common hooks used to belong to `feathers-hooks`. As of v1.6.0, `feathers-hooks` exports `feathers-hooks-common` instead of the previous bundled hooks. This will provide backward compatibility.
-> `feathers-hooks` will become part of core in Feathers 3.0 and you will have to import `feathers-hooks-common` separately. So **Start using feathers-hooks-common now!**
+> **ProTip:** Hooks previously in `feathers-hooks` are included with the common hooks.
+> As of v1.6.0, `feathers-hooks` instead exports `feathers-hooks-common` to provide backward compatibility.
+> `feathers-hooks` will become part of core in Feathers 3.0 and you will have to import `feathers-hooks-common` separately.
 
 <!-- -->
 
 > **ProTip** Database adapters that use an ORM like `feathers-sequelize` and `feathers-mongoose` return ORM instances instead of plain objects.  You may need to convert them to plain objects for some hooks to work properly.  Check the documentation for your database adapter to see how to get plain objects.
 > 
 
-The following hooks all reside in the `feathers-hooks-common` module.
+Categories of hooks in `feathers-hooks-common`:
 
 * [Deprecations](#deprecations)
-* [Altering Data](#altering-data)
-* [Query Params](#query-params)
+* [Altering Data](#alteringData)
+* [Query Params](#queryParams)
 * [Database](#database)
 * [Validation](#validation)
 * [Utilities](#utilities)
-* [Running hooks conditionally](#running-hooks-conditionally)
-* [Utilities for Writing Hooks](#utilities-for-writing-hooks)
+* [Running hooks conditionally](#runningHooksConditionally)
+* [Utilities for Writing Hooks](#utilitiesForWritingHooks)
 
-## Deprecations
+## <a name="deprecations"></a> Deprecations
 
 A few things from `feathers-hooks` have been deprecated and will be removed in a future version of `feathers-hooks-common`.
 
-- The hooks bundled with `feathers-hooks` are deprecated. Use `feathers-hooks-common` instead.
-- Many hooks allowed a predicate function as their last param, e.g. `remove('name', () => true)`. This allowed the hook to be conditionally run. `iff(predicate, hookFunc)` should be used instead.
+- Some hooks allowed a predicate function as their last param, e.g. `remove('name', () => true)`. This allowed the hook to be conditionally run. Use `iff(predicate, hookFunc)` instead.
 - Instead of `restrictToRoles` use the expanded hooks bundled with the next version of `feathers-authentication`.
-- The several validation hooks are deprecated. Use validate instead.
 
-## Altering Data
+## <a name="alteringData"></a> Altering Data
 
 These hooks are used to manipulate your data before it is sent to the database or after it retrieved.
 
@@ -111,7 +113,7 @@ app.service('users').before({
 
 > **ProTip:** This hook will only fire when `params.provider` has a value, i.e. when it is an external request over REST or Sockets.
 
-#### Options
+Options
 
 - `fieldName` [required] - The first field that you want to remove from the object(s).
 - `fieldNames` [optional] - Other fields that you want to remove.
@@ -142,7 +144,7 @@ app.service('users').before({
 
 > **ProTip:** This hook will only fire when `params.provider` has a value, i.e. when it is an external request over REST or Sockets.
 
-#### Options
+Options
 
 - `fieldName` [required] - The fields that you want to retain from the object(s).
 - `fieldNames` [optional] - The other fields that you want to retain.
@@ -168,7 +170,7 @@ app.service('users').before({
 });
 ```
 
-#### Options
+Options
 
 - `fieldName` [required] - The fields that you want to lowercase from the retrieved object(s).
 - `fieldNames` [optional] - The other fields that you want to lowercase.
@@ -192,7 +194,7 @@ app.service('users').before({
 };
 ```
 
-#### Options
+Options
 
 - `fieldName` [optional. default: `createdAt`] - The field that you want to add with the current date-time to the retrieved object(s).
 - `fieldNames` [optional] - Other fields to add with the current date-time.
@@ -216,12 +218,12 @@ app.service('users').before({
 };
 ```
 
-#### Options
+Options
 
 - `fieldName` [optional. default: `updatedAt`] - The fields that you want to add or update in the retrieved object(s).
 - `fieldNames` [optional] - Other fields to add or update with the current date-time.
 
-## Query Params
+## <a name="QueryParams"></a> Query Params
 
 ### removeQuery
 `removeQuery(...fieldNames?: string[]): HookFunc`
@@ -243,7 +245,7 @@ app.service('users').before({
 
 > **ProTip:** This hook will only fire when `params.provider` has a value, i.e. when it is an external request over REST or Sockets.
 
-#### Options
+Options
 
 - `fieldNames` [optional] - The fields that you want to remove from the query object.
 
@@ -268,11 +270,11 @@ app.service('users').before({
 
 > **ProTip:** This hook will only fire when `params.provider` has a value, i.e. when it is an external request over REST or Sockets.
 
-#### Options
+Options
 
 - `fieldNames` [optional] - The fields that you want to retain from the query object. All other fields will be discarded.
 
-## Database
+## <a name="database"></a> Database
 
 ### softDelete
 `softDelete(fieldName = 'deleted'): HookFunc`
@@ -296,11 +298,11 @@ app.service('stockItems').before({
   remove: hooks.softDelete(),
 });
 ```
-#### Options
+Options
 
 - `fieldName` [optional. default: `deleted`] - The name of the field holding the deleted flag.
 
-## Validation
+## <a name="validation"></a> Validation
 
 ### validate
 
@@ -312,15 +314,18 @@ Call a validation function from a `before` hook. The function may be sync or ret
 
 > **ProTip:** If you have a different signature for the validator then pass a wrapper as the validator e.g. `(values) => myValidator(..., values, ...)`.
 
+<!-- -->
+
 > **ProTip:** If your validator uses a callback, wrap your validator in a Promise
 
 ```javascript
-const fnPromisify = require('feathers-hooks-common/lib/promisify').fnPromisifyCallback;
+const callbackToPromise = require('feathers-hooks-common/lib/promisify').callbackToPromise;
 function myCallbackValidator(values, cb) { ... }
-const myValidator = fnPromisifyCallback(myCallbackValidator, 1); // function requires 1 param
+const myValidator = callbackToPromise(myCallbackValidator, 1); // function requires 1 param
 app.service('users').before({ create: validate(myValidator) });
-```     
-#### Options
+```  
+   
+Options
 
 - `validator` [required] - Validation function with signature `function validator(formValues)`.
 
@@ -328,7 +333,7 @@ Sync functions return either an error object or null. Validate will throw on an 
 object with `throw new errors.BadRequest({ errors: errorObject });`.
 
 Promise functions should throw on an error. Their `.then` returns either sanitized values to
-replace hook.data, or null.
+replace `hook.data`, or null.
 
 #### Example
 
@@ -347,90 +352,13 @@ A full featured example of such a process appears below. It validates and saniti
 - The server performs schema validation using `Joi`.
 - The server does further validation and sanitization.
 
-#### Validation without using validate
-
-The `before` hooks module for service `users`. It includes hooks for the above validations. These validations use sync, Promise and callback functions to show how the 3 different types of functions are integrated into hooks. Imported modules are listed at the end of this article.
-
-```javascript
-// file /server/services/users/hooks/index.js
-import errors from 'feathers-errors';
-const auth = require('feathers-authentication').hooks;
-const hooks = require('feathers-hooks-common');
-const hookUtils = require('feathers-hooks-common/lib/utils');
-const validateSchema = require('feathers-hooks-validate-joi');
-
-const clientValidations = require('/common/usersClientValidations');
-const serverValidations = require('/server/validations/usersServerValidations');
-const schemas = require('/server/validations/schemas');
-
-const { checkContext, getItems, replaceItems } = hookUtils;
-
-// hook for validation on form submit - sync
-const validateSignupSubmit = () => (hook) => {
-  checkContext(hook, 'before', ['create', 'update', 'patch'], 'validateSignupSubmit');
-
-  const formErrors = clientValidations.signup(getItems(hook)); // sync function
-
-  if (formErrors && Object.keys(formErrors).length) {
-    throw new errors.BadRequest({ errors: formErrors });
-  }
-
-  return hook;
-};
-
-// hook for form async validation - Promise
-const validateSignupAsync = () => (hook) => {
-  checkContext(hook, 'before', ['create', 'update', 'patch'], 'validateUsingPromise');
-
-  return clientValidations.signupAsync(getItems(hook))
-    .then(convertedValues => {
-      if (convertedValues) { // if values have been sanitized
-        replaceItems(hook, convertedValues);
-      }
-
-      return hook;
-    });
-};
-
-// hook for server async validation - callback
-const validateSignupServer = () => (hook, next) => {
-  checkContext(hook, 'before', ['create', 'update', 'patch'], 'validateSignupServer');
-
-  serverValidations.signup(getItems(hook), cb);
-
-  function cb(formErrors, convertedValues) {
-    if (formErrors) {
-      return next(formErrors instanceof Error ? formErrors :
-        new errors.BadRequest('Invalid data', { errors: formErrors }), hook);
-    }
-
-    if (convertedValues) { // if values have been sanitized
-      replaceItems(hook, convertedValues);
-    }
-
-    return next(null, hook);
-  }
-};
-
-exports.before = {
-  create: [
-    validateSchema.form(schemas.signup, schemas.options), // schema validation
-    validateSignupSubmit(), // re-run form sync validation
-    validateSignupAsync(), // re-run form async validation
-    validateSignupServer(), // run server validation
-    hooks.remove('confirmPassword'),
-    auth.hashPassword()
-  ]
-};
-```
-
 #### Validation using Validate
 
 ```javascript
 // file /server/services/users/hooks/index.js
 const auth = require('feathers-authentication').hooks;
 const hooks = require('feathers-hooks-common');
-const fnPromisifyCallback = require('feathers-hooks-common/lib/promisify').fnPromisifyCallback;
+const callbackToPromise = require('feathers-hooks-common/lib/promisify').callbackToPromise;
 const validateSchema = require('feathers-hooks-validate-joi');
 
 const clientValidations = require('/common/usersClientValidations');
@@ -438,7 +366,7 @@ const serverValidations = require('/server/validations/usersServerValidations');
 const schemas = require('/server/validations/schemas');
 
 const validate = hooks.validate;
-const serverValidationsSignup = fnPromisifyCallback(serverValidations.signup, 1);
+const serverValidationsSignup = callbackToPromise(serverValidations.signup, 1);
 
 exports.before = {
   create: [
@@ -539,7 +467,7 @@ module.exports = {
 };
 ```
 
-## Utilities
+## <a name="utilities"></a> Utilities
 
 ### setSlug
 `setSlug(slug: string, fieldName = 'query.' + slug): HookFunc`
@@ -569,7 +497,7 @@ app.service('stores').before({
   create: [ hooks.setSlug('storeId') ]
 });
 ```
-#### Options
+Options
 
 - `slug` [required] - The slug as it appears in the route, e.g. `storeId` for `/stores/:storeId/candies` .
 - `fieldName` [optional. default: `query[slugId]`] - The field to contain the slug value.
@@ -592,7 +520,7 @@ hooks.debug('step 1')
 // result: { assigned: true }
 ```
 
-#### Options
+Options
 
 - `label` [optional] - Label to identify the debug listing.
 
@@ -641,7 +569,7 @@ function (cb) {
 }
 ```
 
-#### Options
+Options
 
 - `callbackFunc` [required] - A function which uses a callback as its last param.
 - `paramsCount` [optional. default: count is obtained by parsing func signature] - The number of parameters `callbackFunc` expects. This count does not include the callback param itself.
@@ -665,7 +593,7 @@ const abc = (a, b = 'x,y'.indexOf('y'), c) {};
 
 As an aside, these cases all go away if you transpile your code with Babel.
 
-## Running hooks conditionally
+## <a name="runningHooksConditionaly"></a> Running hooks conditionally
 
 There are times when you may want to run a hook conditionally,
 perhaps depending on the provider, the user authorization,
@@ -706,7 +634,7 @@ app.service('workOrders').after({
 });
 ```
 
-#### Options
+Options
 
 - `predicateFunc` [required] - Function to determine if hookFunc should be run or not. `predicateFunc` is called with the hook as its param. It returns either a boolean or a Promise that evaluates to a boolean.
 - `hookFunc` [required] - A hook function.
@@ -729,7 +657,7 @@ app.service('workOrders').after({
 });
 ```
 
-#### Options
+Options
 
 - `predicateFunc` [required] - A function which returns either a boolean or a Promise that resolves to a boolean.
 
@@ -750,7 +678,7 @@ app.service('users').after({
 });
 ```
 
-#### Options
+Options
 
 - `provider` [required] - The transport that you want this hook to run for. Options are:
   - `server` - Run the hook if the server called the service method.
@@ -760,7 +688,7 @@ app.service('users').after({
   - `rest` - If the REST provider.
 - `providers` [optional] - Other transports that you want this hook to run for.
   
-## Utilities for Writing Hooks
+## <a name="utilitiesForWritingHooks"></a> Utilities for Writing Hooks
 
 These utilities may be useful when you are writing your own hooks.
 You can import them from `feathers-hooks-common/lib/utils`.
@@ -789,7 +717,7 @@ app.service('users').after({
 // checkContext(hook, 'before');
 ```
 
-#### Options
+Options
 
 - `hook` [required] - The hook provided to the hook function.
 - `type` [optional] - The hook may be run in `before` or `after`. `null` allows the hook to be run in either.
@@ -822,7 +750,7 @@ app.service('messages').before = {
 };
 ```
 
-#### Options
+Options
 
 - `hook` [required] - The hook provided to the hook function.
 - `items` [required] - The updated item or array of items.
@@ -851,7 +779,7 @@ app.service('directories').before = {
 };
 ```
 
-#### Options
+Options
 
 - `obj` [required] - The object we get data from or set data in.
 - `path` [required] - The path to the data, e.g. `person.address.city`. Array notion is _not_ supported, e.g. `order.lineItems[1].quantity`.
