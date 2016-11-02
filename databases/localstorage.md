@@ -112,14 +112,9 @@ import feathers from 'feathers';
 import hooks from 'feathers-hooks';
 import localstorage from 'feathers-localstorage';
 import {client as socketio} from 'feathers-socketio';
-import {socket.io as io} from 'socket.io-client';
+import io from 'socket.io-client/socket.io';
 
 let { AsyncStorage } = React;
-
-// A hack so that you can still debug. Required because react native debugger runs in a web worker, which doesn't have a window.navigator attribute.
-if (window.navigator && Object.keys(window.navigator).length == 0) {
-  window = Object.assign(window, { navigator: { userAgent: 'ReactNative' }});
-}
 
 const socket = io('http://api.feathersjs.com', { transports: ['websocket'] });
 const app = feathers()

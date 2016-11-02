@@ -55,17 +55,10 @@ messageService.create({
 $ npm install feathers feathers-socketio feathers-hooks socket.io-client babel-polyfill
 ```
 
-Create a `user-agent.js` with the following content:
-
-```js
-window.navigator.userAgent = 'react-native';
-```
-
 Then in the main application file:
 
 ```js
 import 'babel-polyfill';
-import './user-agent';
 import io from 'socket.io-client/socket.io';
 import feathers from 'feathers/client';
 import socketio from 'feathers-socketio/client';
