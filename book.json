@@ -1,5 +1,35 @@
 {
   "styles": {
     "website": "styles/website.css"
+  },
+  "plugins": [
+    "collapsible-menu",
+    "heading-anchors",
+    "edit-link",
+    "ga",
+    "versions"
+  ],
+  "pluginsConfig": {
+    "edit-link": {
+      "placement": "left",
+      "base": "https://github.com/feathersjs/feathers-docs/edit/master",
+      "label": "Edit This Page"
+    },
+    "ga": {
+      "token": "UA-64904930-1"
+    },
+    "versions": {
+      "gitbookConfigURL": "https://raw.githubusercontent.com/feathersjs/feathers-docs/master/book.json",
+      "options": [
+        {
+          "value": "https://docs.feathersjs.com/v/master",
+          "text": "Latest Stable"
+        },
+        {
+          "value": "https://docs.feathersjs.com/v/auk/",
+          "text": "Auk"
+        }
+      ]
+    }
   }
 }
