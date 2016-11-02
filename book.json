@@ -6,8 +6,7 @@
     "collapsible-menu",
     "heading-anchors",
     "edit-link",
-    "ga",
-    "versions"
+    "ga"
   ],
   "pluginsConfig": {
     "edit-link": {
@@ -19,19 +18,6 @@
     },
     "ga": {
       "token": "UA-64904930-1"
-    },
-    "versions": {
-      "gitbookConfigURL": "https://raw.githubusercontent.com/feathersjs/feathers-docs/master/book.json",
-      "options": [
-        {
-          "value": "https://docs.feathersjs.com/v/master",
-          "text": "Latest Stable"
-        },
-        {
-          "value": "https://docs.feathersjs.com/v/auk/",
-          "text": "Auk"
-        }
-      ]
     }
   }
 }
