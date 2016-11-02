@@ -11,8 +11,6 @@
   "pluginsConfig": {
     "edit-link": {
       "placement": "left"
-    },
-    "edit-link": {
       "base": "https://github.com/feathersjs/feathers-docs/edit/master",
       "label": "Edit This Page"
     },
