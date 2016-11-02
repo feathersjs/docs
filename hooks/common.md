@@ -21,22 +21,22 @@ The following plug-ins come bundled with their own hooks:
 Categories of hooks in `feathers-hooks-common`:
 
 * [Deprecations](#deprecations)
-* [Altering Data](#alteringData)
-* [Query Params](#queryParams)
+* [Altering Data](#altering-data)
+* [Query Params](#query-params)
 * [Database](#database)
 * [Validation](#validation)
 * [Utilities](#utilities)
-* [Running hooks conditionally](#runningHooksConditionally)
-* [Utilities for Writing Hooks](#utilitiesForWritingHooks)
+* [Running hooks conditionally](#running-hooks-conditionally)
+* [Utilities for Writing Hooks](#utilities-for-writingH-hooks)
 
-## <a name="deprecations"></a> Deprecations
+## Deprecations
 
 A few things from `feathers-hooks` have been deprecated and will be removed in a future version of `feathers-hooks-common`.
 
 - Some hooks allowed a predicate function as their last param, e.g. `remove('name', () => true)`. This allowed the hook to be conditionally run. Use `iff(predicate, hookFunc)` instead.
 - Instead of `restrictToRoles` use the expanded hooks bundled with the next version of `feathers-authentication`.
 
-## <a name="alteringData"></a> Altering Data
+## Altering Data
 
 These hooks are used to manipulate your data before it is sent to the database or after it retrieved.
 
@@ -223,7 +223,7 @@ Options
 - `fieldName` [optional. default: `updatedAt`] - The fields that you want to add or update in the retrieved object(s).
 - `fieldNames` [optional] - Other fields to add or update with the current date-time.
 
-## <a name="QueryParams"></a> Query Params
+## Query Params
 
 ### removeQuery
 `removeQuery(...fieldNames?: string[]): HookFunc`
@@ -274,7 +274,7 @@ Options
 
 - `fieldNames` [optional] - The fields that you want to retain from the query object. All other fields will be discarded.
 
-## <a name="database"></a> Database
+## Database
 
 ### softDelete
 `softDelete(fieldName = 'deleted'): HookFunc`
@@ -302,7 +302,7 @@ Options
 
 - `fieldName` [optional. default: `deleted`] - The name of the field holding the deleted flag.
 
-## <a name="validation"></a> Validation
+## Validation
 
 ### validate
 
@@ -467,7 +467,7 @@ module.exports = {
 };
 ```
 
-## <a name="utilities"></a> Utilities
+## Utilities
 
 ### setSlug
 `setSlug(slug: string, fieldName = 'query.' + slug): HookFunc`
@@ -593,7 +593,7 @@ const abc = (a, b = 'x,y'.indexOf('y'), c) {};
 
 As an aside, these cases all go away if you transpile your code with Babel.
 
-## <a name="runningHooksConditionaly"></a> Running hooks conditionally
+## Running hooks conditionally
 
 There are times when you may want to run a hook conditionally,
 perhaps depending on the provider, the user authorization,
@@ -688,7 +688,7 @@ Options
   - `rest` - If the REST provider.
 - `providers` [optional] - Other transports that you want this hook to run for.
   
-## <a name="utilitiesForWritingHooks"></a> Utilities for Writing Hooks
+## Utilities for Writing Hooks
 
 These utilities may be useful when you are writing your own hooks.
 You can import them from `feathers-hooks-common/lib/utils`.
