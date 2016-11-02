@@ -120,7 +120,7 @@ export class MessageService {
 
 As you can see, we imported the `feathers.service.ts` code we previously wrote, and set class instance variables to the services we want to interact with. 
 
-> **ProTip:** Remember that funny-looking `@Injectable()` decorator we used earlier? Angular 2 uses it to emit metadata about a service. Without it, we wouldn't be able to inject one service into another, like we just did.
+> **ProTip:** Remember that `@Injectable()` decorator we used earlier? Angular 2 uses it to emit metadata about a service. Without it, we wouldn't be able to inject one service into another, like we just did.
 
 Now let's write methods that will abstractly allow for our components to access our API! 
 
@@ -181,8 +181,7 @@ import { Component } from '@angular/core';
 
 @Component({
     selector: 'my-app',
-    template: '<h1>My First Angular 2 App</h1>',
-    providers: [ MessageService ]
+    template: '<h1>My First Angular 2 App</h1>'
 })
 export class AppComponent { }
 ```
