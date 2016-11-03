@@ -32,7 +32,7 @@
     "release:patch": "npm version patch && npm run publish",
     "release:minor": "npm version minor && npm run publish",
     "release:major": "npm version major && npm run publish",
-    "test": "echo \"Error: no test specified.\""
+    "test": "echo \"Error: no test specified.\"" 
   },
   "directories": {},
   "dependencies": {
