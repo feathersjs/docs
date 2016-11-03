@@ -18,6 +18,9 @@
     "ga": {
       "token": "UA-64904930-1"
     },
+    "lunr": {
+      "maxIndexSize": 1000000000
+    },
     "versions": {
       "gitbookConfigURL": "https://raw.githubusercontent.com/feathersjs/feathers-docs/master/book.json",
       "options": [
