@@ -23,7 +23,7 @@ Generate your app and follow the prompts.
 $ feathers generate
 ```
 
-When presented with the project name just hit enter.
+When presented with the project name just hit enter, or enter a name (no spaces).
 
 Next, enter in a short description of your app.
 
@@ -41,17 +41,23 @@ Your options should all look like this and you should have seen that a whole bun
 
 Next, npm will do it's thing and install all our dependencies. This can take a minute or two based on your Internet connection speed.
 
-Now our app is ready to go but let's add a Message service for our chat app:
+Now our app is ready to go but let's add a Message service for our chat app. Because we're in the feathers-cli scope, we don't need to preceed the command with `feathers` this time:
 
 ```
-$ feathers generate service
+$ generate service
 ```
 
 The name should be `message` and the other options can be accepted with their default value (we will add authorization in the next chapter):
 
 ![Final Service Configuration](./assets/message-service.png)
 
-We can now start our app with:
+Exit the feathers-cli:
+
+```
+$ exit
+```
+
+We can now start our app, with:
 
 ```
 $ npm start
