@@ -52,6 +52,66 @@ module.exports = function() {
 };
 ```
 
+When signing up the user service has to execute the hook to add the gravatar image to the database. Change `src/services/user/hooks/index.js` to include it in the `create` method of the `before` hook:
+
+```js
+'use strict';
+
+const gravatar = require('./gravatar');
+
+const globalHooks = require('../../../hooks');
+const hooks = require('feathers-hooks');
+const auth = require('feathers-authentication').hooks;
+const gravatar = require('./gravatar');
+
+exports.before = {
+  all: [],
+  find: [
+    auth.verifyToken(),
+    auth.populateUser(),
+    auth.restrictToAuthenticated()
+  ],
+  get: [
+    auth.verifyToken(),
+    auth.populateUser(),
+    auth.restrictToAuthenticated(),
+    auth.restrictToOwner({ ownerField: '_id' })
+  ],
+  create: [
+    auth.hashPassword(),
+    gravatar()
+  ],
+  update: [
+    auth.verifyToken(),
+    auth.populateUser(),
+    auth.restrictToAuthenticated(),
+    auth.restrictToOwner({ ownerField: '_id' })
+  ],
+  patch: [
+    auth.verifyToken(),
+    auth.populateUser(),
+    auth.restrictToAuthenticated(),
+    auth.restrictToOwner({ ownerField: '_id' })
+  ],
+  remove: [
+    auth.verifyToken(),
+    auth.populateUser(),
+    auth.restrictToAuthenticated(),
+    auth.restrictToOwner({ ownerField: '_id' })
+  ]
+};
+
+exports.after = {
+  all: [hooks.remove('password')],
+  find: [],
+  get: [],
+  create: [],
+  update: [],
+  patch: [],
+  remove: []
+};
+```
+
 ### Processing messages
 
 The next hook will also be a `before` hook for a `create` method but this time for the `message` service.  We'll do two things:
