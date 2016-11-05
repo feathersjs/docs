@@ -62,7 +62,6 @@ const gravatar = require('./gravatar');
 const globalHooks = require('../../../hooks');
 const hooks = require('feathers-hooks');
 const auth = require('feathers-authentication').hooks;
-const gravatar = require('./gravatar');
 
 exports.before = {
   all: [],
