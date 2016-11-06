@@ -163,7 +163,7 @@ var vm = new Vue({
     }
   },
 
-  created() {
+  created () {
     app.authenticate().then(() => {
       this.user.authenticated = true
     })
@@ -216,7 +216,7 @@ The only method within this component is a `logout` method which will redirect t
 Vue.component('user-list', {
   template: '#user-list-template',
 
-  data() {
+  data () {
     return {
       dummyUser: dummyUser,
       users: []
