@@ -5,7 +5,7 @@ In this guide we will create a plain Vue.js web front-end for the chat API built
 
 If you haven't done so you'll want to go through that tutorial or you can find a [working example here](https://github.com/feathersjs/feathers-chat).
 
-> **Note on the used Version** This Guide is written for Vue 2.0, which was released on Sept. 30th, 2016. If you worked with Vue 1.0.\* previously, we recommend to update to the latest version. You can find the new documentation [here](http://vuejs.org/v2/guide/index.html). Take a look into the  Migration Guide [here](http://vuejs.org/v2/guide/migration.html) to see what has changed and how to migrate
+> **Vue 2.0 vs. 1.0** This Guide, previosly written for Vue 1.0, has been updated for Vue 2.0, which was released on Sept. 30th, 2016. If you worked with Vue 1.0.\* previously, we recommend to update to the latest version. You can find the new documentation [here](http://vuejs.org/v2/guide/index.html). Take a look into the  Migration Guide [here](http://vuejs.org/v2/guide/migration.html) to see what has changed and how to migrate
 
 ## Setting up the HTML page
 
@@ -332,7 +332,7 @@ Vue.component('compose-message', {
 ## Further study
 The Vue documentation is a fantastic source of reference. As your app grows, you may become interested in introducing Vuex, a state management library for Vue that's based heavily on Redux.
 
-Below is an introduction to using Vuex with Vue and Feathers on the backend.
+Below is an introduction to using Vuex with Vue and Feathers on the backend (using Vue 1.0).
 
 [![Realtime Vue.js and Feathers.js Example](http://i.imgur.com/MhYLgxb.png)](https://www.youtube.com/watch?v=zbhYcxr5ldk "Realtime Vue.js and Feathers.js Example ")
 
