@@ -11,7 +11,6 @@
    * [Building a Front-end](getting-started/frontend.md)
 * [Why Feathers](why/readme.md)
    * [Philosophy](why/philosophy.md)
-   * [Built with Feathers](why/showcase.md)
    * [Features](why/features.md)
    * [Feathers vs. X](why/vs/readme.md)
        * [Express + Socket.io](why/vs/express-socketio.md)
