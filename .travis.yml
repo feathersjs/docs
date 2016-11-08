@@ -1,5 +1,8 @@
 language: node_js
 node_js:
   - "6.5"
+branches:
+  only:
+  - master
 after_success:
   - surge --project ./_book --domain feathers-docs.surge.sh
