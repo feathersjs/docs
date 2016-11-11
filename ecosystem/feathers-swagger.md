@@ -1,7 +1,13 @@
 # feathers-swagger
 *description*
 
-badges
+[![Build Status](https://travis-ci.org/feathersjs/feathers-swagger.png?branch=master)](https://travis-ci.org/feathersjs/feathers-swagger)
+[![Code Climate](https://codeclimate.com/github/feathersjs/feathers-swagger/badges/gpa.svg)](https://codeclimate.com/github/feathersjs/feathers-swagger)
+[![Test Coverage](https://codeclimate.com/github/feathersjs/feathers-swagger/badges/coverage.svg)](https://codeclimate.com/github/feathersjs/feathers-swagger/coverage)
+[![Dependency Status](https://img.shields.io/david/feathersjs/feathers-swagger.svg?style=flat-square)](https://david-dm.org/feathersjs/feathers-swagger)
+[![Download Status](https://img.shields.io/npm/dm/feathers-swagger.svg?style=flat-square)](https://www.npmjs.com/package/feathers-swagger)
+[![Slack Status](http://slack.feathersjs.com/badge.svg)](http://slack.feathersjs.com)
+
 
 ## Summary
 

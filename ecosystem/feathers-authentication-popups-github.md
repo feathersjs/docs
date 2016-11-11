@@ -1,7 +1,13 @@
-# feathers-authentication-popups-github
+# feathers-authentication-popups-github-github
 *description*
 
-badges
+[![Build Status](https://travis-ci.org/feathersjs/feathers-authentication-popups-github.png?branch=master)](https://travis-ci.org/feathersjs/feathers-authentication-popups-github)
+[![Code Climate](https://codeclimate.com/github/feathersjs/feathers-authentication-popups-github/badges/gpa.svg)](https://codeclimate.com/github/feathersjs/feathers-authentication-popups-github)
+[![Test Coverage](https://codeclimate.com/github/feathersjs/feathers-authentication-popups-github/badges/coverage.svg)](https://codeclimate.com/github/feathersjs/feathers-authentication-popups-github/coverage)
+[![Dependency Status](https://img.shields.io/david/feathersjs/feathers-authentication-popups-github.svg?style=flat-square)](https://david-dm.org/feathersjs/feathers-authentication-popups-github)
+[![Download Status](https://img.shields.io/npm/dm/feathers-authentication-popups-github.svg?style=flat-square)](https://www.npmjs.com/package/feathers-authentication-popups-github)
+[![Slack Status](http://slack.feathersjs.com/badge.svg)](http://slack.feathersjs.com)
+
 
 ## Summary
 

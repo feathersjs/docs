@@ -1,7 +1,13 @@
 # feathers-stripe
 *description*
 
-badges
+[![Build Status](https://travis-ci.org/feathersjs/feathers-stripe.png?branch=master)](https://travis-ci.org/feathersjs/feathers-stripe)
+[![Code Climate](https://codeclimate.com/github/feathersjs/feathers-stripe/badges/gpa.svg)](https://codeclimate.com/github/feathersjs/feathers-stripe)
+[![Test Coverage](https://codeclimate.com/github/feathersjs/feathers-stripe/badges/coverage.svg)](https://codeclimate.com/github/feathersjs/feathers-stripe/coverage)
+[![Dependency Status](https://img.shields.io/david/feathersjs/feathers-stripe.svg?style=flat-square)](https://david-dm.org/feathersjs/feathers-stripe)
+[![Download Status](https://img.shields.io/npm/dm/feathers-stripe.svg?style=flat-square)](https://www.npmjs.com/package/feathers-stripe)
+[![Slack Status](http://slack.feathersjs.com/badge.svg)](http://slack.feathersjs.com)
+
 
 ## Summary
 
