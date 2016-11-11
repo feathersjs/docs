@@ -6,9 +6,9 @@ Below are some of the amazing things built with Feathers or for the Feathers eco
 
 - [Feathers Chat](https://github.com/feathersjs/feathers-chat) ![Official Feathers Repo](/img/tiny-feathers-logo.png) 
 - [Feathers React Native Chat](https://github.com/feathersjs/feathers-react-native-chat) ![Official Feathers Repo](/img/tiny-feathers-logo.png) 
-- [Headstart](http://www.headstartapp.com/readme.md)
-- [GenerousTickets](https://generoustickets.com/readme.md)
-- [Taxfyle](https://www.taxfyle.com/readme.md)
+- [Headstart](http://www.headstartapp.com)
+- [GenerousTickets](https://generoustickets.com)
+- [Taxfyle](https://www.taxfyle.com)
 
 ## Starter stacks, Examples and Tutorials
 
@@ -18,7 +18,7 @@ Submit yours by creating a pull request.
 - [Feathers + Apollo](https://github.com/swarthout/feathers-apollo)
 - [Feathers + React + Mobx](https://github.com/foxhound87/rfx-stack)
 - [Feathers + React + Webpack](https://github.com/sscaff1/feathers-webpack-react)
-- [Observables with Angular2 and FeathersJS](https://berndsgn.ch/angular2-and-feathersjs/readme.md)
+- [Observables with Angular2 and FeathersJS](https://berndsgn.ch/angular2-and-feathersjs)
 - [Feathers + React + Redux + Webpack + local auth. Production quality](https://github.com/eddyystop/feathers-starter-react-redux-login-roles).
 - [Live query. Mirror part of a DB on the client.](https://github.com/eddyystop/feathers-live-query)
 
