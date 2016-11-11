@@ -41,7 +41,7 @@ Submit yours by creating a pull request.
 
 #### Communications
 
-- [feathers-batch](https://www.npmjs.com/package/feathers-batch) - Batch multiple Feathers service calls into one (service) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
+- [feathers-batch](https://www.npmjs.com/package/feathers-batch) ![Official Feathers Module](/img/tiny-feathers-logo.png) - Batch multiple Feathers service calls into one (service) 
 
 #### Providers
 
@@ -89,7 +89,7 @@ Submit yours by creating a pull request.
 #### Multiple instances
 
 - [feathers-cluster](https://www.npmjs.com/package/feathers-cluster) - Easily take advantage of multi-core systems for Featherjs. (configure)
-- [feathers-sync](https://www.npmjs.com/package/feathers-sync) - Synchronize service events between application instances using MongoDB publish/subscribe (configure) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
+- [feathers-sync](https://www.npmjs.com/package/feathers-sync) ![Official Feathers Module](/img/tiny-feathers-logo.png)  - Synchronize service events between application instances using MongoDB publish/subscribe (configure)
 
 #### Mobile
 
@@ -100,9 +100,9 @@ The Feathers client works with React Native but here is a collection of native l
 
 #### Email & SMS
 
-- [feathers-mailer](https://www.npmjs.com/package/feathers-mailer) - Feathers mailer service using nodemailer (service) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
-- [feathers-mailgun](https://www.npmjs.com/package/feathers-mailgun) - A Mailgun Service for FeatherJS. (service) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
-- [feathers-sendgrid](https://www.npmjs.com/package/feathers-sendgrid) - A SendGrid Service for FeatherJS. (service) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
+- [feathers-mailer](https://www.npmjs.com/package/feathers-mailer) ![Official Feathers Module](/img/tiny-feathers-logo.png) - Feathers mailer service using nodemailer (service) 
+- [feathers-mailgun](https://www.npmjs.com/package/feathers-mailgun) ![Official Feathers Module](/img/tiny-feathers-logo.png) - A Mailgun Service for FeatherJS. (service) 
+- [feathers-sendgrid](https://www.npmjs.com/package/feathers-sendgrid) ![Official Feathers Module](/img/tiny-feathers-logo.png) - A SendGrid Service for FeatherJS. (service) 
 - [feathers-twilio](./feathers-twilio.md) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
 
 #### Payments
@@ -139,7 +139,7 @@ The Feathers client works with React Native but here is a collection of native l
 * [feathers-errors](./feathers-errors.md) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
 * [feathers-generator](./feathers-generator.md) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
 * [feathers-hooks](./feathers-hooks.md) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
-- [feathers-hooks-common](https://www.npmjs.com/package/feathers-hooks-common) - Useful hooks for use with Feathersjs services. (hooks) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
+- [feathers-hooks-common](https://www.npmjs.com/package/feathers-hooks-common) ![Official Feathers Module](/img/tiny-feathers-logo.png) - Useful hooks for use with Feathersjs services. (hooks) 
 - [feathers-hooks-utils](https://www.npmjs.com/package/feathers-hooks-utils) - Utility library for writing Feathersjs hooks. (hooks)
 * [feathers-logger](./feathers-logger.md) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
 * [feathers-query-filters](./feathers-query-filters.md) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
@@ -161,7 +161,7 @@ The Feathers client works with React Native but here is a collection of native l
 
 - [donejs-feathers](https://www.npmjs.com/package/donejs-feathers) - A generator to quickly add FeathersJS to your DoneJS project. Includes Auth! (generator)
 - [feathers-mithril](https://www.npmjs.com/package/feathers-mithril) - Connect feathers.js to mithril.js (connector)
-- [feathers-reactive](https://www.npmjs.com/package/feathers-reactive) - Turns a Feathers service call into an RxJS observables that automatically updates on real-time events. (configure) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
+- [feathers-reactive](https://www.npmjs.com/package/feathers-reactive) ![Official Feathers Module](/img/tiny-feathers-logo.png) - Turns a Feathers service call into an RxJS observables that automatically updates on real-time events. (configure)
 - [ng-feathers](https://www.npmjs.com/package/ng-feathers) - Feathers client for AngularJS. FeatherJS for plain old AngularJS (1.X)
 - [vue-syncers-feathjers](https://www.npmjs.com/package/vue-syncers-feathers) - Synchronises feathers services with vue objects, updated in real time (connector)
 - [vue-feathers](https://github.com/sunabozu/vue-feathers) - A plugin for Vuejs 1.x & 2.x to easily access your feathers services.
