@@ -54,7 +54,7 @@ Submit yours by creating a pull request.
 - [amity-mongodb](https://www.npmjs.com/package/amity-mongodb) - Use various FeatherJS services to manage a MongoDB server with Amity.
 - [can-connect-feathers](https://www.npmjs.com/package/can-connect-feathers) - Feathers client library for DoneJS (feathers-client)
 - [canjs-feathers](https://www.npmjs.com/package/canjs-feathers) - CanJS model implementation that connects to Feathers services through feathers-client. (feathers-client)
-- [feathers-blob](https://www.npmjs.com/package/feathers-blob) - Feathers abstract blob store service (service) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
+- [feathers-blob](https://www.npmjs.com/package/feathers-blob) ![Official Feathers Module](/img/tiny-feathers-logo.png) - Feathers abstract blob store service (service) 
 - [feathers-blueprints](https://www.npmjs.com/package/feathers-blueprints) - Add some of the Sails.js blueprints functionality to Feathers. (configure)
 - [feathers-bookshelf](https://www.npmjs.com/package/feathers-bookshelf) - A bookshelf ORM service adapter.  (service)
 - [feathers-filemaker](https://www.npmjs.com/package/feathers-filemaker) - Filemaker adapter for feathers.js
