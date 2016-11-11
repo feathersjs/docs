@@ -1,4 +1,4 @@
-# authentication-popups-github
+# feathers-authentication-popups-github
 *description*
 
 badges
