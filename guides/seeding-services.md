@@ -88,6 +88,7 @@ export default const seederConfig = {
       callback(apartment, seed) {
         // Create 10 tenants for each apartment
         return seed({
+          count: 10,
           path: 'apartments/:apartmentId/tenants',
           template: {
             name: '{{name.firstName}} {{name.lastName}}',
