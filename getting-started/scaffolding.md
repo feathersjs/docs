@@ -116,14 +116,14 @@ Add the following to `public/index.html` before the `</body>` tag:
 </script>
 ```
 
-Open the console, then go to [localhost:3030](http://localhost:3030) and you will see the new message. Those events also work for REST calls. Try running the command below and you will see a new message show up your browser's console.
+Open the console, then go to [localhost:3030](http://localhost:3030) and you will see the new message. Those events also work for REST calls. Try running the command below and you will see a new message show up in your browser's console.
 
 ```
 $ curl 'http://localhost:3030/messages/' -H 'Content-Type: application/json' --data-binary '{ "text": "Hello again!" }'
 ```
 
-This is basically how Feathers does real-time and you can learn more about it in the [Real-Time chapter](../real-time/readme.md).
+This is basically how Feathers does real-time. You can learn more about it in the [Real-Time chapter](../real-time/readme.md).
 
 ## What's next?
 
-In this part we generated our first Feathers app, created our first service, and created our first message. In the [next chapter](user-management.md) we will create a new user and restrict access to our Message service.
+In this part, we generated our first Feathers app, created our first service, and created our first message. In the [next chapter](user-management.md) we will create a new user and restrict access to our Message service.
