@@ -27,7 +27,7 @@ Categories of hooks in `feathers-hooks-common`:
 * [Validation](#validation)
 * [Utilities](#utilities)
 * [Running hooks conditionally](#running-hooks-conditionally)
-* [Utilities for Writing Hooks](#utilities-for-writingH-hooks)
+* [Utilities for Writing Hooks](#utilities-for-writing-hooks)
 
 ## Deprecations
 
