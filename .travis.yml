@@ -4,5 +4,5 @@ node_js:
 branches:
   only:
   - master
-after_success:
+deploy:
   - surge --project ./_book --domain feathers-docs.surge.sh
