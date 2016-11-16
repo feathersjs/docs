@@ -125,6 +125,20 @@ Now clients can listen to the `<servicepath> status` event. Custom events can be
 
 It is easy to listen for these events on the client or the server. Depending on the socket library you are using it is a bit different so refer to either the [Socket.io](socket-io.md) or [Primus](primus.md) docs.
 
+## Event Listener Lifecycle
+
+Registered event listeners can be unregistered through the `removeListener('eventName', listener)` api.
+
+```js
+const messages = app.service('messages');
+
+function onCreatedListener(message) {
+  console.log('created', message);
+}
+
+messages.on('created', onCreatedListener);
+messages.removeListener('created', onCreatedListener);
+```
 
 ## Hooks vs Events
 
