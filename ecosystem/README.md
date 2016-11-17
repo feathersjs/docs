@@ -62,7 +62,7 @@ Submit yours by creating a pull request.
 - [feathers-knex](./feathers-knex.html) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
 - [feathers-levelup](./feathers-levelup.html)
 - [feathers-linvodb](https://www.npmjs.com/package/feathers-linvodb) - Create an LinvoDB Service for FeatherJS. (service)
-- [feathers-localstorage](./feathers-localstorage.html) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
+- [feathers-localstorage](../databases/localstorage.md) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
 - [feathers-memory](./feathers-memory.html) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
 - [feathers-mongo-collections](https://www.npmjs.com/package/feathers-mongo-collections) - MongoDB collections service for FeathersJS. (service)
 - [feathers-mongo-databases](https://www.npmjs.com/package/feathers-mongo-databases) - Create a MongoDB database service for FeathersJS. (service)
