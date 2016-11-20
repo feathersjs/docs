@@ -38,7 +38,7 @@
    * [Mongoose](databases/mongoose.md)
    * [RethinkDB](databases/rethinkdb.md)
    * [KnexJS](databases/knexjs.md)
-   * [Sequelize](databases/sequelizejs.md)
+   * [Sequelize](databases/sequelize.md)
 * [Ecosystem & APIs](/ecosystem/readme.md)
    * [feathers](/ecosystem/feathers.md)
    * [feathers-authentication](/ecosystem/feathers-authentication.md)

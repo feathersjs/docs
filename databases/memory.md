@@ -32,7 +32,7 @@ __Options:__
 - `startId` (*optional*, default: `0`) - An id number to start with that will be incremented for every new record (unless it is already set).
 - `store` (*optional*) - An object with id to item assignments to pre-initialize the data store
 - `events` (*optional*) - A list of [custom service events](../real-time/events.md#custom-events) sent by this service
-- `paginate` (*optional*) - A [pagination object](pagination.md) containing a `default` and `max` page size
+- `paginate` (*optional*) - A [pagination object](./pagination.md) containing a `default` and `max` page size
 
 
 ## Example
@@ -77,8 +77,7 @@ const app = feathers()
 
 // Create a dummy Message
 app.service('messages').create({
-  text: 'Message created on server',
-  completed: false
+  text: 'Message created on server'
 }).then(message => console.log('Created message', message));
 
 // Start the server.

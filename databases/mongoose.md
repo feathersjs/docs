@@ -17,7 +17,7 @@ $ npm install --save mongoose feathers-mongoose
 
 ## API
 
-### `service([options])`
+### `service(options)`
 
 Returns a new service instance intitialized with the given options. `Model` has to be a Mongoose model. See the [Mongoose Guide](http://mongoosejs.com/docs/guide.html) for more information on defining your model.
 
@@ -44,7 +44,7 @@ __Options:__
 - `lean` (*optional*, default: `false`) - When set to true runs queries faster by returning plain mongodb objects instead of mongoose models.
 - `id` (*optional*, default: `'_id'`) - The name of the id field property.
 - `events` (*optional*) - A list of [custom service events](../real-time/events.md#custom-events) sent by this service
-- `paginate` (*optional*) - A [pagination object](pagination.md) containing a `default` and `max` page size
+- `paginate` (*optional*) - A [pagination object](./pagination.md) containing a `default` and `max` page size
 
 > **Important:** To avoid odd error handling behaviour, always set `mongoose.Promise = global.Promise`. If not available already, Feathers comes with a polyfill for native Promises.
 
@@ -69,10 +69,6 @@ const MessageSchema = new Schema({
   text: {
     type: String,
     required: true
-  },
-  read: {
-    type: Boolean,
-    default: false
   }
 });
 const Model = mongoose.model('Message', MessageSchema);
@@ -120,8 +116,7 @@ const app = feathers()
 
 // Create a dummy Message
 app.service('messages').create({
-  text: 'Message created on server',
-  completed: false
+  text: 'Message created on server'
 }).then(function(message) {
   console.log('Created message', message);
 });

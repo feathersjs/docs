@@ -14,7 +14,7 @@ $ npm install --save nedb feathers-nedb
 
 ## API
 
-### `service([options])`
+### `service(options)`
 
 Returns a new service instance intitialized with the given options. `Model` has to be an NeDB database instance.
 
@@ -35,9 +35,9 @@ app.use('/messages', service({ Model, id, events, paginate }));
 __Options:__
 
 - `Model` (**required**) - The NeDB database instance. See the [NeDB API](https://github.com/louischatriot/nedb#api) for more information.
-- `id` (*optional*, default: `'_id'`) - The name of the id field property.
+- `id` (*optional*, default: `'_id'`) - The name of the id field property. By design, NeDB will always add an `_id` property.
 - `events` (*optional*) - A list of [custom service events](../real-time/events.md#custom-events) sent by this service
-- `paginate` (*optional*) - A [pagination object](pagination.md) containing a `default` and `max` page size
+- `paginate` (*optional*) - A [pagination object](./pagination.md) containing a `default` and `max` page size
 
 ## Example
 
@@ -86,8 +86,7 @@ const app = feathers()
 
 // Create a dummy Message
 app.service('messages').create({
-  text: 'Message created on server',
-  completed: false
+  text: 'Message created on server'
 }).then(message => console.log('Created message', message));
 
 // Start the server.

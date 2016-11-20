@@ -17,7 +17,7 @@ $ npm install --save mongodb feathers-mongodb
 
 ## API
 
-### `service([options])`
+### `service(options)`
 
 Returns a new service instance intitialized with the given options. `Model` has to be a MongoDB collection.
 
@@ -36,9 +36,9 @@ MongoClient.connect('mongodb://localhost:27017/feathers').then(db => {
 __Options:__
 
 - `Model` (**required**) - The MongoDB collection instance
-- `id` (*optional*, default: `'_id'`) - The name of the id field property.
+- `id` (*optional*, default: `'_id'`) - The name of the id field property. By design, MongoDB will always add an `_id` property.
 - `events` (*optional*) - A list of [custom service events](../real-time/events.md#custom-events) sent by this service
-- `paginate` (*optional*) - A [pagination object](pagination.md) containing a `default` and `max` page size
+- `paginate` (*optional*) - A [pagination object](./pagination.md) containing a `default` and `max` page size
 
 
 ## Example
@@ -87,8 +87,7 @@ MongoClient.connect('mongodb://localhost:27017/feathers').then(function(db){
 
   // Create a dummy Message
   app.service('messages').create({
-    text: 'Message created on server',
-    completed: false
+    text: 'Message created on server'
   }).then(message => console.log('Created message', message));
 
   // Start the server.

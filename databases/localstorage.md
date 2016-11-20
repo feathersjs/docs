@@ -15,7 +15,7 @@ $ npm install --save feathers-localstorage
 
 ## API
 
-### `service([options])`
+### `service(options)`
 
 Returns a new service instance intitialized with the given options.
 
@@ -35,7 +35,7 @@ __Options:__
 - `startId` (*optional*, default: `0`) - An id number to start with that will be incremented for new record.
 - `name` (*optional*, default: `'feathers'`) - The key to store data under in local or async storage.
 - `store` (*optional*) - An object with id to item assignments to pre-initialize the data store
-- `paginate` (*optional*) - A [pagination object](pagination.md) containing a `default` and `max` page size
+- `paginate` (*optional*) - A [pagination object](./pagination.md) containing a `default` and `max` page size
 
 
 ## Example
@@ -61,8 +61,7 @@ See the [clients](../clients/readme.md) chapter for more information about using
   });
 
   messages.create({
-    text: 'Message created in browser',
-    completed: false
+    text: 'Message created in browser'
   });
 </script>
 ```
@@ -90,7 +89,6 @@ messages.on('created', function(message) {
 });
 
 messages.create({
-  text: 'Message from React Native',
-  completed: false
+  text: 'Message from React Native'
 });
 ```

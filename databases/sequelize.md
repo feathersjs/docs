@@ -26,7 +26,7 @@ npm install --save tedious // MSSQL
 
 ## API
 
-### `service([options])`
+### `service(options)`
 
 Returns a new service instance intitialized with the given options.
 
@@ -43,7 +43,7 @@ __Options:__
 - `Model` (**required**) - The Sequelize model definition
 - `id` (*optional*, default: `'_id'`) - The name of the id field property.
 - `events` (*optional*) - A list of [custom service events](../real-time/events.md#custom-events) sent by this service
-- `paginate` (*optional*) - A [pagination object](pagination.md) containing a `default` and `max` page size
+- `paginate` (*optional*) - A [pagination object](./pagination.md) containing a `default` and `max` page size
 
 
 ## Example
@@ -75,10 +75,6 @@ const Message = sequelize.define('message', {
   text: {
     type: Sequelize.STRING,
     allowNull: false
-  },
-  created: {
-    type: Sequelize.BOOLEAN,
-    defaultValue: false
   }
 }, {
   freezeTableName: true
@@ -108,8 +104,7 @@ const app = feathers()
 Message.sync({ force: true }).then(() => {
   // Create a dummy Message
   app.service('messages').create({
-    text: 'Message created on server',
-    completed: false
+    text: 'Message created on server'
   }).then(message => console.log('Created message', message.toJSON()));
 });
 

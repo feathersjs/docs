@@ -16,7 +16,7 @@ npm install --save mysql knex feathers-knex
 
 ## API
 
-### `service([options])`
+### `service(options)`
 
 Returns a new service instance intitialized with the given options.
 
@@ -35,7 +35,6 @@ const db = knex({
 db.schema.createTable('messages', table => {
   table.increments('id');
   table.string('text');
-  table.boolean('read');
 });
 
 app.use('/messages', service({
@@ -51,7 +50,7 @@ __Options:__
 - `name` (**required**) - The name of the table
 - `id` (*optional*, default: `'id'`) - The name of the id field property.
 - `events` (*optional*) - A list of [custom service events](../real-time/events.md#custom-events) sent by this service
-- `paginate` (*optional*) - A [pagination object](pagination.md) containing a `default` and `max` page size
+- `paginate` (*optional*) - A [pagination object](./pagination.md) containing a `default` and `max` page size
 
 ## Example
 
@@ -111,13 +110,11 @@ db.schema.dropTableIfExists('messages').then(() => {
     console.log('Creating messages table');
     table.increments('id');
     table.string('text');
-    table.boolean('completed');
   });
 }).then(() => {
   // Create a dummy Message
   app.service('messages').create({
-    text: 'Message created on server',
-    completed: false
+    text: 'Message created on server'
   }).then(message => console.log('Created message', message));
 });
 
