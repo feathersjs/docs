@@ -22,7 +22,7 @@ The Vue.js and Feathers client modules can be loaded individually via [npm](http
 </head>
 <body>
 
-<div id="#app">
+<div id="app">
   <chat-app v-if="user.authenticated">
     <user-list></user-list>
     <message-list>
