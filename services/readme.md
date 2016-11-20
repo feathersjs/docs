@@ -200,7 +200,7 @@ Service methods should return a [Promise](https://developer.mozilla.org/en-US/do
 - `params` - can contain any extra parameters, for example the authenticated user.
 - `callback` - is an optional callback that can be called instead of returning a Promise. It is a Node-style callback function following the `function(error, result) {}` convention.
 
-> **ProTip:** `params.query` contains the query parameters from the client (see the [REST](../rest/readme.md) and [real-time](../real-time/readme.md) providers), `params.data` contains any data submitted in a request body, and `params.result` contains any data returned from a data store after a service method has been called.
+> **ProTip:** `hook.params.query` contains the query parameters from the client (see the [REST](../rest/readme.md) and [real-time](../real-time/readme.md) providers).
 
 These methods basically reflect a [CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete) interface:
 
