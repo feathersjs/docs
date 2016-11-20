@@ -6,7 +6,7 @@ The JSON web token (JWT) auth strategy is enabled by default with Feathers authe
 
 ### Server Side
 
-This is what a typical sever setup looks like:
+This is what a typical server setup looks like:
 
 ```js
 app.configure(authentication({
@@ -16,7 +16,7 @@ app.configure(authentication({
 }));
 ```
 
-Normally the only option you might want to pass when registering the `feathers-authentication` module sever side is your token `secret`. That's all.
+Normally the only option you might want to pass when registering the `feathers-authentication` module in server side is your token `secret`. That's all.
 
 > **ProTip:** If you don't pass a token `secret` a secure one will be randomly generated for you each time your app starts.
 

@@ -136,9 +136,9 @@
    * [Using A View Engine](guides/using-a-view-engine.md)
    * [Uploading files](guides/file-uploading.md)
    * [Creating a plugin](guides/creating-a-plugin.md)
+   * [Seeding Services](guides/seeding-services.md)
 * [Help](help/readme.md)
    * [FAQ](help/faq.md)
    * [Contributing](contributing.md)
    * [Changelog](changelog.md)
 * [License](license.md)
-

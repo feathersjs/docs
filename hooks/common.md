@@ -27,7 +27,7 @@ Categories of hooks in `feathers-hooks-common`:
 * [Validation](#validation)
 * [Utilities](#utilities)
 * [Running hooks conditionally](#running-hooks-conditionally)
-* [Utilities for Writing Hooks](#utilities-for-writingH-hooks)
+* [Utilities for Writing Hooks](#utilities-for-writing-hooks)
 
 ## Deprecations
 
@@ -54,18 +54,18 @@ const hooks = require('feathers-hooks-common');
 
 // Given a `user_id` in a message, retrieve the user and
 // add it in the `user` field.
-app.service('messages').after(
-  hooks.populate('user', {
+app.service('messages').after({
+  find: hooks.populate('user', {
     service: 'users',
     field: 'user_id'  
   })
-);
+});
 ```
 ```javascript
 /*
  If the object from the message service is
    { _id: '1...1', senderId: 'a...a', text: 'Jane, are you there?' }
- when the hook is run
+ when the hook is run during a find method
    hooks.populate('senderId', { service: '/users', field: 'user' })
  the result will contain
    { _id: '1...1', senderId : 'a...a', text: 'Jane, are you there?',
