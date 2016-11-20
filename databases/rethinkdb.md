@@ -191,7 +191,6 @@ In a `find` call, `params.rethinkdb` can be passed a RethinkDB query (without pa
 Combined with `.createQuery(query)`, which returns a new RethinkDB query with the [common filter criteria](./querying.md) applied, this can be used to create more complex queries. The best way to customize the query is in a [before hook](../hooks/index.md) for `find`. The following example adds a `getNearest` condition for [RethinkDB geospatial queries](https://www.rethinkdb.com/docs/geo-support/javascript/).
 
 ```js
-// 
 app.service('mesages').hooks({
   before: {
     find(hook) {
@@ -204,7 +203,7 @@ app.service('mesages').hooks({
       hook.params.rethinkdb = query.getNearest(point, { index: 'location' });
     }
   }
-})
+});
 ```
 
 
