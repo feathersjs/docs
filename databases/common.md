@@ -32,7 +32,7 @@ Once registered, the [service methods](../services/readme.md) of the adapter can
 
 Returns a list of all records matching the query in `params.query` using the [common querying mechanism](./querying.md). Will either return an array with the results or a page object if [pagination is enabled](./pagination.md).
 
-> **Important**: When used via REST URLs all query values are strings. Depending on the database the values in `params.query` might have to be converted to the right type in a `before` [hook](../hooks/readme.md).
+> **Important**: When used via REST URLs all query values are strings. Depending on the database the values in `params.query` might have to be converted to the right type in a [before hook](../hooks/readme.md).
 
 ```js
 // Find all messages for user with id 1
@@ -40,7 +40,7 @@ app.service('messages').find({
   query: {
     userId: 1
   }
-});
+}).then(messages => console.log(messages));
 
 // Find all messages belonging to room 1 or 3
 app.service('messages').find({
@@ -49,7 +49,7 @@ app.service('messages').find({
       $in: [ 1, 3 ]
     }
   }
-});
+}).then(messages => console.log(messages));
 ```
 
 Find all messages for user with id 1
