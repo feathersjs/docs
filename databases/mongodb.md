@@ -1,54 +1,63 @@
-# MongoDB Native
+# MongoDB
 
-[feathers-mongodb](https://github.com/feathersjs/feathers-mongodb) is a database adapter for [MongoDB](https://www.mongodb.org/). Unlike [Mongoose](./mongoose.md) this is does not have an ORM. You deal with the database directly.
+[![GitHub stars](https://img.shields.io/github/stars/feathersjs/feathers-mongodb.svg?style=social&label=Star)](https://github.com/feathersjs/feathers-mongodb/)
+[![npm version](https://img.shields.io/npm/v/feathers-mongodb.svg?style=flat-square)](https://www.npmjs.com/package/feathers-mongodb)
+[![Changelog](https://img.shields.io/badge/changelog-.md-blue.svg?style=flat-square)](https://github.com/feathersjs/feathers-mongodb/blob/master/CHANGELOG.md)
+
+[feathers-mongodb](https://github.com/feathersjs/feathers-mongodb) is a database adapter for [MongoDB](https://www.mongodb.org/). It uses the [official NodeJS driver for MongoDB](https://www.npmjs.com/package/mongodb).
 
 ```bash
 $ npm install --save mongodb feathers-mongodb
 ```
 
-## Getting Started
+> **Important:** To use this adapter you also want to be familiar with the [common interface](./common.md) for database adapters.
 
-The following example will create a `messages` endpoint and connect to a local `messages` collection on the `feathers` database.
+> This adapter also requires a [running MongoDB](https://docs.mongodb.com/getting-started/shell/#) database server.
+
+
+## API
+
+### `service([options])`
+
+Returns a new service instance intitialized with the given options. `Model` has to be a MongoDB collection.
 
 ```js
-var MongoClient = require('mongodb').MongoClient;
-var service = require('feathers-mongodb');
-var app = feathers();
+const MongoClient = require('mongodb').MongoClient;
+const service = require('feathers-mongodb');
 
-MongoClient.connect('mongodb://localhost:27017/feathers').then(function(db){
+MongoClient.connect('mongodb://localhost:27017/feathers').then(db => {
   app.use('/messages', service({
     Model: db.collection('messages')
   }));
-
-  app.listen(3030);
+  app.use('/messages', service({ Model, id, events, paginate }));
 });
 ```
 
-## Options
-
-The following options can be passed when creating a new MongoDB service:
+__Options:__
 
 - `Model` (**required**) - The MongoDB collection instance
-- `id` (default: '_id') [optional] - The id field for your documents for this service.
-- `paginate` [optional] - A pagination object containing a `default` and `max` page size (see the [Pagination chapter](databases/pagination.md))
+- `id` (*optional*, default: `'_id'`) - The name of the id field property.
+- `events` (*optional*) - A list of [custom service events](../real-time/events.md#custom-events) sent by this service
+- `paginate` (*optional*) - A [pagination object](pagination.md) containing a `default` and `max` page size
 
-## Complete Example
 
-To run the complete MongoDB example we need to install
+## Example
+
+Here is an example of a Feathers server with a `messages` endpoint that writes to the `feathers` database and the `messages` collection.
 
 ```
-$ npm install feathers feathers-rest feathers-socketio feathers-mongodb mongodb body-parser
+$ npm install feathers feathers-errors feathers-rest feathers-socketio feathers-mongodb mongodb body-parser
 ```
 
-Then add the following into `app.js`:
+In `app.js`:
 
 ```js
 const feathers = require('feathers');
+const errorHandler = require('feathers-errors/handler');
 const rest = require('feathers-rest');
 const socketio = require('feathers-socketio');
-const errors = require('feathers-errors');
 const bodyParser = require('body-parser');
-var MongoClient = require('mongodb').MongoClient;
+const MongoClient = require('mongodb').MongoClient;
 const service = require('feathers-mongodb');
 
 // Create a feathers instance.
@@ -62,7 +71,7 @@ const app = feathers()
   // Turn on URL-encoded parser for REST services
   .use(bodyParser.urlencoded({extended: true}));
 
-  // Connect to your MongoDB instance(s)
+// Connect to your MongoDB instance(s)
 MongoClient.connect('mongodb://localhost:27017/feathers').then(function(db){
   // Connect to the db, create and register a Feathers service.
   app.use('/messages', service({
@@ -74,16 +83,26 @@ MongoClient.connect('mongodb://localhost:27017/feathers').then(function(db){
   }));
 
   // A basic error handler, just like Express
-  app.use(errors.handler());
+  app.use(errorHandler());
 
-  // Start the server
-  var server = app.listen(3030);
-  server.on('listening', function() {
-    console.log('Feathers Message MongoDB service running on 127.0.0.1:3030');
+  // Create a dummy Message
+  app.service('messages').create({
+    text: 'Message created on server',
+    completed: false
+  }).then(message => console.log('Created message', message));
+
+  // Start the server.
+  const port = 3030;
+
+  app.listen(port, () => {
+    console.log(`Feathers server listening on port ${port}`);
   });
-}).catch(function(error){
-  console.error(error);
-});
+}).catch(error => console.error(error));
 ```
 
-You can run this example [from the GitHub repository](https://github.com/feathersjs/feathers-mongodb/blob/master/example/app.js) with `npm start` and going to [localhost:3030/messages](http://localhost:3030/messages). You should see an empty array. That's because you don't have any messages yet but you now have full CRUD for your new messages service.
+Run the example with `node app` and go to [localhost:3030/messages](http://localhost:3030/messages).
+
+
+## Querying
+
+Additionally to the [common querying mechanism](./querying.md) this adapter also supports [MongoDB's query syntax](https://docs.mongodb.com/v3.2/tutorial/query-documents/) and the `update` method also supports MongoDB [update operators](https://docs.mongodb.com/v3.2/reference/operator/update/).
