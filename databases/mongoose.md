@@ -153,39 +153,6 @@ app.use('/messages', mongooseService({
 
 Mongoose by default gives you the ability to add [validations at the model level](http://mongoosejs.com/docs/validation.html). Using an error handler like the one [comes with Feathers](https://github.com/feathersjs/feathers-errors/blob/master/src/error-handler.js) your validation errors will be formatted nicely right out of the box!
 
-For more complex validations you really have two options. You can combine Mongoose's validation mechanism with a validation library like [validator.js](https://github.com/chriso/validator.js) or you can do your validations at the service level [using hooks](http://docs.feathersjs.com/hooks/examples.html#validation).
-
-__With Validator.js__
-
-Here's an example of doing more complex validations at the model level with the [validator.js](https://github.com/chriso/validator.js)  validation library.
-
-```js
-const validator = require('validator');
-const mongoose = require('mongoose');
-
-const Schema = mongoose.Schema;
-const userSchema = new Schema({
-  email: {
-    type: String,
-    validate: {
-      validator: validator.isEmail,
-      message: '{VALUE} is not a valid email!'
-    }
-  },
-  phone: {
-    type: String,
-    validate: {
-      validator: function(v) {
-        return /d{3}-d{3}-d{4}/.test(v);
-      },
-      message: '{VALUE} is not a valid phone number!'
-    }
-  }
-});
-
-const User = mongoose.model('user', userSchema);
-```
-
 ## Modifying results with the `toObject` hook
 
 Unless you passed `lean: true` when initializing your service, the records returned from a query are Mongoose documents, so they can't be modified directly (You won't be able to delete properties from them).
