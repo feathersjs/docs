@@ -1,21 +1,32 @@
 # Mongoose
 
-[feathers-mongoose](https://github.com/feathersjs/feathers-mongoose) is a database adapter for [Mongoose](http://mongoosejs.com/), an object modeling tool for [MongoDB](https://www.mongodb.org/). Mongoose provides a straight-forward, schema-based solution to model your application data. It includes built-in type casting, validation, query building, business logic hooks and more.
+[![GitHub stars](https://img.shields.io/github/stars/feathersjs/feathers-mongoose.svg?style=social&label=Star)](https://github.com/feathersjs/feathers-mongoose/)
+[![npm version](https://img.shields.io/npm/v/feathers-mongoose.svg?style=flat-square)](https://www.npmjs.com/package/feathers-mongoose)
+[![Changelog](https://img.shields.io/badge/changelog-.md-blue.svg?style=flat-square)](https://github.com/feathersjs/feathers-mongoose/blob/master/CHANGELOG.md)
+
+[feathers-mongoose](https://github.com/feathersjs/feathers-mongoose) is a database adapter for [Mongoose](http://mongoosejs.com/), an object modeling tool for [MongoDB](https://www.mongodb.org/).
 
 ```bash
 $ npm install --save mongoose feathers-mongoose
 ```
 
-## Getting Started
+> **Important:** To use this adapter you also want to be familiar with the [common interface](./common.md) for database adapters.
 
-We can create Mongoose services like this:
+> This adapter also requires a [running MongoDB](https://docs.mongodb.com/getting-started/shell/#) database server.
+
+
+## API
+
+### `service(options)`
+
+Returns a new service instance intitialized with the given options. `Model` has to be a Mongoose model. See the [Mongoose Guide](http://mongoosejs.com/docs/guide.html) for more information on defining your model.
 
 ```js
 const mongoose = require('mongoose');
 const service = require('feathers-mongoose');
 
 // A module that exports your Mongoose model
-const Message = require('./models/message');
+const Model = require('./models/message');
 
 // Make Mongoose use the ES6 promise
 mongoose.Promise = global.Promise;
@@ -23,31 +34,29 @@ mongoose.Promise = global.Promise;
 // Connect to a local database called `feathers`
 mongoose.connect('mongodb://localhost:27017/feathers');
 
-app.use('/messages', service({ Model: Message }));
+app.use('/messages', service({ Model }));
+app.use('/messages', service({ Model, lean, id, events, paginate }));
 ```
 
-> __Important:__ To avoid odd error handling behaviour, always set `mongoose.Promise = global.Promise`. If not available already, Feathers comes with a polyfill for native Promises.
-
-> You can get aceess to Mongoose model via `this.Model` inside any hook and use it as usual.
-
-See the [Mongoose Guide](http://mongoosejs.com/docs/guide.html) for more information on defining your model.
-
-## Options
-
-The following options can be passed when creating a new Mongoose service:
+__Options:__
 
 - `Model` (**required**) - The Mongoose model definition
-- `id` (default: `_id`) [optional] - The name of the id property
-- `paginate` - A pagination object containing a `default` and `max` page size (see the [Pagination chapter](databases/pagination.md))
-- `lean` (default: `false`) [optional] - When set to true runs queries faster by returning plain mongodb objects instead of mongoose models.
-- `overwrite` (default: `true`) [optional] - Updates completely replace existing documents.
+- `lean` (*optional*, default: `false`) - When set to true runs queries faster by returning plain mongodb objects instead of mongoose models.
+- `id` (*optional*, default: `'_id'`) - The name of the id field property.
+- `events` (*optional*) - A list of [custom service events](../real-time/events.md#custom-events) sent by this service
+- `paginate` (*optional*) - A [pagination object](./pagination.md) containing a `default` and `max` page size
 
-### Complete Example
+> **Important:** To avoid odd error handling behaviour, always set `mongoose.Promise = global.Promise`. If not available already, Feathers comes with a polyfill for native Promises.
+
+> **Note:** You can get access to the Mongoose model via `this.Model` inside a [hook](../hooks/readme.md) and use it as usual.
+
+
+## Example
 
 Here's a complete example of a Feathers server with a `messages` Mongoose service.
 
 ```
-$ npm install feathers feathers-rest body-parser mongoose feathers-mongoose
+$ npm install feathers feathers-errors feathers-rest body-parser mongoose feathers-mongoose
 ```
 
 In `message-model.js`:
@@ -60,10 +69,6 @@ const MessageSchema = new Schema({
   text: {
     type: String,
     required: true
-  },
-  read: {
-    type: Boolean,
-    default: false
   }
 });
 const Model = mongoose.model('Message', MessageSchema);
@@ -75,6 +80,7 @@ Then in `app.js`:
 
 ```js
 const feathers = require('feathers');
+const errorHandler = require('feathers-errors/handler');
 const rest = require('feathers-rest');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
@@ -97,100 +103,46 @@ const app = feathers()
   .use(bodyParser.json())
   // Turn on URL-encoded parser for REST services
   .use(bodyParser.urlencoded({extended: true}))
-
-// Connect to the db, create and register a Feathers service.
-app.use('/messages', service({
-  Model,
-  lean: true, // set to false if you want Mongoose documents returned
-  paginate: {
-    default: 2,
-    max: 4
-  }
-}));
+  // Connect to the db, create and register a Feathers service.
+  .use('/messages', service({
+    Model,
+    lean: true, // set to false if you want Mongoose documents returned
+    paginate: {
+      default: 2,
+      max: 4
+    }
+  }))
+  .use(errorHandler());
 
 // Create a dummy Message
 app.service('messages').create({
-  text: 'Server message'
+  text: 'Message created on server'
 }).then(function(message) {
   console.log('Created message', message);
 });
 
 // Start the server.
 const port = 3030;
-app.listen(port, function() {
+app.listen(port, () => {
     console.log(`Feathers server listening on port ${port}`);
 });
 ```
 
-You can run this example by using `npm start` and going to [localhost:3030/messages](http://localhost:3030/messages). You should see a paginated object with the message that we created on the server.
+You can run this example by using `node app` and go to [localhost:3030/messages](http://localhost:3030/messages).
 
-## Migrating
 
-Version 3 of this adapter no longer brings its own Mongoose dependency, only accepts mongoose models and doesn't set up a database connection for you anymore. This means that you now need to make your own mongoose database connection and you need to pass in mongoose models changing something like
+## Querying, Validation
 
-```js
-var MySchema = require('./models/mymodel')
-var mongooseService = require('feathers-mongoose');
-app.use('messages', mongooseService('message', MySchema, options));
-```
+Mongoose by default gives you the ability to add [validations at the model level](http://mongoosejs.com/docs/validation.html). Using an error handler like the one that [comes with Feathers](https://github.com/feathersjs/feathers-errors/blob/master/src/error-handler.js) your validation errors will be formatted nicely right out of the box!
 
-To
+For more information on querying and validation refer to the [Mongoose documentation](http://mongoosejs.com/docs/guide.html).
 
-```js
-var mongoose = require('mongoose');
-var MongooseModel = require('./models/mymodel')
-var mongooseService = require('feathers-mongoose');
-
-mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost:27017/feathers');
-
-app.use('/messages', mongooseService({
-  Model: MongooseModel
-}));
-```
-
-## Validation
-
-Mongoose by default gives you the ability to add [validations at the model level](http://mongoosejs.com/docs/validation.html). Using an error handler like the one [comes with Feathers](https://github.com/feathersjs/feathers-errors/blob/master/src/error-handler.js) your validation errors will be formatted nicely right out of the box!
-
-For more complex validations you really have two options. You can combine Mongoose's validation mechanism with a validation library like [validator.js](https://github.com/chriso/validator.js) or you can do your validations at the service level [using hooks](http://docs.feathersjs.com/hooks/examples.html#validation).
-
-__With Validator.js__
-
-Here's an example of doing more complex validations at the model level with the [validator.js](https://github.com/chriso/validator.js)  validation library.
-
-```js
-const validator = require('validator');
-const mongoose = require('mongoose');
-
-const Schema = mongoose.Schema;
-const userSchema = new Schema({
-  email: {
-    type: String,
-    validate: {
-      validator: validator.isEmail,
-      message: '{VALUE} is not a valid email!'
-    }
-  },
-  phone: {
-    type: String,
-    validate: {
-      validator: function(v) {
-        return /d{3}-d{3}-d{4}/.test(v);
-      },
-      message: '{VALUE} is not a valid phone number!'
-    }
-  }
-});
-
-const User = mongoose.model('user', userSchema);
-```
 
 ## Modifying results with the `toObject` hook
 
-Unless you passed `lean: true` when initializing your service, the records returned from a query are Mongoose documents, so they can't be modified directly (You won't be able to delete properties from them).
+Unless you passed `lean: true` when initializing your service, the *records returned from a query are Mongoose documents so they can't be modified directly*. This means you won't be able to add or delete properties from them.
 
-To get around this, you can use the included `toObject` hook to convert the Mongoose documents into plain objects.  Let's modify the after hook's setup in the feathers-hooks example, above, to this:
+To get around this, you can use the included `toObject` hook to convert the Mongoose documents into plain objects:
 
 ```js
 app.service('messages').after({
@@ -198,4 +150,4 @@ app.service('messages').after({
 });
 ```
 
-The `toObject` hook must be called as a function and accepts a configuration object with any of the options supported by [Mongoose's toObject method](http://mongoosejs.com/docs/api.html#document_Document-toObject). Additionally, a second parameter can be specified that determines which attribute of `hook.result` will have its Mongoose documents converted to plain objects (defaults to `data`).
+The `toObject` hook must be called before any hook that modifies the result as a function that accepts a configuration object with any of the options supported by [Mongoose's toObject method](http://mongoosejs.com/docs/api.html#document_Document-toObject). Additionally, a second parameter can be specified that determines which attribute of `hook.result` will have its Mongoose documents converted to plain objects (defaults to `data`).

@@ -1,16 +1,24 @@
 # KnexJS
 
-[feathers-knex](https://github.com/feathersjs/feathers-knex) is a database adapter for [KnexJS](http://knexjs.org/), an SQL query builder for Postgres, MSSQL, MySQL, MariaDB, SQLite3, and Oracle designed to be flexible, portable, and fun to use.
+[![GitHub stars](https://img.shields.io/github/stars/feathersjs/feathers-knex.svg?style=social&label=Star)](https://github.com/feathersjs/feathers-knex/)
+[![npm version](https://img.shields.io/npm/v/feathers-knex.svg?style=flat-square)](https://www.npmjs.com/package/feathers-knex)
+[![Changelog](https://img.shields.io/badge/changelog-.md-blue.svg?style=flat-square)](https://github.com/feathersjs/feathers-knex/blob/master/CHANGELOG.md)
+
+[feathers-knex](https://github.com/feathersjs/feathers-knex) is a database adapter for [KnexJS](http://knexjs.org/), an SQL query builder for Postgres, MSSQL, MySQL, MariaDB, SQLite3, and Oracle.
 
 ```bash
 npm install --save mysql knex feathers-knex
 ```
 
-> **ProTip:** You also need to [install the database driver](http://knexjs.org/#Installation-node) for the DB you want to use. If you used the Feathers generator then this was already done for you. 
+> **Important:** To use this adapter you also want to be familiar with the [common interface](./common.md) for database adapters.
 
-## Getting Started
+> **Note:** You also need to [install the database driver](http://knexjs.org/#Installation-node) for the DB you want to use.
 
-You can create a SQL Knex service like this:
+## API
+
+### `service(options)`
+
+Returns a new service instance intitialized with the given options.
 
 ```js
 const knex = require('knex');
@@ -27,37 +35,36 @@ const db = knex({
 db.schema.createTable('messages', table => {
   table.increments('id');
   table.string('text');
-  table.boolean('read');
 });
 
 app.use('/messages', service({
   Model: db,
   name: 'messages'
 }));
+app.use('/messages', service({ Model, name, id, events, paginate }));
 ```
 
-This will create a `messages` endpoint and connect to a local `messages` table on an SQLite database in `data.db`.
-
-## Options
-
-The following options can be passed when creating a Knex service:
+__Options:__
 
 - `Model` (**required**) - The KnexJS database instance
 - `name` (**required**) - The name of the table
-- `id` (default: `id`) [optional] - The name of the id property.
-- `paginate` [optional] - A pagination object containing a `default` and `max` page size (see the [Pagination chapter](pagination.md))
+- `id` (*optional*, default: `'id'`) - The name of the id field property.
+- `events` (*optional*) - A list of [custom service events](../real-time/events.md#custom-events) sent by this service
+- `paginate` (*optional*) - A [pagination object](./pagination.md) containing a `default` and `max` page size
 
-## Complete Example
+## Example
 
-Here's a complete example of a Feathers server with a `messages` SQLite service. We are using the [Knex schema builder](http://knexjs.org/#Schema)
+Here's a complete example of a Feathers server with a `messages` SQLite service. We are using the [Knex schema builder](http://knexjs.org/#Schema) and [SQLite](https://sqlite.org/) as the database.
 
 ```
-$ npm install feathers feathers-rest feathers-socketio body-parser feathers-knex knex sqlite3
+$ npm install feathers feathers-errors feathers-rest feathers-socketio body-parser feathers-knex knex sqlite3
 ```
+
+In `app.js`:
 
 ```js
-// app.js
 const feathers = require('feathers');
+const errorHandler = require('feathers-errors/handler');
 const rest = require('feathers-rest');
 const socketio = require('feathers-socketio');
 const bodyParser = require('body-parser');
@@ -80,61 +87,67 @@ const app = feathers()
   // Turn on JSON parser for REST services
   .use(bodyParser.json())
   // Turn on URL-encoded parser for REST services
-  .use(bodyParser.urlencoded({ extended: true }));
-
-// Create Knex Feathers service with a default page size of 2 items
-// and a maximum size of 4
-app.use('/messages', service({
-  Model: db,
-  name: 'messages',
-  paginate: {
-    default: 2,
-    max: 4
-  }
-}));
+  .use(bodyParser.urlencoded({ extended: true }))
+  // Create Knex Feathers service with a default page size of 2 items
+  // and a maximum size of 4
+  .use('/messages', service({
+    Model: db,
+    name: 'messages',
+    paginate: {
+      default: 2,
+      max: 4
+    }
+  }))
+  .use(errorHandler());
 
 // Clean up our data. This is optional and is here
 // because of our integration tests
-db.schema.dropTableIfExists('messages').then(function() {
+db.schema.dropTableIfExists('messages').then(() => {
   console.log('Dropped messages table');
 
   // Initialize your table
-  return db.schema.createTable('messages', function(table) {
+  return db.schema.createTable('messages', table => {
     console.log('Creating messages table');
     table.increments('id');
     table.string('text');
-    table.boolean('complete');
   });
-}).then(function() {
+}).then(() => {
   // Create a dummy Message
   app.service('messages').create({
-    text: 'Server message',
-    complete: false
-  }).then(function(message) {
-    console.log('Created message', message);
-  });
+    text: 'Message created on server'
+  }).then(message => console.log('Created message', message));
 });
 
 // Start the server.
 const port = 3030;
 
-app.listen(port, function() {
+app.listen(port, () => {
   console.log(`Feathers server listening on port ${port}`);
 });
 ```
 
-## Extra query operations
+Run the example with `node app` and go to [localhost:3030/messages](http://localhost:3030/messages).
 
-This DB adapter supports some extra query operations along with [regular ones](querying.md).
+## Querying
+
+In addition to the [common querying mechanism](./querying.md), this adapter also supports:
 
 ### $like
 
-Find all records where the value matches the given string pattern. The following query retrieves all users with names ending with "lice".
+Find all records where the value matches the given string pattern. The following query retrieves all messages that start with `Hello`:
 
 ```js
-query: {
-  name: {
-    $like: '%lice'
+app.service('messages').find({
+  query: {
+    text: {
+      $like: 'Hello%'
+    }
   }
-}
+});
+```
+
+Through the REST API:
+
+```
+/messages?text[$like]=Hello%
 ```

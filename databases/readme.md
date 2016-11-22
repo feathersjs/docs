@@ -1,13 +1,17 @@
 # Databases
 
-The [service interface](../services/readme.md) makes it easy to implement a wrapper that connects to a database. Which is exactly what we have done with the Feathers database adapters. Using those adapters it is possible to create a database-backed REST and real-time API endpoint, including validation in a few minutes!
+Feathers database adapters are [services](../services/readme.md) that write to a database. Instead of coming up with our own ORM and validation system our official database adapters simply wrap many of the great ORM/ODM solutions that already exist.
 
-Instead of coming up with our own ORM and validation system our official database adapters simply wrap many of the great ORM/ODM solutions that already exist. Feathers currently supports [Mongoose](mongoose.md), [Sequelize](sequelize.md), [KnexJS](knexjs.md), [Waterline](waterline.md) and [LevelUP](levelup.md) as well as standalone adapters for [in-memory](memory.md) and [NeDB](nedb.md). This allows you to use the following databases, among many others:
+> **Important:** We recommend being familiar with the [common interface](commond.md) chapter before using a specific database adapter.
 
-![Feathers supports a lot of databases](/img/services-data-store.jpg)
+Every official database adapter supports [common functionality](common.md) for initialization, [pagination and sorting](pagination.md) and [advanced querying](querying.md) out of the box and can be [extended](extending.md) with custom functionality. Errors from the adapters (like ORM validation errors) will be passed seamlessly to clients.
 
-- **AsyncStorage** - [feathers-localstorage](localstorage.md)
-- **localStorage** - [feathers-localstorage](localstorage.md)
+This allows you to swap databases whenever the need arises **without having to change any of your querying code or validation hooks** and you can even use multiple databases within the same app.
+
+> **Important:** If your database of choice is not officially supported you can still implement it as [your own service](../service/readme.md) and get hooks and real-time updates for that database. Also, have a look at the [Ecosystem](../ecosystem/readme.md) section to see if there isn't a community supported adapter for the database already.
+
+The following databases are supported:
+
 - **Memory** - [feathers-memory](memory.md)
 - **MongoDB**
   - [feathers-mongoose](mongoose.md)
@@ -19,22 +23,5 @@ Instead of coming up with our own ORM and validation system our official databas
   - [feathers-sequelize](sequelize.md)
 - **Oracle** - [feathers-knex](knexjs.md)
 - **Microsoft SQL Server** - [feathers-sequelize](sequelize.md)
-- **Waterline** - [feathers-waterline](waterline.md) adds support for the following data stores (among others):
-  - Redis
-  - Riak
-  - Neo4j
-  - OrientDB
-  - ArangoDB
-  - Apache Cassandra
-  - GraphQL
-- **LevelUP** - [feathers-levelup](levelup.md) adds support for [many backing stores](https://github.com/Level/levelup/wiki/Modules#storage) including:
-  - LevelDB
-  - Amazon DynamoDB
-  - Windows Azure Table Storage
-  - Redis
-  - Riak
-  - Google Sheets
-
-Every database adapter supports a common syntax for [pagination, sorting and selecting](pagination.md) and [advanced querying](querying.md) out of the box and can be [easily extended](extending.md) with custom functionality. Errors from the adapters (like ORM validation errors) will be passed seamlessly to clients.
-
-This allows you to swap databases whenever the need arises **without having to change any of your querying code or validation hooks** and you can even use multiple databases within the same app!
+- **AsyncStorage** - [feathers-localstorage](localstorage.md)
+- **localStorage** - [feathers-localstorage](localstorage.md)

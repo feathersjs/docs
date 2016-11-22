@@ -1,4 +1,4 @@
-# Pagination, Sorting, Limiting, and Selecting
+# Pagination, Sorting and limiting
 
 All official database adapters support a common way for sorting, limiting, selecting, and paginating `find` method calls as part of `params.query`.
 
@@ -45,74 +45,70 @@ app.service('todos').find({
   paginate: false
 });
 ```
-Note: Disabling the pagination is not available in the client. Only `query` is passed to the server. ([Workaround](https://github.com/feathersjs/feathers/issues/382#issuecomment-238407741))
+
+> **Note:** Disabling or changing the default pagination is not available in the client. Only `params.query` is passed to the server. ([Workaround](https://github.com/feathersjs/feathers/issues/382#issuecomment-238407741))
+
+> **Pro tip:** To just get the number of available records set `$limit` to `0`. This will only run a (fast) counting query against the database.
 
 
-## Sorting, limiting and selecting
+## Sorting and limiting
 
-The `find` API allows the use of `$limit`, `$skip`, `$sort`, and `$select` in the query.  These special parameters can be passed directly inside the query object:
-
-```js
-// Find all recipes that include salt, limit to 10, only include name field.
-{"ingredients":"salt", "$limit":10, "$select": ["name"] } } // JSON
-
-GET /?ingredients=salt&$limit=10&$select[]=name // HTTP
-```
-
-> **ProTip:** As a result of allowing these to be put directly into the query string, you won't want to use `$limit`, `$skip`, `$sort`, or `$select` as field names for documents in your database.
+The `find` API also allows the use of `$limit`, `$skip` and `$sort` in the query.
 
 ### `$limit`
 
 `$limit` will return only the number of results you specify:
 
+```js
+// Retrieves the first two unread messages
+app.service('messages').find({
+  query: {
+    $limit: 2,
+    read: false
+  }
+});
 ```
-// Retrieves the first two records found where age is 37.
-query: {
-  age: 37,
-  $limit: 2
-}
+
+```
+GET /messages?$limit=2&read=false
 ```
 
 ### `$skip`
 
 `$skip` will skip the specified number of results:
 
+```js
+// Retrieves the next two unread messages
+app.service('messages').find({
+  query: {
+    $limit: 2,
+    $skip: 2,
+    read: false
+  }
+});
 ```
-// Retrieves all except the first two records found where age is 37.
-query: {
-  age: 37,
-  $skip: 2
-}
+
+```
+GET /messages?$limit=2&$skip=2&read=false
 ```
 
 ### `$sort`
 
-`$sort` will sort based on the object you provide:
+`$sort` will sort based on the object you provide. It can contain a list of properties by which to sort mapped to the order (`1` ascending, `-1` descending).
 
-```
-// Retrieves all where age is 37, sorted ascending alphabetically by name.
-query: {
-  age: 37,
-  $sort: { name: 1 }
-}
 
-// Retrieves all where age is 37, sorted descending alphabetically by name.
-query: {
-  age: 37,
-  $sort: { name: -1}
-}
-```
-
-### `$select`
-
-`$select` support in a query allows you to pick which fields to include in the results.
-
-```
-// Only retrieve `name` and `id`
-query: {
-  name: 'Alice',
-  $select: ['id', 'name']
-}
+```js
+// Find the 10 newest messages
+app.service('messages').find({
+  query: {
+    $limit: 10,
+    $sort: {
+      createdAt: -1
+    }
+  }
+});
 ```
 
-To exclude fields from a result the [remove hook](../hooks/bundled.md#remove) can be used.
+```
+/messages?$limit=10&$sort[createdAt]=-1
+```

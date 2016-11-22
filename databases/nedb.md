@@ -1,56 +1,58 @@
 # NeDB
 
-[feathers-nedb](https://github.com/feathersjs/feathers-nedb) is a database adapter for [NeDB](https://github.com/louischatriot/nedb), an embedded datastore with a [MongoDB](https://www.mongodb.org/) like API. By default NeDB persists data locally to a file. This is very useful if you do not want to run a separate database server. To use the adapter we have to install both, `feathers-nedb` and the `nedb` package itself:
+[![GitHub stars](https://img.shields.io/github/stars/feathersjs/feathers-nedb.svg?style=social&label=Star)](https://github.com/feathersjs/feathers-nedb/)
+[![npm version](https://img.shields.io/npm/v/feathers-nedb.svg?style=flat-square)](https://www.npmjs.com/package/feathers-nedb)
+[![Changelog](https://img.shields.io/badge/changelog-.md-blue.svg?style=flat-square)](https://github.com/feathersjs/feathers-nedb/blob/master/CHANGELOG.md)
+
+[feathers-nedb](https://github.com/feathersjs/feathers-nedb/) is a database service adapter for [NeDB](https://github.com/louischatriot/nedb), an embedded datastore with a [MongoDB](https://www.mongodb.org/) like API. NeDB can store data in-memory or on the filesystem which makes it useful as a persistent storage without a separate database server.
 
 ```bash
 $ npm install --save nedb feathers-nedb
 ```
 
-## Getting Started
+> **Important:** To use this adapter you also want to be familiar with the [common interface](./common.md) for database adapters.
 
-The following example creates a NeDB `messages` service. It will create a `messages.db` datastore file in the `db-data` directory and automatically load it. If you delete that file, the data will be deleted. For a list of all the available options when creating an NeDB instance check out the [NeDB documentation](https://github.com/louischatriot/nedb#creatingloading-a-database).
+## API
+
+### `service(options)`
+
+Returns a new service instance intitialized with the given options. `Model` has to be an NeDB database instance.
 
 ```js
 const NeDB = require('nedb');
 const service = require('feathers-nedb');
 
 // Create a NeDB instance
-const db = new NeDB({
+const Model = new NeDB({
   filename: './data/messages.db',
   autoload: true
 });
 
-app.use('/messages', service({
-  // Use it as the service `Model`
-  Model: db,
-  // Enable pagination
-  paginate: {
-    default: 2,
-    max: 4
-  }
-}));
+app.use('/messages', service({ Model }));
+app.use('/messages', service({ Model, id, events, paginate }));
 ```
 
-## Options
+__Options:__
 
-The following options can be passed when creating a new NeDB service:
+- `Model` (**required**) - The NeDB database instance. See the [NeDB API](https://github.com/louischatriot/nedb#api) for more information.
+- `id` (*optional*, default: `'_id'`) - The name of the id field property. By design, NeDB will always add an `_id` property.
+- `events` (*optional*) - A list of [custom service events](../real-time/events.md#custom-events) sent by this service
+- `paginate` (*optional*) - A [pagination object](./pagination.md) containing a `default` and `max` page size
 
-- `Model` (**required**) - The NeDB database instance
-- `paginate` [optional] - A pagination object containing a `default` and `max` page size (see the [Pagination chapter](databases/pagination.md))
+## Example
 
-## Complete Example
-
-To run the complete NeDB example we need to install
+Here is an example of a Feathers server with a `messages` NeDB service that supports pagination and persists to `db-data/messages`:
 
 ```
-$ npm install feathers feathers-rest feathers-socketio feathers-nedb nedb body-parser
+$ npm install feathers feathers-errors feathers-rest feathers-socketio feathers-nedb nedb body-parser
 ```
 
-Then add the following into `app.js`:
+In `app.js`:
 
 ```js
 const NeDB = require('nedb');
 const feathers = require('feathers');
+const errorHandler = require('feathers-errors/handler');
 const rest = require('feathers-rest');
 const socketio = require('feathers-socketio');
 const bodyParser = require('body-parser');
@@ -62,7 +64,7 @@ const db = new NeDB({
 });
 
 // Create a feathers instance.
-var app = feathers()
+const app = feathers()
   // Enable REST services
   .configure(rest())
   // Enable Socket.io services
@@ -70,31 +72,29 @@ var app = feathers()
   // Turn on JSON parser for REST services
   .use(bodyParser.json())
   // Turn on URL-encoded parser for REST services
-  .use(bodyParser.urlencoded({extended: true}));
-
-// Connect to the db, create and register a Feathers service.
-app.use('/messages', service({
-  Model: db,
-  paginate: {
-    default: 2,
-    max: 4
-  }
-}));
+  .use(bodyParser.urlencoded({extended: true}))
+  // Connect to the db, create and register a Feathers service.
+  .use('/messages', service({
+    Model: db,
+    paginate: {
+      default: 2,
+      max: 4
+    }
+  }))
+  // Set up default error handler
+  .use(errorHandler());
 
 // Create a dummy Message
 app.service('messages').create({
-  text: 'Oh hai!',
-  complete: false
-}).then(function(message) {
-  console.log('Created message', message);
-});
+  text: 'Message created on server'
+}).then(message => console.log('Created message', message));
 
 // Start the server.
 const port = 3030;
 
-app.listen(port, function() {
+app.listen(port, () => {
   console.log(`Feathers server listening on port ${port}`);
 });
 ```
 
-You can run this example [from the GitHub repository](https://github.com/feathersjs/feathers-nedb/blob/master/example/app.js) with `npm start` and going to [localhost:3030/messages](http://localhost:3030/messages). You should see an empty array. That's because you don't have any messages yet but you now have full CRUD for your new messages service.
+Run the example with `node app` and go to [localhost:3030/messages](http://localhost:3030/messages).
