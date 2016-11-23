@@ -1,7 +1,7 @@
 # Common hooks
 
 Some plug-ins include their own hooks when it makes sense to do so.
-[`feathers-common-hooks`]() contains other useful hooks.
+[`feathers-hooks-common`]() contains other useful hooks.
 
 The following plug-ins come bundled with their own hooks:
 
