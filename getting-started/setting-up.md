@@ -33,7 +33,7 @@ Update your `package.json` start and test scripts:
 
 ```javascript
 "scripts": {
-  "start": "babel-node src/app",
+  "start": "babel-node src/index",
   "test": "mocha test/ --recursive --compilers js:babel-register"
 }
 ```

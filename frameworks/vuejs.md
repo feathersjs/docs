@@ -22,7 +22,7 @@ The Vue.js and Feathers client modules can be loaded individually via [npm](http
 </head>
 <body>
 
-<div id="#app">
+<div id="app">
   <chat-app v-if="user.authenticated">
     <user-list></user-list>
     <message-list>
@@ -84,14 +84,16 @@ The Vue.js and Feathers client modules can be loaded individually via [npm](http
 
 
 <template id="message-template">
-  <img :src="message.sentBy.avatar || placeholder" :alt="message.sentBy.email" class="avatar">
-  <div class="message-wrapper">
-    <p class="message-header">
-      <span class="username font-600">{{ message.email }}</span>
-      <span class="sent-date font-300">{{ message.createdAt | moment }}</span>
-    </p>
-    <p class="message-content font-300">{{ message.text }}</p>
-  </div>
+  <div>
+      <img :src="message.sentBy.avatar || placeholder" :alt="message.sentBy.email" class="avatar">
+      <div class="message-wrapper">
+        <p class="message-header">
+          <span class="username font-600">{{ message.email }}</span>
+          <span class="sent-date font-300">{{ message.createdAt | moment }}</span>
+        </p>
+        <p class="message-content font-300">{{ message.text }}</p>
+      </div>
+    </div>
   </div>
 </template>
 

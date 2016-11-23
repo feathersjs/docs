@@ -23,7 +23,7 @@ Generate your app and follow the prompts.
 $ feathers generate
 ```
 
-When presented with the project name just hit enter.
+When presented with the project name just hit enter, or enter a name (no spaces).
 
 Next, enter in a short description of your app.
 
@@ -41,17 +41,23 @@ Your options should all look like this and you should have seen that a whole bun
 
 Next, npm will do it's thing and install all our dependencies. This can take a minute or two based on your Internet connection speed.
 
-Now our app is ready to go but let's add a Message service for our chat app:
+Now our app is ready to go but let's add a Message service for our chat app. Because we're in the feathers-cli scope, we don't need to preceed the command with `feathers` this time:
 
 ```
-$ feathers generate service
+$ generate service
 ```
 
 The name should be `message` and the other options can be accepted with their default value (we will add authorization in the next chapter):
 
 ![Final Service Configuration](./assets/message-service.png)
 
-We can now start our app with:
+Exit the feathers-cli:
+
+```
+$ exit
+```
+
+We can now start our app, with:
 
 ```
 $ npm start
@@ -116,14 +122,14 @@ Add the following to `public/index.html` before the `</body>` tag:
 </script>
 ```
 
-Open the console, then go to [localhost:3030](http://localhost:3030) and you will see the new message. Those events also work for REST calls. Try running the command below and you will see a new message show up your browser's console.
+Open the console, then go to [localhost:3030](http://localhost:3030) and you will see the new message. Those events also work for REST calls. Try running the command below and you will see a new message show up in your browser's console.
 
 ```
 $ curl 'http://localhost:3030/messages/' -H 'Content-Type: application/json' --data-binary '{ "text": "Hello again!" }'
 ```
 
-This is basically how Feathers does real-time and you can learn more about it in the [Real-Time chapter](../real-time/readme.md).
+This is basically how Feathers does real-time. You can learn more about it in the [Real-Time chapter](../real-time/readme.md).
 
 ## What's next?
 
-In this part we generated our first Feathers app, created our first service, and created our first message. In the [next chapter](user-management.md) we will create a new user and restrict access to our Message service.
+In this part, we generated our first Feathers app, created our first service, and created our first message. In the [next chapter](user-management.md) we will create a new user and restrict access to our Message service.
