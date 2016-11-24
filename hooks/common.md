@@ -88,7 +88,7 @@ and then `fieldName` will be set to the service object(s) selected.
 
 
 ### remove
-`remove(fieldName: string, ...fieldNames?: string[]): HookFunc`
+`remove(fieldName: string [, fieldName: string,...]): HookFunc`
 
 Remove the given fields either from the data submitted or from the result. If the data is an array or a paginated `find` result the hook will remove the field(s) for every item.
 
