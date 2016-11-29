@@ -125,6 +125,10 @@ Will set `params.query` to
 
 > **ProTip:** To get extended query parsing [set](http://expressjs.com/en/4x/api.html#app.set) `app.set('query parser', 'extended')` which will use the [qs](https://www.npmjs.com/package/qs) instead of the built-in [querystring](https://nodejs.org/api/querystring.html) module.
 
+<!-- -->
+
+> **ProTip:** If an array in your request consists of more than 20 items, the [qs](https://www.npmjs.com/package/qs) parser implicitly [converts](https://github.com/ljharb/qs#parsing-arrays) it  to an object with indices as keys. To extend this limit, you can set a custom query parser: `app.set('query parser', str => qs.parse(str, {arrayLimit: 1000}))`
+
 ```js
 const feathers = require('feathers');
 const rest = require('feathers-rest');
