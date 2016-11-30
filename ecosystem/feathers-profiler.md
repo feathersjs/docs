@@ -1,21 +1,23 @@
-# feathers-logger-profiler
+# feathers-profiler
 *Log service calls and gather profile information on them.*
 
-[![Build Status](https://travis-ci.org/feathersjs/feathers-logger-profiler.png?branch=master)](https://travis-ci.org/feathersjs/feathers-logger-profiler)
-[![Code Climate](https://codeclimate.com/github/feathersjs/feathers-logger-profiler/badges/gpa.svg)](https://codeclimate.com/github/feathersjs/feathers-logger-profiler)
-[![Test Coverage](https://codeclimate.com/github/feathersjs/feathers-logger-profiler/badges/coverage.svg)](https://codeclimate.com/github/feathersjs/feathers-logger-profiler/coverage)
-[![Dependency Status](https://img.shields.io/david/feathersjs/feathers-logger-profiler.svg?style=flat-square)](https://david-dm.org/feathersjs/feathers-logger-profiler)
-[![Download Status](https://img.shields.io/npm/dm/feathers-logger-profiler.svg?style=flat-square)](https://www.npmjs.com/package/feathers-logger-profiler)
+[![Build Status](https://travis-ci.org/feathersjs/feathers-profiler.png?branch=master)](https://travis-ci.org/feathersjs/feathers-profiler)
+[![Code Climate](https://codeclimate.com/github/feathersjs/feathers-profiler/badges/gpa.svg)](https://codeclimate.com/github/feathersjs/feathers-profiler)
+[![Test Coverage](https://codeclimate.com/github/feathersjs/feathers-profiler/badges/coverage.svg)](https://codeclimate.com/github/feathersjs/feathers-profiler/coverage)
+[![Dependency Status](https://img.shields.io/david/feathersjs/feathers-profiler.svg?style=flat-square)](https://david-dm.org/feathersjs/feathers-profiler)
+[![Download Status](https://img.shields.io/npm/dm/feathers-profiler.svg?style=flat-square)](https://www.npmjs.com/package/feathers-profiler)
 [![Slack Status](http://slack.feathersjs.com/badge.svg)](http://slack.feathersjs.com)
 
 
 ## Summary
 
-Express middleware loggers will not log service calls transported by websockets.
-`feathers-logger-profiler` logs all service calls
+Service calls transported by websockets are not passed through Express middleware.
+`feathers-profiler` logs service calls from all transports
 and gathers performance information on them.
 
-### `app.configure(loggerStats(options))`
+##### `import { profiler, getProfile, clearProfile, getPending, timestamp } from 'feathers-profiler';`
+
+### `app.configure(profiler(options))`
 
 Start logging and/or profiling service calls.
 
@@ -38,20 +40,20 @@ __Options:__
 - statsDetail
     - default is shown [below](#gathers-profile-information-on-service-calls).
     - `hook => {}` returns a custom category for the call.
+
+
+### `getProfile()`
+
+Returns profile information as an object.
+
+### `clearProfile()`
+
+Re-initializes the profile information.
+The profile internal counts may not add up perfectly unless `getPending() === 0`.
     
 ### `getPending()`
 
-Return the number of currently pending service calls.
-
-### `getStats()`
-
-Return service call profile as an object.
-
-### `clearCache()`
-
-Re-initializes the profile.
-The profile counts will not add up perfectly if `getPending) !== 0`
-at the time of re-initialization.
+Returns the number of currently pending service calls.
 
 ### `timestamp()`
 
@@ -67,7 +69,7 @@ const hooks = require('feathers-hooks');
 const bodyParser = require('body-parser');
 const errorHandler = require('feathers-errors/handler');
 
-const { loggerProfiler, getPending, getStats}  = require('feathers-logger-profiler');
+const { profiler, getProfile, getPending }  = require('feathers-profiler');
 
 // Initialize the application
 const app = feathers()
@@ -78,12 +80,12 @@ const app = feathers()
   .use(bodyParser.urlencoded({ extended: true }))
   .use('users', { ...}) // services
   .use('messages', { ... })
-  .configure(loggerProfiler({ stats: 'detail' }) // must be configured after all services
+  .configure(profiler({ stats: 'detail' }) // must be configured after all services
   .use(errorHandler());
   
   // ... once multiple service calls have been made
   console.log('pending', getPending());
-  console.log(require('util').inspect(getStats(), {
+  console.log(require('util').inspect(getProfile(), {
     depth: 5,
     colors: true
   }));
@@ -100,7 +102,7 @@ The log message may be customized. The default log message includes:
 - Number of service calls pending when call was made.
 - Where service call failed and why.
 
-![logs](../img/logger-profiler-log.jpg)
+![logs](../img/profiler-log.jpg)
 
 ### Gathers profile information on service calls
 
@@ -112,4 +114,4 @@ Profile information is:
 - Average, min and max elapsed time provide information on how responsive the server is.
 - The number of returned items provides information on how large the `find` results were.
 
-![stats](../img/logger-profiler-stats.jpg)
+![stats](../img/profiler-stats.jpg)

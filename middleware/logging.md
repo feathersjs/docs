@@ -9,5 +9,5 @@ For production it is recommended that you use an error reporting service. [Sentr
 > **ProTip:** Because Feathers extends Express you can use any Express compatible logging middleware with Feathers.
 
 However Express middleware loggers will not report on service calls transported by websockets.
-[`feathers-logger-profiler`](../ecosystem/feathers-logger-profiler.md)
+[`feathers-profiler`](../ecosystem/feathers-profiler.md)
 can log all service calls and gather profile information on them.
