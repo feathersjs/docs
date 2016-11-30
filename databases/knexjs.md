@@ -52,6 +52,11 @@ __Options:__
 - `events` (*optional*) - A list of [custom service events](../real-time/events.md#custom-events) sent by this service
 - `paginate` (*optional*) - A [pagination object](./pagination.md) containing a `default` and `max` page size
 
+### `adapter.createQuery(query)`
+
+Returns a KnexJS query with the [common filter criteria](./querying.md) (without pagination) applied.
+
+
 ## Example
 
 Here's a complete example of a Feathers server with a `messages` SQLite service. We are using the [Knex schema builder](http://knexjs.org/#Schema) and [SQLite](https://sqlite.org/) as the database.
@@ -150,4 +155,26 @@ Through the REST API:
 
 ```
 /messages?text[$like]=Hello%
+```
+
+
+## Customizing the query
+
+In a `find` call, `params.knex` can be passed a KnexJS query (without pagination) to customize the find results.
+
+Combined with `.createQuery(query)`, which returns a new KnexJS query with the [common filter criteria](./querying.md) applied, this can be used to create more complex queries. The best way to customize the query is in a [before hook](../hooks/index.md) for `find`.
+
+```js
+app.service('mesages').hooks({
+  before: {
+    find(hook) {
+      const query = this.createQuery(hook.params.query);
+
+      // do something with query here
+      query.orderBy('name', 'desc');
+
+      hook.params.knex = query;
+    }
+  }
+});
 ```
