@@ -3,7 +3,11 @@
     "website": "styles/website.css"
   },
   "plugins": [
-    "collapsible-menu"
+
+    "heading-anchors",
+    "edit-link",
+    "ga",
+    "versions"
   ],
   "pluginsConfig": {
     "edit-link": {
