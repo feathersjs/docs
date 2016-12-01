@@ -4,6 +4,7 @@ These utilities may be useful when you are writing your own hooks.
 You can import them from `feathers-hooks-common/lib/utils`.
 
 * [checkcontext](#checkcontext)
+* [combine](#combine)
 * [getItems, replaceItems](#getitems-replaceitems)
 * [getByDot, setByDot](#getbydot-setbydot)
 
@@ -37,6 +38,23 @@ Options
 - `type` [optional] - The hook may be run in `before` or `after`. `null` allows the hook to be run in either.
 - `methods` [optional] - The hook may be run for these methods.
 - `label` [optional] - The label to identify the hook in error messages, e.g. its name.
+
+### combine
+`combine(...hooks: HookFunc[]): HookFunc`
+
+Sequentially execute multiple hooks within a custom hook function.
+
+```javascript
+function (hook) { // an arrow func cannot be used because we need 'this'
+  // ...
+  hooks.combine(hook1, hook2, hook3).call(this, hook)
+    .then(hook => {});
+}
+```
+
+Options
+
+- `hooks` [optional] - The hooks to run.
 
 ### getItems, replaceItems
 `getItems(hook: Hook): Item[]|Item
