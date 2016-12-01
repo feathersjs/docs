@@ -6,6 +6,13 @@
 
 ---
 
+Or for a complete and comprehensive 8 part video tutorial guide...
+[![Comprehensive Guide to FeathersJS with React](http://i.imgur.com/entWb29.jpg)](https://www.youtube.com/watch?v=nR0kxhbI09I "Fullstack Feathersjs and React Web App")
+
+> Mad ♥️ to [Ben Awad](https://www.youtube.com/channel/UC-8QAzbLcRglXeN_MY9blyw) for putting together an entire video series.
+
+---
+
 With [NodeJS](https://nodejs.org) installed, you can quickly scaffold your first REST and real-time API by following these few steps.
 
 > **ProTip:** Make sure you have [set up your development environment](./setting-up.md) properly. We recommend node v5.x+.
