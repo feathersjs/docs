@@ -62,10 +62,6 @@ app.service('user').before({
 
 You can view the all available options in the [node-jsonwebtoken](https://github.com/auth0/node-jsonwebtoken) repo.
 
-
-
-
-
 ## verifyOrRestrict
 
 The `verifyOrRestrict` is intended to be used as a **before** hook for any service on the **find** or **get** methods. The hook will attempt to verify a token. If the token is missing or is invalid it adds a restriction onto the query and calls find with that query. If the token is valid it adds the decrypted payload to `hook.params.payload` which contains the user id but does not add the restriction.
@@ -95,7 +91,7 @@ but are not authenticated, then `verifyOrRestrict` will merge the restriction in
 { likes: {$gt: 50} , approved: true}
 ```
 
-It hook will always call the **find** method even if a _get by id_ request was made so that if the document being requested was not approved then the query would not succeed.
+The hook will always call the **find** method even if a _get by id_ request was made so that if the document being requested was not approved then the query would not succeed.
 
 #### Options
 
