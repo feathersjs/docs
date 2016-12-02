@@ -1,12 +1,9 @@
 # feathers-service-logger-stats
 *description*
 
-[![Build Status](https://travis-ci.org/feathersjs/feathers-service-logger-stats.png?branch=master)](https://travis-ci.org/feathersjs/feathers-service-logger-stats)
-[![Code Climate](https://codeclimate.com/github/feathersjs/feathers-service-logger-stats/badges/gpa.svg)](https://codeclimate.com/github/feathersjs/feathers-service-logger-stats)
-[![Test Coverage](https://codeclimate.com/github/feathersjs/feathers-service-logger-stats/badges/coverage.svg)](https://codeclimate.com/github/feathersjs/feathers-service-logger-stats/coverage)
-[![Dependency Status](https://img.shields.io/david/feathersjs/feathers-service-logger-stats.svg?style=flat-square)](https://david-dm.org/feathersjs/feathers-service-logger-stats)
-[![Download Status](https://img.shields.io/npm/dm/feathers-service-logger-stats.svg?style=flat-square)](https://www.npmjs.com/package/feathers-service-logger-stats)
-[![Slack Status](http://slack.feathersjs.com/badge.svg)](http://slack.feathersjs.com)
+[![GitHub stars](https://img.shields.io/github/stars/feathersjs/feathers-service-logger-stats.png?style=social&label=Star)](https://github.com/feathersjs/feathers-service-logger-stats/)
+[![npm version](https://img.shields.io/npm/v/feathers-service-logger-stats.png?style=flat-square)](https://www.npmjs.com/package/feathers-service-logger-stats)
+[![Changelog](https://img.shields.io/badge/changelog-.md-blue.png?style=flat-square)](https://github.com/feathersjs/feathers-service-logger-stats/blob/master/CHANGELOG.md)
 
 
 ## Summary

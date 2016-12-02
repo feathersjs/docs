@@ -1,12 +1,9 @@
 # feathers-batch
 *description*
 
-[![Build Status](https://travis-ci.org/feathersjs/feathers-batch.png?branch=master)](https://travis-ci.org/feathersjs/feathers-batch)
-[![Code Climate](https://codeclimate.com/github/feathersjs/feathers-batch/badges/gpa.svg)](https://codeclimate.com/github/feathersjs/feathers-batch)
-[![Test Coverage](https://codeclimate.com/github/feathersjs/feathers-batch/badges/coverage.svg)](https://codeclimate.com/github/feathersjs/feathers-batch/coverage)
-[![Dependency Status](https://img.shields.io/david/feathersjs/feathers-batch.svg?style=flat-square)](https://david-dm.org/feathersjs/feathers-batch)
-[![Download Status](https://img.shields.io/npm/dm/feathers-batch.svg?style=flat-square)](https://www.npmjs.com/package/feathers-batch)
-[![Slack Status](http://slack.feathersjs.com/badge.svg)](http://slack.feathersjs.com)
+[![GitHub stars](https://img.shields.io/github/stars/feathersjs/feathers-batch.png?style=social&label=Star)](https://github.com/feathersjs/feathers-batch/)
+[![npm version](https://img.shields.io/npm/v/feathers-batch.png?style=flat-square)](https://www.npmjs.com/package/feathers-batch)
+[![Changelog](https://img.shields.io/badge/changelog-.md-blue.png?style=flat-square)](https://github.com/feathersjs/feathers-batch/blob/master/CHANGELOG.md)
 
 
 ## Summary

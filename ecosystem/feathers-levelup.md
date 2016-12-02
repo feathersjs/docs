@@ -1,12 +1,9 @@
 # feathers-levelup (DEPRECATED)
 *description*
 
-[![Build Status](https://travis-ci.org/feathersjs/feathers-levelup.png?branch=master)](https://travis-ci.org/feathersjs/feathers-levelup)
-[![Code Climate](https://codeclimate.com/github/feathersjs/feathers-levelup/badges/gpa.svg)](https://codeclimate.com/github/feathersjs/feathers-levelup)
-[![Test Coverage](https://codeclimate.com/github/feathersjs/feathers-levelup/badges/coverage.svg)](https://codeclimate.com/github/feathersjs/feathers-levelup/coverage)
-[![Dependency Status](https://img.shields.io/david/feathersjs/feathers-levelup.svg?style=flat-square)](https://david-dm.org/feathersjs/feathers-levelup)
-[![Download Status](https://img.shields.io/npm/dm/feathers-levelup.svg?style=flat-square)](https://www.npmjs.com/package/feathers-levelup)
-[![Slack Status](http://slack.feathersjs.com/badge.svg)](http://slack.feathersjs.com)
+[![GitHub stars](https://img.shields.io/github/stars/feathersjs/feathers-levelup.png?style=social&label=Star)](https://github.com/feathersjs/feathers-levelup/)
+[![npm version](https://img.shields.io/npm/v/feathers-levelup.png?style=flat-square)](https://www.npmjs.com/package/feathers-levelup)
+[![Changelog](https://img.shields.io/badge/changelog-.md-blue.png?style=flat-square)](https://github.com/feathersjs/feathers-levelup/blob/master/CHANGELOG.md)
 
 
 ## Summary

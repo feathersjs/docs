@@ -1,8 +1,8 @@
 # Mongoose
 
-[![GitHub stars](https://img.shields.io/github/stars/feathersjs/feathers-mongoose.svg?style=social&label=Star)](https://github.com/feathersjs/feathers-mongoose/)
-[![npm version](https://img.shields.io/npm/v/feathers-mongoose.svg?style=flat-square)](https://www.npmjs.com/package/feathers-mongoose)
-[![Changelog](https://img.shields.io/badge/changelog-.md-blue.svg?style=flat-square)](https://github.com/feathersjs/feathers-mongoose/blob/master/CHANGELOG.md)
+[![GitHub stars](https://img.shields.io/github/stars/feathersjs/feathers-mongoose.png?style=social&label=Star)](https://github.com/feathersjs/feathers-mongoose/)
+[![npm version](https://img.shields.io/npm/v/feathers-mongoose.png?style=flat-square)](https://www.npmjs.com/package/feathers-mongoose)
+[![Changelog](https://img.shields.io/badge/changelog-.md-blue.png?style=flat-square)](https://github.com/feathersjs/feathers-mongoose/blob/master/CHANGELOG.md)
 
 [feathers-mongoose](https://github.com/feathersjs/feathers-mongoose) is a database adapter for [Mongoose](http://mongoosejs.com/), an object modeling tool for [MongoDB](https://www.mongodb.org/).
 

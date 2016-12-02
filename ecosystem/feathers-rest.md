@@ -1,12 +1,9 @@
 # feathers-rest
 *description*
 
-[![Build Status](https://travis-ci.org/feathersjs/feathers-rest.png?branch=master)](https://travis-ci.org/feathersjs/feathers-rest)
-[![Code Climate](https://codeclimate.com/github/feathersjs/feathers-rest/badges/gpa.svg)](https://codeclimate.com/github/feathersjs/feathers-rest)
-[![Test Coverage](https://codeclimate.com/github/feathersjs/feathers-rest/badges/coverage.svg)](https://codeclimate.com/github/feathersjs/feathers-rest/coverage)
-[![Dependency Status](https://img.shields.io/david/feathersjs/feathers-rest.svg?style=flat-square)](https://david-dm.org/feathersjs/feathers-rest)
-[![Download Status](https://img.shields.io/npm/dm/feathers-rest.svg?style=flat-square)](https://www.npmjs.com/package/feathers-rest)
-[![Slack Status](http://slack.feathersjs.com/badge.svg)](http://slack.feathersjs.com)
+[![GitHub stars](https://img.shields.io/github/stars/feathersjs/feathers-rest.png?style=social&label=Star)](https://github.com/feathersjs/feathers-rest/)
+[![npm version](https://img.shields.io/npm/v/feathers-rest.png?style=flat-square)](https://www.npmjs.com/package/feathers-rest)
+[![Changelog](https://img.shields.io/badge/changelog-.md-blue.png?style=flat-square)](https://github.com/feathersjs/feathers-rest/blob/master/CHANGELOG.md)
 
 
 ## Summary

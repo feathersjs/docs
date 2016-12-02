@@ -1,12 +1,9 @@
 # feathers-mailer
 *description*
 
-[![Build Status](https://travis-ci.org/feathersjs/feathers-mailer.png?branch=master)](https://travis-ci.org/feathersjs/feathers-mailer)
-[![Code Climate](https://codeclimate.com/github/feathersjs/feathers-mailer/badges/gpa.svg)](https://codeclimate.com/github/feathersjs/feathers-mailer)
-[![Test Coverage](https://codeclimate.com/github/feathersjs/feathers-mailer/badges/coverage.svg)](https://codeclimate.com/github/feathersjs/feathers-mailer/coverage)
-[![Dependency Status](https://img.shields.io/david/feathersjs/feathers-mailer.svg?style=flat-square)](https://david-dm.org/feathersjs/feathers-mailer)
-[![Download Status](https://img.shields.io/npm/dm/feathers-mailer.svg?style=flat-square)](https://www.npmjs.com/package/feathers-mailer)
-[![Slack Status](http://slack.feathersjs.com/badge.svg)](http://slack.feathersjs.com)
+[![GitHub stars](https://img.shields.io/github/stars/feathersjs/feathers-mailer.png?style=social&label=Star)](https://github.com/feathersjs/feathers-mailer/)
+[![npm version](https://img.shields.io/npm/v/feathers-mailer.png?style=flat-square)](https://www.npmjs.com/package/feathers-mailer)
+[![Changelog](https://img.shields.io/badge/changelog-.md-blue.png?style=flat-square)](https://github.com/feathersjs/feathers-mailer/blob/master/CHANGELOG.md)
 
 
 ## Summary

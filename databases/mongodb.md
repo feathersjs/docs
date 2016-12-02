@@ -1,8 +1,8 @@
 # MongoDB
 
-[![GitHub stars](https://img.shields.io/github/stars/feathersjs/feathers-mongodb.svg?style=social&label=Star)](https://github.com/feathersjs/feathers-mongodb/)
-[![npm version](https://img.shields.io/npm/v/feathers-mongodb.svg?style=flat-square)](https://www.npmjs.com/package/feathers-mongodb)
-[![Changelog](https://img.shields.io/badge/changelog-.md-blue.svg?style=flat-square)](https://github.com/feathersjs/feathers-mongodb/blob/master/CHANGELOG.md)
+[![GitHub stars](https://img.shields.io/github/stars/feathersjs/feathers-mongodb.png?style=social&label=Star)](https://github.com/feathersjs/feathers-mongodb/)
+[![npm version](https://img.shields.io/npm/v/feathers-mongodb.png?style=flat-square)](https://www.npmjs.com/package/feathers-mongodb)
+[![Changelog](https://img.shields.io/badge/changelog-.md-blue.png?style=flat-square)](https://github.com/feathersjs/feathers-mongodb/blob/master/CHANGELOG.md)
 
 [feathers-mongodb](https://github.com/feathersjs/feathers-mongodb) is a database adapter for [MongoDB](https://www.mongodb.org/). It uses the [official NodeJS driver for MongoDB](https://www.npmjs.com/package/mongodb).
 

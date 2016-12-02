@@ -1,12 +1,9 @@
 # feathers-hooks-common
 *description*
 
-[![Build Status](https://travis-ci.org/feathersjs/feathers-hooks-common.png?branch=master)](https://travis-ci.org/feathersjs/feathers-hooks-common)
-[![Code Climate](https://codeclimate.com/github/feathersjs/feathers-hooks-common/badges/gpa.svg)](https://codeclimate.com/github/feathersjs/feathers-hooks-common)
-[![Test Coverage](https://codeclimate.com/github/feathersjs/feathers-hooks-common/badges/coverage.svg)](https://codeclimate.com/github/feathersjs/feathers-hooks-common/coverage)
-[![Dependency Status](https://img.shields.io/david/feathersjs/feathers-hooks-common.svg?style=flat-square)](https://david-dm.org/feathersjs/feathers-hooks-common)
-[![Download Status](https://img.shields.io/npm/dm/feathers-hooks-common.svg?style=flat-square)](https://www.npmjs.com/package/feathers-hooks-common)
-[![Slack Status](http://slack.feathersjs.com/badge.svg)](http://slack.feathersjs.com)
+[![GitHub stars](https://img.shields.io/github/stars/feathersjs/feathers-hooks-common.png?style=social&label=Star)](https://github.com/feathersjs/feathers-hooks-common/)
+[![npm version](https://img.shields.io/npm/v/feathers-hooks-common.png?style=flat-square)](https://www.npmjs.com/package/feathers-hooks-common)
+[![Changelog](https://img.shields.io/badge/changelog-.md-blue.png?style=flat-square)](https://github.com/feathersjs/feathers-hooks-common/blob/master/CHANGELOG.md)
 
 
 ## Summary
