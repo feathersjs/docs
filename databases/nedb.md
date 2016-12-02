@@ -1,8 +1,8 @@
 # NeDB
 
-[![GitHub stars](https://img.shields.io/github/stars/feathersjs/feathers-nedb.svg?style=social&label=Star)](https://github.com/feathersjs/feathers-nedb/)
-[![npm version](https://img.shields.io/npm/v/feathers-nedb.svg?style=flat-square)](https://www.npmjs.com/package/feathers-nedb)
-[![Changelog](https://img.shields.io/badge/changelog-.md-blue.svg?style=flat-square)](https://github.com/feathersjs/feathers-nedb/blob/master/CHANGELOG.md)
+[![GitHub stars](https://img.shields.io/github/stars/feathersjs/feathers-nedb.png?style=social&label=Star)](https://github.com/feathersjs/feathers-nedb/)
+[![npm version](https://img.shields.io/npm/v/feathers-nedb.png?style=flat-square)](https://www.npmjs.com/package/feathers-nedb)
+[![Changelog](https://img.shields.io/badge/changelog-.md-blue.png?style=flat-square)](https://github.com/feathersjs/feathers-nedb/blob/master/CHANGELOG.md)
 
 [feathers-nedb](https://github.com/feathersjs/feathers-nedb/) is a database service adapter for [NeDB](https://github.com/louischatriot/nedb), an embedded datastore with a [MongoDB](https://www.mongodb.org/) like API. NeDB can store data in-memory or on the filesystem which makes it useful as a persistent storage without a separate database server.
 

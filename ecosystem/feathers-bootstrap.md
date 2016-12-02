@@ -1,12 +1,9 @@
 # feathers-bootstrap
 *description*
 
-[![Build Status](https://travis-ci.org/feathersjs/feathers-bootstrap.png?branch=master)](https://travis-ci.org/feathersjs/feathers-bootstrap)
-[![Code Climate](https://codeclimate.com/github/feathersjs/feathers-bootstrap/badges/gpa.svg)](https://codeclimate.com/github/feathersjs/feathers-bootstrap)
-[![Test Coverage](https://codeclimate.com/github/feathersjs/feathers-bootstrap/badges/coverage.svg)](https://codeclimate.com/github/feathersjs/feathers-bootstrap/coverage)
-[![Dependency Status](https://img.shields.io/david/feathersjs/feathers-bootstrap.svg?style=flat-square)](https://david-dm.org/feathersjs/feathers-bootstrap)
-[![Download Status](https://img.shields.io/npm/dm/feathers-bootstrap.svg?style=flat-square)](https://www.npmjs.com/package/feathers-bootstrap)
-[![Slack Status](http://slack.feathersjs.com/badge.svg)](http://slack.feathersjs.com)
+[![GitHub stars](https://img.shields.io/github/stars/feathersjs/feathers-bootstrap.png?style=social&label=Star)](https://github.com/feathersjs/feathers-bootstrap/)
+[![npm version](https://img.shields.io/npm/v/feathers-bootstrap.png?style=flat-square)](https://www.npmjs.com/package/feathers-bootstrap)
+[![Changelog](https://img.shields.io/badge/changelog-.md-blue.png?style=flat-square)](https://github.com/feathersjs/feathers-bootstrap/blob/master/CHANGELOG.md)
 
 
 ## Summary

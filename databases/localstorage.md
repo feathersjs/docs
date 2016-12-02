@@ -1,8 +1,8 @@
 # LocalStorage and AsyncStorage
 
-[![GitHub stars](https://img.shields.io/github/stars/feathersjs/feathers-localstorage.svg?style=social&label=Star)](https://github.com/feathersjs/feathers-localstorage/)
-[![npm version](https://img.shields.io/npm/v/feathers-localstorage.svg?style=flat-square)](https://www.npmjs.com/package/feathers-localstorage)
-[![Changelog](https://img.shields.io/badge/changelog-.md-blue.svg?style=flat-square)](https://github.com/feathersjs/feathers-localstorage/blob/master/CHANGELOG.md)
+[![GitHub stars](https://img.shields.io/github/stars/feathersjs/feathers-localstorage.png?style=social&label=Star)](https://github.com/feathersjs/feathers-localstorage/)
+[![npm version](https://img.shields.io/npm/v/feathers-localstorage.png?style=flat-square)](https://www.npmjs.com/package/feathers-localstorage)
+[![Changelog](https://img.shields.io/badge/changelog-.md-blue.png?style=flat-square)](https://github.com/feathersjs/feathers-localstorage/blob/master/CHANGELOG.md)
 
 [feathers-localstorage](https://github.com/feathersjs/feathers-localstorage/) is a database service adapter that extends [feathers-memory](./memory.md) and stores data in [localStorage](https://developer.mozilla.org/en/docs/Web/API/Window/localStorage) in the browser or [AsyncStorage](https://facebook.github.io/react-native/docs/asyncstorage.html) in React Native.
 

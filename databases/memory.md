@@ -1,8 +1,8 @@
 # In Memory
 
-[![GitHub stars](https://img.shields.io/github/stars/feathersjs/feathers-memory.svg?style=social&label=Star)](https://github.com/feathersjs/feathers-memory/)
-[![npm version](https://img.shields.io/npm/v/feathers-memory.svg?style=flat-square)](https://www.npmjs.com/package/feathers-memory)
-[![Changelog](https://img.shields.io/badge/changelog-.md-blue.svg?style=flat-square)](https://github.com/feathersjs/feathers-memory/blob/master/CHANGELOG.md)
+[![GitHub stars](https://img.shields.io/github/stars/feathersjs/feathers-memory.png?style=social&label=Star)](https://github.com/feathersjs/feathers-memory/)
+[![npm version](https://img.shields.io/npm/v/feathers-memory.png?style=flat-square)](https://www.npmjs.com/package/feathers-memory)
+[![Changelog](https://img.shields.io/badge/changelog-.md-blue.png?style=flat-square)](https://github.com/feathersjs/feathers-memory/blob/master/CHANGELOG.md)
 
 [feathers-memory](https://github.com/feathersjs/feathers-memory/) is a database service adapter for in-memory data storage that works on all platforms.
 

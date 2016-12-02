@@ -1,12 +1,9 @@
 # feathers-authentication-popups
 
 [![Build Status](https://travis-ci.org/feathersjs/feathers-authentication-popups.png?branch=master)](https://travis-ci.org/feathersjs/feathers-authentication-popups)
-[![Code Climate](https://codeclimate.com/github/feathersjs/feathers-authentication-popups/badges/gpa.svg)](https://codeclimate.com/github/feathersjs/feathers-authentication-popups)
-[![Test Coverage](https://codeclimate.com/github/feathersjs/feathers-authentication-popups/badges/coverage.svg)](https://codeclimate.com/github/feathersjs/feathers-authentication-popups/coverage)
-[![Dependency Status](https://img.shields.io/david/feathersjs/feathers-authentication-popups.svg?style=flat-square)](https://david-dm.org/feathersjs/feathers-authentication-popups)
-[![Download Status](https://img.shields.io/npm/dm/feathers-authentication-popups.svg?style=flat-square)](https://www.npmjs.com/package/feathers-authentication-popups)
-[![Slack Status](http://slack.feathersjs.com/badge.svg)](http://slack.feathersjs.com)
-
+[![GitHub stars](https://img.shields.io/github/stars/feathersjs/feathers-authentication-popups.png?style=social&label=Star)](https://github.com/feathersjs/feathers-authentication-popups/)
+[![npm version](https://img.shields.io/npm/v/feathers-authentication-popups.png?style=flat-square)](https://www.npmjs.com/package/feathers-authentication-popups)
+[![Changelog](https://img.shields.io/badge/changelog-.md-blue.png?style=flat-square)](https://github.com/feathersjs/feathers-authentication-popups/blob/master/CHANGELOG.md)
 > Server and client utils for implementing popup-based authentication flows
 
 ## Summary

@@ -1,8 +1,8 @@
 # KnexJS
 
-[![GitHub stars](https://img.shields.io/github/stars/feathersjs/feathers-knex.svg?style=social&label=Star)](https://github.com/feathersjs/feathers-knex/)
-[![npm version](https://img.shields.io/npm/v/feathers-knex.svg?style=flat-square)](https://www.npmjs.com/package/feathers-knex)
-[![Changelog](https://img.shields.io/badge/changelog-.md-blue.svg?style=flat-square)](https://github.com/feathersjs/feathers-knex/blob/master/CHANGELOG.md)
+[![GitHub stars](https://img.shields.io/github/stars/feathersjs/feathers-knex.png?style=social&label=Star)](https://github.com/feathersjs/feathers-knex/)
+[![npm version](https://img.shields.io/npm/v/feathers-knex.png?style=flat-square)](https://www.npmjs.com/package/feathers-knex)
+[![Changelog](https://img.shields.io/badge/changelog-.md-blue.png?style=flat-square)](https://github.com/feathersjs/feathers-knex/blob/master/CHANGELOG.md)
 
 [feathers-knex](https://github.com/feathersjs/feathers-knex) is a database adapter for [KnexJS](http://knexjs.org/), an SQL query builder for Postgres, MSSQL, MySQL, MariaDB, SQLite3, and Oracle.
 

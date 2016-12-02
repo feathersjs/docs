@@ -1,8 +1,8 @@
 # RethinkDB
 
-[![GitHub stars](https://img.shields.io/github/stars/feathersjs/feathers-rethinkdb.svg?style=social&label=Star)](https://github.com/feathersjs/feathers-rethinkdb/)
-[![npm version](https://img.shields.io/npm/v/feathers-rethinkdb.svg?style=flat-square)](https://www.npmjs.com/package/feathers-rethinkdb)
-[![Changelog](https://img.shields.io/badge/changelog-.md-blue.svg?style=flat-square)](https://github.com/feathersjs/feathers-rethinkdb/blob/master/CHANGELOG.md)
+[![GitHub stars](https://img.shields.io/github/stars/feathersjs/feathers-rethinkdb.png?style=social&label=Star)](https://github.com/feathersjs/feathers-rethinkdb/)
+[![npm version](https://img.shields.io/npm/v/feathers-rethinkdb.png?style=flat-square)](https://www.npmjs.com/package/feathers-rethinkdb)
+[![Changelog](https://img.shields.io/badge/changelog-.md-blue.png?style=flat-square)](https://github.com/feathersjs/feathers-rethinkdb/blob/master/CHANGELOG.md)
 
 [feathers-rethinkdb](https://github.com/feathersjs/feathers-rethinkdb) is a database adapter for [RethinkDB](https://rethinkdb.com), a real-time database.
 

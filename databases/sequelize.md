@@ -1,8 +1,8 @@
 # Sequelize
 
-[![GitHub stars](https://img.shields.io/github/stars/feathersjs/feathers-sequelize.svg?style=social&label=Star)](https://github.com/feathersjs/feathers-sequelize/)
-[![npm version](https://img.shields.io/npm/v/feathers-sequelize.svg?style=flat-square)](https://www.npmjs.com/package/feathers-sequelize)
-[![Changelog](https://img.shields.io/badge/changelog-.md-blue.svg?style=flat-square)](https://github.com/feathersjs/feathers-sequelize/blob/master/CHANGELOG.md)
+[![GitHub stars](https://img.shields.io/github/stars/feathersjs/feathers-sequelize.png?style=social&label=Star)](https://github.com/feathersjs/feathers-sequelize/)
+[![npm version](https://img.shields.io/npm/v/feathers-sequelize.png?style=flat-square)](https://www.npmjs.com/package/feathers-sequelize)
+[![Changelog](https://img.shields.io/badge/changelog-.md-blue.png?style=flat-square)](https://github.com/feathersjs/feathers-sequelize/blob/master/CHANGELOG.md)
 
 [feathers-sequelize](https://github.com/feathersjs/feathers-sequelize) is a database adapter for [Sequelize](http://sequelizejs.com), an ORM for Node.js. It supports PostgreSQL, MySQL, MariaDB, SQLite and MSSQL and features transaction support, relations, read replication and more.
 

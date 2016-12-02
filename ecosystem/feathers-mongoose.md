@@ -1,12 +1,9 @@
 # feathers-mongoose
 *description*
 
-[![Build Status](https://travis-ci.org/feathersjs/feathers-mongoose.png?branch=master)](https://travis-ci.org/feathersjs/feathers-mongoose)
-[![Code Climate](https://codeclimate.com/github/feathersjs/feathers-mongoose/badges/gpa.svg)](https://codeclimate.com/github/feathersjs/feathers-mongoose)
-[![Test Coverage](https://codeclimate.com/github/feathersjs/feathers-mongoose/badges/coverage.svg)](https://codeclimate.com/github/feathersjs/feathers-mongoose/coverage)
-[![Dependency Status](https://img.shields.io/david/feathersjs/feathers-mongoose.svg?style=flat-square)](https://david-dm.org/feathersjs/feathers-mongoose)
-[![Download Status](https://img.shields.io/npm/dm/feathers-mongoose.svg?style=flat-square)](https://www.npmjs.com/package/feathers-mongoose)
-[![Slack Status](http://slack.feathersjs.com/badge.svg)](http://slack.feathersjs.com)
+[![GitHub stars](https://img.shields.io/github/stars/feathersjs/feathers-mongoose.png?style=social&label=Star)](https://github.com/feathersjs/feathers-mongoose/)
+[![npm version](https://img.shields.io/npm/v/feathers-mongoose.png?style=flat-square)](https://www.npmjs.com/package/feathers-mongoose)
+[![Changelog](https://img.shields.io/badge/changelog-.md-blue.png?style=flat-square)](https://github.com/feathersjs/feathers-mongoose/blob/master/CHANGELOG.md)
 
 
 ## Summary

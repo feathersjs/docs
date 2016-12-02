@@ -1,12 +1,9 @@
 # feathers-authentication-client
 *description*
 
-[![Build Status](https://travis-ci.org/feathersjs/feathers-authentication-client.png?branch=master)](https://travis-ci.org/feathersjs/feathers-authentication-client)
-[![Code Climate](https://codeclimate.com/github/feathersjs/feathers-authentication-client/badges/gpa.svg)](https://codeclimate.com/github/feathersjs/feathers-authentication-client)
-[![Test Coverage](https://codeclimate.com/github/feathersjs/feathers-authentication-client/badges/coverage.svg)](https://codeclimate.com/github/feathersjs/feathers-authentication-client/coverage)
-[![Dependency Status](https://img.shields.io/david/feathersjs/feathers-authentication-client.svg?style=flat-square)](https://david-dm.org/feathersjs/feathers-authentication-client)
-[![Download Status](https://img.shields.io/npm/dm/feathers-authentication-client.svg?style=flat-square)](https://www.npmjs.com/package/feathers-authentication-client)
-[![Slack Status](http://slack.feathersjs.com/badge.svg)](http://slack.feathersjs.com)
+[![GitHub stars](https://img.shields.io/github/stars/feathersjs/feathers-authentication-client.png?style=social&label=Star)](https://github.com/feathersjs/feathers-authentication-client/)
+[![npm version](https://img.shields.io/npm/v/feathers-authentication-client.png?style=flat-square)](https://www.npmjs.com/package/feathers-authentication-client)
+[![Changelog](https://img.shields.io/badge/changelog-.md-blue.png?style=flat-square)](https://github.com/feathersjs/feathers-authentication-client/blob/master/CHANGELOG.md)
 
 
 ## Summary

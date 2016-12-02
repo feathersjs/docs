@@ -1,12 +1,9 @@
 # feathers-primus
 *description*
 
-[![Build Status](https://travis-ci.org/feathersjs/feathers-primus.png?branch=master)](https://travis-ci.org/feathersjs/feathers-primus)
-[![Code Climate](https://codeclimate.com/github/feathersjs/feathers-primus/badges/gpa.svg)](https://codeclimate.com/github/feathersjs/feathers-primus)
-[![Test Coverage](https://codeclimate.com/github/feathersjs/feathers-primus/badges/coverage.svg)](https://codeclimate.com/github/feathersjs/feathers-primus/coverage)
-[![Dependency Status](https://img.shields.io/david/feathersjs/feathers-primus.svg?style=flat-square)](https://david-dm.org/feathersjs/feathers-primus)
-[![Download Status](https://img.shields.io/npm/dm/feathers-primus.svg?style=flat-square)](https://www.npmjs.com/package/feathers-primus)
-[![Slack Status](http://slack.feathersjs.com/badge.svg)](http://slack.feathersjs.com)
+[![GitHub stars](https://img.shields.io/github/stars/feathersjs/feathers-primus.png?style=social&label=Star)](https://github.com/feathersjs/feathers-primus/)
+[![npm version](https://img.shields.io/npm/v/feathers-primus.png?style=flat-square)](https://www.npmjs.com/package/feathers-primus)
+[![Changelog](https://img.shields.io/badge/changelog-.md-blue.png?style=flat-square)](https://github.com/feathersjs/feathers-primus/blob/master/CHANGELOG.md)
 
 
 ## Summary
