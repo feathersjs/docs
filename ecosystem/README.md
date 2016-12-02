@@ -6,9 +6,10 @@ Below are some of the amazing things built with Feathers or for the Feathers eco
 
 - [Feathers Chat](https://github.com/feathersjs/feathers-chat) ![Official Feathers Repo](/img/tiny-feathers-logo.png) 
 - [Feathers React Native Chat](https://github.com/feathersjs/feathers-react-native-chat) ![Official Feathers Repo](/img/tiny-feathers-logo.png) 
-- [Headstart](http://www.headstartapp.com)
-- [GenerousTickets](https://generoustickets.com)
-- [Taxfyle](https://www.taxfyle.com)
+- [Headstart](http://www.headstartapp.com/)
+- [GenerousTickets](https://generoustickets.com/)
+- [Taxfyle](https://www.taxfyle.com/)
+- [J.A.B. Property Investments](https://jabpi.com)
 
 ## Starter stacks, Examples and Tutorials
 

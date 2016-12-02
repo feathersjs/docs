@@ -48,7 +48,8 @@ __Options:__
 
 > **Important:** To avoid odd error handling behaviour, always set `mongoose.Promise = global.Promise`. If not available already, Feathers comes with a polyfill for native Promises.
 
-> **Note:** You can get access to the Mongoose model via `this.Model` inside a [hook](../hooks/readme.md) and use it as usual.
+> **Note:** You can get access to the Mongoose model via `this.Model` inside a [hook](../hooks/readme.md) and use it as usual. See the [Mongoose Guide](http://mongoosejs.com/docs/guide.html) for more information on defining your model.
+
 
 
 ## Example

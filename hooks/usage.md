@@ -17,10 +17,11 @@ Lets assume a Feathers application initialized like this:
 ```js
 const feathers = require('feathers');
 const memory = require('feathers-memory');
+const rest = require('feathers-rest');
 const hooks = require('feathers-hooks');
 
 const app = feathers()
-  .configure(feathers.rest())
+  .configure(rest())
   .configure(hooks())
   .use('/todos', memory());
 

@@ -44,7 +44,7 @@ It is important to keep in mind that those routes are only possible for the REST
 
 ```js
 app.service('users/:user_id/todos').before(function(hook) {
-  if(hook.params.userId) {
+  if(hook.params.user_id) {
     hook.params.query.user_id = hook.params.user_id;
   }
 });

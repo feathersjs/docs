@@ -51,7 +51,7 @@ app.configure(primus({
   transformer: 'sockjs'
 }, function(primus) {
   // Do something with primus
-  primus.before('todos::create', function(socket, done){
+  primus.use('todos::create', function(socket, done){
     // Exposing a request property to services and hooks
     socket.request.feathers.referrer = socket.request.referrer;
     done();
