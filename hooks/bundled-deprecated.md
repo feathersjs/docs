@@ -1,6 +1,6 @@
 # Bundled Hooks (Deprecated)
 
-> **ProTip:** The built-in hooks are being deprecated in favor of [Common Hooks](./common.md). All of these are currently available as part of `feathers-common-hooks`. Please start using that module.
+> **ProTip:** The built-in hooks are being deprecated in favor of [Common Hooks](./common.md). All of these are currently available as part of `feathers-hooks-common`. Please start using that module.
 
 `feathers-hooks` comes with some bundled hooks to provide common functionality.
 
