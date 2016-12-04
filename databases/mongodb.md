@@ -37,7 +37,7 @@ The following options can be passed when creating a new MongoDB service:
 To run the complete MongoDB example we need to install
 
 ```
-$ npm install feathers feathers-rest feathers-socketio feathers-mongodb mongodb body-parser
+$ npm install feathers feathers-rest feathers-socketio feathers-mongodb feathers-errors mongodb body-parser
 ```
 
 Then add the following into `app.js`:
