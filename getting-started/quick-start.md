@@ -5,7 +5,7 @@
 > Mad ♥️ to [Chris Pena](https://twitter.com/dev_coffee) for putting together the video.
 
 
-[![Comprehensive Guide to FeathersJS with React](http://i.imgur.com/entWb29.jpg)](https://www.youtube.com/playlist?list=PLN3n1USn4xlnulnnBGD2RMid_p7xVj9x "Fullstack Feathersjs and React Web App")
+[![Comprehensive Guide to FeathersJS with React](http://i.imgur.com/entWb29.jpg)](https://www.youtube.com/playlist?list=PLN3n1USn4xlnulnnBGD2RMid_p7xVj9xU "Fullstack Feathersjs and React Web App")
 
 > Mad ♥️ to [Ben Awad](https://www.youtube.com/channel/UC-8QAzbLcRglXeN_MY9blyw) for putting together an entire video series.
 
