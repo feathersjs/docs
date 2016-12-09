@@ -133,7 +133,7 @@ service.before({
       .else(
         hooks.iff(hook => hook.path === 'users', hook6, hook7)
       )
-})
+});
 ```
 
 Options
@@ -143,7 +143,37 @@ They may include other `iff().else()` functions.
 
 ### when
 
+An alias for `iff`.
+
 ### unless
+`unless(predicate: boolean|Promise|function, ...hookFuncs: HookFunc[]): HookFunc`
+
+Resolve the predicate to a boolean.
+Run the hooks sequentially if the result is falsey.
+
+- Used as a `before` or `after` hook.
+- Predicate may be a sync or async function.
+- Hooks to run may be sync, Promises or callbacks.
+- `feathers-hooks` catches any errors thrown in the predicate or hook.
+
+```javascript
+service.before({
+  create:
+    unless(isServer,
+      hookA,
+      unless(isProvider('rest'), hook1, hook2, hook3),
+      hookB
+    )
+});
+```
+
+Options
+
+- `predicate` [required] - Determines if hookFuncs should be run or not.
+If a function, `predicate` is called with the hook as its param.
+It returns either a boolean or a Promise that evaluates to a boolean.
+- `hookFuncs` [optional] - Zero or more hook functions.
+They may include other conditional hook functions.
 
 ## Predicate functions
 
@@ -151,15 +181,61 @@ Predicate functions are used with [conditional hooks](#conditional-hooks).
 They return truthy or falsey values
 
 ### every
+`every(...hookFuncs: HookFunc[]): boolean`
+
+Run hook functions in parallel.
+Return `true` if every hook function returned a truthy value.
+
+- Used as a predicate function with [conditional hooks](#conditional-hooks).
+- The current `hook` is passed to all the hook functions, and they are run in parallel.
+- Hooks to run may be sync or Promises only.
+- `feathers-hooks` catches any errors thrown in the predicate.
+
+```javascript
+service.before({
+  create: hooks.iff(hooks.every(hook1, hook2, ...), hookA, hookB, ...)
+});
+```
+```javascript
+hooks.every(hook1, hook2, ...).call(this, currentHook)
+  .then(bool => { ... });
+```
+
+Options
+
+- `hookFuncs` [required] Functions which take the current hook as a param and return a boolean result.
 
 ### some
+`some(...hookFuncs: HookFunc[]): boolean`
+
+Run hook functions in parallel.
+Return `true` if any hook function returned a truthy value.
+
+- Used as a predicate function with [conditional hooks](#conditional-hooks).
+- The current `hook` is passed to all the hook functions, and they are run in parallel.
+- Hooks to run may be sync or Promises only.
+- `feathers-hooks` catches any errors thrown in the predicate.
+
+```javascript
+service.before({
+  create: hooks.iff(hooks.some(hook1, hook2, ...), hookA, hookB, ...)
+});
+```
+```javascript
+hooks.some(hook1, hook2, ...).call(this, currentHook)
+  .then(bool => { ... });
+```
+
+Options
+
+- `hookFuncs` [required] Functions which take the current hook as a param and return a boolean result.
 
 ### isNot
 `isNot(predicateFunc: function)`
 
 Negate the `predicateFunc`.
 
-- Used with `hooks.iff`.
+- Used as a predicate function with [conditional hooks](#conditional-hooks).
 - Predicate may be a sync or async function.
 - `feathers-hooks` catches any errors thrown in the predicate.
 
@@ -183,8 +259,7 @@ Options
 Check which transport called the service method.
 All providers ([REST](../rest/readme.md), [Socket.io](../real-time/socket-io.md) and [Primus](../real-time/primus.md)) set the `params.provider` property which is what `isProvider` checks for.
 
- - Used as a predicate function with `hooks.iff`.
- - 
+ - Used as a predicate function with [conditional hooks](#conditional-hooks).
 
 ```javascript
 import hooks, { iff, isProvider } from 'feathers-hooks-common';
