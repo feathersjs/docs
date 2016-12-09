@@ -11,8 +11,8 @@ while others do not.
 
 - [Workflows](#workflows)
 - [Conditional hooks](#conditional-hooks)
-    - [iff](#iff)
     - [iffElse](#iffelse)
+    - [iff](#iff)
     - [else](#else)
     - [when](#when)
     - [unless](#unless)
@@ -40,11 +40,40 @@ necessary, and include it with the hooks where its needed.
 These hooks conditionally run a set of other hooks,
 based on the result of a [predicate function](#predicate-functions).
 
-### iff
-`iff(predicateFunc: function, ...hookFuncs: HookFunc[]): HookFunc`
+### iffElse
+`iffElse(predicate: boolean|Promise|function, trueHooks: [], falseHooks: []): HookFunc`
 
-Run a predicate function,
-which returns either a boolean, or a Promise which evaluates to a boolean.
+Resolve the predicate to a boolean.
+Run the first set of hooks sequentially if the result is truthy,
+the second set otherwise.
+
+- Used as a `before` or `after` hook.
+- Predicate may be a sync or async function.
+- Hooks to run may be sync, Promises or callbacks.
+- `feathers-hooks` catches any errors thrown in the predicate or hook.
+
+```javascript
+const { iffElse, populate, serialize } = require('feathers-hooks-common');
+app.service('purchaseOrders').after({
+  create: iffElse(() => { ... },
+    [populate(poAccting), serialize( ... )],
+    [populate(poReceiving), serialize( ... )]
+  )
+});
+```
+
+Options
+
+- `predicate` [required] - Determines if hookFuncs should be run or not.
+If a function, `predicate` is called with the hook as its param.
+It returns either a boolean or a Promise that evaluates to a boolean
+- `trueHooks` [optional] - Zero or more hook functions run when `predicate` is truthy.
+- `falseHooks` [optional] - Zero or more hook functions run when `predicate` is false.
+
+### iff
+`iff(predicate: boolean|Promise|function, ...hookFuncs: HookFunc[]): HookFunc`
+
+Resolve the predicate to a boolean.
 Run the hooks sequentially if the result is truthy.
 
 - Used as a `before` or `after` hook.
@@ -72,43 +101,11 @@ app.service('workOrders').after({
 
 Options
 
-- `predicateFunc` [required] - Function to determine if hookFunc should be run or not.
-`predicateFunc` is called with the hook as its param.
-It returns either a boolean or a Promise that evaluates to a boolean.
+- `predicate` [required] - Determines if hookFuncs should be run or not.
+If a function, `predicate` is called with the hook as its param.
+It returns either a boolean or a Promise that evaluates to a boolean
 - `hookFuncs` [optional] - Zero or more hook functions.
-They may include other `iff().else()` functions.
-
-### iffElse
-`iffElse(predicateFunc: function, trueHooks: [], falseHooks: []): HookFunc`
-
-Run a predicate function,
-which returns either a boolean, or a Promise which evaluates to a boolean.
-Run the first set of hooks sequentially if the result is truthy,
-the second set otherwise.
-
-- Used as a `before` or `after` hook.
-- Predicate may be a sync or async function.
-- Hooks to run may be sync, Promises or callbacks.
-- `feathers-hooks` catches any errors thrown in the predicate or hook.
-
-```javascript
-const { iffElse, populate, serialize } = require('feathers-hooks-common');
-app.service('purchaseOrders').after({
-  create: iffElse(() => { ... },
-    [populate(poAccting), serialize( ... )],
-    [populate(poReceiving), serialize( ... )]
-  )
-});
-```
-
-Options
-
-- `predicateFunc` [required] - Function to determine if hookFunc should be run or not.
-`predicateFunc` is called with the hook as its param.
-It returns either a boolean or a Promise that evaluates to a boolean.
-- `trueHooks` [optional] - Zero or more hook functions run when `predicateFunc` is truthy.
-- `falseHooks` [optional] - Zero or more hook functions run when `predicateFunc` is false.
-
+They may include other conditional hooks.
 
 ### else
 `if(...).else(...hookFuncs: HookFunc[]): HookFunc`
@@ -139,7 +136,7 @@ service.before({
 Options
 
 - `hookFuncs` [optional] - Zero or more hook functions.
-They may include other `iff().else()` functions.
+They may include other conditional hooks.
 
 ### when
 
@@ -231,11 +228,11 @@ Options
 - `hookFuncs` [required] Functions which take the current hook as a param and return a boolean result.
 
 ### isNot
-`isNot(predicateFunc: function)`
+`isNot(predicate: boolean|Promise|function)`
 
-Negate the `predicateFunc`.
+Negate the `predicate`.
 
-- Used as a predicate function with [conditional hooks](#conditional-hooks).
+- Used as a predicate with [conditional hooks](#conditional-hooks).
 - Predicate may be a sync or async function.
 - `feathers-hooks` catches any errors thrown in the predicate.
 
@@ -250,7 +247,7 @@ app.service('workOrders').after({
 
 Options
 
-- `predicateFunc` [required] - A function which returns either a boolean or a Promise that resolves to a boolean.
+- `predicate` [required] - A function which returns either a boolean or a Promise that resolves to a boolean.
 
 
 ### isProvider
