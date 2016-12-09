@@ -79,7 +79,7 @@ It returns either a boolean or a Promise that evaluates to a boolean.
 They may include other `iff().else()` functions.
 
 ### iffElse
-`iff(predicateFunc: function, trueHooks: [], falseHooks: []): HookFunc`
+`iffElse(predicateFunc: function, trueHooks: [], falseHooks: []): HookFunc`
 
 Run a predicate function,
 which returns either a boolean, or a Promise which evaluates to a boolean.
@@ -92,7 +92,7 @@ the second set otherwise.
 - `feathers-hooks` catches any errors thrown in the predicate or hook.
 
 ```javascript
-const { iffElse, populate } = require('feathers-hooks-common');
+const { iffElse, populate, serialize } = require('feathers-hooks-common');
 app.service('purchaseOrders').after({
   create: iffElse(() => { ... },
     [populate(poAccting), serialize( ... )],
