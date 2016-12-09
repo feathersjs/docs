@@ -9,11 +9,20 @@ with a data value specifying the action the service is to perform.
 Certain actions may require authentication or authorization,
 while others do not.
 
-* [iff](#iff)
-* [else](#else)
-* [isNot](#isnot)
-* [isProvider](#isprovider)
-* [combine](#combine)
+- [Workflows](#workflows)
+- [Conditional hooks](#conditional-hooks)
+    - [iff](#iff)
+    - [iffElse](#iffelse)
+    - [else](#else)
+    - [when](#when)
+    - [unless](#unless)
+- [Predicate functions](#predicate-functions)
+    - [every](#every)
+    - [some](#some)
+    - [isNot](#isnot)
+    - [isProvider](#isprovider)
+- [Other](#other)
+    - [combine](#combine)
 
 ## Workflows
 
@@ -26,12 +35,17 @@ and want to call it from different places to send different key/value pairs.
 You could create `sendMetric` containing the hooks and conditional logic
 necessary, and include it with the hooks where its needed. 
 
+## Conditional hooks
+
+These hooks conditionally run a set of other hooks,
+based on the result of a [predicate function](#predicate-functions).
+
 ### iff
 `iff(predicateFunc: function, ...hookFuncs: HookFunc[]): HookFunc`
 
 Run a predicate function,
 which returns either a boolean, or a Promise which evaluates to a boolean.
-Run the hooks sequentially if the result is truesy.
+Run the hooks sequentially if the result is truthy.
 
 - Used as a `before` or `after` hook.
 - Predicate may be a sync or async function.
@@ -58,14 +72,50 @@ app.service('workOrders').after({
 
 Options
 
-- `predicateFunc` [required] - Function to determine if hookFunc should be run or not. `predicateFunc` is called with the hook as its param. It returns either a boolean or a Promise that evaluates to a boolean.
+- `predicateFunc` [required] - Function to determine if hookFunc should be run or not.
+`predicateFunc` is called with the hook as its param.
+It returns either a boolean or a Promise that evaluates to a boolean.
 - `hookFuncs` [optional] - Zero or more hook functions.
 They may include other `iff().else()` functions.
+
+### iffElse
+`iffElse(predicateFunc: function, trueHooks: [], falseHooks: []): HookFunc`
+
+Run a predicate function,
+which returns either a boolean, or a Promise which evaluates to a boolean.
+Run the first set of hooks sequentially if the result is truthy,
+the second set otherwise.
+
+- Used as a `before` or `after` hook.
+- Predicate may be a sync or async function.
+- Hooks to run may be sync, Promises or callbacks.
+- `feathers-hooks` catches any errors thrown in the predicate or hook.
+
+```javascript
+const { iffElse, populate, serialize } = require('feathers-hooks-common');
+app.service('purchaseOrders').after({
+  create: iffElse(() => { ... },
+    [populate(poAccting), serialize( ... )],
+    [populate(poReceiving), serialize( ... )]
+  )
+});
+```
+
+Options
+
+- `predicateFunc` [required] - Function to determine if hookFunc should be run or not.
+`predicateFunc` is called with the hook as its param.
+It returns either a boolean or a Promise that evaluates to a boolean.
+- `trueHooks` [optional] - Zero or more hook functions run when `predicateFunc` is truthy.
+- `falseHooks` [optional] - Zero or more hook functions run when `predicateFunc` is false.
+
 
 ### else
 `if(...).else(...hookFuncs: HookFunc[]): HookFunc`
 
-If the predicate in the `iff()` is falsey, run the hooks sequentially.
+`iff().else()` is similar to `iff` and `iffElse`.
+It's syntax is more suitable for writing nested conditional hooks.
+If the predicate in the `iff()` is falsey, run the hooks in `else()` sequentially.
 
 - Used as a `before` or `after` hook.
 - Hooks to run may be sync, Promises or callbacks.
@@ -91,6 +141,19 @@ Options
 - `hookFuncs` [optional] - Zero or more hook functions.
 They may include other `iff().else()` functions.
 
+### when
+
+### unless
+
+## Predicate functions
+
+Predicate functions are used with [conditional hooks](#conditional-hooks).
+They return truthy or falsey values
+
+### every
+
+### some
+
 ### isNot
 `isNot(predicateFunc: function)`
 
@@ -112,6 +175,7 @@ app.service('workOrders').after({
 Options
 
 - `predicateFunc` [required] - A function which returns either a boolean or a Promise that resolves to a boolean.
+
 
 ### isProvider
 `isProvider(provider: string, providers?: string[])`
@@ -140,6 +204,7 @@ Options
   - `rest` - If the REST provider.
 - `providers` [optional] - Other transports that you want this hook to run for.
   
+## Other
   
 ### combine
 `combine(...hooks: HookFunc[])`
