@@ -194,7 +194,7 @@ const poSchemas = {
 };
 
 purchaseOrders.before({
-  all: $client
+  all: $client('schema')
 });
 purchaseOrders.after({
   all: populate(() => poSchemas[hook.params.schema])
