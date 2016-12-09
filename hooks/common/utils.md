@@ -2,10 +2,35 @@
 
 Miscellaneous hooks.
 
+* [$client](#$client)
 * [setSlug](#setslug)
 * [debug](#debug)
 * [callbackToPromise](#callbacktopromise)
 * [promiseToCallback](#promisetocallback)
+
+### $client
+`$client(...whitelist: string[]): HookFunc`
+
+A hook for passing params from the client to the server.
+
+- Used as a `before` hook.
+
+On client, only `query` is transferred to the server:
+```js
+service.find({ query: { dept: 'a', $client: ( populate: 'po-1', serialize: 'po-mgr' } } } );
+```
+On server:
+```js
+service.before({ all: [ $client('populate', 'serialize', 'otherProp'), myHook ]});
+// myHook's hook.params is now
+// { query: { dept: 'a' }, populate: 'po-1', serialize: 'po-mgr' } }
+```
+
+Options
+
+- `whitelist` [optional] Names of the potential props to transfer from `query.$client`.
+Other props are ignored. This is a security feature.
+
 
 ### setSlug
 `setSlug(slug: string, fieldName = 'query.' + slug): HookFunc`
