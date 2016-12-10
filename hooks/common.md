@@ -66,7 +66,7 @@ app.service('messages').after({
  If the object from the message service is
    { _id: '1...1', senderId: 'a...a', text: 'Jane, are you there?' }
  when the hook is run during a find method
-   hooks.populate('senderId', { service: '/users', field: 'user' })
+   hooks.populate('user', { service: '/users', field: 'senderId' })
  the result will contain
    { _id: '1...1', senderId : 'a...a', text: 'Jane, are you there?',
      user: { _id: 'a...a', name: 'John Doe'} }
