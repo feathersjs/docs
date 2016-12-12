@@ -214,7 +214,7 @@ const hooks = require('feathers-hooks-common');
 
 // set the `updatedAt` field before a user is created
 app.service('users').before({
-  create: [ hooks.setCreatedAt('updatedAt') ]
+  create: [ hooks.setUpdatedAt('updatedAt') ]
 };
 ```
 
