@@ -71,7 +71,7 @@ app.listen(3030);
 
 ### Using uWebSocket for better performance
 
-[uWebSocket](https://github.com/uwebsocket/uwebsocket) is a WebSocket server implementation that provides better performace and reduced latency. You may opt-in to using uWebSockets whenever you configure `feathers-socket.io`.
+[uWebSocket](https://github.com/uwebsockets/uwebsockets) is a WebSocket server implementation that provides better performace and reduced latency. You may opt-in to using uWebSockets whenever you configure `feathers-socket.io`.
 
 ```
 $ npm install uws --save
