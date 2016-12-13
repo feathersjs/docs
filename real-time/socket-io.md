@@ -69,6 +69,8 @@ const app = feathers()
 app.listen(3030);
 ```
 
+### Using uWebSocket for better performance
+
 [uWebSocket](https://github.com/uwebsocket/uwebsocket) is a web-socket server engine that provides better performace than the standard engine included with Socket.io. You may opt-in to using uWebSockets whenever you configure `feathers-socket.io`.
 
 ```
