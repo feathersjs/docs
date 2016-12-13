@@ -69,6 +69,27 @@ const app = feathers()
 app.listen(3030);
 ```
 
+[uWebSocket](https://github.com/uwebsocket/uwebsocket) is a web-socket server engine that provides better performace than the standard engine included with Socket.io. You may opt-in to using uWebSockets whenever you configure `feathers-socket.io`.
+
+```
+$ npm install uws --save
+```
+
+```js
+const feathers = require('feathers');
+const socketio = require('feathers-socketio');
+
+const app = feathers()
+  .configure(socketio({
+    wsEngine: 'uws'
+  }, function(io) {
+    // Do something here
+    // This function is optional
+  }));
+
+app.listen(3030);
+```
+
 ### Middleware and service parameters
 
 Similar to [REST provider](../rest/readme.md) middleware, Socket.io middleware can modify the `feathers` property on the `socket` which will then be used as the service parameters:
