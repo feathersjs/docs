@@ -84,10 +84,7 @@ const socketio = require('feathers-socketio');
 const app = feathers()
   .configure(socketio({
     wsEngine: 'uws'
-  }, function(io) {
-    // Do something here
-    // This function is optional
-  }));
+  });
 
 app.listen(3030);
 ```
