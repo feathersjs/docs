@@ -1,5 +1,49 @@
 # Authenticating With Feathers Client
 
+
+
+## Client use
+
+You can use the client in the Browser, in NodeJS and in React Native.
+
+```js
+import io from 'socket.io-client';
+import feathers from 'feathers/client';
+import hooks from 'feathers-hooks';
+import socketio from 'feathers-socketio/client';
+import localstorage from 'feathers-localstorage';
+import authentication from 'feathers-authentication-client';
+
+const socket = io('http://localhost:3030/');
+const app = feathers()
+  .configure(socketio(socket)) // you could use Primus or REST instead
+  .configure(hooks())
+  .configure(authentication({ storage: window.localStorage }));
+
+app.authenticate({
+  strategy: 'local',
+  email: 'admin@feathersjs.com',
+  password: 'admin'
+}).then(function(result){
+  console.log('Authenticated!', result);
+}).catch(function(error){
+  console.error('Error authenticating!', error);
+});
+```
+
+
+> **ProTip:** You can also use Primus or a handful of Ajax providers instead of Socket.io. Check out the [Feathers client authentication](./client.md) section for more detail.
+
+<!-- -->
+
+> **ProTip:** You can only have one provider client side per "app". For example if you want to use both Socket.io and a REST Ajax provider then you need to configure two apps.
+
+
+
+
+
+
+
 The Feathers authentication module has a client side component that makes it very easy for you to authenticate with a Feathers API in the browser, from another NodeJS server, or a React Native app.
 
 ## API
