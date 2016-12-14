@@ -1,0 +1,1 @@
+# Authenticating over REST / XHR
