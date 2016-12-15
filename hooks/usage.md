@@ -185,7 +185,7 @@ todoService.before({
 });
 ```
 
-If you want to change the hook object just chain the returned promise using `.then`:
+If you  t to change the hook object just chain the returned promise using `.then`:
 
 ```js
 todoService.before({
@@ -289,7 +289,7 @@ Now that you know a bit about hooks work. Feel free to check out some [examples]
 
 ## Customizing Built In Hooks
 
-Sometimes you will only want to run a hook in certain circumstances or you wan to modify the functionality of the output of the hook without re-writing it. Since hooks are chainable you can simply wrap it in your own hook.
+Sometimes you will only want to run a hook in certain circumstances or you want to modify the functionality of the output of the hook without re-writing it. Since hooks are chainable you can simply wrap it in your own hook.
 
 ```js
 const { hooks } = require('feathers-authentication');
