@@ -60,7 +60,7 @@ Change the `sortField` option to the field of your choice to configure your data
 ```js
 app.use('todos', service({
   db: db,
-  sortField: '_createdAt' // this field value will be prepended to the db key
+  sortField: '_createdAt', // this field value will be prepended to the db key
   paginate: {
     default: 2,
     max: 4
