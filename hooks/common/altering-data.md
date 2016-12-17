@@ -8,6 +8,7 @@ or after it has been retrieved.
 * [lowercase](#lowercase)
 * [setCreatedAt](#setcreatedat)
 * [setUpdatedAt](#setupdatedat)
+* [traverse](#traverse)
 
 ### remove
 `remove(fieldName: string, ...fieldNames?: string[]): HookFunc`
@@ -144,3 +145,38 @@ Options
 
 - `fieldName` [optional. default: `updatedAt`] - The fields that you want to add or update in the retrieved object(s).
 - `fieldNames` [optional] - Other fields to add or update with the current date-time.
+
+
+### traverse
+`traverse(transformer: Function, getObject?: Function): HookFunc`
+
+Traverse and transform objects in place by visiting every node on a recursive walk.
+
+- Used as a `before` or `after` hook.
+- Supports multiple data items, including paginated `find`.
+- Any object in the hook may be traversed, **including the query object**.
+- `transformer` has access to powerful methods and context.
+
+```js
+// Trim strings
+const trimmer = function (node) {
+  if (typeof node === 'string') { this.update(node.trim()); }
+};
+service.before({ create: traverse(trimmer) });
+```
+```javascript
+// REST HTTP request may use the string 'null' in its query string.
+// Replace these strings with the value null.
+const nuller = function (node) {
+  if (node === 'null') { this.update(null); }
+};
+service.before({ find: traverse(nuller, hook => hook.params.query) });
+```
+
+> **ProTip:** GitHub's `substack/js-traverse` documents the extensive methods and context available to the transformer function.
+
+Options
+
+- `transformer` [required] - Called for every node and may change it in place.
+- `getObject` [optional, defaults to hook.data or hook.result as appropriate] - 
+Function with signature (hook) which returns the object to traverse.
