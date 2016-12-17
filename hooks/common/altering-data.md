@@ -3,60 +3,11 @@
 Hooks to manipulate your data either before it is passed to the service method,
 or after it has been retrieved.
 
-* [populate](#populate)
 * [remove](#remove)
 * [pluck](#pluck)
 * [lowercase](#lowercase)
 * [setCreatedAt](#setcreatedat)
 * [setUpdatedAt](#setupdatedat)
-
-
-### populate
-`populate(fieldName: string, { service: ServiceName, field = fieldName }): HookFunc`
-
-The `populate` hook uses a property from the result (or every item if it is a list) to retrieve a single related object from a service and add it to the original object. 
-
-- Used as an **after** hook on any service method.
-- Supports multiple result items, including paginated `find`.
-- Supports an array of keys in `field`.
-
-```javascript
-const hooks = require('feathers-hooks-common');
-
-// Given a `user_id` in a message, retrieve the user and
-// add it in the `user` field.
-app.service('messages').after({
-  find: hooks.populate('user', {
-    service: 'users',
-    field: 'user_id'  
-  })
-});
-```
-```javascript
-/*
- If the object from the message service is
-   { _id: '1...1', senderId: 'a...a', text: 'Jane, are you there?' }
- when the hook is run during a find method
-   hooks.populate('senderId', { service: '/users', field: 'user' })
- the result will contain
-   { _id: '1...1', senderId : 'a...a', text: 'Jane, are you there?',
-     user: { _id: 'a...a', name: 'John Doe'} }
- If `senderId` is an array of keys, then `user` will be an array of populated items.
-*/
-```
-
-Options
-
-- `fieldName` [required] - The field name you want to populate the related object on to.
-- `service` [required] - The service you want to populate the object from.
-- `field` [optional. default: `fieldName`] - The field you want to look up the related object by from the service. That is, the foreign key we have for the service.
-
-If `field` is an array of keys, then `fieldName` will contain an array of service objects.
-
-If `field` is not provided, then `fieldName` is used,
-in which case the value(s) of `fieldName` will first be used to look up the service,
-and then `fieldName` will be set to the service object(s) selected.
-
 
 ### remove
 `remove(fieldName: string, ...fieldNames?: string[]): HookFunc`

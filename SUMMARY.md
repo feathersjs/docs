@@ -92,6 +92,7 @@
    * [Common hooks](hooks/common.md)
        * [Altering data](hooks/common/altering-data.md)
        * [Query params](hooks/common/query-params.md)
+       * [Populate](hooks/common/populate.md)
        * [Database](hooks/common/database.md)
        * [Validation](hooks/common/validation.md)
        * [Utilities](hooks/common/utils.md)
