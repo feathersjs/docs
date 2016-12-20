@@ -2,6 +2,10 @@
 
 Sign up verification, forgotten password reset, and other capabilities for local authentication.
 
+This repo work with either the v1.0 rewrite of `feathers-authentication` or with v0.7.
+The examples below use v0.7.
+They will be updated to v1.0 when the `feathers-permissions` v1.0 API is finalized.
+
 ### Multiple communication channels:
 
 Traditionally users have been authenticated using their `username` or `email`.
@@ -29,7 +33,7 @@ provide much of the infrastructure necessary to implement such a scenario.
 - Send another sign up verification notification, routing through user's selected transport.
 - Process a sign up or identity change verification from a URL response.
 - Process a sign up or identity change verification using a short token.
-- Send a forgotten password reset notification, routing through user's preferred transport.
+- Send a forgotten password reset notification, routing through user's preferred communication transport.
 - Process a forgotten password reset from a URL response.
 - Process a forgotten password reset using a short token.
 - Process password change.
@@ -66,7 +70,7 @@ This may be manually entered in a UI to start the sign up verification or the pa
 The email verification token has a 5-day expiry (configurable),
 while the password reset has a 2 hour expiry (configurable).
 
-Typically your notifier routine refers to a property like `user.preferredCommunication: 'email'`
+Typically your notifier routine refers to a property like `user.preferredComm: 'email'`
 to determine which transport to use for user notification.
 However the API allows the UI to be set up to ask the user which transport they prefer for that time.
 
@@ -182,11 +186,13 @@ authManagement.create({ action: 'checkUnique',
   ownId, // excludes your current user from the search
   meta: { noErrMsg }, // if return an error.message if not unique
 })
+// ownId allows the "current" item to be ignored when checking if a field value is unique amoung users.
+// noErrMsg determines if the returned error.message contains text. This may simplify your client side validation.
 
 // resend sign up verification notification
 authManagement.create({ action: 'resendVerifySignup',
   value: identifyUser, // {email}, {token: verifyToken}
-  notifierOptions: {}, // options passed to options.notifier, e.g. {prefersTransport: 'cellphone'}
+  notifierOptions: {}, // options passed to options.notifier, e.g. {preferredComm: 'cellphone'}
 })
 
 // sign up or identityChange verification with long token
@@ -205,7 +211,7 @@ authManagement.create({ action: 'verifySignupShort',
 // send forgotten password notification
 authManagement.create({ action: 'sendResetPwd',
   value: identifyUser, // {email}, {token: verifyToken}
-  notifierOptions, // options passed to options.notifier, e.g. {prefersTransport: 'email'}
+  notifierOptions, // options passed to options.notifier, e.g. {preferredComm: 'email'}
 })
 
 // forgotten password verification with long token
@@ -379,8 +385,8 @@ const verifyHooks = require('feathers-authentication-management').hooks;
 // users service
 module.exports.before = {
   create: [
-    auth.hashPassword(), // adds .isVerified, .verifyExpires, .verifyToken, .verifyChanges
-    verifyHooks.addVerification()
+    auth.hashPassword(),
+    verifyHooks.addVerification() // adds .isVerified, .verifyExpires, .verifyToken, .verifyChanges
   ]
 };
 module.exports.after = {
