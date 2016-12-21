@@ -5,11 +5,11 @@ Hooks that populate items
 - [populate](#populate)
     - [Schema](#schema)
     - [Added properties](#added-properties)
-    - [Examples](#examples)
+    - [Examples](#populate-examples)
         - [Selecting schema based on UI needs](#selecting-schema-based-on-ui-needs)
         - [Using permissions](#using-permissions)
 - [serialize](#serialize)
-  - [Examples](#examples)
+  - [Examples](#serialize-examples)
 - [dePopulate](#depopulate)
 
 ### populate
@@ -169,7 +169,7 @@ This delay is mostly attributed to your DB.
 The [depopulate](#depopulate) hook uses these fields to remove all joined and computed values.
 This allows you to then `service.patch()` the item in the hook.
 
-#### Examples
+#### Populate examples
 
 ##### A simple populate
 
@@ -324,7 +324,7 @@ You may drop, at your own risk, names of included sets of items, `_include` and 
         The function can still reference values which will be later removed by `only` and `exclude`.
         - `hook` The hook passed to serialize.
 
-#### Examples
+#### Serialize examples
 
 ##### A simple serialize
 
