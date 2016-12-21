@@ -222,7 +222,7 @@ const schema = {
 };
 
 purchaseOrders.after({
-  all: populate(schema, (hook, service, permissions) => hook.params.user.permissions.includes(permissions))
+  all: populate(schema, (hook, service, permissions) => hook.params.user.permissions.includes(service))
 });
 ```
 
