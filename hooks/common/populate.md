@@ -5,11 +5,11 @@ Hooks that populate items
 - [populate](#populate)
     - [Schema](#schema)
     - [Added properties](#added-properties)
-    - [Advanced examples](#advanced-examples)
+    - [Examples](#populate-examples)
         - [Selecting schema based on UI needs](#selecting-schema-based-on-ui-needs)
         - [Using permissions](#using-permissions)
 - [serialize](#serialize)
-  - [Advanced example](#advanced-example)
+  - [Examples](#serialize-examples)
 - [dePopulate](#depopulate)
 
 ### populate
@@ -151,10 +151,10 @@ Some additional properties are added to populated items. The result may look lik
   _elapsed: { post: 487947, total: 527118 },
   post:
     { ...
-      _include: [ 'authorInfo', 'commentsInfo', 'readersInfo' ],
-      _elapsed: { authorInfo: 321973, commentsInfo: 469375, readersInfo: 479874, total: 487947 },
+      _include: [ 'authorItem', 'commentsInfo', 'readersInfo' ],
+      _elapsed: { authorItem: 321973, commentsInfo: 469375, readersInfo: 479874, total: 487947 },
       _computed: [ 'averageStars', 'views' ],
-      authorInfo: { ... },
+      authorItem: { ... },
       commentsInfo: [ { ... }, { ... } ],
       readersInfo: [ { ... }, { ... } ]
 } }
@@ -169,7 +169,47 @@ This delay is mostly attributed to your DB.
 The [depopulate](#depopulate) hook uses these fields to remove all joined and computed values.
 This allows you to then `service.patch()` the item in the hook.
 
-#### Advanced examples
+#### Populate examples
+
+##### A simple populate
+
+Our `posts` items look like:
+
+```javascript
+{ id: 9, title: 'The unbearable ligthness of Feathersjs', author: 5, born:  }
+```
+
+Our `users` items look like:
+
+```javascript
+{ id: 9, email: 'john.doe@gmail.com', name: 'John Doe', yearBorn: 1990 }
+```
+
+We can include the author information whenever we `get` or `find` a post using:
+
+```javascript
+const schema = {
+  include: [{
+    service: 'users',
+    nameAs: 'authorItem',
+    parentField: 'author',
+    childField: 'id',
+  }],
+};
+app.service('posts').before({
+  get: hooks.populate({ schema }),
+  find: hooks.populate({ schema })
+});
+```
+
+`app.service('posts').get(9)` would return:
+
+```javascript
+{ id: 9, title: 'The unbearable ligthness of Feathersjs', author: 5, yearBorn: 1990,
+  authorItem: { id: 5, email: 'john.doe@gmail.com', name: 'John Doe' },
+  _include: ['authorItem']
+}
+```
 
 ##### Selecting schema based on UI needs
 
@@ -240,10 +280,10 @@ const schema = {
   },
   post: {
     exclude: ['id', 'createdAt', 'author', 'readers'],
-    authorInfo: {
+    authorItem: {
       exclude: ['id', 'password', 'age'],
       computed: {
-        isUnder18: (authorInfo, hook) => authorInfo.age < 18,
+        isUnder18: (authorItem, hook) => authorItem.age < 18,
       },
     },
     readersInfo: {
@@ -268,7 +308,7 @@ Options
     
 The schema reflects the structure of the populated items.
 The base items for the example above have [included](#include) `post` items,
-which themselves have included `authorInfo`, `readersInfo` and `commentsInfo` items.
+which themselves have included `authorItem`, `readersInfo` and `commentsInfo` items.
 
 The schema for each set of items may have
 
@@ -284,7 +324,48 @@ You may drop, at your own risk, names of included sets of items, `_include` and 
         The function can still reference values which will be later removed by `only` and `exclude`.
         - `hook` The hook passed to serialize.
 
-#### Advanced example
+#### Serialize examples
+
+##### A simple serialize
+
+The populate [example above](#a-simple-populate) produced the result
+
+```javascript
+{ id: 9, title: 'The unbearable ligthness of Feathersjs', author: 5, yearBorn: 1990,
+  authorItem: { id: 5, email: 'john.doe@gmail.com', name: 'John Doe' },
+  _include: ['authorItem']
+}
+```
+
+We could tailor the result more to what we need with:
+
+```javascript
+const serializeSchema = {
+  only: ['title'],
+  authorItem: {
+    only: ['name']
+    computed: {
+      isOver18: (authorItem, hook) => new Date().getFullYear() - authorItem.yearBorn >= 18,
+    },
+  }
+};
+app.service('posts').before({
+  get: [ hooks.populate({ schema }), serialize(serializeSchema) ],
+  find: [ hooks.populate({ schema }), serialize(serializeSchema) ]
+});
+```
+
+The result would now be
+
+```javascript
+{ title: 'The unbearable ligthness of Feathersjs',
+  authorItem: { name: 'John Doe', isOver18: true, _computed: ['isOver18'] },
+  _include: ['authorItem'],
+}
+```
+
+
+##### Using permissions
 
 Consider an Employee item.
 The Payroll Manager would be permitted to see the salaries of other department heads.
