@@ -279,7 +279,7 @@ Any registered service will automatically turn into an event emitter that emits 
 
 ## Protecting Service Methods
 
-There are some times where you may want to use a service method inside your application or allow other servers in your cluster access to a method, but you don't want to expose a service method publicly. We've created [a bundled hook](../hooks/bundled.md#disable) that makes this really easy.
+There are some times where you may want to use a service method inside your application or allow other servers in your cluster access to a method, but you don't want to expose a service method publicly. We've created [a bundled hook](../hooks/bundled-deprecated.html) that makes this really easy.
 
 ```js
 const hooks = require('feathers-hooks');
