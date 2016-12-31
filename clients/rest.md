@@ -2,7 +2,7 @@
 
 Once [set up on the server](../rest/readme.md), there are several ways to connect to the REST API of a Feathers service. Keep in mind that while clients connected via websockets will receive real-time events from other REST API calls, you can't get real-time updates over the HTTP API without resorting to polling.
 
-Using [the Feathers client](feathers.md), the `feathers-rest/client` module allows you to connect to a Feathers service via a REST API using [jQuery](https://jquery.com/), [request](https://github.com/request/request), [Superagent](http://visionmedia.github.io/superagent/) or [Fetch](https://facebook.github.io/react-native/docs/network.html) as the client library.
+Using [the Feathers client](feathers.md), the `feathers-rest/client` module allows you to connect to a Feathers service via a REST API using [jQuery](https://jquery.com/), [request](https://github.com/request/request), [Superagent](http://visionmedia.github.io/superagent/),  [Axios](https://github.com/mzabriskie/axios) or [Fetch](https://facebook.github.io/react-native/docs/network.html) as the client library.
 
 > **ProTip:** REST client services do emit `created`, `updated`, `patched` and `removed` events but only _locally for their own instance_. Real-time events from other clients can only be received by using a websocket connection.
 
@@ -70,6 +70,18 @@ const host = 'http://api.feathersjs.com';
 const app = feathers()
   .configure(rest(host).superagent(superagent));
 ```
+
+### Axios
+
+[Axios](http://github.com/mzabriskie/axios) currently works with a default configuration:
+
+```js
+const feathers = require('feathers/client');
+const rest = require('feathers-rest/client');
+const axios = require('axios');
+const host = 'http://api.feathersjs.com';
+const app = feathers()
+  .configure(rest(host).axios(axios));
 
 ### Fetch
 
