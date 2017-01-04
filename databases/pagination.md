@@ -115,4 +115,4 @@ query: {
 }
 ```
 
-To exclude fields from a result the [remove hook](../hooks/bundled.md#remove) can be used.
+To exclude fields from a result the [remove hook](../hooks/common.html#remove) can be used.
