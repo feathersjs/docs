@@ -40,7 +40,7 @@ choo new src
 
 This installs the `choo-cli` generator and generates a new `choo` project inside the `src` folder, see the `src/readme.md` file for further details about the structure of the generated project.
 
-Next we need to install the `fethers-client` and `socket.io` dependencies and some other dev-dependencies for building and logging:
+Next we need to install the `feathers-client` and `socket.io` dependencies and some other dev-dependencies for building and logging:
 
 ```bash
 cd src
