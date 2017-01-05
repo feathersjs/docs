@@ -38,7 +38,7 @@ Submit yours by creating a pull request.
 #### Communications
 
 - [feathers-batch](https://www.npmjs.com/package/feathers-batch) - Batch multiple Feathers service calls into one (service)
-- [feathers-socketcluster](https://github.com/polst/feathers-socketcluster) - Use SocketCluster to communicate for client/server comunication. Not published.
+- [feathers-socketcluster](https://github.com/polst/feathers-socketcluster) - Use SocketCluster for client/server comunication. Not published.
 
 #### Database
 
