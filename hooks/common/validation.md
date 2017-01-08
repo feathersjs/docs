@@ -2,8 +2,51 @@
 
 Hooks to help validate data.
 
+* [validateSchema](#validateschema)
 * [validate](#validate)
 * [Example](#example)
+
+### validateSchema
+
+`validateSchema(schema: object, ajv: function, options?: object): HookFunc`
+
+Validate an object using [JSON-Schema](http://json-schema.org/).
+
+> **ProTip** There are some
+[good tutorials](//code.tutsplus.com/tutorials/validating-data-with-json-schema-part-1--cms-25343)
+on using JSON-Schema with [ajv](https://github.com/epoberezkin/ajv).
+
+- Used as a `before` or `after` hook.
+- The hook will throw if the data does not match the JSON-Schema.
+`error.errors` will, by default, contain an array of error messages.
+
+> **ProTip** You may customize the error message format with a custom formatting function.
+You could, for example, return `{ name1: message, name2: message }`
+which could be more suitable for a UI.
+
+```javascript
+const ajv = require('ajv');
+const createSchema = { /* JSON-Schema */ };
+module.before({
+  create: validateSchema(createSchema, ajv)
+});
+```
+
+Options
+
+- `schema` [required] - The JSON-Schema.
+- `ajv` [required] - The `ajv` validator.
+- `options` [optional] - Options.
+    - Any `ajv` options.
+    - `addNewError` [optional] - Custom message formatter.
+    Its a reducing function which works similarly to `Array.reduce()`.
+    Its signature is
+    `{ currentFormattedMessages: any, ajvError: AjvError, itemsLen: number, index: number }: newFormattedMessages`
+        - `currentFormattedMessages` - Formatted messages so far. Initially `null`.
+        - `ajvError` - [ajv error](https://github.com/epoberezkin/ajv#error-objects).
+        - `itemsLen` - How many data items there are. 1-based.
+        - `index` - Which item this is. 0-based.
+        - `newFormattedMessages` - The function returns the updated formatted messages.
 
 ### validate
 
@@ -17,10 +60,10 @@ Call a validation function from a `before` hook. The function may be sync or ret
 
 <!-- -->
 
-> **ProTip:** If your validator uses a callback, wrap your validator in a Promise`.
+> **ProTip:** Wrap your validator in `callbackToPromise` if it uses a callback.
 
 ```javascript
-const callbackToPromise = require('feathers-hooks-common/lib/promisify').callbackToPromise;
+const callbackToPromise = require('feathers-hooks-common').callbackToPromise;
 function myCallbackValidator(values, cb) { ... }
 const myValidator = callbackToPromise(myCallbackValidator, 1); // function requires 1 param
 app.service('users').before({ create: validate(myValidator) });
