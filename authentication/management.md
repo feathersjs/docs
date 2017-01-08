@@ -11,7 +11,7 @@ They will be updated to v1.0 when the `feathers-permissions` v1.0 API is finaliz
 Traditionally users have been authenticated using their `username` or `email`.
 However that landscape is changing.
 
-Teens are more involved with cellphone SMS, whatsapp, facebook, QQ and wechat then they are with email.
+Teens are more involved with cellphone SMS, whatsapp, facebook, QQ and wechat than they are with email.
 Seniors may not know how to create an email account or check email, but they have smart phones
 and perhaps whatsapp or wechat accounts.
 
@@ -57,6 +57,8 @@ Notify both the current and new e.g. old email addr may be notified when the ema
 - HTTP POST calls.
 - React's Redux.
 - Vue (docs to do)
+
+Various-sized tokens can be used during the verify/reset processes:
 
 A 30-char token is generated suitable for URL responses.
 (Configurable length.)
@@ -105,8 +107,8 @@ app.configure(authentication)
 ```
 
 `options` are:
-- service: Path of the service for user items, e.g. `/user` (default) or `/organization`.
-- path: The path to associate with this server. Default `authManagement`.
+- service: The path of the service for user items, e.g. `/user` (default) or `/organization`.
+- path: The path to associate with this service. Default `authManagement`.
  See [Multiple services](#multiple-services) for more information.
 - notifier: `function(type, user, notifierOptions)` returns a Promise.
    - type: type of notification
