@@ -3,6 +3,7 @@
 Miscellaneous hooks.
 
 * [disable](#disable)
+* [client](#client)
 * [setSlug](#setslug)
 * [debug](#debug)
 * [callbackToPromise](#callbacktopromise)
@@ -44,6 +45,34 @@ this service method for. Options are:
 - callback () [optional. default: runs when not called internally] -
 A function that receives the hook object where you can put your own logic
 to determine whether this hook should run. Returns either true or false.
+
+
+### client
+`client(...whitelist: string[]): HookFunc`
+
+A hook for passing params from the client to the server.
+
+- Used as a `before` hook.
+
+Only the `hook.params.query` object is transferred to the server from a Feathers client,
+for security amoung other reasons.
+However if you can include a `hook.params.query.$client` object, e.g.
+```js
+service.find({ query: { dept: 'a', $client: { populate: 'po-1', serialize: 'po-mgr' } } } );
+```
+the `client` hook will move that data to `hook.params` on the server.
+```js
+service.before({ all: [ client('populate', 'serialize', 'otherProp'), myHook ]});
+// myHook's hook.params will be
+// { query: { dept: 'a' }, populate: 'po-1', serialize: 'po-mgr' } }
+```
+
+Options
+
+- `whitelist` [optional] Names of the potential props to transfer from `query.client`.
+Other props are ignored. This is a security feature.
+
+> **ProTip** You can use the same technique for service calls made on the server.
 
 
 ### setSlug
