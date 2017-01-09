@@ -44,7 +44,7 @@ Next, npm will do it's thing and install all our dependencies. This can take a m
 Now our app is ready to go but let's add a Message service for our chat app. Because we're in the feathers-cli scope, we don't need to preceed the command with `feathers` this time:
 
 ```
-$ generate service
+$ feathers generate service
 ```
 
 The name should be `message` and the other options can be accepted with their default value (we will add authorization in the next chapter):

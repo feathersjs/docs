@@ -113,6 +113,10 @@ The `include` array has an element for each service to join. They each may have:
 }
 ```
 
+> **ProTip** Instead of setting `include` to a 1-element array,
+you can set it to the include object itself,
+e.g. `include: { service: ..., nameAs: ..., ... }`.
+
 - `service` [required, string] The name of the service providing the items.
 - `nameAs` [optional, string, default is service] Where to place the items from the join.
 - `permissions` [optional, any type of value] Who is allowed to perform this join. See `checkPermissions` above.
@@ -140,6 +144,11 @@ This will include all child items having any of those values.
 A populate hook for, say, `posts` may include items from `users`.
 Should the `users` hooks also include a populate,
 that `users` populate hook will not be run for includes arising from `posts`.
+
+> **ProTip** The populate interface only allows you to directly manipulate `hook.params.query`.
+You can manipulate the rest of `hook.params` by using the
+[`client`](https://docs.feathersjs.com/v/auk/hooks/common/utils.html#client) hook,
+along with something like `query: { ..., $client: { paramsProp1: ..., paramsProp2: ... } }`.
 
 #### Added properties
 
