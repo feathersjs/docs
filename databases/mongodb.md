@@ -105,3 +105,29 @@ Run the example with `node app` and go to [localhost:3030/messages](http://local
 ## Querying
 
 Additionally to the [common querying mechanism](./querying.md) this adapter also supports [MongoDB's query syntax](https://docs.mongodb.com/v3.2/tutorial/query-documents/) and the `update` method also supports MongoDB [update operators](https://docs.mongodb.com/v3.2/reference/operator/update/).
+
+## Collation Support
+
+This adapter includes support for [collation and case insensitive indexes available in MongoDB v3.4](https://docs.mongodb.com/manual/release-notes/3.4/#collation-and-case-insensitive-indexes). Collation parameters may be passed using the special `collation` parameter to the `find()`, `remove()` and `patch()` methods.
+
+### Example: Patch records with case-insensitive alphabetical ordering.
+The example below would patch all student records with grades of `'c'` or `'C'` and above (a natural language ordering). Without collations this would not be as simple, since the comparison `{ $gt: 'c' }` would not include uppercase grades of `'C'` because the code point of `'C'` is less than that of `'c'`.
+
+```js
+const patch = { shouldStudyMore: true };
+const query = { grade: { $gte: 'c' } };
+const collation = { locale: 'en', strength: 1 };
+students.patch(null, patch, { query, collation }).then( ... );
+```
+
+### Example: Find records with a case-insensitive search.
+
+Similar to the above example, this would find students with a grade of `'c'` or greater, in a case-insensitive manner.
+
+```js
+const query = { grade: { $gte: 'c' } };
+const collation = { locale: 'en', strength: 1 };
+students.find({ query, collation }).then( ... );
+```
+
+For more information on MongoDB's collation feature, visit the [collation reference page](https://docs.mongodb.com/manual/reference/collation/).
