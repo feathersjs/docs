@@ -387,11 +387,11 @@ Validations used on front-end. They are re-run by the server.
 ```javascript
 // file /common/usersClientValidations
 // Validations for front-end. Also re-run on server.
-const clientValidations = {};
+let clientValidations = {};
 
 // sync validation of signup form on form submit
 clientValidations.signup = values => {
-  const errors = {};
+  let errors = {};
 
   checkName(values.name, errors);
   checkUsername(values.username, errors);
