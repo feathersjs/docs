@@ -191,7 +191,7 @@ Our `posts` items look like:
 Our `users` items look like:
 
 ```javascript
-{ id: 9, email: 'john.doe@gmail.com', name: 'John Doe', yearBorn: 1990 }
+{ id: 5, email: 'john.doe@gmail.com', name: 'John Doe', yearBorn: 1990 }
 ```
 
 We can include the author information whenever we `get` or `find` a post using:
