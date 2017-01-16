@@ -121,7 +121,7 @@ let app = feathers()
   }));
 
 function showApplication() {
-  // Authentication was successfull, you can now render the application here
+  // Authentication was successful, you can now render the application here
 }
 
 function showLogin() {
