@@ -25,6 +25,7 @@ Populates items *recursively* to any depth. Supports 1:1, 1:n and n:1 relationsh
 
 ```javascript
 const schema = {
+  service: '...',
   permissions: '...',
   include: [
     {
@@ -84,11 +85,15 @@ The data currently in the hook will be populated according to the schema. The sc
 
 ```javascript
 const schema = {
+  service: '...',
   permissions: '...',
   include: [ ... ]
 };
 ```
 
+- `service` [optional, string] The name of the service this schema is to be used with.
+This can be used to prevent a schema designed to populate 'blog' items
+from being incorrectly used with `comment` items.
 - `permissions` [optional, any type of value] Who is allowed to perform this populate. See `checkPermissions` above.
 - `include` [optional, array] Which services to join to the data.
 
@@ -109,6 +114,7 @@ The `include` array has an element for each service to join. They each may have:
   },
   select: (hook, parent, depth) => ({ $limit: 6 }),
   asArray: true,
+  paginate: false,
   include: [ ... ]
 }
 ```
@@ -133,6 +139,11 @@ You may use `query` or `select` to create a query suitable for your DB.
     - `parentItem` The parent item to which we are joining.
     - `depth` How deep the include is in the schema. Top of schema is 0.
 - `asArray` [optional, boolean, default false] Force a single joined item to be stored as an array.
+- `paginate` {optional, boolean or number, default false]
+Controls pagination for this service.
+    - `false` No pagination. The default.
+    - `true` Use the configuration provided when the service was configured/
+    - A number. The maximum number of items to include.
 - `include` [optional] The new items may themselves include other items. The includes are recursive.
 
 Populate forms the query `[childField]: parentItem[parentField]` when the parent value is not an array.
