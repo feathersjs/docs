@@ -125,6 +125,7 @@ e.g. `include: { service: ..., nameAs: ..., ... }`.
 
 - `service` [required, string] The name of the service providing the items.
 - `nameAs` [optional, string, default is service] Where to place the items from the join.
+Dot notation is allowed.
 - `permissions` [optional, any type of value] Who is allowed to perform this join. See `checkPermissions` above.
 - `parentField` [required, string] The name of the field in the parent item for the [relation](#relation).
 Dot notation is allowed.
