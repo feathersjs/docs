@@ -71,7 +71,7 @@ app.service('users').before({ create: validate(myValidator) });
    
 Options
 
-- `validator` [required] - Validation function with signature `function validator(formValues)`.
+- `validator` [required] - Validation function with signature `function validator(formValues, hook)`.
 
 Sync functions return either an error object like `{ fieldName1: 'message', ... }` or null.
 Validate will throw on an error object with `throw new errors.BadRequest({ errors: errorObject });`.
