@@ -2,49 +2,46 @@
 
 Miscellaneous hooks.
 
-* [disable](#disable)
+* [disallow](#disallow)
 * [client](#client)
 * [setSlug](#setslug)
 * [debug](#debug)
 * [callbackToPromise](#callbacktopromise)
 * [promiseToCallback](#promisetocallback)
 
-### disable
-`disable(realm: Function|String, ...providers?: String[]): HookFunc`
 
-Disables access to a service method completely or for a specific provider. All providers
-(REST, Socket.io and Primus) set the params.provider property which is what disable checks for.
+### disallow
+`disallow(...providers?: String[]): HookFunc`
+
+Disallows access to a service method completely or for specific providers. All providers
+(REST, Socket.io and Primus) set the hook.params.provider property, and disallow checks this.
 
 - Used as a `before` hook.
 
 ```js
 app.service('users').before({
   // Users can not be created by external access
-  create: hooks.disable('external'),
+  create: hooks.disallow('external'),
   // A user can not be deleted through the REST provider
-  remove: hooks.disable('rest'),
-  // Disable calling `update` completely (e.g. to only support `patch`)
-  update: hooks.disable(),
-  // Disable the remove hook if the user is not an admin
-  remove: hooks.disable(function(hook) {
-    return !hook.params.user.isAdmin
-  })
+  remove: hooks.disallow('rest'),
+  // disallow calling `update` completely (e.g. to allow only `patch`)
+  update: hooks.disallow(),
+  // disallow the remove hook if the user is not an admin
+  remove: hooks.when(hook => !hook.params.user.isAdmin, hooks.disallow())
 });
 ```
 
-> **ProTip** Service methods that are not implemented do not need to be disabled.
+> **ProTip** Service methods that are not implemented do not need to be disallowed.
 
 Options
 
-- providers [optional. default: disables everything] - The transports that you want to disable
+- providers [optional. default: disallows everything] - The transports that you want to disallow
 this service method for. Options are:
-    - socketio - will disable the method for the Socket.IO provider
-    - primus - will disable the method for the Primus provider
-    - rest - will disable the method for the REST provider
-    - external - will disable access from all providers making a service method only usable internally.
-- callback () [optional. default: runs when not called internally] -
-A function that receives the hook object where you can put your own logic
-to determine whether this hook should run. Returns either true or false.
+    - socketio - will disallow the method for the Socket.IO provider
+    - primus - will disallow the method for the Primus provider
+    - rest - will disallow the method for the REST provider
+    - external - will disallow access from all providers other than the server.
+    - server - will disallow access for the server
 
 
 ### client
