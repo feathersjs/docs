@@ -2,7 +2,24 @@
 
 Hooks that interact with the database.
 
+* [disableMultiItemChange](#disablemultiitemchange)
 * [softDelete](#softdelete)
+
+
+### disableMultiItemChange
+`disableMultiItemChange(): HookFunc`
+
+Disables update, patch and remove methods from using null as an id, e.g. remove(null).
+A null id affects all the items in the DB, so accidentally using it may have undesirable results.
+
+- Used as a `before` hook.
+
+```js
+app.service('users').before({
+  all: hooks.disableMultiItemChange(),
+});
+```
+
 
 ### softDelete
 `softDelete(fieldName = 'deleted'): HookFunc`
