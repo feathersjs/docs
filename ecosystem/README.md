@@ -7,6 +7,8 @@ Below are some of the amazing things built with Feathers or for the Feathers eco
 - [Feathers Chat](https://github.com/feathersjs/feathers-chat) ![Official Feathers Repo](/img/tiny-feathers-logo.png) 
 - [Feathers React Native Chat](https://github.com/feathersjs/feathers-react-native-chat) ![Official Feathers Repo](/img/tiny-feathers-logo.png) 
 - [Headstart](http://www.headstartapp.com/)
+- [Headstart React Native iOS](https://itunes.apple.com/gb/app/headstart-app/id1147423616?mt=8) 
+- [Headstart React Native Android](https://play.google.com/store/apps/details?id=com.headstartapp.app&hl=en)
 - [GenerousTickets](https://generoustickets.com/)
 - [Taxfyle](https://www.taxfyle.com/)
 - [J.A.B. Property Investments](https://jabpi.com)
@@ -43,6 +45,7 @@ Submit yours by creating a pull request.
 
 #### Communications
 
+<<<<<<< HEAD:ecosystem/README.md
 - [feathers-batch](https://www.npmjs.com/package/feathers-batch) ![Official Feathers Module](/img/tiny-feathers-logo.png) - Batch multiple Feathers service calls into one (service) 
 
 #### Providers
@@ -50,6 +53,8 @@ Submit yours by creating a pull request.
 - [feathers-primus](./feathers-primus.html) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
 - [feathers-rest](./feathers-rest.html) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
 - [feathers-socketio](./feathers-socketio.html) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
+- [feathers-batch](https://www.npmjs.com/package/feathers-batch) - Batch multiple Feathers service calls into one (service)
+- [feathers-socketcluster](https://github.com/polst/feathers-socketcluster) - Use SocketCluster for client/server comunication. Not published.
 
 #### Database
 
@@ -98,7 +103,6 @@ Submit yours by creating a pull request.
 The Feathers client works with React Native but here is a collection of native libraries/SDKs.
 
 - [FeathersjsClientSwift](https://github.com/truebucha/FeathersjsClientSwift) - An iOS client written in Swift.
-- [feathers-android](https://github.com/feathersjs/feathers-android) - A native Android client.
 
 #### Email & SMS
 

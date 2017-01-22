@@ -142,7 +142,7 @@ Migrations with feathers and sequelize are quite simple and we have provided som
 - Install the [sequelize CLI](https://github.com/sequelize/cli):
 
 ```
-npm install sequelize-cli --save
+npm install sequelize-cli --save -g
 ```
 
 - Create a `.sequelizerc` file in your project root with the following content:
