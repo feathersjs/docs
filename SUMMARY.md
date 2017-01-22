@@ -62,8 +62,6 @@
    * [Angular](frameworks/angular.md)
    * [Angular 2](frameworks/angular2.md)
    * [Vue.js](frameworks/vuejs.md)
-   * [iOS](frameworks/ios.md)
-   * [Android](frameworks/android.md)
    * [Choo](frameworks/choo.md)
 * [Middleware](middleware/readme.md)
    * [Express Middleware](middleware/express.md)
