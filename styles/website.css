@@ -5,6 +5,14 @@
   background: #FFFFFF;
 }
 
+ul.summary > li > ul > li > span {
+  font-weight: bold;
+}
+
+ul.summary > li > ul > li > ul {
+  padding-left: 0 !important;
+}
+
 /* Sidebar Links */
 .book .book-summary ul.summary li a {
   font-size: 1.2em;
