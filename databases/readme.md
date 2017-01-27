@@ -8,6 +8,7 @@ Instead of coming up with our own ORM and validation system our official databas
 
 - **AsyncStorage** - [feathers-localstorage](localstorage.md)
 - **localStorage** - [feathers-localstorage](localstorage.md)
+- **Elasticsearch** - [feathers-elasticsearch](elasticsearch.md)
 - **Memory** - [feathers-memory](memory.md)
 - **MongoDB**
   - [feathers-mongoose](mongoose.md)
