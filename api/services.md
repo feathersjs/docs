@@ -48,6 +48,10 @@ Service methods should return a [Promise](https://developer.mozilla.org/en-US/do
 
 Keep in mind that services don't have to use databases.  You could easily replace the database in the example with a package that uses some API, like pulling in GitHub stars or stock ticker data.
 
+## Registering and retrieving
+
+## + EventEmitter
+
 ## find
 
 `find(params)` - retrieves a list of all resources from the service. Provider parameters will be passed as `params.query`.
@@ -120,13 +124,3 @@ const app = feathers()
 
 app.listen(3030);
 ```
-
-## on
-
-## emit
-
-## removeListener
-
-## hooks
-
-## filter

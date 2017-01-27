@@ -10,7 +10,7 @@
 $ npm install --save mongoose feathers-mongoose
 ```
 
-> **Important:** To use this adapter you also want to be familiar with the [common interface](./common.md) for database adapters.
+> **Important:** To use this adapter you also want to be familiar with the [database adapter common API](./common.md) and [querying mechanism](./querying.md).
 
 > This adapter also requires a [running MongoDB](https://docs.mongodb.com/getting-started/shell/#) database server.
 

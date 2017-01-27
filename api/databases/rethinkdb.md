@@ -10,11 +10,9 @@
 $ npm install --save rethinkdbdash feathers-rethinkdb
 ```
 
-> **Important:** To use this adapter you also want to be familiar with the [common interface](./common.md) for database adapters.
+> **Important:** To use this adapter you also want to be familiar with the [database adapter common API](./common.md) and [querying mechanism](./querying.md).
 
 > This adapter requires a running [RethinkDB](https://www.rethinkdb.com/) server.
-
-> **Note:** This adapter monitors the database for changes and automatically sends real-time events. This means that, unlike other databases and services, you will also get events if the database is changed directly (also see [how Feathers works](../getting-started/introduction.md)).
 
 ## API
 
@@ -38,6 +36,8 @@ app.use('/messages', service({
   }
 }));
 ```
+
+> **Note:** By default, `watch` is set to `true` which means this adapter monitors the database for changes and automatically sends real-time events. This means that, unlike other databases and services, you will also get events if the database is changed directly.
 
 __Options:__
 

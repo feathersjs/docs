@@ -19,7 +19,7 @@ npm install --save sqlite3
 npm install --save tedious // MSSQL
 ```
 
-> **Important:** To use this adapter you also want to be familiar with the [common interface](./common.md) for database adapters.
+> **Important:** To use this adapter you also want to be familiar with the [database adapter common API](./common.md) and [querying mechanism](./querying.md).
 
 > For more information about models and general Sequelize usage, follow up in the [Sequelize documentation](http://docs.sequelizejs.com/en/latest/).
 

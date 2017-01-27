@@ -10,7 +10,7 @@
 npm install --save mysql knex feathers-knex
 ```
 
-> **Important:** To use this adapter you also want to be familiar with the [common interface](./common.md) for database adapters.
+> **Important:** To use this adapter you also want to be familiar with the [database adapter common API](./common.md) and [querying mechanism](./querying.md).
 
 > **Note:** You also need to [install the database driver](http://knexjs.org/#Installation-node) for the DB you want to use.
 

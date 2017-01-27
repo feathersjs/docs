@@ -6,7 +6,7 @@ You can communicate with a Feathers server using any HTTP REST client. The follo
 
 All query parameters in a URL will be set as `params.query` on the server. Other service parameters can be set through [hooks](../hooks/readme.md) and [Express middleware](../middleware/express.md). URL query parameter values will always be strings. Conversion (e.g. the string `'true'` to boolean `true`) can be done in a hook as well.
 
-The body type for `POST`, `PUT` and `PATCH` requests is determined by the Express [body-parser](https://github.com/expressjs/body-parser) middleware which has to be registered *before* any service. You should also make sure you are setting your `Accepts` header to `application/json`.
+The body type for `POST`, `PUT` and `PATCH` requests is determined by the Express [body-parser](https://github.com/expressjs/body-parser) middleware which has to be registered *before* any service. You should also make sure you are setting your `Accept` header to `application/json`.
 
 | Feathers method | HTTP method | Path     |
 |-----------------|-------------|----------|
@@ -155,7 +155,15 @@ DELETE /messages?read=true
 
 Will call `messages.remove(null, { query: { read: 'true' } })` to delete all read messages.
 
-## Socket.io
+## Websockets
+
+### Calling service methods
+
+Service methods can be called by emitting a `<servicepath>::<methodname>` event with the method parameters. `servicepath` is the name the service has been registered with (in `app.use`) without leading or trailing slashes. An optional callback following the `function(error, data)` Node convention will be called with the result of the method call or any errors that might have occurred.
+
+`params` will be set as `params.query` in the service method call. Other service parameters can be set through a [Socket.io middleware](../real-time/socket-io.md).
+
+### Socket.io
 
 [With Socket.io configured on the server](../real-time/socket-io.md) service methods and events will be available through a websocket connection. While using the REST API and just listening to real-time events on a socket is possible, Feathers also allows to call service methods through a websocket which, in most cases will be faster than REST HTTP.
 
@@ -164,12 +172,6 @@ Will call `messages.remove(null, { query: { read: 'true' } })` to delete all rea
 Feathers sets up a normal Socket.io server that you can connect to using the [Socket.io client](http://socket.io/docs/client-api/) either by loading the `socket.io-client` module or `/socket.io/socket.io.js` from the server. Unlike HTTP calls, websockets do not have a cross-origin restriction in the browser so it is possible to connect to any Feathers server. See below for platform specific examples.
 
 > **ProTip**: The socket connection URL has to point to the server root which is where Feathers will set up Socket.io.
-
-### Calling service methods
-
-Service methods can be called by emitting a `<servicepath>::<methodname>` event with the method parameters. `servicepath` is the name the service has been registered with (in `app.use`) without leading or trailing slashes. An optional callback following the `function(error, data)` Node convention will be called with the result of the method call or any errors that might have occurred.
-
-`params` will be set as `params.query` in the service method call. Other service parameters can be set through a [Socket.io middleware](../real-time/socket-io.md).
 
 #### `find`
 
