@@ -82,6 +82,7 @@ const axios = require('axios');
 const host = 'http://api.feathersjs.com';
 const app = feathers()
   .configure(rest(host).axios(axios));
+```
 
 ### Fetch
 
