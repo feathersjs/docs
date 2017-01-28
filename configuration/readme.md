@@ -8,7 +8,7 @@ Here is what it does:
 - When the `NODE_ENV` is not `development`, also try to load `<NODE_ENV>.json` in that path and merge both configurations (with `<NODE_ENV>.json` taking precedence)
 - Go through each configuration value and sets it on the application (via `app.set(name, value)`).
   - If the value is a valid environment variable (e.v. `NODE_ENV`), use its value instead
-  - If the value start with `./` or `../` turn it it an absolute path relative to the configuration file path
+  - If the value start with `./` or `../` turn it to an absolute path relative to the configuration file path
   - If the value starts with a `\`, do none of the above two
 
 ## Usage
