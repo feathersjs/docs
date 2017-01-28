@@ -132,11 +132,12 @@ $ npm install feathers feathers-rest feathers-hooks superagent
 ```js
 const feathers = require('feathers');
 const superagent = require('superagent');
+const hooks = require('feathers-hooks')
 const client = require('feathers-rest/client');
 const rest = client('http://my-feathers-server.com');
 
 const app = feathers()
-  .configure(feathers.hooks())
+  .configure(hooks())
   .configure(rest.superagent(superagent));
 
 // This will now connect to the http://my-feathers-server.com/messages API
