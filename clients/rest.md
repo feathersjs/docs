@@ -121,7 +121,7 @@ Using [the Feathers client](feathers.md), the `feathers-rest/client` module can 
 </script>
 ```
 
-## Server Usage
+## Node.js Usage
 
 Here's how to use the Feathers REST client in NodeJS.
 
