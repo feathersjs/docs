@@ -136,7 +136,7 @@ const client = require('feathers-rest/client');
 const rest = client('http://my-feathers-server.com');
 
 const app = feathers()
-  .configure(hooks())
+  .configure(feathers.hooks())
   .configure(rest.superagent(superagent));
 
 // This will now connect to the http://my-feathers-server.com/messages API
