@@ -71,7 +71,7 @@ Options
 ```javascript
 import { getItems, replaceItems } from 'feathers-hooks-common/lib/utils';
 
-const insertCode = (code) => (hook) {
+const insertCode = (code) => (hook) => {
     const items = getItems(hook);
     !Array.isArray(items) ? items.code = code : (items.forEach(item => { item.code = code; }));
     replaceItems(hook, items);
