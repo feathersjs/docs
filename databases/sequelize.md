@@ -160,7 +160,7 @@ module.exports = {
 };
 ```
 
-- Register your models. The following assumes you have defined your models using the method [described here](https://github.com/feathersjs/generator-feathers/issues/94#issuecomment-204165134).
+- Register your models in `migrations/models/index.js`. The following assumes you have defined your models using the method [described here](https://github.com/feathersjs/generator-feathers/issues/94#issuecomment-204165134).
 
 ```js
 const Sequelize = require('sequelize');
