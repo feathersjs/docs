@@ -84,6 +84,7 @@
 * [Debugging](debugging/readme.md)
 * [Testing](testing/readme.md)
 * [Security](SECURITY.md)
+* [Scaling](scaling/readme.md)
 * [Core API](api/readme.md)
 * [Guides](guides/readme.md)
    * [Migrating to Feathers 2](guides/migrating.md)
