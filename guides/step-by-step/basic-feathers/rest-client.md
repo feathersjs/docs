@@ -39,7 +39,7 @@ using REST or websockets.
 To keep things DRY, we are isolating in
 [common/public/rest.html](https://github.com/feathersjs/feathers-guide/blob/master/examples/step/01/common/public/rest.html)
 the code which is unique to REST.
-[import](../../examples/step/01/common/public/rest.html)
+[import](../../../examples/step/01/common/public/rest.html)
 
 - `//cdnjs.cloudflare.com/ajax/libs/core-js/2.1.4/core.min.js`
 loads a pollyfill for [fetch](https://davidwalsh.name/fetch) if required.
@@ -61,7 +61,7 @@ The frontend
 [common/public/feathers-app.js.](https://github.com/feathersjs/feathers-guide/blob/master/examples/step/01/common/public/feathers-app.js)
 is essentially the same as the server code we used in
 [Writing a Database Connector](./database-connector.md)!
-[import](../../examples/step/01/common/public/feathers-app.js)
+[import](../../../examples/step/01/common/public/feathers-app.js)
 
 - See what changed:
 [Unified](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-guide/blob/master/examples/step/_diff/01-rest-2-client-line.html)

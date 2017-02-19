@@ -56,7 +56,7 @@ app.service('/messages').remove(null)
 - `service.remove(null)` deletes all of that service's items.
 
 > **Remove.** You have to be careful not to accidentally pass `null`.
-One way to protect yourself is by using a before hook that throws on `null`.
+One way to protect yourself is by using the `disableMultiItemChange` hook.
 
 ### Running the server
 
@@ -70,7 +70,7 @@ messages table cleared.
 Let's exercise the server with these
 [curl](http://www.slashroot.in/curl-command-tutorial-linux-example-usage)
 commands:
-[import](../../examples/chat/server/start/curl-requests.sh)
+[import](../../../examples/chat/server/start/curl-requests.sh)
 
 Run them on another terminal with `./examples/chat/server/start/curl-requests.sh`
 and the following is displayed:

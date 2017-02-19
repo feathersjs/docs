@@ -1,0 +1,18 @@
+--- client/jquery/public/client-app.js	2017-01-05 09:33:29.548000000 -0500
++++ client/webpack/client/app.js	2017-01-16 08:59:58.517000000 -0500
+@@ -1,5 +1,14 @@
+ 
+-/* globals feathersClient: 0, feathers: 0 */
++const $ = require('jquery');
++const io = require('socket.io-client');
++const feathers = require('feathers-client');
++const moment = require('moment');
++
++var serverUrl = 'http://localhost:3030';
++const socket = io(serverUrl);
++
++const feathersClient = feathers()
++  .configure(feathers.socketio(socket));
+ 
+ // Routing
+ 
