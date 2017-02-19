@@ -25,6 +25,34 @@ app.service('messages').hooks({
 ```
 
 
+## Hook objects
+
+The `hook` object is passed to a hook function and contains information about the service method call. Hook objects have __Read-only__ properties that should not be modified and __Writeable__ properties that can be changed for subsequent hooks and - in a `before` hook - the service method call.
+
+- __Read-only:__
+  - `app` - The [app object](./application.md) (used to e.g. retrieve other services)
+  - `service` - The service this hook currently runs on
+  - `path` - The path (name) of the service
+  - `method` - The service method name
+  - `type` - The hook type (`before`, `after` or `error`)
+- __Writeable:__
+  - `params` - The service method parameters (including `params.query`)
+  - `id` - The id (for `get`, `remove`, `update` and `patch`)
+  - `data` - The request data (for `create`, `update` and `patch`)
+  - `error` - The error that was thrown (only in `error` hooks)
+  - `result` - The result of the successful method call (only in `after` hooks).
+
+> **Pro Tip:** `hook.result` Can also be set in a `before` hook which will skip the service method call (but run all other hooks).
+
+<!-- -->
+
+> **Pro Tip:** `hook.id` can also be `null` for `update`, `patch` and `remove`. See the [service methods](./services.md) for more information.
+
+<!-- -->
+
+> **Pro Tip:** The `hook` object is the same throughout a service method call so it is possible to add properties and use them in other hooks at a later time.
+
+
 ## Hook functions
 
 A hook function (or just _hook_) takes a [hook object](#hook-objects) as the parameter (`function(hook) {}` or `hook => {}`) and can
@@ -52,6 +80,7 @@ app.service('messages').hooks({
   }
 });
 ```
+
 
 ## Asynchronous hooks
 
@@ -111,34 +140,6 @@ app.service('messages').hooks({
 <!-- -->
 
 > **Important:** Most Feathers service calls and newer Node packages already return Promises. They can be returned and chained directly. There is no need to instantiate your own `new` Promise instance in those cases.
-
-
-## Hook objects
-
-The `hook` object is passed to a hook function and contains information about the service method call. Hook objects have __Read-only__ properties that should not be modified and __Writeable__ properties that can be changed for subsequent hooks and - in a `before` hook - the service method call.
-
-- __Read-only:__
-  - `app` - The [app object](./application.md) (used to e.g. retrieve other services)
-  - `service` - The service this hook currently runs on
-  - `path` - The path (name) of the service
-  - `method` - The service method name
-  - `type` - The hook type (`before`, `after` or `error`)
-- __Writeable:__
-  - `params` - The service method parameters (including `params.query`)
-  - `id` - The id (for `get`, `remove`, `update` and `patch`)
-  - `data` - The request data (for `create`, `update` and `patch`)
-  - `error` - The error that was thrown (only in `error` hooks)
-  - `result` - The result of the successful method call (only in `after` hooks).
-
-> **Pro Tip:** `hook.result` Can also be set in a `before` hook which will skip the service method call (but run all other hooks).
-
-<!-- -->
-
-> **Pro Tip:** `hook.id` can also be `null` for `update`, `patch` and `remove`. See the [service methods](./services.md) for more information.
-
-<!-- -->
-
-> **Pro Tip:** The `hook` object is the same throughout a service method call so it is possible to add properties and use them in other hooks at a later time.
 
 
 ## Registering hooks

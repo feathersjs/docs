@@ -45,20 +45,21 @@
     * Angular
   * Advanced
     * File upload
+    * Redux
+    * Other guides here
 * [API](api/readme.md)
   * Core
-    * [Application](api/application.md)
     * [Services](api/services.md)
     * [Hooks](api/hooks.md)
+    * [Application](api/application.md)
+    * [Client](api/client.md)
     * [Common Hooks](api/hooks-common.md)
     * [Events](api/events.md)
+    * [Error handling](api/errors.md)
   * Transports
-    * [REST (Express)](api/rest.md)
+    * [REST](api/rest.md)
     * [Socket.io](api/socketio.md)
     * [Primus](api/primus.md)
-  * Client
-    * [Application](api/client/app.md)
-    * [Direct connection](api/client/direct.md)    
   * Authentication
     * [Configuration](api/auth.md)
     * [Local](api/auth-local.md)
