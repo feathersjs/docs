@@ -27,11 +27,12 @@
     "node": ">= 0.12.0"
   },
   "scripts": {
-    "postinstall": "gitbook build",
+    "postinstall": "npm run build",
     "publish": "git push origin && git push origin --tags",
     "release:patch": "npm version patch && npm run publish",
     "release:minor": "npm version minor && npm run publish",
     "release:major": "npm version major && npm run publish",
+    "build": "gitbook build",
     "test": "echo \"Error: no test specified.\""
   },
   "directories": {},
