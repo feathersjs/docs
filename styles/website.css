@@ -5,30 +5,41 @@
   background: #FFFFFF;
 }
 
-ul.summary > li > ul > li > span {
-  font-weight: bold;
-}
-
-ul.summary > li > ul > li > ul {
-  padding-left: 0 !important;
-}
-
 /* Sidebar Links */
-.book .book-summary ul.summary li a {
+.book .book-summary nav ul.summary li a {
   font-size: 1em;
-  color: #4A4A4A;
+  color: #666666;
 }
 
-// Top level links
-.book .book-summary ul.summary > li > a {
+.book .book-summary nav ul.summary li a:hover,
+.book .book-summary nav ul.summary li a:focus {
+  color: #222222;
+  text-decoration: none;
+}
+
+.book .book-summary nav ul.summary li.active > a {
+  color: #43CEA2;
+  text-decoration: none;
+}
+
+/* Top level links */
+.book .book-summary nav ul.summary > li > a {
   font-size: 1.1em;
+}
+
+/* 2nd level headings */
+.book .book-summary nav ul.summary > li > ul > li > span {
   font-weight: 700;
 }
 
-.book .book-summary ul.summary li a:hover,
-.book .book-summary ul.summary li.active > a {
-  color: #43CEA2;
-  text-decoration: none;
+.book .book-summary nav ul.summary > li > ul > li > ul {
+  padding-left: 0 !important;
+}
+
+/* 3rd level menu items */
+.book .book-summary nav ul.summary ul.page-headings > li > a {
+  padding: 5px 10px;
+  font-size: 0.9em;
 }
 
 /* Sidebar Title */
@@ -57,7 +68,7 @@ ul.summary > li > ul > li > ul {
   border-radius: 4px;
   display: inline-block;
   font: inherit;
-  color: #4A4A4A;
+  color: #666666;
   line-height: 1.5em;
   padding: 0.5em 3.5em 0.5em 1em;
 
