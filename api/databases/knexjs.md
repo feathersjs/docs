@@ -18,7 +18,7 @@ npm install --save mysql knex feathers-knex
 
 ### `service(options)`
 
-Returns a new service instance intitialized with the given options.
+Returns a new service instance initialized with the given options.
 
 ```js
 const knex = require('knex');

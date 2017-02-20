@@ -19,7 +19,7 @@ $ npm install --save mongodb feathers-mongodb
 
 ### `service(options)`
 
-Returns a new service instance intitialized with the given options. `Model` has to be a MongoDB collection.
+Returns a new service instance initialized with the given options. `Model` has to be a MongoDB collection.
 
 ```js
 const MongoClient = require('mongodb').MongoClient;

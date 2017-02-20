@@ -1,6 +1,6 @@
 # API
 
-Feathers core API is very small and an initialized application provides the same functionality as an [Express 4](http://expressjs.com/en/4x/api.html) application. The differences and additional methods and their usage are outlined in this chapter. For the service API refer to the [Services chapter](../services/readme.md).
+The Feathers core API is very small and an initialized application provides the same functionality as an [Express 4](http://expressjs.com/en/4x/api.html) application. The differences and additional methods and their usage are outlined in this chapter. For the service API refer to the [Services chapter](../services/readme.md).
 
 ## configure
 
@@ -8,7 +8,7 @@ Feathers core API is very small and an initialized application provides the same
 
 ```js
 function setupService() {
-    this.use('/todos', todoService);
+  this.use('/todos', todoService);
 }
 
 app.configure(setupService);
@@ -34,13 +34,13 @@ Normally `app.setup` will be called automatically when starting the application 
 // Serve public folder for everybody
 app.use(feathers.static(__dirname + '/public');
 // Make sure that everything else only works with authentication
-app.use(function(req,res,next){
-  if(req.isAuthenticated()){
-    next();
-  } else {
-    // 401 Not Authorized
-    next(new Error(401));
+app.use(function(req, res, next) {
+  if (req.isAuthenticated()) {
+    return next();
   }
+
+  // 401 Not Authorized
+  next(new Error(401));
 });
 // Add a service.
 app.use('/todos', {
@@ -69,7 +69,7 @@ app.use('/my/todos', {
 var todoService = app.service('my/todos');
 // todoService is an event emitter
 todoService.on('created', todo => 
-    console.log('Created todo', todo)
+  console.log('Created todo', todo)
 );
 ```
 

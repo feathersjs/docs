@@ -19,7 +19,7 @@ $ npm install --save mongoose feathers-mongoose
 
 ### `service(options)`
 
-Returns a new service instance intitialized with the given options. `Model` has to be a Mongoose model. See the [Mongoose Guide](http://mongoosejs.com/docs/guide.html) for more information on defining your model.
+Returns a new service instance initialized with the given options. `Model` has to be a Mongoose model. See the [Mongoose Guide](http://mongoosejs.com/docs/guide.html) for more information on defining your model.
 
 ```js
 const mongoose = require('mongoose');
@@ -50,7 +50,7 @@ __Options:__
 
 <!-- -->
 
-> **Important:** Whe setting `lean` to `false`, Mongoose models will be returned which can not be modified unless they are converted via `toObject`.
+> **Important:** When setting `lean` to `false`, Mongoose models will be returned which can not be modified unless they are converted to a regular JavaScript object via `toObject`.
 
 <!-- -->
 
