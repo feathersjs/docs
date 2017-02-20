@@ -5,13 +5,18 @@ Below are some of the amazing things built with Feathers or for the Feathers eco
 ## Applications
 
 - [Feathers Chat](https://github.com/feathersjs/feathers-chat) ![Official Feathers Repo](/img/tiny-feathers-logo.png) 
-- [Feathers React Native Chat](https://github.com/feathersjs/feathers-react-native-chat) ![Official Feathers Repo](/img/tiny-feathers-logo.png) 
+- [Feathers React Native Chat](https://github.com/feathersjs/feathers-react-native-chat) ![Official Feathers Repo](/img/tiny-feathers-logo.png)
+- [Foxflow](https://www.foxflow.com/)
+- [GenerousTickets](https://generoustickets.com/)
+- [Gratify](https://gratifyhq.com)
 - [Headstart](http://www.headstartapp.com/)
 - [Headstart React Native iOS](https://itunes.apple.com/gb/app/headstart-app/id1147423616?mt=8) 
 - [Headstart React Native Android](https://play.google.com/store/apps/details?id=com.headstartapp.app&hl=en)
-- [GenerousTickets](https://generoustickets.com/)
-- [Taxfyle](https://www.taxfyle.com/)
 - [J.A.B. Property Investments](https://jabpi.com)
+- [Shakepay](https://shakepay.co)
+- [Simpla](https://www.simpla.io/)
+- [Stoplight](https://stoplight.io/)
+- [Taxfyle](https://www.taxfyle.com/)
 
 ## Starter stacks, Examples and Tutorials
 
@@ -41,11 +46,10 @@ Submit yours by creating a pull request.
 - [feathers-authentication-popups](./feathers-authentication-popups.html) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
 - [feathers-authentication-popups-github](./feathers-authentication-popups-github.html) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
 - [feathers-permissions](./feathers-permissions.html) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
-- [feathers-service-verify-reset](https://www.npmjs.com/package/feathers-service-verify-reset) - Adds user email verification and password reset capabilities to local feathers-authentication (service)
+- [feathers-authentication-management](https://www.npmjs.com/package/feathers-authentication-management) - Adds user email verification and password reset capabilities to local feathers-authentication (service)
 
 #### Communications
 
-<<<<<<< HEAD:ecosystem/README.md
 - [feathers-batch](https://www.npmjs.com/package/feathers-batch) ![Official Feathers Module](/img/tiny-feathers-logo.png) - Batch multiple Feathers service calls into one (service) 
 
 #### Providers
@@ -54,7 +58,7 @@ Submit yours by creating a pull request.
 - [feathers-rest](./feathers-rest.html) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
 - [feathers-socketio](./feathers-socketio.html) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
 - [feathers-batch](https://www.npmjs.com/package/feathers-batch) - Batch multiple Feathers service calls into one (service)
-- [feathers-socketcluster](https://github.com/polst/feathers-socketcluster) - Use SocketCluster for client/server comunication. Not published.
+- [feathers-socketcluster](https://github.com/polst/feathers-socketcluster) - Use SocketCluster for client/server communication. Not published.
 
 #### Database
 
@@ -91,11 +95,11 @@ Submit yours by creating a pull request.
 
 #### Documentation
 
-- [feathers-swagger](https://www.npmjs.com/package/feathers-swagger) - Add documentation to your Featherjs services and feed them to Swagger UI. (configure)
+- [feathers-swagger](https://www.npmjs.com/package/feathers-swagger) - Add documentation to your Feathers services and feed them to Swagger UI. (configure)
 
 #### Multiple instances
 
-- [feathers-cluster](https://www.npmjs.com/package/feathers-cluster) - Easily take advantage of multi-core systems for Featherjs. (configure)
+- [feathers-cluster](https://www.npmjs.com/package/feathers-cluster) - Easily take advantage of multi-core systems for Feathers. (configure)
 - [feathers-sync](https://www.npmjs.com/package/feathers-sync) ![Official Feathers Module](/img/tiny-feathers-logo.png)  - Synchronize service events between application instances using MongoDB publish/subscribe (configure)
 
 #### Mobile
@@ -141,19 +145,19 @@ The Feathers client works with React Native but here is a collection of native l
 - [feathers-cli](./feathers-cli.html) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
 - [feathers-client](./feathers-client.html) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
 - [feathers-commons](./feathers-commons.html) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
-* [feathers-configuration](./feathers-configuration.html) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
-* [feathers-errors](./feathers-errors.html) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
-* [feathers-generator](./feathers-generator.html) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
-* [feathers-hooks](./feathers-hooks.html) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
+- [feathers-configuration](./feathers-configuration.html) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
+- [feathers-errors](./feathers-errors.html) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
+- [feathers-generator](./feathers-generator.html) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
+- [feathers-hooks](./feathers-hooks.html) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
 - [feathers-hooks-common](https://www.npmjs.com/package/feathers-hooks-common) ![Official Feathers Module](/img/tiny-feathers-logo.png) - Useful hooks for use with Feathersjs services. (hooks) 
 - [feathers-hooks-utils](https://www.npmjs.com/package/feathers-hooks-utils) - Utility library for writing Feathersjs hooks. (hooks)
-* [feathers-logger](./feathers-logger.html) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
-* [feathers-query-filters](./feathers-query-filters.html) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
-* [feathers-service-logger-stats](./feathers-service-logger-stats.html) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
-* [feathers-socket-commons](./feathers-socket-commons.html) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
-* [feathers-swagger](./feathers-swagger.html) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
-* [generator-feathers](./generator-feathers.html) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
-* [generator-feathers-plugin](./generator-feathers-plugin.html) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
+- [feathers-logger](./feathers-logger.html) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
+- [feathers-query-filters](./feathers-query-filters.html) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
+- [feathers-service-logger-stats](./feathers-service-logger-stats.html) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
+- [feathers-socket-commons](./feathers-socket-commons.html) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
+- [feathers-swagger](./feathers-swagger.html) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
+- [generator-feathers](./generator-feathers.html) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
+- [generator-feathers-plugin](./generator-feathers-plugin.html) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
 
 #### Validation
 
