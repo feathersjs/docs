@@ -49,22 +49,23 @@
     * Other guides here
 * [API](api/readme.md)
   * Core
+    * [Application](api/application.md)
     * [Services](api/services.md)
     * [Hooks](api/hooks.md)
-    * [Application](api/application.md)
     * [Client](api/client.md)
     * [Common Hooks](api/hooks-common.md)
     * [Events](api/events.md)
-    * [Error handling](api/errors.md)
+    * [Errors](api/errors.md)
   * Transports
     * [REST](api/rest.md)
     * [Socket.io](api/socketio.md)
     * [Primus](api/primus.md)
   * Authentication
-    * [Configuration](api/auth.md)
-    * [Local](api/auth-local.md)
-    * [OAuth](api/auth-oauth.md)
-    * [Permissions](api/auth-permissions.md)
+    * [Configuration](api/authentication/configuration.md)
+    * [Local](api/authentication/local.md)
+    * [OAuth1](api/authentication/oauth1.md)
+    * [OAuth2](api/authentication/oauth2.md)
+    * [Permissions](api/authentication/permissions.md)
   * Databases
     * [Common API](api/databases/common.md)
     * [Querying](api/databases/querying.md)
