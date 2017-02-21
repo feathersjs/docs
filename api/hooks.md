@@ -1,25 +1,27 @@
 # Hooks
 
-Hooks are pluggable middleware functions that can be registered __before__, __after__ or on __error__s of a [service method](./services.md). 
+Hooks are simply functions that can be registered __before__, __after__ or on __error__s of a [service method](./services.md). You can register a single hook function or create a chain of them to create complex work-flows. Most of the time multiple hooks are registered so the examples show the "hook chain" array style registration.
 
-It is a flexible way to handle things like validation, logging, populating related entities, sending notifications and more without having to change the original service. For more information about the design patterns behind hooks see [this blog post](https://blog.feathersjs.com/api-service-composition-with-hooks-47af13aa6c01).
+A hook is **transport independent**, which means it does not matter if it has been called through HTTP(S) (REST), Socket.io, Primus or any other transport Feathers may support in the future. They are also service agnostic, meaning they can be used with ​**any**​ service regardless of whether they have a model or not.
+
+Hooks are commonly used to handle things like validation, logging, populating related entities, sending notifications and more. This pattern keeps you application logic flexible, composable, and much easier to trace through and debug. For more information about the design patterns behind hooks see [this blog post](https://blog.feathersjs.com/api-service-composition-with-hooks-47af13aa6c01).
 
 The following example adds a `createdAt` and `updatedAt` property before sending the data to the database.
 
 ```js
 app.service('messages').hooks({
   before: {
-    create(hook) {
-      hook.data.createdAt = new Date();
-    },
+    create: [
+      (hook) => hook.data.createdAt = new Date()
+    ],
 
-    update(hook) {
-      hook.data.updatedAt = new Date();
-    },
+    update: [
+      (hook) => hook.data.updatedAt = new Date()
+    ],
 
-    patch(hook) {
-      hook.data.updatedAt = new Date();
-    }
+    patch: [
+      (hook) => hook.data.updatedAt = new Date()
+    ]
   }
 });
 ```
@@ -27,9 +29,9 @@ app.service('messages').hooks({
 
 ## Hook objects
 
-The `hook` object is passed to a hook function and contains information about the service method call. Hook objects have __Read-only__ properties that should not be modified and __Writeable__ properties that can be changed for subsequent hooks and - in a `before` hook - the service method call.
+The `hook` object is passed to a hook function and contains information about the service method call. Hook objects have __read only__ properties that should not be modified and __writeable__ properties that can be changed for subsequent hooks.
 
-- __Read-only:__
+- __Read Only:__
   - `app` - The [app object](./application.md) (used to e.g. retrieve other services)
   - `service` - The service this hook currently runs on
   - `path` - The path (name) of the service
@@ -72,11 +74,13 @@ The following example throws an error when the text for creating a new message i
 ```js
 app.service('messages').hooks({
   before: {
-    create(hook) {
-      if(hook.data.text.trim() === '') {
-        throw new Error('Message text can not be empty');
+    create: [
+      (hook) => {
+        if(hook.data.text.trim() === '') {
+          throw new Error('Message text can not be empty');
+        }
       }
-    }
+    ]
   }
 });
 ```
@@ -93,18 +97,20 @@ The following example shows an asynchronous hook that uses another service to re
 ```js
 app.service('messages').hooks({
   after: {
-    get(hook) {
-      const userId = hook.result.userId;
+    get: [
+      (hook) => {
+        const userId = hook.result.userId;
 
-      // hook.app.service('users').get returns a Promise already
-      return hook.app.service('users').get(userId).then(user => {
-        // Update the result (the message)
-        hook.result.user = user;
+        // hook.app.service('users').get returns a Promise already
+        return hook.app.service('users').get(userId).then(user => {
+          // Update the result (the message)
+          hook.result.user = user;
 
-        // Returning will resolve the promise with the `hook` object
-        return hook;
-      });
-    }
+          // Returning will resolve the promise with the `hook` object
+          return hook;
+        });
+      }
+    ]
   }
 });
 ```
@@ -116,21 +122,23 @@ The following example reads a JSON file with [fs.readFile](https://nodejs.org/ap
 ```js
 app.service('messages').hooks({
   after: {
-    get(hook) {
-      return new Promise((resolve, reject) => {
-        require('fs').readFile('./myfile.json', (error, data) => {
-          // Check if the callback got an error, if so reject the promise and return
-          if(error) {
-            return reject(error);
-          }
+    get: [
+      (hook) => {
+        return new Promise((resolve, reject) => {
+          require('fs').readFile('./myfile.json', (error, data) => {
+            // Check if the callback got an error, if so reject the promise and return
+            if(error) {
+              return reject(error);
+            }
 
-          hook.result.myFile = JSON.parse(data.toString());
+            hook.result.myFile = JSON.parse(data.toString());
 
-          // Resolve the promise with the `hook` object
-          resolve(hook);
+            // Resolve the promise with the `hook` object
+            resolve(hook);
+          });
         });
-      });
-    }
+      }
+    ]
   }
 });
 ```
@@ -186,7 +194,7 @@ app.service('servicename').hooks({
   }
 });
 
-// Register a hook before, after and on error for all methods
+// Register a single hook before, after and on error for all methods
 app.service('servicename').hooks({
   before(hook) {
     console.log('before all hook ran');
