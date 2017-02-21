@@ -1,4 +1,4 @@
-## The MIT license
+# MIT license
 
 Copyright (C) 2016 [Feathers contributors](https://github.com/feathersjs/feathers/graphs/contributors)
 

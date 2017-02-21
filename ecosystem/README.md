@@ -22,6 +22,7 @@ Below are some of the amazing things built with Feathers or for the Feathers eco
 
 Submit yours by creating a pull request.
 
+- [Best Buy API Playground](https://github.com/BestBuy/api-playground)
 - [A series of small, example apps](https://github.com/feathersjs/feathers-demos)
 - [Feathers + Apollo](https://github.com/swarthout/feathers-apollo)
 - [Feathers + React + Mobx](https://github.com/foxhound87/rfx-stack)
