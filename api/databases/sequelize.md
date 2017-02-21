@@ -28,7 +28,7 @@ npm install --save tedious // MSSQL
 
 ### `service(options)`
 
-Returns a new service instance intitialized with the given options.
+Returns a new service instance initialized with the given options.
 
 ```js
 const Model = require('./models/mymodel');

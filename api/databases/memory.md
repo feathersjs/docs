@@ -17,7 +17,7 @@ $ npm install --save feathers-memory
 
 ### `service([options])`
 
-Returns a new service instance intitialized with the given options.
+Returns a new service instance initialized with the given options.
 
 ```js
 const service = require('feathers-memory');
