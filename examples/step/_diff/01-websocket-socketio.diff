@@ -1,0 +1,31 @@
+--- 01/common/public/rest.html	2017-01-10 12:33:47.042000000 -0500
++++ 01/common/public/socketio.html	2017-01-10 12:33:46.955000000 -0500
+@@ -1,6 +1,6 @@
+ <html>
+ <head>
+-  <title>Feathers REST client</title>
++  <title>Feathers Socketio client</title>
+   <style>
+     body {
+       font-family: 'Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif';
+@@ -12,15 +12,17 @@
+ </head>
+ <body>
+ <h1>Feathers guide</h1>
+-<h2>Feathers REST client</h2>
++<h2>Feathers Socketio client</h2>
+ <br />
+-Open console to see results of <strong>feathers-rest</strong> calls.
++Open console to see results of <strong>feathers-socketio</strong> calls.
+ <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/core-js/2.1.4/core.min.js"></script>
+ <script src="//unpkg.com/feathers-client@^1.8.0/dist/feathers.js"></script>
++<script src="/socket.io.min.js"></script>
+ <script src="/serverUrl.js"></script>
+ <script>
++  const socket = io(serverUrl);
+   const feathersClient = feathers()
+-      .configure(feathers.rest(serverUrl).fetch(fetch))
++      .configure(feathers.socketio(socket))
+ </script>
+ <script src="/feathers-app.js"></script>
+ </body>

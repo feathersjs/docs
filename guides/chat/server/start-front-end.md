@@ -59,7 +59,7 @@ The sign-up section is displayed initially.
 The
 [client](https://github.com/feathersjs/feathers-guide/blob/master/examples/chat/server/client/public/socketio-app.js)
 has a basic router to handle the 3 sections of the HTML.
-[import:'router'](../../examples/chat/server/client/public/socketio-app.js)
+[import:'router'](../../../examples/chat/server/client/public/socketio-app.js)
 ```javascript
 function handleClick(id, func) {
   document.getElementById(id).addEventListener('click', func);
@@ -78,7 +78,7 @@ So when the button `to-signin-user`, the router is called to display the `sign-i
 The
 [client](https://github.com/feathersjs/feathers-guide/blob/master/examples/chat/server/client/public/socketio-app.js)
 responds to Feathers events:
-[import:'events'](../../examples/chat/server/client/public/socketio-app.js)
+[import:'events'](../../../examples/chat/server/client/public/socketio-app.js)
 
 - `userList` will contain the users, once we ourselves are authenticated.
 
@@ -112,7 +112,7 @@ messageService.filter((data, connection) => connection.user ? data : false);
 Now let's add helpers to the
 [client](https://github.com/feathersjs/feathers-guide/blob/master/examples/chat/server/client/public/socketio-app.js)
 to handle events related to users.
-[import:'user-helpers'](../../examples/chat/server/client/public/socketio-app.js)
+[import:'user-helpers'](../../../examples/chat/server/client/public/socketio-app.js)
 
 - `signUpUser` is called when `signup-user` is clicked.
 It adds a user item, and then displays the `sign-in` section.
@@ -132,7 +132,7 @@ It logs the user off and then displays the `sign-in` section.
 Finally add helpers to the
 [client](https://github.com/feathersjs/feathers-guide/blob/master/examples/chat/server/client/public/socketio-app.js)
 to handle events related to messages.
-[import:'message-helpers'](../../examples/chat/server/client/public/socketio-app.js)
+[import:'message-helpers'](../../../examples/chat/server/client/public/socketio-app.js)
 
 - `sendMessage` add the new message to the messages table.
 This will cause that message to be sent to all connected clients

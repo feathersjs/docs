@@ -1,0 +1,37 @@
+--- 01/common/public/feathers-app-del.js	2017-01-13 14:49:01.187000000 -0500
++++ 02/app/public/feathers-app.js	2017-01-13 14:50:14.748000000 -0500
+@@ -1,4 +1,10 @@
+ 
++feathersClient
++  .configure(feathers.hooks())
++  .configure(feathers.authentication({
++    storage: window.localStorage
++  }));
++
+ let jackId;
+ const users = feathersClient.service('/users');
+ 
+@@ -16,11 +22,18 @@
+   
+     jackId = results[3]._id;
+     
+-    return users.remove(jackId)
+-      .then(result => console.log('deleted Jack Doe item\n', result));
++    return feathersClient.authenticate({
++      type: 'local',
++      'email': 'jane.doe@gmail.com',
++      'password': '11111'
+   })
+-  .then(() => {
+-    return users.find()
+-      .then(results => console.log('find all items\n', results));
++      .then(() => console.log('\nAuthenticated successfully.\n '))
++      .catch(err => console.error('\nError authenticating:', err));
+   })
++  .then(() => users.remove(jackId)
++    .then(results => console.log('deleted Jack Doe item\n', results))
++  )
++  .then(() => users.find()
++    .then(results => console.log('find all items\n', results))
++  )
+   .catch(err => console.log('Error occurred:', err));
