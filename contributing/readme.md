@@ -1,8 +1,6 @@
-# Help Us Write the Book!
+# Contributing
 
 Just like Feathers itself, all of the documentation is open source and [available to edit on GitHub](https://github.com/feathersjs/feathers-docs).  If you see something that you can contribute, we would LOVE a pull request with your edits! To make this easy you can click the _"Edit this page"_ link at the top of the web docs.
-
-## Contributing Guidelines
 
 The docs are all written in [GitHub Flavored Markdown](https://help.github.com/articles/github-flavored-markdown/).  If you've used GitHub, it's pretty likely you've encountered it before.  You can become a pro in a few minutes by reading their [GFM Documentation page](https://help.github.com/articles/github-flavored-markdown/).
 
