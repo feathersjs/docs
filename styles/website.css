@@ -120,7 +120,5 @@ section.markdown-section table {
 
 .book .book-summary ul.summary > li[data-level="1.2"] > ul > li > ul > li > span {
   font-size: 1.2em;
-  /*font-weight: bold;
-  font-style: italic;*/
   text-decoration: underline;
 }
