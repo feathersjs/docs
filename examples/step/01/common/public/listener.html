@@ -1,0 +1,28 @@
+<html>
+<head>
+  <title>Feathers event listener</title>
+  <style>
+    body {
+      font-family: 'Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif';
+      font-weight: 400;
+      font-size: 16px;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+<h1>Feathers guide</h1>
+<h2>Feathers event listener</h2>
+<br />
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/core-js/2.1.4/core.min.js"></script>
+<script src="//unpkg.com/feathers-client@^1.8.0/dist/feathers.js"></script>
+<script src="/socket.io.min.js"></script>
+<script src="/serverUrl.js"></script>
+<script>
+  const socket = io(serverUrl);
+  const feathersClient = feathers()
+      .configure(feathers.socketio(socket))
+</script>
+<script src="/listener-app.js"></script>
+</body>
+</html>

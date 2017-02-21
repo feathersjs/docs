@@ -18,7 +18,7 @@ $ npm install --save rethinkdbdash feathers-rethinkdb
 
 ### `service(options)`
 
-Returns a new service instance intitialized with the given options. For more information on initializing the driver see the [RehinktDBdash documentation](https://github.com/neumino/rethinkdbdash).
+Returns a new service instance initialized with the given options. For more information on initializing the driver see the [RehinktDBdash documentation](https://github.com/neumino/rethinkdbdash).
 
 ```js
 const r = require('rethinkdbdash')({
@@ -113,7 +113,7 @@ var app = feathers()
   }))
   .use(errorHandler());
 
-// Intitialize database and messages table if it does not exists yet
+// Initialize database and messages table if it does not exists yet
 app.service('messages').init().then(() => {
   // Create a message on the server
   app.service('messages').create({

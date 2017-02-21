@@ -22,7 +22,8 @@ Below are some of the amazing things built with Feathers or for the Feathers eco
 
 Submit yours by creating a pull request.
 
-- [A series of small, example apps](https://github.com/feathersjs/feathers-demos)
+- [Best Buy API Playground](https://github.com/BestBuy/api-playground)
+- [Small Example Apps](https://github.com/feathersjs/feathers-demos)
 - [Feathers + Apollo](https://github.com/swarthout/feathers-apollo)
 - [Feathers + React + Mobx](https://github.com/foxhound87/rfx-stack)
 - [Feathers + React + Webpack](https://github.com/sscaff1/feathers-webpack-react)
@@ -44,9 +45,8 @@ Submit yours by creating a pull request.
 - [feathers-authentication-oauth1](./feathers-authentication-oauth1.html) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
 - [feathers-authentication-oauth2](./feathers-authentication-oauth2.html) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
 - [feathers-authentication-popups](./feathers-authentication-popups.html) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
-- [feathers-authentication-popups-github](./feathers-authentication-popups-github.html) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
 - [feathers-permissions](./feathers-permissions.html) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
-- [feathers-authentication-management](https://www.npmjs.com/package/feathers-authentication-management) - Adds user email verification and password reset capabilities to local feathers-authentication (service)
+- [feathers-authentication-management](https://www.npmjs.com/package/feathers-authentication-management) ![Official Feathers Repo](/img/tiny-feathers-logo.png) - User email verification and password reset capabilities to local feathers-authentication (service)
 
 #### Communications
 
@@ -68,6 +68,7 @@ Submit yours by creating a pull request.
 - [feathers-blob](https://www.npmjs.com/package/feathers-blob) ![Official Feathers Module](/img/tiny-feathers-logo.png) - Feathers abstract blob store service (service) 
 - [feathers-blueprints](https://www.npmjs.com/package/feathers-blueprints) - Add some of the Sails.js blueprints functionality to Feathers. (configure)
 - [feathers-bookshelf](https://www.npmjs.com/package/feathers-bookshelf) - A bookshelf ORM service adapter.  (service)
+- [feathers-elasticsearch](https://github.com/feathersjs/feathers-elasticsearch) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
 - [feathers-filemaker](https://www.npmjs.com/package/feathers-filemaker) - Filemaker adapter for feathers.js
 - [feathers-knex](./feathers-knex.html) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
 - [feathers-levelup](./feathers-levelup.html)
@@ -95,7 +96,7 @@ Submit yours by creating a pull request.
 
 #### Documentation
 
-- [feathers-swagger](https://www.npmjs.com/package/feathers-swagger) - Add documentation to your Feathers services and feed them to Swagger UI. (configure)
+- [feathers-swagger](https://www.npmjs.com/package/feathers-swagger) ![Official Feathers Module](/img/tiny-feathers-logo.png) - Add documentation to your Feathers services and feed them to Swagger UI. (configure)
 
 #### Multiple instances
 
@@ -155,7 +156,6 @@ The Feathers client works with React Native but here is a collection of native l
 - [feathers-query-filters](./feathers-query-filters.html) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
 - [feathers-service-logger-stats](./feathers-service-logger-stats.html) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
 - [feathers-socket-commons](./feathers-socket-commons.html) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
-- [feathers-swagger](./feathers-swagger.html) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
 - [generator-feathers](./generator-feathers.html) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
 - [generator-feathers-plugin](./generator-feathers-plugin.html) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
 
@@ -175,3 +175,4 @@ The Feathers client works with React Native but here is a collection of native l
 - [ng-feathers](https://www.npmjs.com/package/ng-feathers) - Feathers client for AngularJS. FeatherJS for plain old AngularJS (1.X)
 - [vue-syncers-feathjers](https://www.npmjs.com/package/vue-syncers-feathers) - Synchronises feathers services with vue objects, updated in real time (connector)
 - [vue-feathers](https://github.com/sunabozu/vue-feathers) - A plugin for Vuejs 1.x & 2.x to easily access your feathers services.
+- [feathers-polymer](https://github.com/thosakwe/polymer-feathers)

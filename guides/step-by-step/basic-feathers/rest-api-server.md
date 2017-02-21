@@ -24,7 +24,7 @@ and
 
 This is our previous example with the database method calls removed,
 and with an Express server added.
-[import](../../examples/step/01/rest/1.js)
+[import](../../../examples/step/01/rest/1.js)
 
 - See what changed:
 [Unified](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-guide/blob/master/examples/step/_diff/01-rest-1-line.html)
@@ -33,11 +33,11 @@ and with an Express server added.
 
 The Express server [common/expressServerConfig.js](https://github.com/feathersjs/feathers-guide/blob/master/examples/step/01/common/expressServerConfig.js)
 is configured as follows.
-[import](../../examples/step/01/common/expressServerConfig.js)
+[import](../../../examples/step/01/common/expressServerConfig.js)
 
 The Express middleware [common/expressMiddleware/index.js](https://github.com/feathersjs/feathers-guide/blob/master/examples/step/01/common/expressMiddleware/index.js)
 handles logging, pages not found, and general errors.
-[import](../../examples/step/01/common/expressMiddleware/index.js)
+[import](../../../examples/step/01/common/expressMiddleware/index.js)
 
 > **Boilerplate.** The server configuration and middleware are standard Express.
 They have little to do with Feathers other than to feed REST requests to it.
@@ -49,7 +49,7 @@ We can now made REST API calls to the server.
 In the previous example we created 3 user items and then printed the user file.
 We can now do the same thing, but using REST, with
 [curl](https://en.wikipedia.org/wiki/CURL) commands:
-[import](../../examples/step/01/rest/curl-requests.sh)
+[import](../../../examples/step/01/rest/curl-requests.sh)
 
 First, start the server by running `node ./examples/step/01/rest/1.js` on one terminal.
 

@@ -16,7 +16,7 @@ $ npm install --save nedb feathers-nedb
 
 ### `service(options)`
 
-Returns a new service instance intitialized with the given options. `Model` has to be an NeDB database instance.
+Returns a new service instance initialized with the given options. `Model` has to be an NeDB database instance.
 
 ```js
 const NeDB = require('nedb');

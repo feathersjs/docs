@@ -43,7 +43,7 @@ and
 Implementing the listener
 [common/public/listener-app.js](https://github.com/feathersjs/feathers-guide/blob/master/examples/step/01/common/public/listener-app.js)
 is straight forward.
-[import](../../examples/step/01/common/public/listener-app.js)
+[import](../../../examples/step/01/common/public/listener-app.js)
 
 ### Filtering
 

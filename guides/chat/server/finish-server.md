@@ -37,12 +37,12 @@ cd examples/chat/server/finish
 
 Then copy the following into the
 [new hook file.](https://github.com/feathersjs/feathers-guide/blob/master/examples/chat/server/finish/src/services/message/hooks/restrict-to-sender.js).
-[import](../../examples/chat/server/finish/src/services/message/hooks/restrict-to-sender.js)
+[import](../../../examples/chat/server/finish/src/services/message/hooks/restrict-to-sender.js)
 
 - `hook.app` - Hooks conveniently get the `app` object.
 - `hook.app.service()` - With `app`, hooks can get a handle to any service.
 - The update, patch and remove service calls do not necessarily provide us
-with the data we know who created the message.
+with the data we need to know who created the message.
 Therefore we first read the message.
 
 > **hook.params.** 
@@ -72,7 +72,7 @@ cd examples/chat/server/finish
 
 Then copy the following into this
 [new hook file.](https://github.com/feathersjs/feathers-guide/blob/master/examples/chat/server/finish/src/services/message/hooks/process.js).
-[import](../../examples/chat/server/finish/src/services/message/hooks/process.js)
+[import](../../../examples/chat/server/finish/src/services/message/hooks/process.js)
 
 - `hook.params.user` contains the authenticated user item from `auth.populateUser()`.
 - `hook.data` contains the message item.

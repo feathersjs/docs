@@ -31,16 +31,16 @@ Now you can see where Feathers got its name.
 
 
 #### We require our dependencies.
-[import:'dependencies'](../../examples/step/01/db-connector/1.js)
+[import:'dependencies'](../../../examples/step/01/db-connector/1.js)
 
 #### We start an instance of Feathers and define its services.
-[import:'feathers'](../../examples/step/01/db-connector/1.js)
+[import:'feathers'](../../../examples/step/01/db-connector/1.js)
 
 users is the only service we need  and its a database table located at examples/step/data/users.db.
-[import:'services'](../../examples/step/01/db-connector/1.js)
+[import:'services'](../../../examples/step/01/db-connector/1.js)
 
 #### Create 3 users using Promises.
-[import:'create'](../../examples/step/01/db-connector/1.js)
+[import:'create'](../../../examples/step/01/db-connector/1.js)
 Each create returns a promise which resolves into the item added into the database.
 NeDB will always adds a unique `_id` property to the user item and the returned item will contain it.
 
@@ -62,7 +62,7 @@ The n-th element of the array is the resolved value of the n-th element in Promi
 
 The 3 user items are now are in the database, their values are returned in `results`.
 We issue a find for the entire table and print the results.
-[import:'results'](../../examples/step/01/db-connector/1.js)
+[import:'results'](../../../examples/step/01/db-connector/1.js)
 
 > ** Promise Refresher.** `user.find().then(results => ...);`
 `user.find()` returns a Promise. `.then(results => ...)` waits for the Promise to resolve,

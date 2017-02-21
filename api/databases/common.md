@@ -8,7 +8,7 @@ All database adapters implement a common interface for initialization, paginatio
 
 ### `service([options])`
 
-Returns a new service instance intitialized with the given options.
+Returns a new service instance initialized with the given options.
 
 ```js
 const service = require('feathers-<adaptername>');
@@ -55,13 +55,14 @@ app.use('/todos', service({
   }
 }));
 
-// override pagination in `params.paginate`
+// override pagination in `params.paginate` for this call
 app.service('todos').find({
   paginate: {
     default: 100,
     max: 200
   }
 });
+
 // disable pagination for this call
 app.service('todos').find({
   paginate: false
@@ -254,13 +255,13 @@ const app = feathers()
 
 app.service('todos').hooks({
   before: {
-    create(hook) {
-      hook.data.createdAt = new Date();
-    },
+    create: [
+      (hook) => hook.data.createdAt = new Date()
+    ],
     
-    update(hook) {
-      hook.data.updatedAt = new Date();
-    }
+    update: [
+      (hook) => hook.data.updatedAt = new Date()
+    ]
   }
 });
 
