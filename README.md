@@ -1,7 +1,5 @@
 ![Feathers Logo](/img/logo-title.jpg)
 
-## Feathers
-
 > A minimalist real-time framework for tomorrow's apps.
 
 With Feathers it's easy to create scalable real-time applications. This guide will tell you everything you need to know about creating web and mobile apps with Feathers.
