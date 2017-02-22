@@ -59,6 +59,8 @@ This will pull from your global authentication object in your config file. It wi
 
 Registering the OAuth2 plugin will automatically set up routes to handle the OAuth redirects and authorization.
 
+### Default Options
+
 ```js
 {
     idField: '<provider>Id', // The field to look up the entity by when logging in with the provider. Defaults to '<provider>Id' (ie. 'facebookId').

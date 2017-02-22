@@ -13,7 +13,7 @@ $ npm install feathers-authentication-oauth1 --save
 
 This module contains 2 core pieces:
 
-1. The main entry function
+1. The main initialization function
 2. The `Verifier` class
 
 ## Configuration
@@ -175,7 +175,9 @@ app.service('users').hooks({
 
 ## Client Usage
 
-When this module is registered server side, whether you are using `feathers-authentication-client` or not you simply get the user to navigate to the authentication strategy url. This could be by setting `window.location` a link in your app. For example you might have a login button for Twitter:
+When this module is registered server side, whether you are using `feathers-authentication-client` or not you simply get the user to navigate to the authentication strategy url. This could be by setting `window.location` or through a link in your app.
+
+For example you might have a login button for Twitter:
 
 ```html
 <a href="/auth/twitter" class="button">Login With Twitter</a>
