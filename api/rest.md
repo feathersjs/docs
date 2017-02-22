@@ -8,7 +8,7 @@
 $ npm install feathers-rest --save
 ```
 
-The [feathers-rest](https://github.com/feathersjs/feathers-rest) module allows to expose and consume [services](./services.md) through a [RESTful API](https://en.wikipedia.org/wiki/Representational_state_transfer). This means that you can call a service method through the `GET`, `POST`, `PUT`, `PATCH` and `DELETE` [HTTP methods](https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol):
+The [feathers-rest](https://github.com/feathersjs/feathers-rest) module allows you to expose and consume [services](./services.md) through a [RESTful API](https://en.wikipedia.org/wiki/Representational_state_transfer). This means that you can call a service method through the `GET`, `POST`, `PUT`, `PATCH` and `DELETE` [HTTP methods](https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol):
 
 ```js
 const messageService = {
@@ -55,9 +55,10 @@ $ npm install body-parser --save
 Configures the transport provider with a standard formatter sending JSON response via [res.json](http://expressjs.com/en/4x/api.html#res.json).
 
 ```js
-const app = feathers();
+const feathers = require('feathers');
 const bodyParser = require('body-parser');
 const rest = require('feathers-rest');
+const app = feathers();
 
 // Turn on JSON parser for REST services
 app.use(bodyParser.json())
@@ -94,7 +95,7 @@ app.configure(rest(function(req, res) {
 
 ## Client
 
-The `feathers-rest/client` module allows to connect to a service exposed through the [REST server](#server) using [jQuery](https://jquery.com/), [request](https://github.com/request/request), [Superagent](http://visionmedia.github.io/superagent/), [Axios](https://github.com/mzabriskie/axios) or [Fetch](https://facebook.github.io/react-native/docs/network.html) as the AJAX library.
+The `feathers-rest/client` module allows you to connect to a service exposed through the [REST server](#server) using [jQuery](https://jquery.com/), [request](https://github.com/request/request), [Superagent](http://visionmedia.github.io/superagent/), [Axios](https://github.com/mzabriskie/axios) or [Fetch](https://facebook.github.io/react-native/docs/network.html) as the AJAX library.
 
 > **Very important:** The examples below assume you are using Feathers either in Node or in the browser with a module loader like Webpack or Browserify. For using Feathers with a `<script>` tag, AMD modules or with React Native see the [client chapter](./client.md).
 

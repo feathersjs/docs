@@ -61,11 +61,14 @@
     * [Socket.io](api/socketio.md)
     * [Primus](api/primus.md)
   * Authentication
-    * [Configuration](api/authentication/configuration.md)
+    * [Server](api/authentication/server.md)
+    * [Client](api/authentication/client.md)
     * [Local](api/authentication/local.md)
+    * [JWT](api/authentication/jwt.md)
     * [OAuth1](api/authentication/oauth1.md)
     * [OAuth2](api/authentication/oauth2.md)
     * [Permissions](api/authentication/permissions.md)
+    * [Management](api/authentication/management.md)
   * Databases
     * [Common API](api/databases/common.md)
     * [Querying](api/databases/querying.md)
