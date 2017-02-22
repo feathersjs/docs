@@ -176,3 +176,13 @@ section.markdown-section table {
   display: block;
   overflow-x: auto;
 }
+
+.book .book-summary ul.summary > li[data-level="1.2"] > ul > li > a {
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+.book .book-summary ul.summary > li[data-level="1.2"] > ul > li > ul > li > span {
+  font-size: 1.2em;
+  text-decoration: underline;
+}
