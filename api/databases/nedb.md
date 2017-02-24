@@ -39,6 +39,18 @@ __Options:__
 - `events` (*optional*) - A list of [custom service events](../real-time/events.md#custom-events) sent by this service
 - `paginate` (*optional*) - A [pagination object](./pagination.md) containing a `default` and `max` page size
 
+### params.nedb
+
+When making a [service method](./services.md) call, `params` can contain an `nedb` property which allows to pass additional [NeDB options](https://github.com/louischatriot/nedb#updating-documents), for example to allow `upsert`:
+
+```js
+app.service('messages').update('someid', {
+  text: 'This message will be either created or updated'
+}, {
+  nedb: { upsert: true }
+});
+```
+
 ## Example
 
 Here is an example of a Feathers server with a `messages` NeDB service that supports pagination and persists to `db-data/messages`:
