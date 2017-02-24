@@ -19,7 +19,7 @@ The [feathers-socketio](https://github.com/feathersjs/feathers-socketio) module 
 | .patch()        | `messages::patch`   | `messages patched` |
 | .remove()       | `messages::removed` | `messages removed` |
 
-> **Important:** Primus is also used to *call* service methods. Using sockets for both, calling methods and receiving real-time events is generally faster than using [REST](rest.md) and there is usually no need to use both, REST and Socket.io in the same client application at the same time.
+> **Important:** Socket.io is also used to *call* service methods. Using sockets for both, calling methods and receiving real-time events is generally faster than using [REST](rest.md) and there is usually no need to use both, REST and Socket.io in the same client application at the same time.
 
 ## Server
 
