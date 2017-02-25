@@ -48,6 +48,10 @@ To expose services through a RESTful API we will have to configure the feathers-
 $ npm install body-parser --save
 ```
 
+> **Important:** For additional information about middleware, routing and how the REST module works with Express middleware see the [Express chapter](./express.md).
+
+<!-- -->
+
 > **ProTip:** The body-parser middleware has to be registered _before_ any service. Otherwise the service method will throw a `No data provided` or `First parameter for 'create' must be an object` error.
 
 #### `app.configure(rest())`
