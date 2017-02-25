@@ -45,6 +45,21 @@ __Options:__
 - `events` (*optional*) - A list of [custom service events](../real-time/events.md#custom-events) sent by this service
 - `paginate` (*optional*) - A [pagination object](./pagination.md) containing a `default` and `max` page size
 
+### params.sequelize
+
+When making a [service method](./services.md) call, `params` can contain an `sequelize` property which allows to pass additional Sequelize options. This can e.g. be used to **retrieve associations**. Normally this wil be set in a before [hook](./hooks.md):
+
+```js
+app.service('messages').hooks({
+  before: {
+    find(hook) {
+      hook.params.sequelize = {
+        include: [ User ]
+      }
+    }
+  }
+});
+```
 
 ## Example
 

@@ -65,6 +65,10 @@ app.service('messages').init({
 
 Returns a RethinkDB query with the [common filter criteria](./querying.md) (without pagination) applied.
 
+### params.rethinkdb
+
+When making a [service method](./services.md) call, `params` can contain an `rethinkdb` property which allows to pass additional RethinkDB options. See [customizing the query](#customizing-the-query) for an example.
+
 
 ## Example
 
