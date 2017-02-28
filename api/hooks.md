@@ -26,17 +26,17 @@ app.configure(hooks());
 
 app.service('messages').hooks({
   before: {
-    create: [
-      (hook) => hook.data.createdAt = new Date()
-    ],
+    create(hook) {
+      hook.data.createdAt = new Date();
+    },
 
-    update: [
-      (hook) => hook.data.updatedAt = new Date()
-    ],
+    update(hook) {
+      hook.data.updatedAt = new Date();
+    },
 
-    patch: [
-      (hook) => hook.data.updatedAt = new Date()
-    ]
+    patch(hook) {
+      hook.data.updatedAt = new Date();
+    }
   }
 });
 ```

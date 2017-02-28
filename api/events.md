@@ -128,32 +128,6 @@ messages.remove(1);
 ```
 
 
-## Registering filters
-
-There are several ways filter functions can be registered, very similar to how [hooks](hooks.md) can be registered.
-
-```js
-const todos = app.service('todos');
-
-// Register a filter for all events
-todos.filter(function(data, connection, hook) {});
-
-// Register a filter for the `created` event
-todos.filter('created', function(data, connection, hook) {});
-
-// Register a filter for the `created` and `updated` event
-todos.filter({
-  created(data, connection, hook) {},
-  updated(data, connection, hook) {}
-});
-
-// Register a filter chain the `created` and `removed` event
-todos.filter({
-  created: [ filterA, filterB ],
-  removed: [ filterA, filterB ]
-});
-```
-
 ## Event Filtering
 
 By default all service events will be sent to **all** connected clients. In many cases you probably want to be able to only send events to certain clients, say maybe only ones that are authenticated or only users that belong to the same company. The [Socket.io](socket-io.md) and [Primus](primus.md) provider add a `.filter()` service method which can be used to filter events. A filter is a `function(data, connection, hook)` that runs for every connected client and gets passed
