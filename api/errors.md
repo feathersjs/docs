@@ -76,6 +76,18 @@ const validationErrors = new errors.BadRequest({
 });
 ```
 
+
+## Server Side Errors
+
+Promises swallow errors if you forget to add a `catch()` statement. Therefore, you should make sure that you **always** call `.catch()` on your promises. To catch uncaught errors at a global level you can add the code below to your top-most file.
+
+```js
+process.on('unhandledRejection', (reason, p) => {
+  console.log('Unhandled Rejection at: Promise ', p, ' reason: ', reason);
+});
+```
+
+
 ## REST (Express) errors
 
 The separate `feathers-errors/handler` module is an [Express error handler](https://expressjs.com/en/guide/error-handling.html) middleware that formats any error response to a REST call as JSON (or HTML if e.g. someone hits our API directly in the browser) and sets the appropriate error code.
@@ -122,14 +134,3 @@ The following options can be passed when creating a new localstorage service:
 - `html` (Function|Object) [optional] - A custom formatter function or an object that contains the path to your custom html error pages.
 
 > **ProTip:** `html` can also be set to `false` to disable html error pages altogether so that only JSON is returned.
-
-
-## Catching Global Server Side Errors
-
-Promises swallow errors if you forget to add a `catch()` statement. Therefore, you should make sure that you **always** call `.catch()` on your promises. To catch uncaught errors at a global level you can add the code below to your top-most file.
-
-```js
-process.on('unhandledRejection', (reason, p) => {
-  console.log('Unhandled Rejection at: Promise ', p, ' reason: ', reason);
-});
-```
