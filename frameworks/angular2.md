@@ -13,14 +13,14 @@ We'll be setting up the basic service structure for an application that uses `fe
 If you're using TypeScript to develop with Angular 2, Feathers and its related modules should be loaded into your app through npm packages. `npm install` the ones you'll need:
 
 ```bash
-npm install feathers feathers-hooks feathers-rest feathers-socketio socket.io-client feathers-authentication
+npm install feathers-client --save
 ```
 
 You'll also need a module loader, a commonly used one is [Webpack](https://webpack.github.io/). If you've gone through the [Angular 2 quickstart](https://angular.io/docs/ts/latest/quickstart.html) you should be good to go.
 
 Finally you'll need to load the feathers modules you need in a TypeScript file. Make a new file (I called mine `feathers.service.ts`) and include the following.
 
-```js
+```ts
 const feathers = require('feathers/client');
 const socketio = require('feathers-socketio/client');
 const io = require('socket.io-client');
@@ -51,7 +51,8 @@ Let's create a new Angular service that uses REST to communicate with our server
 
 ```ts
 import { Injectable } from '@angular/core';
-const superagent = require('superagent');
+
+import * as superagent from 'superagent';
 
 const HOST = 'http://localhost:3000'; // Your base server URL here
 @Injectable()
