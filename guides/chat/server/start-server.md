@@ -40,7 +40,7 @@ that we will later use to handle the user avatar.
 Let's add code to
 [examples/chat/server/start/src/app.js](https://github.com/feathersjs/feathers-guide/blob/master/examples/chat/server/start/src/app.js)
 to clear the database each time this basic server is run.
-This'll help prevent confusion should the server be started multiple times.
+This will help prevent confusion should the server be started multiple times.
 
 ```javascript
 // examples/chat/server/start/src/app.js
