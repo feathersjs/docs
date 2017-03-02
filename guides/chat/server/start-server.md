@@ -23,15 +23,15 @@ This generated the
 and
 [users](https://github.com/feathersjs/feathers-guide/tree/master/examples/chat/server/start/src/services/user)
 services.
-We then generated the
+We generate the
 [messages](https://github.com/feathersjs/feathers-guide/tree/master/examples/chat/server/start/src/services/message)
 service with:
 
 ![generate message service](./assets/generate-service-message.jpg)
 
-We continued by generating a
+Next, we generate a
 [hook](https://github.com/feathersjs/feathers-guide/blob/master/examples/chat/server/start/src/services/user/hooks/gravatar.js)
-we will later use to handle the user avatar.
+that we will later use to handle the user avatar.
 
 ![generate gravatar hook](./assets/generate-hook-gravatar.jpg)
 
