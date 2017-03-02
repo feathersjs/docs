@@ -15,7 +15,7 @@ At a minimum the chat server needs to handle:
     - Issue user events to authenticated users when a user is  or changed.
     The password must not be sent.
     - Issue message events to authenticated users when a message is created or changed.
-    - The message event will contain both the message text and the creator's user id.
+    - The message event will contain both the message text and the creating user's info.
 
 > **Avatar.** We'll display an
 [avatar](http://techterms.com/definition/avatar)
