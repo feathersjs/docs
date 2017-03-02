@@ -10,7 +10,7 @@ Let's handle the user avatar also.
 
 ### Basic scaffolding
 
-We generate the app with:
+We will use the generator to get started. (Read the [Generator Guide](guides/step-by-step/generators/readme.md) if you haven't already.)
 ```text
 mkdir examples/chat/server/start
 cd examples/chat/server/start
