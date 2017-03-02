@@ -10,7 +10,7 @@ Let's handle the user avatar also.
 
 ### Basic scaffolding
 
-We generated the app with:
+We generate the app with:
 ```text
 mkdir examples/chat/server/start
 cd examples/chat/server/start
