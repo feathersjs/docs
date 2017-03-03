@@ -10,7 +10,7 @@ Let's handle the user avatar also.
 
 ### Basic scaffolding
 
-We generated the app with:
+We will use the generator to get started. (Read the [Generator Guide](guides/step-by-step/generators/readme.md) if you haven't already.)
 ```text
 mkdir examples/chat/server/start
 cd examples/chat/server/start
@@ -23,15 +23,15 @@ This generated the
 and
 [users](https://github.com/feathersjs/feathers-guide/tree/master/examples/chat/server/start/src/services/user)
 services.
-We then generated the
+Now, let's generate the
 [messages](https://github.com/feathersjs/feathers-guide/tree/master/examples/chat/server/start/src/services/message)
 service with:
 
 ![generate message service](./assets/generate-service-message.jpg)
 
-We continued by generating a
+Finally, we generate a
 [hook](https://github.com/feathersjs/feathers-guide/blob/master/examples/chat/server/start/src/services/user/hooks/gravatar.js)
-we will later use to handle the user avatar.
+that we will later use to handle the user avatar.
 
 ![generate gravatar hook](./assets/generate-hook-gravatar.jpg)
 
@@ -40,7 +40,7 @@ we will later use to handle the user avatar.
 Let's add code to
 [examples/chat/server/start/src/app.js](https://github.com/feathersjs/feathers-guide/blob/master/examples/chat/server/start/src/app.js)
 to clear the database each time this basic server is run.
-This'll help prevent confusion should the server be started multiple times.
+This will help prevent confusion should the server be started multiple times.
 
 ```javascript
 // examples/chat/server/start/src/app.js
