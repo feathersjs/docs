@@ -25,7 +25,7 @@ const app = feathers();
 
 ## .use(path, service)
 
-`app.use(path service) -> app` allows to register a [service object](./services.md) on the `path`.
+`app.use(path, service) -> app` allows to register a [service object](./services.md) on the `path`.
 
 ```js
 // Add a service.
