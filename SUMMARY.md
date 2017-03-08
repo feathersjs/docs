@@ -41,7 +41,7 @@
    * [Waterline](databases/waterline.md)
    * [LevelUP](databases/levelup.md)
    * [RethinkDB](databases/rethinkdb.md)
-   * [Elastcisearch](databases/elasticsearch.md)
+   * [Elasticsearch](databases/elasticsearch.md)
 * [Hooks](hooks/readme.md)
    * [Usage](hooks/usage.md)
    * [Common hooks](hooks/common.md)
