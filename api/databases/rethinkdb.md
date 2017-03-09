@@ -45,7 +45,7 @@ __Options:__
 - `Model` (**required**) - The `rethinkdbdash` instance, already initialized with a configuration object. [see options here](https://github.com/neumino/rethinkdbdash#importing-the-driver)
 - `name` (**required**) - The name of the table
 - `watch` (*options*, default: `true`) - Listen to table changefeeds and send according [real-time events](../real-time/events.md) on the adapter.
-- `db` (*optional*, default: `none`) - Specify and alternate rethink database for the service to use. Must be on the same server/conneciton used by rethinkdbdash. It will be auto created if you call init() on the service and it does not yet exist.
+- `db` (*optional*, default: `none`) - Specify and alternate rethink database for the service to use. Must be on the same server/connection used by rethinkdbdash. It will be auto created if you call init() on the service and it does not yet exist.
 - `id` (*optional*, default: `'id'`) - The name of the id field property. Needs to be set as the primary key when creating the table.
 - `events` (*optional*) - A list of [custom service events](../real-time/events.md#custom-events) sent by this service
 - `paginate` (*optional*) - A [pagination object](./pagination.md) containing a `default` and `max` page size
