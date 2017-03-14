@@ -40,7 +40,7 @@ The following options can be passed when creating a new Mongoose service:
 
 - `Model` (**required**) - The Mongoose model definition
 - `id` (default: `_id`) [optional] - The name of the id property
-- `paginate` - A pagination object containing a `default` and `max` page size (see the [Pagination chapter](databases/pagination.md))
+- `paginate` - A pagination object containing a `default` and `max` page size (see the [Pagination chapter](pagination.md))
 - `lean` (default: `false`) [optional] - When set to true runs queries faster by returning plain mongodb objects instead of mongoose models.
 - `overwrite` (default: `true`) [optional] - Updates completely replace existing documents.
 

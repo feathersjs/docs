@@ -20,23 +20,14 @@ You'll also need a module loader, a commonly used one is [Webpack](https://webpa
 
 Finally you'll need to load the feathers modules you need in a TypeScript file. Make a new file (I called mine `feathers.service.ts`) and include the following.
 
-```js
-const feathers = require('feathers/client');
-const socketio = require('feathers-socketio/client');
-const io = require('socket.io-client');
-const localstorage = require('feathers-localstorage');
-const hooks = require('feathers-hooks');
-const rest = require('feathers-rest/client');
-const authentication = require('feathers-authentication/client');
-```
-
-Notice that we **aren't using the ES6 import syntax**. As of the time of writing this, Feathers does not have TypeScript definitions, so TypeScript is unable to load the packages in that manner. As an alternative, we can use the standard CommonJS `require` syntax. It'll work the same, we just won't have the helpful intellisense that some IDE's provide.
-
-## Using ES5
-Feathers has a single convenient file for the client which you can include in script tags called [feathers-client](https://github.com/feathersjs/feathers-client).
-
-```html
-<script src="/path/to/feathers-client.js"></script>
+```ts
+import * as feathers from 'feathers/client';
+import * as socketio from 'feathers-socketio/client';
+import * as io from 'socket.io-client';
+import * as localstorage from 'feathers-localstorage';
+import * as hooks from 'feathers-hooks';
+import * as rest from 'feathers-rest/client';
+import * as authentication from 'feathers-authentication/client';
 ```
 
 ## Setup

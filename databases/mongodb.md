@@ -30,7 +30,7 @@ The following options can be passed when creating a new MongoDB service:
 
 - `Model` (**required**) - The MongoDB collection instance
 - `id` (default: '_id') [optional] - The id field for your documents for this service.
-- `paginate` [optional] - A pagination object containing a `default` and `max` page size (see the [Pagination chapter](databases/pagination.md))
+- `paginate` [optional] - A pagination object containing a `default` and `max` page size (see the [Pagination chapter](pagination.md))
 
 ## Complete Example
 

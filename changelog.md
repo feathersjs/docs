@@ -1,5 +1,9 @@
 # Changelog
 
+__2.1.0__
+
+- TypeScript definitions ([#507](https://github.com/feathersjs/feathers/pull/507))
+
 __2.0.2__
 
 - Create an app reference on service event hook object ([#406](https://github.com/feathersjs/feathers/pull/406))

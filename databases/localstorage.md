@@ -26,7 +26,7 @@ The following options can be passed when creating a new localstorage service:
 - `name` (default: 'feathers') [optional] - The key to store data under in local or async storage.
 - `storage` (**required**) - The local storage engine. You can pass in a server side localstorage module, the browser's `localStorage` or AsyncStorage on React Native.
 - `store` [optional] - An object with id to item assignments to pre-initialize the data store
-- `paginate` [optional] - A pagination object containing a `default` and `max` page size (see the [Pagination chapter](databases/pagination.md))
+- `paginate` [optional] - A pagination object containing a `default` and `max` page size (see the [Pagination chapter](pagination.md))
 
 ## Browser Usage
 

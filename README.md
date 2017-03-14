@@ -10,9 +10,14 @@ We have an [introductory tutorial](getting-started/scaffolding.md) to get you ra
 
 Sounds good? [Let's get started](getting-started/readme.md)!
 
+
+
 If you are looking for different formats we have the latest version of this doc available in:
 
-- [HTML](http://docs.feathersjs.com)
-- [PDF](https://www.gitbook.com/download/pdf/book/feathersjs/feathers-docs)
-- [ePub](https://www.gitbook.com/download/epub/book/feathersjs/feathers-docs)
-- [Mobi](https://www.gitbook.com/download/mobi/book/feathersjs/feathers-docs)
+* [HTML](http://docs.feathersjs.com)
+* [PDF](https://www.gitbook.com/download/pdf/book/feathersjs/feathers-docs)
+* [ePub](https://www.gitbook.com/download/epub/book/feathersjs/feathers-docs)
+* [Mobi](https://www.gitbook.com/download/mobi/book/feathersjs/feathers-docs)
+
+
+

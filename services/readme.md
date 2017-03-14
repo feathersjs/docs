@@ -243,7 +243,7 @@ class MessageService {
       id,
       read: false,
       text: `Feathers is great!`,
-      createdAt: new Date.getTime()
+      createdAt: new Date().getTime()
     });
   }
 }

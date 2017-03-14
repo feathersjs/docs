@@ -36,7 +36,7 @@ app.use('/messages', service({
 The following options can be passed when creating a new NeDB service:
 
 - `Model` (**required**) - The NeDB database instance
-- `paginate` [optional] - A pagination object containing a `default` and `max` page size (see the [Pagination chapter](databases/pagination.md))
+- `paginate` [optional] - A pagination object containing a `default` and `max` page size (see the [Pagination chapter](pagination.md))
 
 ## Complete Example
 
