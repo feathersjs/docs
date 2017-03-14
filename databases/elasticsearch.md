@@ -89,6 +89,15 @@ You should see an empty array. That's because you don't have any messages yet bu
 
 On top of the standard, cross-adapter [queries](querying.md), feathers-elasticsearch also supports Elasticsearch specific queries.
 
+### $all
+[The simplest query `match_all`](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-match-all-query.html). Find all documents.
+
+```js
+query: {
+  $all: true
+}
+```
+
 ### $prefix
 [Term level query `prefix`](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-prefix-query.html). Find all documents which have given field containing terms with a specified prefix (not analyzed).
 
