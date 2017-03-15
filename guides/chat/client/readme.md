@@ -20,10 +20,10 @@ Also, many people are familiar with it.
 We will then look at chat clients written using several different frameworks.
 These clients were written for a
 [slightly different Feathers server](https://docs.feathersjs.com/getting-started/readme.html),
-but they clearly indicate have to integrate Feathers with different frameworks.
+but they clearly indicate how to integrate Feathers with different frameworks.
 
 Finally we will move beyound local email, password authentication by
-converting our jQuery client to use oAuth.
+converting our jQuery client to use OAuth.
 
 > **Feathers authentication.** Feathers has very powerful authentication capabilities
 which we cover in later chapters.
