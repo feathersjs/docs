@@ -85,10 +85,67 @@ console.log('Feathers app started on 127.0.0.1:3030');
 You can run this example by using `npm start` and going to [localhost:3030/messages](http://localhost:3030/messages).
 You should see an empty array. That's because you don't have any messages yet but you now have full CRUD for your new message service!
 
+## Supported Elasticsearch specific queries
+
+On top of the standard, cross-adapter [queries](querying.md), feathers-elasticsearch also supports Elasticsearch specific queries.
+
+### $all
+[The simplest query `match_all`](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-match-all-query.html). Find all documents.
+
+```js
+query: {
+  $all: true
+}
+```
+
+### $prefix
+[Term level query `prefix`](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-prefix-query.html). Find all documents which have given field containing terms with a specified prefix (not analyzed).
+
+```js
+query: {
+  user: {
+    $prefix: 'bo'
+  }
+}
+```
+
+### $match
+[Full text query `match`]((https://https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-match-query.html). Find all documents which have given given fields matching the specified value (analysed).
+
+```js
+query: {
+  bio: {
+    $match: 'javascript'
+  }
+}
+```
+
+### $phrase
+[Full text query `match_phrase`](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-match-query-phrase.html). Find all documents which have given given fields matching the specified phrase (analysed).
+
+```js
+query: {
+  bio: {
+    $phrase: 'I like JavaScript'
+  }
+}
+```
+
+### $phrase_prefix
+[Full text query `match_phrase_prefix`](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-match-query-phrase-prefix.html). Find all documents which have given given fields matching the specified phrase prefix (analysed).
+
+```js
+query: {
+  bio: {
+    $phrase_prefix: 'I like JavaS'
+  }
+}
+```
+
 ## Supported Elasticsearch versions
 
-feathers-elasticsearch is currently tested on Elasticsearch 2.4, 5.0 and 5.1. The lowest version supported is 2.4, however that does not mean it wouldn't work fine on anything lower than 2.4.
-
+feathers-elasticsearch is currently tested on Elasticsearch 2.4, 5.0, 5.1 and 5.2. Please note, event though the lowest version supported is 2.4,
+that does not mean it wouldn't work fine on anything lower than 2.4.
 
 ## Quirks
 
@@ -111,7 +168,7 @@ Please be aware that search visibility of the changes (creates, updates, patches
 
 ### Full-text search
 
-In the first version of feathers-elasticsearch full texts search has not been implemented yet. It is coming soon. It is very important feature and it sits at the top of my TODO list.
+Currently feathers-elasticsearch supports most important full-text queries in their default form. Elasticsearch search allows additional parameters to be passed to each of those queries for fine-tuning. Those parameters can change behaviour and affect peformance of the queries therefore I believe they should not be exposed to the client. I am considering ways of adding them safely to the queries while retaining flexibility.
 
 ### Performance considerations
 
