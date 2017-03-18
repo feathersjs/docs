@@ -50,13 +50,13 @@
     * [Application](api/application.md)
     * [Services](api/services.md)
     * [Hooks](api/hooks.md)
-    * [Express](api/express.md)
-    * [Client](api/client.md)
     * [Common Hooks](api/hooks-common.md)
+    * [Client](api/client.md)
     * [Events](api/events.md)
     * [Errors](api/errors.md)
   * Transports
     * [REST](api/rest.md)
+    * [Express](api/express.md)
     * [Socket.io](api/socketio.md)
     * [Primus](api/primus.md)
   * Authentication
