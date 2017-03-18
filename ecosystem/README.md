@@ -6,6 +6,7 @@ Below are some of the amazing things built with Feathers or for the Feathers eco
 
 - [Feathers Chat](https://github.com/feathersjs/feathers-chat) ![Official Feathers Repo](/img/tiny-feathers-logo.png) 
 - [Feathers React Native Chat](https://github.com/feathersjs/feathers-react-native-chat) ![Official Feathers Repo](/img/tiny-feathers-logo.png)
+- [Feathers-Vuex (Vue.js) Chat](https://github.com/feathersjs/feathers-chat-vuex) ![Official Feathers Repo](/img/tiny-feathers-logo.png)
 - [Foxflow](https://www.foxflow.com/)
 - [GenerousTickets](https://generoustickets.com/)
 - [Gratify](https://gratifyhq.com)
@@ -130,6 +131,12 @@ The Feathers client works with React Native but here is a collection of native l
 - [feathers-reduxify-services](https://github.com/eddyystop/feathers-reduxify-services) - Wrap Feathers services so they work transparently and perfectly with Redux.
 - [feathers-reduxify-authentication](https://github.com/eddyystop/feathers-reduxify-authentication) - Wrap Feathers.authentication so it works with Redux, and with auth packages for React-Router. 
 
+#### Vue.js
+
+- [feathers-vuex](https://github.com/feathersjs/feathers-vuex) ![Official Feathers Module](/img/tiny-feathers-logo.png)  - Integration of Feathers services with your Vuex store.
+- [vue-syncers-feathjers](https://www.npmjs.com/package/vue-syncers-feathers) - Synchronises feathers services with vue objects, updated in real time (connector)
+- [vue-feathers](https://github.com/sunabozu/vue-feathers) - A plugin for Vuejs 1.x & 2.x to easily access your feathers services.
+
 #### Testing
 
 - [feathers-tests-fake-app-users](https://www.npmjs.com/package/feathers-tests-fake-app-users) - Fake some feathers dependencies in service unit tests. Starter for your customized fakes (service)
@@ -173,6 +180,4 @@ The Feathers client works with React Native but here is a collection of native l
 - [feathers-mithril](https://www.npmjs.com/package/feathers-mithril) - Connect feathers.js to mithril.js (connector)
 - [feathers-reactive](https://www.npmjs.com/package/feathers-reactive) ![Official Feathers Module](/img/tiny-feathers-logo.png) - Turns a Feathers service call into an RxJS observables that automatically updates on real-time events. (configure)
 - [ng-feathers](https://www.npmjs.com/package/ng-feathers) - Feathers client for AngularJS. FeatherJS for plain old AngularJS (1.X)
-- [vue-syncers-feathjers](https://www.npmjs.com/package/vue-syncers-feathers) - Synchronises feathers services with vue objects, updated in real time (connector)
-- [vue-feathers](https://github.com/sunabozu/vue-feathers) - A plugin for Vuejs 1.x & 2.x to easily access your feathers services.
 - [feathers-polymer](https://github.com/thosakwe/polymer-feathers)
