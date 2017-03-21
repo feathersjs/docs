@@ -109,6 +109,10 @@ The `client` module in `feathers-rest` (`require('feathers-rest/client')`) allow
 
 > **ProTip:** REST client services do emit `created`, `updated`, `patched` and `removed` events but only _locally for their own instance_. Real-time events from other clients can only be received by using a websocket connection.
 
+<!-- -->
+
+> **Note:** A client application can only use a single transport (either REST, Socket.io or Primus). Using two transports in the same client application is normally not necessary.
+
 ### `rest([baseUrl])`
 
 REST client services can be initialized by loading `feathers-rest/client` and initializing a client object with a base URL:

@@ -103,6 +103,10 @@ The `client` module in `feathers-primus` (`require('feathers-primus/client')`) a
 
 > **Very important:** The examples below assume you are using Feathers either in Node or in the browser with a module loader like Webpack or Browserify. For using Feathers with a `<script>` tag, AMD modules or with React Native see the [client chapter](./client.md).
 
+<!-- -->
+
+> **Note:** A client application can only use a single transport (either REST, Socket.io or Primus). Using two transports in the same client application is normally not necessary.
+
 ### Loading the Primus client library
 
 In the browser the Primus client library (usually at `primus/primus.js`) always has to be loaded using a `<script>` tag:

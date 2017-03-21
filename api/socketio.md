@@ -162,6 +162,10 @@ The `client` module in `feathers-socketio` (`require('feathers-socketio/client')
 
 > **Very important:** The examples below assume you are using Feathers either in Node or in the browser with a module loader like Webpack or Browserify. For using Feathers with a `<script>` tag, AMD modules or with React Native see the [client chapter](./client.md).
 
+<!-- -->
+
+> **Note:** A client application can only use a single transport (either REST, Socket.io or Primus). Using two transports in the same client application is normally not necessary.
+
 ### `socketio(socket)`
 
 Initialize the Socket.io client using a given socket and the default options.

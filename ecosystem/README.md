@@ -2,10 +2,12 @@
 
 Below are some of the amazing things built with Feathers or for the Feathers ecosystem.
 
+
 ## Applications
 
 - [Feathers Chat](https://github.com/feathersjs/feathers-chat) ![Official Feathers Repo](/img/tiny-feathers-logo.png) 
 - [Feathers React Native Chat](https://github.com/feathersjs/feathers-react-native-chat) ![Official Feathers Repo](/img/tiny-feathers-logo.png)
+- [Feathers-Vuex (Vue.js) Chat](https://github.com/feathersjs/feathers-chat-vuex) ![Official Feathers Repo](/img/tiny-feathers-logo.png)
 - [Foxflow](https://www.foxflow.com/)
 - [GenerousTickets](https://generoustickets.com/)
 - [Gratify](https://gratifyhq.com)
@@ -17,6 +19,7 @@ Below are some of the amazing things built with Feathers or for the Feathers eco
 - [Simpla](https://www.simpla.io/)
 - [Stoplight](https://stoplight.io/)
 - [Taxfyle](https://www.taxfyle.com/)
+
 
 ## Starter stacks, Examples and Tutorials
 
@@ -32,11 +35,8 @@ Submit yours by creating a pull request.
 - [Live query. Mirror part of a DB on the client.](https://github.com/eddyystop/feathers-live-query)
 - [Feathers + React + Redux + Webpack + complete auth + offline mode (with generator & ideal for production)](https://github.com/bertho-zero/react-redux-universal-hot-example)
 
-## Community Plug-ins
 
-Submit yours by creating a pull request.
-
-#### Authentication & Authorization
+## Authentication & Authorization
 
 - [feathers-accounts](https://www.npmjs.com/package/feathers-accounts) - Token-Based User Account System for FeathersJS (configure).
 - [feathers-authentication](./feathers-authentication.html) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
@@ -48,23 +48,15 @@ Submit yours by creating a pull request.
 - [feathers-permissions](./feathers-permissions.html) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
 - [feathers-authentication-management](https://www.npmjs.com/package/feathers-authentication-management) ![Official Feathers Repo](/img/tiny-feathers-logo.png) - User email verification and password reset capabilities to local feathers-authentication (service)
 
-#### Communications
+
+## Communications
 
 - [feathers-batch](https://www.npmjs.com/package/feathers-batch) ![Official Feathers Module](/img/tiny-feathers-logo.png) - Batch multiple Feathers service calls into one (service) 
 
-#### Providers
 
-- [feathers-primus](./feathers-primus.html) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
-- [feathers-rest](./feathers-rest.html) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
-- [feathers-socketio](./feathers-socketio.html) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
-- [feathers-batch](https://www.npmjs.com/package/feathers-batch) - Batch multiple Feathers service calls into one (service)
-- [feathers-socketcluster](https://github.com/polst/feathers-socketcluster) - Use SocketCluster for client/server communication. Not published.
-
-#### Database
+## Database
 
 - [amity-mongodb](https://www.npmjs.com/package/amity-mongodb) - Use various FeatherJS services to manage a MongoDB server with Amity.
-- [can-connect-feathers](https://www.npmjs.com/package/can-connect-feathers) - Feathers client library for DoneJS (feathers-client)
-- [canjs-feathers](https://www.npmjs.com/package/canjs-feathers) - CanJS model implementation that connects to Feathers services through feathers-client. (feathers-client)
 - [feathers-blob](https://www.npmjs.com/package/feathers-blob) ![Official Feathers Module](/img/tiny-feathers-logo.png) - Feathers abstract blob store service (service) 
 - [feathers-blueprints](https://www.npmjs.com/package/feathers-blueprints) - Add some of the Sails.js blueprints functionality to Feathers. (configure)
 - [feathers-bookshelf](https://www.npmjs.com/package/feathers-bookshelf) - A bookshelf ORM service adapter.  (service)
@@ -94,53 +86,60 @@ Submit yours by creating a pull request.
 - [feathers-solr](https://www.npmjs.com/package/feathers-solr) - Solr Adapter for Feathersjs
 - [feathers-waterline](./feathers-waterline.html)
 
-#### Documentation
+
+## Documentation
 
 - [feathers-swagger](https://www.npmjs.com/package/feathers-swagger) ![Official Feathers Module](/img/tiny-feathers-logo.png) - Add documentation to your Feathers services and feed them to Swagger UI. (configure)
 
-#### Multiple instances
 
-- [feathers-cluster](https://www.npmjs.com/package/feathers-cluster) - Easily take advantage of multi-core systems for Feathers. (configure)
-- [feathers-sync](https://www.npmjs.com/package/feathers-sync) ![Official Feathers Module](/img/tiny-feathers-logo.png)  - Synchronize service events between application instances using MongoDB publish/subscribe (configure)
-
-#### Mobile
-
-The Feathers client works with React Native but here is a collection of native libraries/SDKs.
-
-- [FeathersjsClientSwift](https://github.com/truebucha/FeathersjsClientSwift) - An iOS client written in Swift.
-
-#### Email & SMS
+## Email & SMS
 
 - [feathers-mailer](https://www.npmjs.com/package/feathers-mailer) ![Official Feathers Module](/img/tiny-feathers-logo.png) - Feathers mailer service using nodemailer (service) 
 - [feathers-mailgun](https://www.npmjs.com/package/feathers-mailgun) ![Official Feathers Module](/img/tiny-feathers-logo.png) - A Mailgun Service for FeatherJS. (service) 
 - [feathers-sendgrid](https://www.npmjs.com/package/feathers-sendgrid) ![Official Feathers Module](/img/tiny-feathers-logo.png) - A SendGrid Service for FeatherJS. (service) 
 - [feathers-twilio](./feathers-twilio.html) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
 
-#### Payments
+
+## Multiple instances
+
+- [feathers-cluster](https://www.npmjs.com/package/feathers-cluster) - Easily take advantage of multi-core systems for Feathers. (configure)
+- [feathers-sync](https://www.npmjs.com/package/feathers-sync) ![Official Feathers Module](/img/tiny-feathers-logo.png)  - Synchronize service events between application instances using MongoDB publish/subscribe (configure)
+
+
+## Mobile
+
+The Feathers client works with React Native but here is a collection of native libraries/SDKs.
+
+- [FeathersjsClientSwift](https://github.com/truebucha/FeathersjsClientSwift) - An iOS client written in Swift.
+
+
+## Payments
 
 - [feathers-stripe](./feathers-stripe.html) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
 
-#### React, Redux
 
-- [feathers-action](https://www.npmjs.com/package/feathers-action) - use feathers services with redux (connector)
-- [feathers-action-creators](https://www.npmjs.com/package/feathers-action-creators) - redux action creators for feathers services
-- [feathers-action-reducer](https://www.npmjs.com/package/feathers-action-reducer) - redux reducer for feathers service actions
-- [feathers-action-types](https://www.npmjs.com/package/feathers-action-types) - flux action types for feathers services (connector)
-- [feathers-react-redux](https://www.npmjs.com/package/feathers-react-redux) - Unofficial Feathers bindings for React-Redux.
-- [feathers-reduxify-services](https://github.com/eddyystop/feathers-reduxify-services) - Wrap Feathers services so they work transparently and perfectly with Redux.
-- [feathers-reduxify-authentication](https://github.com/eddyystop/feathers-reduxify-authentication) - Wrap Feathers.authentication so it works with Redux, and with auth packages for React-Router. 
-
-#### Testing
+## Testing
 
 - [feathers-tests-fake-app-users](https://www.npmjs.com/package/feathers-tests-fake-app-users) - Fake some feathers dependencies in service unit tests. Starter for your customized fakes (service)
 
-#### Transformation
+
+## Transformation
 
 - [feathers-populate-hook](https://www.npmjs.com/package/feathers-populate-hook) - Feathers hook to populate multiple fields with n:m, n:1 or 1:m relations. (hook)
 - [feathers-transform-hook](https://www.npmjs.com/package/feathers-transform-hook) - Feathers hook for transform hook.data parameters (hook)
 - [feathers-virtual-attribute-hook](https://www.npmjs.com/package/feathers-virtual-attribute-hook) - Feathers hook for add virtual attributes to your service response (hook)
 
-#### Utilities
+
+## Transports
+
+- [feathers-primus](./feathers-primus.html) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
+- [feathers-rest](./feathers-rest.html) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
+- [feathers-socketio](./feathers-socketio.html) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
+- [feathers-batch](https://www.npmjs.com/package/feathers-batch) - Batch multiple Feathers service calls into one (service)
+- [feathers-socketcluster](https://github.com/polst/feathers-socketcluster) - Use SocketCluster for client/server communication. Not published.
+
+
+## Utilities
 
 - [feathers-bootstrap](./feathers-bootstrap.html) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
 - [feathers-cli](./feathers-cli.html) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
@@ -159,7 +158,8 @@ The Feathers client works with React Native but here is a collection of native l
 - [generator-feathers](./generator-feathers.html) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
 - [generator-feathers-plugin](./generator-feathers-plugin.html) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
 
-#### Validation
+
+## Validation
 
 - [feathers-hooks-validate-joi](https://www.npmjs.com/package/feathers-hooks-validate-joi) - Feathers hook utility for schema validation, sanitization and client notification using Joi. (hook)
 - [feathers-hook-validation-jsonschema](https://www.npmjs.com/package/feathers-hook-validation-jsonschema) - Validate Feathers resources using JSON Schema. (hook)
@@ -167,12 +167,38 @@ The Feathers client works with React Native but here is a collection of native l
 - [feathers-validate-hook](https://www.npmjs.com/package/feathers-validate-hook) - Feathers hook for validate json-schema with is-my-json-valid (hook)
 - [feathers-validator](https://www.npmjs.com/package/feathers-validator) - A validator for Feathers services. (service)
 
-#### View layer
 
-- [donejs-feathers](https://www.npmjs.com/package/donejs-feathers) - A generator to quickly add FeathersJS to your DoneJS project. Includes Auth! (generator)
+## Client & Framework Integration
+
+- [feathers-client](https://www.npmjs.com/package/feathers-client) ![Official Feathers Module](/img/tiny-feathers-logo.png) - All of the main client packages rolled into one.
 - [feathers-mithril](https://www.npmjs.com/package/feathers-mithril) - Connect feathers.js to mithril.js (connector)
 - [feathers-reactive](https://www.npmjs.com/package/feathers-reactive) ![Official Feathers Module](/img/tiny-feathers-logo.png) - Turns a Feathers service call into an RxJS observables that automatically updates on real-time events. (configure)
+- [feathers-polymer](https://github.com/thosakwe/polymer-feathers)
 - [ng-feathers](https://www.npmjs.com/package/ng-feathers) - Feathers client for AngularJS. FeatherJS for plain old AngularJS (1.X)
-- [vue-syncers-feathjers](https://www.npmjs.com/package/vue-syncers-feathers) - Synchronises feathers services with vue objects, updated in real time (connector)
+
+
+## DoneJS
+
+- [can-connect-feathers](https://www.npmjs.com/package/can-connect-feathers) - Feathers client library for DoneJS (feathers-client)
+- [canjs-feathers](https://www.npmjs.com/package/canjs-feathers) - CanJS model implementation that connects to Feathers services through feathers-client. (feathers-client)
+- [donejs-feathers](https://www.npmjs.com/package/donejs-feathers) - A generator to quickly add FeathersJS to your DoneJS project. Includes Auth! (generator)
+
+
+## React, Redux
+
+- [feathers-action](https://www.npmjs.com/package/feathers-action) - use feathers services with redux (connector)
+- [feathers-action-creators](https://www.npmjs.com/package/feathers-action-creators) - redux action creators for feathers services
+- [feathers-action-reducer](https://www.npmjs.com/package/feathers-action-reducer) - redux reducer for feathers service actions
+- [feathers-action-types](https://www.npmjs.com/package/feathers-action-types) - flux action types for feathers services (connector)
+- [feathers-react-redux](https://www.npmjs.com/package/feathers-react-redux) - Unofficial Feathers bindings for React-Redux.
+- [feathers-reduxify-services](https://github.com/eddyystop/feathers-reduxify-services) - Wrap Feathers services so they work transparently and perfectly with Redux.
+- [feathers-reduxify-authentication](https://github.com/eddyystop/feathers-reduxify-authentication) - Wrap Feathers.authentication so it works with Redux, and with auth packages for React-Router. 
+
+
+## Vue.js
+
+- [feathers-vuex](https://github.com/feathersjs/feathers-vuex) ![Official Feathers Module](/img/tiny-feathers-logo.png)  - Integration of Feathers services with your Vuex store.
+- [vue-syncers-feathers](https://www.npmjs.com/package/vue-syncers-feathers) - Synchronises feathers services with vue objects, updated in real time (connector)
 - [vue-feathers](https://github.com/sunabozu/vue-feathers) - A plugin for Vuejs 1.x & 2.x to easily access your feathers services.
 - [feathers-polymer](https://github.com/thosakwe/polymer-feathers)
+
