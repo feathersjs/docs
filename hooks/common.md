@@ -760,7 +760,7 @@ Options
 
 `setByDot(obj: object, path: string, value: any, ifDelete: boolean): void`
 
-`getItems` gets a value from an object using dot notation, e.g. `employee.address.city`. It does not differentiate between non-existent paths and a value of `undefined`.
+`getByDot` gets a value from an object using dot notation, e.g. `employee.address.city`. It does not differentiate between non-existent paths and a value of `undefined`.
 
 `setByDot` is the companion to `getByDot`. It sets a value in an object using dot notation.
 
