@@ -102,7 +102,7 @@ So far we've implemented a couple of `before` hooks but we can also format our d
 
 Let's say that we want to populate the sender of each message so that we can display them in our UI. Instead of creating one of your own hooks, this time we'll use some that come [bundled with Feathers](../hooks/common.html). Specifically, we'll use the `populate` and `remove` hooks that come bundled with `feathers-hooks`.
 
-We need to make a small change to our `src/services/message/hooks/index.js` file so that it now looks like this:
+We need to make a small change to our `src/services/messages/hooks/index.js` file so that it now looks like this:
 
 ```js
 'use strict';
