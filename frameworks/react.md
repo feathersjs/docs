@@ -46,7 +46,7 @@ All of the code examples that follow should be appended to the `public/app.jsx` 
 const PLACEHOLDER = 'https://placeimg.com/60/60/people';
 // An anonymous user if the message does not have that information
 const dummyUser = {
-  avatar: PLACEHOLDER,
+  image: PLACEHOLDER,
   email: 'Anonymous'
 };
 ```
@@ -150,7 +150,7 @@ const MessageList = React.createClass({
     const sender = message.sentBy || dummyUser;
 
     return <div className="message flex flex-row">
-      <img src={sender.avatar || PLACEHOLDER} alt={sender.email} className="avatar" />
+      <img src={sender.image || PLACEHOLDER} alt={sender.email} className="avatar" />
       <div className="message-wrapper">
         <p className="message-header">
           <span className="username font-600">{sender.email}</span>
