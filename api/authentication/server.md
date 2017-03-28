@@ -8,7 +8,8 @@
 $ npm install feathers-authentication --save
 ```
 
+The [feathers-authentication](https://github.com/feathersjs/feathers-authentication) module allows you to use any [Passport](http://passportjs.org/) authentication strategy over all of the transports that Feathers supports and to generate JWT access tokens after successful authentication. These JWT access tokens are then used to 
 
-## Server
+## Configuration
 
-## Client
+## API

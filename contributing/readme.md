@@ -6,21 +6,17 @@ The docs are all written in [GitHub Flavored Markdown](https://help.github.com/a
 
 ### Organizing Files
 
-You'll notice that the [GitHub Repo](https://github.com/feathersjs/feathers-docs) is organized in a nice logical folder structure.  The first file in each chapter is named as a description of the entire chapter's topic.  For example, the intro to databases is located in `api/databases/readme.md`. 
+You'll notice that the [GitHub Repo](https://github.com/feathersjs/feathers-docs) is organized in a nice logical folder structure.  The first file in each chapter is named as a description of the entire chapter's topic.  For example, the content related to databases is located in `api/databases/`. 
 
 Some of the chapters are split into multiple sections to help break up the content and make it easier to digest. You can easily see how chapters are laid out by looking at the `SUMMARY.md` file. This convention helps keep chapters together in the file system and easy to view either directly on github or gitbook.
 
 ### Table of Contents
 
-[SUMMARY.md](https://github.com/feathersjs/feathers-docs/blob/master/SUMMARY.md) = Table of Contents.
-
 You'll find the table of contents in the [SUMMARY.md](https://github.com/feathersjs/feathers-docs/blob/master/SUMMARY.md) file.  It's a nested list of markdown links.  You can link to a file simply by putting the filename (including the extension) inside the link target.
 
 ### Introduction Page
 
-Intro Page = [README.md](https://github.com/feathersjs/feathers-docs/blob/master/README.md)
-
-Give you the elevator pitch of what Feathers is and why we think it is useful.
+This is the root [README.md](https://github.com/feathersjs/feathers-docs/blob/master/README.md) file. It's intent is to give the reader an elevator pitch of what Feathers is and why we think it is useful.
 
 ### Send a Pull Request
 So that's it. You make your edits, keep your files and the Table of Contents organized, and send us a pull request.

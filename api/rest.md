@@ -8,7 +8,7 @@
 $ npm install feathers-rest --save
 ```
 
-The [feathers-rest](https://github.com/feathersjs/feathers-rest) module allows to expose and consume [services](./services.md) through a [RESTful API](https://en.wikipedia.org/wiki/Representational_state_transfer). This means that you can call a service method through the `GET`, `POST`, `PUT`, `PATCH` and `DELETE` [HTTP methods](https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol):
+The [feathers-rest](https://github.com/feathersjs/feathers-rest) module allows you to expose and consume [services](./services.md) through a [RESTful API](https://en.wikipedia.org/wiki/Representational_state_transfer). This means that you can call a service method through the `GET`, `POST`, `PUT`, `PATCH` and `DELETE` [HTTP methods](https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol):
 
 | Service method  | HTTP method | Path        |
 |-----------------|-------------|-------------|
@@ -39,9 +39,10 @@ $ npm install body-parser --save
 Configures the transport provider with a standard formatter sending JSON response via [res.json](http://expressjs.com/en/4x/api.html#res.json).
 
 ```js
-const app = feathers();
+const feathers = require('feathers');
 const bodyParser = require('body-parser');
 const rest = require('feathers-rest');
+const app = feathers();
 
 // Turn on JSON parser for REST services
 app.use(bodyParser.json())
