@@ -29,7 +29,7 @@ The following plugins are complementary, but entirely optional:
 
 This module contains:
 
-1. [The main entry function](#configuring-the-plugin)
+1. [The main entry function](#configuration)
 2. [The `/authentication` service](#the-authentication-service)
 3. [The `authenticate` hook](#the-authenticate-hook)
 4. Socket listeners
