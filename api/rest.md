@@ -10,26 +10,6 @@ $ npm install feathers-rest --save
 
 The [feathers-rest](https://github.com/feathersjs/feathers-rest) module allows you to expose and consume [services](./services.md) through a [RESTful API](https://en.wikipedia.org/wiki/Representational_state_transfer). This means that you can call a service method through the `GET`, `POST`, `PUT`, `PATCH` and `DELETE` [HTTP methods](https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol):
 
-```js
-const messageService = {
-  // GET /messages
-  find(params) {},
-  // GET /messages/<id>
-  get(id, params) {},
-  // POST /messages
-  create(data, params) {},
-  // PUT /messages[/<id>]
-  update(id, data, params) {},
-  // PATCH /messages[/<id>]
-  patch(id, data, params) {},
-  // DELETE /messages[/<id>]
-  remove(id, params) {},
-  setup(app, path) {}
-}
-
-app.use('/messages', messageService);
-```
-
 | Service method  | HTTP method | Path        |
 |-----------------|-------------|-------------|
 | .find()         | GET         | /messages   |
@@ -47,6 +27,10 @@ To expose services through a RESTful API we will have to configure the feathers-
 ```
 $ npm install body-parser --save
 ```
+
+> **Important:** For additional information about middleware, routing and how the REST module works with Express middleware see the [Express chapter](./express.md).
+
+<!-- -->
 
 > **ProTip:** The body-parser middleware has to be registered _before_ any service. Otherwise the service method will throw a `No data provided` or `First parameter for 'create' must be an object` error.
 
@@ -92,16 +76,43 @@ app.configure(rest(function(req, res) {
 }))
 ```
 
+### `params.query`
+
+`params.query` will contain the URL query parameters sent from the client. For the REST transport the query string is parsed using the [qs](https://github.com/ljharb/qs) module. For some query string examples see the [database querying](./databases/querying.md) chatper.
+
+> **Important:** Only `params.query` is passed between the server and the client, other parts of `params` are not. This is for security reasons so that a client can't set things like `params.user` or the database options. You can always map from `params.query` to other `params` properties in a before [hook](./hooks.md).
+
+### `params.provider`
+
+For any [service method call](./services.md) made through REST `params.provider` will be set to `rest`. In a [hook](./hooks.md) this can for example be used to prevent external users from making a service method call:
+
+```js
+app.service('users').hooks({
+  before: {
+    remove(hook) {
+      // check for if(hook.params.provider) to prevent any external call
+      if(hook.params.provider === 'rest') {
+        throw new Error('You can not delete a user via REST');
+      }
+    }
+  }
+});
+```
+
 
 ## Client
 
-The `feathers-rest/client` module allows you to connect to a service exposed through the [REST server](#server) using [jQuery](https://jquery.com/), [request](https://github.com/request/request), [Superagent](http://visionmedia.github.io/superagent/), [Axios](https://github.com/mzabriskie/axios) or [Fetch](https://facebook.github.io/react-native/docs/network.html) as the AJAX library.
+The `client` module in `feathers-rest` (`require('feathers-rest/client')`) allows to connect to a service exposed through the [REST server](#server) using [jQuery](https://jquery.com/), [request](https://github.com/request/request), [Superagent](http://visionmedia.github.io/superagent/), [Axios](https://github.com/mzabriskie/axios) or [Fetch](https://facebook.github.io/react-native/docs/network.html) as the AJAX library.
 
 > **Very important:** The examples below assume you are using Feathers either in Node or in the browser with a module loader like Webpack or Browserify. For using Feathers with a `<script>` tag, AMD modules or with React Native see the [client chapter](./client.md).
 
 <!-- -->
 
 > **ProTip:** REST client services do emit `created`, `updated`, `patched` and `removed` events but only _locally for their own instance_. Real-time events from other clients can only be received by using a websocket connection.
+
+<!-- -->
+
+> **Note:** A client application can only use a single transport (either REST, Socket.io or Primus). Using two transports in the same client application is normally not necessary.
 
 ### `rest([baseUrl])`
 

@@ -2,8 +2,7 @@
 
 * [Introduction](README.md)
 * [Guides](guides/readme.md)
-  * The Basics
-    * [Introduction To Feathers](guides/step-by-step/readme.md)
+  * [The Basics](guides/step-by-step/readme.md)
     * [This guide](guides/step-by-step/intro/readme.md)
     * [What not to worry about](guides/step-by-step/intro/not-worry.md)
     * Basic Feathers
@@ -24,8 +23,7 @@
     * [Is Feathers production ready?](guides/step-by-step/production-ready.md)
     * Appendix
     * [What is 'this'?](guides/step-by-step/appendix/what-is-this.md)
-  * A Chat application
-    * [Introduction](guides/chat/readme.md)
+  * [A Chat application](guides/chat/readme.md)
     * Server
     * [Introduction](guides/chat/server/readme.md)
     * [Starting the server](guides/chat/server/start-server.md)
@@ -39,11 +37,11 @@
     * [OAuth jQuery client](guides/chat/client/oauth.md)
     * [Clients for other frameworks](guides/chat/client/other-clients.md)
     * [What's next?](guides/chat/what-next.md)
-  * [Frameworks]
+  * [Frameworks](guides/readme.md)
     * jQuery
     * React
     * Angular
-  * Advanced
+  * [Advanced](guides/readme.md)
     * File upload
     * Redux
     * Other guides here
@@ -52,12 +50,13 @@
     * [Application](api/application.md)
     * [Services](api/services.md)
     * [Hooks](api/hooks.md)
-    * [Client](api/client.md)
     * [Common Hooks](api/hooks-common.md)
+    * [Client](api/client.md)
     * [Events](api/events.md)
     * [Errors](api/errors.md)
   * Transports
     * [REST](api/rest.md)
+    * [Express](api/express.md)
     * [Socket.io](api/socketio.md)
     * [Primus](api/primus.md)
   * Authentication

@@ -40,6 +40,10 @@ __Options:__
 - `events` (*optional*) - A list of [custom service events](../real-time/events.md#custom-events) sent by this service
 - `paginate` (*optional*) - A [pagination object](./pagination.md) containing a `default` and `max` page size
 
+### params.mongodb
+
+When making a [service method](./services.md) call, `params` can contain an `mongodb` property which allows to modify the options used to run the MongoDB query.
+
 
 ## Example
 

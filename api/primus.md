@@ -49,6 +49,29 @@ app.configure(feathers.primus({
 }));
 ```
 
+### `params.provider`
+
+For any [service method call](./services.md) made through `params.provider` will be set to `primus`. In a [hook](./hooks.md) this can for example be used to prevent external users from making a service method call:
+
+```js
+app.service('users').hooks({
+  before: {
+    remove(hook) {
+      // check for if(hook.params.provider) to prevent any external call
+      if(hook.params.provider === 'primus') {
+        throw new Error('You can not delete a user via Primus');
+      }
+    }
+  }
+});
+```
+
+### `params.query`
+
+`params.query` will contain the query parameters sent from the client.
+
+> **Important:** Only `params.query` is passed between the server and the client, other parts of `params` are not. This is for security reasons so that a client can't set things like `params.user` or the database options. You can always map from `params.query` to `params` in a before [hook](./hooks.md).
+
 ### Middleware and service parameters
 
 The Primus request object has a `feathers` property that can be extended with additional service `params` during authorization:
@@ -76,9 +99,13 @@ app.use('messages', {
 
 ## Client
 
-The `feathers-primus/client` module allows to connect to services exposed through the [Primus server](#server) via a client socket.
+The `client` module in `feathers-primus` (`require('feathers-primus/client')`) allows to connect to services exposed through the [Primus server](#server) via a client socket.
 
 > **Very important:** The examples below assume you are using Feathers either in Node or in the browser with a module loader like Webpack or Browserify. For using Feathers with a `<script>` tag, AMD modules or with React Native see the [client chapter](./client.md).
+
+<!-- -->
+
+> **Note:** A client application can only use a single transport (either REST, Socket.io or Primus). Using two transports in the same client application is normally not necessary.
 
 ### Loading the Primus client library
 

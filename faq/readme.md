@@ -2,6 +2,46 @@
 
 We've been collecting some commonly asked questions here. We'll either be updating the guide directly, providing answers here, or both.
 
+## How do I create custom methods?
+
+One important thing to know about Feathers is that it only exposes the official [service methods](../services/readme.md) to clients. While you can add and use any service method on the server, it is __not__ possible to expose those custom methods to clients.
+
+In the [Why Feathers](../why/readme.md) chapter we discussed how the _uniform interface_ of services naturally translates into a REST API and also makes it easy to hook into the execution of known methods and emit events when they return. Adding support for custom methods would add a new level of complexity defining how to describe, expose and secure custom methods. This does not go well with Feathers approach of adding services as a small and well defined concept.
+
+In general, almost anything that may require custom methods can also be done by creating other services. For example, a `userService.resetPassword` method can also be implemented as a password service that resets the password in the `create`:
+
+```js
+class PasswordService {
+  create(data) {
+    const userId = data.user_id;
+    const userService = this.app.service('user');
+    
+    userService.resetPassword(userId).then(user => {
+      // Send an email with the new password
+      return sendEmail(user);
+    })
+  }
+  
+  setup(app) {
+    this.app = app;
+  }
+}
+```
+
+## Is Feathers production ready?
+
+## What is the difference between hooks and events?
+
+## What do event filters do?
+
+## How do I do associations?
+
+## I am not getting the right HTTP error code
+
+## I am not getting JSON errors
+
+
+
 ## How do I debug my app
 
 It's really no different than debugging any other NodeJS app but you can refer to the [Debugging](../debugging/readme.md) section of the guide for more Feathers specific tips and tricks.

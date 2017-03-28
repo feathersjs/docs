@@ -56,6 +56,10 @@ __Options:__
 
 Returns a KnexJS query with the [common filter criteria](./querying.md) (without pagination) applied.
 
+### params.knex
+
+When making a [service method](./services.md) call, `params` can contain an `knex` property which allows to modify the options used to run the KnexJS query. See [customizing the query](#customizing-the-query) for an example.
+
 
 ## Example
 

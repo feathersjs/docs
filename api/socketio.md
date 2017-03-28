@@ -19,7 +19,7 @@ The [feathers-socketio](https://github.com/feathersjs/feathers-socketio) module 
 | .patch()        | `messages::patch`   | `messages patched` |
 | .remove()       | `messages::removed` | `messages removed` |
 
-> **Important:** Primus is also used to *call* service methods. Using sockets for both, calling methods and receiving real-time events is generally faster than using [REST](rest.md) and there is usually no need to use both, REST and Socket.io in the same client application at the same time.
+> **Important:** Socket.io is also used to *call* service methods. Using sockets for both, calling methods and receiving real-time events is generally faster than using [REST](rest.md) and there is usually no need to use both, REST and Socket.io in the same client application at the same time.
 
 ## Server
 
@@ -91,6 +91,29 @@ const app = feathers()
 app.listen(3030);
 ```
 
+### `params.provider`
+
+For any [service method call](./services.md) made through Socket.io `params.provider` will be set to `socketio`. In a [hook](./hooks.md) this can for example be used to prevent external users from making a service method call:
+
+```js
+app.service('users').hooks({
+  before: {
+    remove(hook) {
+      // check for if(hook.params.provider) to prevent any external call
+      if(hook.params.provider === 'socketio') {
+        throw new Error('You can not delete a user via Socket.io');
+      }
+    }
+  }
+});
+```
+
+### `params.query`
+
+`params.query` will contain the query parameters sent from the client.
+
+> **Important:** Only `params.query` is passed between the server and the client, other parts of `params` are not. This is for security reasons so that a client can't set things like `params.user` or the database options. You can always map from `params.query` to `params` in a before [hook](./hooks.md).
+
 ### uWebSocket
 
 The options can also be used to initialize [uWebSocket](https://github.com/uwebsockets/uwebsockets) which is a WebSocket server implementation that provides better performace and reduced latency.
@@ -135,9 +158,13 @@ app.use('messages', {
 
 ## Client
 
-The `feathers-socketio/client` module allows to connect to services exposed through the [Socket.io server](#server) via a Socket.io socket.
+The `client` module in `feathers-socketio` (`require('feathers-socketio/client')`) allows to connect to services exposed through the [Socket.io server](#server) via a Socket.io socket.
 
 > **Very important:** The examples below assume you are using Feathers either in Node or in the browser with a module loader like Webpack or Browserify. For using Feathers with a `<script>` tag, AMD modules or with React Native see the [client chapter](./client.md).
+
+<!-- -->
+
+> **Note:** A client application can only use a single transport (either REST, Socket.io or Primus). Using two transports in the same client application is normally not necessary.
 
 ### `socketio(socket)`
 

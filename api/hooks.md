@@ -1,6 +1,14 @@
 # Hooks
 
-Hooks are simply functions that can be registered __before__, __after__ or on __error__s of a [service method](./services.md). You can register a single hook function or create a chain of them to create complex work-flows. Most of the time multiple hooks are registered so the examples show the "hook chain" array style registration.
+[![GitHub stars](https://img.shields.io/github/stars/feathersjs/feathers-hooks.png?style=social&label=Star)](https://github.com/feathersjs/feathers-hooks/)
+[![npm version](https://img.shields.io/npm/v/feathers-hooks.png?style=flat-square)](https://www.npmjs.com/package/feathers-hooks)
+[![Changelog](https://img.shields.io/badge/changelog-.md-blue.png?style=flat-square)](https://github.com/feathersjs/feathers-hooks/blob/master/CHANGELOG.md)
+
+```
+$ npm install feathers-hooks --save
+```
+
+Hooks are pluggable middleware functions that can be registered __before__, __after__ or on __error__s of a [service method](./services.md). You can register a single hook function or create a chain of them to create complex work-flows. Most of the time multiple hooks are registered so the examples show the "hook chain" array style registration.
 
 A hook is **transport independent**, which means it does not matter if it has been called through HTTP(S) (REST), Socket.io, Primus or any other transport Feathers may support in the future. They are also service agnostic, meaning they can be used with ​**any**​ service regardless of whether they have a model or not.
 
@@ -9,19 +17,26 @@ Hooks are commonly used to handle things like validation, logging, populating re
 The following example adds a `createdAt` and `updatedAt` property before sending the data to the database.
 
 ```js
+const feathers = require('feathers');
+const hooks = require('feathers-hooks');
+
+const app = feathers();
+
+app.configure(hooks());
+
 app.service('messages').hooks({
   before: {
-    create: [
-      (hook) => hook.data.createdAt = new Date()
-    ],
+    create(hook) {
+      hook.data.createdAt = new Date();
+    },
 
-    update: [
-      (hook) => hook.data.updatedAt = new Date()
-    ],
+    update(hook) {
+      hook.data.updatedAt = new Date();
+    },
 
-    patch: [
-      (hook) => hook.data.updatedAt = new Date()
-    ]
+    patch(hook) {
+      hook.data.updatedAt = new Date();
+    }
   }
 });
 ```
