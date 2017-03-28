@@ -77,21 +77,20 @@ The following default options will be mixed in with your global `auth` object fr
 ```
 
 ## Methods
-
 ### `app.authenticate(data)`
 
-- `data {Object}` - of the format `{strategy [, ...otherProps]}`
-  - `strategy {String}` - the name of the strategy to be used to authenticate.  Required.
-  - `...otherProps {Properties} ` vary depending on the chosen strategy.
-
 ```js
-// Example of using the `jwt` strategy (feathers-authentication-jwt)
 app.authenticate({
   strategy: 'jwt', 
   accessToken: '<the.jwt.token.string>'
 })
+```
 
-// Example of using the `local` strategy (feathers-authentication-local)
+- `data {Object}` - of the format `{strategy [, ...otherProps]}`
+  - `strategy {String}` - the name of the strategy to be used to authenticate.  Required.
+  - `...otherProps {Properties} ` vary depending on the chosen strategy. Above is an example of using the `jwt` strategy.  Below is one for the `local` strategy.
+
+```js
 app.authenticate({
   strategy: 'local',
   email: 'my@email.com',
