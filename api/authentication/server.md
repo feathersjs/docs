@@ -78,11 +78,17 @@ The following default options will be mixed in with your global `auth` object fr
 ## The `/authentication` service
 The heart of this plugin is simply a service for creating JWT.  It's a normal Feathers service that implements only the `create` and `remove` methods.  
 
+### app.service('/authentication').create(data)
+
 The `create` method will be used in nearly every Feathers application.  It creates a JWT that contains the `hook.data` as its payload.  Having a JWT is equivalent to being logged in.  Once the JWT expires or is deleted from the client, the user is essentially logged out.
+
+### app.service('/authentication').remove(data)
 
 The `remove` method will be used less often.  It mostly exists to allow for adding hooks the the "logout" process.  For example, in services that require high control over security, a developer could register hooks on the `remove` method that perform token blacklisting.
 
 ## The `authenticate` Hook
+
+`auth.hooks.authenticate(strategies)`, where `strategies` is an array of passport strategy names.
 
 `feathers-authentication` only includes a single hook. This bundled `authenticate` hook is used to register an array of authentication strategies on a service method.
 
