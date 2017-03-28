@@ -121,7 +121,7 @@ Verifies the signature and payload of the passed in JWT `token` using the `optio
 ## The `/authentication` service
 The heart of this plugin is simply a service for creating JWT.  It's a normal Feathers service that implements only the `create` and `remove` methods.  
 
-### `app.service('/authentication').create(data)`
+### `app.service('/authentication').create(data, params)`
 
 The `create` method will be used in nearly every Feathers application.  It creates a JWT based on the `jwt` options configured on the plugin.  The API of this method utilizes the `hook` object:
 
