@@ -48,10 +48,15 @@ const HOST = 'http://localhost:3000'; // Your base server URL here
 @Injectable()
 export class RestService {
   private _app: any;
+
   constructor() {
     this._app = feathers() // Initialize feathers
       .configure(rest(HOST).superagent(superagent)) // Fire up rest
       .configure(hooks()) // Configure feathers-hooks
+  }
+
+  getService(service: string) {
+    return this._app.service(service);
   }
 }
 ```
@@ -63,7 +68,7 @@ Our socket.io app setup doesn't look much different!
 
 ```ts
 @Injectable()
-export class SocketService extends Service {
+export class SocketService {
   public socket: SocketIOClient.Socket;
   private _app: any;
   
@@ -72,6 +77,10 @@ export class SocketService extends Service {
     this._app = feathers()
       .configure(socketio(this.socket))
       .configure(hooks())
+  }
+  
+  getService(service: string) {
+    return this._app.service(service);
   }
 }
 ```
