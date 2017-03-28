@@ -76,7 +76,7 @@ The following default options will be mixed in with your global `auth` object fr
 }
 ```
 
-## Methods
+## Additional `app` methods
 The Feathers `app` will contain a few useful methods once you've configured the auth plugin:
 - [app.authenticate](#appauthenticatedata)
 - [app.passport.createJWT](#apppassportcreatejwtpayload-options-source)
@@ -119,7 +119,7 @@ Verifies the signature and payload of the passed in JWT `token` using the `optio
   - See the [`jsonwebtoken`](https://www.npmjs.com/package/jsonwebtoken#jwtsignpayload-secretorprivatekey-options-callback) package docs for other available options.
 
 
-## The `/authentication` service
+## The `authentication` service
 The heart of this plugin is simply a service for creating JWT.  It's a normal Feathers service that implements only the `create` and `remove` methods.  
 
 ### `app.service('/authentication').create(data, params)`
@@ -139,7 +139,7 @@ These properties can be modified to change the behavior of the `/authentication`
 
 The `remove` method will be used less often.  It mostly exists to allow for adding hooks the the "logout" process.  For example, in services that require high control over security, a developer could register hooks on the `remove` method that perform token blacklisting.
 
-## The `authenticate` Hook
+## The `authenticate` hook
 
 `auth.hooks.authenticate(strategies)`, where `strategies` is an array of passport strategy names.
 
