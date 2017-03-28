@@ -23,7 +23,7 @@
     * [Is Feathers production ready?](guides/step-by-step/production-ready.md)
     * Appendix
     * [What is 'this'?](guides/step-by-step/appendix/what-is-this.md)
-  * [A chat application](guides/chat/readme.md)
+  * [A Chat Application](guides/chat/readme.md)
     * [Creating the application](guides/chat/creating.md)
     * [Generating a service](guides/chat/service.md)
     * [Adding authentication](guides/chat/authentication.md)
