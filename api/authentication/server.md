@@ -83,6 +83,7 @@ The Feathers `app` will contain a few useful methods once you've configured the 
 - [app.passport.verifyJWT](#apppassportverifyjwttoken-options-source)
 
 ### `app.authenticate(data)`
+A wrapper that calls `app.service('/authorization').create(data, params)` to create a JWT access token.  It uses the `jwt` options provided during configuration.
 
 ```js
 app.authenticate({
