@@ -123,7 +123,16 @@ The heart of this plugin is simply a service for creating JWT.  It's a normal Fe
 
 ### `app.service('/authentication').create(data)`
 
-The `create` method will be used in nearly every Feathers application.  It creates a JWT that contains the `hook.data` as its payload.  Having a JWT is equivalent to being logged in.  Once the JWT expires or is deleted from the client, the user is essentially logged out.
+The `create` method will be used in nearly every Feathers application.  It creates a JWT based on the `jwt` options configured on the plugin.  The API of this method utilizes the `hook` object:
+
+#### `before` hook API:
+These properties can be modified to change the behavior of the `/authentication` service.
+- `hook.data.payload {Object}` - determines the payload of the JWT
+- `hook.params.payload {Object}` - also determines the payload of the JWT. Any matching attributes in the `hook.data.payload` will be overwritten by these. Persists into after hooks.
+- `hook.params.authenticated {Boolean}` - After successful authentication, will be set to `true`, unless it's set to `false` in a before hook.  If you set it to `false` in a before hook, it will prevent the websocket from being flagged as authenticated. Persists into after hooks.
+
+#### `after` hook API:
+- `hook.params[entity] {Object}` - After successful authentication, the `entity` looked up from the database will be populated here. (The default option is `user`.)
 
 ### `app.service('/authentication').remove(data)`
 
