@@ -2,6 +2,7 @@
 
 * [Introduction](README.md)
 * [Guides](guides/readme.md)
+  <!--
   * [The Basics](guides/step-by-step/readme.md)
     * [This guide](guides/step-by-step/intro/readme.md)
     * [What not to worry about](guides/step-by-step/intro/not-worry.md)
@@ -37,14 +38,13 @@
     * [OAuth jQuery client](guides/chat/client/oauth.md)
     * [Clients for other frameworks](guides/chat/client/other-clients.md)
     * [What's next?](guides/chat/what-next.md)
-  * [Frameworks](guides/readme.md)
-    * jQuery
-    * React
-    * Angular
-  * [Advanced](guides/readme.md)
-    * File upload
-    * Redux
-    * Other guides here
+  -->
+  * A chat application
+    * [Creating the application](guides/chat/creating.md)
+    * [Generating a service](guides/chat/service.md)
+    * [Adding authentication](guides/chat/authentication.md)
+    * [Processing data](guides/chat/processing.md)
+    * [Frameworks: React, Angular etc.](guides/chat/frameworks.md)
 * [API](api/readme.md)
   * Core
     * [Application](api/application.md)
