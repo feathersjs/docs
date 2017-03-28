@@ -77,6 +77,7 @@ The following default options will be mixed in with your global `auth` object fr
 ```
 
 ## Methods
+The Feathers `app` will contain a few useful methods once you've configured the auth plugin.
 ### `app.authenticate(data)`
 
 ```js
