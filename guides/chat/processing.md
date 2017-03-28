@@ -15,7 +15,7 @@ The hook we want to create will be called `process-message`. Since we want to pr
 
 Next we will see a list of all our services we can add this hook to. For this hook we will only choose the `messages` service (navigate to the entry with the arrow keys and select it with the space key).
 
-A hook can run before any number of [service methods](../../api/services.md), for this one we will only select `create`. After confirming the last prompt we wills ee something like this:
+A hook can run before any number of [service methods](../../api/services.md), for this one we will only select `create`. After confirming the last prompt we will see something like this:
 
 ![The process-message hook prompts](./assets/process-message.png)
 
