@@ -173,12 +173,12 @@ app.post('/login', auth.express.authenticate('local', { successRedirect: '/app',
 
 Additional middleware are included and exposed but typically you don't need to worry about them:
 
-- `emitEvents` - emit `login` and `logout` events
-- `exposeCookies` - expose cookies to Feathers so they are available to hooks and services
-- `exposeHeaders` - expose headers to Feathers so they are available to hooks and services
-- `failureRedirect` - support redirecting on auth failure. Only triggered if `hook.redirect` is set.
-- `successRedirect` - support redirecting on auth success. Only triggered if `hook.redirect` is set.
-- `setCookie` - support setting the JWT access token in a cookie. Only enabled if cookies are enabled.  Note: Feathers will not read an access token from a cookie.  This would expose the API to CSRF attacks.  This `setCookie` feature is available primarily for helping with Server Side Rendering.
+- `emitEvents` [source](https://github.com/feathersjs/feathers-authentication/blob/master/src/express/emit-events.js) - emit `login` and `logout` events
+- `exposeCookies` [source](https://github.com/feathersjs/feathers-authentication/blob/master/src/express/expose-cookies.js) - expose cookies to Feathers so they are available to hooks and services.  **This is NOT used by default as its use exposes your API to CSRF vulnerabilities.**  Only use it if you really know what you're doing.
+- `exposeHeaders` [source](https://github.com/feathersjs/feathers-authentication/blob/master/src/express/expose-headers.js) - expose headers to Feathers so they are available to hooks and services. **This is NOT used by default as its use exposes your API to CSRF vulnerabilities.** Only use it if you really know what you're doing.
+- `failureRedirect` [source](https://github.com/feathersjs/feathers-authentication/blob/master/src/express/failure-redirect.js) - support redirecting on auth failure. Only triggered if `hook.redirect` is set.
+- `successRedirect` [source](https://github.com/feathersjs/feathers-authentication/blob/master/src/express/success-redirect.js) - support redirecting on auth success. Only triggered if `hook.redirect` is set.
+- `setCookie` [source](https://github.com/feathersjs/feathers-authentication/blob/master/src/express/set-cookie.js) - support setting the JWT access token in a cookie. Only enabled if cookies are enabled.  **Note: Feathers will NOT read an access token from a cookie.  This would expose the API to CSRF attacks.**  This `setCookie` feature is available primarily for helping with Server Side Rendering.
 
 ## Migrating to 1.x
 Refer to [the migration guide](https://github.com/feathersjs/feathers-authentication/blob/master/docs/migrating.md).
@@ -186,7 +186,7 @@ Refer to [the migration guide](https://github.com/feathersjs/feathers-authentica
 ## Complete Example
 Here's an example of a Feathers server that uses `feathers-authentication` for local auth. You can try it out on your own machine by running the [example](./example/).
 
-**Note:** This does NOT implement any authorization. Use [feathers-permissions](https://github.com/feathersjs/feathers-permissions) for that.
+**Note:** This example does NOT implement any authorization. Use [feathers-permissions](https://github.com/feathersjs/feathers-permissions) for that.
 
 ```js
 const feathers = require('feathers');
