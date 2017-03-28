@@ -36,8 +36,9 @@ This module contains:
 5. Express middleware
 6. A [Passport](http://passportjs.org/) adapter for Feathers
 
-## Configuring the Plugin
-Setting up is done the same as all Feathers plugins, using the `configure` method:
+## Configuration
+### `app.configure(auth(options))`
+Setup is done the same as all Feathers plugins, using the `configure` method:
 
 ```js
 const auth = require('feathers-authentication');
@@ -46,7 +47,7 @@ const auth = require('feathers-authentication');
 app.configure(auth(options))
 ```
 
-## Default Options
+## Default `options`
 
 The following default options will be mixed in with your global `auth` object from your config file. It will set the mixed options back on to the app so that they are available at any time by calling `app.get('auth')`. They can all be overridden and are required by some of the authentication plugins.
 
@@ -59,9 +60,9 @@ The following default options will be mixed in with your global `auth` object fr
   passReqToCallback: true, // whether the request object should be passed to the strategies `verify` function
   session: false, // whether to use sessions
   cookie: {
-    enabled: false, // whether the cookie should be enabled
+    enabled: false, // whether cookie creation is enabled
     name: 'feathers-jwt', // the cookie name
-    httpOnly: false, // whether the cookie should not be available to client side JavaScript
+    httpOnly: false, // when enabled, prevents the client from reading the cookie.
     secure: true // whether cookies should only be available over HTTPS
   },
   jwt: {
@@ -75,14 +76,52 @@ The following default options will be mixed in with your global `auth` object fr
 }
 ```
 
+## Methods
+
+### `app.authenticate(data)`
+
+- `data {Object}` - of the format `{strategy [, ...otherProps]}`
+  - `strategy {String}` - the name of the strategy to be used to authenticate.  Required.
+  - `...otherProps {Properties} ` vary depending on the chosen strategy.
+
+```js
+// Example of using the `jwt` strategy (feathers-authentication-jwt)
+app.authenticate({
+  strategy: 'jwt', 
+  accessToken: '<the.jwt.token.string>'
+})
+
+// Example of using the `local` strategy (feathers-authentication-local)
+app.authenticate({
+  strategy: 'local',
+  email: 'my@email.com',
+  password: 'my-password'
+})
+```
+
+### `app.passport.createJWT(payload, options)` [source](https://github.com/feathersjs/feathers-authentication/blob/master/src/utils.js#L8)
+This is the method used by the `/authentication` service to generate JSON Web Tokens.
+- `payload {Object}` - becomes the JWT payload. Will also include an `exp` property denoting the expiry timestamp.
+- `options {Object}` - the options passed to [jsonwebtoken `sign()`](https://www.npmjs.com/package/jsonwebtoken#jwtsignpayload-secretorprivatekey-options-callback)
+  - `secret {String | Buffer}` - either the secret for HMAC algorithms, or the PEM encoded private key for RSA and ECDSA.
+  - See the [`jsonwebtoken`](https://www.npmjs.com/package/jsonwebtoken#jwtsignpayload-secretorprivatekey-options-callback) package docs for other available options.  The authenticate method uses the [default `jwt` options](#default-options). When using this package, directly, they will have to be passed in manually.
+
+### `app.passport.verifyJWT(token, options)` [source](https://github.com/feathersjs/feathers-authentication/blob/master/src/utils.js#L48)
+Verifies the signature and payload of the passed in JWT `token` using the `options`.
+- `token {JWT}` - the JWT to be verified.
+- `options {Object}` the options passed to [jsonwebtoken `verify()`](https://www.npmjs.com/package/jsonwebtoken#jwtverifytoken-secretorpublickey-options-callback)
+  - `secret {String | Buffer}` - - either the secret for HMAC algorithms, or the PEM encoded private key for RSA and ECDSA.
+  - See the [`jsonwebtoken`](https://www.npmjs.com/package/jsonwebtoken#jwtsignpayload-secretorprivatekey-options-callback) package docs for other available options.
+
+
 ## The `/authentication` service
 The heart of this plugin is simply a service for creating JWT.  It's a normal Feathers service that implements only the `create` and `remove` methods.  
 
-### app.service('/authentication').create(data)
+### `app.service('/authentication').create(data)`
 
 The `create` method will be used in nearly every Feathers application.  It creates a JWT that contains the `hook.data` as its payload.  Having a JWT is equivalent to being logged in.  Once the JWT expires or is deleted from the client, the user is essentially logged out.
 
-### app.service('/authentication').remove(data)
+### `app.service('/authentication').remove(data)`
 
 The `remove` method will be used less often.  It mostly exists to allow for adding hooks the the "logout" process.  For example, in services that require high control over security, a developer could register hooks on the `remove` method that perform token blacklisting.
 
