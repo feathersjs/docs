@@ -33,7 +33,7 @@
 }
 
 .book .book-summary nav ul.summary > li > ul > li > ul {
-  padding-left: 0 !important;
+  padding-left: 8px !important;
 }
 
 /* 3rd level menu items */

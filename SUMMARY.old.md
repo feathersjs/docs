@@ -23,7 +23,23 @@
     * [Is Feathers production ready?](guides/step-by-step/production-ready.md)
     * Appendix
     * [What is 'this'?](guides/step-by-step/appendix/what-is-this.md)
-  * [A chat application](guides/chat/readme.md)
+  <!--
+  * [A Chat application](guides/chat/readme.md)
+    * Server
+    * [Introduction](guides/chat/server/readme.md)
+    * [Starting the server](guides/chat/server/start-server.md)
+    * [Starting the front-end](guides/chat/server/start-front-end.md)
+    * [Finishing the server](guides/chat/server/finish-server.md)
+    * [User management](guides/chat/server/user-mgnt.md)
+    * Client
+    * [Introduction](guides/chat/client/readme.md)
+    * [jQuery client](guides/chat/client/jQuery.md)
+    * [Using Webpack](guides/chat/client/webpack.md)
+    * [OAuth jQuery client](guides/chat/client/oauth.md)
+    * [Clients for other frameworks](guides/chat/client/other-clients.md)
+    * [What's next?](guides/chat/what-next.md)
+  -->
+  * A chat application
     * [Creating the application](guides/chat/creating.md)
     * [Generating a service](guides/chat/service.md)
     * [Adding authentication](guides/chat/authentication.md)
