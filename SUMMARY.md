@@ -28,7 +28,7 @@
     * [Generating a service](guides/chat/service.md)
     * [Adding authentication](guides/chat/authentication.md)
     * [Processing data](guides/chat/processing.md)
-    * [Frameworks: React, Angular etc.](guides/chat/frameworks.md)
+    * [Frameworks: React, Vue etc.](guides/chat/frameworks.md)
 * [API](api/readme.md)
   * Core
     * [Application](api/application.md)
