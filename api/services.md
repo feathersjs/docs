@@ -1,8 +1,10 @@
 # Services
 
-Services are the heart of every Feathers application and JavaScript objects (or instances of [ES6 classes](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Classes)) that provide certain methods.
+Services are the heart of every Feathers application and JavaScript objects (or instances of [ES6 classes](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Classes)) that implements [certain methods](#service-methods). Feathers itself will also add some [additional methods and functionality](#feathers-functionality) to its services.
 
-Below is a complete example of the Feathers *service interface*:
+## Service methods
+
+Service methods are pre-defined [CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete) methods that your service object can implement (or that has already been implemented by one of the [database adapters](./databases/common.md)). Below is a complete example of the Feathers *service interface*:
 
 ```js
 const myService = {
@@ -147,6 +149,11 @@ const app = feathers()
 
 app.listen(3030);
 ```
+
+
+## Feathers functionality
+
+When registering a service, Feathers (or its plugins) can also add its own methods to a service. Most notably, every service will automatically become an instance of a [NodeJS EventEmitter](https://nodejs.org/api/events.html#events_class_eventemitter).
 
 
 ## .hooks(hooks)
