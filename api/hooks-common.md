@@ -81,9 +81,9 @@ Display current info about the hook to console.
 - Used as a `before` or `after` hook.
 
 ```javascript
-const hooks = require('feathers-hooks-common');
+const { debug } = require('feathers-hooks-common');
 
-hooks.debug('step 1')
+debug('step 1')
 // * step 1
 // type: before, method: create
 // data: { name: 'Joe Doe' }
@@ -158,6 +158,41 @@ app.service('users').before({
   all: hooks.disableMultiItemChange(),
 });
 ```
+
+
+## discard
+
+### `discard(... fieldNames)` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/services/discard.js)
+
+Delete the given fields either from the data submitted or from the result. If the data is an array or a paginated `find` result the hook will Delete the field(s) for every item.
+
+- Used as a `before` hook for `create`, `update` or `patch`.
+- Used as an `after` hook.
+- Field names support dot notation e.g. `name.address.city`.
+- Supports multiple data items, including paginated `find`.
+
+```js
+const { discard } = require('feathers-hooks-common');
+
+// Delete the hashed `password` and `salt` field after all method calls
+app.service('users').after(discard('password', 'salt'));
+
+// Delete _id for `create`, `update` and `patch`
+app.service('users').before({
+  create: discard('_id', 'password'),
+  update: discard('_id'),
+  patch: discard('_id')
+})
+```
+
+> **ProTip:** This hook will always delete the fields,
+unlike the `remove` hook which only deletes the fields if the service call was made by a client.
+
+__Options:__
+
+- `fieldNames` (*required*) - One or more fields you want to remove from the object(s).
+
+See also remove.
 
 
 ## else
@@ -237,20 +272,20 @@ Run the hooks sequentially if the result is truthy.
 - `feathers-hooks` catches any errors thrown in the predicate or hook.
 
 ```javascript
-const hooks = require('feathers-hooks-common');
+const { iff, populate } = require('feathers-hooks-common');
 const isNotAdmin = adminRole => hook => hook.params.user.roles.indexOf(adminRole || 'admin') === -1;
 
 app.service('workOrders').after({
   // async predicate and hook
-  create: hooks.iff(
+  create: iff(
     () => new Promise((resolve, reject) => { ... }),
-    hooks.populate('user', { field: 'authorisedByUserId', service: 'users' })
+    populate('user', { field: 'authorisedByUserId', service: 'users' })
   )
 });
 
 app.service('workOrders').after({
   // sync predicate and hook
-  find: [ hooks.iff(isNotAdmin(), hooks.remove('budget')) ]
+  find: [ iff(isNotAdmin(), hooks.remove('budget')) ]
 });
 ```
 
@@ -335,10 +370,10 @@ All providers ([REST](./rest.md), [Socket.io](./socketio.md) and [Primus](./prim
  - Used as a predicate function with [conditional hooks](#conditional-hooks).
 
 ```javascript
-import hooks, { iff, isProvider } from 'feathers-hooks-common';
+import { iff, isProvider, remove } from 'feathers-hooks-common';
 
 app.service('users').after({
-  iff(isProvider('external'), hooks.remove( ... ))
+  iff(isProvider('external'), remove( ... ))
 });
 ```
 
@@ -367,11 +402,11 @@ Lower cases the given fields either in the data submitted or in the result. If t
 - Supports multiple data items, including paginated `find`.
 
 ```js
-const hooks = require('feathers-hooks-common');
+const { lowerCase } = require('feathers-hooks-common');
 
 // lowercase the `email` and `password` field before a user is created
 app.service('users').before({
-  create: hooks.lowerCase('email', 'username')
+  create: lowerCase('email', 'username')
 });
 ```
 
@@ -394,16 +429,16 @@ Discard all other fields except for the provided fields either from the data sub
 - Supports multiple data items, including paginated `find`.
 
 ```js
-const hooks = require('feathers-hooks-common');
+const { pluck } = require('feathers-hooks-common');
 
 // Only retain the hashed `password` and `salt` field after all method calls
-app.service('users').after(hooks.pluck('password', 'salt'));
+app.service('users').after(pluck('password', 'salt'));
 
 // Only keep the _id for `create`, `update` and `patch`
 app.service('users').before({
-  create: hooks.pluck('_id'),
-  update: hooks.pluck('_id'),
-  patch: hooks.pluck('_id')
+  create: pluck('_id'),
+  update: pluck('_id'),
+  patch: pluck('_id')
 })
 ```
 
@@ -427,12 +462,12 @@ Discard all other fields except for the given fields from the query params.
 - Supports multiple data items, including paginated `find`.
 
 ```js
-const hooks = require('feathers-hooks-common');
+const { pluckQuery } = require('feathers-hooks-common');
 
 // Discard all other fields except for _id from the query
 // for all service methods
 app.service('users').before({
-  all: hooks.pluckQuery('_id')
+  all: pluckQuery('_id')
 });
 ```
 
@@ -737,16 +772,16 @@ Remove the given fields either from the data submitted or from the result. If th
 - Supports multiple data items, including paginated `find`.
 
 ```js
-const hooks = require('feathers-hooks-common');
+const { remove } = require('feathers-hooks-common');
 
 // Remove the hashed `password` and `salt` field after all method calls
-app.service('users').after(hooks.remove('password', 'salt'));
+app.service('users').after(remove('password', 'salt'));
 
 // Remove _id for `create`, `update` and `patch`
 app.service('users').before({
-  create: hooks.remove('_id', 'password'),
-  update: hooks.remove('_id'),
-  patch: hooks.remove('_id')
+  create: remove('_id', 'password'),
+  update: remove('_id'),
+  patch: remove('_id')
 })
 ```
 
@@ -770,11 +805,11 @@ Remove the given fields from the query params.
 - Supports multiple data items, including paginated `find`.
 
 ```js
-const hooks = require('feathers-hooks-common');
+const { removeQuery } = require('feathers-hooks-common');
 
 // Remove _id from the query for all service methods
 app.service('users').before({
-  all: hooks.removeQuery('_id')
+  all: removeQuery('_id')
 });
 ```
 
@@ -925,11 +960,11 @@ Add the fields with the current date-time.
 - Supports multiple data items, including paginated `find`.
 
 ```js
-const hooks = require('feathers-hooks-common');
+const { setCreatedAt } = require('feathers-hooks-common');
 
 // set the `createdAt` field before a user is created
 app.service('users').before({
-  create: [ hooks.setCreatedAt('createdAt') ]
+  create: [ setCreatedAt('createdAt') ]
 });
 ```
 
@@ -964,10 +999,10 @@ provides a normalized `hook.params.query` of
 - Field names support dot notation.
 
 ```js
-const hooks = require('feathers-hooks-common');
+const { setSlug } = require('feathers-hooks-common');
 
 app.service('stores').before({
-  create: [ hooks.setSlug('storeId') ]
+  create: [ setSlug('storeId') ]
 });
 ```
 
@@ -989,11 +1024,11 @@ Add or update the fields with the current date-time.
 - Supports multiple data items, including paginated `find`.
 
 ```js
-const hooks = require('feathers-hooks-common');
+const { setCreatedAt } = require('feathers-hooks-common');
 
 // set the `updatedAt` field before a user is created
 app.service('users').before({
-  create: [ hooks.setCreatedAt('updatedAt') ]
+  create: [ setCreatedAt('updatedAt') ]
 });
 ```
 
@@ -1017,11 +1052,11 @@ but you have historical information which continues to refer to the discontinued
 - Supports multiple data items, including paginated `find`.
 
 ```js
-const hooks = require('feathers-hooks-common');
+const { softDelete } = require('feathers-hooks-common');
 const dept = app.service('departments');
 
 dept.before({
-  all: hooks.softDelete(),
+  all: softDelete(),
 });
 
 // will throw if item is marked deleted.
@@ -1149,7 +1184,7 @@ Call a validation function from a `before` hook. The function may be sync or ret
 > **ProTip:** Wrap your validator in `callbackToPromise` if it uses a callback.
 
 ```javascript
-const callbackToPromise = require('feathers-hooks-common').callbackToPromise;
+const { callbackToPromise, validate } = require('feathers-hooks-common');
 
 // function myCallbackValidator(values, cb) { ... }
 const myValidator = callbackToPromise(myCallbackValidator, 1); // function requires 1 param
@@ -1189,15 +1224,13 @@ A full featured example of such a process appears below. It validates and saniti
 ```javascript
 // file /server/services/users/hooks/index.js
 const auth = require('feathers-authentication').hooks;
-const hooks = require('feathers-hooks-common');
-const callbackToPromise = require('feathers-hooks-common/lib/promisify').callbackToPromise;
+const { callbackToPromise, remove, validate } = require('feathers-hooks-common');
 const validateSchema = require('feathers-hooks-validate-joi');
 
 const clientValidations = require('/common/usersClientValidations');
 const serverValidations = require('/server/validations/usersServerValidations');
 const schemas = require('/server/validations/schemas');
 
-const validate = hooks.validate;
 const serverValidationsSignup = callbackToPromise(serverValidations.signup, 1);
 
 exports.before = {
@@ -1206,7 +1239,7 @@ exports.before = {
     validate(clientValidations.signup), // re-run form sync validation
     validate(values => clientValidations.signupAsync(values, 'someMoreParams')), // re-run form async
     validate(serverValidationsSignup), // run server validation
-    hooks.remove('confirmPassword'),
+    remove('confirmPassword'),
     auth.hashPassword()
   ]
 };
@@ -1359,7 +1392,7 @@ Wrap a function calling a callback into one that returns a Promise.
 - Promise is rejected if the function throws.
 
 ```javascript
-const callbackToPromise = require('feathers-hooks-common/promisify').callbackToPromise;
+const { callbackToPromise } = require('feathers-hooks-common');
 
 function tester(data, a, b, cb) {
   if (data === 3) { throw new Error('error thrown'); }
@@ -1394,7 +1427,7 @@ Restrict the hook to a hook type (before, after) and a set of
 hook methods (find, get, create, update, patch, remove).
 
 ```javascript
-const checkContext = require('feathers-hooks-common/lib/utils').checkContext;
+const { checkContext } = require('feathers-hooks-common');
 
 function myHook(hook) {
   checkContext(hook, 'before', ['create', 'remove']);
@@ -1419,20 +1452,44 @@ __Options:__
 - `label` (*optional*) - The label to identify the hook in error messages, e.g. its name.
 
 
+## Util: deleteByDot
+
+### `deleteByDot(obj, path)` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/common/delete-by-dot.js)
+
+`deleteByDot` deletes a property from an object using dot notation, e.g. `employee.address.city`.
+
+```javascript
+import { deleteByDot } from 'feathers-hooks-common';
+
+const discardPasscode = () => (hook) => {
+  deleteByDot(hook.data, 'security.passcode');
+}
+
+app.service('directories').before = {
+  find: discardPasscode()
+};
+```
+
+__Options:__
+
+- `obj` (*required*) - The object containing the property we want to delete.
+- `path` (*required*) - The path to the data, e.g. `security.passcode`. Array notion is _not_ supported, e.g. `order.lineItems[1].quantity`.
+
+See also getByDot, setByDot.
+
+
 ## Util: getByDot, setByDot
 
 ### `getByDot(obj, path)` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/common/get-by-dot.js)
 
 ### `setByDot(obj, path, value, ifDelete)` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/common/set-by-dot.js)
 
-`getItems` gets a value from an object using dot notation, e.g. `employee.address.city`. It does not differentiate between non-existent paths and a value of `undefined`.
+`getByDot` gets a value from an object using dot notation, e.g. `employee.address.city`. It does not differentiate between non-existent paths and a value of `undefined`.
 
 `setByDot` is the companion to `getByDot`. It sets a value in an object using dot notation.
 
-- Optionally deletes properties in object.
-
 ```javascript
-import { getByDot, setByDot } from 'feathers-hooks-common/lib/utils';
+import { getByDot, setByDot } from 'feathers-hooks-common';
 
 const setHomeCity = () => (hook) => {
   const city = getByDot(hook.data, 'person.address.city');
@@ -1449,14 +1506,11 @@ __Options:__
 - `obj` (*required*) - The object we get data from or set data in.
 - `path` (*required*) - The path to the data, e.g. `person.address.city`. Array notion is _not_ supported, e.g. `order.lineItems[1].quantity`.
 - `value` (*required*) - The value to set the data to.
-- `ifDelete` (*optional, default: `false`) - Delete the property at the end of the path if `value` is `undefined`. Note that
-new empty inner objects will still be created,
-e.g. `setByDot({}, 'a.b.c', undefined, true)` will result in `{a: b: {} }`.
 
 See also deleteByDot.
 
 
-## getItems, replaceItems
+## Util: getItems, replaceItems
 
 ### `getItems(hook)` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/services/get-items.js)
 
@@ -1470,7 +1524,7 @@ See also deleteByDot.
 - Handles paginated and non-paginated results from `find`.
 
 ```javascript
-import { getItems, replaceItems } from 'feathers-hooks-common/lib/utils';
+import { getItems, replaceItems } from 'feathers-hooks-common';
 
 const insertCode = (code) => (hook) {
     const items = getItems(hook);
@@ -1488,7 +1542,7 @@ __Options:__
 - `hook` (*required*) - The hook provided to the hook function.
 - `items` (*required*) - The updated item or array of items.
 
-## promiseToCallback
+## Util: promiseToCallback
 
 ### `promiseToCallback(promise)(callbackFunc)` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/services/promise-to-callback.js)
 
@@ -1497,7 +1551,7 @@ Wrap a Promise into a function that calls a callback.
 - The callback does not run in the Promise's scope. The Promise's `catch` chain is not invoked if the callback throws.
 
 ```javascript
-import { promiseToCallback } from 'feathers-hooks-common/promisify'
+import { promiseToCallback } from 'feathers-hooks-common'
 
 function (cb) {
   const promise = new Promise( ...).then( ... ).catch( ... );
