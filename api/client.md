@@ -27,7 +27,11 @@ This chapter describes how to use Feathers as the client in Node, React Native a
 
 ## Browserify, StealJS
 
-Both, Browserify and StealJS support npm modules and require no additional configuration. 
+Both, Browserify and StealJS support npm modules and require no additional configuration.  If you're using socket.io with StealJS, be sure to import the dist version:
+
+```js
+import io from 'socket.io-client/dist/socket.io'
+```
 
 ## React Native
 
