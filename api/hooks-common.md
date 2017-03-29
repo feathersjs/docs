@@ -15,7 +15,7 @@ $ npm install feathers-hooks-common --save
 
 ## remove
 
-### `remove(... fieldNames)`
+### `remove(... fieldNames)` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/services/remove.js)
 
 Remove the given fields either from the data submitted or from the result. If the data is an array or a paginated `find` result the hook will remove the field(s) for every item.
 
@@ -47,7 +47,7 @@ __Options:__
 
 ## pluck
 
-### `pluck(... fieldNames)`
+### `pluck(... fieldNames)` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/services/pluck.js)
 
 Discard all other fields except for the provided fields either from the data submitted or from the result. If the data is an array or a paginated `find` result the hook will remove the field(s) for every item.
 
@@ -79,9 +79,9 @@ __Options:__
 All other fields will be discarded.
 
 
-### removeQuery
+## removeQuery
 
-`removeQuery(... fieldNames)`
+`removeQuery(... fieldNames)` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/services/remove-query.js)
 
 Remove the given fields from the query params.
 
@@ -107,7 +107,7 @@ __Options:__
 
 ## pluckQuery
 
-`pluckQuery(... fieldNames)`
+`pluckQuery(... fieldNames)` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/services/pluck-query.js)
 
 Discard all other fields except for the given fields from the query params.
 
@@ -134,7 +134,7 @@ __Options:__
 
 ## lowerCase
 
-### `lowerCase(... fieldNames)`
+### `lowerCase(... fieldNames)` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/services/lower-case.js)
 
 Lower cases the given fields either in the data submitted or in the result. If the data is an array or a paginated `find` result the hook will lowercase the field(s) for every item.
 
@@ -159,7 +159,7 @@ __Options:__
 
 ## setCreatedAt
 
-### `setCreatedAt(fieldName = 'createdAt', ... fieldNames)`
+### `setCreatedAt(fieldName = 'createdAt', ... fieldNames)` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/services/set-created-at.js)
 
 Add the fields with the current date-time.
 
@@ -185,7 +185,7 @@ __Options:__
 
 ## setUpdatedAt
 
-### `setUpdatedAt(fieldName = 'updatedAt', ...fieldNames)`
+### `setUpdatedAt(fieldName = 'updatedAt', ...fieldNames)` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/services/set-updated-at.js)
 
 Add or update the fields with the current date-time.
 
@@ -211,7 +211,7 @@ __Options:__
 
 ## traverse
 
-### `traverse(transformer, getObject)`
+### `traverse(transformer, getObject)` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/services/traverse.js)
 
 Traverse and transform objects in place by visiting every node on a recursive walk.
 
@@ -247,7 +247,7 @@ __Options:__
 
 ## iffElse
 
-### `iffElse(predicate, trueHooks, falseHooks)`
+### `iffElse(predicate, trueHooks, falseHooks)` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/common/iff-else.js)
 
 Resolve the predicate to a boolean.
 Run the first set of hooks sequentially if the result is truthy,
@@ -278,7 +278,7 @@ It returns either a boolean or a Promise that evaluates to a boolean
 
 ## iff
 
-### `iff(predicate: boolean|Promise|function, ...hookFuncs: HookFunc[]): HookFunc`
+### `iff(predicate: boolean|Promise|function, ...hookFuncs: HookFunc[]): HookFunc` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/common/iff.js)
 
 Resolve the predicate to a boolean.
 Run the hooks sequentially if the result is truthy.
@@ -317,7 +317,7 @@ They may include other conditional hooks.
 
 ## else
 
-### `iff(...).else(...hookFuncs)`
+### `iff(...).else(...hookFuncs)` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/common/iff.js#L10)
 
 `iff().else()` is similar to `iff` and `iffElse`.
 Its syntax is more suitable for writing nested conditional hooks.
@@ -350,12 +350,12 @@ They may include other conditional hooks.
 
 ## when
 
-An alias for [iff](#iff)
+An alias for [iff](#iff) [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/common/iff.js)
 
 
 ## unless
 
-### `unless(predicate, ...hookFuncs)`
+### `unless(predicate, ...hookFuncs)` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/common/unless.js)
 
 Resolve the predicate to a boolean.
 Run the hooks sequentially if the result is falsey.
@@ -386,7 +386,7 @@ They may include other conditional hook functions.
 
 ## every
 
-### `every(... hookFuncs)`
+### `every(... hookFuncs)` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/common/every.js)
 
 Run hook functions in parallel.
 Return `true` if every hook function returned a truthy value.
@@ -413,7 +413,7 @@ __Options:__
 
 ## some
 
-### `some(... hookFuncs)`
+### `some(... hookFuncs)` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/common/some.js)
 
 Run hook functions in parallel.
 Return `true` if any hook function returned a truthy value.
@@ -439,7 +439,7 @@ __Options:__
 
 ## isNot
 
-### `isNot(predicate)`
+### `isNot(predicate)` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/common/is-not.js)
 
 Negate the `predicate`.
 
@@ -463,7 +463,7 @@ __Options:__
 
 ## isProvider
 
-### `isProvider(provider)`
+### `isProvider(provider)` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/services/is-provider.js)
 
 Check which transport called the service method.
 All providers ([REST](./rest.md), [Socket.io](./socketio.md) and [Primus](./primus.md)) set the `params.provider` property which is what `isProvider` checks for.
@@ -487,28 +487,11 @@ __Options:__
   - `primus` - If the Primus provider.
   - `rest` - If the REST provider.
 - `providers` (*optional*) - Other transports that you want this hook to run for.
-  
-## combine
-
-### `combine(... hookFuncs)`
-
-Sequentially execute multiple hooks.
-`combine` is usually used [within custom hook functions](./utils-hooks.md#combine).
-
-```javascript
-service.before({
-  create: hooks.combine(hook1, hook2, hook3) // same as [hook1, hook2, hook3]
-});
-```
-
-__Options:__
-
-- `hooks` (*optional*) - The hooks to run.
 
 
 ## disableMultiItemChange
 
-### `disableMultiItemChange()`
+### `disableMultiItemChange()` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/services/disable-multi-item-change.js)
 
 Disables update, patch and remove methods from using null as an id, e.g. remove(null).
 A null id affects all the items in the DB, so accidentally using it may have undesirable results.
@@ -524,7 +507,7 @@ app.service('users').before({
 
 ## softDelete
 
-### `softDelete(fieldName = 'deleted')`
+### `softDelete(fieldName = 'deleted')` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/services/soft-delete.js)
 
 Marks items as `{ deleted: true }` instead of physically removing them.
 This is useful when you want to discontinue use of, say, a department,
@@ -554,7 +537,7 @@ __Options:__
 
 ## checkContext
 
-### `checkContext(hook, type, methods, label)`
+### `checkContext(hook, type, methods, label)` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/services/check-context.js)
 
 Restrict the hook to a hook type (before, after) and a set of
 hook methods (find, get, create, update, patch, remove).
@@ -587,7 +570,7 @@ __Options:__
 
 ## combine
 
-### `combine(... hookFuncs)`
+### `combine(... hookFuncs)` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/services/combine.js)
 
 Sequentially execute multiple hooks within a custom hook function.
 
@@ -605,9 +588,9 @@ __Options:__
 
 ## getItems, replaceItems
 
-### `getItems(hook)
+### `getItems(hook)` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/services/get-items.js)
 
-### `replaceItems(hook, items)`
+### `replaceItems(hook, items)` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/services/replace-items.js)
 
 `getItems` gets the data items in a hook. The items may be `hook.data`, `hook.result` or `hook.result.data` depending on where the hook is used, the method its used with and if pagination is used. `undefined`, an object or an array of objects may be returned.
 
@@ -637,9 +620,9 @@ __Options:__
 
 ## getByDot, setByDot
 
-### `getByDot(obj, path)`
+### `getByDot(obj, path)` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/common/get-by-dot.js)
 
-### `setByDot(obj, path, value, ifDelete)`
+### `setByDot(obj, path, value, ifDelete)` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/common/set-by-dot.js)
 
 `getItems` gets a value from an object using dot notation, e.g. `employee.address.city`. It does not differentiate between non-existent paths and a value of `undefined`.
 
@@ -672,7 +655,7 @@ e.g. `setByDot({}, 'a.b.c', undefined, true)` will result in `{a: b: {} }`.
 
 ## validateSchema
 
-### `validateSchema(schema, ajv, options)`
+### `validateSchema(schema, ajv, options)` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/services/validate-schema.js)
 
 Validate an object using [JSON-Schema](http://json-schema.org/) through [AJV](https://github.com/epoberezkin/ajv)
 
@@ -715,7 +698,7 @@ __Options:__
 
 ## validate
 
-### `validate(validator)`
+### `validate(validator)` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/services/validate.js)
 
 Call a validation function from a `before` hook. The function may be sync or return a Promise.
 
@@ -881,7 +864,7 @@ module.exports = {
 
 ## disallow
 
-### `disallow(...providers)`
+### `disallow(...providers)` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/services/disallow.js)
 
 Disallows access to a service method completely or for specific providers. All providers
 (REST, Socket.io and Primus) set the hook.params.provider property, and disallow checks this.
@@ -915,7 +898,7 @@ __Options:__
 
 ## client
 
-### `client(... whitelist)`
+### `client(... whitelist)` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/services/client.js)
 
 A hook for passing params from the client to the server.
 
@@ -955,7 +938,7 @@ Other props are ignored. This is a security feature.
 
 ## setSlug
 
-### `setSlug(slug, fieldName = 'query.' + slug)`
+### `setSlug(slug, fieldName = 'query.' + slug)` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/services/set-slug.js)
 
 A service may have a slug in its URL, e.g. `storeId` in
 `app.use('/stores/:storeId/candies', new Service());`.
@@ -991,7 +974,7 @@ __Options:__
 
 ## debug
 
-### `debug(label)`
+### `debug(label)` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/services/debug.js)
 
 Display current info about the hook to console.
 
@@ -1014,7 +997,7 @@ __Options:__
 
 ## callbackToPromise
 
-### `callbackToPromise(callbackFunc, paramsCount)`
+### `callbackToPromise(callbackFunc, paramsCount)` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/services/callback-to-promise.js)
 
 Wrap a function calling a callback into one that returns a Promise.
 
@@ -1048,7 +1031,7 @@ The wrapped function will always be called with that many params, preventing pot
 
 ## promiseToCallback
 
-### `promiseToCallback(promise)(callbackFunc)`
+### `promiseToCallback(promise)(callbackFunc)` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/services/promise-to-callback.js)
 
 Wrap a Promise into a function that calls a callback.
 
@@ -1072,7 +1055,7 @@ __Options:__
 
 ## populate
 
-### `populate(options: Object): HookFunc`
+### `populate(options: Object): HookFunc` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/services/populate.js)
 
 Populates items *recursively* to any depth. Supports 1:1, 1:n and n:1 relationships.
 
@@ -1350,7 +1333,7 @@ purchaseOrders.after({
 
 ## serialize
 
-### `serialize(schema: Object|Function): HookFunc`
+### `serialize(schema: Object|Function): HookFunc` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/services/serialize.js)
 
 Remove selected information from populated items. Add new computed information.
 Intended for use with the `populate` hook.
@@ -1477,7 +1460,7 @@ employees.after({
 
 ## dePopulate
 
-### `dePopulate()`
+### `dePopulate()` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/services/de-populate.js)
 
 Removes joined and [computed](#added-properties) properties, as well any profile information.
 Populated and serialized items may, after dePopulate, be used in `service.patch(id, items)` calls.
