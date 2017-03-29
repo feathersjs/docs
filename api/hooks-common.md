@@ -13,889 +13,6 @@ $ npm install feathers-hooks-common --save
 > **Note:** Many hooks are just a few lines of code to implement from scratch. If you can't find a hook here but are unsure how to implement it or have an idea for a generally useful hook create a new issue [here](https://github.com/feathersjs/feathers-hooks-common/issues/new).
 
 
-## remove
-
-### `remove(... fieldNames)` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/services/remove.js)
-
-Remove the given fields either from the data submitted or from the result. If the data is an array or a paginated `find` result the hook will remove the field(s) for every item.
-
-- Used as a `before` hook for `create`, `update` or `patch`.
-- Used as an `after` hook.
-- Field names support dot notation e.g. `name.address.city`.
-- Supports multiple data items, including paginated `find`.
-
-```js
-const hooks = require('feathers-hooks-common');
-
-// Remove the hashed `password` and `salt` field after all method calls
-app.service('users').after(hooks.remove('password', 'salt'));
-
-// Remove _id for `create`, `update` and `patch`
-app.service('users').before({
-  create: hooks.remove('_id', 'password'),
-  update: hooks.remove('_id'),
-  patch: hooks.remove('_id')
-})
-```
-
-> **ProTip:** This hook will only fire when `params.provider` has a value, i.e. when it is an external request over REST or Sockets.
-
-__Options:__
-
-- `fieldNames` (*required*) - One or more fields you want to remove from the object(s).
-
-
-## pluck
-
-### `pluck(... fieldNames)` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/services/pluck.js)
-
-Discard all other fields except for the provided fields either from the data submitted or from the result. If the data is an array or a paginated `find` result the hook will remove the field(s) for every item.
-
-- Used as a `before` hook for `create`, `update` or `patch`.
-- Used as an `after` hook.
-- Field names support dot notation.
-- Supports multiple data items, including paginated `find`.
-
-```js
-const hooks = require('feathers-hooks-common');
-
-// Only retain the hashed `password` and `salt` field after all method calls
-app.service('users').after(hooks.pluck('password', 'salt'));
-
-// Only keep the _id for `create`, `update` and `patch`
-app.service('users').before({
-  create: hooks.pluck('_id'),
-  update: hooks.pluck('_id'),
-  patch: hooks.pluck('_id')
-})
-```
-
-> **ProTip:** This hook will only fire when `params.provider` has a value, i.e. when it is an external request over REST or Sockets.
-
-__Options:__
-
-- `fieldNames` (*required*) - One or more fields that you want to retain from the object(s).
-
-All other fields will be discarded.
-
-
-## removeQuery
-
-`removeQuery(... fieldNames)` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/services/remove-query.js)
-
-Remove the given fields from the query params.
-
-- Used as a `before` hook.
-- Field names support dot notation
-- Supports multiple data items, including paginated `find`.
-
-```js
-const hooks = require('feathers-hooks-common');
-
-// Remove _id from the query for all service methods
-app.service('users').before({
-  all: hooks.removeQuery('_id')
-});
-```
-
-> **ProTip:** This hook will only fire when `params.provider` has a value, i.e. when it is an external request over REST or Sockets.
-
-__Options:__
-
-- `fieldNames` (*optional*) - The fields that you want to remove from the query object.
-
-
-## pluckQuery
-
-`pluckQuery(... fieldNames)` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/services/pluck-query.js)
-
-Discard all other fields except for the given fields from the query params.
-
-- Used as a `before` hook.
-- Field names support dot notation.
-- Supports multiple data items, including paginated `find`.
-
-```js
-const hooks = require('feathers-hooks-common');
-
-// Discard all other fields except for _id from the query
-// for all service methods
-app.service('users').before({
-  all: hooks.pluckQuery('_id')
-});
-```
-
-> **ProTip:** This hook will only fire when `params.provider` has a value, i.e. when it is an external request over REST or Sockets.
-
-__Options:__
-
-- `fieldNames` (*optional*) - The fields that you want to retain from the query object. All other fields will be discarded.
-
-
-## lowerCase
-
-### `lowerCase(... fieldNames)` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/services/lower-case.js)
-
-Lower cases the given fields either in the data submitted or in the result. If the data is an array or a paginated `find` result the hook will lowercase the field(s) for every item.
-
-- Used as a `before` hook for `create`, `update` or `patch`.
-- Used as an `after` hook.
-- Field names support dot notation.
-- Supports multiple data items, including paginated `find`.
-
-```js
-const hooks = require('feathers-hooks-common');
-
-// lowercase the `email` and `password` field before a user is created
-app.service('users').before({
-  create: hooks.lowerCase('email', 'username')
-});
-```
-
-__Options:__
-
-- `fieldNames` (*required*) - One or more fields that you want to lowercase from the retrieved object(s).
-
-
-## setCreatedAt
-
-### `setCreatedAt(fieldName = 'createdAt', ... fieldNames)` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/services/set-created-at.js)
-
-Add the fields with the current date-time.
-
-- Used as a `before` hook for `create`, `update` or `patch`.
-- Used as an `after` hook.
-- Field names support dot notation.
-- Supports multiple data items, including paginated `find`.
-
-```js
-const hooks = require('feathers-hooks-common');
-
-// set the `createdAt` field before a user is created
-app.service('users').before({
-  create: [ hooks.setCreatedAt('createdAt') ]
-});
-```
-
-__Options:__
-
-- `fieldName` (*optional*, default: `createdAt`) - The field that you want to add with the current date-time to the retrieved object(s).
-- `fieldNames` (*optional*) - Other fields to add with the current date-time.
-
-
-## setUpdatedAt
-
-### `setUpdatedAt(fieldName = 'updatedAt', ...fieldNames)` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/services/set-updated-at.js)
-
-Add or update the fields with the current date-time.
-
-- Used as a `before` hook for `create`, `update` or `patch`.
-- Used as an `after` hook.
-- Field names support dot notation.
-- Supports multiple data items, including paginated `find`.
-
-```js
-const hooks = require('feathers-hooks-common');
-
-// set the `updatedAt` field before a user is created
-app.service('users').before({
-  create: [ hooks.setCreatedAt('updatedAt') ]
-});
-```
-
-__Options:__
-
-- `fieldName` (*optional*, default: `updatedAt`) - The fields that you want to add or update in the retrieved object(s).
-- `fieldNames` (*optional*) - Other fields to add or update with the current date-time.
-
-
-## traverse
-
-### `traverse(transformer, getObject)` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/services/traverse.js)
-
-Traverse and transform objects in place by visiting every node on a recursive walk.
-
-- Used as a `before` or `after` hook.
-- Supports multiple data items, including paginated `find`.
-- Any object in the hook may be traversed, **including the query object**.
-- `transformer` has access to powerful methods and context.
-
-```js
-// Trim strings
-const trimmer = function (node) {
-  if (typeof node === 'string') { this.update(node.trim()); }
-};
-service.before({ create: traverse(trimmer) });
-```
-
-```javascript
-// REST HTTP request may use the string 'null' in its query string.
-// Replace these strings with the value null.
-const nuller = function (node) {
-  if (node === 'null') { this.update(null); }
-};
-service.before({ find: traverse(nuller, hook => hook.params.query) });
-```
-
-> **ProTip:** GitHub's [substack/js-traverse](https://github.com/substack/js-traverse) documents the extensive methods and context available to the transformer function.
-
-__Options:__
-
-- `transformer` (*required*) - Called for every node and may change it in place.
-- `getObject` (*optional*, defaults to `hook.data` or `hook.result`) -  Function with signature (hook) which returns the object to traverse.
-
-
-## iffElse
-
-### `iffElse(predicate, trueHooks, falseHooks)` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/common/iff-else.js)
-
-Resolve the predicate to a boolean.
-Run the first set of hooks sequentially if the result is truthy,
-the second set otherwise.
-
-- Used as a `before` or `after` hook.
-- Predicate may be a sync or async function.
-- Hooks to run may be sync, Promises or callbacks.
-- `feathers-hooks` catches any errors thrown in the predicate or hook.
-
-```javascript
-const { iffElse, populate, serialize } = require('feathers-hooks-common');
-app.service('purchaseOrders').after({
-  create: iffElse(() => { ... },
-    [populate(poAccting), serialize( ... )],
-    [populate(poReceiving), serialize( ... )]
-  )
-});
-```
-
-__Options:__
-
-- `predicate` (*required*) - Determines if hookFuncs should be run or not.
-If a function, `predicate` is called with the hook as its param.
-It returns either a boolean or a Promise that evaluates to a boolean
-- `trueHooks` (*optional*) - Zero or more hook functions run when `predicate` is truthy.
-- `falseHooks` (*optional*) - Zero or more hook functions run when `predicate` is false.
-
-## iff
-
-### `iff(predicate: boolean|Promise|function, ...hookFuncs: HookFunc[]): HookFunc` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/common/iff.js)
-
-Resolve the predicate to a boolean.
-Run the hooks sequentially if the result is truthy.
-
-- Used as a `before` or `after` hook.
-- Predicate may be a sync or async function.
-- Hooks to run may be sync, Promises or callbacks.
-- `feathers-hooks` catches any errors thrown in the predicate or hook.
-
-```javascript
-const hooks = require('feathers-hooks-common');
-const isNotAdmin = adminRole => hook => hook.params.user.roles.indexOf(adminRole || 'admin') === -1;
-
-app.service('workOrders').after({
-  // async predicate and hook
-  create: hooks.iff(
-    () => new Promise((resolve, reject) => { ... }),
-    hooks.populate('user', { field: 'authorisedByUserId', service: 'users' })
-  )
-});
-
-app.service('workOrders').after({
-  // sync predicate and hook
-  find: [ hooks.iff(isNotAdmin(), hooks.remove('budget')) ]
-});
-```
-
-__Options:__
-
-- `predicate` (*required*) - Determines if hookFuncs should be run or not.
-If a function, `predicate` is called with the hook as its param.
-It returns either a boolean or a Promise that evaluates to a boolean
-- `hookFuncs` (*optional*) - Zero or more hook functions.
-They may include other conditional hooks.
-
-
-## else
-
-### `iff(...).else(...hookFuncs)` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/common/iff.js#L10)
-
-`iff().else()` is similar to `iff` and `iffElse`.
-Its syntax is more suitable for writing nested conditional hooks.
-If the predicate in the `iff()` is falsey, run the hooks in `else()` sequentially.
-
-- Used as a `before` or `after` hook.
-- Hooks to run may be sync, Promises or callbacks.
-- `feathers-hooks` catches any errors thrown in the predicate or hook.
-
-```javascript
-service.before({
-  create:
-    hooks.iff(isServer,
-      hookA,
-      hooks.iff(isProvider('rest'), hook1, hook2, hook3)
-        .else(hook4, hook5),
-      hookB
-    )
-      .else(
-        hooks.iff(hook => hook.path === 'users', hook6, hook7)
-      )
-});
-```
-
-__Options:__
-
-- `hookFuncs` (*optional*) - Zero or more hook functions.
-They may include other conditional hooks.
-
-
-## when
-
-An alias for [iff](#iff) [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/common/iff.js)
-
-
-## unless
-
-### `unless(predicate, ...hookFuncs)` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/common/unless.js)
-
-Resolve the predicate to a boolean.
-Run the hooks sequentially if the result is falsey.
-
-- Used as a `before` or `after` hook.
-- Predicate may be a sync or async function.
-- Hooks to run may be sync, Promises or callbacks.
-- `feathers-hooks` catches any errors thrown in the predicate or hook.
-
-```javascript
-service.before({
-  create:
-    unless(isServer,
-      hookA,
-      unless(isProvider('rest'), hook1, hook2, hook3),
-      hookB
-    )
-});
-```
-
-__Options:__
-
-- `predicate` (*required*) - Determines if hookFuncs should be run or not.
-If a function, `predicate` is called with the hook as its param.
-It returns either a boolean or a Promise that evaluates to a boolean.
-- `hookFuncs` (*optional*) - Zero or more hook functions.
-They may include other conditional hook functions.
-
-## every
-
-### `every(... hookFuncs)` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/common/every.js)
-
-Run hook functions in parallel.
-Return `true` if every hook function returned a truthy value.
-
-- Used as a predicate function with [conditional hooks](#conditional-hooks).
-- The current `hook` is passed to all the hook functions, and they are run in parallel.
-- Hooks to run may be sync or Promises only.
-- `feathers-hooks` catches any errors thrown in the predicate.
-
-```javascript
-service.before({
-  create: hooks.iff(hooks.every(hook1, hook2, ...), hookA, hookB, ...)
-});
-```
-```javascript
-hooks.every(hook1, hook2, ...).call(this, currentHook)
-  .then(bool => { ... });
-```
-
-__Options:__
-
-- `hookFuncs` (*required*) Functions which take the current hook as a param and return a boolean result.
-
-
-## some
-
-### `some(... hookFuncs)` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/common/some.js)
-
-Run hook functions in parallel.
-Return `true` if any hook function returned a truthy value.
-
-- Used as a predicate function with [conditional hooks](#conditional-hooks).
-- The current `hook` is passed to all the hook functions, and they are run in parallel.
-- Hooks to run may be sync or Promises only.
-- `feathers-hooks` catches any errors thrown in the predicate.
-
-```javascript
-service.before({
-  create: hooks.iff(hooks.some(hook1, hook2, ...), hookA, hookB, ...)
-});
-```
-```javascript
-hooks.some(hook1, hook2, ...).call(this, currentHook)
-  .then(bool => { ... });
-```
-
-__Options:__
-
-- `hookFuncs` (*required*) Functions which take the current hook as a param and return a boolean result.
-
-## isNot
-
-### `isNot(predicate)` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/common/is-not.js)
-
-Negate the `predicate`.
-
-- Used as a predicate with [conditional hooks](#conditional-hooks).
-- Predicate may be a sync or async function.
-- `feathers-hooks` catches any errors thrown in the predicate.
-
-```javascript
-import hooks, { iff, isNot, isProvider } from 'feathers-hooks-common';
-const isRequestor = () => hook => new Promise(resolve, reject) => ... );
-
-app.service('workOrders').after({
-  iff(isNot(isRequestor()), hooks.remove( ... ))
-});
-```
-
-__Options:__
-
-- `predicate` (*required*) - A function which returns either a boolean or a Promise that resolves to a boolean.
-
-
-## isProvider
-
-### `isProvider(provider)` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/services/is-provider.js)
-
-Check which transport called the service method.
-All providers ([REST](./rest.md), [Socket.io](./socketio.md) and [Primus](./primus.md)) set the `params.provider` property which is what `isProvider` checks for.
-
- - Used as a predicate function with [conditional hooks](#conditional-hooks).
-
-```javascript
-import hooks, { iff, isProvider } from 'feathers-hooks-common';
-
-app.service('users').after({
-  iff(isProvider('external'), hooks.remove( ... ))
-});
-```
-
-__Options:__
-
-- `provider` (*required*) - The transport that you want this hook to run for. Options are:
-  - `server` - Run the hook if the server called the service method.
-  - `external` - Run the hook if any transport other than the server called the service method.
-  - `socketio` - Run the hook if the Socket.IO provider called the service method.
-  - `primus` - If the Primus provider.
-  - `rest` - If the REST provider.
-- `providers` (*optional*) - Other transports that you want this hook to run for.
-
-
-## disableMultiItemChange
-
-### `disableMultiItemChange()` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/services/disable-multi-item-change.js)
-
-Disables update, patch and remove methods from using null as an id, e.g. remove(null).
-A null id affects all the items in the DB, so accidentally using it may have undesirable results.
-
-- Used as a `before` hook.
-
-```js
-app.service('users').before({
-  all: hooks.disableMultiItemChange(),
-});
-```
-
-
-## softDelete
-
-### `softDelete(fieldName = 'deleted')` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/services/soft-delete.js)
-
-Marks items as `{ deleted: true }` instead of physically removing them.
-This is useful when you want to discontinue use of, say, a department,
-but you have historical information which continues to refer to the discontinued department.
-
-- Used as a `before.all` hook to handle all service methods.
-- Supports multiple data items, including paginated `find`.
-
-```js
-const hooks = require('feathers-hooks-common');
-const dept = app.service('departments');
-
-dept.before({
-  all: hooks.softDelete(),
-});
-
-// will throw if item is marked deleted.
-dept.get(0).then()
-
-// methods can be run avoiding softDelete handling
-dept.get(0, { query: { $disableSoftDelete: true }}).then()
-```
-__Options:__
-
-- `fieldName` (*optional*, default: `deleted`) - The name of the field holding the deleted flag.
-
-
-## checkContext
-
-### `checkContext(hook, type, methods, label)` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/services/check-context.js)
-
-Restrict the hook to a hook type (before, after) and a set of
-hook methods (find, get, create, update, patch, remove).
-
-```javascript
-const checkContext = require('feathers-hooks-common/lib/utils').checkContext;
-
-function myHook(hook) {
-  checkContext(hook, 'before', ['create', 'remove']);
-  ...
-}
-
-app.service('users').after({
-  create: [ myHook ] // throws
-});
-
-// checkContext(hook, 'before', ['update', 'patch'], 'hookName');
-// checkContext(hook, null, ['update', 'patch']);
-// checkContext(hook, 'before', null, 'hookName');
-// checkContext(hook, 'before');
-```
-
-__Options:__
-
-- `hook` (*required*) - The hook provided to the hook function.
-- `type` (*optional*) - The hook may be run in `before` or `after`. `null` allows the hook to be run in either.
-- `methods` (*optional*) - The hook may be run for these methods.
-- `label` (*optional*) - The label to identify the hook in error messages, e.g. its name.
-
-
-## combine
-
-### `combine(... hookFuncs)` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/services/combine.js)
-
-Sequentially execute multiple hooks within a custom hook function.
-
-```javascript
-function (hook) { // an arrow func cannot be used because we need 'this'
-  // ...
-  hooks.combine(hook1, hook2, hook3).call(this, hook)
-    .then(hook => {});
-}
-```
-
-__Options:__
-
-- `hooks` (*optional*) - The hooks to run.
-
-## getItems, replaceItems
-
-### `getItems(hook)` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/services/get-items.js)
-
-### `replaceItems(hook, items)` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/services/replace-items.js)
-
-`getItems` gets the data items in a hook. The items may be `hook.data`, `hook.result` or `hook.result.data` depending on where the hook is used, the method its used with and if pagination is used. `undefined`, an object or an array of objects may be returned.
-
-`replaceItems` is the companion to `getItems`. It updates the data items in the hook.
-
-- Handles before and after hooks.
-- Handles paginated and non-paginated results from `find`.
-
-```javascript
-import { getItems, replaceItems } from 'feathers-hooks-common/lib/utils';
-
-const insertCode = (code) => (hook) {
-    const items = getItems(hook);
-    !Array.isArray(items) ? items.code = code : (items.forEach(item => { item.code = code; }));
-    replaceItems(hook, items);
-  }
-
-app.service('messages').before = { 
-  create: insertCode('a')
-};
-```
-
-__Options:__
-
-- `hook` (*required*) - The hook provided to the hook function.
-- `items` (*required*) - The updated item or array of items.
-
-## getByDot, setByDot
-
-### `getByDot(obj, path)` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/common/get-by-dot.js)
-
-### `setByDot(obj, path, value, ifDelete)` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/common/set-by-dot.js)
-
-`getItems` gets a value from an object using dot notation, e.g. `employee.address.city`. It does not differentiate between non-existent paths and a value of `undefined`.
-
-`setByDot` is the companion to `getByDot`. It sets a value in an object using dot notation.
-
-- Optionally deletes properties in object.
-
-```javascript
-import { getByDot, setByDot } from 'feathers-hooks-common/lib/utils';
-
-const setHomeCity = () => (hook) => {
-  const city = getByDot(hook.data, 'person.address.city');
-  setByDot(hook, 'data.person.home.city', city);
-}
-
-app.service('directories').before = {
-  create: setHomeCity()
-};
-```
-
-__Options:__
-
-- `obj` (*required*) - The object we get data from or set data in.
-- `path` (*required*) - The path to the data, e.g. `person.address.city`. Array notion is _not_ supported, e.g. `order.lineItems[1].quantity`.
-- `value` (*required*) - The value to set the data to.
-- `ifDelete` (*optional, default: `false`) - Delete the property at the end of the path if `value` is `undefined`. Note that
-new empty inner objects will still be created,
-e.g. `setByDot({}, 'a.b.c', undefined, true)` will result in `{a: b: {} }`.
-
-
-## validateSchema
-
-### `validateSchema(schema, ajv, options)` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/services/validate-schema.js)
-
-Validate an object using [JSON-Schema](http://json-schema.org/) through [AJV](https://github.com/epoberezkin/ajv)
-
-> **ProTip** There are some
-[good tutorials](//code.tutsplus.com/tutorials/validating-data-with-json-schema-part-1--cms-25343)
-on using JSON-Schema with [ajv](https://github.com/epoberezkin/ajv).
-
-- Used as a `before` or `after` hook.
-- The hook will throw if the data does not match the JSON-Schema.
-`error.errors` will, by default, contain an array of error messages.
-
-> **ProTip** You may customize the error message format with a custom formatting function.
-You could, for example, return `{ name1: message, name2: message }`
-which could be more suitable for a UI.
-
-```javascript
-const ajv = require('ajv');
-const createSchema = { /* JSON-Schema */ };
-module.before({
-  create: validateSchema(createSchema, ajv)
-});
-```
-
-__Options:__
-
-- `schema` (*required*) - The JSON-Schema.
-- `ajv` (*required*) - The `ajv` validator.
-- `options` (*optional*) - Options.
-    - Any `ajv` options.
-    - `addNewError` (*optional*) - Custom message formatter.
-    Its a reducing function which works similarly to `Array.reduce()`.
-    Its signature is
-    `{ currentFormattedMessages: any, ajvError: AjvError, itemsLen: number, index: number }: newFormattedMessages`
-        - `currentFormattedMessages` - Formatted messages so far. Initially `null`.
-        - `ajvError` - [ajv error](https://github.com/epoberezkin/ajv#error-objects).
-        - `itemsLen` - How many data items there are. 1-based.
-        - `index` - Which item this is. 0-based.
-        - `newFormattedMessages` - The function returns the updated formatted messages.
-
-
-## validate
-
-### `validate(validator)` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/services/validate.js)
-
-Call a validation function from a `before` hook. The function may be sync or return a Promise.
-
-- Used as a `before` hook for `create`, `update` or `patch`.
-
-> **ProTip:** If you have a different signature for the validator then pass a wrapper as the validator e.g. `(values) => myValidator(..., values, ...)`.
-
-<!-- -->
-
-> **ProTip:** Wrap your validator in `callbackToPromise` if it uses a callback.
-
-```javascript
-const callbackToPromise = require('feathers-hooks-common').callbackToPromise;
-
-// function myCallbackValidator(values, cb) { ... }
-const myValidator = callbackToPromise(myCallbackValidator, 1); // function requires 1 param
-app.service('users').before({ create: validate(myValidator) });
-```
-   
-__Options:__
-
-- `validator` (*required*) - Validation function with signature `function validator(formValues, hook)`.
-
-Sync functions return either an error object like `{ fieldName1: 'message', ... }` or null.
-Validate will throw on an error object with `throw new errors.BadRequest({ errors: errorObject });`.
-
-Promise functions should throw on an error or reject with
-`new errors.BadRequest('Error message', { errors: { fieldName1: 'message', ... } });`
-Their `.then` returns either sanitized values to replace `hook.data`, or null.
-
-#### Example
-
-Comprehensive validation may include the following:
-
-- Object schema validation. Checking the item object contains the expected properties with values in the expected format. The values might get sanitized. Knowing the item is well formed makes further validation simpler.
-- Re-running any validation supposedly already done on the front-end. It would an asset if the server can re-run the same code the front-end used.
-- Performing any validation and sanitization unique to the server.
-
-A full featured example of such a process appears below. It validates and sanitizes a new user before adding the user to the database.
-
-- The form expects to be notified of errors in the format `{ email: 'Invalid email.', password: 'Password must be at least 8 characters.' }`.
-- The form calls the server for async checking of selected fields when control leaves those fields. This for example could check that an email address is not already used by another user.
-- The form does local sync validation when the form is submitted.
-- The code performing the validations on the front-end is also used by the server.
-- The server performs schema validation using Walmart's [Joi](https://github.com/hapijs/joi).
-- The server does further validation and sanitization.
-
-#### Validation using Validate
-
-```javascript
-// file /server/services/users/hooks/index.js
-const auth = require('feathers-authentication').hooks;
-const hooks = require('feathers-hooks-common');
-const callbackToPromise = require('feathers-hooks-common/lib/promisify').callbackToPromise;
-const validateSchema = require('feathers-hooks-validate-joi');
-
-const clientValidations = require('/common/usersClientValidations');
-const serverValidations = require('/server/validations/usersServerValidations');
-const schemas = require('/server/validations/schemas');
-
-const validate = hooks.validate;
-const serverValidationsSignup = callbackToPromise(serverValidations.signup, 1);
-
-exports.before = {
-  create: [
-    validateSchema.form(schemas.signup, schemas.options), // schema validation
-    validate(clientValidations.signup), // re-run form sync validation
-    validate(values => clientValidations.signupAsync(values, 'someMoreParams')), // re-run form async
-    validate(serverValidationsSignup), // run server validation
-    hooks.remove('confirmPassword'),
-    auth.hashPassword()
-  ]
-};
-```
-
-#### Validation routines for front and back-end.
-
-Validations used on front-end. They are re-run by the server.
-
-```javascript
-// file /common/usersClientValidations
-// Validations for front-end. Also re-run on server.
-const clientValidations = {};
-
-// sync validation of signup form on form submit
-clientValidations.signup = values => {
-  const errors = {};
-
-  checkName(values.name, errors);
-  checkUsername(values.username, errors);
-  checkEmail(values.email, errors);
-  checkPassword(values.password, errors);
-  checkConfirmPassword(values.password, values.confirmPassword, errors);
-
-  return errors;
-};
-
-// async validation on exit from some fields on form
-clientValidations.signupAsync = values =>
-  new Promise((resolve, reject) => {
-    const errs = {};
-
-    // set a dummy error
-    errs.email = 'Already taken.';
-
-    if (!Object.keys(errs).length) {
-      resolve(null); // 'null' as we did not sanitize 'values'
-    }
-    reject(new errors.BadRequest('Values already taken.', { errors: errs }));
-  });
-
-module.exports = clientValidations;
-
-function checkName(name, errors, fieldName = 'name') {
-  if (!/^[\\sa-zA-Z]{8,30}$/.test((name || '').trim())) {
-    errors[fieldName] = 'Name must be 8 or more letters or spaces.';
-  }
-}
-```
-
-Schema definitions used by the server.
-
-```javascript
-// file /server/validations/schemas
-const Joi = require('joi');
-
-const username = Joi.string().trim().alphanum().min(5).max(30).required();
-const password = Joi.string().trim().regex(/^[\sa-zA-Z0-9]+$/, 'letters, numbers, spaces')
-  .min(8).max(30).required();
-const email = Joi.string().trim().email().required();
-
-module.exports = {
-  options: { abortEarly: false, convert: true, allowUnknown: false, stripUnknown: true },
-  signup: Joi.object().keys({
-    name: Joi.string().trim().min(8).max(30).required(),
-    username,
-    password,
-    confirmPassword: password.label('Confirm password'),
-    email
-  })
-};
-```
-
-Validations run by the server.
-
-```javascript
-// file /server/validations/usersServerValidations
-// Validations on server. A callback function is used to show how the hook handles it.
-module.exports = {
-  signup: (data, cb) => {
-    const formErrors = {};
-    const sanitized = {};
-
-    Object.keys(data).forEach(key => {
-      sanitized[key] = (data[key] || '').trim();
-    });
-
-    cb(Object.keys(formErrors).length > 0 ? formErrors : null, sanitized);
-  }
-};
-```
-
-
-## disallow
-
-### `disallow(...providers)` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/services/disallow.js)
-
-Disallows access to a service method completely or for specific providers. All providers
-(REST, Socket.io and Primus) set the hook.params.provider property, and disallow checks this.
-
-- Used as a `before` hook.
-
-```js
-app.service('users').before({
-  // Users can not be created by external access
-  create: hooks.disallow('external'),
-  // A user can not be deleted through the REST provider
-  remove: hooks.disallow('rest'),
-  // disallow calling `update` completely (e.g. to allow only `patch`)
-  update: hooks.disallow(),
-  // disallow the remove hook if the user is not an admin
-  remove: hooks.when(hook => !hook.params.user.isAdmin, hooks.disallow())
-});
-```
-
-> **ProTip** Service methods that are not implemented do not need to be disallowed.
-
-__Options:__
-
-- providers (*optional*, default: disallows everything) - The transports that you want to disallow this service method for. Options are:
-    - `socketio` - will disallow the method for the Socket.IO provider
-    - `primus` - will disallow the method for the Primus provider
-    - `rest` - will disallow the method for the REST provider
-    - `external` - will disallow access from all providers other than the server.
-    - `server` - will disallow access for the server
-
-
 ## client
 
 ### `client(... whitelist)` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/services/client.js)
@@ -936,40 +53,23 @@ Other props are ignored. This is a security feature.
 > **ProTip** You can use the same technique for service calls made on the server.
 
 
-## setSlug
+## combine
 
-### `setSlug(slug, fieldName = 'query.' + slug)` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/services/set-slug.js)
+### `combine(... hookFuncs)` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/services/combine.js)
 
-A service may have a slug in its URL, e.g. `storeId` in
-`app.use('/stores/:storeId/candies', new Service());`.
-The service gets slightly different values depending on the transport used by the client.
+Sequentially execute multiple hooks within a custom hook function.
 
-| transport | `hook.data.storeId` | `hook.params.query` | code run on client |
-| -- | -- | -- | -- |
-| socketio | `undefined` | `{ size: 'large', storeId: '123' }` | `candies.create({ name: 'Gummi', qty: 100 }, { query: { size: 'large', storeId: '123' } })` |
-| rest | `:storeId` | ... same as above | ... same as above |
-| raw HTTP | `123` | `{ size: 'large' }` | `fetch('/stores/123/candies?size=large', ..` |
-
-This hook normalizes the difference between the transports. A hook of
-`all: [ hooks.setSlug('storeId') ]`
-provides a normalized `hook.params.query` of
-`{ size: 'large', storeId: '123' }` for the above cases.
-
-- Used as a `before` hook.
-- Field names support dot notation.
-
-```js
-const hooks = require('feathers-hooks-common');
-
-app.service('stores').before({
-  create: [ hooks.setSlug('storeId') ]
-});
+```javascript
+function (hook) { // an arrow func cannot be used because we need 'this'
+  // ...
+  hooks.combine(hook1, hook2, hook3).call(this, hook)
+    .then(hook => {});
+}
 ```
 
 __Options:__
 
-- `slug` (*required*) - The slug as it appears in the route, e.g. `storeId` for `/stores/:storeId/candies` .
-- `fieldName` (*optional*, default: `query[slugId]`) - The field to contain the slug value.
+- `hooks` (*optional*) - The hooks to run.
 
 
 ## debug
@@ -995,62 +95,353 @@ __Options:__
 
 - `label` (*optional*) - Label to identify the debug listing.
 
-## callbackToPromise
 
-### `callbackToPromise(callbackFunc, paramsCount)` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/services/callback-to-promise.js)
+## dePopulate
 
-Wrap a function calling a callback into one that returns a Promise.
+### `dePopulate()` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/services/de-populate.js)
 
-- Promise is rejected if the function throws.
+Removes joined and [computed](#added-properties) properties, as well any profile information.
+Populated and serialized items may, after dePopulate, be used in `service.patch(id, items)` calls.
+
+- Used as a **before** or **after** hook on any service method.
+- Supports multiple result items, including paginated `find`.
+- Supports an array of keys in `field`.
+
+See also populate, serialize.
+
+
+## disallow
+
+### `disallow(...providers)` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/services/disallow.js)
+
+Disallows access to a service method completely or for specific providers. All providers
+(REST, Socket.io and Primus) set the hook.params.provider property, and disallow checks this.
+
+- Used as a `before` hook.
+
+```js
+app.service('users').before({
+  // Users can not be created by external access
+  create: hooks.disallow('external'),
+  // A user can not be deleted through the REST provider
+  remove: hooks.disallow('rest'),
+  // disallow calling `update` completely (e.g. to allow only `patch`)
+  update: hooks.disallow(),
+  // disallow the remove hook if the user is not an admin
+  remove: hooks.when(hook => !hook.params.user.isAdmin, hooks.disallow())
+});
+```
+
+> **ProTip** Service methods that are not implemented do not need to be disallowed.
+
+__Options:__
+
+- providers (*optional*, default: disallows everything) - The transports that you want to disallow this service method for. Options are:
+    - `socketio` - will disallow the method for the Socket.IO provider
+    - `primus` - will disallow the method for the Primus provider
+    - `rest` - will disallow the method for the REST provider
+    - `external` - will disallow access from all providers other than the server.
+    - `server` - will disallow access for the server
+
+
+## disableMultiItemChange
+
+### `disableMultiItemChange()` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/services/disable-multi-item-change.js)
+
+Disables update, patch and remove methods from using null as an id, e.g. remove(null).
+A null id affects all the items in the DB, so accidentally using it may have undesirable results.
+
+- Used as a `before` hook.
+
+```js
+app.service('users').before({
+  all: hooks.disableMultiItemChange(),
+});
+```
+
+
+## else
+
+### `iff(...).else(...hookFuncs)` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/common/iff.js#L10)
+
+`iff().else()` is similar to `iff` and `iffElse`.
+Its syntax is more suitable for writing nested conditional hooks.
+If the predicate in the `iff()` is falsey, run the hooks in `else()` sequentially.
+
+- Used as a `before` or `after` hook.
+- Hooks to run may be sync, Promises or callbacks.
+- `feathers-hooks` catches any errors thrown in the predicate or hook.
 
 ```javascript
-const callbackToPromise = require('feathers-hooks-common/promisify').callbackToPromise;
-
-function tester(data, a, b, cb) {
-  if (data === 3) { throw new Error('error thrown'); }
-  cb(data === 1 ? null : 'bad', data);
-} 
-const wrappedTester = callbackToPromise(tester, 3); // because func call requires 3 params
-
-wrappedTester(1, 2, 3); // tester(1, 2, 3, wrapperCb)
-wrappedTester(1, 2); // tester(1, 2, undefined, wrapperCb)
-wrappedTester(); // tester(undefined, undefined undefined, wrapperCb)
-wrappedTester(1, 2, 3, 4, 5); // tester(1, 2, 3, wrapperCb)
-
-wrappedTester(1, 2, 3).then( ... )
-  .catch(err => { console.log(err instanceof Error ? err.message : err); });
+service.before({
+  create:
+    hooks.iff(isServer,
+      hookA,
+      hooks.iff(isProvider('rest'), hook1, hook2, hook3)
+        .else(hook4, hook5),
+      hookB
+    )
+      .else(
+        hooks.iff(hook => hook.path === 'users', hook6, hook7)
+      )
+});
 ```
 
 __Options:__
 
-- `callbackFunc` (*required*) - A function which uses a callback as its last param.
-- `paramsCount` (*required*) - The number of parameters `callbackFunc` expects. This count does not include the callback param itself.
+- `hookFuncs` (*optional*) - Zero or more hook functions.
+They may include other conditional hooks.
 
-The wrapped function will always be called with that many params, preventing potential bugs.
+See also iff, iffElse, when, unless, isNot, isProvider.
 
 
-## promiseToCallback
+## every
 
-### `promiseToCallback(promise)(callbackFunc)` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/services/promise-to-callback.js)
+### `every(... hookFuncs)` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/common/every.js)
 
-Wrap a Promise into a function that calls a callback.
+Run hook functions in parallel.
+Return `true` if every hook function returned a truthy value.
 
-- The callback does not run in the Promise's scope. The Promise's `catch` chain is not invoked if the callback throws.
+- Used as a predicate function with [conditional hooks](#conditional-hooks).
+- The current `hook` is passed to all the hook functions, and they are run in parallel.
+- Hooks to run may be sync or Promises only.
+- `feathers-hooks` catches any errors thrown in the predicate.
 
 ```javascript
-import { promiseToCallback } from 'feathers-hooks-common/promisify'
-
-function (cb) {
-  const promise = new Promise( ...).then( ... ).catch( ... );
-  ...
-  promiseToCallback(promise)(cb);
-  promise.then( ... ); // this is still possible
-}
+service.before({
+  create: hooks.iff(hooks.every(hook1, hook2, ...), hookA, hookB, ...)
+});
+```
+```javascript
+hooks.every(hook1, hook2, ...).call(this, currentHook)
+  .then(bool => { ... });
 ```
 
 __Options:__
 
-- `promise` (*required*) - A function returning a promise.
+- `hookFuncs` (*required*) Functions which take the current hook as a param and return a boolean result.
+
+See also some.
+
+
+## iff
+
+### `iff(predicate: boolean|Promise|function, ...hookFuncs: HookFunc[]): HookFunc` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/common/iff.js)
+
+Resolve the predicate to a boolean.
+Run the hooks sequentially if the result is truthy.
+
+- Used as a `before` or `after` hook.
+- Predicate may be a sync or async function.
+- Hooks to run may be sync, Promises or callbacks.
+- `feathers-hooks` catches any errors thrown in the predicate or hook.
+
+```javascript
+const hooks = require('feathers-hooks-common');
+const isNotAdmin = adminRole => hook => hook.params.user.roles.indexOf(adminRole || 'admin') === -1;
+
+app.service('workOrders').after({
+  // async predicate and hook
+  create: hooks.iff(
+    () => new Promise((resolve, reject) => { ... }),
+    hooks.populate('user', { field: 'authorisedByUserId', service: 'users' })
+  )
+});
+
+app.service('workOrders').after({
+  // sync predicate and hook
+  find: [ hooks.iff(isNotAdmin(), hooks.remove('budget')) ]
+});
+```
+
+__Options:__
+
+- `predicate` (*required*) - Determines if hookFuncs should be run or not.
+If a function, `predicate` is called with the hook as its param.
+It returns either a boolean or a Promise that evaluates to a boolean
+- `hookFuncs` (*optional*) - Zero or more hook functions.
+They may include other conditional hooks.
+
+See also iffElse, else, when, unless, isNot, isProvider.
+
+
+## iffElse
+
+### `iffElse(predicate, trueHooks, falseHooks)` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/common/iff-else.js)
+
+Resolve the predicate to a boolean.
+Run the first set of hooks sequentially if the result is truthy,
+the second set otherwise.
+
+- Used as a `before` or `after` hook.
+- Predicate may be a sync or async function.
+- Hooks to run may be sync, Promises or callbacks.
+- `feathers-hooks` catches any errors thrown in the predicate or hook.
+
+```javascript
+const { iffElse, populate, serialize } = require('feathers-hooks-common');
+app.service('purchaseOrders').after({
+  create: iffElse(() => { ... },
+    [populate(poAccting), serialize( ... )],
+    [populate(poReceiving), serialize( ... )]
+  )
+});
+```
+
+__Options:__
+
+- `predicate` (*required*) - Determines if hookFuncs should be run or not.
+If a function, `predicate` is called with the hook as its param.
+It returns either a boolean or a Promise that evaluates to a boolean
+- `trueHooks` (*optional*) - Zero or more hook functions run when `predicate` is truthy.
+- `falseHooks` (*optional*) - Zero or more hook functions run when `predicate` is false.
+
+See also iff, else, when, unless, isNot, isProvider.
+
+
+## isNot
+
+### `isNot(predicate)` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/common/is-not.js)
+
+Negate the `predicate`.
+
+- Used as a predicate with [conditional hooks](#conditional-hooks).
+- Predicate may be a sync or async function.
+- `feathers-hooks` catches any errors thrown in the predicate.
+
+```javascript
+import hooks, { iff, isNot, isProvider } from 'feathers-hooks-common';
+const isRequestor = () => hook => new Promise(resolve, reject) => ... );
+
+app.service('workOrders').after({
+  iff(isNot(isRequestor()), hooks.remove( ... ))
+});
+```
+
+__Options:__
+
+- `predicate` (*required*) - A function which returns either a boolean or a Promise that resolves to a boolean.
+
+See also iff, iffElse, else, when, unless, isProvider.
+
+
+## isProvider
+
+### `isProvider(provider)` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/services/is-provider.js)
+
+Check which transport called the service method.
+All providers ([REST](./rest.md), [Socket.io](./socketio.md) and [Primus](./primus.md)) set the `params.provider` property which is what `isProvider` checks for.
+
+ - Used as a predicate function with [conditional hooks](#conditional-hooks).
+
+```javascript
+import hooks, { iff, isProvider } from 'feathers-hooks-common';
+
+app.service('users').after({
+  iff(isProvider('external'), hooks.remove( ... ))
+});
+```
+
+__Options:__
+
+- `provider` (*required*) - The transport that you want this hook to run for. Options are:
+  - `server` - Run the hook if the server called the service method.
+  - `external` - Run the hook if any transport other than the server called the service method.
+  - `socketio` - Run the hook if the Socket.IO provider called the service method.
+  - `primus` - If the Primus provider.
+  - `rest` - If the REST provider.
+- `providers` (*optional*) - Other transports that you want this hook to run for.
+
+See also iff, iffElse, else, when, unless, isNot, isProvider.
+
+
+## lowerCase
+
+### `lowerCase(... fieldNames)` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/services/lower-case.js)
+
+Lower cases the given fields either in the data submitted or in the result. If the data is an array or a paginated `find` result the hook will lowercase the field(s) for every item.
+
+- Used as a `before` hook for `create`, `update` or `patch`.
+- Used as an `after` hook.
+- Field names support dot notation.
+- Supports multiple data items, including paginated `find`.
+
+```js
+const hooks = require('feathers-hooks-common');
+
+// lowercase the `email` and `password` field before a user is created
+app.service('users').before({
+  create: hooks.lowerCase('email', 'username')
+});
+```
+
+__Options:__
+
+- `fieldNames` (*required*) - One or more fields that you want to lowercase from the retrieved object(s).
+
+See also upperCase.
+
+
+## pluck
+
+### `pluck(... fieldNames)` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/services/pluck.js)
+
+Discard all other fields except for the provided fields either from the data submitted or from the result. If the data is an array or a paginated `find` result the hook will remove the field(s) for every item.
+
+- Used as a `before` hook for `create`, `update` or `patch`.
+- Used as an `after` hook.
+- Field names support dot notation.
+- Supports multiple data items, including paginated `find`.
+
+```js
+const hooks = require('feathers-hooks-common');
+
+// Only retain the hashed `password` and `salt` field after all method calls
+app.service('users').after(hooks.pluck('password', 'salt'));
+
+// Only keep the _id for `create`, `update` and `patch`
+app.service('users').before({
+  create: hooks.pluck('_id'),
+  update: hooks.pluck('_id'),
+  patch: hooks.pluck('_id')
+})
+```
+
+> **ProTip:** This hook will only fire when `params.provider` has a value, i.e. when it is an external request over REST or Sockets.
+
+__Options:__
+
+- `fieldNames` (*required*) - One or more fields that you want to retain from the object(s).
+
+All other fields will be discarded.
+
+
+## pluckQuery
+
+`pluckQuery(... fieldNames)` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/services/pluck-query.js)
+
+Discard all other fields except for the given fields from the query params.
+
+- Used as a `before` hook.
+- Field names support dot notation.
+- Supports multiple data items, including paginated `find`.
+
+```js
+const hooks = require('feathers-hooks-common');
+
+// Discard all other fields except for _id from the query
+// for all service methods
+app.service('users').before({
+  all: hooks.pluckQuery('_id')
+});
+```
+
+> **ProTip:** This hook will only fire when `params.provider` has a value, i.e. when it is an external request over REST or Sockets.
+
+__Options:__
+
+- `fieldNames` (*optional*) - The fields that you want to retain from the query object. All other fields will be discarded.
+
 
 
 ## populate
@@ -1331,6 +722,69 @@ purchaseOrders.after({
 });
 ```
 
+See also dePopulate, serialize.
+
+
+## remove
+
+### `remove(... fieldNames)` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/services/remove.js)
+
+Remove the given fields either from the data submitted or from the result. If the data is an array or a paginated `find` result the hook will remove the field(s) for every item.
+
+- Used as a `before` hook for `create`, `update` or `patch`.
+- Used as an `after` hook.
+- Field names support dot notation e.g. `name.address.city`.
+- Supports multiple data items, including paginated `find`.
+
+```js
+const hooks = require('feathers-hooks-common');
+
+// Remove the hashed `password` and `salt` field after all method calls
+app.service('users').after(hooks.remove('password', 'salt'));
+
+// Remove _id for `create`, `update` and `patch`
+app.service('users').before({
+  create: hooks.remove('_id', 'password'),
+  update: hooks.remove('_id'),
+  patch: hooks.remove('_id')
+})
+```
+
+> **ProTip:** This hook will only fire when `params.provider` has a value, i.e. when it is an external request over REST or Sockets.
+
+__Options:__
+
+- `fieldNames` (*required*) - One or more fields you want to remove from the object(s).
+
+See also discard.
+
+
+## removeQuery
+
+`removeQuery(... fieldNames)` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/services/remove-query.js)
+
+Remove the given fields from the query params.
+
+- Used as a `before` hook.
+- Field names support dot notation
+- Supports multiple data items, including paginated `find`.
+
+```js
+const hooks = require('feathers-hooks-common');
+
+// Remove _id from the query for all service methods
+app.service('users').before({
+  all: hooks.removeQuery('_id')
+});
+```
+
+> **ProTip:** This hook will only fire when `params.provider` has a value, i.e. when it is an external request over REST or Sockets.
+
+__Options:__
+
+- `fieldNames` (*optional*) - The fields that you want to remove from the query object.
+
+
 ## serialize
 
 ### `serialize(schema: Object|Function): HookFunc` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/services/serialize.js)
@@ -1458,13 +912,603 @@ employees.after({
 });
 ```
 
-## dePopulate
 
-### `dePopulate()` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/services/de-populate.js)
+## setCreatedAt
 
-Removes joined and [computed](#added-properties) properties, as well any profile information.
-Populated and serialized items may, after dePopulate, be used in `service.patch(id, items)` calls.
+### `setCreatedAt(fieldName = 'createdAt', ... fieldNames)` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/services/set-created-at.js)
 
-- Used as a **before** or **after** hook on any service method.
-- Supports multiple result items, including paginated `find`.
-- Supports an array of keys in `field`.
+Add the fields with the current date-time.
+
+- Used as a `before` hook for `create`, `update` or `patch`.
+- Used as an `after` hook.
+- Field names support dot notation.
+- Supports multiple data items, including paginated `find`.
+
+```js
+const hooks = require('feathers-hooks-common');
+
+// set the `createdAt` field before a user is created
+app.service('users').before({
+  create: [ hooks.setCreatedAt('createdAt') ]
+});
+```
+
+__Options:__
+
+- `fieldName` (*optional*, default: `createdAt`) - The field that you want to add with the current date-time to the retrieved object(s).
+- `fieldNames` (*optional*) - Other fields to add with the current date-time.
+
+See also setUpdatedAt.
+
+
+## setSlug
+
+### `setSlug(slug, fieldName = 'query.' + slug)` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/services/set-slug.js)
+
+A service may have a slug in its URL, e.g. `storeId` in
+`app.use('/stores/:storeId/candies', new Service());`.
+The service gets slightly different values depending on the transport used by the client.
+
+| transport | `hook.data.storeId` | `hook.params.query` | code run on client |
+| -- | -- | -- | -- |
+| socketio | `undefined` | `{ size: 'large', storeId: '123' }` | `candies.create({ name: 'Gummi', qty: 100 }, { query: { size: 'large', storeId: '123' } })` |
+| rest | `:storeId` | ... same as above | ... same as above |
+| raw HTTP | `123` | `{ size: 'large' }` | `fetch('/stores/123/candies?size=large', ..` |
+
+This hook normalizes the difference between the transports. A hook of
+`all: [ hooks.setSlug('storeId') ]`
+provides a normalized `hook.params.query` of
+`{ size: 'large', storeId: '123' }` for the above cases.
+
+- Used as a `before` hook.
+- Field names support dot notation.
+
+```js
+const hooks = require('feathers-hooks-common');
+
+app.service('stores').before({
+  create: [ hooks.setSlug('storeId') ]
+});
+```
+
+__Options:__
+
+- `slug` (*required*) - The slug as it appears in the route, e.g. `storeId` for `/stores/:storeId/candies` .
+- `fieldName` (*optional*, default: `query[slugId]`) - The field to contain the slug value.
+
+
+## setUpdatedAt
+
+### `setUpdatedAt(fieldName = 'updatedAt', ...fieldNames)` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/services/set-updated-at.js)
+
+Add or update the fields with the current date-time.
+
+- Used as a `before` hook for `create`, `update` or `patch`.
+- Used as an `after` hook.
+- Field names support dot notation.
+- Supports multiple data items, including paginated `find`.
+
+```js
+const hooks = require('feathers-hooks-common');
+
+// set the `updatedAt` field before a user is created
+app.service('users').before({
+  create: [ hooks.setCreatedAt('updatedAt') ]
+});
+```
+
+__Options:__
+
+- `fieldName` (*optional*, default: `updatedAt`) - The fields that you want to add or update in the retrieved object(s).
+- `fieldNames` (*optional*) - Other fields to add or update with the current date-time.
+
+See also setCreatedAt.
+
+
+## softDelete
+
+### `softDelete(fieldName = 'deleted')` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/services/soft-delete.js)
+
+Marks items as `{ deleted: true }` instead of physically removing them.
+This is useful when you want to discontinue use of, say, a department,
+but you have historical information which continues to refer to the discontinued department.
+
+- Used as a `before.all` hook to handle all service methods.
+- Supports multiple data items, including paginated `find`.
+
+```js
+const hooks = require('feathers-hooks-common');
+const dept = app.service('departments');
+
+dept.before({
+  all: hooks.softDelete(),
+});
+
+// will throw if item is marked deleted.
+dept.get(0).then()
+
+// methods can be run avoiding softDelete handling
+dept.get(0, { query: { $disableSoftDelete: true }}).then()
+```
+__Options:__
+
+- `fieldName` (*optional*, default: `deleted`) - The name of the field holding the deleted flag.
+
+
+## some
+
+### `some(... hookFuncs)` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/common/some.js)
+
+Run hook functions in parallel.
+Return `true` if any hook function returned a truthy value.
+
+- Used as a predicate function with [conditional hooks](#conditional-hooks).
+- The current `hook` is passed to all the hook functions, and they are run in parallel.
+- Hooks to run may be sync or Promises only.
+- `feathers-hooks` catches any errors thrown in the predicate.
+
+```javascript
+service.before({
+  create: hooks.iff(hooks.some(hook1, hook2, ...), hookA, hookB, ...)
+});
+```
+```javascript
+hooks.some(hook1, hook2, ...).call(this, currentHook)
+  .then(bool => { ... });
+```
+
+__Options:__
+
+- `hookFuncs` (*required*) Functions which take the current hook as a param and return a boolean result.
+
+See also every.
+
+
+## traverse
+
+### `traverse(transformer, getObject)` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/services/traverse.js)
+
+Traverse and transform objects in place by visiting every node on a recursive walk.
+
+- Used as a `before` or `after` hook.
+- Supports multiple data items, including paginated `find`.
+- Any object in the hook may be traversed, **including the query object**.
+- `transformer` has access to powerful methods and context.
+
+```js
+// Trim strings
+const trimmer = function (node) {
+  if (typeof node === 'string') { this.update(node.trim()); }
+};
+service.before({ create: traverse(trimmer) });
+```
+
+```javascript
+// REST HTTP request may use the string 'null' in its query string.
+// Replace these strings with the value null.
+const nuller = function (node) {
+  if (node === 'null') { this.update(null); }
+};
+service.before({ find: traverse(nuller, hook => hook.params.query) });
+```
+
+> **ProTip:** GitHub's [substack/js-traverse](https://github.com/substack/js-traverse) documents the extensive methods and context available to the transformer function.
+
+__Options:__
+
+- `transformer` (*required*) - Called for every node and may change it in place.
+- `getObject` (*optional*, defaults to `hook.data` or `hook.result`) -  Function with signature (hook) which returns the object to traverse.
+
+
+## unless
+
+### `unless(predicate, ...hookFuncs)` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/common/unless.js)
+
+Resolve the predicate to a boolean.
+Run the hooks sequentially if the result is falsey.
+
+- Used as a `before` or `after` hook.
+- Predicate may be a sync or async function.
+- Hooks to run may be sync, Promises or callbacks.
+- `feathers-hooks` catches any errors thrown in the predicate or hook.
+
+```javascript
+service.before({
+  create:
+    unless(isServer,
+      hookA,
+      unless(isProvider('rest'), hook1, hook2, hook3),
+      hookB
+    )
+});
+```
+
+__Options:__
+
+- `predicate` (*required*) - Determines if hookFuncs should be run or not.
+If a function, `predicate` is called with the hook as its param.
+It returns either a boolean or a Promise that evaluates to a boolean.
+- `hookFuncs` (*optional*) - Zero or more hook functions.
+They may include other conditional hook functions.
+
+See also iff, iffElse, else, when, isNot, isProvider.
+
+
+## validate
+
+### `validate(validator)` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/services/validate.js)
+
+Call a validation function from a `before` hook. The function may be sync or return a Promise.
+
+- Used as a `before` hook for `create`, `update` or `patch`.
+
+> **ProTip:** If you have a different signature for the validator then pass a wrapper as the validator e.g. `(values) => myValidator(..., values, ...)`.
+
+<!-- -->
+
+> **ProTip:** Wrap your validator in `callbackToPromise` if it uses a callback.
+
+```javascript
+const callbackToPromise = require('feathers-hooks-common').callbackToPromise;
+
+// function myCallbackValidator(values, cb) { ... }
+const myValidator = callbackToPromise(myCallbackValidator, 1); // function requires 1 param
+app.service('users').before({ create: validate(myValidator) });
+```
+   
+__Options:__
+
+- `validator` (*required*) - Validation function with signature `function validator(formValues, hook)`.
+
+Sync functions return either an error object like `{ fieldName1: 'message', ... }` or null.
+Validate will throw on an error object with `throw new errors.BadRequest({ errors: errorObject });`.
+
+Promise functions should throw on an error or reject with
+`new errors.BadRequest('Error message', { errors: { fieldName1: 'message', ... } });`
+Their `.then` returns either sanitized values to replace `hook.data`, or null.
+
+#### Example
+
+Comprehensive validation may include the following:
+
+- Object schema validation. Checking the item object contains the expected properties with values in the expected format. The values might get sanitized. Knowing the item is well formed makes further validation simpler.
+- Re-running any validation supposedly already done on the front-end. It would an asset if the server can re-run the same code the front-end used.
+- Performing any validation and sanitization unique to the server.
+
+A full featured example of such a process appears below. It validates and sanitizes a new user before adding the user to the database.
+
+- The form expects to be notified of errors in the format `{ email: 'Invalid email.', password: 'Password must be at least 8 characters.' }`.
+- The form calls the server for async checking of selected fields when control leaves those fields. This for example could check that an email address is not already used by another user.
+- The form does local sync validation when the form is submitted.
+- The code performing the validations on the front-end is also used by the server.
+- The server performs schema validation using Walmart's [Joi](https://github.com/hapijs/joi).
+- The server does further validation and sanitization.
+
+#### Validation using Validate
+
+```javascript
+// file /server/services/users/hooks/index.js
+const auth = require('feathers-authentication').hooks;
+const hooks = require('feathers-hooks-common');
+const callbackToPromise = require('feathers-hooks-common/lib/promisify').callbackToPromise;
+const validateSchema = require('feathers-hooks-validate-joi');
+
+const clientValidations = require('/common/usersClientValidations');
+const serverValidations = require('/server/validations/usersServerValidations');
+const schemas = require('/server/validations/schemas');
+
+const validate = hooks.validate;
+const serverValidationsSignup = callbackToPromise(serverValidations.signup, 1);
+
+exports.before = {
+  create: [
+    validateSchema.form(schemas.signup, schemas.options), // schema validation
+    validate(clientValidations.signup), // re-run form sync validation
+    validate(values => clientValidations.signupAsync(values, 'someMoreParams')), // re-run form async
+    validate(serverValidationsSignup), // run server validation
+    hooks.remove('confirmPassword'),
+    auth.hashPassword()
+  ]
+};
+```
+
+#### Validation routines for front and back-end.
+
+Validations used on front-end. They are re-run by the server.
+
+```javascript
+// file /common/usersClientValidations
+// Validations for front-end. Also re-run on server.
+const clientValidations = {};
+
+// sync validation of signup form on form submit
+clientValidations.signup = values => {
+  const errors = {};
+
+  checkName(values.name, errors);
+  checkUsername(values.username, errors);
+  checkEmail(values.email, errors);
+  checkPassword(values.password, errors);
+  checkConfirmPassword(values.password, values.confirmPassword, errors);
+
+  return errors;
+};
+
+// async validation on exit from some fields on form
+clientValidations.signupAsync = values =>
+  new Promise((resolve, reject) => {
+    const errs = {};
+
+    // set a dummy error
+    errs.email = 'Already taken.';
+
+    if (!Object.keys(errs).length) {
+      resolve(null); // 'null' as we did not sanitize 'values'
+    }
+    reject(new errors.BadRequest('Values already taken.', { errors: errs }));
+  });
+
+module.exports = clientValidations;
+
+function checkName(name, errors, fieldName = 'name') {
+  if (!/^[\\sa-zA-Z]{8,30}$/.test((name || '').trim())) {
+    errors[fieldName] = 'Name must be 8 or more letters or spaces.';
+  }
+}
+```
+
+Schema definitions used by the server.
+
+```javascript
+// file /server/validations/schemas
+const Joi = require('joi');
+
+const username = Joi.string().trim().alphanum().min(5).max(30).required();
+const password = Joi.string().trim().regex(/^[\sa-zA-Z0-9]+$/, 'letters, numbers, spaces')
+  .min(8).max(30).required();
+const email = Joi.string().trim().email().required();
+
+module.exports = {
+  options: { abortEarly: false, convert: true, allowUnknown: false, stripUnknown: true },
+  signup: Joi.object().keys({
+    name: Joi.string().trim().min(8).max(30).required(),
+    username,
+    password,
+    confirmPassword: password.label('Confirm password'),
+    email
+  })
+};
+```
+
+Validations run by the server.
+
+```javascript
+// file /server/validations/usersServerValidations
+// Validations on server. A callback function is used to show how the hook handles it.
+module.exports = {
+  signup: (data, cb) => {
+    const formErrors = {};
+    const sanitized = {};
+
+    Object.keys(data).forEach(key => {
+      sanitized[key] = (data[key] || '').trim();
+    });
+
+    cb(Object.keys(formErrors).length > 0 ? formErrors : null, sanitized);
+  }
+};
+```
+
+See also validateSchema.
+
+
+## validateSchema
+
+### `validateSchema(schema, ajv, options)` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/services/validate-schema.js)
+
+Validate an object using [JSON-Schema](http://json-schema.org/) through [AJV](https://github.com/epoberezkin/ajv)
+
+> **ProTip** There are some
+[good tutorials](//code.tutsplus.com/tutorials/validating-data-with-json-schema-part-1--cms-25343)
+on using JSON-Schema with [ajv](https://github.com/epoberezkin/ajv).
+
+- Used as a `before` or `after` hook.
+- The hook will throw if the data does not match the JSON-Schema.
+`error.errors` will, by default, contain an array of error messages.
+
+> **ProTip** You may customize the error message format with a custom formatting function.
+You could, for example, return `{ name1: message, name2: message }`
+which could be more suitable for a UI.
+
+```javascript
+const ajv = require('ajv');
+const createSchema = { /* JSON-Schema */ };
+module.before({
+  create: validateSchema(createSchema, ajv)
+});
+```
+
+__Options:__
+
+- `schema` (*required*) - The JSON-Schema.
+- `ajv` (*required*) - The `ajv` validator.
+- `options` (*optional*) - Options.
+    - Any `ajv` options.
+    - `addNewError` (*optional*) - Custom message formatter.
+    Its a reducing function which works similarly to `Array.reduce()`.
+    Its signature is
+    `{ currentFormattedMessages: any, ajvError: AjvError, itemsLen: number, index: number }: newFormattedMessages`
+        - `currentFormattedMessages` - Formatted messages so far. Initially `null`.
+        - `ajvError` - [ajv error](https://github.com/epoberezkin/ajv#error-objects).
+        - `itemsLen` - How many data items there are. 1-based.
+        - `index` - Which item this is. 0-based.
+        - `newFormattedMessages` - The function returns the updated formatted messages.
+
+
+## when
+
+An alias for [iff](#iff) [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/common/iff.js)
+
+
+## Util: callbackToPromise
+
+### `callbackToPromise(callbackFunc, paramsCount)` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/services/callback-to-promise.js)
+
+Wrap a function calling a callback into one that returns a Promise.
+
+- Promise is rejected if the function throws.
+
+```javascript
+const callbackToPromise = require('feathers-hooks-common/promisify').callbackToPromise;
+
+function tester(data, a, b, cb) {
+  if (data === 3) { throw new Error('error thrown'); }
+  cb(data === 1 ? null : 'bad', data);
+} 
+const wrappedTester = callbackToPromise(tester, 3); // because func call requires 3 params
+
+wrappedTester(1, 2, 3); // tester(1, 2, 3, wrapperCb)
+wrappedTester(1, 2); // tester(1, 2, undefined, wrapperCb)
+wrappedTester(); // tester(undefined, undefined undefined, wrapperCb)
+wrappedTester(1, 2, 3, 4, 5); // tester(1, 2, 3, wrapperCb)
+
+wrappedTester(1, 2, 3).then( ... )
+  .catch(err => { console.log(err instanceof Error ? err.message : err); });
+```
+
+__Options:__
+
+- `callbackFunc` (*required*) - A function which uses a callback as its last param.
+- `paramsCount` (*required*) - The number of parameters `callbackFunc` expects. This count does not include the callback param itself.
+
+The wrapped function will always be called with that many params, preventing potential bugs.
+
+See also promiseToCallback.
+
+
+## Util: checkContext
+
+### `checkContext(hook, type, methods, label)` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/services/check-context.js)
+
+Restrict the hook to a hook type (before, after) and a set of
+hook methods (find, get, create, update, patch, remove).
+
+```javascript
+const checkContext = require('feathers-hooks-common/lib/utils').checkContext;
+
+function myHook(hook) {
+  checkContext(hook, 'before', ['create', 'remove']);
+  ...
+}
+
+app.service('users').after({
+  create: [ myHook ] // throws
+});
+
+// checkContext(hook, 'before', ['update', 'patch'], 'hookName');
+// checkContext(hook, null, ['update', 'patch']);
+// checkContext(hook, 'before', null, 'hookName');
+// checkContext(hook, 'before');
+```
+
+__Options:__
+
+- `hook` (*required*) - The hook provided to the hook function.
+- `type` (*optional*) - The hook may be run in `before` or `after`. `null` allows the hook to be run in either.
+- `methods` (*optional*) - The hook may be run for these methods.
+- `label` (*optional*) - The label to identify the hook in error messages, e.g. its name.
+
+
+## Util: getByDot, setByDot
+
+### `getByDot(obj, path)` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/common/get-by-dot.js)
+
+### `setByDot(obj, path, value, ifDelete)` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/common/set-by-dot.js)
+
+`getItems` gets a value from an object using dot notation, e.g. `employee.address.city`. It does not differentiate between non-existent paths and a value of `undefined`.
+
+`setByDot` is the companion to `getByDot`. It sets a value in an object using dot notation.
+
+- Optionally deletes properties in object.
+
+```javascript
+import { getByDot, setByDot } from 'feathers-hooks-common/lib/utils';
+
+const setHomeCity = () => (hook) => {
+  const city = getByDot(hook.data, 'person.address.city');
+  setByDot(hook, 'data.person.home.city', city);
+}
+
+app.service('directories').before = {
+  create: setHomeCity()
+};
+```
+
+__Options:__
+
+- `obj` (*required*) - The object we get data from or set data in.
+- `path` (*required*) - The path to the data, e.g. `person.address.city`. Array notion is _not_ supported, e.g. `order.lineItems[1].quantity`.
+- `value` (*required*) - The value to set the data to.
+- `ifDelete` (*optional, default: `false`) - Delete the property at the end of the path if `value` is `undefined`. Note that
+new empty inner objects will still be created,
+e.g. `setByDot({}, 'a.b.c', undefined, true)` will result in `{a: b: {} }`.
+
+See also deleteByDot.
+
+
+## getItems, replaceItems
+
+### `getItems(hook)` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/services/get-items.js)
+
+### `replaceItems(hook, items)` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/services/replace-items.js)
+
+`getItems` gets the data items in a hook. The items may be `hook.data`, `hook.result` or `hook.result.data` depending on where the hook is used, the method its used with and if pagination is used. `undefined`, an object or an array of objects may be returned.
+
+`replaceItems` is the companion to `getItems`. It updates the data items in the hook.
+
+- Handles before and after hooks.
+- Handles paginated and non-paginated results from `find`.
+
+```javascript
+import { getItems, replaceItems } from 'feathers-hooks-common/lib/utils';
+
+const insertCode = (code) => (hook) {
+    const items = getItems(hook);
+    !Array.isArray(items) ? items.code = code : (items.forEach(item => { item.code = code; }));
+    replaceItems(hook, items);
+  }
+
+app.service('messages').before = { 
+  create: insertCode('a')
+};
+```
+
+__Options:__
+
+- `hook` (*required*) - The hook provided to the hook function.
+- `items` (*required*) - The updated item or array of items.
+
+## promiseToCallback
+
+### `promiseToCallback(promise)(callbackFunc)` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/services/promise-to-callback.js)
+
+Wrap a Promise into a function that calls a callback.
+
+- The callback does not run in the Promise's scope. The Promise's `catch` chain is not invoked if the callback throws.
+
+```javascript
+import { promiseToCallback } from 'feathers-hooks-common/promisify'
+
+function (cb) {
+  const promise = new Promise( ...).then( ... ).catch( ... );
+  ...
+  promiseToCallback(promise)(cb);
+  promise.then( ... ); // this is still possible
+}
+```
+
+__Options:__
+
+- `promise` (*required*) - A function returning a promise.
+
+See also callbackToPromise.
