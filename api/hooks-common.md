@@ -922,7 +922,7 @@ A hook for passing params from the client to the server.
 - Used as a `before` hook.
 
 Only the `hook.params.query` object is transferred to the server from a Feathers client,
-for security amoung other reasons.
+for security among other reasons.
 However if you can include a `hook.params.query.$client` object, e.g.
 
 ```js
