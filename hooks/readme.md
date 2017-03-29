@@ -53,7 +53,7 @@ const myHook = options => { // always wrap in a function so you can pass options
 
 // Set up our before hook
 userService.before({
-  all: [] // run hooks for all service methods
+  all: [], // run hooks for all service methods
   find: [myHook()] // run hook on before a find. You can chain multiple hooks.
 });
 ```
