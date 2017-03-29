@@ -10,17 +10,15 @@ npm install feathers-authentication-client --save
 
 **Note:** This is only compatibile with `feathers-authentication@1.x` and above.
 
-## Documentation
-
 The [feathers-authentication-client](https://github.com/feathersjs/feathers-authentication-client) module allows you to easily authenticate against a Feathers server. It is not required. It simply makes it easier to implement authentication in your client by automatically storing and sending the JWT access token and handling re-authenticating when a websocket disconnects.
 
 ## API
 
 This module contains:
 
-1. The main entry function
-2. Some helpful hooks
-
+- [The main entry function](#configuration)
+- [Additional feathersClient methods](#additional-feathersclient-methods)
+- [Some helpful hooks](#hooks)
 
 ## Configuration
 ### `feathersClient.configure(auth(options))`
@@ -32,7 +30,6 @@ import auth from 'feathers-authentication-client';
 // Available options are listed in the "Default Options" section
 feathersClient.configure(auth(options))
 ```
-
 
 ### Default `options`
 
@@ -88,7 +85,7 @@ Pull the JWT from localstorage or the cookie. Returns a Promise.
 ### `feathersClient.passport.verifyJWT(token)` [source](https://github.com/feathersjs/feathers-authentication-client/blob/master/src/passport.js#L268)
 Verify that a JWT is not expired and decode it to get the payload. Returns a Promise.
 
-### `feathersClient.passport.payloadIsValid(token)`
+### `feathersClient.passport.payloadIsValid(token)` [source](https://github.com/feathersjs/feathers-authentication-client/blob/master/src/utils.js#L21)
 Synchronously verify that a token has not expired. Returns a Boolean.
 
 ## Hooks
