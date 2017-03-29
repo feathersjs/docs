@@ -1,0 +1,101 @@
+diff -bdur --new-file 02/app/src/services/index.js 02/app1/src/services/index.js
+--- 02/app/src/services/index.js	2016-12-23 17:38:02.716000000 -0500
++++ 02/app1/src/services/index.js	2017-01-10 15:55:18.811000000 -0500
+@@ -1,4 +1,5 @@
+ 'use strict';
++const teams = require('./teams');
+ const authentication = require('./authentication');
+ const user = require('./user');
+ 
+@@ -8,4 +9,5 @@
+   
+   app.configure(authentication);
+   app.configure(user);
++  app.configure(teams);
+ };
+diff -bdur --new-file 02/app/src/services/teams/hooks/index.js 02/app1/src/services/teams/hooks/index.js
+--- 02/app/src/services/teams/hooks/index.js	1969-12-31 19:00:00.000000000 -0500
++++ 02/app1/src/services/teams/hooks/index.js	2017-01-10 15:55:18.871000000 -0500
+@@ -0,0 +1,29 @@
++'use strict';
++
++const globalHooks = require('../../../hooks');
++const hooks = require('feathers-hooks');
++const auth = require('feathers-authentication').hooks;
++
++exports.before = {
++  all: [
++    auth.verifyToken(),
++    auth.populateUser(),
++    auth.restrictToAuthenticated()
++  ],
++  find: [],
++  get: [],
++  create: [],
++  update: [],
++  patch: [],
++  remove: []
++};
++
++exports.after = {
++  all: [],
++  find: [],
++  get: [],
++  create: [],
++  update: [],
++  patch: [],
++  remove: []
++};
+diff -bdur --new-file 02/app/src/services/teams/index.js 02/app1/src/services/teams/index.js
+--- 02/app/src/services/teams/index.js	1969-12-31 19:00:00.000000000 -0500
++++ 02/app1/src/services/teams/index.js	2017-01-10 15:55:18.867000000 -0500
+@@ -0,0 +1,35 @@
++'use strict';
++
++const path = require('path');
++const NeDB = require('nedb');
++const service = require('feathers-nedb');
++const hooks = require('./hooks');
++
++module.exports = function(){
++  const app = this;
++
++  const db = new NeDB({
++    filename: path.join(app.get('nedb'), 'teams.db'),
++    autoload: true
++  });
++
++  let options = {
++    Model: db,
++    paginate: {
++      default: 5,
++      max: 25
++    }
++  };
++
++  // Initialize our service with any options it requires
++  app.use('/teams', service(options));
++
++  // Get our initialize service to that we can bind hooks
++  const teamsService = app.service('/teams');
++
++  // Set up our before hooks
++  teamsService.before(hooks.before);
++
++  // Set up our after hooks
++  teamsService.after(hooks.after);
++};
+diff -bdur --new-file 02/app/test/services/teams/index.test.js 02/app1/test/services/teams/index.test.js
+--- 02/app/test/services/teams/index.test.js	1969-12-31 19:00:00.000000000 -0500
++++ 02/app1/test/services/teams/index.test.js	2017-01-10 15:55:18.875000000 -0500
+@@ -0,0 +1,10 @@
++'use strict';
++
++const assert = require('assert');
++const app = require('../../../src/app');
++
++describe('teams service', function() {
++  it('registered the teams service', () => {
++    assert.ok(app.service('teams'));
++  });
++});

@@ -19,7 +19,7 @@ Here are some things that you should be aware of when writing your app to make s
 - Don't use a weak `secret` for you token service. The generator creates a strong one for you automatically. No need to change it.
 - Use hooks to check security roles to make sure users can only access data they should be permitted to. We've provided some [built in authorization hooks](http://docs.feathersjs.com/authorization/bundled-hooks.html) to make this process easier (many of which are added by default to a generated app).
 
-## Some of technologies we employ
+## Some of the technologies we employ
 
 - Password storage inside `feathers-authentication` uses [bcrypt](https://github.com/dcodeIO/bcrypt.js). We don't store the salts separately since they are included in the bcrypt hashes.
 - [JWT](https://jwt.io/) is used instead of cookies to avoid CSRF attacks. We use the `HS512` algorithm by default (HMAC using SHA-512 hash algorithm).

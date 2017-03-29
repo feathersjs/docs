@@ -1,0 +1,58 @@
+--- 01/db-connector/1.js	2017-01-13 12:32:29.198000000 -0500
++++ 01/rest/1.js	2017-01-13 12:32:29.363000000 -0500
+@@ -1,40 +1,21 @@
+ 
+-// Example - Create service on server with NeDB database
++// Example - Create REST API
+ 
+-/// [dependencies]
+-const feathers = require('feathers');
++const expressServerConfig = require('../common/expressServerConfig');
++const expressMiddleware = require('../common/expressMiddleware');
++const rest = require('feathers-rest');
+ const NeDB = require('nedb');
+ const path = require('path');
+ const service = require('feathers-nedb');
+-//! [dependencies]
+-
+-/// [feathers]
+-const app = feathers()
+-  .configure(services);
+-//! [feathers]
+-
+-/// [create]
+-const users = app.service('/users');
+ 
+-Promise.all([
+-  users.create({ email: 'jane.doe@gmail.com', password: '11111', role: 'admin' }),
+-  users.create({ email: 'john.doe@gmail.com', password: '22222', role: 'user' }),
+-  users.create({ email: 'judy.doe@gmail.com', password: '33333', role: 'user' })
+-])
+-//! [create]
+-/// [results]
+-  .then(results => {
+-    console.log('created Jane Doe item\n', results[0]);
+-    console.log('created John Doe item\n', results[1]);
+-    console.log('created Judy Doe item\n', results[2]);
++const app = expressServerConfig()
++  .configure(rest())
++  .configure(services)
++  .configure(expressMiddleware);
+     
+-    return users.find()
+-      .then(results => console.log('find all items\n', results));
+-  })
+-  .catch(err => console.log('Error occurred:', err));
+-//! [results]
++const server = app.listen(3030);
++server.on('listening', () => console.log(`Feathers application started on port 3030`));
+ 
+-/// [services]
+ function services() {
+   this.use('/users', service({ Model: userModel() }));
+ }
+@@ -45,4 +26,3 @@
+     autoload: true
+   });
+ }
+-//! [services]

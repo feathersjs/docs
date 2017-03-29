@@ -1,0 +1,263 @@
+diff -bdur --new-file 02/app/public/feathers-app.js 02/service/public/feathers-app.js
+--- 02/app/public/feathers-app.js	2017-01-13 14:50:14.748000000 -0500
++++ 02/service/public/feathers-app.js	2017-01-13 15:20:11.900000000 -0500
+@@ -5,35 +5,23 @@
+     storage: window.localStorage
+   }));
+ 
+-let jackId;
+-const users = feathersClient.service('/users');
+-
+-Promise.all([
+-  users.create({ email: 'jane.doe@gmail.com', password: '11111', role: 'admin' }),
+-  users.create({ email: 'john.doe@gmail.com', password: '22222', role: 'user' }),
+-  users.create({ email: 'judy.doe@gmail.com', password: '33333', role: 'user' }),
+-  users.create({ email: 'jack.doe@gmail.com', password: '44444', role: 'user' })
+-])
+-  .then(results => {
+-    console.log('created Jane Doe item\n', results[0]);
+-    console.log('created John Doe item\n', results[1]);
+-    console.log('created Judy Doe item\n', results[2]);
+-    console.log('created Jack Doe item\n', results[3]);
+-    
+-    jackId = results[3]._id;
++const teams = feathersClients.service('/teams');
+     
+-    return feathersClient.authenticate({
++feathersClients.authenticate({
+       type: 'local',
+       'email': 'jane.doe@gmail.com',
+       'password': '11111'
++})
++  .then(() => {
++    // Find team items, and join the user items of their members
++    teams.find({ query: { type: 'dungeon' }})
++      .then(results => {
++        console.log('\nAll dungeon teams\n', JSON.stringify(results.data, null, 2));
++      });
++    
++    teams.find({ query: { name: 'Lee family' }})
++      .then(results => {
++        console.log('\nLee family\n', JSON.stringify(results.data, null, 2));
++      });
+     })
+-      .then(() => console.log('\nAuthenticated successfully.\n '))
+-      .catch(err => console.error('\nError authenticating:', err));
+-  })
+-  .then(() => users.remove(jackId)
+-    .then(results => console.log('deleted Jack Doe item\n', results))
+-  )
+-  .then(() => users.find()
+-    .then(results => console.log('find all items\n', results))
+-  )
+-  .catch(err => console.log('Error occurred:', err));
++  .catch(err => console.log('\nError occurred:', err));
+diff -bdur --new-file 02/app/public/rest.html 02/service/public/rest.html
+--- 02/app/public/rest.html	2017-01-10 14:53:22.318000000 -0500
++++ 02/service/public/rest.html	2017-01-10 15:45:39.434000000 -0500
+@@ -1,6 +1,6 @@
+ <html>
+ <head>
+-  <title>Feathers REST client, with authentication</title>
++  <title>Feathers REST client, multiple services</title>
+   <style>
+     body {
+       font-family: 'Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif';
+@@ -12,7 +12,7 @@
+ </head>
+ <body>
+ <h1>Feathers guide</h1>
+-<h2>Feathers REST client, with authentication</h2>
++<h2>Feathers REST client, multiple services</h2>
+ <br />
+ Open console to see results of <strong>feathers-rest</strong> calls.
+ <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/core-js/2.1.4/core.min.js"></script>
+diff -bdur --new-file 02/app/public/socketio.html 02/service/public/socketio.html
+--- 02/app/public/socketio.html	2017-01-10 14:53:22.496000000 -0500
++++ 02/service/public/socketio.html	2017-01-10 15:45:39.527000000 -0500
+@@ -1,6 +1,6 @@
+ <html>
+ <head>
+-  <title>Feathers Socketio client, with authentication</title>
++  <title>Feathers Socketio client, multiple services</title>
+   <style>
+     body {
+       font-family: 'Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif';
+@@ -12,7 +12,7 @@
+ </head>
+ <body>
+ <h1>Feathers guide</h1>
+-<h2>Feathers Socketio client, with authentication</h2>
++<h2>Feathers Socketio client, multiple services</h2>
+ <br />
+ Open console to see results of <strong>feathers-socketio</strong> calls.
+ <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/core-js/2.1.4/core.min.js"></script>
+diff -bdur --new-file 02/app/src/app.js 02/service/src/app.js
+--- 02/app/src/app.js	2016-12-23 17:38:02.788000000 -0500
++++ 02/service/src/app.js	2016-12-25 10:41:50.656000000 -0500
+@@ -28,4 +28,47 @@
+   .configure(services)
+   .configure(middleware);
+ 
++loadDatabases(app);
++
+ module.exports = app;
++
++function loadDatabases(app) {
++  let userIds = [];
++  const teams = app.service('/teams');
++  const users = app.service('/users');
++  
++  console.log('\nClear databases.');
++  Promise.all([
++    teams.remove(null),
++    users.remove(null)
++  ])
++    .then (() => {
++      console.log('\nLoad users.');
++      return  Promise.all([
++        users.create({ email: 'jane.doe@gmail.com', password: '11111', role: 'admin, tank' }),
++        users.create({ email: 'john.doe@gmail.com', password: '22222', role: 'user, heals' }),
++        users.create({ email: 'judy.doe@gmail.com', password: '33333', role: 'user' }),
++        users.create({ email: 'jack.doe@gmail.com', password: '44444', role: 'user' }),
++        users.create({ email: 'tom.smith@gmail.com', password: '55555', role: 'user' }),
++        users.create({ email: 'bob.smith@gmail.com', password: '66666', role: 'user' }),
++        users.create({ email: 'joe.smith@gmail.com', password: '77777', role: 'user' }),
++        users.create({ email: 'tim.lee@gmail.com', password: '88888', role: 'user, damage' }),
++        users.create({ email: 'tod.lee@gmail.com', password: '99999', role: 'user' }),
++        users.create({ email: 'sam.lee@gmail.com', password: '00000', role: 'user' }),
++      ])
++    })
++    .then(results => {
++      userIds = results.map(user => user._id); // This way is not elegant but easy to understand.
++  
++      console.log('\nLoad teams.');
++      return Promise.all([
++        teams.create({ name: 'Doe family', type: 'family', memberIds: [userIds[0], userIds[1], userIds[2], userIds[3]]}),
++        teams.create({ name: 'Smith family', type: 'family', memberIds: [userIds[4], userIds[5], userIds[6]]}),
++        teams.create({ name: 'Lee family', type: 'family', memberIds: [userIds[7], userIds[8], userIds[9]]}),
++        teams.create({ name: 'Fires of Heaven', type: 'dungeon', memberIds: [userIds[0], userIds[1], userIds[7]]}),
++      ]);
++    })
++    .then(() => {
++      console.log('\nDatabases loaded.');
++    })
++}
+diff -bdur --new-file 02/app/src/services/index.js 02/service/src/services/index.js
+--- 02/app/src/services/index.js	2016-12-23 17:38:02.716000000 -0500
++++ 02/service/src/services/index.js	2016-12-24 10:50:25.710000000 -0500
+@@ -1,4 +1,5 @@
+ 'use strict';
++const teams = require('./teams');
+ const authentication = require('./authentication');
+ const user = require('./user');
+ 
+@@ -8,4 +9,5 @@
+   
+   app.configure(authentication);
+   app.configure(user);
++  app.configure(teams);
+ };
+diff -bdur --new-file 02/app/src/services/teams/hooks/index.js 02/service/src/services/teams/hooks/index.js
+--- 02/app/src/services/teams/hooks/index.js	1969-12-31 19:00:00.000000000 -0500
++++ 02/service/src/services/teams/hooks/index.js	2016-12-25 10:38:49.022000000 -0500
+@@ -0,0 +1,46 @@
++'use strict';
++
++const globalHooks = require('../../../hooks');
++const hooks = require('feathers-hooks');
++const auth = require('feathers-authentication').hooks;
++const { populate, serialize } = require('feathers-hooks-common'); // added
++
++const populateSchema = { // added
++  include: [{
++    service: 'users',
++    nameAs: 'members',
++    parentField: 'memberIds',
++    childField: '_id'
++  }]
++};
++
++const serializeSchema = { // added
++  exclude: ['_id', '_include'],
++  members: {
++    only: ['email', 'role']
++  }
++};
++
++exports.before = {
++  all: [
++    auth.verifyToken(),
++    auth.populateUser(),
++    auth.restrictToAuthenticated()
++  ],
++  find: [],
++  get: [],
++  create: [],
++  update: [],
++  patch: [],
++  remove: []
++};
++
++exports.after = {
++  all: [],
++  find: [ populate({ schema: populateSchema }), serialize(serializeSchema) ], // changed
++  get: [ populate({ schema: populateSchema }), serialize(serializeSchema) ], // changed
++  create: [],
++  update: [],
++  patch: [],
++  remove: []
++};
+diff -bdur --new-file 02/app/src/services/teams/index.js 02/service/src/services/teams/index.js
+--- 02/app/src/services/teams/index.js	1969-12-31 19:00:00.000000000 -0500
++++ 02/service/src/services/teams/index.js	2016-12-28 14:28:28.319000000 -0500
+@@ -0,0 +1,35 @@
++'use strict';
++
++const path = require('path');
++const NeDB = require('nedb');
++const service = require('feathers-nedb');
++const hooks = require('./hooks');
++
++module.exports = function(){
++  const app = this;
++
++  const db = new NeDB({
++    filename: path.join(app.get('nedb'), 'teams.db'),
++    autoload: true
++  });
++
++  let options = {
++    Model: db,
++    paginate: {
++      default: 5,
++      max: 25
++    }
++  };
++
++  // Initialize our service with any options it requires
++  app.use('/teams', service(options));
++
++  // Get our initialize service to that we can bind hooks
++  const teamsService = app.service('/teams');
++
++  // Set up our before hooks
++  teamsService.before(hooks.before);
++
++  // Set up our after hooks
++  teamsService.after(hooks.after);
++};
+diff -bdur --new-file 02/app/test/services/teams/index.test.js 02/service/test/services/teams/index.test.js
+--- 02/app/test/services/teams/index.test.js	1969-12-31 19:00:00.000000000 -0500
++++ 02/service/test/services/teams/index.test.js	2016-12-24 10:50:25.750000000 -0500
+@@ -0,0 +1,10 @@
++'use strict';
++
++const assert = require('assert');
++const app = require('../../../src/app');
++
++describe('teams service', function() {
++  it('registered the teams service', () => {
++    assert.ok(app.service('teams'));
++  });
++});

@@ -6,14 +6,40 @@
 }
 
 /* Sidebar Links */
-.book .book-summary ul.summary li a {
-  font-size: 1.2em;
-  color: #4A4A4A;
+.book .book-summary nav ul.summary li a {
+  font-size: 1em;
+  color: #666666;
 }
 
-.book .book-summary ul.summary li a:hover,
-.book .book-summary ul.summary li.active>a {
+.book .book-summary nav ul.summary li a:hover,
+.book .book-summary nav ul.summary li a:focus {
+  color: #222222;
+  text-decoration: none;
+}
+
+.book .book-summary nav ul.summary li.active > a {
   color: #43CEA2;
+  text-decoration: none;
+}
+
+/* Top level links */
+.book .book-summary nav ul.summary > li > a {
+  font-size: 1.1em;
+}
+
+/* 2nd level headings */
+.book .book-summary nav ul.summary > li > ul > li > span {
+  font-weight: 700;
+}
+
+.book .book-summary nav ul.summary > li > ul > li > ul {
+  padding-left: 8px !important;
+}
+
+/* 3rd level menu items */
+.book .book-summary nav ul.summary ul.page-headings > li > a {
+  padding: 5px 10px;
+  font-size: 0.9em;
 }
 
 /* Sidebar Title */
@@ -32,6 +58,52 @@
   background-repeat: no-repeat;
   margin: 10px;
   min-height: 50px;
+}
+
+/* Sidebar Version Dropdown */
+.versions-select select {
+  /* styling */
+  background-color: white;
+  border: 2px solid #43cea2;
+  border-radius: 4px;
+  display: inline-block;
+  font: inherit;
+  color: #666666;
+  line-height: 1.5em;
+  padding: 0.5em 3.5em 0.5em 1em;
+
+  /* reset */
+
+  margin: 0;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  /* Dropdown Arrow */
+  background-image:
+    linear-gradient(45deg, transparent 50%, gray 50%),
+    linear-gradient(135deg, gray 50%, transparent 50%),
+    linear-gradient(to right, #ccc, #ccc);
+  background-position:
+    calc(100% - 20px) calc(1em + 2px),
+    calc(100% - 15px) calc(1em + 2px),
+    calc(100% - 2.5em) 0.5em;
+  background-size:
+    5px 5px,
+    5px 5px,
+    1px 1.5em;
+  background-repeat: no-repeat;
+}
+
+.versions-select select:focus {
+  outline: none;
+}
+
+.versions-select select:-moz-focusring {
+  color: transparent;
+  text-shadow: 0 0 0 #000;
 }
 
 /* Sepia and dark themes */
@@ -103,4 +175,14 @@
 section.markdown-section table {
   display: block;
   overflow-x: auto;
+}
+
+.book .book-summary ul.summary > li[data-level="1.2"] > ul > li > a {
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+.book .book-summary ul.summary > li[data-level="1.2"] > ul > li > ul > li > span {
+  font-size: 1.2em;
+  text-decoration: underline;
 }

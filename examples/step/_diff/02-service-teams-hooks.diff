@@ -1,0 +1,37 @@
+--- 02/app1/src/services/teams/hooks/index.js	2017-01-10 15:55:18.871000000 -0500
++++ 02/service/src/services/teams/hooks/index.js	2016-12-25 10:38:49.022000000 -0500
+@@ -3,6 +3,23 @@
+ const globalHooks = require('../../../hooks');
+ const hooks = require('feathers-hooks');
+ const auth = require('feathers-authentication').hooks;
++const { populate, serialize } = require('feathers-hooks-common'); // added
++
++const populateSchema = { // added
++  include: [{
++    service: 'users',
++    nameAs: 'members',
++    parentField: 'memberIds',
++    childField: '_id'
++  }]
++};
++
++const serializeSchema = { // added
++  exclude: ['_id', '_include'],
++  members: {
++    only: ['email', 'role']
++  }
++};
+ 
+ exports.before = {
+   all: [
+@@ -20,8 +37,8 @@
+ 
+ exports.after = {
+   all: [],
+-  find: [],
+-  get: [],
++  find: [ populate({ schema: populateSchema }), serialize(serializeSchema) ], // changed
++  get: [ populate({ schema: populateSchema }), serialize(serializeSchema) ], // changed
+   create: [],
+   update: [],
+   patch: [],
