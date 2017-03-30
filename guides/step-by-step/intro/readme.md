@@ -7,18 +7,18 @@ Each step is backed by a working example in `examples/step/`.
 The code samples in the guide are extracts from those examples.
 Code snippets may be ambiguous, misleading or confusing.
 Working examples reduce these problems,
-as well as letting you learn more by modifying them yourself.
+and let you learn more by modifying them yourself.
 
 One example may continue with changes from a previous example.
-In such cases, a recap of the differences between the 2 examples may be shown
-to help in understanding the changes.
+In such cases, a summary of the differences between the two examples may be shown
+to help you understand the changes.
 
 > **Warning.** The clients in the examples log results to the browser console.
 So open the console log before pointing the browser at an example URL.
 
 Feathers has a definite **ah-ha** moment,
 that moment when you realize how much it accomplishes and how simply.
-We want to get to that moment quickly while fulling understanding what is happening.
+We want to get to that moment quickly, while fully understanding what is happening.
 
 We'll develop a solid enough understanding of Feathers basics that,
 by the time we get to Feathers' generators,
