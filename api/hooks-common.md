@@ -237,7 +237,7 @@ See also iff, iffElse, when, unless, isNot, isProvider.
 Run hook functions in parallel.
 Return `true` if every hook function returned a truthy value.
 
-- Used as a predicate function with [conditional hooks](#conditional-hooks).
+- Used as a predicate function with conditional hooks.
 - The current `hook` is passed to all the hook functions, and they are run in parallel.
 - Hooks to run may be sync or Promises only.
 - `feathers-hooks` catches any errors thrown in the predicate.
@@ -340,7 +340,7 @@ See also iff, else, when, unless, isNot, isProvider.
 
 Negate the `predicate`.
 
-- Used as a predicate with [conditional hooks](#conditional-hooks).
+- Used as a predicate with conditional hooks.
 - Predicate may be a sync or async function.
 - `feathers-hooks` catches any errors thrown in the predicate.
 
@@ -367,7 +367,7 @@ See also iff, iffElse, else, when, unless, isProvider.
 Check which transport called the service method.
 All providers ([REST](./rest.md), [Socket.io](./socketio.md) and [Primus](./primus.md)) set the `params.provider` property which is what `isProvider` checks for.
 
- - Used as a predicate function with [conditional hooks](#conditional-hooks).
+ - Used as a predicate function with conditional hooks.
 
 ```javascript
 import { iff, isProvider, remove } from 'feathers-hooks-common';
@@ -1077,7 +1077,7 @@ __Options:__
 Run hook functions in parallel.
 Return `true` if any hook function returned a truthy value.
 
-- Used as a predicate function with [conditional hooks](#conditional-hooks).
+- Used as a predicate function with conditional hooks.
 - The current `hook` is passed to all the hook functions, and they are run in parallel.
 - Hooks to run may be sync or Promises only.
 - `feathers-hooks` catches any errors thrown in the predicate.
