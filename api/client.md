@@ -22,15 +22,52 @@ This chapter describes how to use Feathers as the client in Node, React Native a
 
 
 ## Node and npm loaders
-
-## Webpack
-
-## Browserify, StealJS
-
-Both, Browserify and StealJS support npm modules and require no additional configuration.  If you're using socket.io with StealJS, be sure to import the dist version:
+The client utilities can be used directly on the server.  Just `require` each individual package or the `feathers-client` and use it the same way as shown for in the browser examples, below.  Node.js natively supports the CommonJS module syntax.  Here's an example of setting up the client in Node:
 
 ```js
-import io from 'socket.io-client/dist/socket.io'
+const feathers = require('feathers/client');
+const socketio = require('feathers-socketio/client');
+const hooks = require('feathers-hooks');
+const errors = require('feathers-errors');
+const auth = require('feathers-authentication-client/dist/socket.io');
+const io = require('socket.io-client');
+
+const socket = io('http://localhost:3030', {
+  transports: ['websocket']
+});
+
+const feathersClient = feathers()
+  .configure(socketio(socket))
+  .configure(hooks())
+  .configure(auth())
+  .configure(errors())
+
+module.exports = feathersClient;
+```
+
+## Browserify, StealJS, and Webpack
+
+Both, Browserify and StealJS support npm modules and require no additional configuration.  The client modules are all JavaScript, and should also work with any Webpack configuration.  Here's the same example from above, rewritten in ES Module syntax:
+
+```js
+import feathers from 'feathers/client';
+import socketio from 'feathers-socketio/client';
+import hooks from 'feathers-hooks';
+import errors from 'feathers-errors';
+import auth from 'feathers-authentication-client/dist/socket.io';
+import io from 'socket.io-client';
+
+const socket = io('http://localhost:3030', {
+  transports: ['websocket']
+});
+
+const feathersClient = feathers()
+  .configure(socketio(socket))
+  .configure(hooks())
+  .configure(auth())
+  .configure(errors())
+
+export default feathersClient;
 ```
 
 ## React Native
@@ -90,6 +127,8 @@ $ npm install feathers-client --save
 | feathers-primus/client          | feathers.primus         |
 | feathers-authentication/client  | feathers.authentication |
 
+### Load from CDN with `<script>`
+
  Below is an example of the scripts you would use to load `feathers-client` from `unpkg.com`.  It's possible to use it with a module loader,  but using individual client packages will allow you to take advantage of Feathers' modularity.
 
 ```html
@@ -115,6 +154,27 @@ $ npm install feathers-client --save
 
 You can use `feathers-client` in NodeJS or with a browser module loader/bundler but it will include packages you may not use. It is also important to note that - except for this section - all other Feathers client examples assume you are using Node or a module loader.
 
-### `<script>` tag
-
 ### RequireJS
+Here's an example of loading feathers-client using RequireJS Syntax:
+```js
+define(function (require) {
+  const feathers = require('feathers/client');
+  const socketio = feathers.socketio;
+  const hooks = feathers.hooks;
+  const errors = feathers.errors;
+  const auth = feathers.auth;
+  const io = require('socket.io-client');
+
+  const socket = io('http://localhost:3030', {
+    transports: ['websocket']
+  });
+
+  const feathersClient = feathers()
+    .configure(socketio(socket))
+    .configure(hooks())
+    .configure(auth())
+    .configure(errors())
+
+  return feathersClient;
+});
+```
