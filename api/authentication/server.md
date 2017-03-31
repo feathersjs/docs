@@ -78,31 +78,12 @@ The following default options will be mixed in with your global `auth` object fr
 
 ## Additional `app` methods
 The Feathers `app` will contain a few useful methods once you've configured the auth plugin:
-- [app.authenticate](#appauthenticatedata)
+- [app.authenticate](#appauthenticate)
 - [app.passport.createJWT](#apppassportcreatejwtpayload-options-source)
 - [app.passport.verifyJWT](#apppassportverifyjwttoken-options-source)
 
-### `app.authenticate(data)`
-A wrapper that calls `app.service('/authorization').create(data, params)` to create a JWT access token.  It uses the `jwt` options provided during configuration.
-
-```js
-app.authenticate({
-  strategy: 'jwt', 
-  accessToken: '<the.jwt.token.string>'
-})
-```
-
-- `data {Object}` - of the format `{strategy [, ...otherProps]}`
-  - `strategy {String}` - the name of the strategy to be used to authenticate.  Required.
-  - `...otherProps {Properties} ` vary depending on the chosen strategy. Above is an example of using the `jwt` strategy.  Below is one for the `local` strategy.
-
-```js
-app.authenticate({
-  strategy: 'local',
-  email: 'my@email.com',
-  password: 'my-password'
-})
-```
+### `app.authenticate`
+The same as PassportJS `authenticate`.  See the [PassportJS docs](http://passportjs.org/docs/authenticate).
 
 ### `app.passport.createJWT(payload, options)` [source](https://github.com/feathersjs/feathers-authentication/blob/master/src/utils.js#L8)
 This is the method used by the `/authentication` service to generate JSON Web Tokens.
