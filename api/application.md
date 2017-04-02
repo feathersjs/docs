@@ -39,7 +39,7 @@ app.use('/messages', {
 });
 ```
 
-On the server `.use` will additionally also provide the same functionality as [Express app.use](http://expressjs.com/en/4x/api.html#app.use) if passed something other than a service object (e.g. an Express middleware or other app object).
+On the server `.use` also provides the same functionality as [Express app.use](http://expressjs.com/en/4x/api.html#app.use) if passed something other than a service object (e.g. an Express middleware or other app object).
 
  > **Important:** [REST](./rest.md) services are registered in the same order as any other middleware. For additional information how services and middleware interact see the [Express chapter](./express.md).
 
