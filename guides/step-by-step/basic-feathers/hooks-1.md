@@ -3,24 +3,24 @@
 Applications are more than reading and writing database items.
 Application-specific logic often needs to run before and after service methods execute.
 
-This is what Feathers [hooks](https://docs.feathersjs.com/hooks/readme.html) are for.
+This is what Feathers [hooks](../../../api/hooks.md) are for.
 We'll be introducing specific hooks as we need them.
 
-### Working example
+## Working example
 
-- Server code: [examples/step/01/hooks/1.js](https://github.com/feathersjs/feathers-guide/blob/master/examples/step/01/hooks/1.js)
-- Client code: [common/public/rest.html](https://github.com/feathersjs/feathers-guide/blob/master/examples/step/01/common/public/rest.html)
+- Server code: [examples/step/01/hooks/1.js](https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/01/hooks/1.js)
+- Client code: [common/public/rest.html](https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/01/common/public/rest.html)
 and
-[feathers-app.js](https://github.com/feathersjs/feathers-guide/blob/master/examples/step/01/common/public/feathers-app.js)
+[feathers-app.js](https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/01/common/public/feathers-app.js)
 - Start the server: `node ./examples/step/01/hooks/2`
 - Point the browser at: `//localhost:3030/rest.html`
 - Compare with last page's server
-[examples/step/01/hooks/1.js](https://github.com/feathersjs/feathers-guide/blob/master/examples/step/01/hooks/1.js):
-[Unified](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-guide/blob/master/examples/step/_diff/01-hooks-1-line.html)
+[examples/step/01/hooks/1.js](https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/01/hooks/1.js):
+[Unified](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/_diff/01-hooks-1-line.html)
 |
-[Split](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-guide/blob/master/examples/step/_diff/01-hooks-1-side.html)
+[Split](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/_diff/01-hooks-1-side.html)
 
-### Writing hooks
+## Writing hooks
 
 Let's add some hooks to the server we've used with the Feathers REST and Websocket clients.
 
@@ -68,36 +68,36 @@ function userSchema() {
 }
 ```
 - See what changed:
-[Unified](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-guide/blob/master/examples/step/_diff/01-hooks-1-line.html)
+[Unified](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/_diff/01-hooks-1-line.html)
 |
-[Split](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-guide/blob/master/examples/step/_diff/01-hooks-1-side.html)
+[Split](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/_diff/01-hooks-1-side.html)
 
 
-#### - .configure(hooks())
+### - .configure(hooks())
 
 We include support for hooks in the configuration.
 
-#### - this.configure(user);
+### - this.configure(user);
 
 The user service is now more complex, so we configure it on its own.
  
-#### - const { validateSchema, setCreatedAt, setUpdatedAt, unless, remove } = commonHooks;
+### - const { validateSchema, setCreatedAt, setUpdatedAt, unless, remove } = commonHooks;
 
 Feathers comes with a library of useful hooks.
 Here we get some common hooks from `feathers-hooks-common`.
 More specialized hooks come bundled with their specialized packages,
 such as with `feathers-authentication-local`.
 
-#### - userService.before({ ... });
+### - userService.before({ ... });
 
 These hooks will be run before the operation on the database.
 
-#### - create: [ ... ]
+### - create: [ ... ]
 
 These hooks will be run before all `create` operations on the database.
 `all` (all service methods), `get`, `update`', `patch`, `remove`, `find` may also be included.
 
-#### - validateSchema(userSchema(), Ajv)
+### - validateSchema(userSchema(), Ajv)
 
 Validate the data we are to add using [ajv](https://github.com/epoberezkin/ajv).
 The service's [JSON schema](https://github.com/json-schema-org/json-schema-spec)
@@ -107,7 +107,7 @@ There are
 [good tutorials](https://code.tutsplus.com/tutorials/validating-data-with-json-schema-part-1--cms-25343)
 on validating data with JSON schema.
 
-#### - authHooks.hashPassword()
+### - authHooks.hashPassword()
 
 The data has a `password` field.
 This specialized authentication hook will replace it by hashed version
@@ -125,16 +125,16 @@ The cookies vs token debate
 [favors token-based authentication](https://auth0.com/blog/cookies-vs-tokens-definitive-guide/).
 The avoidance of sessions makes Feathers apps more easily scalable.
 
-#### - setCreatedAt(), setUpdatedAt()
+### - setCreatedAt(), setUpdatedAt()
 
 These hooks add `createdAt` and `updatedAt` properties to the data.
 
-#### - userService.after({ ... });
+### - userService.after({ ... });
 
 These hooks are run after the operation on the database.
 They act on all the results returned by the operation.
 
-#### - unless(hook => hook.method === 'find', remove('password'))
+### - unless(hook => hook.method === 'find', remove('password'))
 
 - `hook => hook.method === 'find'` returns true if the database operation was a `find`.
 All hooks are passed a [hook](https://docs.feathersjs.com/hooks/usage.html#after-hooks)
@@ -155,7 +155,7 @@ Before we add a new user, we verify the data, encode the password,
 and add createdAt plus updatedAt properties.
 We remove the password field before we return the results to the client.
 
-### Hooks
+## Hooks
 
 Many of your common needs are already handled by hooks in the common hook library.
 This may significantly reduce the code you need to write.
@@ -175,7 +175,7 @@ You can swap databases or ORMs with minimal application code changes.
 You can also share validations for multiple databases in the same app, across multiple apps,
 and with your client.
 
-### The results
+## Results
 
 The browser console displays
 

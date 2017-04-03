@@ -5,7 +5,7 @@
 A Feathers server automatically handles requests from
 - HTTP REST clients,
 - Feathers REST clients, or
-- Feathers websocket clients.
+- Feathers WebSocket clients.
 
 ## Feathers resource management is platform agnostic
 
@@ -19,7 +19,7 @@ without you needing to do anything.
 The "ah-ha" moment comes when you start to realize the significance of these features.
 Enormous amounts of boilerplate simply disappear.
 
-| You might now start to appreciate why people are enthusiastic about Feathers.
+> You might now start to appreciate why people are enthusiastic about Feathers.
 
 ### Is anything wrong, unclear, missing?
 [Leave a comment.](https://github.com/feathersjs/feathers-guide/issues/new?title=Comment:Step-Basic-Ahha&body=Comment:Step-Basic-Ahha)
