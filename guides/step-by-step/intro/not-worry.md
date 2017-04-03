@@ -7,11 +7,11 @@ Feathers supports over 20 different databases.
 Feathers apps are database agnostic for the most part.
 At worst, it shouldn't take more than 30 minutes to switch your app from one database to another.
 - **Authentication.**
-Feathers authentication wraps [Passport](http://passportjs.org/) so Feathers can do anything Passport does.
+Feathers authentication wraps [PassportJS](http://passportjs.org/) so Feathers can do anything Passport does.
 - **How do I use Feathers with React, Angular, Vue?**
 These are covered in the companion guides.
 - **Is Feathers production ready? Is it scalable?** Yes, and yes.
-These's detailed information [below](../production-read.md).
+There's detailed information [below](../production-ready.md).
 - **Javascript Promises.**
 Feathers works with both [callbacks](http://dreamerslab.com/blog/en/javascript-callbacks/)
 or [Promises](https://davidwalsh.name/promises).
