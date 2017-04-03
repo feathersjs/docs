@@ -1,5 +1,5 @@
---- 02/app1/src/services/teams/hooks/index.js	2017-01-10 15:55:18.871000000 -0500
-+++ 02/service/src/services/teams/hooks/index.js	2016-12-25 10:38:49.022000000 -0500
+--- 02/app1/src/services/teams/hooks/index.js	2017-03-29 08:57:36.706003415 -0400
++++ 02/service/src/services/teams/hooks/index.js	2017-03-29 08:57:36.710005414 -0400
 @@ -3,6 +3,23 @@
  const globalHooks = require('../../../hooks');
  const hooks = require('feathers-hooks');

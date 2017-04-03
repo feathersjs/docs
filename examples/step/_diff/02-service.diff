@@ -1,6 +1,6 @@
 diff -bdur --new-file 02/app/public/feathers-app.js 02/service/public/feathers-app.js
---- 02/app/public/feathers-app.js	2017-01-13 14:50:14.748000000 -0500
-+++ 02/service/public/feathers-app.js	2017-01-13 15:20:11.900000000 -0500
+--- 02/app/public/feathers-app.js	2017-03-29 08:57:36.697999415 -0400
++++ 02/service/public/feathers-app.js	2017-03-29 08:57:36.706003415 -0400
 @@ -5,35 +5,23 @@
      storage: window.localStorage
    }));
@@ -21,10 +21,10 @@ diff -bdur --new-file 02/app/public/feathers-app.js 02/service/public/feathers-a
 -    console.log('created Jack Doe item\n', results[3]);
 -    
 -    jackId = results[3]._id;
-+const teams = feathersClients.service('/teams');
++const teams = feathersClient.service('/teams');
      
 -    return feathersClient.authenticate({
-+feathersClients.authenticate({
++feathersClient.authenticate({
        type: 'local',
        'email': 'jane.doe@gmail.com',
        'password': '11111'
@@ -53,8 +53,8 @@ diff -bdur --new-file 02/app/public/feathers-app.js 02/service/public/feathers-a
 -  .catch(err => console.log('Error occurred:', err));
 +  .catch(err => console.log('\nError occurred:', err));
 diff -bdur --new-file 02/app/public/rest.html 02/service/public/rest.html
---- 02/app/public/rest.html	2017-01-10 14:53:22.318000000 -0500
-+++ 02/service/public/rest.html	2017-01-10 15:45:39.434000000 -0500
+--- 02/app/public/rest.html	2017-03-29 08:57:36.697999415 -0400
++++ 02/service/public/rest.html	2017-03-29 08:57:36.706003415 -0400
 @@ -1,6 +1,6 @@
  <html>
  <head>
@@ -73,8 +73,8 @@ diff -bdur --new-file 02/app/public/rest.html 02/service/public/rest.html
  Open console to see results of <strong>feathers-rest</strong> calls.
  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/core-js/2.1.4/core.min.js"></script>
 diff -bdur --new-file 02/app/public/socketio.html 02/service/public/socketio.html
---- 02/app/public/socketio.html	2017-01-10 14:53:22.496000000 -0500
-+++ 02/service/public/socketio.html	2017-01-10 15:45:39.527000000 -0500
+--- 02/app/public/socketio.html	2017-03-29 08:57:36.702001415 -0400
++++ 02/service/public/socketio.html	2017-03-29 08:57:36.710005414 -0400
 @@ -1,6 +1,6 @@
  <html>
  <head>
@@ -93,8 +93,8 @@ diff -bdur --new-file 02/app/public/socketio.html 02/service/public/socketio.htm
  Open console to see results of <strong>feathers-socketio</strong> calls.
  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/core-js/2.1.4/core.min.js"></script>
 diff -bdur --new-file 02/app/src/app.js 02/service/src/app.js
---- 02/app/src/app.js	2016-12-23 17:38:02.788000000 -0500
-+++ 02/service/src/app.js	2016-12-25 10:41:50.656000000 -0500
+--- 02/app/src/app.js	2017-03-29 08:57:36.702001415 -0400
++++ 02/service/src/app.js	2017-03-29 08:57:36.710005414 -0400
 @@ -28,4 +28,47 @@
    .configure(services)
    .configure(middleware);
@@ -144,8 +144,8 @@ diff -bdur --new-file 02/app/src/app.js 02/service/src/app.js
 +    })
 +}
 diff -bdur --new-file 02/app/src/services/index.js 02/service/src/services/index.js
---- 02/app/src/services/index.js	2016-12-23 17:38:02.716000000 -0500
-+++ 02/service/src/services/index.js	2016-12-24 10:50:25.710000000 -0500
+--- 02/app/src/services/index.js	2017-03-29 08:57:36.702001415 -0400
++++ 02/service/src/services/index.js	2017-03-29 08:57:36.710005414 -0400
 @@ -1,4 +1,5 @@
  'use strict';
 +const teams = require('./teams');
@@ -160,7 +160,7 @@ diff -bdur --new-file 02/app/src/services/index.js 02/service/src/services/index
  };
 diff -bdur --new-file 02/app/src/services/teams/hooks/index.js 02/service/src/services/teams/hooks/index.js
 --- 02/app/src/services/teams/hooks/index.js	1969-12-31 19:00:00.000000000 -0500
-+++ 02/service/src/services/teams/hooks/index.js	2016-12-25 10:38:49.022000000 -0500
++++ 02/service/src/services/teams/hooks/index.js	2017-03-29 08:57:36.710005414 -0400
 @@ -0,0 +1,46 @@
 +'use strict';
 +
@@ -210,7 +210,7 @@ diff -bdur --new-file 02/app/src/services/teams/hooks/index.js 02/service/src/se
 +};
 diff -bdur --new-file 02/app/src/services/teams/index.js 02/service/src/services/teams/index.js
 --- 02/app/src/services/teams/index.js	1969-12-31 19:00:00.000000000 -0500
-+++ 02/service/src/services/teams/index.js	2016-12-28 14:28:28.319000000 -0500
++++ 02/service/src/services/teams/index.js	2017-03-29 08:57:36.710005414 -0400
 @@ -0,0 +1,35 @@
 +'use strict';
 +
@@ -249,7 +249,7 @@ diff -bdur --new-file 02/app/src/services/teams/index.js 02/service/src/services
 +};
 diff -bdur --new-file 02/app/test/services/teams/index.test.js 02/service/test/services/teams/index.test.js
 --- 02/app/test/services/teams/index.test.js	1969-12-31 19:00:00.000000000 -0500
-+++ 02/service/test/services/teams/index.test.js	2016-12-24 10:50:25.750000000 -0500
++++ 02/service/test/services/teams/index.test.js	2017-03-29 08:57:36.710005414 -0400
 @@ -0,0 +1,10 @@
 +'use strict';
 +
