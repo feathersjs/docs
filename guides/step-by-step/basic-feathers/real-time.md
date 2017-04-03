@@ -25,27 +25,27 @@ These would have implement a traditional long-polling design.
 Let's create an event listener for the [Feathers Websocket Client](./socket-client.md)
 we already have.
 
-### Working example
+## Working example
 
-- Server code: [examples/step/01/websocket/1.js](https://github.com/feathersjs/feathers-guide/blob/master/examples/step/01/websocket/1.js)
-- Listener code: [common/public/listener.html](https://github.com/feathersjs/feathers-guide/blob/master/examples/step/01/common/public/listener.html)
+- Server code: [examples/step/01/websocket/1.js](https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/01/websocket/1.js)
+- Listener code: [common/public/listener.html](https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/01/common/public/listener.html)
 and
-[listener-app.js](https://github.com/feathersjs/feathers-guide/blob/master/examples/step/01/common/public/listener-app.js)
-- Client code: [common/public/socketio.html](https://github.com/feathersjs/feathers-guide/blob/master/examples/step/01/common/public/socketio.html)
+[listener-app.js](https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/01/common/public/listener-app.js)
+- Client code: [common/public/socketio.html](https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/01/common/public/socketio.html)
 and
-[feathers-app.js](https://github.com/feathersjs/feathers-guide/blob/master/examples/step/01/common/public/feathers-app.js)
+[feathers-app.js](https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/01/common/public/feathers-app.js)
 - Start the server: `node ./examples/step/01/websocket/1.js`
 - Start the listener by pointing a browser tab at `//localhost:3030/listener.html`
 - Start making changes by pointing a browser tab at: `//localhost:3030/socketio.html`
 
-### Implementing a listener
+## Implementing a listener
 
 Implementing the listener
-[common/public/listener-app.js](https://github.com/feathersjs/feathers-guide/blob/master/examples/step/01/common/public/listener-app.js)
+[common/public/listener-app.js](https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/01/common/public/listener-app.js)
 is straight forward.
 [import](../../../examples/step/01/common/public/listener-app.js)
 
-### Filtering
+## Filtering
 
 Our listener's console displays:
 

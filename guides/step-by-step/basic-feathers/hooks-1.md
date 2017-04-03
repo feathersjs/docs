@@ -22,7 +22,7 @@ and
 
 ## Writing hooks
 
-Let's add some hooks to the server we've used with the Feathers REST and Websocket clients.
+Let's add some hooks to the server we've used with the Feathers REST and WebSocket clients.
 
 ```javascript
 const authHooks = require('feathers-authentication-local').hooks;
@@ -84,9 +84,9 @@ The user service is now more complex, so we configure it on its own.
 ### - const { validateSchema, setCreatedAt, setUpdatedAt, unless, remove } = commonHooks;
 
 Feathers comes with a library of useful hooks.
-Here we get some common hooks from `feathers-hooks-common`.
-More specialized hooks come bundled with their specialized packages,
-such as with `feathers-authentication-local`.
+Here we get some common hooks from
+[`feathers-hooks-common`](../../../api/hooks-common.md).
+More specialized hooks come bundled with their specialized packages.
 
 ### - userService.before({ ... });
 
@@ -137,8 +137,8 @@ They act on all the results returned by the operation.
 ### - unless(hook => hook.method === 'find', remove('password'))
 
 - `hook => hook.method === 'find'` returns true if the database operation was a `find`.
-All hooks are passed a [hook](https://docs.feathersjs.com/hooks/usage.html#after-hooks)
-object which contains information about the operation.
+All hooks are passed a [hook object](../../../api/hooks.md#hook-objects)
+which contains information about the operation.
 
 - `remove('password')`
 removes the `password` property from the results.
@@ -157,13 +157,14 @@ We remove the password field before we return the results to the client.
 
 ## Hooks
 
-Many of your common needs are already handled by hooks in the common hook library.
+Many of your common needs are already handled by hooks in the
+[common hooks library](../../../api/hooks-common.md).
 This may significantly reduce the code you need to write.
 
 Hooks are just small middleware functions that get applied before and after a service method executes.
 
 Hooks are transport independent. It does not matter if the service request come through
-HTTP REST, Feathers REST, Feathers websockets, or any other transport Feathers may support in the future.
+HTTP REST, Feathers REST, Feathers WebSockets, or any other transport Feathers may support in the future.
 
 Most hooks can be used with any service.
 This allows you to easily decouple the actual service logic from things like
@@ -171,7 +172,7 @@ authorization, data pre-processing (sanitizing and validating),
 data post processing (serialization),
 or sending notifications like emails or text messages after something happened.
 
-You can swap databases or ORMs with minimal application code changes.
+You can swap databases with minimal application code changes.
 You can also share validations for multiple databases in the same app, across multiple apps,
 and with your client.
 

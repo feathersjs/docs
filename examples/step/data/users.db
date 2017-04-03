@@ -1,6 +1,9 @@
 {"email":"john.doe@gmail.com","password":"22222","role":"user","_id":"93JfbxCC9LuMeYcy"}
+{"email":"john.doe@gmail.com","password":"22222","role":"user","_id":"DD3xQ5Pk6qVN584M"}
+{"email":"jane.doe@gmail.com","password":"11111","role":"admin","_id":"FPo0ZPU5VkKbUKvi"}
+{"email":"judy.doe@gmail.com","password":"33333","role":"user","_id":"LM2Vqo7hBZAd7v4Q"}
 {"email":"jane.doe@gmail.com","password":"11111","role":"admin","_id":"cd7mrf0DzmjGop2N"}
 {"email":"judy.doe@gmail.com","password":"33333","role":"user","_id":"o3hasn77L8gimX8d"}
-{"email":"jane.doe@gmail.com","password":"11111","role":"admin","_id":"FPo0ZPU5VkKbUKvi"}
-{"email":"john.doe@gmail.com","password":"22222","role":"user","_id":"DD3xQ5Pk6qVN584M"}
-{"email":"judy.doe@gmail.com","password":"33333","role":"user","_id":"LM2Vqo7hBZAd7v4Q"}
+{"email":"jane.doe@gmail.com","password":"$2a$10$z9eNadrxUgkO2Va6F7nQI.lsosp3EbiHaMRZ441yGPRTbdrXWYYcG","role":"admin","createdAt":{"$$date":1491246769845},"updatedAt":{"$$date":1491246769845},"_id":"f6VQyRUaeoOtjD1Q"}
+{"email":"john.doe@gmail.com","password":"$2a$10$6xjWTNJ7SnxdTVZUcXgvJusoy5kjPuqgYHw7NhglzCijON.WPqpaG","role":"user","createdAt":{"$$date":1491246769845},"updatedAt":{"$$date":1491246769845},"_id":"jzpMvu2efqgo6EqV"}
+{"email":"judy.doe@gmail.com","password":"$2a$10$hHgrHmuyaFb6/aPo35keWuXDh5nxSlzRA74vgafOlfrmlJI0mPokm","role":"user","createdAt":{"$$date":1491246769845},"updatedAt":{"$$date":1491246769845},"_id":"AjqElVvlBFnW18if"}
