@@ -1,4 +1,4 @@
-# Installing the guides and examples
+# Installing the examples
 
 ## Install Node
 
@@ -18,7 +18,7 @@ There are many resources available for installing it.
 - [Mac OSX.](https://www.atlassian.com/git/tutorials/install-git/mac-os-x)
 - [Windows.](https://www.atlassian.com/git/tutorials/install-git/windows)
 
-## Install the guide and its examples
+## Install the examples
 
 Linux and Windows:
 ```text
@@ -29,7 +29,7 @@ git clone https://github.com/feathersjs/feathers-docs
 > **Alternative install.** If you don't already have git installed on your machine,
 you may prefer to download the repository as a zip file.
 Point your browser at
-`https://github.com/feathersjs/feathers-docs/archive/auk.zip`
+`https://github.com/feathersjs/feathers-docs/archive/master.zip`
 to start the download.
 
 ## Install dependencies
@@ -41,8 +41,8 @@ npm install
 ## Reading the guide
 
 You can read this guide by pointing your browser to the
-[Feathers documentation](https://docs.feathersjs.com/v/auk/guides/step-by-step/readme.html).
-You can also read the guide by serving the static files in this repo located at `feathers-docs/_book`.
+[Feathers documentation](https://docs.feathersjs.com/guides/step-by-step/readme.html).
+You can also read the guide by serving static files from this repo.
 
 If you do not have a static server already installed, you may install
 [http-server](https://www.npmjs.com/package/http-server)
