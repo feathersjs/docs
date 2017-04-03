@@ -136,9 +136,9 @@ process.on('nuxt:build:done', (err) => {
 });
 ```
 
-## Finishing up…
+## Wrapping up…
 
-You can now create your views inside `pages/` and Nuxt will pick them up and create routes for. Here are a couple that you can use to test your new app:
+You can now create your views inside `pages/` and Nuxt will pick them up and create appropriate routes. Here are a couple that you can use to test your new app:
 
 ```html
 <!-- your-app/pages/index.vue -->
@@ -172,3 +172,5 @@ export default {
 }
 </script>
 ```
+
+Now if you point your browser to http://localhost:3030/ you should see your brand new Feathers + Nuxt application!
