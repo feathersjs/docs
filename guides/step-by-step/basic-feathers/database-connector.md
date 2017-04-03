@@ -3,7 +3,7 @@
 Our first Feathers example resides on the server only.
 We'll see how easy it is to use a database table.
 
-The example adds some user items to a NeDB database table,
+This example adds some user items to a NeDB database table,
 reads them back and displays them.
 
 > **Databases.** We're using the NeDB database because it won't distract us
@@ -15,7 +15,7 @@ Everything we mention in this guide is applicable to all of them.
 
 ### Working example
 
-- Source code: [examples/step/01/db-connector/1.js](https://github.com/feathersjs/feathers-guide/blob/master/examples/step/01/db-connector/1.js)
+- Source code: [examples/step/01/db-connector/1.js](https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/01/db-connector/1.js)
 - Run it: `node ./examples/step/01/db-connector/1.js`
 
 ### Feathers is modular
@@ -52,7 +52,7 @@ Feathers team prioritizes them.
 
 > ** Promise Refresher.** `Promise.all([ ... ]).then(results => { ... });`
 Promise.all takes an array whose elements are JavaScript values or Promises.
-It resolves each element, i.e. it waits for any async Promise to complete.
+It resolves each element, i.e. it waits for that async Promise to complete.
 The elements are resolved in parallel, not sequentially,
 so Promise.all is a great pattern with which to start independent actions.
 The `then` portion is called once all elements are resolved.
@@ -69,11 +69,12 @@ We issue a find for the entire table and print the results.
 i.e. for the find to finish.
 The zero, one or more items found in the table are returned in the `results` param.
 
-| View the completed file [db-connector/1.js.](https://github.com/feathersjs/feathers-guide/blob/master/examples/step/01/db-connector/1.js)
+| View the completed file [db-connector/1.js.](https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/01/db-connector/1.js)
 
 ### Service methods
 
-Feathers provides the following service methods:
+Feathers provides the following
+[service methods](../../../api/services.md#service-methods):
 ```javascript
 find(params)
 get(id, params)
@@ -88,7 +89,7 @@ also for patch and remove if id is `null`.
 
 ### Results
 
-Run the program from feathers-guide with `node ./examples/step/01/db-connector/1.js`.
+Run the program with `node ./examples/step/01/db-connector/1.js`.
 The console displays:
 
 ```text
