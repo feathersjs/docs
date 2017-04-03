@@ -24,7 +24,7 @@ We'll develop a solid enough understanding of Feathers basics that,
 by the time we get to Feathers' generators,
 we'll be mostly interested in how they structure projects rather than in the code they produce.
 
-### Our intended audience
+## Our intended audience
 
 Readers should have reasonable JavaScript experience, some experience with
 [Node](https://nodejs.org/en/),

@@ -73,5 +73,5 @@ Create a folder called, say, `copy-an-introduction` with a subfolder `examples/`
 You can run the same commands as mentioned in the guide
 and (hopefully!) get the same results.
 
-## Is anything wrong, unclear, missing?
+### Is anything wrong, unclear, missing?
 [Leave a comment.](https://github.com/feathersjs/feathers-guide/issues/new?title=Comment:Readme&body=Comment:Readme)

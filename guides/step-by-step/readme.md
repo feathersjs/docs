@@ -14,7 +14,7 @@ but the tools provided make your life so much easier." --
 
 Feathers has several core features.
 
-#### Services
+## Services
 
 [Services](../../api/services.md) are the heart of Feathers, as this is what all clients will interact with.
 They are middlemen and can be used to perform operations of any kind.
@@ -26,7 +26,7 @@ They are middlemen and can be used to perform operations of any kind.
     - process a payment,
     - return the current weather for a location, etc.
         
-#### Hooks
+## Hooks
         
 [Hooks](../../api/hooks.md) are functions that run automatically before or after a service is called upon.
 They can be service gatekeepers and make sure that all operations are allowed and have the required information.
@@ -34,7 +34,7 @@ They can also make sure that only data that should be returned to a client is re
 - before hooks: validate/cleanse/check permissions
 - after hooks: remove data before it's sent to the client
 
-#### Events
+## Events
 
 [Events](../../api/events.md) are sent to clients (or other servers if the feathers-sync package is used)
 when a service method completes.
@@ -44,7 +44,7 @@ The `created`, `updated`, `patched`, and `removed` events provide real-time func
 This is the Feathers alternative to Socket.io's rooms
 and it's an extremely intelligent approach that enables reactive applications to scale well.
 
-#### Authentication
+## Authentication
 
 Feathers provides
 [local](../../api/authentication/local.md),
@@ -55,7 +55,7 @@ and [OAuth2](../../api/authentication/oauth2.md) authentication
 over [REST](https://en.wikipedia.org/wiki/Representational_state_transfer)
 and [WebSockets](https://en.wikipedia.org/wiki/WebSocket).
 
-#### Providers
+## Providers
 
 Choose which providers to use in your application.
 - [REST](https://en.wikipedia.org/wiki/Representational_state_transfer)
@@ -67,7 +67,7 @@ Choose which providers to use in your application.
 [SockJS](https://github.com/sockjs/sockjs-node),
 [Faye](https://faye.jcoglan.com/))
     
-#### Middleware
+## Middleware
   
 [Express middleware](https://expressjs.com/en/guide/using-middleware.html)
 handles the extra fluff that isn't exactly necessary,
@@ -75,7 +75,7 @@ but can be nice for optimization/logging.
 - before service methods: compression, CORS, etc.
 - after service methods: logs, error handlers, etc.
     
-### This guide's purpose
+## This guide's purpose
 
 This guide covers
 - Services used with a database.
