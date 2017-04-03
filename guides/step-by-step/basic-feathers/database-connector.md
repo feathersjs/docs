@@ -1,4 +1,4 @@
-# Writing a Database Connector
+# A Database Connector
 
 Our first Feathers example resides on the server only.
 We'll see how easy it is to use a database table.
@@ -13,12 +13,15 @@ but requires neither installation nor configuration.
 > Feathers supports over 20 different databases.
 Everything we mention in this guide is applicable to all of them.
 
-### Working example
+## Working example
 
 - Source code: [examples/step/01/db-connector/1.js](https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/01/db-connector/1.js)
 - Run it: `node ./examples/step/01/db-connector/1.js`
 
-### Feathers is modular
+The source code contains lines like `/// [dependencies]` and `//! [dependencies]`.
+Ignore them. They are for automatic display of code snippets in this guide.
+
+## Feathers is modular
 
 Feathers embodies the same spirit as the popular HTTP server framework
 [Express](http://expressjs.com/).
@@ -27,19 +30,16 @@ and the core weighs in at just a few hundred lines of code.
 How's that for light weight!
 Now you can see where Feathers got its name.
 
-### Implementing a database connector
-
-
-#### We require our dependencies.
+## We require our dependencies.
 [import:'dependencies'](../../../examples/step/01/db-connector/1.js)
 
-#### We start an instance of Feathers and define its services.
+## We start an instance of Feathers and define its services.
 [import:'feathers'](../../../examples/step/01/db-connector/1.js)
 
 users is the only service we need  and its a database table located at examples/step/data/users.db.
 [import:'services'](../../../examples/step/01/db-connector/1.js)
 
-#### Create 3 users using Promises.
+## Create 3 users using Promises.
 [import:'create'](../../../examples/step/01/db-connector/1.js)
 Each create returns a promise which resolves into the item added into the database.
 NeDB will always adds a unique `_id` property to the user item and the returned item will contain it.
@@ -71,7 +71,7 @@ The zero, one or more items found in the table are returned in the `results` par
 
 | View the completed file [db-connector/1.js.](https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/01/db-connector/1.js)
 
-### Service methods
+## Service methods
 
 Feathers provides the following
 [service methods](../../../api/services.md#service-methods):
@@ -87,7 +87,7 @@ remove(id, params)
 params may be `{ query: { ... }, ... }` for find;
 also for patch and remove if id is `null`.
 
-### Results
+## Results
 
 Run the program with `node ./examples/step/01/db-connector/1.js`.
 The console displays:

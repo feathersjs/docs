@@ -1,0 +1,75 @@
+{
+  "name": "feathers-guide",
+  "description": "Step by Step Guide To Feathersjs",
+  "version": "0.0.0",
+  "homepage": "https://github.com/feathersjs/feathers-guide",
+  "keywords": [
+    "feathers",
+    "feathersjs",
+    "docs",
+    "guide",
+    "introduction"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/feathersjs/feathers-guide.git"
+  },
+  "author": {
+    "name": "Feathers contributors",
+    "email": "hello@feathersjs.com",
+    "url": "https://feathersjs.com"
+  },
+  "contributors": [],
+  "bugs": {
+    "url": "https://github.com/feathersjs/feathers-guide/issues"
+  },
+  "engines": {
+    "node": ">= 6.0.0"
+  },
+  "scripts": {
+    "release:patch": "npm version patch",
+    "release:minor": "npm version minor",
+    "release:major": "npm version major",
+    "lint": "semistandard src/**/*.js test/**/*.js --fix",
+    "build": "./examples/make-diffs.sh && gitbook build"
+  },
+  "semistandard": {
+    "sourceType": "module",
+    "env": [
+      "mocha"
+    ]
+  },
+  "directories": {},
+  "dependencies": {
+    "ajv": "4.10.1",
+    "body-parser": "1.15.2",
+    "compression": "1.6.2",
+    "cors": "2.8.1",
+    "debug": "2.5.1",
+    "feathers": "2.0.3",
+    "feathers-authentication": "0.7.12",
+    "feathers-authentication-local": "0.3.2",
+    "feathers-configuration": "0.2.3",
+    "feathers-errors": "2.5.0",
+    "feathers-hooks": "1.7.1",
+    "feathers-hooks-common": "2.0.3",
+    "feathers-nedb": "2.6.0",
+    "feathers-rest": "1.5.2",
+    "feathers-socketio": "1.4.2",
+    "gitbook-plugin-feathers-collapsible-menu": "^1.0.2",
+    "gitbook-plugin-heading-anchors": "^1.0.3",
+    "gitbook-plugin-include-codeblock": "2.2.0",
+    "moment": "2.17.1",
+    "nedb": "1.8.0",
+    "passport": "0.3.2",
+    "serve-favicon": "2.3.2",
+    "socket.io-client": "1.7.2",
+    "winston": "2.3.0"
+  },
+  "devDependencies": {
+    "gitbook-cli": "^2.3.0",
+    "semistandard": "9.2.1",
+    "webpack": "2.2.0-rc.4"
+  }
+}

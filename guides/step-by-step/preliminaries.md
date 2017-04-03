@@ -32,11 +32,13 @@ Point your browser at
 `https://github.com/feathersjs/feathers-docs/archive/master.zip`
 to start the download.
 
-## Install dependencies
+## Install dependencies used by examples
 ```text
-cd ./feathers-docs
+cd path/to/feathers-docs/examples/step
 npm install
 ```
+
+This will install the dependencies needed by the examples in `/examples/step/node_modules`.
 
 ## Reading the guide
 
@@ -49,7 +51,7 @@ If you do not have a static server already installed, you may install
 globally with `npm install http-server -g`
 and start serving the guide with:
 ```text
-cd feathers-docs
+cd path/to/feathers-docs
 http-server
 ```
 
