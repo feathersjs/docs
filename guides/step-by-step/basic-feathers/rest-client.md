@@ -1,43 +1,43 @@
-# Writing a Feathers REST Client
+# A Feathers REST Client
 
 We already have a Feathers REST API server from the previous example.
 Let's write a Javascript frontend for it.
 
-### Working example
+## Working example
 
-- Server code: [examples/step/01/rest/2.js](https://github.com/feathersjs/feathers-guide/blob/master/examples/step/01/rest/2.js)
+- Server code: [examples/step/01/rest/2.js](https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/01/rest/2.js)
 - Client code:
-[common/public/rest.html](https://github.com/feathersjs/feathers-guide/blob/master/examples/step/01/common/public/rest.html)
+[common/public/rest.html](https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/01/common/public/rest.html)
 and
-[feathers-app.js](https://github.com/feathersjs/feathers-guide/blob/master/examples/step/01/common/public/feathers-app.js)
+[feathers-app.js](https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/01/common/public/feathers-app.js)
 - Start the server: `node ./examples/step/01/rest/2`
 - Point the browser at: `//localhost:3030/rest.html`
 - Compare with last page's server
-[examples/step/01/rest/1.js](https://github.com/feathersjs/feathers-guide/blob/master/examples/step/01/rest/1.js):
-[Unified](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-guide/blob/master/examples/step/_diff/01-rest-2-line.html)
+[examples/step/01/rest/1.js](https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/01/rest/1.js):
+[Unified](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/_diff/01-rest-2-line.html)
 |
-[Split](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-guide/blob/master/examples/step/_diff/01-rest-2-side.html)
+[Split](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/_diff/01-rest-2-side.html)
 
-### Writing a server for Feathers client REST calls
+## Writing a server for Feathers client REST calls
 
-[rest/2.js](https://github.com/feathersjs/feathers-guide/blob/master/examples/step/01/rest/2.js)
+[rest/2.js](https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/01/rest/2.js)
 , our server for Feathers REST clients, is exactly the same as
-[rest/1.js.](https://github.com/feathersjs/feathers-guide/blob/master/examples/step/01/rest/1.js)
+[rest/1.js.](https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/01/rest/1.js)
 , our previous server for HTTP REST API calls. 
 **No new server code is required to handle Feathers REST clients.**
 
 Compare the two:
-[Unified](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-guide/blob/master/examples/step/_diff/01-rest-2-line.html)
+[Unified](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/_diff/01-rest-2-line.html)
 |
-[Split](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-guide/blob/master/examples/step/_diff/01-rest-2-side.html).
+[Split](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/_diff/01-rest-2-side.html).
 
 
-### Writing the frontend HTML
+## Writing the frontend HTML
 
 We'll soon see most of the frontend doesn't care if we're communicating with the server
 using REST or websockets.
 To keep things DRY, we are isolating in
-[common/public/rest.html](https://github.com/feathersjs/feathers-guide/blob/master/examples/step/01/common/public/rest.html)
+[common/public/rest.html](https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/01/common/public/rest.html)
 the code which is unique to REST.
 [import](../../../examples/step/01/common/public/rest.html)
 
@@ -54,25 +54,27 @@ It points to the server,
 and passes the `fetch` instruction as the interface for fetching resources.
 - `src="/feathers-app.js"` loads the main application.
 
-### Writing the Feathers frontend
+## Writing the Feathers frontend
 
 Writing the HTML was actually the hard part.
 The frontend
-[common/public/feathers-app.js.](https://github.com/feathersjs/feathers-guide/blob/master/examples/step/01/common/public/feathers-app.js)
+[common/public/feathers-app.js.](https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/01/common/public/feathers-app.js)
 is essentially the same as the server code we used in
 [Writing a Database Connector](./database-connector.md)!
 [import](../../../examples/step/01/common/public/feathers-app.js)
 
 - See what changed:
-[Unified](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-guide/blob/master/examples/step/_diff/01-rest-2-client-line.html)
+[Unified](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/_diff/01-rest-2-client-line.html)
 |
-[Split](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-guide/blob/master/examples/step/_diff/01-rest-2-client-side.html).
+[Split](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/_diff/01-rest-2-client-side.html).
 
 > **Feathers "ah-ha" moment.**
 We can run **exactly** the same code on the frontend as on the server.
 We can code the frontend as if the database was sitting on it.
 That's part of the magic of Feathers,
 and it makes frontend development significantly simpler.
+
+## Results
 
 The results in the console window of the browser are the same as they were
 running [Writing a Database Connector](./database-connector.md).

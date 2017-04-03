@@ -55,6 +55,9 @@ First, start the server by running `node ./examples/step/01/rest/1.js` on one te
 
 Then run the curl commands with `./examples/step/01/rest/curl-requests.sh`
 on another terminal.
+
+## Results
+
 That console displays:
 
 ```text
