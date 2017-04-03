@@ -55,7 +55,7 @@ cd path/to/feathers-docs
 http-server
 ```
 
-Then point your browser at `http://localhost:8080/_book`.
+Then point your browser at `localhost:8080/_book`.
 
 ## Recreating the examples used in the guides
 

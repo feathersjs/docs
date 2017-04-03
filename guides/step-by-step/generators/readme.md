@@ -26,7 +26,7 @@ The generated modules are structured as recommended by the Feathers team.
 The generators will generate code for different databases.
 So you don't have to investigate how to do so.
 
-### Install generators
+## Install the generators
 
 You can install the Feathers generators with
 

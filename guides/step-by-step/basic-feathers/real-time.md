@@ -1,6 +1,6 @@
 # Real-time
 
-In Feathers, real-time means that services automatically send
+In Feathers, [real-time](../../../api/events.md) means that services automatically send
 created, updated, patched and removed events when
 a create, update, patch or remove service method is complete.
 Clients can listen for these events and then react accordingly.
@@ -35,8 +35,8 @@ and
 and
 [feathers-app.js](https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/01/common/public/feathers-app.js)
 - Start the server: `node ./examples/step/01/websocket/1.js`
-- Start the listener by pointing a browser tab at `//localhost:3030/listener.html`
-- Start making changes by pointing a browser tab at: `//localhost:3030/socketio.html`
+- Start the listener by pointing a browser tab at `localhost:3030/listener.html`
+- Start making changes by pointing a browser tab at: `localhost:3030/socketio.html`
 
 ## Implementing a listener
 
@@ -65,7 +65,7 @@ In many cases you probably want to be able to send certain events to certain cli
 say maybe only ones that are authenticated.
 
 You can control what data is sent to which clients with
-[event filters](https://docs.feathersjs.com/real-time/filtering.html).
+[event filters](../../../api/events.html#event-filtering).
 
 ![Feathers Realtime](/img/event-filter-diagram.jpg)
 

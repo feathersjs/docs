@@ -14,7 +14,7 @@ We will use the popular Socket.io in this guide.
 and
 [feathers-app.js](https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/01/common/public/feathers-app.js)
 - Start the server: `node ./examples/step/01/websocket/1`
-- Point the browser at: `//localhost:3030/socketio.html`
+- Point the browser at: `localhost:3030/socketio.html`
 - Compare with last page's server
 [examples/step/01/rest/2.js](https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/01/rest/2.js):
 [Unified](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/_diff/01-websocket-1-line.html)

@@ -13,7 +13,7 @@ We'll be introducing specific hooks as we need them.
 and
 [feathers-app.js](https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/01/common/public/feathers-app.js)
 - Start the server: `node ./examples/step/01/hooks/2`
-- Point the browser at: `//localhost:3030/rest.html`
+- Point the browser at: `localhost:3030/rest.html`
 - Compare with last page's server
 [examples/step/01/hooks/1.js](https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/01/hooks/1.js):
 [Unified](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/_diff/01-hooks-1-line.html)

@@ -11,7 +11,7 @@ Let's write a Javascript frontend for it.
 and
 [feathers-app.js](https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/01/common/public/feathers-app.js)
 - Start the server: `node ./examples/step/01/rest/2`
-- Point the browser at: `//localhost:3030/rest.html`
+- Point the browser at: `localhost:3030/rest.html`
 - Compare with last page's server
 [examples/step/01/rest/1.js](https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/01/rest/1.js):
 [Unified](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/_diff/01-rest-2-line.html)
@@ -45,7 +45,7 @@ the code which is unique to REST.
 loads a pollyfill for [fetch](https://davidwalsh.name/fetch) if required.
 - `src="//unpkg.com/feathers-client@^1.8.0/dist/feathers.js"` loads the Feathers client code.
 - `src="/serverUrl.js"` loads the URL of the server.
-The default is `var serverUrl = 'http://localhost:3030';`.
+The default is `var serverUrl = 'http:localhost:3030';`.
 Change the value if you need to.
 - `const app = feathers()` instantiates a Feathers client.
 - `.configure(feathers.rest(serverUrl).fetch(fetch))` configures the client to use REST

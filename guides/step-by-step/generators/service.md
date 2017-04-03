@@ -5,20 +5,20 @@ local authentication.
 
 Let's add another service.
 
-### Working example
+## Working example
 
-- Server code: [examples/step/02/service/](https://github.com/feathersjs/feathers-guide/blob/master/examples/step/02/service/)
-- Client code: [service/public/socketio.html](https://github.com/feathersjs/feathers-guide/blob/master/examples/step/02/service/public/socketio.html)
+- Server code: [examples/step/02/service/](https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/02/service/)
+- Client code: [service/public/socketio.html](https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/02/service/public/socketio.html)
 and
-[feathers-app.js](https://github.com/feathersjs/feathers-guide/blob/master/examples/step/02/service/public/feathers-app.js)
+[feathers-app.js](https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/02/service/public/feathers-app.js)
 - Start the server: `node ./examples/step/02/service/src`
-- Point the browser at: `//localhost:3030/socketio.html`
+- Point the browser at: `localhost:3030/socketio.html`
 - Compare with the app on the last page
-[Unified](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-guide/blob/master/examples/step/_diff/02-service-line.html)
+[Unified](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/_diff/02-service-line.html)
 |
-[Split](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-guide/blob/master/examples/step/_diff/02-service-side.html)
+[Split](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/_diff/02-service-side.html)
 
-### Generating a service
+## Generating a service
 
 We copied examples/step/02/app/ to examples/step/02/service/.
 We then ran `feathers generate service`:
@@ -32,24 +32,24 @@ Once again we remove the dependencies loaded by the generator
 as they are already installed at the root of `feathers-guide`.
 
 - See the changes the service generator made:
-[Unified](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-guide/blob/master/examples/step/_diff/02-app1-line.html)
+[Unified](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/_diff/02-app1-line.html)
 |
-[Split](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-guide/blob/master/examples/step/_diff/02-app1-side.html)
+[Split](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/_diff/02-app1-side.html)
 
 
-### App structure
+## App structure
 
 The teams service has been added to the app at src/services/teams/.
 Its structured similarly to users.
 
-### Loading the tables
+## Loading the tables
 
 We added function loadDatabases to service/src/app.js.
 
 - See what changed:
-[Unified](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-guide/blob/master/examples/step/_diff/02-service-src-app-line.html)
+[Unified](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/_diff/02-service-src-app-line.html)
 |
-[Split](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-guide/blob/master/examples/step/_diff/02-service-src-app-side.html)
+[Split](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/_diff/02-service-src-app-side.html)
 
 loadDatabases loads data into the users and teams tables.
 The team item contains the `user._id` of its team members in `team.memberIds`.
@@ -61,10 +61,10 @@ The team item contains the `user._id` of its team members in `team.memberIds`.
 }
 ````
 
-### Populating items
+## Populating items
 
 Let's add some hooks to for teams in
-[src/services/teams/hooks/index.js](https://github.com/feathersjs/feathers-guide/blob/master/examples/step/02/service/src/services/teams/hooks/index.js)
+[src/services/teams/hooks/index.js](https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/02/service/src/services/teams/hooks/index.js)
 
 ```javascript
 const { populate, serialize } = require('feathers-hooks-common');
@@ -99,21 +99,21 @@ exports.after = {
 };
 ```
 
-#### - auth.verifyToken()
+### - auth.verifyToken()
 
 Verifies the JWT token that came with the request.
 The hook will throw an error message should the token be invalid,
 and the error object will be returned to the client automatically.
 
-#### - auth.populateUser()
+### - auth.populateUser()
 
 Add the user item to the information passed to each hook.
 
-#### - auth.restrictToAuthenticated()
+### - auth.restrictToAuthenticated()
 
 Throw if the user is not yet authenticated.
 
-#### - populate({ schema: populateSchema })
+### - populate({ schema: populateSchema })
 
 Its not uncommon to want to include related information in an item.
 In our case we want to join the user items of the members of the team.
@@ -152,7 +152,7 @@ We might get a result that looks like:
 > **Populate.** The populate hook can join multiple services to an item.
 Those items may themselves have other items joined to them recursively.
 
-#### - serialize(serializeSchema)
+### - serialize(serializeSchema)
 
 The client often does not need all the information contained in the base items,
 nor all in any joined items.
@@ -179,14 +179,14 @@ and only keep 2 from the newly joined members property.
 > **Depopulate.** Should you modify your base items and want to `patch` the new values back to the table,
 the dePopulate() hook will remove all joined and calculated properties for you.
 
-#### - Recap
+## - Recap
 
 Let's recap the hooks we added to the generated service:
-[Unified](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-guide/blob/master/examples/step/_diff/02-service-teams-hooks-line.html)
+[Unified](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/_diff/02-service-teams-hooks-line.html)
 |
-[Split](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-guide/blob/master/examples/step/_diff/02-service-teams-hooks-side.html)
+[Split](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/_diff/02-service-teams-hooks-side.html)
 
-### The results
+## The results
 
 The browser console displays the following:
 
