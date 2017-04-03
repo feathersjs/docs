@@ -4,7 +4,7 @@
 
 Integrating Nuxt is pretty straight forward: it mostly involves creating a middleware for building your Nuxt application.
 
-This guide assumes that you'll be building your app using the [Feathers CLI](https://github.com/feathersjs/feathers-cli).
+This guide assumes that you'll be building your app using the [Feathers CLI](https://github.com/feathersjs/feathers-cli). Upon finishing, you'll end up with a Server-Side Rendered Vue.js + Feathers application.
 
 ## Setting things up
 
