@@ -8,7 +8,7 @@
 $ npm install feathers --save
 ```
 
-The core `feathers` module provides the ability to initialize a new Feathers application which allows to register and retrieve [services](./services.md), configure plugins and set global configuration options. An initialized Feathers application is referred to as the **app object**.
+The core `feathers` module provides the ability to initialize new Feathers application instances.  Each instance allows for registration and retrieval of [services](./services.md), plugin configuration, and getting and setting global configuration options. An initialized Feathers application is referred to as the **app object**.
 
 ```js
 // To create a Feathers server application
@@ -20,12 +20,12 @@ const feathers = require('feathers/client');
 const app = feathers();
 ```
 
-> **Important:** Additionally to the API outlined below, a Feathers server application also provides the exact same functionality as an [Express 4](http://expressjs.com/en/4x/api.html) application. For a more advanced use of Feathers, being familiar with Express is highly recommended. For the interaction between Express and Feathers also see the [REST](./rest.md) and [Express chapter](./express.md).
+> **Important:** In addition to the API outlined below, a Feathers server application also provides the exact same functionality as an [Express 4](http://expressjs.com/en/4x/api.html) application. For more advanced use of Feathers, familiarity with Express is highly recommended. For the interaction between Express and Feathers, also see the [REST](./rest.md) and [Express](./express.md) chapters.
 
 
 ## .use(path, service)
 
-`app.use(path, service) -> app` allows to register a [service object](./services.md) on the `path`.
+`app.use(path, service) -> app` allows registering a [service object](./services.md) on the `path`.
 
 ```js
 // Add a service.
@@ -41,7 +41,7 @@ app.use('/messages', {
 
 On the server `.use` also provides the same functionality as [Express app.use](http://expressjs.com/en/4x/api.html#app.use) if passed something other than a service object (e.g. an Express middleware or other app object).
 
- > **Important:** [REST](./rest.md) services are registered in the same order as any other middleware. For additional information how services and middleware interact see the [Express chapter](./express.md).
+ > **Important:** [REST](./rest.md) services are registered in the same order as any other middleware. For additional information on how services and middleware interact see the [Express chapter](./express.md).
 
 
 ## .service(path)
@@ -84,6 +84,8 @@ app.configure(setupService);
 
 `app.listen([port]) -> HTTPServer` starts the application on the given port. It will first call the original [Express app.listen([port])](http://expressjs.com/api.html#app.listen), then run `app.setup(server)` (see below) with the server object and then return the server object.
 
+`listen` does nothing on the Feathers Client.
+
 
 ## .setup(server)
 
@@ -111,7 +113,7 @@ app.listen(app.get('port'));
 
 ## .hooks(hooks)
 
-`app.hooks(hooks) -> app` allows to register application level hooks. For more information see the [application hooks section](./hooks.md#application-hooks).
+`app.hooks(hooks) -> app` allows registration of application-level hooks. For more information see the [application hooks section](./hooks.md#application-hooks).
 
 
 ## .on(eventname, listener)
