@@ -1,36 +1,36 @@
-# Writing a Feathers Websocket Client
+# A Feathers WebSocket Client
 
 We already have a Feathers REST frontend.
-Its simple to convert that to one using websockets.
+Its simple to convert that to one using WebSockets.
 
-> **Websockets.** Feathers can use eight of the most popular websocket libraries.
+> **WebSockets.** Feathers can use eight of the most popular WebSocket libraries.
 We will use the popular Socket.io in this guide.
 
 
-### Working example
+## Working example
 
-- Server code: [examples/step/01/websocket/1.js](https://github.com/feathersjs/feathers-guide/blob/master/examples/step/01/websocket/1.js)
-- Client code: [common/public/socketio.html](https://github.com/feathersjs/feathers-guide/blob/master/examples/step/01/common/public/socketio.html)
+- Server code: [examples/step/01/websocket/1.js](https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/01/websocket/1.js)
+- Client code: [common/public/socketio.html](https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/01/common/public/socketio.html)
 and
-[feathers-app.js](https://github.com/feathersjs/feathers-guide/blob/master/examples/step/01/common/public/feathers-app.js)
+[feathers-app.js](https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/01/common/public/feathers-app.js)
 - Start the server: `node ./examples/step/01/websocket/1`
 - Point the browser at: `//localhost:3030/socketio.html`
 - Compare with last page's server
-[examples/step/01/rest/2.js](https://github.com/feathersjs/feathers-guide/blob/master/examples/step/01/rest/2.js):
-[Unified](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-guide/blob/master/examples/step/_diff/01-websocket-1-line.html)
+[examples/step/01/rest/2.js](https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/01/rest/2.js):
+[Unified](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/_diff/01-websocket-1-line.html)
 |
-[Split](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-guide/blob/master/examples/step/_diff/01-websocket-1-side.html)
+[Split](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/_diff/01-websocket-1-side.html)
 - Compare with last page's HTML
-[common/public/socketio.html](https://github.com/feathersjs/feathers-guide/blob/master/examples/step/01/common/public/socketio.html)
-[Unified](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-guide/blob/master/examples/step/_diff/01-websocket-socketio-line.html)
+[common/public/socketio.html](https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/01/common/public/socketio.html)
+[Unified](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/_diff/01-websocket-socketio-line.html)
 |
-[Split](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-guide/blob/master/examples/step/_diff/01-websocket-socketio-side.html)
+[Split](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/_diff/01-websocket-socketio-side.html)
 
 
-### Change the server to support clients using either Feathers REST **or** websocket calls
+## Change the server to support clients using either Feathers REST **or** WebSocket calls
 
 Add 2 lines to the server code so it supports
-either REST **or** websocket calls from the Feathers client.
+either REST **or** WebSocket calls from the Feathers client.
 
 ```javascript
 const rest = require('feathers-rest');
@@ -43,13 +43,13 @@ const app = httpServerConfig()
   .configure(middleware);
 ```
 - See what changed:
-[Unified](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-guide/blob/master/examples/step/_diff/01-websocket-1-line.html)
+[Unified](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/_diff/01-websocket-1-line.html)
 |
-[Split](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-guide/blob/master/examples/step/_diff/01-websocket-1-side.html)
+[Split](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/_diff/01-websocket-1-side.html)
 
-### Changing the HTML for Feathers client websocket calls
+## Changing the HTML for Feathers client WebSocket calls
 
-We replace the REST code we had in the HTML with the equivalent Websocket code.
+We replace the REST code we had in the HTML with the equivalent WebSocket code.
 
 ```html
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/core-js/2.1.4/core.min.js"></script>
@@ -64,28 +64,28 @@ We replace the REST code we had in the HTML with the equivalent Websocket code.
 <script src="/feathers-app.js"></script>
 ```
 - See what changed:
-[Unified](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-guide/blob/master/examples/step/_diff/01-websocket-socketio-line.html)
+[Unified](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/_diff/01-websocket-socketio-line.html)
 |
-[Split](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-guide/blob/master/examples/step/_diff/01-websocket-socketio-side.html)
+[Split](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/_diff/01-websocket-socketio-side.html)
 - `src="/socket.io.min.js"` load the Socket.io client code.
-- `const socket = io(serverUrl);` create a websocket.
-- `.configure(feathers.socketio(socket))` configure Feathers client to use the websocket.
+- `const socket = io(serverUrl);` create a WebSocket.
+- `.configure(feathers.socketio(socket))` configure Feathers client to use the WebSocket.
 
-### Changing the frontend code
+## Changing the frontend code
 
 We've already said that most of the Feathers frontend doesn't care
-if it's communicating with the server using REST or Websockets.
+if it's communicating with the server using REST or WebSockets.
 **No more changes are necessary.**
 
-> **REST vs Websockets.**
-There is a huge technical difference involved in communicating via REST or Websockets.
+> **REST vs WebSockets.**
+There is a huge technical difference involved in communicating via REST or WebSockets.
 Feathers hides this so you can get on with what's important
 rather than handling such details.
 
-### Results
+## Results
 
 And that's all there is to it.
-The results are identical to that for [Writing a Feathers REST Client](./rest-client.md)
+The results are identical to that for [A Feathers REST Client](./rest-client.md)
  
 ### Is anything wrong, unclear, missing?
 [Leave a comment.](https://github.com/feathersjs/feathers-guide/issues/new?title=Comment:Step-Basic-Socket-client&body=Comment:Step-Basic-Socket-client)

@@ -11,7 +11,7 @@
     * [A database connector](guides/step-by-step/basic-feathers/database-connector.md)
     * [A REST API server](guides/step-by-step/basic-feathers/rest-api-server.md)
     * [A Feathers REST client](guides/step-by-step/basic-feathers/rest-client.md)
-    * [A Feathers websocket client](guides/step-by-step/basic-feathers/socket-client.md)
+    * [A Feathers WebSocket client](guides/step-by-step/basic-feathers/socket-client.md)
     * [The "ah-ha" moment](guides/step-by-step/basic-feathers/ah-ha.md)
     * [Hooks, part 1](guides/step-by-step/basic-feathers/hooks-1.md)
     * [Hooks, part 2](guides/step-by-step/basic-feathers/hooks-2.md)
