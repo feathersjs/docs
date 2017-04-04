@@ -15,7 +15,7 @@ npm install --save nuxt
 npm install --save-dev nodemon
 ```
 
-Now you must set up a couple new NPM scripts to build and start you new Feathers + Nuxt app. Open your `package.json` file and add these new scripts:
+Now you must set up a couple new NPM scripts to build and start your new Feathers + Nuxt app. Open your `package.json` file and add these new scripts:
 
 ```json
 // your-app/package.json
