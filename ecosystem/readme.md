@@ -56,7 +56,7 @@ Submit yours by creating a pull request.
 
 ## Database
 
-- [amity-mongodb](https://www.npmjs.com/package/amity-mongodb) - Use various FeatherJS services to manage a MongoDB server with Amity.
+- [amity-mongodb](https://www.npmjs.com/package/amity-mongodb) - Use various FeathersJS services to manage a MongoDB server with Amity.
 - [feathers-blob](https://www.npmjs.com/package/feathers-blob) ![Official Feathers Module](/img/tiny-feathers-logo.png) - Feathers abstract blob store service (service) 
 - [feathers-blueprints](https://www.npmjs.com/package/feathers-blueprints) - Add some of the Sails.js blueprints functionality to Feathers. (configure)
 - [feathers-bookshelf](https://www.npmjs.com/package/feathers-bookshelf) - A bookshelf ORM service adapter.  (service)
@@ -64,7 +64,7 @@ Submit yours by creating a pull request.
 - [feathers-filemaker](https://www.npmjs.com/package/feathers-filemaker) - Filemaker adapter for feathers.js
 - [feathers-knex](./feathers-knex.html) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
 - [feathers-levelup](./feathers-levelup.html)
-- [feathers-linvodb](https://www.npmjs.com/package/feathers-linvodb) - Create an LinvoDB Service for FeatherJS. (service)
+- [feathers-linvodb](https://www.npmjs.com/package/feathers-linvodb) - Create an LinvoDB Service for FeathersJS. (service)
 - [feathers-localstorage](../databases/localstorage.md) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
 - [feathers-memory](./feathers-memory.html) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
 - [feathers-mongo-collections](https://www.npmjs.com/package/feathers-mongo-collections) - MongoDB collections service for FeathersJS. (service)
@@ -73,11 +73,11 @@ Submit yours by creating a pull request.
 - [feathers-mongodb-revisions](https://www.npmjs.com/package/feathers-mongodb-revisions) - This Feathers database adapter extends the basic MongoDB adapter, adding revision support. (service)
 - [feathers-mongoose](./feathers-mongoose.html) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
 - [feathers-mongoose-advanced](https://www.npmjs.com/package/feathers-mongoose-advanced) - Create a flexible Mongoose Service for FeathersJS. (service)
-- [feathers-mongoose-service](https://www.npmjs.com/package/feathers-mongoose-service) - Easily create a Mongoose Service for Featherjs. (service)
+- [feathers-mongoose-service](https://www.npmjs.com/package/feathers-mongoose-service) - Easily create a Mongoose Service for FeathersJS. (service)
 - [feathers-nedb](./feathers-nedb.html) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
 - [feathers-nedb-dump](https://www.npmjs.com/package/feathers-nedb-dump) - Middleware for Feathers.js - dumps and restores NeDB database for a given service (middleware)
 - [feathers-objection](https://github.com/mcchrish/feathers-objection) - A service adapter for [Objection.js](http://vincit.github.io/objection.js.html) - A minimal SQL ORM built on top of Knex.
-- [feathers-orm-service](https://www.npmjs.com/package/feathers-orm-service) - Easily create a Object Relational Mapping Service for Featherjs.
+- [feathers-orm-service](https://www.npmjs.com/package/feathers-orm-service) - Easily create a Object Relational Mapping Service for FeathersJS.
 - [feathers-rethinkdb](./feathers-rethinkdb.html) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
 - [feathers-rethinky](https://www.npmjs.com/package/feathers-rethinky) - Thinky.js RethinkDB Adaptor for Feathers JS
 - [feathers-seeder](https://www.npmjs.com/package/feathers-seeder) - Straightforward data seeder for FeathersJS services.
@@ -95,8 +95,9 @@ Submit yours by creating a pull request.
 ## Email & SMS
 
 - [feathers-mailer](https://www.npmjs.com/package/feathers-mailer) ![Official Feathers Module](/img/tiny-feathers-logo.png) - Feathers mailer service using nodemailer (service) 
-- [feathers-mailgun](https://www.npmjs.com/package/feathers-mailgun) ![Official Feathers Module](/img/tiny-feathers-logo.png) - A Mailgun Service for FeatherJS. (service) 
-- [feathers-sendgrid](https://www.npmjs.com/package/feathers-sendgrid) ![Official Feathers Module](/img/tiny-feathers-logo.png) - A SendGrid Service for FeatherJS. (service) 
+- [feathers-mailgun](https://www.npmjs.com/package/feathers-mailgun) ![Official Feathers Module](/img/tiny-feathers-logo.png) - A Mailgun Service for FeathersJS. (service) 
+- [feathers-postmark](https://www.npmjs.com/package/feathers-postmark) ![Official Feathers Module](/img/tiny-feathers-logo.png) - A Postmark Service for FeathersJS. (service) 
+- [feathers-sendgrid](https://www.npmjs.com/package/feathers-sendgrid) ![Official Feathers Module](/img/tiny-feathers-logo.png) - A SendGrid Service for FeathersJS. (service) 
 - [feathers-twilio](./feathers-twilio.html) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
 
 
@@ -174,7 +175,7 @@ The Feathers client works with React Native but here is a collection of native l
 - [feathers-mithril](https://www.npmjs.com/package/feathers-mithril) - Connect feathers.js to mithril.js (connector)
 - [feathers-reactive](https://www.npmjs.com/package/feathers-reactive) ![Official Feathers Module](/img/tiny-feathers-logo.png) - Turns a Feathers service call into an RxJS observables that automatically updates on real-time events. (configure)
 - [feathers-polymer](https://github.com/thosakwe/polymer-feathers)
-- [ng-feathers](https://www.npmjs.com/package/ng-feathers) - Feathers client for AngularJS. FeatherJS for plain old AngularJS (1.X)
+- [ng-feathers](https://www.npmjs.com/package/ng-feathers) - Feathers client for AngularJS. FeathersJS for plain old AngularJS (1.X)
 
 
 ## DoneJS
