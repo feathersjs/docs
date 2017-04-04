@@ -96,6 +96,7 @@ Submit yours by creating a pull request.
 
 - [feathers-mailer](https://www.npmjs.com/package/feathers-mailer) ![Official Feathers Module](/img/tiny-feathers-logo.png) - Feathers mailer service using nodemailer (service) 
 - [feathers-mailgun](https://www.npmjs.com/package/feathers-mailgun) ![Official Feathers Module](/img/tiny-feathers-logo.png) - A Mailgun Service for FeatherJS. (service) 
+- [feathers-postmark](https://www.npmjs.com/package/feathers-postmark) ![Official Feathers Module](/img/tiny-feathers-logo.png) - A Postmark Service for FeatherJS. (service) 
 - [feathers-sendgrid](https://www.npmjs.com/package/feathers-sendgrid) ![Official Feathers Module](/img/tiny-feathers-logo.png) - A SendGrid Service for FeatherJS. (service) 
 - [feathers-twilio](./feathers-twilio.html) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
 
