@@ -492,42 +492,26 @@ Populates items *recursively* to any depth. Supports 1:1, 1:n and n:1 relationsh
 - Backward compatible with the old FeathersJS `populate` hook.
 
 ```javascript
-const schema = {
-  service: '...',
-  permissions: '...',
-  include: [
-    {
-      service: 'users',
-      nameAs: 'authorItem',
-      parentField: 'author',
-      childField: 'id',
-      include: [ ... ],
-    },
-    {
-      service: 'comments',
-      parentField: 'id',
-      childField: 'postId',
-      query: {
-        $limit: 5,
-        $select: ['title', 'content', 'postId'],
-        $sort: {createdAt: -1}
-      },
-      select: (hook, parent, depth) => ({ $limit: 6 }),
-      asArray: true,
-    },
-    {
-      service: 'users',
-      permissions: '...',
-      nameAs: 'readers',
-      parentField: 'readers',
-      childField: 'id'
-    }
-  ],
-};
+import { populate } from 'feathers-hooks-common';
 
-module.exports.after = {
-  all: populate({ schema, checkPermissions, profile: true })
-};
+service.hooks({
+  after: {
+    all: [
+      populate({
+        schema: {
+          include: [
+            {
+              service: 'users', // the name of the service to call `find` on
+              nameAs: 'authorUser', // the name of the property to be added to the parent
+              parentField: 'author',  // the name of the parent property that contains the child id
+              childField: '_id', // the name of the child property that contains the id
+            }
+          ]
+        }
+      })
+    ]
+  }
+});
 ```
 
 Options
