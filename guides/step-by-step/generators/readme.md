@@ -17,7 +17,7 @@ coding "by hand" so far.
 Some other frameworks make things “seem” easy by generating thousands of lines of code for you
 and in the process making it almost impossible to implement anything not supported out of the box
 by their generators.
-Not so Feathers.
+Not so with Feathers.
 
 - **Structure your app.**
 The generated modules are structured as recommended by the Feathers team.
