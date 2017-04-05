@@ -1,7 +1,7 @@
 # Integrating with Frontend Frameworks
 
 ## Feathers Chat Applications
-These guides show how to integrate the [Feathers Chat application](../guides/chat/readme.md) with various frontend frameworks.
+These guides show how to integrate the [Feathers Chat application](../chat/readme.md) with various frontend frameworks.
 
 [**Feathers Chat - React**]()<br/>
 Not yet published on the blog.
