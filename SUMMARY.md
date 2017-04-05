@@ -26,9 +26,16 @@
   * [A Chat Application](guides/chat/readme.md)
     * [Creating the application](guides/chat/creating.md)
     * [Generating a service](guides/chat/service.md)
+    * [Building a frontend](guides/chat/frontend.md)
     * [Adding authentication](guides/chat/authentication.md)
     * [Processing data](guides/chat/processing.md)
-    * [Frameworks: React, Vue etc.](guides/chat/frameworks.md)
+    * [Frameworks: React, VueJS etc.](guides/chat/frameworks.md)
+  <!--
+  * The Feathers Generator
+    * The Command Line Interface (CLI)
+    * File structure
+    * Application patterns
+  -->
   * [Debugging](guides/debug/readme.md)
 * [API](api/readme.md)
   * Core
