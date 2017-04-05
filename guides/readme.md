@@ -8,3 +8,6 @@ This is the original Feathers chat application guide, re-written for the latest 
 
 [**Frontend Frameworks**](./frameworks/readme.md)<br/>
 A curated collection of guides created by the FeathersJS team and members of the Feathers community.
+
+[**Debugging**](./debug/readme.md)<br/>
+Techniques, tips, and tricks on how to debug your Feathers applications.
