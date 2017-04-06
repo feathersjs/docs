@@ -18,6 +18,8 @@
     * [Real-time](guides/step-by-step/basic-feathers/real-time.md)
     * Generators
     * [Introduction](guides/step-by-step/generators/readme.md)
+    * [Generate app](guides/step-by-step/generators/gen-app.md)
+    * [Generate authentication](guides/step-by-step/generators/gen-authentication.md)
     * [Generating an app](guides/step-by-step/generators/app.md)
     * [Adding a service](guides/step-by-step/generators/service.md)
     * [What's next?](guides/step-by-step/what-next.md)
