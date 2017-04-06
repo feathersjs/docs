@@ -2,7 +2,7 @@
 
 Now let's write a new project using the Feathers generators.
 
-This project has users who may be members of one or more teams.
+This project will have users who may be members of one or more teams.
 We want to display teams with all their members.
 
 ## Create the app
@@ -10,8 +10,13 @@ We want to display teams with all their members.
 The first thing we do is generate the basic app using:
 ![Generate app](../assets/gen-app.jpg)
 
-This generated [code](https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/02/gen1/)
-with the structure:
+The generator creates some
+[modules](https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/02/gen1/)
+reflecting your choices.
+The modules are properly wired together and structured as recommended by the Feathers team.
+
+They are mostly [boilerplate](https://en.wikipedia.org/wiki/Boilerplate_code)
+and organized as follows:
 
 ![Generate app structure](../assets/gen-app-dir.jpg)
 
@@ -23,11 +28,11 @@ Contains the configuration files for the app.
 values override
 [default.json](https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/02/gen1/config/default.json)
 ones when in production mode,
-i.e. when you run `NODE_ENV=production node ./examples/step/02/app/src`.
+i.e. when you run `NODE_ENV=production node path/to/your/server.js`.
 
 ## public/
  
-Contains the public resources.
+Contains the resources to be served.
 A sample favicon and
 [HTML file](https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/02/gen1/public/index.html)
 are included.
@@ -40,22 +45,22 @@ Contains the Feathers server.
 - **hooks/** contains your custom hooks,
 usually those general enough to used with multiple services.
 A simple but useful
-[logger](https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/02/gen1/src/hooks.logger.js)
+[logger](https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/02/gen1/src/hooks/logger.js)
 is provided as an example.
     
 - **middleware/** contains your Express middleware.
     
-- **services/** will contains the services.
+- **services/** will contain the services.
             
 - [app.hooks.js](https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/02/gen1/src/app.hooks.js)
 configures those hooks which run for all services.
 This initially includes the `logger` hook.
     
 - [app.js](https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/02/gen1/src/app.js)
-configures Feathers.
+configures Feathers and Express.
     
 - [index.js](https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/02/gen1/src/index.js)
-starts the app.
+is used by node to start the app.
  
 ## test/
 
@@ -64,12 +69,12 @@ Contains the tests for the app.
 tests that the index page appears, as well as 404 errors for HTML pages and JSON.
 
 ## [.editorconfig](https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/02/gen1/.editorconfig)
-is compatible with the [EditorConfig project](https://editorconfig.org/)
-which helps developers define and maintain consistent coding styles between different editors and IDEs.
+is compatible with the [EditorConfig project](http://editorconfig.org/)
+and helps developers define and maintain consistent coding styles between different editors and IDEs.
 
 ## [.eslintrc.json](https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/02/gen1/.eslintrc.json)
 contains defaults for liniting your code with
-[ESLint](https://eslint.org/docs/user-guide/getting##started).
+[ESLint](http://eslint.org/docs/user-guide/getting##started).
 
 ## [.gitignore](https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/02/gen1/.gitignore)
 specifies
@@ -88,12 +93,14 @@ for distribution.
 contains the [license](https://docs.npmjs.com/files/package.json#license)
 so that people know how they are permitted to use it, and any restrictions you're placing on it.
 
+It defaults to the Feathers license.
+
 ## [package.json](https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/02/gen1/package.json)
 contains [information](https://docs.npmjs.com/files/package.json)
 which
 [npm](https://docs.npmjs.com/),
 [yarn](https://yarnpkg.com/en/)
-and other package managers need to install and access your package 
+and other package managers need to install and use your package.
 
 ### Is anything wrong, unclear, missing?
 [Leave a comment.](https://github.com/feathersjs/feathers-guide/issues/new?title=Comment:Step-Generators-App&body=Comment:Step-Generators-App)
