@@ -35,32 +35,65 @@ are included.
 ## src/
  
 Contains the Feathers server.
+
     
-    - **hooks/** contains your custom hooks,
-    usually those general enough to used with multiple services.
-    A simple but useful
-    [logger](https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/02/gen1/src/hooks.logger.js)
-    is provided as an example.
+- **hooks/** contains your custom hooks,
+usually those general enough to used with multiple services.
+A simple but useful
+[logger](https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/02/gen1/src/hooks.logger.js)
+is provided as an example.
     
-    - **middleware/** contains your Express middleware.
+- **middleware/** contains your Express middleware.
     
-    - **services/** will contains the services.
+- **services/** will contains the services.
             
-    - [app.hooks.js](https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/02/gen1/src/app.hooks.js)
-    configures those hooks which run for all services.
-    This initially includes the `logger` hook.
+- [app.hooks.js](https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/02/gen1/src/app.hooks.js)
+configures those hooks which run for all services.
+This initially includes the `logger` hook.
     
-    - [app.js](https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/02/gen1/src/app.js)
-    configures Feathers.
+- [app.js](https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/02/gen1/src/app.js)
+configures Feathers.
     
-    - [index.js](https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/02/gen1/src.index.js)
-    starts the app.
+- [index.js](https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/02/gen1/src/index.js)
+starts the app.
  
 ## test/
 
 Contains the tests for the app.
 [app.test.js](https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/02/gen1/test/app.test.js)
 tests that the index page appears, as well as 404 errors for HTML pages and JSON.
+
+## [.editorconfig](https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/02/gen1/.editorconfig)
+is compatible with the [EditorConfig project](https://editorconfig.org/)
+which helps developers define and maintain consistent coding styles between different editors and IDEs.
+
+## [.eslintrc.json](https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/02/gen1/.eslintrc.json)
+contains defaults for liniting your code with
+[ESLint](https://eslint.org/docs/user-guide/getting##started).
+
+## [.gitignore](https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/02/gen1/.gitignore)
+specifies
+[intentionally untracked files](https://git-scm.com/docs/gitignore)
+which
+[git](https://git-scm.com/),
+[GitHub](https://github.com/)
+and other similar projects ignore.
+
+## [.npmignore](https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/02/gen1/.npmignore)
+specifies
+[files which are not to be published](https://docs.npmjs.com/misc/developers#keeping-files-out-of-your-package)
+for distribution.
+
+## [LICENSE](https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/02/gen1/LICENSE)
+contains the [license](https://docs.npmjs.com/files/package.json#license)
+so that people know how they are permitted to use it, and any restrictions you're placing on it.
+
+## [package.json](https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/02/gen1/package.json)
+contains [information](https://docs.npmjs.com/files/package.json)
+which
+[npm](https://docs.npmjs.com/),
+[yarn](https://yarnpkg.com/en/)
+and other package managers need to install and access your package 
 
 ### Is anything wrong, unclear, missing?
 [Leave a comment.](https://github.com/feathersjs/feathers-guide/issues/new?title=Comment:Step-Generators-App&body=Comment:Step-Generators-App)
