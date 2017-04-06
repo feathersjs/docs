@@ -1,5 +1,5 @@
---- 01/common/public/feathers-app-del.js	2017-01-13 14:49:01.187000000 -0500
-+++ 02/app/public/feathers-app.js	2017-01-13 14:50:14.748000000 -0500
+--- 01/common/public/feathers-app-del.js	2017-03-29 08:57:36.697999415 -0400
++++ 02/app/public/feathers-app.js	2017-03-29 08:57:36.697999415 -0400
 @@ -1,4 +1,10 @@
  
 +feathersClient

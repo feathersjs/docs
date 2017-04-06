@@ -1,6 +1,6 @@
 diff -bdur --new-file 02/app/src/services/index.js 02/app1/src/services/index.js
---- 02/app/src/services/index.js	2016-12-23 17:38:02.716000000 -0500
-+++ 02/app1/src/services/index.js	2017-01-10 15:55:18.811000000 -0500
+--- 02/app/src/services/index.js	2017-03-29 08:57:36.702001415 -0400
++++ 02/app1/src/services/index.js	2017-03-29 08:57:36.706003415 -0400
 @@ -1,4 +1,5 @@
  'use strict';
 +const teams = require('./teams');
@@ -15,7 +15,7 @@ diff -bdur --new-file 02/app/src/services/index.js 02/app1/src/services/index.js
  };
 diff -bdur --new-file 02/app/src/services/teams/hooks/index.js 02/app1/src/services/teams/hooks/index.js
 --- 02/app/src/services/teams/hooks/index.js	1969-12-31 19:00:00.000000000 -0500
-+++ 02/app1/src/services/teams/hooks/index.js	2017-01-10 15:55:18.871000000 -0500
++++ 02/app1/src/services/teams/hooks/index.js	2017-03-29 08:57:36.706003415 -0400
 @@ -0,0 +1,29 @@
 +'use strict';
 +
@@ -48,7 +48,7 @@ diff -bdur --new-file 02/app/src/services/teams/hooks/index.js 02/app1/src/servi
 +};
 diff -bdur --new-file 02/app/src/services/teams/index.js 02/app1/src/services/teams/index.js
 --- 02/app/src/services/teams/index.js	1969-12-31 19:00:00.000000000 -0500
-+++ 02/app1/src/services/teams/index.js	2017-01-10 15:55:18.867000000 -0500
++++ 02/app1/src/services/teams/index.js	2017-03-29 08:57:36.706003415 -0400
 @@ -0,0 +1,35 @@
 +'use strict';
 +
@@ -87,7 +87,7 @@ diff -bdur --new-file 02/app/src/services/teams/index.js 02/app1/src/services/te
 +};
 diff -bdur --new-file 02/app/test/services/teams/index.test.js 02/app1/test/services/teams/index.test.js
 --- 02/app/test/services/teams/index.test.js	1969-12-31 19:00:00.000000000 -0500
-+++ 02/app1/test/services/teams/index.test.js	2017-01-10 15:55:18.875000000 -0500
++++ 02/app1/test/services/teams/index.test.js	2017-03-29 08:57:36.706003415 -0400
 @@ -0,0 +1,10 @@
 +'use strict';
 +
