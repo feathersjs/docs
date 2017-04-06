@@ -1,0 +1,232 @@
+diff -bdur --new-file 02/gen1/config/default.json 02/gen2/config/default.json
+--- 02/gen1/config/default.json	2017-04-06 12:30:19.720496074 -0400
++++ 02/gen2/config/default.json	2017-04-06 12:34:15.816496074 -0400
+@@ -5,5 +5,15 @@
+   "paginate": {
+     "default": 10,
+     "max": 50
+-  }
++  },
++  "authentication": {
++    "secret": "FpsjWz8yY6khkBJHEgbp1vGUJCacKDCZ088Nzbo9vtMqXpV2mwtIdnl2nKxgrhKG",
++    "strategies": [
++      "jwt",
++      "local"
++    ],
++    "path": "/authentication",
++    "service": "users"
++  },
++  "nedb": "../data"
+ }
+diff -bdur --new-file 02/gen1/package.json 02/gen2/package.json
+--- 02/gen1/package.json	2017-04-06 12:31:44.372496074 -0400
++++ 02/gen2/package.json	2017-04-06 12:34:43.260496074 -0400
+@@ -31,13 +31,18 @@
+     "compression": "1.6.2",
+     "cors": "2.8.3",
+     "feathers": "2.1.1",
++    "feathers-authentication": "1.2.0",
++    "feathers-authentication-jwt": "0.3.1",
++    "feathers-authentication-local": "0.3.4",
+     "feathers-configuration": "0.4.1",
+     "feathers-errors": "2.6.2",
+     "feathers-hooks": "1.8.1",
+     "feathers-hooks-common": "2.0.3",
++    "feathers-nedb": "2.6.2",
+     "feathers-rest": "1.7.1",
+     "feathers-socketio": "1.5.2",
+     "helmet": "3.5.0",
++    "nedb": "1.8.0",
+     "serve-favicon": "2.4.2",
+     "winston": "2.3.1"
+   },
+diff -bdur --new-file 02/gen1/src/app.js 02/gen2/src/app.js
+--- 02/gen1/src/app.js	2017-04-06 12:30:19.748496074 -0400
++++ 02/gen2/src/app.js	2017-04-06 12:34:15.832496074 -0400
+@@ -17,6 +17,8 @@
+ const services = require('./services');
+ const appHooks = require('./app.hooks');
+ 
++const authentication = require('./authentication');
++
+ const app = feathers();
+ 
+ // Load app configuration
+@@ -36,6 +38,8 @@
+ app.configure(rest());
+ app.configure(socketio());
+ 
++app.configure(authentication);
++
+ // Set up our services (see `services/index.js`)
+ app.configure(services);
+ // Configure middleware (see `middleware/index.js`) - always has to be last
+diff -bdur --new-file 02/gen1/src/authentication.js 02/gen2/src/authentication.js
+--- 02/gen1/src/authentication.js	1969-12-31 19:00:00.000000000 -0500
++++ 02/gen2/src/authentication.js	2017-04-06 12:34:15.828496074 -0400
+@@ -0,0 +1,34 @@
++'use strict';
++
++const authentication = require('feathers-authentication');
++const jwt = require('feathers-authentication-jwt');
++const local = require('feathers-authentication-local');
++
++
++
++module.exports = function() {
++  const app = this;
++  const config = app.get('authentication');
++
++  // Set up authentication with the secret
++  app.configure(authentication(config));
++  app.configure(jwt());
++  
++  app.configure(local());
++  
++  
++
++  // The `authentication` service is used to create a JWT.
++  // The before `create` hook registers strategies that can be used
++  // to create a new valid JWT (e.g. local or oauth2)
++  app.service('authentication').hooks({
++    before: {
++      create: [
++        authentication.hooks.authenticate(config.strategies)
++      ],
++      remove: [
++        authentication.hooks.authenticate('jwt')
++      ]
++    }
++  });
++};
+diff -bdur --new-file 02/gen1/src/models/users.model.js 02/gen2/src/models/users.model.js
+--- 02/gen1/src/models/users.model.js	1969-12-31 19:00:00.000000000 -0500
++++ 02/gen2/src/models/users.model.js	2017-04-06 12:34:15.844496074 -0400
+@@ -0,0 +1,14 @@
++const NeDB = require('nedb');
++const path = require('path');
++
++module.exports = function(app) {
++  const dbPath = app.get('nedb');
++  const Model = new NeDB({
++    filename: path.join(dbPath, 'users.db'),
++    autoload: true
++  });
++
++  Model.ensureIndex({ fieldName: 'email', unique: true });
++
++  return Model;
++};
+diff -bdur --new-file 02/gen1/src/services/index.js 02/gen2/src/services/index.js
+--- 02/gen1/src/services/index.js	2017-04-06 12:30:19.740496074 -0400
++++ 02/gen2/src/services/index.js	2017-04-06 12:34:15.844496074 -0400
+@@ -1,5 +1,8 @@
+ 'use strict';
+ 
++const users = require('./users/users.service.js');
++
+ module.exports = function() {
+   const app = this; // eslint-disable-line no-unused-vars
++  app.configure(users);
+ };
+diff -bdur --new-file 02/gen1/src/services/users/users.filters.js 02/gen2/src/services/users/users.filters.js
+--- 02/gen1/src/services/users/users.filters.js	1969-12-31 19:00:00.000000000 -0500
++++ 02/gen2/src/services/users/users.filters.js	2017-04-06 12:34:15.848496074 -0400
+@@ -0,0 +1,6 @@
++/*eslint no-console: 1 */
++console.warn('You are using the default filter for the users service. For more information about event filters see https://docs.feathersjs.com/api/events.html#event-filtering'); // eslint-disable-line no-console
++
++module.exports = function(data, connection, hook) { // eslint-disable-line no-unused-vars
++  return data;
++};
+diff -bdur --new-file 02/gen1/src/services/users/users.hooks.js 02/gen2/src/services/users/users.hooks.js
+--- 02/gen1/src/services/users/users.hooks.js	1969-12-31 19:00:00.000000000 -0500
++++ 02/gen2/src/services/users/users.hooks.js	2017-04-06 12:34:15.844496074 -0400
+@@ -0,0 +1,36 @@
++'use strict';
++
++const { authenticate } = require('feathers-authentication').hooks;
++const { hashPassword } = require('feathers-authentication-local').hooks;
++
++module.exports = {
++  before: {
++    all: [],
++    find: [ authenticate('jwt') ],
++    get: [ authenticate('jwt') ],
++    create: [ hashPassword() ],
++    update: [ authenticate('jwt') ],
++    patch: [ authenticate('jwt') ],
++    remove: [ authenticate('jwt') ]
++  },
++
++  after: {
++    all: [],
++    find: [],
++    get: [],
++    create: [],
++    update: [],
++    patch: [],
++    remove: []
++  },
++
++  error: {
++    all: [],
++    find: [],
++    get: [],
++    create: [],
++    update: [],
++    patch: [],
++    remove: []
++  }
++};
+diff -bdur --new-file 02/gen1/src/services/users/users.service.js 02/gen2/src/services/users/users.service.js
+--- 02/gen1/src/services/users/users.service.js	1969-12-31 19:00:00.000000000 -0500
++++ 02/gen2/src/services/users/users.service.js	2017-04-06 12:34:15.836496074 -0400
+@@ -0,0 +1,31 @@
++'use strict';
++
++// Initializes the `users` service on path `/users`
++const createService = require('feathers-nedb');
++const createModel = require('../../models/users.model');
++const hooks = require('./users.hooks');
++const filters = require('./users.filters');
++
++module.exports = function() {
++  const app = this;
++  const Model = createModel(app);
++  const paginate = app.get('paginate');
++
++  const options = {
++    name: 'users',
++    Model,
++    paginate
++  };
++
++  // Initialize our service with any options it requires
++  app.use('/users', createService(options));
++
++  // Get our initialized service so that we can register hooks and filters
++  const service = app.service('users');
++
++  service.hooks(hooks);
++
++  if (service.filter) {
++    service.filter(filters);
++  }
++};
+diff -bdur --new-file 02/gen1/test/services/users.test.js 02/gen2/test/services/users.test.js
+--- 02/gen1/test/services/users.test.js	1969-12-31 19:00:00.000000000 -0500
++++ 02/gen2/test/services/users.test.js	2017-04-06 12:34:15.856496074 -0400
+@@ -0,0 +1,12 @@
++'use strict';
++
++const assert = require('assert');
++const app = require('../../src/app');
++
++describe('\'users\' service', () => {
++  it('registered the service', () => {
++    const service = app.service('users');
++
++    assert.ok(service, 'Registered the service');
++  });
++});
