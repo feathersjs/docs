@@ -29,7 +29,9 @@
     * [Adding authentication](guides/chat/authentication.md)
     * [Processing data](guides/chat/processing.md)
     * [Frameworks: React, Vue etc.](guides/chat/frameworks.md)
-  * [Authentication](guides/auth.md)
+  * [Frontend Frameworks](guides/frameworks/readme.md)
+  * [Authentication](guides/auth/readme.md)
+    * [Recipes](guides/auth/recipes.md)
   * [Debugging](guides/debug.md)
 * [API](api/readme.md)
   * Core

@@ -17,6 +17,19 @@ Learn how to keep the benefits of JWT authentication while you setup your applic
 [**Setup OAuth Through Client Redirect**]()<br/>
 Learn how to setup the default OAuth experience that ships with the new Feathers authentication plugins.  This guide will show you how to upgrade the Feathers Chat application to use Facebook OAuth2 login.
 
+- `feathers generate app`
+- `feathers generate authentication`: github
+- add cookie config
+```json
+"cookie": {
+  "enabled": true, // whether cookie creation is enabled
+  "name": "feathers-jwt", // the cookie name
+  "httpOnly": false, // when enabled, prevents the client from reading the cookie.
+  "secure": false // whether cookies should only be available over HTTPS
+}
+```
+- 
+
 [**Setup Popup-based OAuth**]()<br/>
 Learn how to use popup windows to keep the user's context while authenticating with OAuth.
 
@@ -25,4 +38,7 @@ Learn what's needed to use popup-based OAuth when the web client and server are 
 
 [**Customize the OAuth Payload**]()<br/>
 Learn how to change the user data that you receive back from an OAuth provider.
+
+[**Combining local auth and OAuth data**]()<br/>
+Learn how to use hooks to make OAuth data fit your `/users` service validation settings.
 
