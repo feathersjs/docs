@@ -17,8 +17,6 @@ const middleware = require('./middleware');
 const services = require('./services');
 const appHooks = require('./app.hooks');
 
-const authentication = require('./authentication');
-
 const app = feathers();
 
 // Load app configuration
@@ -37,8 +35,6 @@ app.use('/', feathers.static(app.get('public')));
 app.configure(hooks());
 app.configure(rest());
 app.configure(socketio());
-
-app.configure(authentication);
 
 // Set up our services (see `services/index.js`)
 app.configure(services);

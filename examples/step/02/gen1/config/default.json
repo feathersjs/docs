@@ -5,15 +5,5 @@
   "paginate": {
     "default": 10,
     "max": 50
-  },
-  "authentication": {
-    "secret": "JJjCIE0m90kUioNQfmlXVp3yx6x1EDVxqfFbDfNj8VhU2BN7iSNeIJOGAB4DOo3b",
-    "strategies": [
-      "jwt",
-      "local"
-    ],
-    "path": "/authentication",
-    "service": "users"
-  },
-  "nedb": "../data"
+  }
 }

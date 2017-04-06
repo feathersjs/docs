@@ -1,12 +1,11 @@
 'use strict';
 
-const { authenticate } = require('feathers-authentication').hooks;
-
-const teamsPopulate = require('../../hooks/teams-populate');
+// Application hooks that run for every service
+const logger = require('./hooks/logger');
 
 module.exports = {
   before: {
-    all: [ authenticate('jwt') ],
+    all: [],
     find: [],
     get: [],
     create: [],
@@ -16,8 +15,8 @@ module.exports = {
   },
 
   after: {
-    all: [],
-    find: [teamsPopulate()],
+    all: [ logger() ],
+    find: [],
     get: [],
     create: [],
     update: [],
@@ -26,7 +25,7 @@ module.exports = {
   },
 
   error: {
-    all: [],
+    all: [ logger() ],
     find: [],
     get: [],
     create: [],

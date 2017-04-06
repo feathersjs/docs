@@ -1,14 +1,14 @@
 'use strict';
 
 const assert = require('assert');
-const teamsPopulate = require('../../src/hooks/teams-populate');
+const populateTeams = require('../../src/hooks/populate-teams');
 
-describe('\'teamsPopulate\' hook', () => {
+describe('\'populateTeams\' hook', () => {
   it('runs the hook', () => {
     // A mock hook object
     const mock = {};
     // Initialize our hook with no options
-    const hook = teamsPopulate();
+    const hook = populateTeams();
 
     // Run the hook function (which returns a promise)
     // and compare the resulting hook object
