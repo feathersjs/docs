@@ -42,6 +42,10 @@ buildDiff 01/common/public/feathers-app-del.js 02/app/public/feathers-app.js _di
 #buildDiff 02/app1/src/services/teams/hooks/index.js 02/service/src/services/teams/hooks/index.js _diff/02-service-teams-hooks
 
 buildDiffDir 02/gen1/ 02/gen2/ _diff/02-gen2
+buildDiff 02/gen1/config/default.json 02/gen2/config/default.json _diff/02-gen2-default
+buildDiff 02/gen1/src/services/index.js 02/gen2/src/services/index.js _diff/02-gen2-service
+buildDiff 02/gen1/src/app.js 02/gen2/src/app.js _diff/02-gen2-app
+buildDiff 02/gen1/package.json 02/gen2/package.json _diff/02-gen2-package
 
 # restore original pwd
 cd ${startPwd}

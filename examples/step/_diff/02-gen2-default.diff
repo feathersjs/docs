@@ -1,0 +1,19 @@
+--- 02/gen1/config/default.json	2017-04-06 12:30:19.720496074 -0400
++++ 02/gen2/config/default.json	2017-04-06 12:34:15.816496074 -0400
+@@ -5,5 +5,15 @@
+   "paginate": {
+     "default": 10,
+     "max": 50
+-  }
++  },
++  "authentication": {
++    "secret": "FpsjWz8yY6khkBJHEgbp1vGUJCacKDCZ088Nzbo9vtMqXpV2mwtIdnl2nKxgrhKG",
++    "strategies": [
++      "jwt",
++      "local"
++    ],
++    "path": "/authentication",
++    "service": "users"
++  },
++  "nedb": "../data"
+ }
