@@ -67,9 +67,22 @@
     "socket.io-client": "1.7.2",
     "winston": "2.3.0"
   },
+
   "devDependencies": {
     "gitbook-cli": "^2.3.0",
     "semistandard": "9.2.1",
     "webpack": "2.2.0-rc.4"
   }
 }
+
+/*
+  generate|g [type]  Run a generator. Type can be
+    	• app - Create a new Feathers application in the current folder
+    	• authentication - Set up authentication for the current application
+    	• connection - Initialize a new database connection
+    	• hook - Create a new hook
+    	• middleware - Create an Express middleware
+    	• secret - Generate a new authentication secret
+    	• service - Generate a new service
+    	• plugin - Create a new Feathers plugin
+

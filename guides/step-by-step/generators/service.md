@@ -179,7 +179,7 @@ and only keep 2 from the newly joined members property.
 > **Depopulate.** Should you modify your base items and want to `patch` the new values back to the table,
 the dePopulate() hook will remove all joined and calculated properties for you.
 
-## - Recap
+## Recap
 
 Let's recap the hooks we added to the generated service:
 [Unified](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/_diff/02-service-teams-hooks-line.html)
