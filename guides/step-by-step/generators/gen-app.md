@@ -20,7 +20,6 @@ and organized as follows:
 
 ![Generate app structure](../assets/gen-app-dir.jpg)
 
-
 ## config/
  
 Contains the configuration files for the app.
@@ -40,7 +39,6 @@ are included.
 ## src/
  
 Contains the Feathers server.
-
     
 - **hooks/** contains your custom hooks,
 usually those general enough to used with multiple services.
@@ -51,16 +49,18 @@ is provided as an example.
 - **middleware/** contains your Express middleware.
     
 - **services/** will contain the services.
-            
-- [app.hooks.js](https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/02/gen1/src/app.hooks.js)
-configures those hooks which run for all services.
-This initially includes the `logger` hook.
+
+- [index.js](https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/02/gen1/src/index.js)
+is used by node to start the app.
     
 - [app.js](https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/02/gen1/src/app.js)
 configures Feathers and Express.
-    
-- [index.js](https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/02/gen1/src/index.js)
-is used by node to start the app.
+
+- [app.hooks.js](https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/02/gen1/src/app.hooks.js)
+contains hooks which have to run for **all** services.
+**We have not covered this capability before.**
+You can configure such hooks
+[like this.](https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/02/gen1/src/app.js#L43)
  
 ## test/
 
@@ -101,6 +101,31 @@ which
 [npm](https://docs.npmjs.com/),
 [yarn](https://yarnpkg.com/en/)
 and other package managers need to install and use your package.
+
+## Recap
+
+The generated code will look familiar.
+It contains nothing more than what we have covered previously.
+The main advantage of the Feathers generators is
+
+- Generators structure your app.
+The generated modules are structured as recommended by the Feathers team.
+
+- Generators write the repetitive boilerplate.
+So you don't have to.
+
+- Generators handle database specifics.
+The generators will generate code for different databases.
+So you don't have to investigate how to do so.
+
+> **Generators.**
+Feathers generators produce very little code because Feathers is so succinct.
+You can easily understand the generated code because its no different from what we've been
+coding "by hand" so far.
+Some other frameworks make things “seem” easy by generating thousands of lines of code for you
+and, in the process, making it almost impossible to implement anything not supported out of the box
+by their generators.
+Not so with Feathers
 
 ### Is anything wrong, unclear, missing?
 [Leave a comment.](https://github.com/feathersjs/feathers-guide/issues/new?title=Comment:Step-Generators-App&body=Comment:Step-Generators-App)
