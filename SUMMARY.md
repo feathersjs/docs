@@ -36,6 +36,7 @@
     * [Adding authentication](guides/chat/authentication.md)
     * [Processing data](guides/chat/processing.md)
     * [Frameworks: React, Vue etc.](guides/chat/frameworks.md)
+  * [Authentication](guides/auth/readme.md)
   * [Advanced topics](guides/advanced/readme.md)
     * [Debugging](guides/advanced/debugging.md)
     * [Configuration](guides/advanced/configuration.md)
