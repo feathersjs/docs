@@ -17,7 +17,18 @@ The directory has changed:
 
 ![Compare gen2 and gen3 folders](../assets/gen2-3-dir.jpg)
 
-## The users service
+## The teams service
+
+We saw the `users` service being added previously.
+The `teams` service has been added in exactly the same way.
+There is nothing new.
+The boilerplate differs only in the names of the services.
+
+> **Generators.**
+The feathers generators are great for roughing out a project,
+creating something in its approximate, but not finished, form.
+The generators will write most of the boilerplate you need,
+while you concentrate on the unique needs of the project.
 
 ### Is anything wrong, unclear, missing?
-[Leave a comment.](https://github.com/feathersjs/feathers-guide/issues/new?title=Comment:Step-Generators-App&body=Comment:Step-Generators-App)
+[Leave a comment.](https://github.com/feathersjs/feathers-guide/issues/new?title=Comment:Step-Generators-Service&body=Comment:Step-Generators-Service)
