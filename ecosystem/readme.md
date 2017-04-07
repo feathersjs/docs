@@ -25,6 +25,7 @@ Submit yours by creating a pull request.
 - [Feathers React Native Chat](https://github.com/feathersjs/feathers-react-native-chat) ![Official Feathers Repo](/img/tiny-feathers-logo.png)
 - [Feathers-Vuex (Vue.js) Chat](https://github.com/feathersjs/feathers-chat-vuex) ![Official Feathers Repo](/img/tiny-feathers-logo.png)
 - [Best Buy API Playground](https://github.com/BestBuy/api-playground)
+- [Feathers + Quasar](https://github.com/claustres/quasar-feathers-tutorial)
 - [Feathers + Apollo](https://github.com/swarthout/feathers-apollo)
 - [Feathers + React + Mobx](https://github.com/foxhound87/rfx-stack)
 - [Feathers + React + Webpack](https://github.com/sscaff1/feathers-webpack-react)
