@@ -39,17 +39,19 @@ describes how `users` in indexed. `NeDB` is a
     
     - [users.filters.js](https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/02/gen2/src/services/users/users.filters.js)
     will allow you to control which clients are notified when a user is mutated.
+    
+- [test/services/users.test.js](https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/02/gen2/test/services/users.test.js)
+tests that the service gets configured.
 
-The service also had to be wired into the boilerplate,
-so the generator made the following changes:
+The service has to be wired into the app, so the generator made the following changes:
 
-- src/config/default.json now
+- **src/config/default.json** now
 ([Unified](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/_diff/02-gen2-default-line.html)
 |
 [Split](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/_diff/02-gen2-default-side.html))
-retains with the path of the NeDB tables.
+keeps the path of the NeDB tables.
  
-- src/services/index.js now
+- **src/services/index.js** now
 ([Unified](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/_diff/02-gen2-service-line.html)
 |
 [Split](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/_diff/02-gen2-service-side.html))
@@ -63,22 +65,21 @@ Its responsible for authenticating clients against the `users` service,
 generating JWT tokens and verifying them.
 
 The `authentication` service is a **custom service**, not a database service.
-It does not have a model, a database table, hooks or filters which run against it.
+It has no model, no database table, no hooks to run when one of its methods is called.
 
 - So instead of creating a set of folders as was done for `users`,
-then generator creates the only module `authentication` needs as
-[src/services/authentication.js](https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/02/gen2/src/services/authentication.js)
+the generator creates the only module `authentication` needs as
+[src/authentication.js](https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/02/gen2/src/authentication.js)
 
-This service also has to be wired into the boilerplate,
-so the generator made the following change:
+This service also has to be wired into the app, so the generator made the following change:
 
-- src/config/default.json now
+- **src/config/default.json** now
 ([Unified](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/_diff/02-gen2-default-line.html)
 |
 [Split](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/_diff/02-gen2-default-side.html))
 retains authentication information.
 
-- src/app.js now
+- **src/app.js** now
 ([Unified](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/_diff/02-gen2-app-line.html)
 |
 [Split](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/_diff/02-gen2-app-side.html))
@@ -88,11 +89,27 @@ configures the `authentication` service.
 
 The changes to our app have introduced new dependencies and they need to be defined.
 
-- package.json now
+- **package.json** now
 ([Unified](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/_diff/02-gen2-package-line.html)
 |
 [Split](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/_diff/02-gen2-package-side.html))
 records them.
+
+## Recap
+
+We have not previously covered Feathers authentication,
+so the authentication service written for that is brand new to us.
+You can refer to the authentication
+[API](https://auk.docs.feathersjs.com/api/authentication/server.html)
+and guides for more details.
+
+A `users` service was created as its needed for the local authentication.
+That generated code contains no surprises for us as we have covered it before.
+
+> **Generators.**
+Feathers generators produce very little code because Feathers is so succinct.
+You can easily understand the generated code because its no different from what we've been
+coding "by hand" so far.
 
 ### Is anything wrong, unclear, missing?
 [Leave a comment.](https://github.com/feathersjs/feathers-guide/issues/new?title=Comment:Step-Generators-Auth&body=Comment:Step-Generators-Auth)
