@@ -1,12 +1,8 @@
 # Add the teams service
 
-We then generate the teams service using:
-![Generate service](../assets/gen-service.jpg
+We now generate the teams service using:
 
-# Add authentication
-
-We can now use the generator to add the `teams` service.
-![Generate authentication](../assets/gen-service.jpg)
+![Generate service](../assets/gen-service.jpg)
 
 The generator will add some new modules and modify some existing ones.
 You can see all the changes here:
@@ -17,7 +13,7 @@ You can see all the changes here:
 
 ## New modules
 
-The directories have changed:
+The directory has changed:
 
 ![Compare gen2 and gen3 folders](../assets/gen2-3-dir.jpg)
 
