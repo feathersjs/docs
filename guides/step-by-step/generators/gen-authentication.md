@@ -12,7 +12,7 @@ You can see all the changes here:
 
 ## New modules
 
-The directories have changed:
+The directory has changed:
 
 ![Compare app and authentication folders](../assets/gen1-2-dir.jpg)
 

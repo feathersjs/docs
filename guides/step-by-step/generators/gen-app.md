@@ -127,9 +127,5 @@ and, in the process, making it almost impossible to implement anything not suppo
 by their generators.
 Not so with Feathers
 
-## One new thing
-
-The generated code does contain something we have not yet covered.
-
 ### Is anything wrong, unclear, missing?
 [Leave a comment.](https://github.com/feathersjs/feathers-guide/issues/new?title=Comment:Step-Generators-App&body=Comment:Step-Generators-App)
