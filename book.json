@@ -25,11 +25,11 @@
       "gitbookConfigURL": "https://raw.githubusercontent.com/feathersjs/feathers-docs/master/book.json",
       "options": [
         {
-          "value": "https://docs.feathersjs.com/v/master",
+          "value": "https://docs.feathersjs.com",
           "text": "Latest Stable"
         },
         {
-          "value": "https://docs.feathersjs.com/v/auk/",
+          "value": "https://auk.docs.feathersjs.com",
           "text": "Auk"
         }
       ]
