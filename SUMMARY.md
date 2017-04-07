@@ -19,8 +19,10 @@
     * Generators
     * [Introduction](guides/step-by-step/generators/readme.md)
     * [Generate app](guides/step-by-step/generators/gen-app.md)
-    * [Generate authentication](guides/step-by-step/generators/gen-authentication.md)
-    * [Generating an app](guides/step-by-step/generators/app.md)
+    * [Add authentication](guides/step-by-step/generators/gen-authentication.md)
+    * [Add the teams service](guides/step-by-step/generators/gen-service.md)
+    * [Add the populate hook](guides/step-by-step/generators/gen-hook.md)
+    * [===Generating an app](guides/step-by-step/generators/app.md)
     * [Adding a service](guides/step-by-step/generators/service.md)
     * [What's next?](guides/step-by-step/what-next.md)
     * [Is Feathers production ready?](guides/step-by-step/production-ready.md)
