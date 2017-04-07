@@ -665,7 +665,7 @@ This allows you to then `service.patch()` the item in the hook.
 Our `posts` items look like:
 
 ```javascript
-{ id: 9, title: 'The unbearable ligthness of Feathersjs', author: 5, born:  }
+{ id: 9, title: 'The unbearable ligthness of FeathersJS', author: 5, born:  }
 ```
 
 Our `users` items look like:
@@ -694,7 +694,7 @@ app.service('posts').before({
 `app.service('posts').get(9)` would return:
 
 ```javascript
-{ id: 9, title: 'The unbearable ligthness of Feathersjs', author: 5, yearBorn: 1990,
+{ id: 9, title: 'The unbearable ligthness of FeathersJS', author: 5, yearBorn: 1990,
   authorItem: { id: 5, email: 'john.doe@gmail.com', name: 'John Doe' },
   _include: ['authorItem']
 }
@@ -886,7 +886,7 @@ You may drop, at your own risk, names of included sets of items, `_include` and 
 The populate [example above](#a-simple-populate) produced the result
 
 ```javascript
-{ id: 9, title: 'The unbearable ligthness of Feathersjs', author: 5, yearBorn: 1990,
+{ id: 9, title: 'The unbearable ligthness of FeathersJS', author: 5, yearBorn: 1990,
   authorItem: { id: 5, email: 'john.doe@gmail.com', name: 'John Doe' },
   _include: ['authorItem']
 }
@@ -913,7 +913,7 @@ app.service('posts').before({
 The result would now be
 
 ```javascript
-{ title: 'The unbearable ligthness of Feathersjs',
+{ title: 'The unbearable ligthness of FeathersJS',
   authorItem: { name: 'John Doe', isOver18: true, _computed: ['isOver18'] },
   _include: ['authorItem'],
 }
