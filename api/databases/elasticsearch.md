@@ -132,6 +132,7 @@ query: {
 ```
 
 ### $phrase_prefix
+
 [Full text query `match_phrase_prefix`](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-match-query-phrase-prefix.html). Find all documents which have given given fields matching the specified phrase prefix (analysed).
 
 ```js

@@ -1,6 +1,6 @@
 ![Feathers Logo](/img/logo-title.jpg)
 
-> A minimalist real-time framework for tomorrow's apps.
+> An open source REST and realtime API layer for modern applications.
 
 With Feathers it's easy to create scalable real-time applications. This guide will tell you everything you need to know about creating web and mobile apps with Feathers.
 

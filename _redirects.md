@@ -1,2 +1,0 @@
-/v/auk/*  https://auk.docs.feathersjs.com/:splat
-/v/auk-reorg/*  https://auk.docs.feathersjs.com/:splat
