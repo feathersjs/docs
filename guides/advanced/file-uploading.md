@@ -4,7 +4,8 @@ Over the last months we at [ciancoders.com](https://ciancoders.com/) have been w
 
 Recently we were struggling to find a way to upload files without having to write a separate Express middleware or having to (re)write a complex Feathers service.
 
-# Our Goals
+## Our Goals
+
 We want to implement an upload service to accomplish a few important things:
 
 1. It has to handle large files (+10MB).
@@ -235,7 +236,7 @@ app.service('/uploads').before({
 **Simply awesome.**
 
 
-# Further improvements
+## Further improvements
 
 The service always return the dataURI back to us, which may not be necessary as we'd just uploaded the file, also we need to validate the file and check for authorization. 
 

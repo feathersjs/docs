@@ -3,12 +3,14 @@
 The easiest way to create a plugin is with the [Yeoman generator](https://github.com/feathersjs/generator-feathers-plugin).
 
 First install the generator
+
 ```js
 $ npm install -g generator-feathers-plugin
 
 ```
 
 Then in a new directory run: 
+
 ```js
 $ yo feathers-plugin
 ```
@@ -65,6 +67,7 @@ Dang! Running the example app resulted in an error and you said to yourself, "Th
 
 Back in business. That error message was telling us that we need to build our project. In this case it means babel needs to do it's thing. 
 For development you can run watch
+
 ```
 $ npm run watch
 
@@ -83,7 +86,7 @@ Feathers app started on 127.0.0.1:3030
 
 ```
 
-##Expanding our Plugin
+## Expanding our Plugin
 
 Now that we did our verification we can safely change things. For this example we want 2 services to be exposed from our Plugin. Let's create a services directory within the src folder.
 

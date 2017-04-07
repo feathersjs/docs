@@ -49,7 +49,7 @@ messageService.create({
 
 ## Usage with React Native
 
-[React Native](https://facebook.github.io/react-native/) currently requires [a workaround](http://stackoverflow.com/a/32234446/120513) due to [an issue in Socket.io](https://github.com/socketio/engine.io-parser/pull/55).
+Install the required packages into your [React Native](https://facebook.github.io/react-native/) project.
 
 ```bash
 $ npm install feathers feathers-socketio feathers-hooks socket.io-client babel-polyfill
@@ -101,13 +101,13 @@ In the browser a client that connects to the local server via websockets can be 
   var app = feathers()
     .configure(feathers.hooks())
     .configure(feathers.socketio(socket));
-  
+
   var messageService = app.service('messages');
-  
+
   messageService.on('created', function(message) {
     console.log('Someone created a message', message);
   });
-  
+
   messageService.create({
     text: 'Message from client'
   });
