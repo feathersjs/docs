@@ -14,13 +14,11 @@ With this experimentation Feathers has grown into what it is today. Our core phi
 
 We strongly believe that your UI, data and business logic are the core of any web or mobile application and your framework should take care of the rest so you can focus on the things that matter.
 
-## The services concept
+## Services
 
 Many web frameworks focus on things like rendering views, defining routes and handling HTTP requests and responses without providing a structure for implementing application logic separate from those secondary concerns. The result - even when using the MVC pattern - are monolithic applications with messy controllers or fat models. Your actual application logic and how your data is accessed are all mixed up together.
 
 Feathers brings 3 important concepts together that help to separate those concerns from how your application works and give you incredible flexibility while still keeping things [DRY](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself).
-
-## Services
 
 A service layer which helps to decouple your application logic from how it is being accessed and represented. Besides also making things a lot easier to test - you just call your service methods instead of having to make fake HTTP requests - this is what allows Feathers to provide the same API through both HTTP REST and websockets. It can even be extended to use any other RPC protocol and you won't have to change any of your services.
 
