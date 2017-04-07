@@ -7,7 +7,3 @@ A couple other options are [bunyan](https://github.com/trentm/node-bunyan) and [
 For production it is recommended that you use an error reporting service. [Sentry](https://getsentry.com/) is an amazing one and has a [simple Express middleware](https://getsentry.com/for/express/) that you can easily drop in to your Feathers app.
 
 > **ProTip:** Because Feathers extends Express you can use any Express compatible logging middleware with Feathers.
-
-However Express middleware loggers will not report on service calls transported by websockets.
-[`feathers-profiler`](../ecosystem/feathers-profiler.md)
-can log all service calls and gather profile information on them.
