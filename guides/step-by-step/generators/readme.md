@@ -22,9 +22,6 @@ Not so with Feathers.
 ## Generators structure your app.
 The generated modules are structured as recommended by the Feathers team.
 
-## Generators write the repetitive boilerplate,
-so you don't have to.
-
 ## Generators handle database specifics.
 The generators will generate code for different databases.
 So you don't have to investigate how to do so.

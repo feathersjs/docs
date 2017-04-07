@@ -50,6 +50,7 @@ buildDiff 02/gen1/package.json 02/gen2/package.json _diff/02-gen2-package
 buildDiffDir 02/gen2/ 02/gen3/ _diff/02-gen3
 
 buildDiffDir 02/gen3/ 02/gen4/ _diff/02-gen4
+buildDiff 02/gen3/src/services/teams/teams.hooks.js 02/gen4/src/services/teams/teams.hooks.js _diff/02-gen4-hooks
 
 # restore original pwd
 cd ${startPwd}
