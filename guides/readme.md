@@ -9,5 +9,8 @@ The goal of this guide is to get you to the "A-ha!" moment as efficiently as pos
 [**A Chat Application**](./chat/readme.md)<br/>
 Learn how to create a chat REST and real-time API complete with authentication and data processing including a simple browser app.
 
+[**Authentication**](./auth/readme.md)<br/>
+Learn how to add local (username & password), OAuth1, and OAuth2 authentication to your Feathers Applications.
+
 [**Advanced topics**](./advanced/readme.md)<br/>
 Guides for more advanced Feathers topics like debugging, configuration, file uploads and more.
