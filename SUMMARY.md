@@ -10,7 +10,6 @@
     * [Introduction](guides/step-by-step/intro/readme.md)
     * [What not to worry about](guides/step-by-step/intro/not-worry.md)
     * [Preliminaries](guides/step-by-step/preliminaries.md)
-    * Basic Feathers
     * [Introduction](guides/step-by-step/basic-feathers/readme.md)
     * [A database connector](guides/step-by-step/basic-feathers/database-connector.md)
     * [A REST API server](guides/step-by-step/basic-feathers/rest-api-server.md)
@@ -20,16 +19,13 @@
     * [Hooks, part 1](guides/step-by-step/basic-feathers/hooks-1.md)
     * [Hooks, part 2](guides/step-by-step/basic-feathers/hooks-2.md)
     * [Real-time](guides/step-by-step/basic-feathers/real-time.md)
-    * Generators
+  * [The Generator (CLI)](guides/generator/readme.md)
     * [Introduction](guides/step-by-step/generators/readme.md)
     * [Generate app](guides/step-by-step/generators/gen-app.md)
     * [Generate authentication](guides/step-by-step/generators/gen-authentication.md)
     * [Generating an app](guides/step-by-step/generators/app.md)
     * [Adding a service](guides/step-by-step/generators/service.md)
     * [What's next?](guides/step-by-step/what-next.md)
-    * [Is Feathers production ready?](guides/step-by-step/production-ready.md)
-    * Appendix
-    * [What is 'this'?](guides/step-by-step/appendix/what-is-this.md)
   * [A Chat Application](guides/chat/readme.md)
     * [Creating the application](guides/chat/creating.md)
     * [Generating a service](guides/chat/service.md)
