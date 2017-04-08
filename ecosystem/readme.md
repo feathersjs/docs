@@ -3,17 +3,13 @@
 Below are some of the amazing things built with Feathers or for the Feathers ecosystem.
 
 
-## Applications
+## Production Applications
 
-- [Feathers Chat](https://github.com/feathersjs/feathers-chat) ![Official Feathers Repo](/img/tiny-feathers-logo.png) 
-- [Feathers React Native Chat](https://github.com/feathersjs/feathers-react-native-chat) ![Official Feathers Repo](/img/tiny-feathers-logo.png)
-- [Feathers-Vuex (Vue.js) Chat](https://github.com/feathersjs/feathers-chat-vuex) ![Official Feathers Repo](/img/tiny-feathers-logo.png)
 - [Foxflow](https://www.foxflow.com/)
 - [GenerousTickets](https://generoustickets.com/)
 - [Gratify](https://gratifyhq.com)
 - [Headstart](http://www.headstartapp.com/)
-- [Headstart React Native iOS](https://itunes.apple.com/gb/app/headstart-app/id1147423616?mt=8) 
-- [Headstart React Native Android](https://play.google.com/store/apps/details?id=com.headstartapp.app&hl=en)
+- [HaulHound](https://haulhound.com/)
 - [J.A.B. Property Investments](https://jabpi.com)
 - [Shakepay](https://shakepay.co)
 - [Simpla](https://www.simpla.io/)
@@ -25,8 +21,11 @@ Below are some of the amazing things built with Feathers or for the Feathers eco
 
 Submit yours by creating a pull request.
 
+- [Feathers Chat](https://github.com/feathersjs/feathers-chat) ![Official Feathers Repo](/img/tiny-feathers-logo.png) 
+- [Feathers React Native Chat](https://github.com/feathersjs/feathers-react-native-chat) ![Official Feathers Repo](/img/tiny-feathers-logo.png)
+- [Feathers-Vuex (Vue.js) Chat](https://github.com/feathersjs/feathers-chat-vuex) ![Official Feathers Repo](/img/tiny-feathers-logo.png)
 - [Best Buy API Playground](https://github.com/BestBuy/api-playground)
-- [Small Example Apps](https://github.com/feathersjs/feathers-demos)
+- [Feathers + Quasar](https://github.com/claustres/quasar-feathers-tutorial)
 - [Feathers + Apollo](https://github.com/swarthout/feathers-apollo)
 - [Feathers + React + Mobx](https://github.com/foxhound87/rfx-stack)
 - [Feathers + React + Webpack](https://github.com/sscaff1/feathers-webpack-react)
@@ -39,19 +38,19 @@ Submit yours by creating a pull request.
 ## Authentication & Authorization
 
 - [feathers-accounts](https://www.npmjs.com/package/feathers-accounts) - Token-Based User Account System for FeathersJS (configure).
-- [feathers-authentication](./feathers-authentication.html) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
-- [feathers-authentication-client](./feathers-authentication-client.html) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
-- [feathers-authentication-local](./feathers-authentication-local.html) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
-- [feathers-authentication-oauth1](./feathers-authentication-oauth1.html) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
-- [feathers-authentication-oauth2](./feathers-authentication-oauth2.html) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
-- [feathers-authentication-popups](./feathers-authentication-popups.html) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
-- [feathers-permissions](./feathers-permissions.html) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
-- [feathers-authentication-management](https://www.npmjs.com/package/feathers-authentication-management) ![Official Feathers Repo](/img/tiny-feathers-logo.png) - User email verification and password reset capabilities to local feathers-authentication (service)
+- [feathers-authentication](../api/authentication/server.md) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
+- [feathers-authentication-client](../api/authentication/client.md) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
+- [feathers-authentication-local](../api/authentication/local.md) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
+- [feathers-authentication-oauth1](../api/authentication/oauth1.md) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
+- [feathers-authentication-oauth2](../api/authentication/oauth2.md) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
+- [feathers-authentication-popups](https://github.com/feathersjs/feathers-authentication-popups) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
+- [feathers-permissions](https://github.com/feathersjs/feathers-permissions) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
+- [feathers-authentication-management](https://github.com/feathersjs/feathers-authentication-management) ![Official Feathers Repo](/img/tiny-feathers-logo.png) - User email verification and password reset capabilities to local feathers-authentication (service)
 
 
 ## Communications
 
-- [feathers-batch](https://www.npmjs.com/package/feathers-batch) ![Official Feathers Module](/img/tiny-feathers-logo.png) - Batch multiple Feathers service calls into one (service) 
+- [feathers-batch](https://github.com/feathersjs/feathers-batch/) ![Official Feathers Module](/img/tiny-feathers-logo.png) - Batch multiple Feathers service calls into one (service) 
 
 
 ## Database
@@ -62,29 +61,29 @@ Submit yours by creating a pull request.
 - [feathers-bookshelf](https://www.npmjs.com/package/feathers-bookshelf) - A bookshelf ORM service adapter.  (service)
 - [feathers-elasticsearch](https://github.com/feathersjs/feathers-elasticsearch) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
 - [feathers-filemaker](https://www.npmjs.com/package/feathers-filemaker) - Filemaker adapter for feathers.js
-- [feathers-knex](./feathers-knex.html) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
-- [feathers-levelup](./feathers-levelup.html)
+- [feathers-knex](../api/databases/knexjs.md) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
+- [feathers-levelup](https://www.npmjs.com/package/feathers-levelup)
 - [feathers-linvodb](https://www.npmjs.com/package/feathers-linvodb) - Create an LinvoDB Service for FeatherJS. (service)
-- [feathers-localstorage](../databases/localstorage.md) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
-- [feathers-memory](./feathers-memory.html) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
+- [feathers-localstorage](../api/databases/localstorage.md) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
+- [feathers-memory](../api/databases/memory.md) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
 - [feathers-mongo-collections](https://www.npmjs.com/package/feathers-mongo-collections) - MongoDB collections service for FeathersJS. (service)
 - [feathers-mongo-databases](https://www.npmjs.com/package/feathers-mongo-databases) - Create a MongoDB database service for FeathersJS. (service)
-- [feathers-mongodb](./feathers-mongodb.htmlhtml) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
+- [feathers-mongodb](../api/databases/mongodb.md) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
 - [feathers-mongodb-revisions](https://www.npmjs.com/package/feathers-mongodb-revisions) - This Feathers database adapter extends the basic MongoDB adapter, adding revision support. (service)
-- [feathers-mongoose](./feathers-mongoose.html) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
+- [feathers-mongoose](../api/databases/mongoose.md) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
 - [feathers-mongoose-advanced](https://www.npmjs.com/package/feathers-mongoose-advanced) - Create a flexible Mongoose Service for FeathersJS. (service)
 - [feathers-mongoose-service](https://www.npmjs.com/package/feathers-mongoose-service) - Easily create a Mongoose Service for Featherjs. (service)
-- [feathers-nedb](./feathers-nedb.html) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
+- [feathers-nedb](../api/databases/nedb.md) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
 - [feathers-nedb-dump](https://www.npmjs.com/package/feathers-nedb-dump) - Middleware for Feathers.js - dumps and restores NeDB database for a given service (middleware)
 - [feathers-objection](https://github.com/mcchrish/feathers-objection) - A service adapter for [Objection.js](http://vincit.github.io/objection.js.html) - A minimal SQL ORM built on top of Knex.
 - [feathers-orm-service](https://www.npmjs.com/package/feathers-orm-service) - Easily create a Object Relational Mapping Service for Featherjs.
-- [feathers-rethinkdb](./feathers-rethinkdb.html) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
+- [feathers-rethinkdb](../api/databases/rethinkdb.md) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
 - [feathers-rethinky](https://www.npmjs.com/package/feathers-rethinky) - Thinky.js RethinkDB Adaptor for Feathers JS
 - [feathers-seeder](https://www.npmjs.com/package/feathers-seeder) - Straightforward data seeder for FeathersJS services.
-- [feathers-sequelize](./feathers-sequelize.html) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
+- [feathers-sequelize](../api/databases/sequelize.md) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
 - [feathers-skypager](https://www.npmjs.com/package/feathers-skypager) - A skypager ORM service adapter (service)
 - [feathers-solr](https://www.npmjs.com/package/feathers-solr) - Solr Adapter for Feathersjs
-- [feathers-waterline](./feathers-waterline.html)
+- [feathers-waterline](https://www.npmjs.com/package/feathers-waterline)
 
 
 ## Documentation
@@ -97,7 +96,6 @@ Submit yours by creating a pull request.
 - [feathers-mailer](https://www.npmjs.com/package/feathers-mailer) ![Official Feathers Module](/img/tiny-feathers-logo.png) - Feathers mailer service using nodemailer (service) 
 - [feathers-mailgun](https://www.npmjs.com/package/feathers-mailgun) ![Official Feathers Module](/img/tiny-feathers-logo.png) - A Mailgun Service for FeatherJS. (service) 
 - [feathers-sendgrid](https://www.npmjs.com/package/feathers-sendgrid) ![Official Feathers Module](/img/tiny-feathers-logo.png) - A SendGrid Service for FeatherJS. (service) 
-- [feathers-twilio](./feathers-twilio.html) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
 
 
 ## Multiple instances
@@ -115,7 +113,7 @@ The Feathers client works with React Native but here is a collection of native l
 
 ## Payments
 
-- [feathers-stripe](./feathers-stripe.html) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
+- [feathers-stripe](https://github.com/feathersjs/feathers-stripe) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
 
 
 ## Testing
@@ -132,31 +130,31 @@ The Feathers client works with React Native but here is a collection of native l
 
 ## Transports
 
-- [feathers-primus](./feathers-primus.html) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
-- [feathers-rest](./feathers-rest.html) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
-- [feathers-socketio](./feathers-socketio.html) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
+- [feathers-primus](../api/primus.md) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
+- [feathers-rest](../api/rest.md) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
+- [feathers-socketio](../api/socketio.md) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
 - [feathers-batch](https://www.npmjs.com/package/feathers-batch) - Batch multiple Feathers service calls into one (service)
 - [feathers-socketcluster](https://github.com/polst/feathers-socketcluster) - Use SocketCluster for client/server communication. Not published.
 
 
 ## Utilities
 
-- [feathers-bootstrap](./feathers-bootstrap.html) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
-- [feathers-cli](./feathers-cli.html) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
-- [feathers-client](./feathers-client.html) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
-- [feathers-commons](./feathers-commons.html) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
-- [feathers-configuration](./feathers-configuration.html) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
-- [feathers-errors](./feathers-errors.html) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
-- [feathers-generator](./feathers-generator.html) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
-- [feathers-hooks](./feathers-hooks.html) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
-- [feathers-hooks-common](https://www.npmjs.com/package/feathers-hooks-common) ![Official Feathers Module](/img/tiny-feathers-logo.png) - Useful hooks for use with Feathersjs services. (hooks) 
+- [feathers-bootstrap](https://github.com/feathersjs/feathers-bootstrap) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
+- [feathers-cli](https://github.com/feathersjs/feathers-cli) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
+- [feathers-client](../api/client.md) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
+- [feathers-commons](https://github.com/feathersjs/feathers-cli) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
+- [feathers-configuration](../guides/advanced/configuration.md) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
+- [feathers-errors](../api/errors.md) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
+- [feathers-generator](https://github.com/feathersjs/feathers-generator) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
+- [feathers-hooks](../api/hooks.md) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
+- [feathers-hooks-common](../api/hooks-common.md) ![Official Feathers Module](/img/tiny-feathers-logo.png) - Useful hooks for use with Feathersjs services. (hooks) 
 - [feathers-hooks-utils](https://www.npmjs.com/package/feathers-hooks-utils) - Utility library for writing Feathersjs hooks. (hooks)
 - [feathers-logger](./feathers-logger.html) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
-- [feathers-query-filters](./feathers-query-filters.html) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
-- [feathers-service-logger-stats](./feathers-service-logger-stats.html) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
-- [feathers-socket-commons](./feathers-socket-commons.html) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
-- [generator-feathers](./generator-feathers.html) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
-- [generator-feathers-plugin](./generator-feathers-plugin.html) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
+- [feathers-query-filters](https://github.com/feathersjs/feathers-logger) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
+- [feathers-service-logger-stats](https://github.com/feathersjs/feathers-service-logger-stats) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
+- [feathers-socket-commons](https://github.com/feathersjs/feathers-socket-commons) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
+- [generator-feathers](https://github.com/feathersjs/generator-feathers) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
+- [generator-feathers-plugin](https://github.com/feathersjs/generator-feathers-plugin) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
 
 
 ## Validation

@@ -1,12 +1,12 @@
 # Is Feathers production ready?
 
-##### by David Luecke, Dec. 22, 2016
+#### by David Luecke, Dec. 22, 2016
 
 Production ready has always been a loaded question to me but I will try to answer it
 based on “Who is using it?” and this
 [Stackexchange definition of “production ready”](http://softwareengineering.stackexchange.com/questions/61726/define-production-ready).
 
-### Who is using it?
+## Who is using it?
 
 The best measure for production ready usually is if someone is actually using it in production.
 Here are some interesting companies that are using Feathers:
@@ -21,9 +21,7 @@ Here are some interesting companies that are using Feathers:
 There are also at least two other Fortune 100 companies we know of
 that unfortunately prefer not to be on the list.
 
-### Programmer's definition of "production-ready":
-
-- it runs
+## It runs
 
 An interesting thing that happened during the 2.0 release earlier this year was that
 a surprising amount of people mentioned they have been using Feathers successfully in production
@@ -42,7 +40,7 @@ and database/ORM setup.
 If you are looking for a one-stop real-time webapp solution
 and don’t mind some lock-in then Meteor might be better suited.
 
-- its design was well thought out
+## Its design was well thought out
 
 The whole project started as my final thesis paper in university in 2010.
 The goal was to research and implement a (Java) prototype of an abstraction layer
@@ -56,7 +54,7 @@ and creating web applications for some of the largest companies in the world.
 
 It is always great to see it “click” when someone gets how it all fits together to make creating and consuming APIs easier.
 
-- it's stable
+## It's stable
 
 The core API has been stable since 2013 with the 1.0 release in October 2014 and only
 [minor breaking changes](https://docs.feathersjs.com/guides/migrating.html)
@@ -66,7 +64,7 @@ to improve performance and security and remove the hard dependency on Express.
 There also may be breaking changes in plugins you are using - especially in 0.x releases -
 but we try to always document why and how to migrate.
 
-it's maintainable
+## It's maintainable
 
 A pet peeve of mine are frameworks that make things “seem” easy by generating thousands of lines of code for you
 and in the process making it almost impossible to implement anything not supported out of the box by their generators.
@@ -80,7 +78,7 @@ We also try to keep every plugin just as small and focussed on its task.
 With lots of open source experience in the team it was also possible to streamline the release and
 maintenance process so that most non-breaking bugfixes are usually released within 24 hours.
 
-- it's scalable
+## It's scalable
 
 Since Feathers is built on
 [Express](http://expressjs.com/) and 
@@ -91,7 +89,7 @@ into individual parts should the need arise.
 
 You also have the option to use other more performant websocket libraries like µWS and, coming up in v3, other server frameworks like Koa.
 
-- it's documented
+## It's documented
 
 There are always opportunities to improve
 [documentation](https://docs.feathersjs.com/)

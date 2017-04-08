@@ -1,7 +1,16 @@
 # Guides
 
+[**About Feathers**](./about/readme.md)<br/>
+Learn about Feathers features, philosophy and how it compares with some other frameworks.
+
 [**The Basics - A Step-by-Step Intro to Feathers**](./step-by-step/readme.md)<br/>
 The goal of this guide is to get you to the "A-ha!" moment as efficiently as possible.  You will learn how the primary parts of the core work together.  You'll also learn how to start new applications with the generator.
 
 [**A Chat Application**](./chat/readme.md)<br/>
-This is the original Feathers chat application guide, re-written for the latest release.  You'll learn how to add authentication to an application.
+Learn how to create a chat REST and real-time API complete with authentication and data processing including a simple browser app.
+
+[**Authentication**](./auth/readme.md)<br/>
+Learn how to add local (username & password), OAuth1, and OAuth2 authentication to your Feathers Applications.
+
+[**Advanced topics**](./advanced/readme.md)<br/>
+Guides for more advanced Feathers topics like debugging, configuration, file uploads and more.

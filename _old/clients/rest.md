@@ -82,6 +82,7 @@ const axios = require('axios');
 const host = 'http://api.feathersjs.com';
 const app = feathers()
   .configure(rest(host).axios(axios));
+```
 
 ### Fetch
 
@@ -120,9 +121,9 @@ Using [the Feathers client](feathers.md), the `feathers-rest/client` module can 
 </script>
 ```
 
-## Server Usage
+## Node.js Usage
 
-Here's how to use the Feathers REST client in NodeJS.
+Here's how to use the Feathers REST client in Node.js.
 
 ```
 $ npm install feathers feathers-rest feathers-hooks superagent
@@ -131,6 +132,7 @@ $ npm install feathers feathers-rest feathers-hooks superagent
 ```js
 const feathers = require('feathers');
 const superagent = require('superagent');
+const hooks = require('feathers-hooks')
 const client = require('feathers-rest/client');
 const rest = client('http://my-feathers-server.com');
 

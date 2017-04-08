@@ -20,6 +20,9 @@ This chapter describes how to use Feathers as the client in Node, React Native a
 | `feathers-primus`         | `feathers-primus/client`         | [Primus Transport API](./primus.md) |
 | `feathers-authentication` | `feathers-authentication/client` | [Feathers Authentication Client API]() |
 
+## Universal (Isomorphic) API
+The Feathers Client uses the same [Application API](./application.md) as is available on the server.  It is extremely lightweight, however, with Express having been replaced by a [thin wrapper](https://github.com/feathersjs/feathers/blob/master/src/client/express.js).  There are differences between the client and server APIs.  Learn more under each method on the [Application API page](./application.md).
+
 
 ## Node and npm loaders
 The client utilities can be used directly on the server.  Just `require` each individual package or the `feathers-client` and use it the same way as shown for in the browser examples, below.  Node.js natively supports the CommonJS module syntax.  Here's an example of setting up the client in Node:

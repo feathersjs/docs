@@ -28,7 +28,7 @@ const service = require('feathers-rethinkdb');
 
 app.use('/messages', service({
   Model: r,
-  db: 'someotherdb' //must be on the same connection as rethinkdbdash
+  db: 'someotherdb', //must be on the same connection as rethinkdbdash
   name: 'messages',
   // Enable pagination
   paginate: {

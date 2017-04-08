@@ -2,7 +2,7 @@
 
 Over the last months we at [ciancoders.com](https://ciancoders.com/) have been working in a new SPA project using Feathers and React, the combination of those two turns out to be **just amazing**.  
 
-Recently we where struggling to find a way to upload files without having to write a separate Express middleware or having to (re)write a complex Feathers service.
+Recently we were struggling to find a way to upload files without having to write a separate Express middleware or having to (re)write a complex Feathers service.
 
 # Our Goals
 We want to implement an upload service to accomplish a few important things:

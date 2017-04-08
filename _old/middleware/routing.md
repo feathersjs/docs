@@ -98,7 +98,7 @@ module.exports = {
   }
 }
 
-// v1/app1.js
+// v1/app.js
 const feathers = require('feathers');
 const todoService = require('./todos');
 
@@ -120,7 +120,7 @@ module.exports = {
   }
 }
 
-// v2/app1.js
+// v2/app.js
 const feathers = require('feathers');
 const todoService = require('./todos');
 

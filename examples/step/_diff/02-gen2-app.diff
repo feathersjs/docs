@@ -1,0 +1,20 @@
+--- 02/gen1/src/app.js	2017-04-06 12:30:19.748496074 -0400
++++ 02/gen2/src/app.js	2017-04-06 12:34:15.832496074 -0400
+@@ -17,6 +17,8 @@
+ const services = require('./services');
+ const appHooks = require('./app.hooks');
+ 
++const authentication = require('./authentication');
++
+ const app = feathers();
+ 
+ // Load app configuration
+@@ -36,6 +38,8 @@
+ app.configure(rest());
+ app.configure(socketio());
+ 
++app.configure(authentication);
++
+ // Set up our services (see `services/index.js`)
+ app.configure(services);
+ // Configure middleware (see `middleware/index.js`) - always has to be last

@@ -4,7 +4,7 @@ We will start with writing snippets of Feathers code by hand.
 We'll take a step by step approach, introducing a few new concepts each time.
 
 Each step is backed by a working example in `examples/step/`.
-The code samples in the guide are extracts from those examples.
+The code samples in this guide are extracts from those examples.
 Code snippets may be ambiguous, misleading or confusing.
 Working examples reduce these problems,
 and let you learn more by modifying them yourself.
@@ -24,19 +24,19 @@ We'll develop a solid enough understanding of Feathers basics that,
 by the time we get to Feathers' generators,
 we'll be mostly interested in how they structure projects rather than in the code they produce.
 
-### Our intended audience
+## Our intended audience
 
 Readers should have reasonable JavaScript experience, some experience with
 [Node](https://nodejs.org/en/),
-the concept of [HTTP REST](http://rest.elkstein.org/),
-and an idea of what [Websockets](https://www.html5rocks.com/en/tutorials/websockets/basics/) are.
+the concept of [HTTP REST](https://en.wikipedia.org/wiki/Representational_state_transfer),
+and an idea of what [WebSockets](https://www.html5rocks.com/en/tutorials/websockets/basics/) are.
 Having some experience with [ExpressJS](http://expressjs.com/) is an asset.
 We assume everyone has worked with database tables.
 
 This guide should be an comfortable introduction to Feathers for people learning new technologies,
 such as those coming from PHP, Ruby or Meteor.
 
-It may be productive for seasoned developers, experienced in Node, REST and websockets,
+It may be productive for seasoned developers, experienced in Node, REST and WebSockets,
 to skim the text, paying more attention to the code extracts.
 
 They should however make sure to absorb fully the [Generators](../generators/readme.md) section.

@@ -22,7 +22,6 @@ Output files from generator:
    create .editorconfig
    create .jshintrc
    create .travis.yml
-   create example/app.js
    create src/index.js
    create test/index.test.js
    create README.md

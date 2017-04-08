@@ -1,6 +1,6 @@
 # What is 'this'?
 
-#### In a service configuration
+## In a service configuration
 
 Its the Feathers configuration's app object.
 
@@ -12,7 +12,7 @@ module.exports = function () {
 }
 ```
 
-#### In a hook definition
+## In a hook definition
 
 Its the service object.
 

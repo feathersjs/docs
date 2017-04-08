@@ -11,7 +11,7 @@ You can find a complete working example [here](https://github.com/feathersjs/fea
 [**Chapter 1: Creating the application**](./creating.md)<br/>
 Create a new application using the generator.
 
-[**Chapter 2: Generating a service**](./generating.md)<br/>
+[**Chapter 2: Generating a service**](./generator.md)<br/>
 Add an API endpoint to store messages.
 
 [**Chapter 3: Adding Authentication**](./authentication.md)<br/>

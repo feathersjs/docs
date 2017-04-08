@@ -31,6 +31,8 @@ app.listen(8000);
 const todoService = app.service('todos');
 ```
 
+> **Note:** `all` hooks will be registered before specific hooks in that object. For the above example that means that the `all` hook will be added to the `create` service method and then the specific hook.
+
 ## Before hooks
 
 `service.before(beforeHooks)` hooks allow you to pre-process service call parameters. They will be called with the hook object and a callback which should be called with any errors or no arguments or `null` and the modified hook object. The hook object contains information about the intercepted method and for `before` hooks can have the following properties:
@@ -62,8 +64,6 @@ todoService.before({
   }
 });
 ```
-
-> **Note:** `all` hooks will be registered before specific hooks in that object. For the above example that means that the `all` hook will be added to the `create` service method and then the specific hook.
 
 ## After hooks
 
@@ -100,8 +100,6 @@ todoService.after({
 ```
 
 After hooks also support the `all` property to register a hook for every service method.
-
-> **ProTip:** `all` hooks will be registered after specific hooks in that object.
  
 <!-- -->
 
