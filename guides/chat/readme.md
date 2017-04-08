@@ -5,7 +5,7 @@ This guide will walk you through creating the API for the Feathers Chat applicat
 [**Chapter 1: Creating the application**](./creating.md)<br/>
 Begin a new application using the generator.
 
-[**Chapter 2: Generating a service**](./generating.md)<br/>
+[**Chapter 2: Generating a service**](./generator.md)<br/>
 Add an API endpoint to store messages.
 
 [**Chapter 3: Adding Authentication**](./authentication.md)<br/>
