@@ -47,7 +47,7 @@ and that is when it is being run.
 The generated code, once again, contains no surprises for us as we have covered it before.
 
 > **Generators.**
-The feathers generators are great for roughing out a project,
+The Feathers generators are great for roughing out a project,
 creating something in its approximate, but not finished, form.
 
 ### Is anything wrong, unclear, missing?

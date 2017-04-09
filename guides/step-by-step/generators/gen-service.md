@@ -25,7 +25,7 @@ There is nothing new.
 The boilerplate differs only in the names of the services.
 
 > **Generators.**
-The feathers generators are great for roughing out a project,
+The Feathers generators are great for roughing out a project,
 creating something in its approximate, but not finished, form.
 The generators will write most of the boilerplate you need,
 while you concentrate on the unique needs of the project.
