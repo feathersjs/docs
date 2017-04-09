@@ -1,6 +1,6 @@
 # basic-guide-generated-project
 
-> Generated app for Feathers The Basics Guide
+> Generated app for Feathers Generator Guide
 
 ## About
 
