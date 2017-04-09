@@ -1,16 +1,17 @@
---- 02/gen1/package.json	2017-04-06 12:31:44.372496074 -0400
-+++ 02/gen2/package.json	2017-04-06 12:34:43.260496074 -0400
-@@ -31,13 +31,18 @@
+--- 02/gen1/package.json	2017-04-09 09:01:50.466007000 -0400
++++ 02/gen2/package.json	2017-04-09 09:13:11.086007000 -0400
+@@ -31,13 +31,19 @@
      "compression": "1.6.2",
      "cors": "2.8.3",
      "feathers": "2.1.1",
-+    "feathers-authentication": "1.2.0",
++    "feathers-authentication": "1.2.1",
++    "feathers-authentication-hooks": "0.1.0",
 +    "feathers-authentication-jwt": "0.3.1",
 +    "feathers-authentication-local": "0.3.4",
      "feathers-configuration": "0.4.1",
-     "feathers-errors": "2.6.2",
+     "feathers-errors": "2.6.3",
      "feathers-hooks": "1.8.1",
-     "feathers-hooks-common": "2.0.3",
+     "feathers-hooks-common": "3.0.0",
 +    "feathers-nedb": "2.6.2",
      "feathers-rest": "1.7.1",
      "feathers-socketio": "1.5.2",
