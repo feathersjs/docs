@@ -51,4 +51,4 @@ The feathers generators are great for roughing out a project,
 creating something in its approximate, but not finished, form.
 
 ### Is anything wrong, unclear, missing?
-[Leave a comment.](https://github.com/feathersjs/feathers-guide/issues/new?title=Comment:Step-Generators-Service&body=Comment:Step-Generators-Service)
+[Leave a comment.](https://github.com/feathersjs/feathers-guide/issues/new?title=Comment:Step-Generators-Hook&body=Comment:Step-Generators-Hook)

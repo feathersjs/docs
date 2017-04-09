@@ -26,6 +26,7 @@
     * [Add authentication](guides/step-by-step/generators/gen-authentication.md)
     * [Add the teams service](guides/step-by-step/generators/gen-service.md)
     * [Add the populate hook](guides/step-by-step/generators/gen-hook.md)
+    * [Run the Roughed Out App](guides/step-by-step/generators/gen-run.md)
     * [===Generating an app](guides/step-by-step/generators/app.md)
     * [Adding a service](guides/step-by-step/generators/service.md)
     * [What's next?](guides/step-by-step/what-next.md)
