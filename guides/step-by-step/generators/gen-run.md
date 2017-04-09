@@ -3,8 +3,9 @@
 
 ## Install dependencies
 
-The generator will automatically run the dependencies it needs when you run it yourself.
-However those dependencies are not stored with this repo in order to save storage.
+The generator will automatically install the dependencies it needs when you run it.
+However they have not been included with this repo in order to save space.
+
 So we will install them manually.
 
 ```text
@@ -26,7 +27,7 @@ Let's run them.
 ![Generate hook](../assets/gen-rough-test.jpg)
 
 `npm run test` runs the `test` script in
-[package.json](https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/02/gen4/package.json).
+[package.json](https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/02/gen4/package.json#L23-L28).
 ```text
 "scripts": {
     "test": "npm run eslint && npm run mocha",
@@ -75,12 +76,12 @@ These messages are logged just to remind you to do so.
 ## About the config files
 
 We changed to the generated app's directory (`gen4`) to start the server.
-Its nice to use `npm run start` because we need to know where the server starting code is.
-However we could just as easily run `node ./src`.
+Its nice to use `npm run start` as then we don't need to know where the server starting code resides.
+However we could just as easily have run `node ./src`.
 
 One thing the generated code assumes is that the
 [`config` directory](https://github.com/feathersjs/feathers-docs/tree/auk/examples/step/02/gen4/config)
-is in the current directory.
+is located in the current directory.
 So we wouldn't be able to start the server with `node path/to/app/src`
 because the config files wouldn't be found.
 
@@ -92,6 +93,16 @@ NODE_CONFIG_DIR=path/to/app/config node path/to/app/src
 SET NODE_CONFIG_DIR=path/to/app/config
 node path/to/app/src
 ```
+
+## Recap
+
+The Feathers generators are great for roughing out a project,
+creating something in its approximate, but not finished, form.
+
+> **Generators.**
+You can also use them later on to add additional services and hooks as your app evolves.
+
+We now have the boilerplate for our app, and we start adding the custom code it requires.
 
 ### Is anything wrong, unclear, missing?
 [Leave a comment.](https://github.com/feathersjs/feathers-guide/issues/new?title=Comment:Step-Generators-Run&body=Comment:Step-Generators-Run)
