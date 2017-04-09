@@ -40,6 +40,7 @@
     * [Processing data](guides/chat/processing.md)
     * [Frameworks: React, Vue etc.](guides/chat/frameworks.md)
   * [Authentication](guides/auth/readme.md)
+    * [Recipe: Mixed Auth Endpoints](guides/auth/recipe.mixed-auth.md)
   * [Advanced topics](guides/advanced/readme.md)
     * [Debugging](guides/advanced/debugging.md)
     * [Configuration](guides/advanced/configuration.md)
