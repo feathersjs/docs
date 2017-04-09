@@ -1,5 +1,5 @@
---- 02/gen1/src/app.js	2017-04-06 12:30:19.748496074 -0400
-+++ 02/gen2/src/app.js	2017-04-06 12:34:15.832496074 -0400
+--- 02/gen1/src/app.js	2017-04-09 09:00:41.670007000 -0400
++++ 02/gen2/src/app.js	2017-04-09 09:12:41.790007000 -0400
 @@ -17,6 +17,8 @@
  const services = require('./services');
  const appHooks = require('./app.hooks');
