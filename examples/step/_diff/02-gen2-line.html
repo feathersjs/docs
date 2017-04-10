@@ -37,13 +37,13 @@
 
 <div id="diff">
   <div class="d2h-wrapper">
-    <div id="d2h-737124" class="d2h-file-wrapper" data-lang="816496074 -0400">
+    <div id="d2h-813361" class="d2h-file-wrapper" data-lang="778007000 -0400">
     <div class="d2h-file-header">
     <span class="d2h-file-name-wrapper">
     <span class="d2h-icon-wrapper"><svg aria-hidden="true" class="d2h-icon" height="16" version="1.1" viewBox="0 0 12 16" width="12">
     <path d="M6 5H2v-1h4v1zM2 8h7v-1H2v1z m0 2h7v-1H2v1z m0 2h7v-1H2v1z m10-7.5v9.5c0 0.55-0.45 1-1 1H1c-0.55 0-1-0.45-1-1V2c0-0.55 0.45-1 1-1h7.5l3.5 3.5z m-1 0.5L8 2H1v12h10V5z"></path>
 </svg></span>
-    <span class="d2h-file-name">02/{gen1/config/default.json	2017-04-06 12:30:19.720496074 -0400 → gen2/config/default.json	2017-04-06 12:34:15.816496074 -0400}</span>
+    <span class="d2h-file-name">02/{gen1/config/default.json	2017-04-09 09:00:41.590007000 -0400 → gen2/config/default.json	2017-04-09 09:12:41.778007000 -0400}</span>
     <span class="d2h-tag d2h-moved d2h-moved-tag">RENAMED</span></span>
     </div>
     <div class="d2h-file-diff">
@@ -53,7 +53,7 @@
                 <tr>
     <td class="d2h-code-linenumber d2h-info"></td>
     <td class="d2h-info">
-        <div class="d2h-code-line d2h-info">@@ -5,5 +5,15 @@</div>
+        <div class="d2h-code-line d2h-info">@@ -5,5 +5,31 @@</div>
     </td>
 </tr><tr>
     <td class="d2h-code-linenumber d2h-cntx">
@@ -89,17 +89,6 @@
         </div>
     </td>
 </tr><tr>
-    <td class="d2h-code-linenumber d2h-del">
-      <div class="line-num1">8</div>
-<div class="line-num2"></div>
-    </td>
-    <td class="d2h-del">
-        <div class="d2h-code-line d2h-del">
-            <span class="d2h-code-line-prefix">-</span>
-            <span class="d2h-code-line-ctn">  <del>}</del></span>
-        </div>
-    </td>
-</tr><tr>
     <td class="d2h-code-linenumber d2h-ins">
       <div class="line-num1"></div>
 <div class="line-num2">8</div>
@@ -107,7 +96,7 @@
     <td class="d2h-ins">
         <div class="d2h-code-line d2h-ins">
             <span class="d2h-code-line-prefix">+</span>
-            <span class="d2h-code-line-ctn">  <ins>},</ins></span>
+            <span class="d2h-code-line-ctn">  },</span>
         </div>
     </td>
 </tr><tr>
@@ -129,7 +118,7 @@
     <td class="d2h-ins">
         <div class="d2h-code-line d2h-ins">
             <span class="d2h-code-line-prefix">+</span>
-            <span class="d2h-code-line-ctn">    "secret": "FpsjWz8yY6khkBJHEgbp1vGUJCacKDCZ088Nzbo9vtMqXpV2mwtIdnl2nKxgrhKG",</span>
+            <span class="d2h-code-line-ctn">    "secret": "da81c03cc0b6f35e66dea739da376de3ef0c3e5783b3d42f065e216c28efd0872a5f328109e19973100d785814f71a56aa8f250aa85247a430f82419738a556e576c1f4a1031a726c3ef79c68c0ef7750a7d8bb8e6e463a2c80092d50c1561a8208a7fc214d78789848e524eef189363b1ff2dc2b732c72a762ff71e27e7eab09fa77b63fd7418b36576d0a9a74a4396f696ccd2e54cb2f38d2348c963f3f230f72911efdeed879b93ec366199c64e44e826208d9cfe891242fc0ad1ee5cff6799849f7a70cbcc838c697145f21d5f747b820a15da4fb6173d5aa6a91efc456dc24ed1c942b60367293ebcb29852bdbc3ebace724d48ae79dcaac1dd4ed74a62",</span>
         </div>
     </td>
 </tr><tr>
@@ -195,7 +184,7 @@
     <td class="d2h-ins">
         <div class="d2h-code-line d2h-ins">
             <span class="d2h-code-line-prefix">+</span>
-            <span class="d2h-code-line-ctn">    "service": "users"</span>
+            <span class="d2h-code-line-ctn">    "service": "users",</span>
         </div>
     </td>
 </tr><tr>
@@ -206,7 +195,7 @@
     <td class="d2h-ins">
         <div class="d2h-code-line d2h-ins">
             <span class="d2h-code-line-prefix">+</span>
-            <span class="d2h-code-line-ctn">  },</span>
+            <span class="d2h-code-line-ctn">    "jwt": {</span>
         </div>
     </td>
 </tr><tr>
@@ -217,13 +206,189 @@
     <td class="d2h-ins">
         <div class="d2h-code-line d2h-ins">
             <span class="d2h-code-line-prefix">+</span>
+            <span class="d2h-code-line-ctn">      "header": {</span>
+        </div>
+    </td>
+</tr><tr>
+    <td class="d2h-code-linenumber d2h-ins">
+      <div class="line-num1"></div>
+<div class="line-num2">19</div>
+    </td>
+    <td class="d2h-ins">
+        <div class="d2h-code-line d2h-ins">
+            <span class="d2h-code-line-prefix">+</span>
+            <span class="d2h-code-line-ctn">        "type": "access"</span>
+        </div>
+    </td>
+</tr><tr>
+    <td class="d2h-code-linenumber d2h-ins">
+      <div class="line-num1"></div>
+<div class="line-num2">20</div>
+    </td>
+    <td class="d2h-ins">
+        <div class="d2h-code-line d2h-ins">
+            <span class="d2h-code-line-prefix">+</span>
+            <span class="d2h-code-line-ctn">      },</span>
+        </div>
+    </td>
+</tr><tr>
+    <td class="d2h-code-linenumber d2h-ins">
+      <div class="line-num1"></div>
+<div class="line-num2">21</div>
+    </td>
+    <td class="d2h-ins">
+        <div class="d2h-code-line d2h-ins">
+            <span class="d2h-code-line-prefix">+</span>
+            <span class="d2h-code-line-ctn">      "audience": "https://yourdomain.com",</span>
+        </div>
+    </td>
+</tr><tr>
+    <td class="d2h-code-linenumber d2h-ins">
+      <div class="line-num1"></div>
+<div class="line-num2">22</div>
+    </td>
+    <td class="d2h-ins">
+        <div class="d2h-code-line d2h-ins">
+            <span class="d2h-code-line-prefix">+</span>
+            <span class="d2h-code-line-ctn">      "subject": "anonymous",</span>
+        </div>
+    </td>
+</tr><tr>
+    <td class="d2h-code-linenumber d2h-ins">
+      <div class="line-num1"></div>
+<div class="line-num2">23</div>
+    </td>
+    <td class="d2h-ins">
+        <div class="d2h-code-line d2h-ins">
+            <span class="d2h-code-line-prefix">+</span>
+            <span class="d2h-code-line-ctn">      "issuer": "feathers",</span>
+        </div>
+    </td>
+</tr><tr>
+    <td class="d2h-code-linenumber d2h-ins">
+      <div class="line-num1"></div>
+<div class="line-num2">24</div>
+    </td>
+    <td class="d2h-ins">
+        <div class="d2h-code-line d2h-ins">
+            <span class="d2h-code-line-prefix">+</span>
+            <span class="d2h-code-line-ctn">      "algorithm": "HS256",</span>
+        </div>
+    </td>
+</tr><tr>
+    <td class="d2h-code-linenumber d2h-ins">
+      <div class="line-num1"></div>
+<div class="line-num2">25</div>
+    </td>
+    <td class="d2h-ins">
+        <div class="d2h-code-line d2h-ins">
+            <span class="d2h-code-line-prefix">+</span>
+            <span class="d2h-code-line-ctn">      "expiresIn": "1d"</span>
+        </div>
+    </td>
+</tr><tr>
+    <td class="d2h-code-linenumber d2h-ins">
+      <div class="line-num1"></div>
+<div class="line-num2">26</div>
+    </td>
+    <td class="d2h-ins">
+        <div class="d2h-code-line d2h-ins">
+            <span class="d2h-code-line-prefix">+</span>
+            <span class="d2h-code-line-ctn">    },</span>
+        </div>
+    </td>
+</tr><tr>
+    <td class="d2h-code-linenumber d2h-ins">
+      <div class="line-num1"></div>
+<div class="line-num2">27</div>
+    </td>
+    <td class="d2h-ins">
+        <div class="d2h-code-line d2h-ins">
+            <span class="d2h-code-line-prefix">+</span>
+            <span class="d2h-code-line-ctn">    "local": {</span>
+        </div>
+    </td>
+</tr><tr>
+    <td class="d2h-code-linenumber d2h-ins">
+      <div class="line-num1"></div>
+<div class="line-num2">28</div>
+    </td>
+    <td class="d2h-ins">
+        <div class="d2h-code-line d2h-ins">
+            <span class="d2h-code-line-prefix">+</span>
+            <span class="d2h-code-line-ctn">      "entity": "user",</span>
+        </div>
+    </td>
+</tr><tr>
+    <td class="d2h-code-linenumber d2h-ins">
+      <div class="line-num1"></div>
+<div class="line-num2">29</div>
+    </td>
+    <td class="d2h-ins">
+        <div class="d2h-code-line d2h-ins">
+            <span class="d2h-code-line-prefix">+</span>
+            <span class="d2h-code-line-ctn">      "service": "users",</span>
+        </div>
+    </td>
+</tr><tr>
+    <td class="d2h-code-linenumber d2h-ins">
+      <div class="line-num1"></div>
+<div class="line-num2">30</div>
+    </td>
+    <td class="d2h-ins">
+        <div class="d2h-code-line d2h-ins">
+            <span class="d2h-code-line-prefix">+</span>
+            <span class="d2h-code-line-ctn">      "usernameField": "email",</span>
+        </div>
+    </td>
+</tr><tr>
+    <td class="d2h-code-linenumber d2h-ins">
+      <div class="line-num1"></div>
+<div class="line-num2">31</div>
+    </td>
+    <td class="d2h-ins">
+        <div class="d2h-code-line d2h-ins">
+            <span class="d2h-code-line-prefix">+</span>
+            <span class="d2h-code-line-ctn">      "passwordField": "password"</span>
+        </div>
+    </td>
+</tr><tr>
+    <td class="d2h-code-linenumber d2h-cntx">
+      <div class="line-num1">8</div>
+<div class="line-num2">32</div>
+    </td>
+    <td class="d2h-cntx">
+        <div class="d2h-code-line d2h-cntx">
+            <span class="d2h-code-line-prefix"> </span>
+            <span class="d2h-code-line-ctn">  }</span>
+        </div>
+    </td>
+</tr><tr>
+    <td class="d2h-code-linenumber d2h-ins">
+      <div class="line-num1"></div>
+<div class="line-num2">33</div>
+    </td>
+    <td class="d2h-ins">
+        <div class="d2h-code-line d2h-ins">
+            <span class="d2h-code-line-prefix">+</span>
+            <span class="d2h-code-line-ctn">  },</span>
+        </div>
+    </td>
+</tr><tr>
+    <td class="d2h-code-linenumber d2h-ins">
+      <div class="line-num1"></div>
+<div class="line-num2">34</div>
+    </td>
+    <td class="d2h-ins">
+        <div class="d2h-code-line d2h-ins">
+            <span class="d2h-code-line-prefix">+</span>
             <span class="d2h-code-line-ctn">  "nedb": "../data"</span>
         </div>
     </td>
 </tr><tr>
     <td class="d2h-code-linenumber d2h-cntx">
       <div class="line-num1">9</div>
-<div class="line-num2">19</div>
+<div class="line-num2">35</div>
     </td>
     <td class="d2h-cntx">
         <div class="d2h-code-line d2h-cntx">
@@ -237,13 +402,13 @@
         </div>
     </div>
 </div>
-<div id="d2h-424862" class="d2h-file-wrapper" data-lang="260496074 -0400">
+<div id="d2h-856866" class="d2h-file-wrapper" data-lang="086007000 -0400">
     <div class="d2h-file-header">
     <span class="d2h-file-name-wrapper">
     <span class="d2h-icon-wrapper"><svg aria-hidden="true" class="d2h-icon" height="16" version="1.1" viewBox="0 0 12 16" width="12">
     <path d="M6 5H2v-1h4v1zM2 8h7v-1H2v1z m0 2h7v-1H2v1z m0 2h7v-1H2v1z m10-7.5v9.5c0 0.55-0.45 1-1 1H1c-0.55 0-1-0.45-1-1V2c0-0.55 0.45-1 1-1h7.5l3.5 3.5z m-1 0.5L8 2H1v12h10V5z"></path>
 </svg></span>
-    <span class="d2h-file-name">02/{gen1/package.json	2017-04-06 12:31:44.372496074 -0400 → gen2/package.json	2017-04-06 12:34:43.260496074 -0400}</span>
+    <span class="d2h-file-name">02/{gen1/package.json	2017-04-09 09:01:50.466007000 -0400 → gen2/package.json	2017-04-09 09:13:11.086007000 -0400}</span>
     <span class="d2h-tag d2h-moved d2h-moved-tag">RENAMED</span></span>
     </div>
     <div class="d2h-file-diff">
@@ -253,7 +418,7 @@
                 <tr>
     <td class="d2h-code-linenumber d2h-info"></td>
     <td class="d2h-info">
-        <div class="d2h-code-line d2h-info">@@ -31,13 +31,18 @@</div>
+        <div class="d2h-code-line d2h-info">@@ -31,13 +31,19 @@</div>
     </td>
 </tr><tr>
     <td class="d2h-code-linenumber d2h-cntx">
@@ -296,7 +461,7 @@
     <td class="d2h-ins">
         <div class="d2h-code-line d2h-ins">
             <span class="d2h-code-line-prefix">+</span>
-            <span class="d2h-code-line-ctn">    "feathers-authentication": "1.2.0",</span>
+            <span class="d2h-code-line-ctn">    "feathers-authentication": "1.2.1",</span>
         </div>
     </td>
 </tr><tr>
@@ -307,7 +472,7 @@
     <td class="d2h-ins">
         <div class="d2h-code-line d2h-ins">
             <span class="d2h-code-line-prefix">+</span>
-            <span class="d2h-code-line-ctn">    "feathers-authentication-jwt": "0.3.1",</span>
+            <span class="d2h-code-line-ctn">    "feathers-authentication-hooks": "0.1.0",</span>
         </div>
     </td>
 </tr><tr>
@@ -318,13 +483,24 @@
     <td class="d2h-ins">
         <div class="d2h-code-line d2h-ins">
             <span class="d2h-code-line-prefix">+</span>
+            <span class="d2h-code-line-ctn">    "feathers-authentication-jwt": "0.3.1",</span>
+        </div>
+    </td>
+</tr><tr>
+    <td class="d2h-code-linenumber d2h-ins">
+      <div class="line-num1"></div>
+<div class="line-num2">37</div>
+    </td>
+    <td class="d2h-ins">
+        <div class="d2h-code-line d2h-ins">
+            <span class="d2h-code-line-prefix">+</span>
             <span class="d2h-code-line-ctn">    "feathers-authentication-local": "0.3.4",</span>
         </div>
     </td>
 </tr><tr>
     <td class="d2h-code-linenumber d2h-cntx">
       <div class="line-num1">34</div>
-<div class="line-num2">37</div>
+<div class="line-num2">38</div>
     </td>
     <td class="d2h-cntx">
         <div class="d2h-code-line d2h-cntx">
@@ -335,18 +511,18 @@
 </tr><tr>
     <td class="d2h-code-linenumber d2h-cntx">
       <div class="line-num1">35</div>
-<div class="line-num2">38</div>
+<div class="line-num2">39</div>
     </td>
     <td class="d2h-cntx">
         <div class="d2h-code-line d2h-cntx">
             <span class="d2h-code-line-prefix"> </span>
-            <span class="d2h-code-line-ctn">    "feathers-errors": "2.6.2",</span>
+            <span class="d2h-code-line-ctn">    "feathers-errors": "2.6.3",</span>
         </div>
     </td>
 </tr><tr>
     <td class="d2h-code-linenumber d2h-cntx">
       <div class="line-num1">36</div>
-<div class="line-num2">39</div>
+<div class="line-num2">40</div>
     </td>
     <td class="d2h-cntx">
         <div class="d2h-code-line d2h-cntx">
@@ -357,18 +533,18 @@
 </tr><tr>
     <td class="d2h-code-linenumber d2h-cntx">
       <div class="line-num1">37</div>
-<div class="line-num2">40</div>
+<div class="line-num2">41</div>
     </td>
     <td class="d2h-cntx">
         <div class="d2h-code-line d2h-cntx">
             <span class="d2h-code-line-prefix"> </span>
-            <span class="d2h-code-line-ctn">    "feathers-hooks-common": "2.0.3",</span>
+            <span class="d2h-code-line-ctn">    "feathers-hooks-common": "3.0.0",</span>
         </div>
     </td>
 </tr><tr>
     <td class="d2h-code-linenumber d2h-ins">
       <div class="line-num1"></div>
-<div class="line-num2">41</div>
+<div class="line-num2">42</div>
     </td>
     <td class="d2h-ins">
         <div class="d2h-code-line d2h-ins">
@@ -379,7 +555,7 @@
 </tr><tr>
     <td class="d2h-code-linenumber d2h-cntx">
       <div class="line-num1">38</div>
-<div class="line-num2">42</div>
+<div class="line-num2">43</div>
     </td>
     <td class="d2h-cntx">
         <div class="d2h-code-line d2h-cntx">
@@ -390,7 +566,7 @@
 </tr><tr>
     <td class="d2h-code-linenumber d2h-cntx">
       <div class="line-num1">39</div>
-<div class="line-num2">43</div>
+<div class="line-num2">44</div>
     </td>
     <td class="d2h-cntx">
         <div class="d2h-code-line d2h-cntx">
@@ -401,7 +577,7 @@
 </tr><tr>
     <td class="d2h-code-linenumber d2h-cntx">
       <div class="line-num1">40</div>
-<div class="line-num2">44</div>
+<div class="line-num2">45</div>
     </td>
     <td class="d2h-cntx">
         <div class="d2h-code-line d2h-cntx">
@@ -412,7 +588,7 @@
 </tr><tr>
     <td class="d2h-code-linenumber d2h-ins">
       <div class="line-num1"></div>
-<div class="line-num2">45</div>
+<div class="line-num2">46</div>
     </td>
     <td class="d2h-ins">
         <div class="d2h-code-line d2h-ins">
@@ -423,7 +599,7 @@
 </tr><tr>
     <td class="d2h-code-linenumber d2h-cntx">
       <div class="line-num1">41</div>
-<div class="line-num2">46</div>
+<div class="line-num2">47</div>
     </td>
     <td class="d2h-cntx">
         <div class="d2h-code-line d2h-cntx">
@@ -434,7 +610,7 @@
 </tr><tr>
     <td class="d2h-code-linenumber d2h-cntx">
       <div class="line-num1">42</div>
-<div class="line-num2">47</div>
+<div class="line-num2">48</div>
     </td>
     <td class="d2h-cntx">
         <div class="d2h-code-line d2h-cntx">
@@ -445,7 +621,7 @@
 </tr><tr>
     <td class="d2h-code-linenumber d2h-cntx">
       <div class="line-num1">43</div>
-<div class="line-num2">48</div>
+<div class="line-num2">49</div>
     </td>
     <td class="d2h-cntx">
         <div class="d2h-code-line d2h-cntx">
@@ -459,13 +635,13 @@
         </div>
     </div>
 </div>
-<div id="d2h-847750" class="d2h-file-wrapper" data-lang="832496074 -0400">
+<div id="d2h-995904" class="d2h-file-wrapper" data-lang="790007000 -0400">
     <div class="d2h-file-header">
     <span class="d2h-file-name-wrapper">
     <span class="d2h-icon-wrapper"><svg aria-hidden="true" class="d2h-icon" height="16" version="1.1" viewBox="0 0 12 16" width="12">
     <path d="M6 5H2v-1h4v1zM2 8h7v-1H2v1z m0 2h7v-1H2v1z m0 2h7v-1H2v1z m10-7.5v9.5c0 0.55-0.45 1-1 1H1c-0.55 0-1-0.45-1-1V2c0-0.55 0.45-1 1-1h7.5l3.5 3.5z m-1 0.5L8 2H1v12h10V5z"></path>
 </svg></span>
-    <span class="d2h-file-name">02/{gen1/src/app.js	2017-04-06 12:30:19.748496074 -0400 → gen2/src/app.js	2017-04-06 12:34:15.832496074 -0400}</span>
+    <span class="d2h-file-name">02/{gen1/src/app.js	2017-04-09 09:00:41.670007000 -0400 → gen2/src/app.js	2017-04-09 09:12:41.790007000 -0400}</span>
     <span class="d2h-tag d2h-moved d2h-moved-tag">RENAMED</span></span>
     </div>
     <div class="d2h-file-diff">
@@ -660,13 +836,13 @@
         </div>
     </div>
 </div>
-<div id="d2h-555125" class="d2h-file-wrapper" data-lang="828496074 -0400">
+<div id="d2h-141597" class="d2h-file-wrapper" data-lang="786007000 -0400">
     <div class="d2h-file-header">
     <span class="d2h-file-name-wrapper">
     <span class="d2h-icon-wrapper"><svg aria-hidden="true" class="d2h-icon" height="16" version="1.1" viewBox="0 0 12 16" width="12">
     <path d="M6 5H2v-1h4v1zM2 8h7v-1H2v1z m0 2h7v-1H2v1z m0 2h7v-1H2v1z m10-7.5v9.5c0 0.55-0.45 1-1 1H1c-0.55 0-1-0.45-1-1V2c0-0.55 0.45-1 1-1h7.5l3.5 3.5z m-1 0.5L8 2H1v12h10V5z"></path>
 </svg></span>
-    <span class="d2h-file-name">02/{gen1/src/authentication.js	1969-12-31 19:00:00.000000000 -0500 → gen2/src/authentication.js	2017-04-06 12:34:15.828496074 -0400}</span>
+    <span class="d2h-file-name">02/{gen1/src/authentication.js	1969-12-31 19:00:00.000000000 -0500 → gen2/src/authentication.js	2017-04-09 09:12:41.786007000 -0400}</span>
     <span class="d2h-tag d2h-moved d2h-moved-tag">RENAMED</span></span>
     </div>
     <div class="d2h-file-diff">
@@ -676,7 +852,7 @@
                 <tr>
     <td class="d2h-code-linenumber d2h-info"></td>
     <td class="d2h-info">
-        <div class="d2h-code-line d2h-info">@@ -0,0 +1,34 @@</div>
+        <div class="d2h-code-line d2h-info">@@ -0,0 +1,30 @@</div>
     </td>
 </tr><tr>
     <td class="d2h-code-linenumber d2h-ins">
@@ -760,6 +936,7 @@
     <td class="d2h-ins">
         <div class="d2h-code-line d2h-ins">
             <span class="d2h-code-line-prefix">+</span>
+            <span class="d2h-code-line-ctn">module.exports = function () {</span>
         </div>
     </td>
 </tr><tr>
@@ -770,7 +947,7 @@
     <td class="d2h-ins">
         <div class="d2h-code-line d2h-ins">
             <span class="d2h-code-line-prefix">+</span>
-            <span class="d2h-code-line-ctn">module.exports = function() {</span>
+            <span class="d2h-code-line-ctn">  const app = this;</span>
         </div>
     </td>
 </tr><tr>
@@ -781,7 +958,7 @@
     <td class="d2h-ins">
         <div class="d2h-code-line d2h-ins">
             <span class="d2h-code-line-prefix">+</span>
-            <span class="d2h-code-line-ctn">  const app = this;</span>
+            <span class="d2h-code-line-ctn">  const config = app.get('authentication');</span>
         </div>
     </td>
 </tr><tr>
@@ -792,7 +969,6 @@
     <td class="d2h-ins">
         <div class="d2h-code-line d2h-ins">
             <span class="d2h-code-line-prefix">+</span>
-            <span class="d2h-code-line-ctn">  const config = app.get('authentication');</span>
         </div>
     </td>
 </tr><tr>
@@ -803,6 +979,7 @@
     <td class="d2h-ins">
         <div class="d2h-code-line d2h-ins">
             <span class="d2h-code-line-prefix">+</span>
+            <span class="d2h-code-line-ctn">  // Set up authentication with the secret</span>
         </div>
     </td>
 </tr><tr>
@@ -813,7 +990,7 @@
     <td class="d2h-ins">
         <div class="d2h-code-line d2h-ins">
             <span class="d2h-code-line-prefix">+</span>
-            <span class="d2h-code-line-ctn">  // Set up authentication with the secret</span>
+            <span class="d2h-code-line-ctn">  app.configure(authentication(config));</span>
         </div>
     </td>
 </tr><tr>
@@ -824,7 +1001,7 @@
     <td class="d2h-ins">
         <div class="d2h-code-line d2h-ins">
             <span class="d2h-code-line-prefix">+</span>
-            <span class="d2h-code-line-ctn">  app.configure(authentication(config));</span>
+            <span class="d2h-code-line-ctn">  app.configure(jwt());</span>
         </div>
     </td>
 </tr><tr>
@@ -835,7 +1012,7 @@
     <td class="d2h-ins">
         <div class="d2h-code-line d2h-ins">
             <span class="d2h-code-line-prefix">+</span>
-            <span class="d2h-code-line-ctn">  app.configure(jwt());</span>
+            <span class="d2h-code-line-ctn">  app.configure(local(config.local));</span>
         </div>
     </td>
 </tr><tr>
@@ -846,7 +1023,6 @@
     <td class="d2h-ins">
         <div class="d2h-code-line d2h-ins">
             <span class="d2h-code-line-prefix">+</span>
-            <span class="d2h-code-line-ctn">  </span>
         </div>
     </td>
 </tr><tr>
@@ -857,7 +1033,7 @@
     <td class="d2h-ins">
         <div class="d2h-code-line d2h-ins">
             <span class="d2h-code-line-prefix">+</span>
-            <span class="d2h-code-line-ctn">  app.configure(local());</span>
+            <span class="d2h-code-line-ctn">  // The `authentication` service is used to create a JWT.</span>
         </div>
     </td>
 </tr><tr>
@@ -868,7 +1044,7 @@
     <td class="d2h-ins">
         <div class="d2h-code-line d2h-ins">
             <span class="d2h-code-line-prefix">+</span>
-            <span class="d2h-code-line-ctn">  </span>
+            <span class="d2h-code-line-ctn">  // The before `create` hook registers strategies that can be used</span>
         </div>
     </td>
 </tr><tr>
@@ -879,7 +1055,7 @@
     <td class="d2h-ins">
         <div class="d2h-code-line d2h-ins">
             <span class="d2h-code-line-prefix">+</span>
-            <span class="d2h-code-line-ctn">  </span>
+            <span class="d2h-code-line-ctn">  // to create a new valid JWT (e.g. local or oauth2)</span>
         </div>
     </td>
 </tr><tr>
@@ -890,6 +1066,7 @@
     <td class="d2h-ins">
         <div class="d2h-code-line d2h-ins">
             <span class="d2h-code-line-prefix">+</span>
+            <span class="d2h-code-line-ctn">  app.service('authentication').hooks({</span>
         </div>
     </td>
 </tr><tr>
@@ -900,7 +1077,7 @@
     <td class="d2h-ins">
         <div class="d2h-code-line d2h-ins">
             <span class="d2h-code-line-prefix">+</span>
-            <span class="d2h-code-line-ctn">  // The `authentication` service is used to create a JWT.</span>
+            <span class="d2h-code-line-ctn">    before: {</span>
         </div>
     </td>
 </tr><tr>
@@ -911,7 +1088,7 @@
     <td class="d2h-ins">
         <div class="d2h-code-line d2h-ins">
             <span class="d2h-code-line-prefix">+</span>
-            <span class="d2h-code-line-ctn">  // The before `create` hook registers strategies that can be used</span>
+            <span class="d2h-code-line-ctn">      create: [</span>
         </div>
     </td>
 </tr><tr>
@@ -922,7 +1099,7 @@
     <td class="d2h-ins">
         <div class="d2h-code-line d2h-ins">
             <span class="d2h-code-line-prefix">+</span>
-            <span class="d2h-code-line-ctn">  // to create a new valid JWT (e.g. local or oauth2)</span>
+            <span class="d2h-code-line-ctn">        authentication.hooks.authenticate(config.strategies)</span>
         </div>
     </td>
 </tr><tr>
@@ -933,7 +1110,7 @@
     <td class="d2h-ins">
         <div class="d2h-code-line d2h-ins">
             <span class="d2h-code-line-prefix">+</span>
-            <span class="d2h-code-line-ctn">  app.service('authentication').hooks({</span>
+            <span class="d2h-code-line-ctn">      ],</span>
         </div>
     </td>
 </tr><tr>
@@ -944,7 +1121,7 @@
     <td class="d2h-ins">
         <div class="d2h-code-line d2h-ins">
             <span class="d2h-code-line-prefix">+</span>
-            <span class="d2h-code-line-ctn">    before: {</span>
+            <span class="d2h-code-line-ctn">      remove: [</span>
         </div>
     </td>
 </tr><tr>
@@ -955,7 +1132,7 @@
     <td class="d2h-ins">
         <div class="d2h-code-line d2h-ins">
             <span class="d2h-code-line-prefix">+</span>
-            <span class="d2h-code-line-ctn">      create: [</span>
+            <span class="d2h-code-line-ctn">        authentication.hooks.authenticate('jwt')</span>
         </div>
     </td>
 </tr><tr>
@@ -966,7 +1143,7 @@
     <td class="d2h-ins">
         <div class="d2h-code-line d2h-ins">
             <span class="d2h-code-line-prefix">+</span>
-            <span class="d2h-code-line-ctn">        authentication.hooks.authenticate(config.strategies)</span>
+            <span class="d2h-code-line-ctn">      ]</span>
         </div>
     </td>
 </tr><tr>
@@ -977,7 +1154,7 @@
     <td class="d2h-ins">
         <div class="d2h-code-line d2h-ins">
             <span class="d2h-code-line-prefix">+</span>
-            <span class="d2h-code-line-ctn">      ],</span>
+            <span class="d2h-code-line-ctn">    }</span>
         </div>
     </td>
 </tr><tr>
@@ -988,57 +1165,13 @@
     <td class="d2h-ins">
         <div class="d2h-code-line d2h-ins">
             <span class="d2h-code-line-prefix">+</span>
-            <span class="d2h-code-line-ctn">      remove: [</span>
-        </div>
-    </td>
-</tr><tr>
-    <td class="d2h-code-linenumber d2h-ins">
-      <div class="line-num1"></div>
-<div class="line-num2">30</div>
-    </td>
-    <td class="d2h-ins">
-        <div class="d2h-code-line d2h-ins">
-            <span class="d2h-code-line-prefix">+</span>
-            <span class="d2h-code-line-ctn">        authentication.hooks.authenticate('jwt')</span>
-        </div>
-    </td>
-</tr><tr>
-    <td class="d2h-code-linenumber d2h-ins">
-      <div class="line-num1"></div>
-<div class="line-num2">31</div>
-    </td>
-    <td class="d2h-ins">
-        <div class="d2h-code-line d2h-ins">
-            <span class="d2h-code-line-prefix">+</span>
-            <span class="d2h-code-line-ctn">      ]</span>
-        </div>
-    </td>
-</tr><tr>
-    <td class="d2h-code-linenumber d2h-ins">
-      <div class="line-num1"></div>
-<div class="line-num2">32</div>
-    </td>
-    <td class="d2h-ins">
-        <div class="d2h-code-line d2h-ins">
-            <span class="d2h-code-line-prefix">+</span>
-            <span class="d2h-code-line-ctn">    }</span>
-        </div>
-    </td>
-</tr><tr>
-    <td class="d2h-code-linenumber d2h-ins">
-      <div class="line-num1"></div>
-<div class="line-num2">33</div>
-    </td>
-    <td class="d2h-ins">
-        <div class="d2h-code-line d2h-ins">
-            <span class="d2h-code-line-prefix">+</span>
             <span class="d2h-code-line-ctn">  });</span>
         </div>
     </td>
 </tr><tr>
     <td class="d2h-code-linenumber d2h-ins">
       <div class="line-num1"></div>
-<div class="line-num2">34</div>
+<div class="line-num2">30</div>
     </td>
     <td class="d2h-ins">
         <div class="d2h-code-line d2h-ins">
@@ -1052,13 +1185,13 @@
         </div>
     </div>
 </div>
-<div id="d2h-811781" class="d2h-file-wrapper" data-lang="844496074 -0400">
+<div id="d2h-522530" class="d2h-file-wrapper" data-lang="798007000 -0400">
     <div class="d2h-file-header">
     <span class="d2h-file-name-wrapper">
     <span class="d2h-icon-wrapper"><svg aria-hidden="true" class="d2h-icon" height="16" version="1.1" viewBox="0 0 12 16" width="12">
     <path d="M6 5H2v-1h4v1zM2 8h7v-1H2v1z m0 2h7v-1H2v1z m0 2h7v-1H2v1z m10-7.5v9.5c0 0.55-0.45 1-1 1H1c-0.55 0-1-0.45-1-1V2c0-0.55 0.45-1 1-1h7.5l3.5 3.5z m-1 0.5L8 2H1v12h10V5z"></path>
 </svg></span>
-    <span class="d2h-file-name">02/{gen1/src/models/users.model.js	1969-12-31 19:00:00.000000000 -0500 → gen2/src/models/users.model.js	2017-04-06 12:34:15.844496074 -0400}</span>
+    <span class="d2h-file-name">02/{gen1/src/models/users.model.js	1969-12-31 19:00:00.000000000 -0500 → gen2/src/models/users.model.js	2017-04-09 09:12:41.798007000 -0400}</span>
     <span class="d2h-tag d2h-moved d2h-moved-tag">RENAMED</span></span>
     </div>
     <div class="d2h-file-diff">
@@ -1110,7 +1243,7 @@
     <td class="d2h-ins">
         <div class="d2h-code-line d2h-ins">
             <span class="d2h-code-line-prefix">+</span>
-            <span class="d2h-code-line-ctn">module.exports = function(app) {</span>
+            <span class="d2h-code-line-ctn">module.exports = function (app) {</span>
         </div>
     </td>
 </tr><tr>
@@ -1227,13 +1360,13 @@
         </div>
     </div>
 </div>
-<div id="d2h-331839" class="d2h-file-wrapper" data-lang="844496074 -0400">
+<div id="d2h-458489" class="d2h-file-wrapper" data-lang="798007000 -0400">
     <div class="d2h-file-header">
     <span class="d2h-file-name-wrapper">
     <span class="d2h-icon-wrapper"><svg aria-hidden="true" class="d2h-icon" height="16" version="1.1" viewBox="0 0 12 16" width="12">
     <path d="M6 5H2v-1h4v1zM2 8h7v-1H2v1z m0 2h7v-1H2v1z m0 2h7v-1H2v1z m10-7.5v9.5c0 0.55-0.45 1-1 1H1c-0.55 0-1-0.45-1-1V2c0-0.55 0.45-1 1-1h7.5l3.5 3.5z m-1 0.5L8 2H1v12h10V5z"></path>
 </svg></span>
-    <span class="d2h-file-name">02/{gen1/src/services/index.js	2017-04-06 12:30:19.740496074 -0400 → gen2/src/services/index.js	2017-04-06 12:34:15.844496074 -0400}</span>
+    <span class="d2h-file-name">02/{gen1/src/services/index.js	2017-04-09 09:00:41.662007000 -0400 → gen2/src/services/index.js	2017-04-09 09:12:41.798007000 -0400}</span>
     <span class="d2h-tag d2h-moved d2h-moved-tag">RENAMED</span></span>
     </div>
     <div class="d2h-file-diff">
@@ -1295,7 +1428,7 @@
     <td class="d2h-cntx">
         <div class="d2h-code-line d2h-cntx">
             <span class="d2h-code-line-prefix"> </span>
-            <span class="d2h-code-line-ctn">module.exports = function() {</span>
+            <span class="d2h-code-line-ctn">module.exports = function () {</span>
         </div>
     </td>
 </tr><tr>
@@ -1337,13 +1470,13 @@
         </div>
     </div>
 </div>
-<div id="d2h-130775" class="d2h-file-wrapper" data-lang="848496074 -0400">
+<div id="d2h-250970" class="d2h-file-wrapper" data-lang="806007000 -0400">
     <div class="d2h-file-header">
     <span class="d2h-file-name-wrapper">
     <span class="d2h-icon-wrapper"><svg aria-hidden="true" class="d2h-icon" height="16" version="1.1" viewBox="0 0 12 16" width="12">
     <path d="M6 5H2v-1h4v1zM2 8h7v-1H2v1z m0 2h7v-1H2v1z m0 2h7v-1H2v1z m10-7.5v9.5c0 0.55-0.45 1-1 1H1c-0.55 0-1-0.45-1-1V2c0-0.55 0.45-1 1-1h7.5l3.5 3.5z m-1 0.5L8 2H1v12h10V5z"></path>
 </svg></span>
-    <span class="d2h-file-name">02/{gen1/src/services/users/users.filters.js	1969-12-31 19:00:00.000000000 -0500 → gen2/src/services/users/users.filters.js	2017-04-06 12:34:15.848496074 -0400}</span>
+    <span class="d2h-file-name">02/{gen1/src/services/users/users.filters.js	1969-12-31 19:00:00.000000000 -0500 → gen2/src/services/users/users.filters.js	2017-04-09 09:12:41.806007000 -0400}</span>
     <span class="d2h-tag d2h-moved d2h-moved-tag">RENAMED</span></span>
     </div>
     <div class="d2h-file-diff">
@@ -1363,7 +1496,7 @@
     <td class="d2h-ins">
         <div class="d2h-code-line d2h-ins">
             <span class="d2h-code-line-prefix">+</span>
-            <span class="d2h-code-line-ctn">/*eslint no-console: 1 */</span>
+            <span class="d2h-code-line-ctn">/* eslint no-console: 1 */</span>
         </div>
     </td>
 </tr><tr>
@@ -1395,7 +1528,7 @@
     <td class="d2h-ins">
         <div class="d2h-code-line d2h-ins">
             <span class="d2h-code-line-prefix">+</span>
-            <span class="d2h-code-line-ctn">module.exports = function(data, connection, hook) { // eslint-disable-line no-unused-vars</span>
+            <span class="d2h-code-line-ctn">module.exports = function (data, connection, hook) { // eslint-disable-line no-unused-vars</span>
         </div>
     </td>
 </tr><tr>
@@ -1426,13 +1559,13 @@
         </div>
     </div>
 </div>
-<div id="d2h-453243" class="d2h-file-wrapper" data-lang="844496074 -0400">
+<div id="d2h-661062" class="d2h-file-wrapper" data-lang="806007000 -0400">
     <div class="d2h-file-header">
     <span class="d2h-file-name-wrapper">
     <span class="d2h-icon-wrapper"><svg aria-hidden="true" class="d2h-icon" height="16" version="1.1" viewBox="0 0 12 16" width="12">
     <path d="M6 5H2v-1h4v1zM2 8h7v-1H2v1z m0 2h7v-1H2v1z m0 2h7v-1H2v1z m10-7.5v9.5c0 0.55-0.45 1-1 1H1c-0.55 0-1-0.45-1-1V2c0-0.55 0.45-1 1-1h7.5l3.5 3.5z m-1 0.5L8 2H1v12h10V5z"></path>
 </svg></span>
-    <span class="d2h-file-name">02/{gen1/src/services/users/users.hooks.js	1969-12-31 19:00:00.000000000 -0500 → gen2/src/services/users/users.hooks.js	2017-04-06 12:34:15.844496074 -0400}</span>
+    <span class="d2h-file-name">02/{gen1/src/services/users/users.hooks.js	1969-12-31 19:00:00.000000000 -0500 → gen2/src/services/users/users.hooks.js	2017-04-09 09:12:41.806007000 -0400}</span>
     <span class="d2h-tag d2h-moved d2h-moved-tag">RENAMED</span></span>
     </div>
     <div class="d2h-file-diff">
@@ -1442,7 +1575,7 @@
                 <tr>
     <td class="d2h-code-linenumber d2h-info"></td>
     <td class="d2h-info">
-        <div class="d2h-code-line d2h-info">@@ -0,0 +1,36 @@</div>
+        <div class="d2h-code-line d2h-info">@@ -0,0 +1,51 @@</div>
     </td>
 </tr><tr>
     <td class="d2h-code-linenumber d2h-ins">
@@ -1484,7 +1617,7 @@
     <td class="d2h-ins">
         <div class="d2h-code-line d2h-ins">
             <span class="d2h-code-line-prefix">+</span>
-            <span class="d2h-code-line-ctn">const { hashPassword } = require('feathers-authentication-local').hooks;</span>
+            <span class="d2h-code-line-ctn">const commonHooks = require('feathers-hooks-common');</span>
         </div>
     </td>
 </tr><tr>
@@ -1495,6 +1628,7 @@
     <td class="d2h-ins">
         <div class="d2h-code-line d2h-ins">
             <span class="d2h-code-line-prefix">+</span>
+            <span class="d2h-code-line-ctn">const { restrictToOwner } = require('feathers-authentication-hooks');</span>
         </div>
     </td>
 </tr><tr>
@@ -1505,7 +1639,6 @@
     <td class="d2h-ins">
         <div class="d2h-code-line d2h-ins">
             <span class="d2h-code-line-prefix">+</span>
-            <span class="d2h-code-line-ctn">module.exports = {</span>
         </div>
     </td>
 </tr><tr>
@@ -1516,7 +1649,7 @@
     <td class="d2h-ins">
         <div class="d2h-code-line d2h-ins">
             <span class="d2h-code-line-prefix">+</span>
-            <span class="d2h-code-line-ctn">  before: {</span>
+            <span class="d2h-code-line-ctn">const { hashPassword } = require('feathers-authentication-local').hooks;</span>
         </div>
     </td>
 </tr><tr>
@@ -1527,7 +1660,7 @@
     <td class="d2h-ins">
         <div class="d2h-code-line d2h-ins">
             <span class="d2h-code-line-prefix">+</span>
-            <span class="d2h-code-line-ctn">    all: [],</span>
+            <span class="d2h-code-line-ctn">const restrict = [</span>
         </div>
     </td>
 </tr><tr>
@@ -1538,7 +1671,7 @@
     <td class="d2h-ins">
         <div class="d2h-code-line d2h-ins">
             <span class="d2h-code-line-prefix">+</span>
-            <span class="d2h-code-line-ctn">    find: [ authenticate('jwt') ],</span>
+            <span class="d2h-code-line-ctn">  authenticate('jwt'),</span>
         </div>
     </td>
 </tr><tr>
@@ -1549,7 +1682,7 @@
     <td class="d2h-ins">
         <div class="d2h-code-line d2h-ins">
             <span class="d2h-code-line-prefix">+</span>
-            <span class="d2h-code-line-ctn">    get: [ authenticate('jwt') ],</span>
+            <span class="d2h-code-line-ctn">  restrictToOwner({</span>
         </div>
     </td>
 </tr><tr>
@@ -1560,7 +1693,7 @@
     <td class="d2h-ins">
         <div class="d2h-code-line d2h-ins">
             <span class="d2h-code-line-prefix">+</span>
-            <span class="d2h-code-line-ctn">    create: [ hashPassword() ],</span>
+            <span class="d2h-code-line-ctn">    idField: '_id',</span>
         </div>
     </td>
 </tr><tr>
@@ -1571,7 +1704,7 @@
     <td class="d2h-ins">
         <div class="d2h-code-line d2h-ins">
             <span class="d2h-code-line-prefix">+</span>
-            <span class="d2h-code-line-ctn">    update: [ authenticate('jwt') ],</span>
+            <span class="d2h-code-line-ctn">    ownerField: '_id'</span>
         </div>
     </td>
 </tr><tr>
@@ -1582,7 +1715,7 @@
     <td class="d2h-ins">
         <div class="d2h-code-line d2h-ins">
             <span class="d2h-code-line-prefix">+</span>
-            <span class="d2h-code-line-ctn">    patch: [ authenticate('jwt') ],</span>
+            <span class="d2h-code-line-ctn">  })</span>
         </div>
     </td>
 </tr><tr>
@@ -1593,7 +1726,7 @@
     <td class="d2h-ins">
         <div class="d2h-code-line d2h-ins">
             <span class="d2h-code-line-prefix">+</span>
-            <span class="d2h-code-line-ctn">    remove: [ authenticate('jwt') ]</span>
+            <span class="d2h-code-line-ctn">];</span>
         </div>
     </td>
 </tr><tr>
@@ -1604,7 +1737,6 @@
     <td class="d2h-ins">
         <div class="d2h-code-line d2h-ins">
             <span class="d2h-code-line-prefix">+</span>
-            <span class="d2h-code-line-ctn">  },</span>
         </div>
     </td>
 </tr><tr>
@@ -1615,6 +1747,7 @@
     <td class="d2h-ins">
         <div class="d2h-code-line d2h-ins">
             <span class="d2h-code-line-prefix">+</span>
+            <span class="d2h-code-line-ctn">module.exports = {</span>
         </div>
     </td>
 </tr><tr>
@@ -1625,7 +1758,7 @@
     <td class="d2h-ins">
         <div class="d2h-code-line d2h-ins">
             <span class="d2h-code-line-prefix">+</span>
-            <span class="d2h-code-line-ctn">  after: {</span>
+            <span class="d2h-code-line-ctn">  before: {</span>
         </div>
     </td>
 </tr><tr>
@@ -1647,7 +1780,7 @@
     <td class="d2h-ins">
         <div class="d2h-code-line d2h-ins">
             <span class="d2h-code-line-prefix">+</span>
-            <span class="d2h-code-line-ctn">    find: [],</span>
+            <span class="d2h-code-line-ctn">    find: [ authenticate('jwt') ],</span>
         </div>
     </td>
 </tr><tr>
@@ -1658,7 +1791,7 @@
     <td class="d2h-ins">
         <div class="d2h-code-line d2h-ins">
             <span class="d2h-code-line-prefix">+</span>
-            <span class="d2h-code-line-ctn">    get: [],</span>
+            <span class="d2h-code-line-ctn">    get: [ ...restrict ],</span>
         </div>
     </td>
 </tr><tr>
@@ -1669,7 +1802,7 @@
     <td class="d2h-ins">
         <div class="d2h-code-line d2h-ins">
             <span class="d2h-code-line-prefix">+</span>
-            <span class="d2h-code-line-ctn">    create: [],</span>
+            <span class="d2h-code-line-ctn">    create: [ hashPassword() ],</span>
         </div>
     </td>
 </tr><tr>
@@ -1680,7 +1813,7 @@
     <td class="d2h-ins">
         <div class="d2h-code-line d2h-ins">
             <span class="d2h-code-line-prefix">+</span>
-            <span class="d2h-code-line-ctn">    update: [],</span>
+            <span class="d2h-code-line-ctn">    update: [ ...restrict, hashPassword() ],</span>
         </div>
     </td>
 </tr><tr>
@@ -1691,7 +1824,7 @@
     <td class="d2h-ins">
         <div class="d2h-code-line d2h-ins">
             <span class="d2h-code-line-prefix">+</span>
-            <span class="d2h-code-line-ctn">    patch: [],</span>
+            <span class="d2h-code-line-ctn">    patch: [ ...restrict, hashPassword() ],</span>
         </div>
     </td>
 </tr><tr>
@@ -1702,7 +1835,7 @@
     <td class="d2h-ins">
         <div class="d2h-code-line d2h-ins">
             <span class="d2h-code-line-prefix">+</span>
-            <span class="d2h-code-line-ctn">    remove: []</span>
+            <span class="d2h-code-line-ctn">    remove: [ ...restrict ]</span>
         </div>
     </td>
 </tr><tr>
@@ -1734,7 +1867,7 @@
     <td class="d2h-ins">
         <div class="d2h-code-line d2h-ins">
             <span class="d2h-code-line-prefix">+</span>
-            <span class="d2h-code-line-ctn">  error: {</span>
+            <span class="d2h-code-line-ctn">  after: {</span>
         </div>
     </td>
 </tr><tr>
@@ -1745,7 +1878,7 @@
     <td class="d2h-ins">
         <div class="d2h-code-line d2h-ins">
             <span class="d2h-code-line-prefix">+</span>
-            <span class="d2h-code-line-ctn">    all: [],</span>
+            <span class="d2h-code-line-ctn">    all: [</span>
         </div>
     </td>
 </tr><tr>
@@ -1756,7 +1889,7 @@
     <td class="d2h-ins">
         <div class="d2h-code-line d2h-ins">
             <span class="d2h-code-line-prefix">+</span>
-            <span class="d2h-code-line-ctn">    find: [],</span>
+            <span class="d2h-code-line-ctn">      commonHooks.when(</span>
         </div>
     </td>
 </tr><tr>
@@ -1767,7 +1900,7 @@
     <td class="d2h-ins">
         <div class="d2h-code-line d2h-ins">
             <span class="d2h-code-line-prefix">+</span>
-            <span class="d2h-code-line-ctn">    get: [],</span>
+            <span class="d2h-code-line-ctn">        hook =&gt; hook.params.provider,</span>
         </div>
     </td>
 </tr><tr>
@@ -1778,7 +1911,7 @@
     <td class="d2h-ins">
         <div class="d2h-code-line d2h-ins">
             <span class="d2h-code-line-prefix">+</span>
-            <span class="d2h-code-line-ctn">    create: [],</span>
+            <span class="d2h-code-line-ctn">        commonHooks.discard('password')</span>
         </div>
     </td>
 </tr><tr>
@@ -1789,7 +1922,7 @@
     <td class="d2h-ins">
         <div class="d2h-code-line d2h-ins">
             <span class="d2h-code-line-prefix">+</span>
-            <span class="d2h-code-line-ctn">    update: [],</span>
+            <span class="d2h-code-line-ctn">      )</span>
         </div>
     </td>
 </tr><tr>
@@ -1800,7 +1933,7 @@
     <td class="d2h-ins">
         <div class="d2h-code-line d2h-ins">
             <span class="d2h-code-line-prefix">+</span>
-            <span class="d2h-code-line-ctn">    patch: [],</span>
+            <span class="d2h-code-line-ctn">    ],</span>
         </div>
     </td>
 </tr><tr>
@@ -1811,7 +1944,7 @@
     <td class="d2h-ins">
         <div class="d2h-code-line d2h-ins">
             <span class="d2h-code-line-prefix">+</span>
-            <span class="d2h-code-line-ctn">    remove: []</span>
+            <span class="d2h-code-line-ctn">    find: [],</span>
         </div>
     </td>
 </tr><tr>
@@ -1822,13 +1955,177 @@
     <td class="d2h-ins">
         <div class="d2h-code-line d2h-ins">
             <span class="d2h-code-line-prefix">+</span>
-            <span class="d2h-code-line-ctn">  }</span>
+            <span class="d2h-code-line-ctn">    get: [],</span>
         </div>
     </td>
 </tr><tr>
     <td class="d2h-code-linenumber d2h-ins">
       <div class="line-num1"></div>
 <div class="line-num2">36</div>
+    </td>
+    <td class="d2h-ins">
+        <div class="d2h-code-line d2h-ins">
+            <span class="d2h-code-line-prefix">+</span>
+            <span class="d2h-code-line-ctn">    create: [],</span>
+        </div>
+    </td>
+</tr><tr>
+    <td class="d2h-code-linenumber d2h-ins">
+      <div class="line-num1"></div>
+<div class="line-num2">37</div>
+    </td>
+    <td class="d2h-ins">
+        <div class="d2h-code-line d2h-ins">
+            <span class="d2h-code-line-prefix">+</span>
+            <span class="d2h-code-line-ctn">    update: [],</span>
+        </div>
+    </td>
+</tr><tr>
+    <td class="d2h-code-linenumber d2h-ins">
+      <div class="line-num1"></div>
+<div class="line-num2">38</div>
+    </td>
+    <td class="d2h-ins">
+        <div class="d2h-code-line d2h-ins">
+            <span class="d2h-code-line-prefix">+</span>
+            <span class="d2h-code-line-ctn">    patch: [],</span>
+        </div>
+    </td>
+</tr><tr>
+    <td class="d2h-code-linenumber d2h-ins">
+      <div class="line-num1"></div>
+<div class="line-num2">39</div>
+    </td>
+    <td class="d2h-ins">
+        <div class="d2h-code-line d2h-ins">
+            <span class="d2h-code-line-prefix">+</span>
+            <span class="d2h-code-line-ctn">    remove: []</span>
+        </div>
+    </td>
+</tr><tr>
+    <td class="d2h-code-linenumber d2h-ins">
+      <div class="line-num1"></div>
+<div class="line-num2">40</div>
+    </td>
+    <td class="d2h-ins">
+        <div class="d2h-code-line d2h-ins">
+            <span class="d2h-code-line-prefix">+</span>
+            <span class="d2h-code-line-ctn">  },</span>
+        </div>
+    </td>
+</tr><tr>
+    <td class="d2h-code-linenumber d2h-ins">
+      <div class="line-num1"></div>
+<div class="line-num2">41</div>
+    </td>
+    <td class="d2h-ins">
+        <div class="d2h-code-line d2h-ins">
+            <span class="d2h-code-line-prefix">+</span>
+        </div>
+    </td>
+</tr><tr>
+    <td class="d2h-code-linenumber d2h-ins">
+      <div class="line-num1"></div>
+<div class="line-num2">42</div>
+    </td>
+    <td class="d2h-ins">
+        <div class="d2h-code-line d2h-ins">
+            <span class="d2h-code-line-prefix">+</span>
+            <span class="d2h-code-line-ctn">  error: {</span>
+        </div>
+    </td>
+</tr><tr>
+    <td class="d2h-code-linenumber d2h-ins">
+      <div class="line-num1"></div>
+<div class="line-num2">43</div>
+    </td>
+    <td class="d2h-ins">
+        <div class="d2h-code-line d2h-ins">
+            <span class="d2h-code-line-prefix">+</span>
+            <span class="d2h-code-line-ctn">    all: [],</span>
+        </div>
+    </td>
+</tr><tr>
+    <td class="d2h-code-linenumber d2h-ins">
+      <div class="line-num1"></div>
+<div class="line-num2">44</div>
+    </td>
+    <td class="d2h-ins">
+        <div class="d2h-code-line d2h-ins">
+            <span class="d2h-code-line-prefix">+</span>
+            <span class="d2h-code-line-ctn">    find: [],</span>
+        </div>
+    </td>
+</tr><tr>
+    <td class="d2h-code-linenumber d2h-ins">
+      <div class="line-num1"></div>
+<div class="line-num2">45</div>
+    </td>
+    <td class="d2h-ins">
+        <div class="d2h-code-line d2h-ins">
+            <span class="d2h-code-line-prefix">+</span>
+            <span class="d2h-code-line-ctn">    get: [],</span>
+        </div>
+    </td>
+</tr><tr>
+    <td class="d2h-code-linenumber d2h-ins">
+      <div class="line-num1"></div>
+<div class="line-num2">46</div>
+    </td>
+    <td class="d2h-ins">
+        <div class="d2h-code-line d2h-ins">
+            <span class="d2h-code-line-prefix">+</span>
+            <span class="d2h-code-line-ctn">    create: [],</span>
+        </div>
+    </td>
+</tr><tr>
+    <td class="d2h-code-linenumber d2h-ins">
+      <div class="line-num1"></div>
+<div class="line-num2">47</div>
+    </td>
+    <td class="d2h-ins">
+        <div class="d2h-code-line d2h-ins">
+            <span class="d2h-code-line-prefix">+</span>
+            <span class="d2h-code-line-ctn">    update: [],</span>
+        </div>
+    </td>
+</tr><tr>
+    <td class="d2h-code-linenumber d2h-ins">
+      <div class="line-num1"></div>
+<div class="line-num2">48</div>
+    </td>
+    <td class="d2h-ins">
+        <div class="d2h-code-line d2h-ins">
+            <span class="d2h-code-line-prefix">+</span>
+            <span class="d2h-code-line-ctn">    patch: [],</span>
+        </div>
+    </td>
+</tr><tr>
+    <td class="d2h-code-linenumber d2h-ins">
+      <div class="line-num1"></div>
+<div class="line-num2">49</div>
+    </td>
+    <td class="d2h-ins">
+        <div class="d2h-code-line d2h-ins">
+            <span class="d2h-code-line-prefix">+</span>
+            <span class="d2h-code-line-ctn">    remove: []</span>
+        </div>
+    </td>
+</tr><tr>
+    <td class="d2h-code-linenumber d2h-ins">
+      <div class="line-num1"></div>
+<div class="line-num2">50</div>
+    </td>
+    <td class="d2h-ins">
+        <div class="d2h-code-line d2h-ins">
+            <span class="d2h-code-line-prefix">+</span>
+            <span class="d2h-code-line-ctn">  }</span>
+        </div>
+    </td>
+</tr><tr>
+    <td class="d2h-code-linenumber d2h-ins">
+      <div class="line-num1"></div>
+<div class="line-num2">51</div>
     </td>
     <td class="d2h-ins">
         <div class="d2h-code-line d2h-ins">
@@ -1842,13 +2139,13 @@
         </div>
     </div>
 </div>
-<div id="d2h-693416" class="d2h-file-wrapper" data-lang="836496074 -0400">
+<div id="d2h-342658" class="d2h-file-wrapper" data-lang="798007000 -0400">
     <div class="d2h-file-header">
     <span class="d2h-file-name-wrapper">
     <span class="d2h-icon-wrapper"><svg aria-hidden="true" class="d2h-icon" height="16" version="1.1" viewBox="0 0 12 16" width="12">
     <path d="M6 5H2v-1h4v1zM2 8h7v-1H2v1z m0 2h7v-1H2v1z m0 2h7v-1H2v1z m10-7.5v9.5c0 0.55-0.45 1-1 1H1c-0.55 0-1-0.45-1-1V2c0-0.55 0.45-1 1-1h7.5l3.5 3.5z m-1 0.5L8 2H1v12h10V5z"></path>
 </svg></span>
-    <span class="d2h-file-name">02/{gen1/src/services/users/users.service.js	1969-12-31 19:00:00.000000000 -0500 → gen2/src/services/users/users.service.js	2017-04-06 12:34:15.836496074 -0400}</span>
+    <span class="d2h-file-name">02/{gen1/src/services/users/users.service.js	1969-12-31 19:00:00.000000000 -0500 → gen2/src/services/users/users.service.js	2017-04-09 09:12:41.798007000 -0400}</span>
     <span class="d2h-tag d2h-moved d2h-moved-tag">RENAMED</span></span>
     </div>
     <div class="d2h-file-diff">
@@ -1954,7 +2251,7 @@
     <td class="d2h-ins">
         <div class="d2h-code-line d2h-ins">
             <span class="d2h-code-line-prefix">+</span>
-            <span class="d2h-code-line-ctn">module.exports = function() {</span>
+            <span class="d2h-code-line-ctn">module.exports = function () {</span>
         </div>
     </td>
 </tr><tr>
@@ -2200,13 +2497,13 @@
         </div>
     </div>
 </div>
-<div id="d2h-522778" class="d2h-file-wrapper" data-lang="856496074 -0400">
+<div id="d2h-642973" class="d2h-file-wrapper" data-lang="814007000 -0400">
     <div class="d2h-file-header">
     <span class="d2h-file-name-wrapper">
     <span class="d2h-icon-wrapper"><svg aria-hidden="true" class="d2h-icon" height="16" version="1.1" viewBox="0 0 12 16" width="12">
     <path d="M6 5H2v-1h4v1zM2 8h7v-1H2v1z m0 2h7v-1H2v1z m0 2h7v-1H2v1z m10-7.5v9.5c0 0.55-0.45 1-1 1H1c-0.55 0-1-0.45-1-1V2c0-0.55 0.45-1 1-1h7.5l3.5 3.5z m-1 0.5L8 2H1v12h10V5z"></path>
 </svg></span>
-    <span class="d2h-file-name">02/{gen1/test/services/users.test.js	1969-12-31 19:00:00.000000000 -0500 → gen2/test/services/users.test.js	2017-04-06 12:34:15.856496074 -0400}</span>
+    <span class="d2h-file-name">02/{gen1/test/services/users.test.js	1969-12-31 19:00:00.000000000 -0500 → gen2/test/services/users.test.js	2017-04-09 09:12:41.814007000 -0400}</span>
     <span class="d2h-tag d2h-moved d2h-moved-tag">RENAMED</span></span>
     </div>
     <div class="d2h-file-diff">

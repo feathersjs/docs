@@ -1,0 +1,20 @@
+--- 02/gen3/src/services/teams/teams.hooks.js	2017-04-09 09:15:24.638007000 -0400
++++ 02/gen4/src/services/teams/teams.hooks.js	2017-04-09 09:18:59.418007000 -0400
+@@ -2,6 +2,8 @@
+ 
+ const { authenticate } = require('feathers-authentication').hooks;
+ 
++const populateTeams = require('../../hooks/populate-teams');
++
+ module.exports = {
+   before: {
+     all: [ authenticate('jwt') ],
+@@ -15,7 +17,7 @@
+ 
+   after: {
+     all: [],
+-    find: [],
++    find: [populateTeams()],
+     get: [],
+     create: [],
+     update: [],

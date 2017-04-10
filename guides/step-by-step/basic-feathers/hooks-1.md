@@ -12,7 +12,7 @@ We'll be introducing specific hooks as we need them.
 - Client code: [common/public/rest.html](https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/01/common/public/rest.html)
 and
 [feathers-app.js](https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/01/common/public/feathers-app.js)
-- Start the server: `node ./examples/step/01/hooks/2`
+- Start the server: `node ./examples/step/01/hooks/1`
 - Point the browser at: `localhost:3030/rest.html`
 - Compare with last page's server
 [examples/step/01/hooks/1.js](https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/01/hooks/1.js):

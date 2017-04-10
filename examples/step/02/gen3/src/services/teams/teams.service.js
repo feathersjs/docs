@@ -6,7 +6,7 @@ const createModel = require('../../models/teams.model');
 const hooks = require('./teams.hooks');
 const filters = require('./teams.filters');
 
-module.exports = function() {
+module.exports = function () {
   const app = this;
   const Model = createModel(app);
   const paginate = app.get('paginate');

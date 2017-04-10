@@ -1,6 +1,6 @@
 # Client
 
-One of the most notable features of Feathers is that it can also be used as the client. The difference to many other frameworks and services is that it isn't a separate library, you instead get the exact same Feathers as on the server. This means you can use [services](./services.md) and [hooks](./hooks.md) and configure plugins. By default a Feathers client automatically creates services that talk to a Feathers server. How to initialize a connection can be found in
+One of the most notable features of Feathers is that it can also be used as the client. The difference to many other frameworks and services is that it isn't a separate library, you instead get the exact same functionality as on the server. This means you can use [services](./services.md) and [hooks](./hooks.md) and configure plugins. By default a Feathers client automatically creates services that talk to a Feathers server. How to initialize a connection can be found in
 
 - The [REST transport client chapter](./rest.md#client)
 - The [Socket.io transport client chapter](./socketio.md#client) (real-time)
@@ -9,6 +9,10 @@ One of the most notable features of Feathers is that it can also be used as the 
 This chapter describes how to use Feathers as the client in Node, React Native and in the browser with a module loader like Webpack, Browserify, StealJS or through a `<script>` tag.
 
 > __Important:__ The Feathers client libraries come transpiled to ES5 but require ES6 shims either through the [babel-polyfill](https://www.npmjs.com/package/babel-polyfill) module or by including [core.js](https://github.com/zloirock/core-js) in older browsers e.g. via `<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/core-js/2.1.4/core.min.js"></script>`
+
+<!-- -->
+
+> __Important:__ If you are not using a module loader you can load the [feathers-client](#feathers-client) directly through a script tag in the browser.
 
 | Server package            | Client package                   | API page            |
 | ------------------------- | -------------------------------- | ------------------- |
@@ -21,10 +25,12 @@ This chapter describes how to use Feathers as the client in Node, React Native a
 | `feathers-authentication` | `feathers-authentication/client` | [Feathers Authentication Client API]() |
 
 ## Universal (Isomorphic) API
+
 The Feathers Client uses the same [Application API](./application.md) as is available on the server.  It is extremely lightweight, however, with Express having been replaced by a [thin wrapper](https://github.com/feathersjs/feathers/blob/master/src/client/express.js).  There are differences between the client and server APIs.  Learn more under each method on the [Application API page](./application.md).
 
 
 ## Node and npm loaders
+
 The client utilities can be used directly on the server.  Just `require` each individual package or the `feathers-client` and use it the same way as shown for in the browser examples, below.  Node.js natively supports the CommonJS module syntax.  Here's an example of setting up the client in Node:
 
 ```js
@@ -158,10 +164,12 @@ $ npm install feathers-client --save
 You can use `feathers-client` in NodeJS or with a browser module loader/bundler but it will include packages you may not use. It is also important to note that - except for this section - all other Feathers client examples assume you are using Node or a module loader.
 
 ### RequireJS
+
 Here's an example of loading feathers-client using RequireJS Syntax:
+
 ```js
 define(function (require) {
-  const feathers = require('feathers/client');
+  const feathers = require('feathers-client');
   const socketio = feathers.socketio;
   const hooks = feathers.hooks;
   const errors = feathers.errors;

@@ -32,5 +32,15 @@ You can install the Feathers generators with
 
 `npm install -g feathers-cli`
 
+## Install dependencies used by the examples
+
+```text
+cd path/to/feathers-docs/examples/step/02/gen4
+npm install
+```
+
+This will install the dependencies needed by the generator examples into
+`/examples/step/02/gen4/node_modules`.
+
 ### Is anything wrong, unclear, missing?
 [Leave a comment.](https://github.com/feathersjs/feathers-guide/issues/new?title=Comment:Step-Generators-Readme&body=Comment:Step-Generators-Readme)

@@ -32,15 +32,15 @@ Point your browser at
 `https://github.com/feathersjs/feathers-docs/archive/master.zip`
 to start the download.
 
-## Install dependencies used by examples
+## Install dependencies used by the examples
+
 ```text
-cd path/to/feathers-docs/examples/step
+cd path/to/feathers-docs/examples/step/01
 npm install
 ```
 
-This will install the dependencies needed by the examples in `/examples/step/node_modules`.
-
-## Reading the guide
+This will install the dependencies needed by the Basics examples into
+`/examples/step/01/node_modules`.
 
 You can read this guide by pointing your browser to the
 [Feathers documentation](https://docs.feathersjs.com/guides/step-by-step/readme.html).

@@ -1,7 +1,6 @@
 # Creating a service
 
-Now that we have a our Feathers application [set up](./creating.md) we can create a new API endpoint to store messages.
-
+Now that we have a our [Feathers application generated](./creating.md) we can create a new API endpoint to store messages.
 
 ## Generating a service
 
@@ -46,11 +45,6 @@ Or with a REST client like [Postman](https://chrome.google.com/webstore/detail/p
 
 If we now go to [localhost:3030/messages](http://localhost:3030/messages) again we will see the newly created message(s).
 
+## What's next?
 
-## Building a frontend
-
-Having a full REST endpoint and somehow also real-time functionality that any client can connect to is nice but somehow still a little abstract. Before we dive into authentication and processing data, let's create a simple frontend for our chat application.
-
-We won't be using a framework like jQuery, Angular, React or VueJS (for more information about those, see the [frameworks]() chapter of this guide) but plain old JavaScript that will work in any modern browser.
-
-Instead of using a REST client (making AJAX request) or websockets messages directly (which is also totally possible), we'll also use one of the best features of Feathers, namely that it works just the same as a client in the browser, with React Native or on other NodeJS servers.
+Before we dive into authentication and processing data, [let's create a simple web application](./frontend.md) that uses our new chat message endpoint.

@@ -46,9 +46,9 @@ Service methods have to return a [Promise](https://developer.mozilla.org/en-US/d
 - `data` - the resource data.
 - `params` - can contain any extra parameters, for example the authenticated user.
 
-> **Important:** `params.query` contains the query parameters from the client, either passed as URL query paramters (see the [REST](./rest.md) chapter) or through websocket (see [Socket.io](./socketio.md) or [Primus](./primus.md).
+> **Important:** `params.query` contains the query parameters from the client, either passed as URL query paramters (see the [REST](./rest.md) chapter) or through websockets (see [Socket.io](./socketio.md) or [Primus](./primus.md)).
 
-Once registered the service can be retrieved and used via [app.service()](./services.md#servicepath):
+Once registered the service can be retrieved and used via [app.service()](./application.md#servicepath):
 
 ```js
 const myService = app.service('my-service');
@@ -59,22 +59,61 @@ myService.get(1).then(item => console.log('.get(1)', items));
 
 Keep in mind that services don't have to use databases.  You could easily replace the database in the example with a package that uses some API, like pulling in GitHub stars or stock ticker data.
 
-> **Important:** This section describes the official service methods and how to implement them in your own services. For using one of the official Feathers database adapters see the [database adapters common API](./databases/common.md).
+> **Important:** This section describes the general use of service methods and how to implement them. They are already implemented by Feathers official database adapters. For specifics on how to use the database adapters see the [database adapters common API](./databases/common.md).
 
 
 ## .find(params)
 
 `find(params) -> Promise` - retrieves a list of all resources from the service. Provider parameters will be passed as `params.query`.
 
+```js
+app.use('/messages', {
+  find(params) {
+    return Promise.resolve([
+      {
+        id: 1,
+        text: 'Message 1'
+      }, {
+        id: 2,
+        text: 'Message 2'
+      }
+    ]);
+  }
+});
+```
+
+> **Note:** `find` does not have to return an array it can also return an object. The database adapters already do this for [pagination](./databases/common.md#pagination).
 
 ## .get(id, params)
 
 `get(id, params) -> Promise` - retrieves a single resource with the given `id` from the service.
 
+```js
+app.use('/messages', {
+  get(id, params) {
+    return Promise.resolve({
+      id,
+      text: `You have to do ${id}!`
+    });
+  }
+});
+```
 
 ## .create(data, params)
 
 `create(data, params) -> Promise` - creates a new resource with `data`. The method should return a Promise with the newly created data. `data` may also be an array.
+
+```js
+app.use('/messages', {
+  messages: [],
+
+  create(data, params) {
+    this.messages.push(data);
+
+    return Promise.resolve(data);
+  }
+});
+```
 
 > **Important:** A successful `create` method call emits the [`created` service event](./events.md#created).
 

@@ -1,7 +1,6 @@
 # Creating the application
 
-In this part we are going to create a new Feathers application using the generator. 
-
+In this part we are going to create a new Feathers application using the generator.
 
 ## Generating the application
 
@@ -34,6 +33,7 @@ Once you confirm the final prompt you will see something like this:
 
 ![Final Configuration](./assets/creating.png)
 
+The structure and purpose of all those files that have just been created are covered in the [../generator/readme.md] generator chapter.
 
 ## Running the server and tests
 
@@ -51,6 +51,8 @@ The app also comes with a set of basic tests which can be run with
 npm test
 ```
 
+We will cover tests more in depth in the [testing chapter](./testing.md).
+
 ## What's next?
 
-We scaffolded a new Feathers chat application. The next step is to create an API endpoint for messages.
+We scaffolded a new Feathers application. The next step is to [create a service for messages](./service.md).
