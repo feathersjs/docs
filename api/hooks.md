@@ -12,7 +12,7 @@ Hooks are pluggable middleware functions that can be registered __before__, __af
 
 A hook is **transport independent**, which means it does not matter if it has been called through HTTP(S) (REST), Socket.io, Primus or any other transport Feathers may support in the future. They are also service agnostic, meaning they can be used with ​**any**​ service regardless of whether they have a model or not.
 
-Hooks are commonly used to handle things like validation, logging, populating related entities, sending notifications and more. This pattern keeps you application logic flexible, composable, and much easier to trace through and debug. For more information about the design patterns behind hooks see [this blog post](https://blog.feathersjs.com/api-service-composition-with-hooks-47af13aa6c01).
+Hooks are commonly used to handle things like validation, logging, populating related entities, sending notifications and more. This pattern keeps your application logic flexible, composable, and much easier to trace through and debug. For more information about the design patterns behind hooks see [this blog post](https://blog.feathersjs.com/api-service-composition-with-hooks-47af13aa6c01).
 
 The following example adds a `createdAt` and `updatedAt` property before sending the data to the database.
 
@@ -90,7 +90,7 @@ The following example throws an error when the text for creating a new message i
 app.service('messages').hooks({
   before: {
     create: [
-      (hook) => {
+      function(hook) {
         if(hook.data.text.trim() === '') {
           throw new Error('Message text can not be empty');
         }
@@ -113,7 +113,7 @@ The following example shows an asynchronous hook that uses another service to re
 app.service('messages').hooks({
   after: {
     get: [
-      (hook) => {
+      function(hook) {
         const userId = hook.result.userId;
 
         // hook.app.service('users').get returns a Promise already
@@ -138,7 +138,7 @@ The following example reads a JSON file with [fs.readFile](https://nodejs.org/ap
 app.service('messages').hooks({
   after: {
     get: [
-      (hook) => {
+      function(hook) {
         return new Promise((resolve, reject) => {
           require('fs').readFile('./myfile.json', (error, data) => {
             // Check if the callback got an error, if so reject the promise and return
@@ -220,11 +220,6 @@ app.service('servicename').hooks({
   error(hook) {
     console.log('error all hook ran');
   }
-});
-
-// Register a hook for all types and all methods
-app.service('servicename').hooks(function(hook) {
-  console.log('Everything hook ran');
 });
 ```
 
