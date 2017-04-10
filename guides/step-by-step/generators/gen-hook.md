@@ -22,7 +22,7 @@ The directory has changed:
 ## The populateTeams hook
 
 The generator has roughed out an after hook for the `teams` service.
-The hook doesn't do anything so far, but its been placed in the structure and wired into the app.
+This hook doesn't do anything so far, but its been placed in the structure and wired into the app.
 
 This caused the following modules to be added:
 
@@ -32,7 +32,7 @@ contains code for a hook that presently does nothing.
 - [test/hooks/populate-teams.test.js](https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/02/gen4/test/hooks/populate-teams.test.js)
 tests that the hook is configured.
 
-The hook has to be wired into the app, so the generator made the following changes:
+The hook had to be wired into the app, so the generator made the following changes:
 
 - **src/services/teams/teams.hooks.js** now
 ([Unified](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/_diff/02-gen4-hooks-line.html)
@@ -40,7 +40,15 @@ The hook has to be wired into the app, so the generator made the following chang
 [Split](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/_diff/02-gen4-hooks-side.html))
 uses the `populateTeams`.
 We told the generator to create an `after` hook for the `find` method,
-and that is what ut is being run for. 
+and that is when it is being run.
+
+## Recap
+
+The generated code, once again, contains no surprises for us as we have covered it before.
+
+> **Generators.**
+The Feathers generators are great for roughing out a project,
+creating something in its approximate, but not finished, form.
 
 ### Is anything wrong, unclear, missing?
-[Leave a comment.](https://github.com/feathersjs/feathers-guide/issues/new?title=Comment:Step-Generators-Service&body=Comment:Step-Generators-Service)
+[Leave a comment.](https://github.com/feathersjs/feathers-guide/issues/new?title=Comment:Step-Generators-Hook&body=Comment:Step-Generators-Hook)

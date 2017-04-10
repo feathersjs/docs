@@ -29,6 +29,12 @@ values override
 ones when in production mode,
 i.e. when you run `NODE_ENV=production node path/to/your/server.js`.
 
+## node_modules/
+
+The generator installs the project dependencies here using either
+[npm](https://docs.npmjs.com/),or [yarn](https://yarnpkg.com/en/) if that's installed.
+The dependencies are itemized in `package.json`.
+
 ## public/
  
 Contains the resources to be served.

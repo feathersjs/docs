@@ -1,11 +1,11 @@
---- 02/gen1/src/services/index.js	2017-04-06 12:30:19.740496074 -0400
-+++ 02/gen2/src/services/index.js	2017-04-06 12:34:15.844496074 -0400
+--- 02/gen1/src/services/index.js	2017-04-09 09:00:41.662007000 -0400
++++ 02/gen2/src/services/index.js	2017-04-09 09:12:41.798007000 -0400
 @@ -1,5 +1,8 @@
  'use strict';
  
 +const users = require('./users/users.service.js');
 +
- module.exports = function() {
+ module.exports = function () {
    const app = this; // eslint-disable-line no-unused-vars
 +  app.configure(users);
  };
