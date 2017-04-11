@@ -15,6 +15,7 @@ Below are some of the amazing things built with Feathers or for the Feathers eco
 - [Simpla](https://www.simpla.io/)
 - [Stoplight](https://stoplight.io/)
 - [Taxfyle](https://www.taxfyle.com/)
+- [Work ID](http://work.id/)
 
 
 ## Starter stacks, Examples and Tutorials
