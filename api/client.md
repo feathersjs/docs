@@ -31,7 +31,7 @@ The client utilities can be used directly on the server.  Just `require` each in
 const feathers = require('feathers/client');
 const socketio = require('feathers-socketio/client');
 const hooks = require('feathers-hooks');
-const errors = require('feathers-errors');
+const errors = require('feathers-errors'); // An object with all of the custom error types.
 const auth = require('feathers-authentication-client/dist/socket.io');
 const io = require('socket.io-client');
 
@@ -43,7 +43,6 @@ const feathersClient = feathers()
   .configure(socketio(socket))
   .configure(hooks())
   .configure(auth())
-  .configure(errors())
 
 module.exports = feathersClient;
 ```
@@ -56,7 +55,7 @@ Both, Browserify and StealJS support npm modules and require no additional confi
 import feathers from 'feathers/client';
 import socketio from 'feathers-socketio/client';
 import hooks from 'feathers-hooks';
-import errors from 'feathers-errors';
+import errors from 'feathers-errors'; // An object with all of the custom error types.
 import auth from 'feathers-authentication-client/dist/socket.io';
 import io from 'socket.io-client';
 
@@ -68,7 +67,6 @@ const feathersClient = feathers()
   .configure(socketio(socket))
   .configure(hooks())
   .configure(auth())
-  .configure(errors())
 
 export default feathersClient;
 ```
@@ -145,7 +143,8 @@ $ npm install feathers-client --save
     .configure(feathers.hooks())
     .configure(feathers.socketio(socket))
     .configure(feathers.authentication())
-    .configure(feathers.errors())
+
+  // feathers.errors is an object with all of the custom error types.
 </script>
 ```
 
@@ -164,7 +163,7 @@ define(function (require) {
   const feathers = require('feathers/client');
   const socketio = feathers.socketio;
   const hooks = feathers.hooks;
-  const errors = feathers.errors;
+  const errors = feathers.errors; // An object with all of the custom error types.
   const auth = feathers.auth;
   const io = require('socket.io-client');
 
@@ -176,7 +175,6 @@ define(function (require) {
     .configure(socketio(socket))
     .configure(hooks())
     .configure(auth())
-    .configure(errors())
 
   return feathersClient;
 });
