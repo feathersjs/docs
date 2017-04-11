@@ -1,5 +1,12 @@
 # Installing the examples
 
+You can install the code for the examples used in this guide,
+which would allow you to run those examples.
+
+This however is not a requirement and we suggest you first just read
+through the guide.
+You can always the install the examples later if you to work with them.
+
 ## Install Node
 
 [Node](https://nodejs.org/en/) is a server platform which runs JavaScript.
