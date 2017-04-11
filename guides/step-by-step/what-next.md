@@ -13,7 +13,7 @@ Identical database calls may be made on the server and on the frontend.
 - This makes frontend development **significantly** easier.
 - It allows you to share code between the server and the frontend.
 
-We've likely experienced Feathers **ah-ha** moment.
+We've likely experienced Feathers **a-ha!** moment.
 
 We have a solid understanding of basic Feathers.
 Our strong foundation will allow us to explore new Feathers features.

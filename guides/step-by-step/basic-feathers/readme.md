@@ -1,6 +1,6 @@
 # Basic Feathers
 
-| Getting you to Feathers' **ah-ha** moment as quickly as possible.
+| Getting you to Feathers' **a-ha!** moment as quickly as possible.
 
 Let's write some Feathers code because, once we understand that,
 Feathers generators will be straight forward.

@@ -1,4 +1,4 @@
-# The Feathers **"ah-ha"** moment
+# The Feathers **"a-ha!"** moment
 
 ## Feathers is transport agnostic
 
@@ -14,9 +14,9 @@ without you needing to do anything.
 - This makes frontend development **significantly** easier.
 - It allows you to share code between the server and the frontend.
 
-## The **"ah-ha"** moment
+## The **"a-ha!"** moment
 
-The "ah-ha" moment comes when you start to realize the significance of these features.
+The "a-ha!" moment comes when you start to realize the significance of these features.
 Enormous amounts of boilerplate simply disappear.
 
 > You might now start to appreciate why people are enthusiastic about Feathers.
