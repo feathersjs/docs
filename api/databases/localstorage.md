@@ -46,7 +46,7 @@ See the [clients](../clients/readme.md) chapter for more information about using
 
 ```html
 <script type="text/javascript" src="socket.io/socket.io.js"></script>
-<script type="text/javascript" src="//unpkg.com/feathers-client@^1.0.0/dist/feathers.js"></script>
+<script type="text/javascript" src="//unpkg.com/feathers-client@^2.0.0/dist/feathers.js"></script>
 <script type="text/javascript" src="//unpkg.com/feathers-localstorage@^1.0.0/dist/localstorage.js"></script>
 <script type="text/javascript">
   var service = feathers.localstorage({
