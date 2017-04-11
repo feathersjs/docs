@@ -36,6 +36,7 @@
     * [Processing data](guides/chat/processing.md)
     * [Frameworks: React, Vue etc.](guides/chat/frameworks.md)
   * [Authentication](guides/auth/readme.md)
+    * [Recipe: Customize the Login Response](guides/auth/recipe.customize-response.md)
     * [Recipe: Mixed Auth Endpoints](guides/auth/recipe.mixed-auth.md)
     * [Recipe: Basic OAuth](guides/auth/recipe.oauth-basic.md)
   * [Advanced topics](guides/advanced/readme.md)
