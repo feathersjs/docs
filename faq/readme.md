@@ -30,6 +30,8 @@ class PasswordService {
 
 ## Is Feathers production ready?
 
+For some more details see [this answer on Quora](https://www.quora.com/Is-FeathersJS-production-ready)
+
 ## What is the difference between hooks and events?
 
 ## What do event filters do?
