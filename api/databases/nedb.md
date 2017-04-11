@@ -25,7 +25,10 @@ const service = require('feathers-nedb');
 // Create a NeDB instance
 const Model = new NeDB({
   filename: './data/messages.db',
-  autoload: true
+  autoload: true,
+  // Automatically generate createdAt and updatedAt fields, 
+  // so you do not need to use hooks.setCreatedAt(), hooks.setUpdatedAt()
+  timestampData: true
 });
 
 app.use('/messages', service({ Model }));
