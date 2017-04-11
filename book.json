@@ -5,6 +5,7 @@
   "plugins": [
     "feathers-collapsible-menu",
     "heading-anchors",
+    "include-codeblock",
     "edit-link",
     "ga",
     "versions"

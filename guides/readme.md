@@ -1,5 +1,16 @@
 # Guides
 
-This is where we will have guides for common situations. We will be adding to this section over time but if you have done something cool with Feathers that we don't already have a guide for feel free to [open a pull request](https://github.com/feathersjs/feathers-docs/edit/master/guides/readme.md).
+[**About Feathers**](./about/readme.md)<br/>
+Learn about Feathers features, philosophy and how it compares with some other frameworks.
 
-Naturally, our first guide is [how you can migrate to your existing app to Feathers 2](./migrating.md).
+[**The Basics - A Step-by-Step Intro to Feathers**](./step-by-step/readme.md)<br/>
+The goal of this guide is to get you to the "A-ha!" moment as efficiently as possible.  You will learn how the primary parts of the core work together.  You'll also learn how to start new applications with the generator.
+
+[**A Chat Application**](./chat/readme.md)<br/>
+Learn how to create a chat REST and real-time API complete with authentication and data processing including a simple browser app.
+
+[**Authentication**](./auth/readme.md)<br/>
+Learn how to add local (username & password), OAuth1, and OAuth2 authentication to your Feathers Applications.
+
+[**Advanced topics**](./advanced/readme.md)<br/>
+Guides for more advanced Feathers topics like debugging, configuration, file uploads and more.

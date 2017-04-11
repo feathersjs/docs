@@ -1,0 +1,50 @@
+{
+  "name": "basic-guide-generated-project",
+  "description": "Generated app for Feathers Generator Guide",
+  "version": "0.0.0",
+  "homepage": "",
+  "main": "src",
+  "keywords": [
+    "feathers"
+  ],
+  "author": {
+    "name": "John Szwaronek",
+    "email": "johnsz9999@gmail.com"
+  },
+  "contributors": [],
+  "bugs": {},
+  "directories": {
+    "lib": "src"
+  },
+  "engines": {
+    "node": ">= 6.0.0",
+    "npm": ">= 3.0.0"
+  },
+  "scripts": {
+    "test": "npm run eslint && npm run mocha",
+    "eslint": "eslint src/. test/. --config .eslintrc.json",
+    "start": "node src/",
+    "mocha": "mocha test/ --recursive"
+  },
+  "dependencies": {
+    "body-parser": "1.17.1",
+    "compression": "1.6.2",
+    "cors": "2.8.3",
+    "feathers": "2.1.1",
+    "feathers-configuration": "0.4.1",
+    "feathers-errors": "2.6.3",
+    "feathers-hooks": "1.8.1",
+    "feathers-hooks-common": "3.0.0",
+    "feathers-rest": "1.7.1",
+    "feathers-socketio": "1.5.2",
+    "helmet": "3.5.0",
+    "serve-favicon": "2.4.2",
+    "winston": "2.3.1"
+  },
+  "devDependencies": {
+    "eslint": "3.19.0",
+    "mocha": "3.2.0",
+    "request": "2.81.0",
+    "request-promise": "4.2.0"
+  }
+}
