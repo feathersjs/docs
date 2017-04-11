@@ -105,7 +105,7 @@ Now add the following code to the same page.  The first script tag loads Feather
 > Note: This code loads the `feathers-client` package from a CDN.  This is **not** the recommended usage for most apps, but is good for demonstration purposes.  We recommend using a bundler as described in the [Feathers Client API docs](../../api/client.md).
 
 ```html
-<script src="//unpkg.com/feathers-client@2.0.0-pre.2/dist/feathers.js"></script>
+<script src="//unpkg.com/feathers-client@2.0.0/dist/feathers.js"></script>
 <script src="//unpkg.com/socket.io-client@1.7.3/dist/socket.io.js"></script>
 <script>
   // Socket.io is exposed as the `io` global.
