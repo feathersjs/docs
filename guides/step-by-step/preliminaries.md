@@ -1,5 +1,12 @@
 # Installing the examples
 
+You can install the code for the examples used in this guide,
+which would allow you to run those examples.
+
+This however is not a requirement and we suggest you first just read
+through the guide.
+You can always the install the examples later if you to work with them.
+
 ## Install Node
 
 [Node](https://nodejs.org/en/) is a server platform which runs JavaScript.
@@ -41,21 +48,6 @@ npm install
 
 This will install the dependencies needed by the Basics examples into
 `/examples/step/01/node_modules`.
-
-You can read this guide by pointing your browser to the
-[Feathers documentation](https://docs.feathersjs.com/guides/step-by-step/readme.html).
-You can also read the guide by serving static files from this repo.
-
-If you do not have a static server already installed, you may install
-[http-server](https://www.npmjs.com/package/http-server)
-globally with `npm install http-server -g`
-and start serving the guide with:
-```text
-cd path/to/feathers-docs
-http-server
-```
-
-Then point your browser at `localhost:8080/_book`.
 
 ## Recreating the examples used in the guides
 
