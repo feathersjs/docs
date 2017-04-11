@@ -23,9 +23,9 @@ There are a couple of different methods you can use to implement OAuth. Here are
 
 The [`Feathers-cli`](https://github.com/feathersjs/feathers-cli) allows you to easily setup a new application with OAuth.  Here are the steps to generate an application:
 
-1. `npm install -g feathers-cli@pre `<br/>
+1. `npm install -g feathers-cli `<br/>
 or <br/>
-`yarn global feathers-cli@pre`
+`yarn global feathers-cli`
 1. `mkdir feathers-demo-oauth; cd feathers-demo-oauth`<br/>
  or a folder name you prefer.
 1. `feathers generate app`<br/>
