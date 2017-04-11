@@ -2,17 +2,15 @@
 
 Feathers is a REST and realtime API layer for modern applications.
 
-"[FeathersJS'] signature feature [is] that it’s super lightweight.
+*[FeathersJS'] signature feature [is] that it’s super lightweight.
 It contains a simple and logical workflow that streamlines building apis
 and can make an api that would have taken hours and builds it in minutes.
 It hits the perfect balance of magic and control
 where you still have full control over how your api behaves
-but the tools provided make your life so much easier." --
-[Medium](https://medium.com/@codingfriend/feathersjs-a-framework-that-will-spoil-you-109525dfd35e#.8kf707x3k)
+but the tools provided make your life so much easier.* --
+Medium ["FeathersJS — A framework that will spoil you"](https://medium.com/@codingfriend/feathersjs-a-framework-that-will-spoil-you-109525dfd35e#.8kf707x3k)
 
 > Warning: Feathers is addictive.
-
-Feathers has several core features.
 
 ## Services
 
@@ -31,8 +29,8 @@ They are middlemen and can be used to perform operations of any kind.
 [Hooks](../../api/hooks.md) are functions that run automatically before or after a service is called upon.
 They can be service gatekeepers and make sure that all operations are allowed and have the required information.
 They can also make sure that only data that should be returned to a client is returned.
-- before hooks: validate/cleanse/check permissions
-- after hooks: remove data before it's sent to the client
+- before hooks: validate/cleanse/check permissions.
+- after hooks: add additional data or remove unneeded data before it's sent to the client.
 
 ## Events
 
@@ -86,13 +84,13 @@ This guide covers
 It does not assume any prior knowledge of Feathers.
 
 By the time you finish this guide, you will
-- have a solid understanding of Feathers basics
+- have a solid understanding of Feathers basics.
 - understand how Feathers permits your code to be database agnostic.
 - understand how a Feathers server simultaneously and transparently supports a HTTP REST API,
 Feathers REST clients, and Feathers WebSocket clients.
 - understand that you can access your database from the client
 as if that client code was running on the server.
 - understand that the Feathers generators will structure your application for you,
-and you will understand what boilerplate they produce.
+and you will understand the boilerplate they produce.
 
-By the time you finish this guide, you will be ready to write your first, small app.
+By the time you finish this guide, you will be ready to write your first app.

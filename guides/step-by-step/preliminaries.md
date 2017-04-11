@@ -14,9 +14,9 @@ It has the largest ecosystem of open source libraries in the world.
 [git](https://git-scm.com/) is the version control system most frequently used in open source.
 There are many resources available for installing it.
 
-- [Linux.](https://www.atlassian.com/git/tutorials/install-git/linux)
-- [Mac OSX.](https://www.atlassian.com/git/tutorials/install-git/mac-os-x)
-- [Windows.](https://www.atlassian.com/git/tutorials/install-git/windows)
+- [Linux.](https://www.atlassian.com/git/tutorials/install-git#linux)
+- [Mac OSX.](https://www.atlassian.com/git/tutorials/install-git#mac-os-x)
+- [Windows.](https://www.atlassian.com/git/tutorials/install-git#windows)
 
 ## Install the examples
 

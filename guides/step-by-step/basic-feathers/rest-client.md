@@ -68,7 +68,7 @@ is essentially the same as the server code we used in
 |
 [Split](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/_diff/01-rest-2-client-side.html).
 
-> **Feathers "ah-ha" moment.**
+> **Feathers "a-ha!" moment.**
 We can run **exactly** the same code on the frontend as on the server.
 We can code the frontend as if the database was sitting on it.
 That's part of the magic of Feathers,
