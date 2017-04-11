@@ -34,7 +34,7 @@
     * [Processing data](guides/chat/processing.md)
     * [Frameworks: React, Vue etc.](guides/chat/frameworks.md)
   * [Authentication](guides/auth/readme.md)
-    * [How JWT works](./jwt.md)
+    * [How JWT works](guides/auth/how-jwt-works.md)
     * [What's New (external link)](https://github.com/feathersjs/feathers-authentication/blob/master/docs/new-1.0-features.md)
     * [Migration Guide (external link)](https://github.com/feathersjs/feathers-authentication/blob/master/docs/migrating.md)
     * [Recipe: Customize the Login Response](guides/auth/recipe.customize-response.md)

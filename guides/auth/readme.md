@@ -1,6 +1,6 @@
 # Authentication Guides & Recipes
 
-[**How JWT Works**](./jwt.md)<br/>
+[**How JWT Works**](./how-jwt-works.md)<br/>
 Learn more about JWT and how it might differ from authentication methods you've used, previously. (This guide is a work in progress.)
 
 [**What's new in `feathers-authentication@1.x`**](https://github.com/feathersjs/feathers-authentication/blob/master/docs/new-1.0-features.md)<br/>
