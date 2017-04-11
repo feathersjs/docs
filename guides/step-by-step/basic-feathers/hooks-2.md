@@ -12,17 +12,17 @@ We can implement such a **soft delete** with the `softDelete` hook.
 
 ## Working example
 
-- Server code: [examples/step/01/hooks/2.js](https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/01/hooks/2.js)
-- Client code: [common/public/rest-del.html](https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/01/common/public/rest.html)
+- Server code: [examples/step/01/hooks/2.js](https://github.com/feathersjs/feathers-docs/blob/master/examples/step/01/hooks/2.js)
+- Client code: [common/public/rest-del.html](https://github.com/feathersjs/feathers-docs/blob/master/examples/step/01/common/public/rest.html)
 and
-[common/public/feathers-app-del.js](https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/01/common/public/feathers-app-del.js)
+[common/public/feathers-app-del.js](https://github.com/feathersjs/feathers-docs/blob/master/examples/step/01/common/public/feathers-app-del.js)
 - Start the server: `node ./examples/step/01/hooks/2`
 - Point the browser at: `localhost:3030/rest-del.html`
 - Compare with last page's server
-[hooks/1.js.](https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/01/hooks/1.js):
-[Unified](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/_diff/01-hooks-2-line.html)
+[hooks/1.js.](https://github.com/feathersjs/feathers-docs/blob/master/examples/step/01/hooks/1.js):
+[Unified](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-docs/blob/master/examples/step/_diff/01-hooks-2-line.html)
 |
-[Split](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/_diff/01-hooks-2-side.html)
+[Split](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-docs/blob/master/examples/step/_diff/01-hooks-2-side.html)
 
 ## Using softDelete
 
@@ -41,9 +41,9 @@ userService.before({
 });
 ```
 - See what changed:
-[Unified](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/_diff/01-hooks-2-line.html)
+[Unified](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-docs/blob/master/examples/step/_diff/01-hooks-2-line.html)
 |
-[Split](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/_diff/01-hooks-2-side.html)
+[Split](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-docs/blob/master/examples/step/_diff/01-hooks-2-side.html)
 
 ## The results
 

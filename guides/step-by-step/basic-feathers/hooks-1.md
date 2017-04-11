@@ -8,17 +8,17 @@ We'll be introducing specific hooks as we need them.
 
 ## Working example
 
-- Server code: [examples/step/01/hooks/1.js](https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/01/hooks/1.js)
-- Client code: [common/public/rest.html](https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/01/common/public/rest.html)
+- Server code: [examples/step/01/hooks/1.js](https://github.com/feathersjs/feathers-docs/blob/master/examples/step/01/hooks/1.js)
+- Client code: [common/public/rest.html](https://github.com/feathersjs/feathers-docs/blob/master/examples/step/01/common/public/rest.html)
 and
-[feathers-app.js](https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/01/common/public/feathers-app.js)
+[feathers-app.js](https://github.com/feathersjs/feathers-docs/blob/master/examples/step/01/common/public/feathers-app.js)
 - Start the server: `node ./examples/step/01/hooks/1`
 - Point the browser at: `localhost:3030/rest.html`
 - Compare with last page's server
-[examples/step/01/hooks/1.js](https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/01/hooks/1.js):
-[Unified](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/_diff/01-hooks-1-line.html)
+[examples/step/01/hooks/1.js](https://github.com/feathersjs/feathers-docs/blob/master/examples/step/01/hooks/1.js):
+[Unified](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-docs/blob/master/examples/step/_diff/01-hooks-1-line.html)
 |
-[Split](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/_diff/01-hooks-1-side.html)
+[Split](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-docs/blob/master/examples/step/_diff/01-hooks-1-side.html)
 
 ## Writing hooks
 
@@ -68,9 +68,9 @@ function userSchema() {
 }
 ```
 - See what changed:
-[Unified](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/_diff/01-hooks-1-line.html)
+[Unified](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-docs/blob/master/examples/step/_diff/01-hooks-1-line.html)
 |
-[Split](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/_diff/01-hooks-1-side.html)
+[Split](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-docs/blob/master/examples/step/_diff/01-hooks-1-side.html)
 
 
 ### - .configure(hooks())

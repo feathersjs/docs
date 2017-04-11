@@ -7,9 +7,9 @@ This requires a hook and therefore we generate the scaffolding for a hook using:
 
 The generator will add some new modules and modify some existing ones.
 You can see all the changes here:
-[Unified](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/_diff/02-gen4-line.html)
+[Unified](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-docs/blob/master/examples/step/_diff/02-gen4-line.html)
 |
-[Split](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/_diff/02-gen4-side.html)
+[Split](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-docs/blob/master/examples/step/_diff/02-gen4-side.html)
 
 
 ## New modules
@@ -26,18 +26,18 @@ This hook doesn't do anything so far, but its been placed in the structure and w
 
 This caused the following modules to be added:
 
-- [src/hooks/populate-teams.js](https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/02/gen4/src/hooks/populate-teams.js)
+- [src/hooks/populate-teams.js](https://github.com/feathersjs/feathers-docs/blob/master/examples/step/02/gen4/src/hooks/populate-teams.js)
 contains code for a hook that presently does nothing.
 
-- [test/hooks/populate-teams.test.js](https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/02/gen4/test/hooks/populate-teams.test.js)
+- [test/hooks/populate-teams.test.js](https://github.com/feathersjs/feathers-docs/blob/master/examples/step/02/gen4/test/hooks/populate-teams.test.js)
 tests that the hook is configured.
 
 The hook had to be wired into the app, so the generator made the following changes:
 
 - **src/services/teams/teams.hooks.js** now
-([Unified](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/_diff/02-gen4-hooks-line.html)
+([Unified](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-docs/blob/master/examples/step/_diff/02-gen4-hooks-line.html)
 |
-[Split](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/_diff/02-gen4-hooks-side.html))
+[Split](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-docs/blob/master/examples/step/_diff/02-gen4-hooks-side.html))
 uses the `populateTeams`.
 We told the generator to create an `after` hook for the `find` method,
 and that is when it is being run.

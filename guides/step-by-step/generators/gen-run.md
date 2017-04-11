@@ -20,14 +20,14 @@ This will install the dependencies needed by the generator example into
 ## Run the tests
 
 The generator wrote
-[some basic tests](https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/02/gen4/test/)
+[some basic tests](https://github.com/feathersjs/feathers-docs/blob/master/examples/step/02/gen4/test/)
 for what it generated.
 Let's run them.
 
 ![Generate hook](../assets/gen-rough-test.jpg)
 
 `npm run test` runs the `test` script in
-[package.json](https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/02/gen4/package.json#L23-L28).
+[package.json](https://github.com/feathersjs/feathers-docs/blob/master/examples/step/02/gen4/package.json#L23-L28).
 ```text
 "scripts": {
     "test": "npm run eslint && npm run mocha",
@@ -39,7 +39,7 @@ Let's run them.
 
 First [ESLint](http://eslint.org/docs/user-guide/getting-started)
 runs, using the options in
-[.eslintrc.json](https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/02/gen4/.eslintrc.json).
+[.eslintrc.json](https://github.com/feathersjs/feathers-docs/blob/master/examples/step/02/gen4/.eslintrc.json).
 
 ESLint checks the syntax and basic coding patterns of the modules in `src/` and `test/`.
 Any informatory messages would be logged to the console and the processing terminated.
@@ -63,8 +63,8 @@ The `info` line indicates the server for our roughed out app started properly.
 
 The `You are using the default filter for ...` lines are interesting.
 They are logged from
-[here](https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/02/gen4/src/services/users/users.filters.js#L2)
-and [here](https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/02/gen4/src/services/teams/teams.filters.js#L2).
+[here](https://github.com/feathersjs/feathers-docs/blob/master/examples/step/02/gen4/src/services/users/users.filters.js#L2)
+and [here](https://github.com/feathersjs/feathers-docs/blob/master/examples/step/02/gen4/src/services/teams/teams.filters.js#L2).
 
 Feathers [real-time events](../../../api/events#service-events)
 will notify all WebSocket clients of mutations occurring in Feathers DB services.
@@ -80,7 +80,7 @@ Its nice to use `npm run start` as then we don't need to know where the server s
 However we could just as easily have run `node ./src`.
 
 One thing the generated code assumes is that the
-[`config` directory](https://github.com/feathersjs/feathers-docs/tree/auk/examples/step/02/gen4/config)
+[`config` directory](https://github.com/feathersjs/feathers-docs/tree/master/examples/step/02/gen4/config)
 is located in the current directory.
 So we wouldn't be able to start the server with `node path/to/app/src`
 because the config files wouldn't be found.

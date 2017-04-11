@@ -15,7 +15,7 @@ Everything we mention in this guide is applicable to all of them.
 
 ## Working example
 
-- Source code: [examples/step/01/db-connector/1.js](https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/01/db-connector/1.js)
+- Source code: [examples/step/01/db-connector/1.js](https://github.com/feathersjs/feathers-docs/blob/master/examples/step/01/db-connector/1.js)
 - Run it: `node ./examples/step/01/db-connector/1.js`
 
 The source code contains lines like `/// [dependencies]` and `//! [dependencies]`.
@@ -69,7 +69,7 @@ We issue a find for the entire table and print the results.
 i.e. for the find to finish.
 The zero, one or more items found in the table are returned in the `results` param.
 
-| View the completed file [db-connector/1.js.](https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/01/db-connector/1.js)
+| View the completed file [db-connector/1.js.](https://github.com/feathersjs/feathers-docs/blob/master/examples/step/01/db-connector/1.js)
 
 ## Service methods
 
