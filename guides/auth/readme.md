@@ -1,5 +1,8 @@
 # Authentication Guides & Recipes
 
+[**What's new in `feathers-authentication@1.x`**](https://github.com/feathersjs/feathers-authentication/blob/master/docs/new-1.0-features.md)<br/>
+The new `feathers-authentication` introduces a lot of changes.  See what's new.
+
 [**Migrating to `feathers-authentication@1.x`**](https://github.com/feathersjs/feathers-authentication/blob/master/docs/migrating.md)<br/>
 See what needs to change to upgrade your existing Feathers application from `feathers-authentication@0.7.x`.
 
