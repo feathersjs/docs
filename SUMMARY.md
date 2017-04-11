@@ -9,7 +9,7 @@
   * [The Basics](guides/step-by-step/readme.md)
     * [Introduction](guides/step-by-step/intro/readme.md)
     * [What not to worry about](guides/step-by-step/intro/not-worry.md)
-    * [Preliminaries](guides/step-by-step/preliminaries.md)
+    * [Installing the Examples](guides/step-by-step/preliminaries.md)
     * [Basic Feathers](guides/step-by-step/basic-feathers/readme.md)
     * [A database connector](guides/step-by-step/basic-feathers/database-connector.md)
     * [A REST API server](guides/step-by-step/basic-feathers/rest-api-server.md)
