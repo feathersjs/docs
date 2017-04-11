@@ -8,7 +8,7 @@
 $ npm install feathers --save
 ```
 
-The core `feathers` module provides the ability to initialize new Feathers application instances.  Each instance allows for registration and retrieval of [services](./services.md), plugin configuration, and getting and setting global configuration options. An initialized Feathers application is referred to as the **app object**.
+The core `feathers` module provides the ability to initialize new Feathers application instances. Each instance allows for registration and retrieval of [services](./services.md), plugin configuration, and getting and setting global configuration options. An initialized Feathers application is referred to as the **app object**. The API documented on this page works both, on the server and [the client](./client.md).
 
 ```js
 // To create a Feathers server application
@@ -46,7 +46,7 @@ On the server `.use` also provides the same functionality as [Express app.use](h
 
 ## .service(path)
 
-`app.service(path) -> service` returns the wrapped [service object](./services.md) for the given path. Feathers internally creates a new object from each registered service. This means that the object returned by `app.service(path)` will provide the same methods and functionality as your original service object but also functionality added by Feathers and its plugins (most notably it is possible to listen to [service events](./events.md)). `path` can be the service name with or without leading and trailing slashes.
+`app.service(path) -> service` returns the wrapped [service object](./services.md) for the given path. Feathers internally creates a new object from each registered service. This means that the object returned by `app.service(path)` will provide the same methods and functionality as your original service object but also functionality added by Feathers and its plugins like [service events](./events.md) and [additional methods](./services.md##feathers-functionality). `path` can be the service name with or without leading and trailing slashes.
 
 ```js
 const messageService = app.service('messages');
