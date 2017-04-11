@@ -26,8 +26,6 @@
     * [Add the teams service](guides/step-by-step/generators/gen-service.md)
     * [Add the populate hook](guides/step-by-step/generators/gen-hook.md)
     * [Run the Roughed Out App](guides/step-by-step/generators/gen-run.md)
-    * [Generating an app](guides/step-by-step/generators/app.md)
-    * [Adding a service](guides/step-by-step/generators/service.md)
   * [A Chat Application](guides/chat/readme.md)
     * [Creating the application](guides/chat/creating.md)
     * [Generating a service](guides/chat/service.md)
