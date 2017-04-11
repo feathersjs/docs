@@ -27,11 +27,11 @@
       "options": [
         {
           "value": "https://docs.feathersjs.com",
-          "text": "Latest Stable - Auk"
+          "text": "Latest Stable (Auk)"
         },
         {
           "value": "https://legacy.docs.feathersjs.com",
-          "text": "Legacy - Pre-Auk"
+          "text": "Legacy (Pre-Auk)"
         }
       ]
     }
