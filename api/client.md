@@ -139,7 +139,7 @@ $ npm install feathers-client --save
  Below is an example of the scripts you would use to load `feathers-client` from `unpkg.com`.  It's possible to use it with a module loader,  but using individual client packages will allow you to take advantage of Feathers' modularity.
 
 ```html
-<script src="//unpkg.com/feathers-client@2.0.0-pre.2/dist/feathers.js"></script>
+<script src="//unpkg.com/feathers-client@^2.0.0/dist/feathers.js"></script>
 <script src="//unpkg.com/socket.io-client@1.7.3/dist/socket.io.js"></script>
 <script>
   // Socket.io is exposed as the `io` global.

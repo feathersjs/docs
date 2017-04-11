@@ -23,9 +23,9 @@ There are a couple of different methods you can use to implement OAuth. Here are
 
 The [`Feathers-cli`](https://github.com/feathersjs/feathers-cli) allows you to easily setup a new application with OAuth.  Here are the steps to generate an application:
 
-1. `npm install -g feathers-cli@pre `<br/>
+1. `npm install -g feathers-cli `<br/>
 or <br/>
-`yarn global feathers-cli@pre`
+`yarn global feathers-cli`
 1. `mkdir feathers-demo-oauth; cd feathers-demo-oauth`<br/>
  or a folder name you prefer.
 1. `feathers generate app`<br/>
@@ -105,7 +105,7 @@ Now add the following code to the same page.  The first script tag loads Feather
 > Note: This code loads the `feathers-client` package from a CDN.  This is **not** the recommended usage for most apps, but is good for demonstration purposes.  We recommend using a bundler as described in the [Feathers Client API docs](../../api/client.md).
 
 ```html
-<script src="//unpkg.com/feathers-client@2.0.0-pre.2/dist/feathers.js"></script>
+<script src="//unpkg.com/feathers-client@2.0.0/dist/feathers.js"></script>
 <script src="//unpkg.com/socket.io-client@1.7.3/dist/socket.io.js"></script>
 <script>
   // Socket.io is exposed as the `io` global.

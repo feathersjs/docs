@@ -43,7 +43,7 @@ the code which is unique to REST.
 
 - `//cdnjs.cloudflare.com/ajax/libs/core-js/2.1.4/core.min.js`
 loads a pollyfill for [fetch](https://davidwalsh.name/fetch) if required.
-- `src="//unpkg.com/feathers-client@^1.8.0/dist/feathers.js"` loads the Feathers client code.
+- `src="//unpkg.com/feathers-client@^2.0.0/dist/feathers.js"` loads the Feathers client code.
 - `src="/serverUrl.js"` loads the URL of the server.
 The default is `var serverUrl = 'http:localhost:3030';`.
 Change the value if you need to.
