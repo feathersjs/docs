@@ -17,24 +17,24 @@ As another example, the client could maintain a local copy of
 part of a database table.
 It can keep it up to date by listening to events for that table.
 
-> **Real-time.** Real-time events are sent only to Feathers websocket clients.
+> **Real-time.** Real-time events are sent only to Feathers WebSocket clients.
 They are not sent to Feathers REST ot HTTP REST clients.
 These would have implement a traditional long-polling design.
-**Conclusion:** Use Feathers websocket clients.
+**Conclusion:** Use Feathers WebSocket clients.
 
 Let's create an event listener for the [Feathers Websocket Client](./socket-client.md)
 we already have.
 
 ## Working example
 
-- Server code: [examples/step/01/websocket/1.js](https://github.com/feathersjs/feathers-docs/blob/master/examples/step/01/websocket/1.js)
+- Server code: [examples/step/01/WebSocket/1.js](https://github.com/feathersjs/feathers-docs/blob/master/examples/step/01/WebSocket/1.js)
 - Listener code: [common/public/listener.html](https://github.com/feathersjs/feathers-docs/blob/master/examples/step/01/common/public/listener.html)
 and
 [listener-app.js](https://github.com/feathersjs/feathers-docs/blob/master/examples/step/01/common/public/listener-app.js)
 - Client code: [common/public/socketio.html](https://github.com/feathersjs/feathers-docs/blob/master/examples/step/01/common/public/socketio.html)
 and
 [feathers-app.js](https://github.com/feathersjs/feathers-docs/blob/master/examples/step/01/common/public/feathers-app.js)
-- Start the server: `node ./examples/step/01/websocket/1.js`
+- Start the server: `node ./examples/step/01/WebSocket/1.js`
 - Start the listener by pointing a browser tab at `localhost:3030/listener.html`
 - Start making changes by pointing a browser tab at: `localhost:3030/socketio.html`
 

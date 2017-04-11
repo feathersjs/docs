@@ -35,7 +35,7 @@ Compare the two:
 ## Writing the frontend HTML
 
 We'll soon see most of the frontend doesn't care if we're communicating with the server
-using REST or websockets.
+using REST or WebSockets.
 To keep things DRY, we are isolating in
 [common/public/rest.html](https://github.com/feathersjs/feathers-docs/blob/master/examples/step/01/common/public/rest.html)
 the code which is unique to REST.
@@ -47,7 +47,7 @@ loads a pollyfill for [fetch](https://davidwalsh.name/fetch) if required.
 - `src="/serverUrl.js"` loads the URL of the server.
 The default is `var serverUrl = 'http:localhost:3030';`.
 Change the value if you need to.
-- `const app = feathers()` instantiates a Feathers client.
+- `const feathersClient  = feathers()` instantiates a Feathers client.
 - `.configure(feathers.rest(serverUrl).fetch(fetch))` configures the client to use REST
 when communicating with the server.
 It points to the server,
