@@ -4,23 +4,23 @@ Let's generate a new project.
 
 ## Working example
 
-- Server code: [examples/step/02/app/](https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/02/app/)
-- Client code: [app/public/socketio.html](https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/02/app/public/socketio.html)
+- Server code: [examples/step/02/app/](https://github.com/feathersjs/feathers-docs/blob/master/examples/step/02/app/)
+- Client code: [app/public/socketio.html](https://github.com/feathersjs/feathers-docs/blob/master/examples/step/02/app/public/socketio.html)
 and
-[feathers-app.js](https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/02/app/public/feathers-app.js)
+[feathers-app.js](https://github.com/feathersjs/feathers-docs/blob/master/examples/step/02/app/public/feathers-app.js)
 - Start the server: `node ./examples/step/02/app/src`
 - Point the browser at: `localhost:3030/socketio.html`
 - Compare with our last frontend
-[common/public/feathers-app-del.js](https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/01/common/public/feathers-app-del.js):
-[Unified](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/_diff/02-app-feathers-app-line.html)
+[common/public/feathers-app-del.js](https://github.com/feathersjs/feathers-docs/blob/master/examples/step/01/common/public/feathers-app-del.js):
+[Unified](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-docs/blob/master/examples/step/_diff/02-app-feathers-app-line.html)
 |
-[Split](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/_diff/02-app-feathers-app-side.html)
+[Split](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-docs/blob/master/examples/step/_diff/02-app-feathers-app-side.html)
 
 ## Creating an app
 
 The [app generator](https://docs.feathersjs.com/getting-started/scaffolding.html#generate-the-app)
 wrote most of
-[app/](https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/02/app/)
+[app/](https://github.com/feathersjs/feathers-docs/blob/master/examples/step/02/app/)
 after the following prompts:
 
 ```text
@@ -83,7 +83,7 @@ i.e. when you run `NODE_ENV=production node ./examples/step/02/app/src`.
 ## Authentication
 
 Let's add authentication to the frontend we last used.
-[app/public/feathers-app.js](https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/02/app/public/feathers-app.js)
+[app/public/feathers-app.js](https://github.com/feathersjs/feathers-docs/blob/master/examples/step/02/app/public/feathers-app.js)
 
 ```javascript
 app.authenticate({
@@ -95,9 +95,9 @@ app.authenticate({
   .catch(err => console.error('\nError authenticating:', err));
 ```
 - See what changed:
-[Unified](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/_diff/02-app-feathers-app-line.html)
+[Unified](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-docs/blob/master/examples/step/_diff/02-app-feathers-app-line.html)
 |
-[Split](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/_diff/02-app-feathers-app-side.html)
+[Split](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-docs/blob/master/examples/step/_diff/02-app-feathers-app-side.html)
 
 
 This attempts to authenticate the user.

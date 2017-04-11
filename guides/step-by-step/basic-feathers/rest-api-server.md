@@ -11,14 +11,14 @@ Future versions will support multiple frameworks, starting with
 
 ## Working example
 
-- Source code: [examples/step/01/rest/1.js.](https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/01/rest/1.js)
+- Source code: [examples/step/01/rest/1.js.](https://github.com/feathersjs/feathers-docs/blob/master/examples/step/01/rest/1.js)
 and
-[common/](https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/01/common)
+[common/](https://github.com/feathersjs/feathers-docs/blob/master/examples/step/01/common)
 - Run it: `node ./examples/step/01/rest/1.js`
-- Compare with last page's [examples/step/01/db-connector/1.js](https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/01/db-connector/1.js):
-[Unified](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/_diff/01-rest-1-line.html)
+- Compare with last page's [examples/step/01/db-connector/1.js](https://github.com/feathersjs/feathers-docs/blob/master/examples/step/01/db-connector/1.js):
+[Unified](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-docs/blob/master/examples/step/_diff/01-rest-1-line.html)
 |
-[Split](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/_diff/01-rest-1-side.html)
+[Split](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-docs/blob/master/examples/step/_diff/01-rest-1-side.html)
 
 ## Implementing a REST API server
 
@@ -27,15 +27,15 @@ and with an Express server added.
 [import](../../../examples/step/01/rest/1.js)
 
 - See what changed:
-[Unified](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/_diff/01-rest-1-line.html)
+[Unified](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-docs/blob/master/examples/step/_diff/01-rest-1-line.html)
 |
-[Split](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/_diff/01-rest-1-side.html)
+[Split](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-docs/blob/master/examples/step/_diff/01-rest-1-side.html)
 
-The Express server [common/expressServerConfig.js](https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/01/common/expressServerConfig.js)
+The Express server [common/expressServerConfig.js](https://github.com/feathersjs/feathers-docs/blob/master/examples/step/01/common/expressServerConfig.js)
 is configured as follows.
 [import](../../../examples/step/01/common/expressServerConfig.js)
 
-The Express middleware [common/expressMiddleware/index.js](https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/01/common/expressMiddleware/index.js)
+The Express middleware [common/expressMiddleware/index.js](https://github.com/feathersjs/feathers-docs/blob/master/examples/step/01/common/expressMiddleware/index.js)
 handles logging, pages not found, and general errors.
 [import](../../../examples/step/01/common/expressMiddleware/index.js)
 

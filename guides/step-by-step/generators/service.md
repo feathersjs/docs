@@ -7,16 +7,16 @@ Let's add another service.
 
 ## Working example
 
-- Server code: [examples/step/02/service/](https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/02/service/)
-- Client code: [service/public/socketio.html](https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/02/service/public/socketio.html)
+- Server code: [examples/step/02/service/](https://github.com/feathersjs/feathers-docs/blob/master/examples/step/02/service/)
+- Client code: [service/public/socketio.html](https://github.com/feathersjs/feathers-docs/blob/master/examples/step/02/service/public/socketio.html)
 and
-[feathers-app.js](https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/02/service/public/feathers-app.js)
+[feathers-app.js](https://github.com/feathersjs/feathers-docs/blob/master/examples/step/02/service/public/feathers-app.js)
 - Start the server: `node ./examples/step/02/service/src`
 - Point the browser at: `localhost:3030/socketio.html`
 - Compare with the app on the last page
-[Unified](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/_diff/02-service-line.html)
+[Unified](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-docs/blob/master/examples/step/_diff/02-service-line.html)
 |
-[Split](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/_diff/02-service-side.html)
+[Split](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-docs/blob/master/examples/step/_diff/02-service-side.html)
 
 ## Generating a service
 
@@ -32,9 +32,9 @@ Once again we remove the dependencies loaded by the generator
 as they are already installed at the root of `feathers-guide`.
 
 - See the changes the service generator made:
-[Unified](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/_diff/02-app1-line.html)
+[Unified](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-docs/blob/master/examples/step/_diff/02-app1-line.html)
 |
-[Split](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/_diff/02-app1-side.html)
+[Split](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-docs/blob/master/examples/step/_diff/02-app1-side.html)
 
 
 ## App structure
@@ -47,9 +47,9 @@ Its structured similarly to users.
 We added function loadDatabases to service/src/app.js.
 
 - See what changed:
-[Unified](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/_diff/02-service-src-app-line.html)
+[Unified](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-docs/blob/master/examples/step/_diff/02-service-src-app-line.html)
 |
-[Split](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/_diff/02-service-src-app-side.html)
+[Split](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-docs/blob/master/examples/step/_diff/02-service-src-app-side.html)
 
 loadDatabases loads data into the users and teams tables.
 The team item contains the `user._id` of its team members in `team.memberIds`.
@@ -64,7 +64,7 @@ The team item contains the `user._id` of its team members in `team.memberIds`.
 ## Populating items
 
 Let's add some hooks to for teams in
-[src/services/teams/hooks/index.js](https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/02/service/src/services/teams/hooks/index.js)
+[src/services/teams/hooks/index.js](https://github.com/feathersjs/feathers-docs/blob/master/examples/step/02/service/src/services/teams/hooks/index.js)
 
 ```javascript
 const { populate, serialize } = require('feathers-hooks-common');
@@ -182,9 +182,9 @@ the dePopulate() hook will remove all joined and calculated properties for you.
 ## Recap
 
 Let's recap the hooks we added to the generated service:
-[Unified](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/_diff/02-service-teams-hooks-line.html)
+[Unified](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-docs/blob/master/examples/step/_diff/02-service-teams-hooks-line.html)
 |
-[Split](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/_diff/02-service-teams-hooks-side.html)
+[Split](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-docs/blob/master/examples/step/_diff/02-service-teams-hooks-side.html)
 
 ## The results
 

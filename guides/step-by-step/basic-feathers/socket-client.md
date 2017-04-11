@@ -9,22 +9,22 @@ We will use the popular Socket.io in this guide.
 
 ## Working example
 
-- Server code: [examples/step/01/websocket/1.js](https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/01/websocket/1.js)
-- Client code: [common/public/socketio.html](https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/01/common/public/socketio.html)
+- Server code: [examples/step/01/websocket/1.js](https://github.com/feathersjs/feathers-docs/blob/master/examples/step/01/websocket/1.js)
+- Client code: [common/public/socketio.html](https://github.com/feathersjs/feathers-docs/blob/master/examples/step/01/common/public/socketio.html)
 and
-[feathers-app.js](https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/01/common/public/feathers-app.js)
+[feathers-app.js](https://github.com/feathersjs/feathers-docs/blob/master/examples/step/01/common/public/feathers-app.js)
 - Start the server: `node ./examples/step/01/websocket/1`
 - Point the browser at: `localhost:3030/socketio.html`
 - Compare with last page's server
-[examples/step/01/rest/2.js](https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/01/rest/2.js):
-[Unified](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/_diff/01-websocket-1-line.html)
+[examples/step/01/rest/2.js](https://github.com/feathersjs/feathers-docs/blob/master/examples/step/01/rest/2.js):
+[Unified](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-docs/blob/master/examples/step/_diff/01-websocket-1-line.html)
 |
-[Split](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/_diff/01-websocket-1-side.html)
+[Split](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-docs/blob/master/examples/step/_diff/01-websocket-1-side.html)
 - Compare with last page's HTML
-[common/public/socketio.html](https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/01/common/public/socketio.html)
-[Unified](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/_diff/01-websocket-socketio-line.html)
+[common/public/socketio.html](https://github.com/feathersjs/feathers-docs/blob/master/examples/step/01/common/public/socketio.html)
+[Unified](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-docs/blob/master/examples/step/_diff/01-websocket-socketio-line.html)
 |
-[Split](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/_diff/01-websocket-socketio-side.html)
+[Split](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-docs/blob/master/examples/step/_diff/01-websocket-socketio-side.html)
 
 
 ## Change the server to support clients using either Feathers REST **or** WebSocket calls
@@ -43,9 +43,9 @@ const app = httpServerConfig()
   .configure(middleware);
 ```
 - See what changed:
-[Unified](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/_diff/01-websocket-1-line.html)
+[Unified](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-docs/blob/master/examples/step/_diff/01-websocket-1-line.html)
 |
-[Split](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/_diff/01-websocket-1-side.html)
+[Split](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-docs/blob/master/examples/step/_diff/01-websocket-1-side.html)
 
 ## Changing the HTML for Feathers client WebSocket calls
 
@@ -64,9 +64,9 @@ We replace the REST code we had in the HTML with the equivalent WebSocket code.
 <script src="/feathers-app.js"></script>
 ```
 - See what changed:
-[Unified](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/_diff/01-websocket-socketio-line.html)
+[Unified](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-docs/blob/master/examples/step/_diff/01-websocket-socketio-line.html)
 |
-[Split](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-docs/blob/auk/examples/step/_diff/01-websocket-socketio-side.html)
+[Split](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-docs/blob/master/examples/step/_diff/01-websocket-socketio-side.html)
 - `src="/socket.io.min.js"` load the Socket.io client code.
 - `const socket = io(serverUrl);` create a WebSocket.
 - `.configure(feathers.socketio(socket))` configure Feathers client to use the WebSocket.
