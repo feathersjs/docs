@@ -70,7 +70,7 @@ A pet peeve of mine are frameworks that make things “seem” easy by generatin
 and in the process making it almost impossible to implement anything not supported out of the box by their generators.
 There are generators for Feathers (that are sometimes taken too seriously,
 probably because of the aforementioned experiences with other frameworks)
-but a complete database backed CRUD REST and websocket API takes only 30 lines of code to write from scratch.
+but a complete database backed CRUD REST and WebSocket API takes only 30 lines of code to write from scratch.
 
 Less code means less things that can break and that applies to Feathers code itself as well.
 Core weighs in at only ~300 LOC and is thoroughly tested.
@@ -87,7 +87,7 @@ anything that applies to scaling those also applies to Feathers as well.
 Layering the service oriented approach on top also makes it easier to break up your application
 into individual parts should the need arise.
 
-You also have the option to use other more performant websocket libraries like µWS and, coming up in v3, other server frameworks like Koa.
+You also have the option to use other more performant WebSocket libraries like µWS and, coming up in v3, other server frameworks like Koa.
 
 ## It's documented
 

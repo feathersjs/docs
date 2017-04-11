@@ -107,7 +107,7 @@ or anywhere in its then chain, the next `.catch(err => ...)` is executed.
 
 ## The app
 
-The app is very similar to [Writing a Feathers websocket Client](../basic-feathers/socket-client.md)
+The app is very similar to [Writing a Feathers WebSocket Client](../basic-feathers/socket-client.md)
 and you should have little trouble understanding the generated code.
 
 What's important is that you pay attention to how the app is structured.
@@ -119,7 +119,7 @@ does not have seemingly endless discussions about the best way to structure an a
 ## The results
 
 The results are similar to
-[Writing a Feathers websocket Client](../basic-feathers/socket-client.md).
+[Writing a Feathers WebSocket Client](../basic-feathers/socket-client.md).
 The result for find is different because the user service was configured with pagination.
 
 ```text

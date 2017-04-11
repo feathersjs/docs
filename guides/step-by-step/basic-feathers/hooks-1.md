@@ -110,7 +110,7 @@ on validating data with JSON schema.
 ### - authHooks.hashPassword()
 
 The data has a `password` field.
-This specialized authentication hook will replace it by hashed version
+This specialized authentication hook will replace it with a hashed version
 so the password may be stored safely.
 
 > **bcrypt.** Feathers hashes passwords using [bycrypt](https://www.npmjs.com/package/bcryptjs).

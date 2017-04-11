@@ -2,13 +2,14 @@
 
 If you have an archive of stock movements,
 you cannot simply delete a stock item you no longer want to keep.
-You would not be able to properly present historical data if you do so.
+You would not be able to properly present historical data if you did so.
 
 The solution is to keep the data but mark it as deleted.
 We can ignore the `deleted` flag when we know we are accessing historical, and possibly deleted, items.
 Otherwise we want the application to act as if the item didn't exist.
 
-We can implement such a **soft delete** with the `softDelete` hook.
+It would be fairly complex to implement **soft delete** support yourself,
+however its easy to do using the `softDelete` hook.
 
 ## Working example
 

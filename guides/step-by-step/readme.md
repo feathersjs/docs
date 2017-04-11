@@ -8,7 +8,7 @@ and can make an api that would have taken hours and builds it in minutes.
 It hits the perfect balance of magic and control
 where you still have full control over how your api behaves
 but the tools provided make your life so much easier.* --
-Medium ["FeathersJS — A framework that will spoil you"](https://medium.com/@codingfriend/feathersjs-a-framework-that-will-spoil-you-109525dfd35e#.8kf707x3k)
+[Medium - "FeathersJS — A framework that will spoil you"](https://medium.com/@codingfriend/feathersjs-a-framework-that-will-spoil-you-109525dfd35e#.8kf707x3k)
 
 > Warning: Feathers is addictive.
 
