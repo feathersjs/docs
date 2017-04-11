@@ -80,7 +80,7 @@ and helps developers define and maintain consistent coding styles between differ
 
 ## [.eslintrc.json](https://github.com/feathersjs/feathers-docs/blob/master/examples/step/02/gen1/.eslintrc.json)
 contains defaults for liniting your code with
-[ESLint](http://eslint.org/docs/user-guide/getting##started).
+[ESLint](http://eslint.org/docs/user-guide/getting-started).
 
 ## [.gitignore](https://github.com/feathersjs/feathers-docs/blob/master/examples/step/02/gen1/.gitignore)
 specifies

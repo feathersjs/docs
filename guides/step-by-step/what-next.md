@@ -6,7 +6,7 @@ We've learned Feathers is transport agnostic.
 A Feathers server automatically handles requests from
 - HTTP REST clients,
 - Feathers REST clients, or
-- Feathers websocket clients.
+- Feathers WebSocket clients.
 
 We've learned Feathers resource management is platform agnostic.
 Identical database calls may be made on the server and on the frontend.

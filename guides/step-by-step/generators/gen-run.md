@@ -104,5 +104,11 @@ You can also use them later on to add additional services and hooks as your app 
 
 We now have the boilerplate for our app, and we start adding the custom code it requires.
 
+## What next?
+
+We've learned how the generator works, and we understand the code it produces.
+Let's now use this knowledge to build a
+[Chat Application](../../readme.md).
+
 ### Is anything wrong, unclear, missing?
 [Leave a comment.](https://github.com/feathersjs/feathers-guide/issues/new?title=Comment:Step-Generators-Run&body=Comment:Step-Generators-Run)
