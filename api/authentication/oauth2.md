@@ -65,7 +65,9 @@ Registering the OAuth2 plugin will automatically set up routes to handle the OAu
 {
     idField: '<provider>Id', // The field to look up the entity by when logging in with the provider. Defaults to '<provider>Id' (ie. 'facebookId').
     path: '/auth/<provider>', // The route to register the middleware
-    callbackURL: 'http(s)://hostame[:port]/auth/<provider>/callback', // The callback url. Will automatically take into account your host and port and whether you are in production based on your app environment to construct the url. (ie. in development http://localhost:3030/auth/facebook/callback)
+    callbackURL: 'http(s)://hostname[:port]/auth/<provider>/callback', // The callback url. Will automatically take into account your host and port and whether you are in production based on your app environment to construct the url. (ie. in development http://localhost:3030/auth/facebook/callback)
+    successRedirect: undefined,
+    failureRedirect: undefined,
     entity: 'user', // the entity that you are looking up
     service: 'users', // the service to look up the entity
     passReqToCallback: true, // whether the request object should be passed to `verify`
