@@ -2,8 +2,6 @@
 
 Since Feathers is just an extension of Express it's really simple to render templated views on the server with data from your Feathers services. There are a few different ways that you can structure your app so this guide will show you 3 typical ways you might have your Feathers app organized.
 
-You can see a basic working example [here](https://github.com/feathersjs/feathers-demos/).
-
 ## A Single "Monolithic" App
 
 You probably already know that when you register a Feathers service, Feathers creates RESTful endpoints for that service automatically. Well, really those are just Express routes, so you can define your own as well.
@@ -34,7 +32,7 @@ app.get('/messages', function(req, res, next){
 
 Simple right? We've now rendered a list of messages. All your hooks will get triggered just like they would normally so you can use hooks to pre-filter your data and keep your template rendering routes super tight.
 
-> **ProTip:** If you call a Feathers service "internally" (ie. not over sockets or REST) you won't have a `hook.params.provider` attribute. This allows you to have hooks only execute when services are called externally vs. from your own code. See [bundled hooks](../hooks/bundled.md#disableproviders) for an example.
+> **ProTip:** If you call a Feathers service "internally" (ie. not over sockets or REST) you won't have a `hook.params.provider` attribute. This allows you to have hooks only execute when services are called externally vs. from your own code. See [bundled hooks](../api/hooks-common.md) for an example.
 
 ## Feathers As A Sub-App
 
@@ -64,7 +62,7 @@ Not a whole lot different. Your API sub app is pretty much the same as your sing
 
 ## Feathers As A Separate App
 
-If your app starts to get a bit busier you might decide to move your API to a completely separate standalone Feathers app, maybe even on a different server. In order for both apps to talk to each other they'll need some way to make remote requests. Well, Feathers just so happens to have a [client side piece](../clients/feathers.md) that can be used on the server. This is how it works.
+If your app starts to get a bit busier you might decide to move your API to a completely separate standalone Feathers app, maybe even on a different server. In order for both apps to talk to each other they'll need some way to make remote requests. Well, Feathers just so happens to have a [client side piece](../../api/client.md) that can be used on the server. This is how it works.
 
 ```js
 // You've set up your feathers app already
@@ -89,6 +87,6 @@ app.get('/messages', function(req, res, next){
 });
 ```
 
-> **ProTip:** In the above example we set up sockets. Alternatively you could use a Feathers client [REST provider](../clients/rest.md).
+> **ProTip:** In the above example we set up sockets. Alternatively you could use a Feathers client [REST provider](../../api/rest.md).
 
 And with that, we've shown 3 different ways that you use a template engine with Feathers to render service data. If you see any issues in this guide feel free to [submit a pull request](https://github.com/feathersjs/feathers-docs/edit/master/guides/server-side-rendering.md).

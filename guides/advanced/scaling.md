@@ -2,7 +2,7 @@
 
 Depending on your requirements, your feathers application may need to provide high availability. Feathers is designed to scale.
 
-The types of [providers](../providers/README.md) used in a feathers application will impact the scaling configuration. For example, a feathers app that uses the `feathers-rest` adapter exclusively will require less scaling configuration because HTTP is a stateless protocol. If using websockets (a stateful protocol) through the `feathers-socketio` or `feathers-primus` adapters, configuration may be more complex to ensure websockets work properly.
+The types of transports used in a feathers application will impact the scaling configuration. For example, a feathers app that uses the `feathers-rest` adapter exclusively will require less scaling configuration because HTTP is a stateless protocol. If using websockets (a stateful protocol) through the `feathers-socketio` or `feathers-primus` adapters, configuration may be more complex to ensure websockets work properly.
 
 ## Horizontal Scaling
 

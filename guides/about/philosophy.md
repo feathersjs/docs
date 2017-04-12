@@ -14,7 +14,7 @@ With this experimentation Feathers has grown into what it is today. Our core phi
 
 We strongly believe that your UI, data and business logic are the core of any web or mobile application and your framework should take care of the rest so you can focus on the things that matter.
 
-## Services
+## [Services](../../api/services.md)
 
 Many web frameworks focus on things like rendering views, defining routes and handling HTTP requests and responses without providing a structure for implementing application logic separate from those secondary concerns. The result - even when using the MVC pattern - are monolithic applications with messy controllers or fat models. Your actual application logic and how your data is accessed are all mixed up together.
 
@@ -45,7 +45,7 @@ const myService = {
 
 This interface also makes it easier to "hook" into the execution of those methods and emit events when they return which can naturally be used to provide real-time functionality.
 
-## Hooks
+## [Hooks](../../api/hooks.md)
 
 [Cross cutting concerns](https://en.wikipedia.org/wiki/Cross-cutting_concern) are an extremely powerful part of aspect oriented programming. They are a very good fit for web and mobile applications since the majority are primarily CRUD applications with lots of shared functionality. Keeping with the Unix philosophy we believe that small modules that do one thing are better than large complex ones. That's why you can create `before` and `after` hooks and chain them together to create very complex processes while still maintaining modularity and flexibility.
 
@@ -56,10 +56,8 @@ Because we utilize some already proven modules, we spend less time re-inventing 
 Here's how we use some of the tech under the hood:
 
 - Feathers extends [Express 4](http://expressjs.com), the most popular web framework for [NodeJS](http://nodejs.org/).
-- Our CLI tool extends [Vorpal](http://vorpal.js.org), its generators are built with [Yeoman](http://yeoman.io/).
+- Our CLI tool uses [commander](https://www.npmjs.com/package/commander) and its generators are built with [Yeoman](http://yeoman.io/).
 - We wrap [Socket.io](http://socket.io/) or [Primus](https://github.com/primus/primus) as your websocket transport.
-- Our service adapters typically wrap mature ORMs like [mongoose](http://mongoosejs.com/), [sequelize](http://docs.sequelizejs.com/), [knex](http://knexjs.org/), or [waterline](https://github.com/balderdashy/waterline).
+- Our service adapters typically wrap mature ORMs like [mongoose](http://mongoosejs.com/), [sequelize](http://docs.sequelizejs.com/) or [knex](http://knexjs.org/).
 - [npm](http://npmjs.org) for package management.
 - [passport](http://passportjs.org/) for much of the [feathers-authentication](https://github.com/feathersjs/feathers-authentication) work.
-
-Now that you know a bit about where Feathers comes from [let's look at what Feathers provides](features.md).

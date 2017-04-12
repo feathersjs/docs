@@ -189,20 +189,20 @@ Firebase has JavaScript and mobile clients and also provides framework specific 
 
 Firebase currently supports offline mode whereas that is currently left up to the developer with Feathers. We do however have [a proposal](https://github.com/feathersjs/feathers-client/issues/29) for this feature.
 
-Both Firebase and Feathers support email/password, token, and OAuth authentication. Firebase has not publicly disclosed the database technology they use to store your data behind their API but it seems to be an SQL variant. Feathers supports [multiple databases](../../databases/readme.md), NoSQL and SQL alike.
+Both Firebase and Feathers support email/password, token, and OAuth authentication. Firebase has not publicly disclosed the database technology they use to store your data behind their API but it seems to be an SQL variant. Feathers supports [multiple databases](../../api/databases/common.md), NoSQL and SQL alike.
 
 For more technical details on the difference and how to potentially migrate an application you can read [how to use Feathers as an open source alternative to Firebase](https://medium.com/all-about-feathersjs/using-feathersjs-as-an-open-source-alternative-to-firebase-b5d93c200cee#.olu25brld).
 
 
 ## Feathers vs Meteor
 
-Both Feathers and Meteor are open source real-time JavaScript platforms that provide front end and back end support. They both allow clients to send and receive messages over websockets. Feathers lets you choose which real-time transport(s) you want to use via [socket.io](../../real-time/socket-io.md) or [Primus](../../real-time/primus.md), while Meteor relies on SockJS.
+Both Feathers and Meteor are open source real-time JavaScript platforms that provide front end and back end support. They both allow clients to send and receive messages over websockets. Feathers lets you choose which real-time transport(s) you want to use via [socket.io](../../api/socketio.md) or [Primus](../../api/primus.md), while Meteor relies on SockJS.
 
-Feathers is community supported, whereas Meteor is venture backed and has raised $31.2 million to date.
+Feathers is community supported, whereas Meteor is venture backed and has raised 31.2 million dollars to date.
 
 Meteor only has official support for MongoDB but there are some community modules of various levels of quality that support other databases. Meteor has it's own package manager and package ecosystem. They have their own template engine called Blaze which is based off of Mustache along with their own build system, but also have guides for Angular and React.
 
-Feathers has official support for [many more databases](../../databases/readme.md) and supports any front-end framework or view engine that you want. We have [framework guides](../../frameworks/readme.md) for integrating Feathers with many of the most popular.
+Feathers has official support for [many more databases](../../api/databases/common.md) and supports any front-end framework or view engine that you want by working seamlessly [on the client](../../api/client.md).
 
 Feathers uses the defacto JavaScript package manager [npm](http://npmjs.org). As a result you can utilize the hundreds of thousands of modules published to npm. Feathers lets you decide whether you want to use Gulp, Grunt, Browserify, Webpack or any other build tool.
 
@@ -220,7 +220,7 @@ Sails follows the MVC pattern while Feathers provides lightweight services to de
 
 Feathers supports multiple ORMs while Sails only supports its own Waterline ORM.
 
-Sails allows you to receive messages via websockets on the client, but, unlike Feathers, does not directly support data being sent from the client to the server over websockets. Additionally, Sails uses Socket.io for its websocket transport. Feathers also supports Socket.io but also many other socket implementations via [Primus](../../real-time/primus.md).
+Sails allows you to receive messages via websockets on the client, but, unlike Feathers, does not directly support data being sent from the client to the server over websockets. Additionally, Sails uses Socket.io for its websocket transport. Feathers also supports Socket.io but also many other socket implementations via [Primus](../../api/primus.md).
 
 Even though the features are very similar, Feathers achieves this with much less code. Feathers also doesn't assume how you want to manage your assets or that you even have any (because you might be making a JSON API). Instead of coming bundled with Grunt, Feathers lets you use your build tool of choice.
 

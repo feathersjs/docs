@@ -42,7 +42,7 @@ In addition to setting breakpoints we also use the fabulous [debug](https://gith
 
 ## Using Hooks
 
-Since [hooks](../hooks/readme.md) can be registered dynamically anywhere in your app, using them to debug your state at any point in the hook the chain (either before or after a service call) is really handy. For example,
+Since [hooks](../../api/hooks.md) can be registered dynamically anywhere in your app, using them to debug your state at any point in the hook the chain (either before or after a service call) is really handy. For example,
 
 ```js
 const hooks = require('feathers-authentication').hooks;
