@@ -4,5 +4,6 @@ node_js:
 branches:
   only:
   - master
+  - /^greenkeeper/.*$/
 deploy:
   - surge --project ./_book --domain feathers-docs.surge.sh
