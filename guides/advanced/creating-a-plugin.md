@@ -32,7 +32,7 @@ Output files from generator:
    create .npmignore
 ```
 
-Simple right? We technically could call it a day as we have created a Plugin. However, we probably want to do just a bit more. Generally speaking a Plugin is a [Service](../services/readme.md). The fun part is that a Plugin can contain multiple Services which we will create below. This example is going to build out 2 services. The first will allow us to find members of the Feathers Core Team & the second will allow us to find the best state in the United States. 
+Simple right? We technically could call it a day as we have created a Plugin. However, we probably want to do just a bit more. Generally speaking a Plugin is a [Service](../../api/services.md). The fun part is that a Plugin can contain multiple Services which we will create below. This example is going to build out 2 services. The first will allow us to find members of the Feathers Core Team & the second will allow us to find the best state in the United States. 
 
 
 ##Verifying our Service
@@ -154,7 +154,7 @@ export default { coreTeam, bestState };
 
 ```
 
-Now we need to actually write the services. We will only be implementing the find action as you can reference the [service docs](../services/readme.md) to learn more. Starting with core-team.js we want to find out the names of the members listed in the feathers.js org on github. 
+Now we need to actually write the services. We will only be implementing the find action as you can reference the [service docs](../api/services.md) to learn more. Starting with core-team.js we want to find out the names of the members listed in the feathers.js org on github. 
 
 ```js
 //core-team.js

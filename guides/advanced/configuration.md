@@ -1,6 +1,6 @@
 # App Configuration
 
-`feathers-configuration` allows you to load default and environment specific JSON and/or JS configuration files and environment variables and set them on your application. In a [generated application](../getting-started/readme.md) the `config/default.json` and `config/production.json` files are set up with feathers-configuration automatically.
+`feathers-configuration` allows you to load default and environment specific JSON and/or JS configuration files and environment variables and set them on your application. In a [generated application](../chat/readme.md) the `config/default.json` and `config/production.json` files are set up with feathers-configuration automatically.
 
 Here is what it does:
 

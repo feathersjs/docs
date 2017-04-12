@@ -30,23 +30,11 @@ We like to think of Feathers as a _"batteries included but easily swappable"_ fr
     <td width="70%">Almost every app needs authentication so Feathers comes with support for email/password, OAuth and Token (JWT) authentication out of the box.</td>
   </tr>
   <tr>
-    <td width="30%"><strong>API Versioning</strong></td>
-    <td width="70%">As an application matures the API typically evolves to accommodate business needs or technology changes. With Feathers it's easy to version your API by mounting a sub application or spinning up an entirely new service or app.</td>
-  </tr>
-  <tr>
     <td width="30%"><strong>Pagination</strong></td>
     <td width="70%">Today's applications are very data rich so most of the time you cannot load all the data for a resource all at once. Therefore, Feathers gives you pagination for every service from the start.</td>
   </tr>
   <tr>
-    <td width="30%"><strong>Rate Limiting</strong></td>
-    <td width="70%">When an app goes to production you'll need to have some protection against denial of service attacks. With Feathers it's easy to add Express middleware to do rate limiting at a service level.</td>
-  </tr>
-  <tr>
     <td width="30%"><strong>Error Handling</strong></td>
     <td width="70%">Feathers removes the pain of defining errors and handling them. Feathers services automatically return appropriate errors, including validation errors, and return them to the client in a easily consumable format.</td>
-  </tr>
-  <tr>
-    <td width="30%"><strong>Logging</strong></td>
-    <td width="70%">Feathers comes with a very simplistic logger that has sane defaults for production. However, it is easily swappable to allow you to customize to your needs.</td>
   </tr>
 </table>
