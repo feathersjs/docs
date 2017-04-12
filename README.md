@@ -32,3 +32,6 @@ If you are looking for different formats we have the latest version of this doc 
 
 
 
+
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/feathersjs/feathers-docs.svg)](https://greenkeeper.io/)
