@@ -81,12 +81,14 @@ The Feathers `app` will contain two useful methods once you've configured the au
 - [app.passport.createJWT](#apppassportcreatejwtpayload-options-source)
 - [app.passport.verifyJWT](#apppassportverifyjwttoken-options-source)
 
-### `app.passport.createJWT(payload, options)` [source](https://github.com/feathersjs/feathers-authentication/blob/master/src/utils.js#L8)
+### `app.passport.createJWT(payload, options) => promise` [source](https://github.com/feathersjs/feathers-authentication/blob/master/src/utils.js#L8)
 This is the method used by the `/authentication` service to generate JSON Web Tokens.
 - `payload {Object}` - becomes the JWT payload. Will also include an `exp` property denoting the expiry timestamp.
 - `options {Object}` - the options passed to [jsonwebtoken `sign()`](https://www.npmjs.com/package/jsonwebtoken#jwtsignpayload-secretorprivatekey-options-callback)
   - `secret {String | Buffer}` - either the secret for HMAC algorithms, or the PEM encoded private key for RSA and ECDSA.
   - See the [`jsonwebtoken`](https://www.npmjs.com/package/jsonwebtoken#jwtsignpayload-secretorprivatekey-options-callback) package docs for other available options.  The authenticate method uses the [default `jwt` options](#default-options). When using this package, directly, they will have to be passed in manually.
+
+The returned `promise` resolves with the JWT or fails with an error.
 
 ### `app.passport.verifyJWT(token, options)` [source](https://github.com/feathersjs/feathers-authentication/blob/master/src/utils.js#L48)
 Verifies the signature and payload of the passed in JWT `token` using the `options`.
