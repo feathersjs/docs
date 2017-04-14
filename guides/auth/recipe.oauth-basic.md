@@ -2,7 +2,7 @@
 
 The Auk release of FeathersJS includes a powerful new [authentication suite](../../api/authentication/server.md) built on top of [PassportJS](http://www.passportjs.org/).  This now gives the Feathers community access to hundreds of authentication strategies from the Passport community.  Since many of the Passport strategies are for OAuth, we've created two auth plugins, [`feathers-authentication-oauth1`](../../api/authentication/oauth1.md) and [`feathers-authentication-oauth2`](../../api/authentication/oauth2.md).  These new plugins use a Passport strategy to allow OAuth logins into your app.
 
-Adding OAuth authentication to your app is a great way to quickly allow users to login.  It allows the user to use an existing Internet account with another service to login to your app.  Among lots of good reasons, it often eliminates the need to for the email address verification dance.  This is even more likely for very common OAuth providers, like GitHub, Google, and Facebook.
+Adding OAuth authentication to your app is a great way to quickly allow users to login.  It allows the user to use an existing Internet account with another service to login to your app.  Among lots of good reasons, it often eliminates the need for the email address verification dance.  This is even more likely for very common OAuth providers, like GitHub, Google, and Facebook.
 
 Simplified login is almost always a good idea, but for many developers implementing OAuth can be difficult.  Let's take a look at how it works, in general.  After that, we'll see how the new [`feathers-authentication`](../../api/authentication/server.md) server plugin makes it easy to get up and running.
 
