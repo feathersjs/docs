@@ -29,8 +29,8 @@
           "text": "Latest Stable"
         },
         {
-          "value": "https://auk.docs.feathersjs.com",
-          "text": "Auk"
+          "value": "https://legacy.docs.feathersjs.com",
+          "text": "Legacy"
         }
       ]
     }
