@@ -39,12 +39,13 @@ Normally we find that they actually aren't needed and that it's much better to k
 
 > **Note:** URLs should never contain actions that change data like `post/publish` or `post/delete`. Feathers enforces this more strictly than most other frameworks. For example to publish a post you would call `.patch(id, { published: true })`  .
 
-
-## I am not getting the right HTTP error code
-## I am not getting JSON errors
+## Why am I not getting JSON errors?
 
 If you get a plain text error and a 500 status code for errors that should return different status codes, make sure you have the `feathers-errors/handler` configured as described in the [Express errors](../api/errors.md#rest-express-errors) chapter.
 
+## Why am I not getting the correct HTTP error code
+
+See the above answer.
 
 ## How can I do custom methods like `findOrCreate`?
 
