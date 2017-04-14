@@ -216,7 +216,53 @@ It's really no different than debugging any other NodeJS app but you can refer t
 
 This warning is not as bad as it sounds. If you got it from Feathers you most likely registered more than 64 services and/or event listeners on a Socket. If you don't think there are that many services or event listeners you may have a memory leak. Otherwise you can increase the number in the [Socket.io configuration](../api/socketio.md) via `io.sockets.setMaxListeners(number)` and with [Primus](../api/primus.md) via `primus.setMaxListeners(number)`. `number` can be `0` for unlimited listeners or any other number of how many listeners you'd expect in the worst case.
 
+## Why can't I pass `params` from the client?
+
+When you make a call like:
+
+```js
+const params = { foo: 'bar' };
+client.service('users').patch(1, { admin: true }, params).then(result => {
+  // handle response
+});
+```
+
+on the client the `hook.params` object will only be available in your client side hooks. It will not be provided to the server. The reason for this is because `hook.params` on the server usually contains information that should be server-side only. This can be database options, whether a request is authenticated, etc. If we passed those directly from the client to the server this would be a big security risk. Only the client side `hook.params.query` and `hook.params.headers` objects are provided to the server.
+
+If you need to pass info from the client to the server that is not part of the query you need to add it to `hook.params.query` on the client side and explicitly pull it out of `hook.params.query` on the server side. This can be achieved like so:
+
+```js
+// client side
+client.hooks({
+  before: {
+    all: [
+      hook => {
+        hook.params.query.$client = {
+          platform: 'ios',
+          version: '1.0'
+        };
+        
+        return hook;
+      }
+    ]
+  }
+});
+
+// server side, inside app.hooks.js
+const hooks = require('feathers-hooks-common');
+
+module.exports = {
+  before: {
+    all: [
+      // remove values from hook.params.query.$client and move them to hook.params
+      // so hook.params.query.$client.version -> hook.params.version
+      // and hook.params.query.$client is removed.
+      hooks.client('version', 'platform')
+    ]
+  }
+}
+```
 
 ## Is Feathers production ready?
 
-For some more details see [this answer on Quora](https://www.quora.com/Is-FeathersJS-production-ready).
+Yes! It's being used in production by a bunch of companies from startups to fortune 500s. For some more details see [this answer on Quora](https://www.quora.com/Is-FeathersJS-production-ready).
