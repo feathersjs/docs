@@ -24,7 +24,7 @@ because local authentication requires we keep a database of users.
 This caused the following modules to be added:
 
 - [src/models/users.model.js](https://github.com/feathersjs/feathers-docs/blob/master/examples/step/02/gen2/src/models/users.model.js)
-describes how `users` in indexed. `NeDB` is a
+describes how `users` is indexed. `NeDB` is a
 [NoSQL](https://en.wikipedia.org/wiki/NoSQL) database that's simple to configure.
 
 - **src/services/users** contains the rest of the `users` service.
