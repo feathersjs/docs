@@ -491,6 +491,90 @@ Populates items *recursively* to any depth. Supports 1:1, 1:n and n:1 relationsh
 - Provides performance profile information.
 - Backward compatible with the old FeathersJS `populate` hook.
 
+#### Examples
+
+- 1:1 relationship
+
+```javascript
+// users like { _id: '111', name: 'John', roleId: '555' }
+// roles like { _id: '555', permissions: ['foo', bar'] }
+import { populate } from 'feathers-hooks-common';
+
+const userRoleSchema = {
+  include: {
+    service: roles,
+    nameAs: role,
+    parentField: roleId,
+    chieldField: _id
+  }
+};
+
+app.service('users').hooks({
+  after: {
+    all: populate({ schema: userRoleSchema })
+  }
+});
+
+// result like
+// { _id: '111', name: 'John', roleId: '555', role: { _id: '555', permissions: ['foo', bar'] } }
+```
+
+- 1:n relationship
+
+```javascript
+// users like { _id: '111', name: 'John', roleIds: ['555', '666'] }
+// roles like { _id: '555', permissions: ['foo', 'bar'] }
+const userRolesSchema = {
+  include: {
+    service: roles,
+    nameAs: roles,
+    parentField: roleIds,
+    chieldField: _id
+  }
+};
+
+usersService.hooks({
+  after: {
+    all: populate({ schema: userRolesSchema })
+  }
+});
+
+// result like
+// { _id: '111', name: 'John', roleIds: ['555', '666'], roles: [
+//   { _id: '555', permissions: ['foo', 'bar'] }
+//   { _id: '666', permissions: ['fiz', 'buz'] }
+// ]}
+```
+
+- n:1 relationship
+
+```javascript
+// posts like { _id: '111', body: '...' }
+// comments like { _id: '555', text: '...', postId: '111' }
+const postCommentsSchema = {
+  include: {
+    service: comments,
+    nameAs: comments,
+    parentField: _id,
+    chieldField: postId
+  }
+};
+
+postService.hooks({
+  after: {
+    all: populate({ schema: postCommentsSchema })
+  }
+});
+
+// result like
+// { _id: '111', body: '...' }, comments: [
+//   { _id: '555', text: '...', postId: '111' }
+//   { _id: '666', text: '...', postId: '111' }
+// ]}
+```
+
+- Recursive includes
+
 ```javascript
 const schema = {
   service: '...',
@@ -530,7 +614,7 @@ module.exports.after = {
 };
 ```
 
-Options
+#### Options
 
 - `schema` (*required*, object or function) How to populate the items. [Details are below.](#schema)
     - Function signature `(hook: Hook, options: Object): Object`
