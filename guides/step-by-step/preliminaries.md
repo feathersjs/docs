@@ -14,7 +14,7 @@ Its lightweight and efficient.
 It has the largest ecosystem of open source libraries in the world.
 
 - [Default install.](https://nodejs.org/en/)
-- [Specfic versions.](https://nodejs.org/en/download/)
+- [Specific versions.](https://nodejs.org/en/download/)
 
 ## Install git
 
