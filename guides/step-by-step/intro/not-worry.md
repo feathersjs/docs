@@ -21,7 +21,7 @@ These are covered in the companion guides.
 ## Is Feathers production ready? Is it scalable?
 
 Yes, and yes.
-There's detailed information [below](../production-ready.md).
+There's detailed information in [this post.](https://www.quora.com/Is-FeathersJS-production-ready)
 
 ## Javascript Promises.
 
