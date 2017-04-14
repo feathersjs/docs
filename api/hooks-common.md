@@ -505,7 +505,7 @@ const userRoleSchema = {
     service: roles,
     nameAs: role,
     parentField: roleId,
-    chieldField: _id
+    childField: _id
   }
 };
 
@@ -516,7 +516,8 @@ app.service('users').hooks({
 });
 
 // result like
-// { _id: '111', name: 'John', roleId: '555', role: { _id: '555', permissions: ['foo', bar'] } }
+// { _id: '111', name: 'John', roleId: '555',
+//   role: { _id: '555', permissions: ['foo', bar'] } }
 ```
 
 - 1:n relationship
@@ -529,7 +530,7 @@ const userRolesSchema = {
     service: roles,
     nameAs: roles,
     parentField: roleIds,
-    chieldField: _id
+    childField: _id
   }
 };
 
@@ -556,7 +557,7 @@ const postCommentsSchema = {
     service: comments,
     nameAs: comments,
     parentField: _id,
-    chieldField: postId
+    childField: postId
   }
 };
 
@@ -573,7 +574,7 @@ postService.hooks({
 // ]}
 ```
 
-- Recursive includes
+- Multiple and recursive includes
 
 ```javascript
 const schema = {
