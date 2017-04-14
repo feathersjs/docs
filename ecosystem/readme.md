@@ -146,6 +146,7 @@ The Feathers client works with React Native but here is a collection of native l
 - [feathers-commons](https://github.com/feathersjs/feathers-cli) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
 - [feathers-configuration](../guides/advanced/configuration.md) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
 - [feathers-errors](../api/errors.md) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
+- [feathers-fs](https://github.com/feathersjs/feathers-fs) ![Official Feathers Module](/img/tiny-feathers-logo.png) - Use the FeathersJS service interface to read and write data in the file system.
 - [feathers-generator](https://github.com/feathersjs/feathers-generator) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
 - [feathers-hooks](../api/hooks.md) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
 - [feathers-hooks-common](../api/hooks-common.md) ![Official Feathers Module](/img/tiny-feathers-logo.png) - Useful hooks for use with Feathersjs services. (hooks) 
