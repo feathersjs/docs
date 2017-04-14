@@ -5,7 +5,7 @@ which would allow you to run those examples.
 
 This however is not a requirement and we suggest you first just read
 through the guide.
-You can always the install the examples later if you to work with them.
+You can always the install the examples later if you want to work with them.
 
 ## Install Node
 
@@ -14,7 +14,7 @@ Its lightweight and efficient.
 It has the largest ecosystem of open source libraries in the world.
 
 - [Default install.](https://nodejs.org/en/)
-- [Specfic versions.](https://nodejs.org/en/download/)
+- [Specific versions.](https://nodejs.org/en/download/)
 
 ## Install git
 
