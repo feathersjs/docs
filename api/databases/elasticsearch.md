@@ -143,9 +143,72 @@ query: {
 }
 ```
 
+### $child
+[Joining query `has_child`](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-has-child-query.html).
+Find all documents which have children matching the query. The `$child` query is essentially a full-blown query of its own. The `$child` query requires `$type` property.
+
+
+```js
+query: {
+  $child: {
+    $type: 'blog_tag',
+    tag: 'something'
+  }
+}
+```
+
+### $parent
+[Joining query `has_parent`](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-has-parent-query.html).
+Find all documents which have parent matching the query. The `$parent` query is essentially a full-blown query of its own. The `$parent` query requires `$type` property.
+
+
+```js
+query: {
+  $parent: {
+    $type: 'blog',
+    title: {
+      $match: 'javascript'
+    }
+  }
+}
+```
+
+## Parent-child relationship
+Elasticsearch supports [parent-child relationship](https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping-parent-field.html), however it is not exactly the same as in relational databases. feathers-elasticsearch supports all CRUD operations for Elasticsearch types with parent mapping, and does that with the Elasticsearch constrains. Therefore:
+
+- each operation concering a single document (create, get, patch, update, remove) is required to provide parent id
+- creating documents in bulk (providing a list of documents) is the same as many single document operations, so parent id is required as well
+- to avoid any doubts, each query based operation (find, bulk patch, bulk remove) cannot have the parent id
+
+### How to specify parent id
+Parent id should be provided as part of the data for the create operations (single and bulk):
+
+```javascript
+parentService.create({
+  _id: 123,
+  title: 'JavaScript: The Good Parts'
+});
+
+childService.create({
+  _id: 1000
+  tag: 'javascript',
+  _parent: 123
+})
+```
+Please note, that name of the parent property (`_parent` by default) is configurable through the service options, so that you can set it to whatever suits you.
+
+For all other operations (get, patch, update, remove), the parent id should be provided as part of the query:
+
+```javascript
+childService.remove(
+  1000,
+  { query: { _parent: 123 } }
+);
+```
+
 ## Supported Elasticsearch versions
 
-feathers-elasticsearch is currently tested on Elasticsearch 2.4, 5.0, 5.1 and 5.2. Please note, event though the lowest version supported is 2.4,
+feathers-elasticsearch is currently tested on Elasticsearch 2.4, 5.0, 5.1, 5.2 and 5.3. Please note, event though the lowest version supported is 2.4,
 that does not mean it wouldn't work fine on anything lower than 2.4.
 
 ## Quirks
