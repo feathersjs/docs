@@ -230,7 +230,7 @@ By default, real-time clients will only receive the [standard events](#service-e
 
 <!-- -->
 
-> **Important:** Custom events can only be sent from the server to the client, not the other way (client to server).
+> **Important:** Custom events can only be sent from the server to the client, not the other way (client to server). [Learn more](../faq.md#how-do-i-create-custom-methods)
 
 For example, a payment service that sends status events to the client while processing a payment could look like this:
 
