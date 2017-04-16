@@ -247,7 +247,6 @@ class PaymentService {
         this.emit('status', { status: 'completed' });
       });
     });
-    createPayment(data)
   }
 }
 ```
