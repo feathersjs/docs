@@ -502,10 +502,10 @@ import { populate } from 'feathers-hooks-common';
 
 const userRoleSchema = {
   include: {
-    service: roles,
-    nameAs: role,
-    parentField: roleId,
-    childField: _id
+    service: 'roles',
+    nameAs: 'role',
+    parentField: 'roleId',
+    childField: '_id'
   }
 };
 
@@ -527,10 +527,10 @@ app.service('users').hooks({
 // roles like { _id: '555', permissions: ['foo', 'bar'] }
 const userRolesSchema = {
   include: {
-    service: roles,
-    nameAs: roles,
-    parentField: roleIds,
-    childField: _id
+    service: 'roles',
+    nameAs: 'roles',
+    parentField:'' roleIds'',
+    childField: '_id'
   }
 };
 
@@ -554,10 +554,10 @@ usersService.hooks({
 // comments like { _id: '555', text: '...', postId: '111' }
 const postCommentsSchema = {
   include: {
-    service: comments,
-    nameAs: comments,
-    parentField: _id,
-    childField: postId
+    service: 'comments',
+    nameAs: 'comments',
+    parentField: '_id',
+    childField: 'postId'
   }
 };
 
@@ -744,46 +744,6 @@ The [depopulate](#depopulate) hook uses these fields to remove all joined and co
 This allows you to then `service.patch()` the item in the hook.
 
 #### Populate examples
-
-##### A simple populate
-
-Our `posts` items look like:
-
-```javascript
-{ id: 9, title: 'The unbearable ligthness of FeathersJS', author: 5, born:  }
-```
-
-Our `users` items look like:
-
-```javascript
-{ id: 5, email: 'john.doe@gmail.com', name: 'John Doe', yearBorn: 1990 }
-```
-
-We can include the author information whenever we `get` or `find` a post using:
-
-```javascript
-const schema = {
-  include: [{
-    service: 'users',
-    nameAs: 'authorItem',
-    parentField: 'author',
-    childField: 'id',
-  }],
-};
-app.service('posts').before({
-  get: hooks.populate({ schema }),
-  find: hooks.populate({ schema })
-});
-```
-
-`app.service('posts').get(9)` would return:
-
-```javascript
-{ id: 9, title: 'The unbearable ligthness of FeathersJS', author: 5, yearBorn: 1990,
-  authorItem: { id: 5, email: 'john.doe@gmail.com', name: 'John Doe' },
-  _include: ['authorItem']
-}
-```
 
 ##### Selecting schema based on UI needs
 
