@@ -201,7 +201,7 @@ Options can be:
 
 ```js
 const feathers = require('feathers/client');
-const socketio = require('feahters-socketio/client');
+const socketio = require('feathers-socketio/client');
 const io = require('socket.io-client');
 
 const socket = io('http://api.feathersjs.com');
