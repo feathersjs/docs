@@ -8,7 +8,7 @@
 $ npm install feathers-authentication-hooks --save
 ```
 
-`feathers-authentication-hooks` is a package containing some useful hooks for authentication and authorization. For more information about hooks, refer to the [chapter on hooks](../hooks.md).
+`feathers-authentication-hooks` is a package containing some useful hooks for authentication and authorization. For more information about hooks, refer to the [chapter on hooks](../hooks.md). All hooks in this page won't affect internal call.
 
 
 ## queryWithCurrentUser
