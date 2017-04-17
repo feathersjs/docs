@@ -39,13 +39,13 @@ Normally we find that they actually aren't needed and that it's much better to k
 
 ## How do I do search?
 
-This depends on the database adapter you are using. Many databases already support their own search syntax like
+This depends on the database adapter you are using. Many databases already support their own search syntax:
 
 - Regular expressions (converted in a a hook) for Mongoose, MongoDB and NeDB, see [this comment](https://github.com/feathersjs/feathers/issues/334#issuecomment-234432108)
 - [$like for Sequelize](http://docs.sequelizejs.com/en/latest/docs/querying/) which can be set in [params.sequelize](../api/databases/sequelize.md#paramssequelize)
-- Some database adapters like [KnexJS](../api/databases/knexjs.md), [RethinkDB](../api/databases/rethinkdb.md) and [Elasticsearch](../api/databases/elasticsearch.md) also support non-standard query parameters which are described in their
+- Some database adapters like [KnexJS](../api/databases/knexjs.md), [RethinkDB](../api/databases/rethinkdb.md) and [Elasticsearch](../api/databases/elasticsearch.md) also support non-standard query parameters which are described in their documentation pages.
 
-For further discussion see [this issue](https://github.com/feathersjs/feathers/issues/334).
+For further discussions see [this issue](https://github.com/feathersjs/feathers/issues/334).
 
 ## Why am I not getting JSON errors?
 
