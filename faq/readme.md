@@ -2,7 +2,6 @@
 
 We've been collecting some commonly asked questions here. We'll either be updating the guide directly, providing answers here, or both.
 
-
 ## How do I create custom methods?
 
 One important thing to know about Feathers is that it only exposes the official [service methods](../api/services.md) to clients. While you can add and use any service method on the server, it is __not__ possible to expose those custom methods to clients.
@@ -32,12 +31,21 @@ class PasswordService {
 
 For more examples also see [this issue comment](https://github.com/feathersjs/feathers/issues/488#issuecomment-269687714).
 
-
 ## How do I do nested or custom routes?
 
 Normally we find that they actually aren't needed and that it's much better to keep your routes as flat as possible - which will also work much better when using Feather through a websocket connection that does not know the concept of URLs at all. However, if the need arises there are a couple different ways. Refer to [this section](../api/express.md) for details.
 
 > **Note:** URLs should never contain actions that change data like `post/publish` or `post/delete`. Feathers enforces this more strictly than most other frameworks. For example to publish a post you would call `.patch(id, { published: true })`  .
+
+## How do I do search?
+
+This depends on the database adapter you are using. Many databases already support their own search syntax like
+
+- Regular expressions (converted in a a hook) for Mongoose, MongoDB and NeDB, see [this comment](https://github.com/feathersjs/feathers/issues/334#issuecomment-234432108)
+- [$like for Sequelize](http://docs.sequelizejs.com/en/latest/docs/querying/) which can be set in [params.sequelize](../api/databases/sequelize.md#paramssequelize)
+- Some database adapters like [KnexJS](../api/databases/knexjs.md), [RethinkDB](../api/databases/rethinkdb.md) and [Elasticsearch](../api/databases/elasticsearch.md) also support non-standard query parameters which are described in their
+
+For further discussion see [this issue](https://github.com/feathersjs/feathers/issues/334).
 
 ## Why am I not getting JSON errors?
 
@@ -51,11 +59,9 @@ See the above answer.
 
 Custom functionality can almost always be mapped to an existing service method using hooks.  For example, `findOrCreate` can be implemented as a before-hook on the service's `get` method.  [See this gist](https://gist.github.com/marshallswain/9fa3b1e855633af00998) for an example of how to implement this in a before-hook.
 
-
 ## How do I render templates?
 
 Feathers works just like Express so it's the exact same. We've created a [helpful little guide right here](../guides/advanced/using-a-view-engine.md).
-
 
 ## How do I create channels or rooms
 
@@ -97,7 +103,6 @@ app.service('messages').filter(function(message, connection) {
 
 The room assignment will persist only for the duration of the socket connection.
 
-
 ## How do I do validation?
 
 If your database/ORM supports a model or schema (ie. Mongoose or Sequelize) then you have 2 options.
@@ -118,7 +123,6 @@ With ORM adapters you can perform validation at the model level:
 - [Using Sequelize](http://docs.sequelizejs.com/en/latest/docs/models-definition/#validations)
 
 The nice thing about the model level validations is Feathers will return the validation errors to the client in a nice consistent format for you.
-
 
 ## How do I do associations?
 
@@ -163,16 +167,13 @@ app.service('user').find({
 
 Or set it in a hook as [described here](../api/databases/sequelize.md#associations-and-relations).
 
-
 ## What about Koa/Hapi/X?
 
 There are many other Node server frameworks out there like Koa, a *"next generation web framework for Node.JS"* using ES6 generator functions instead of Express middleware or HapiJS etc. Because Feathers 2 is already [universally usable](../clients/feathers.md) we are planning the ability for it to hook into other frameworks on the server as well. More information can be found in [this issue](https://github.com/feathersjs/feathers/issues/258).
 
-
 ## How do I filter emitted service events?
 
 See [this section](../api/events.md#event-filtering).
-
 
 ## How do I access the request object in hooks or services?
 
@@ -180,11 +181,9 @@ In short, you shouldn't need to. If you look at the [hooks chapter](../api/hooks
 
 If you still need something from the request object (for example, the requesting IP address) you can simply tack it on to the `req.feathers` object [as described here](../api/express.md).
 
-
 ## How do I mount sub apps?
 
 It's pretty much exactly the same as Express. More information can be found [here](../api/express.md#sub-apps).
-
 
 ## How do I do some processing after sending the response to the user?
 
@@ -211,7 +210,6 @@ function (hook) {
 ## How do I debug my app
 
 It's really no different than debugging any other NodeJS app but you can refer to the [Debugging](../guides/advances/debugging.md) section of the guide for more Feathers specific tips and tricks.
-
 
 ## `possible EventEmitter memory leak detected` warning
 
