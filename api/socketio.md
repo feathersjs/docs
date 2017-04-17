@@ -91,6 +91,20 @@ const app = feathers()
 app.listen(3030);
 ```
 
+### `app.configure(socketio(port, [options], [callback]))`
+
+Creates a new Socket.io server on a separate port. Options and a callback are optional and work as described above.
+
+```js
+const feathers = require('feathers');
+const socketio = require('feathers-socketio');
+
+const app = feathers()
+  .configure(socketio(3031));
+  
+app.listen(3030);
+```
+
 ### `params.provider`
 
 For any [service method call](./services.md) made through Socket.io `params.provider` will be set to `socketio`. In a [hook](./hooks.md) this can for example be used to prevent external users from making a service method call:
