@@ -50,6 +50,9 @@ __Options:__
 When making a [service method](./services.md) call, `params` can contain an `sequelize` property which allows to pass additional Sequelize options. This can e.g. be used to **retrieve associations**. Normally this wil be set in a before [hook](./hooks.md):
 
 ```js
+// Get the Sequelize instance. In the generated application via:
+const sequelize = hook.app.get('sequelizeClient');
+
 app.service('messages').hooks({
   before: {
     find(hook) {
