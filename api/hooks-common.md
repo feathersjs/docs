@@ -155,7 +155,7 @@ A null id affects all the items in the DB, so accidentally using it may have und
 
 ```js
 app.service('users').before({
-  all: hooks.disableMultiItemChange(),
+  update: hooks.disableMultiItemChange(),
 });
 ```
 
