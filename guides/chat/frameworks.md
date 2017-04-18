@@ -12,6 +12,10 @@ Not yet published on the blog.
 [**Feathers Chat - Vue.js 2 with `feathers-vuex`**]()<br/>
 Not yet published on the blog.
 
+## React's Redux
+
+[Integrate Feathers services with Redux](https://github.com/eddyystop/feathers-reduxify-services)<br/>
+Wrap Feathers services so they work transparently with Redux.
 
 ## Vue.js
 
