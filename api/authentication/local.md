@@ -145,6 +145,7 @@ If you are not using the `feathers-authentication-client` and you have registere
 ```json
 // POST /authentication
 {
+  "strategy": "local",
   "email": "your email",
   "password": "your password"
 }
@@ -153,5 +154,5 @@ If you are not using the `feathers-authentication-client` and you have registere
 Here is what that looks like with curl:
 
 ```bash
-curl -H "Content-Type: application/json" -X POST -d '{"email":"your email","password":"your password"}' http://localhost:3030/authentication
+curl -H "Content-Type: application/json" -X POST -d '{"strategy":"local","email":"your email","password":"your password"}' http://localhost:3030/authentication
 ```
