@@ -27,13 +27,13 @@ The next prompt will ask for the package manager you want to use. The default is
 
 > **Note:** Choosing [Yarn](https://yarnpkg.com/en/) will make for faster installation times but requires Yarn installed globally via `npm install yarn -g` first.
 
-You're now presented with the option to choose which transport you want to support. Since we're setting up a real-time and REST API we'll go with the default REST and Socket.io options. So just hit enter. You can learn more about transports in the [REST](../api/rest.md), [Socket.io](../api/socketio.md) and [Primus](../api/primus.md) transport documentation.
+You're now presented with the option to choose which transport you want to support. Since we're setting up a real-time and REST API we'll go with the default REST and Socket.io options. So just hit enter.
 
 Once you confirm the final prompt you will see something like this:
 
 ![Final Configuration](./assets/creating.png)
 
-The structure and purpose of all those files that have just been created are covered in the [../generator/readme.md] generator chapter.
+The structure and purpose of all those files that have just been created are covered in the [generator chapter](../step-by-step/generators/readme.md).
 
 ## Running the server and tests
 
@@ -50,8 +50,6 @@ The app also comes with a set of basic tests which can be run with
 ```
 npm test
 ```
-
-We will cover tests more in depth in the [testing chapter](./testing.md).
 
 ## What's next?
 

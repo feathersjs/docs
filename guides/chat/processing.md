@@ -1,6 +1,6 @@
 # Processing data
 
-Now that we can create and authenticate users, we are going to process data, sanitize the input we get from the client and add additional information.
+Now that we can [create and authenticate users](./authentication.md), we are going to process data, sanitize the input we get from the client and add additional information.
 
 
 ## Sanitizing new message
@@ -179,3 +179,7 @@ This will include the `user` property using the `userId`, retrieving it from the
 ## What's next?
 
 In this section we added three hooks to pre- and postprocess our message and user data. We now have a complete API to send and retrieve messages including authentication.
+
+In the [frameworks](../frameworks/readme.md) you can now find more resources on specific frameworks like React, React Native, Angular or VueJS and how to create a complete chat frontend with signup, loging, user listing and messages.
+
+You can also browse the [API](../../api/readme.md) which has a lot of information on the usage of Feathers and its database datapers.

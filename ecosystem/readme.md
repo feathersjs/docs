@@ -17,6 +17,11 @@ Below are some of the amazing things built with Feathers or for the Feathers eco
 - [Taxfyle](https://www.taxfyle.com/)
 - [Work ID](http://work.id/)
 
+## Video tutorials
+
+- [The FeathersJS Youtube playlist](https://www.youtube.com/playlist?list=PLwSdIiqnDlf_lb5y1liQK2OW5daXYgKOe)
+- [FeathersJS Real-Time Chat App - Tutorial](https://www.youtube.com/watch?v=CuM4vLkBaik)
+- [Fullstack Feathersjs and React Web App](https://www.youtube.com/playlist?list=PLN3n1USn4xlnulnnBGD2RMid_p7xVj9xU)
 
 ## Starter stacks, Examples and Tutorials
 

@@ -1,6 +1,6 @@
 ## Building a frontend
 
-In this chapter we will create a very simple web application for the messages service [that we just created](./service.md). We won't be using a framework like jQuery, Angular, React or VueJS (for more information about those, see the [frameworks](./frameworks.md) chapter). Instead we will go with plain old JavaScript that will work in any modern browser.
+In this chapter we will create a very simple web application for the messages service [that we just created](./service.md). We won't be using a framework like jQuery, Angular, React or VueJS (for more information about those, see the [frameworks](../frameworks/readme.md) section). Instead we will go with plain old JavaScript that will work in any modern browser (latest Chrome, Firefox and the Edge Internet Explorer).
 
 ## Using Feathers on the client
 
@@ -53,15 +53,17 @@ messages.create({
   name: 'Test user',
   text: 'Hello world!'
 });
+
+messages.find().then(page => console.log('Current messages are', page));
 ```
 
-This will connect to our API server using Socket.io, send a test message and also listen to any new message in real-time showing it in an alert window when going to the page at [localhost:3030](http://localhost:3030)
+This will connect to our API server using Socket.io, send a test message and also listen to any new message in real-time showing it in an alert window when going to the page at [localhost:3030](http://localhost:3030). Once you was the message you can also see that it showed up in the [localhost:3030/messages](http://localhost:3030/messages) endpoint.
 
 > **Note:** The `feathers` namespace is added by the browser build and `io` is available through the `socket.io/socket.io.js` script. For more information on using Feathers in the browser and with a module loader like Webpack or Browserify see the [client chapter](../../api/client.md).
 
 ## Sending and displaying messages
 
-With that setup, all we now have to do is create a message list and a form with an event listener to send new messages. Let's update `public/index.html` with some HTML for our chat to look like this:
+Allright. We can create and listen to new messages and also list all messages. All that is left to do now is create some HTML from the message list and a form to create new messages. Let's update `public/index.html` with some HTML for our chat to look like this:
 
 ```html
 <html>
@@ -106,7 +108,7 @@ With that setup, all we now have to do is create a message list and a form with 
 </html>
 ```
 
-Then we can update `public/app.js` with the functionality to get, show and send messages to look like this:
+Then we can update `public/app.js` with the functionality to get, show and send messages like this:
 
 ```js
 const socket = io();
@@ -118,6 +120,7 @@ client.configure(feathers.socketio(socket));
 // Get the service for our `messages` endpoint
 const messages = client.service('messages');
 
+// Add a new message to the list
 function addMessage(message) {
   const chat = document.querySelector('.chat');
 
@@ -152,6 +155,8 @@ document.getElementById('send-message').addEventListener('submit', function(ev) 
   ev.preventDefault();
 });
 ```
+
+If you now open [localhost:3030](http://localhost:3030) you can see an input field for your name and the message which will show up in other browsers in real-time.
 
 ## What's next?
 
