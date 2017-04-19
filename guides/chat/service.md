@@ -47,4 +47,4 @@ If we now go to [localhost:3030/messages](http://localhost:3030/messages) again 
 
 ## What's next?
 
-With just one command we created a fully functional REST and real-time API endpoint. Before we dive into authentication and processing data, [let's create a simple web application](./frontend.md) that uses our new chat message endpoint.
+With just one command, we created a fully functional REST and real-time API endpoint. Before we dive into authentication and processing data, [let's create a simple web application](./frontend.md) that uses our new chat message endpoint.

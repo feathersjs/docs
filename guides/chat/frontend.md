@@ -63,7 +63,7 @@ This will connect to our API server using Socket.io, send a test message and als
 
 ## Sending and displaying messages
 
-Allright. We can create and listen to new messages and also list all messages. All that is left to do now is create some HTML from the message list and a form to create new messages. Let's update `public/index.html` with some HTML for our chat to look like this:
+Alright. We can create and listen to new messages and also list all messages. All that is left to do now is create some HTML from the message list and a form to create new messages. Let's update `public/index.html` with some HTML for our chat to look like this:
 
 ```html
 <html>
