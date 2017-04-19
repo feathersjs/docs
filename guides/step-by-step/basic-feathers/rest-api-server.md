@@ -44,7 +44,7 @@ They have little to do with Feathers other than to feed REST requests to it.
 
 ## Running the server
 
-We can now made REST API calls to the server.
+We can now make REST API calls to the server.
 
 In the previous example we created 3 user items and then printed the user file.
 We can now do the same thing, but using REST, with
