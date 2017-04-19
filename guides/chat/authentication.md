@@ -39,7 +39,7 @@ curl 'http://localhost:3030/users/' -H 'Content-Type: application/json' --data-b
 
 With a REST client, e.g. [Postman](https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop?hl=en) using this button:
 
-[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/a0fc238eb16a16101ce0)
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/9668636a9596d1e4a496)
 
 Or via the client we used in the [frontend chapter](./frontend.md) by adding the following to `public/app.js`:
 
@@ -51,7 +51,7 @@ client.service('users').create({
 });
 ```
 
-> **Note:** Creating a user with the same email address will only work once and fail when it already exists int in the database.
+> **Note:** Creating a user with the same email address will only work once and fail when it already exists in the database.
 
 ### Getting a token
 
@@ -73,7 +73,7 @@ curl 'http://localhost:3030/authentication/' -H 'Content-Type: application/json'
 
 With a REST client, e.g. [Postman](https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop?hl=en):
 
-[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/a0fc238eb16a16101ce0)
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/9668636a9596d1e4a496)
 
 The returned token can now be used to authenticate the user it was created for by adding it to the `Authorization` header of new HTTP requests.
 
@@ -95,7 +95,7 @@ client.authenticate({
 
 ## Securing the messages service
 
-Now we have to restrict our messages service to authenticated users. If we run `feathers generate authentication` *before* generating other servies it will ask if the service should be restricted to authenticated users. Because we created the messages service first however, we have to update `src/services/messages/messages.hooks.js` manually to look like this:
+Now we have to restrict our messages service to authenticated users. If we run `feathers generate authentication` *before* generating other services it will ask if the service should be restricted to authenticated users. Because we created the messages service first, however we have to update `src/services/messages/messages.hooks.js` manually to look like this:
 
 ```js
 const { authenticate } = require('feathers-authentication').hooks;

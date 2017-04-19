@@ -41,7 +41,7 @@ curl 'http://localhost:3030/messages/' -H 'Content-Type: application/json' --dat
 
 Or with a REST client, e.g. [Postman](https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop?hl=en) using this button:
 
-[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/a0fc238eb16a16101ce0)
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/9668636a9596d1e4a496)
 
 If we now go to [localhost:3030/messages](http://localhost:3030/messages) again we will see the newly created message(s).
 
