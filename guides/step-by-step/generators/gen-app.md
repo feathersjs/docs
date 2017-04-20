@@ -47,7 +47,7 @@ are included.
 Contains the Feathers server.
     
 - **hooks/** contains your custom hooks,
-usually those general enough to used with multiple services.
+usually those general enough to be used with multiple services.
 A simple but useful
 [logger](https://github.com/feathersjs/feathers-docs/blob/master/examples/step/02/gen1/src/hooks/logger.js)
 is provided as an example.
