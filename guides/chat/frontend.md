@@ -4,7 +4,7 @@ In this chapter we will create a very simple web application for the messages se
 
 ## Using Feathers on the client
 
-We could use a REST client (making AJAX request) or websockets messages directly (both which is also totally possible with Feathers), but instead we will leverage one of the best features of Feathers, namely that it works just the same as a client in the browser, with React Native or on other NodeJS servers.
+We could use a REST client (making AJAX request) or websockets messages directly (both of which are totally possible with Feathers), but instead we will leverage one of the best features of Feathers, namely that it works just the same as a client in the browser, with React Native or on other NodeJS servers.
 
 Our `public/` folder already has an `index.html` page that currently shows a generated homepage if you go to [localhost:3030](http://localhost:3030) in the browser. We will modify that page to show our chat messages and a form to send new ones.
 
