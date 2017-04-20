@@ -92,7 +92,7 @@ client.authenticate({
   console.log('User is logged in');
 });
 ```
-
+ 
 ## Securing the messages service
 
 Now we have to restrict our messages service to authenticated users. If we run `feathers generate authentication` *before* generating other services it will ask if the service should be restricted to authenticated users. Because we created the messages service first, however we have to update `src/services/messages/messages.hooks.js` manually to look like this:
