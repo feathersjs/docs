@@ -33,9 +33,32 @@ For more examples also see [this issue comment](https://github.com/feathersjs/fe
 
 ## How do I do nested or custom routes?
 
-Normally we find that they actually aren't needed and that it's much better to keep your routes as flat as possible - which will also work much better when using Feather through a websocket connection that does not know the concept of URLs at all. However, if the need arises there are a couple different ways. Refer to [this section](../api/express.md) for details.
+Normally we find that they actually aren't needed and that it is much better to keep your routes as flat as possible. For example something like `users/:userId/posts` is - although nice to read for humans - actually not as easy to parse and process as the equivalent `/posts?userId=<userid>` that is already [supported by Feathers out of the box](../api/databases/querying.md). Additionaly, this will also work much better when using Feathers through websocket connections which do not have a concept of routes at all.
 
-> **Note:** URLs should never contain actions that change data like `post/publish` or `post/delete`. Feathers enforces this more strictly than most other frameworks. For example to publish a post you would call `.patch(id, { published: true })`  .
+However, nested routes for services can still be created by registering an existing service on the nested route and mapping the route parameter to a query parameter like this:
+
+```
+app.use('/posts', postService);
+app.use('/users', userService);
+
+// re-export the posts service on the /users/:userId/posts route
+app.use('/users/:userId/posts', app.service('posts'));
+
+// For the new route, map the `:userId` route parameter to the query in a hook
+app.service('users/:userId/posts').hooks({
+  before: {
+    find(hook) {
+      hook.params.query.userId = hook.params.userId;
+    }
+  }  
+})
+```
+
+Now going to `/users/123/posts` will call `postService.find({ query: { userId: 123 } })` and return all posts for that user.
+
+For more information about URL routing and parameters, refer to [the Express chapter](../api/express.md).
+
+> **Note:** URLs should never contain actions that change data (like `post/publish` or `post/delete`). This has always been an important part of the HTTP protocol and Feathers enforces this more strictly than most other frameworks. For example to publish a post you would call `.patch(id, { published: true })`.
 
 ## How do I do search?
 
