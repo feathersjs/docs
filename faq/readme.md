@@ -37,7 +37,7 @@ Normally we find that they actually aren't needed and that it is much better to 
 
 However, nested routes for services can still be created by registering an existing service on the nested route and mapping the route parameter to a query parameter like this:
 
-```
+```js
 app.use('/posts', postService);
 app.use('/users', userService);
 
