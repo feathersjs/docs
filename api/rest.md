@@ -155,6 +155,16 @@ app.service('messages').create({
 });
 ```
 
+Request specific headers can be through `params.headers` in a service call:
+
+```js
+app.service('messages').create({
+  text: 'A message from a REST client'
+}, {
+  headers: { 'X-Requested-With': 'FeathersJS' }
+});
+```
+
 The supported AJAX libraries can be initialized as follows.
 
 ### jQuery
