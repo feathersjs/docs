@@ -44,12 +44,22 @@ app.use('/users', userService);
 // re-export the posts service on the /users/:userId/posts route
 app.use('/users/:userId/posts', app.service('posts'));
 
+// A hook that updates `data` with the route parameter
+function mapUserIdToData(hook) {
+  if(hook.data && hook.params.userId) {
+    hook.data.userId = hook.params.userId;
+  }
+}
+
 // For the new route, map the `:userId` route parameter to the query in a hook
 app.service('users/:userId/posts').hooks({
   before: {
     find(hook) {
       hook.params.query.userId = hook.params.userId;
-    }
+    },
+    create: mapUserIdToData,
+    update: mapUserIdToData,
+    patch: mapUserIdToData
   }  
 })
 ```
