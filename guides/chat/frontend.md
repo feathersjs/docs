@@ -57,7 +57,7 @@ messages.create({
 messages.find().then(page => console.log('Current messages are', page));
 ```
 
-This will connect to our API server using Socket.io, send a test message and also listen to any new message in real-time showing it in an alert window when going to the page at [localhost:3030](http://localhost:3030). Once you was the message you can also see that it showed up in the [localhost:3030/messages](http://localhost:3030/messages) endpoint.
+This will connect to our API server using Socket.io, send a test message and also listen to any new message in real-time showing it in an alert window when going to the page at [localhost:3030](http://localhost:3030). Once you have created the message you can also see that it showed up in the [localhost:3030/messages](http://localhost:3030/messages) endpoint.
 
 > **Note:** The `feathers` namespace is added by the browser build and `io` is available through the `socket.io/socket.io.js` script. For more information on using Feathers in the browser and with a module loader like Webpack or Browserify see the [client chapter](../../api/client.md).
 
