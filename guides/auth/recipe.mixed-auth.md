@@ -98,7 +98,7 @@ Now we need to setup an endpoint to handle both unauthenticated and authenticate
 
 If a `user` record contains `public: true`, then **unauthenticated** users should be able to access it. Let’s see how to use the `iff` and `else` conditional hooks from [`feathers-hooks-common`](../../api/hooks-common.md) to make this happen. Be sure to read the [`iff hook API docs`](../../api/hooks-common.md#iff) and [`else hook API docs`](../../api/hooks-common.md#else) if you haven’t, yet.
 
-We’re going to use the `iff` hook to authenticate users only if a token is in the request. The [`feathers-authentication` plugin](../../api/authentication/server.md), which we used in `src/authentication.js`, includes a token extractor. If a request includes a token, it will automatically be available inside the `hook` object at `hook.params.token`.
+We’re going to use the `iff` hook to authenticate users only if a token is in the request. The [`feathers-authentication-jwt` plugin](../../api/authentication/jwt.md), which we used in `src/authentication.js`, includes a token extractor. If a request includes a token, it will automatically be available inside the `hook` object at `hook.params.token`.
 
 **src/services/users/users.hooks.js**<br/>
 (This example only shows the `find` method's `before` hooks.)
