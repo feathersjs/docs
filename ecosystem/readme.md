@@ -104,7 +104,6 @@ Submit yours by creating a pull request.
 - [feathers-mailgun](https://www.npmjs.com/package/feathers-mailgun) ![Official Feathers Module](/img/tiny-feathers-logo.png) - A Mailgun Service for FeatherJS. (service) 
 - [feathers-sendgrid](https://www.npmjs.com/package/feathers-sendgrid) ![Official Feathers Module](/img/tiny-feathers-logo.png) - A SendGrid Service for FeatherJS. (service) 
 
-
 ## Multiple instances
 
 - [feathers-cluster](https://www.npmjs.com/package/feathers-cluster) - Easily take advantage of multi-core systems for Feathers. (configure)
@@ -122,6 +121,9 @@ The Feathers client works with React Native but here is a collection of native l
 
 - [feathers-stripe](https://github.com/feathersjs/feathers-stripe) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
 
+## Social media
+
+- [feathers-services-instagram-feed](https://www.npmjs.com/package/feathers-services-instagram-feed) - A service that allows to fetch a given user's Instagram feed via its public endpoints.
 
 ## Testing
 
