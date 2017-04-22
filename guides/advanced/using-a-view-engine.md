@@ -89,4 +89,4 @@ app.get('/messages', function(req, res, next){
 
 > **ProTip:** In the above example we set up sockets. Alternatively you could use a Feathers client [REST provider](../../api/rest.md).
 
-And with that, we've shown 3 different ways that you use a template engine with Feathers to render service data. If you see any issues in this guide feel free to [submit a pull request](https://github.com/feathersjs/feathers-docs/edit/master/guides/server-side-rendering.md).
+And with that, we've shown 3 different ways that you use a template engine with Feathers to render service data. If you see any issues in this guide feel free to [submit a pull request](https://github.com/feathersjs/feathers-docs/edit/master/guides/advanced/using-a-view-engine.md).
