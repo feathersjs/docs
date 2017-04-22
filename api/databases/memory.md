@@ -31,7 +31,7 @@ __Options:__
 - `id` (*optional*, default: `'id'`) - The name of the id field property.
 - `startId` (*optional*, default: `0`) - An id number to start with that will be incremented for every new record (unless it is already set).
 - `store` (*optional*) - An object with id to item assignments to pre-initialize the data store
-- `events` (*optional*) - A list of [custom service events](../real-time/events.md#custom-events) sent by this service
+- `events` (*optional*) - A list of [custom service events](../events.md#custom-events) sent by this service
 - `paginate` (*optional*) - A [pagination object](./pagination.md) containing a `default` and `max` page size
 
 

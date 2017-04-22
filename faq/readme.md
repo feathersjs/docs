@@ -242,7 +242,7 @@ function (hook) {
 
 ## How do I debug my app
 
-It's really no different than debugging any other NodeJS app but you can refer to the [Debugging](../guides/advances/debugging.md) section of the guide for more Feathers specific tips and tricks.
+It's really no different than debugging any other NodeJS app but you can refer to the [Debugging](../guides/advanced/debugging.md) section of the guide for more Feathers specific tips and tricks.
 
 ## `possible EventEmitter memory leak detected` warning
 
