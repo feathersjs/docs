@@ -154,7 +154,7 @@ export default { coreTeam, bestState };
 
 ```
 
-Now we need to actually write the services. We will only be implementing the find action as you can reference the [service docs](../api/services.md) to learn more. Starting with core-team.js we want to find out the names of the members listed in the feathers.js org on github. 
+Now we need to actually write the services. We will only be implementing the find action as you can reference the [service docs](../../api/services.md) to learn more. Starting with core-team.js we want to find out the names of the members listed in the feathers.js org on github. 
 
 ```js
 //core-team.js
