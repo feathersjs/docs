@@ -27,7 +27,7 @@ we already have.
 
 ## Working example
 
-- Server code: [examples/step/01/WebSocket/1.js](https://github.com/feathersjs/feathers-docs/blob/master/examples/step/01/WebSocket/1.js)
+- Server code: [examples/step/01/WebSocket/1.js](https://github.com/feathersjs/feathers-docs/blob/master/examples/step/01/websocket/1.js)
 - Listener code: [common/public/listener.html](https://github.com/feathersjs/feathers-docs/blob/master/examples/step/01/common/public/listener.html)
 and
 [listener-app.js](https://github.com/feathersjs/feathers-docs/blob/master/examples/step/01/common/public/listener-app.js)
