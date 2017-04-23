@@ -32,7 +32,7 @@ app.get('/messages', function(req, res, next){
 
 Simple right? We've now rendered a list of messages. All your hooks will get triggered just like they would normally so you can use hooks to pre-filter your data and keep your template rendering routes super tight.
 
-> **ProTip:** If you call a Feathers service "internally" (ie. not over sockets or REST) you won't have a `hook.params.provider` attribute. This allows you to have hooks only execute when services are called externally vs. from your own code. See [bundled hooks](../api/hooks-common.md) for an example.
+> **ProTip:** If you call a Feathers service "internally" (ie. not over sockets or REST) you won't have a `hook.params.provider` attribute. This allows you to have hooks only execute when services are called externally vs. from your own code. See [bundled hooks](../../api/hooks-common.md) for an example.
 
 ## Feathers As A Sub-App
 
@@ -89,4 +89,4 @@ app.get('/messages', function(req, res, next){
 
 > **ProTip:** In the above example we set up sockets. Alternatively you could use a Feathers client [REST provider](../../api/rest.md).
 
-And with that, we've shown 3 different ways that you use a template engine with Feathers to render service data. If you see any issues in this guide feel free to [submit a pull request](https://github.com/feathersjs/feathers-docs/edit/master/guides/server-side-rendering.md).
+And with that, we've shown 3 different ways that you use a template engine with Feathers to render service data. If you see any issues in this guide feel free to [submit a pull request](https://github.com/feathersjs/feathers-docs/edit/master/guides/advanced/using-a-view-engine.md).

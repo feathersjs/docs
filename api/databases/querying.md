@@ -40,7 +40,7 @@ app.service('messages').find({
 GET /messages?$limit=2&read=false
 ```
 
-> **Pro tip:** With [pagination enabled](../common.md#pagination), to just get the number of available records set `$limit` to `0`. This will only run a (fast) counting query against the database and return a page object with the `total` and an empty `data` array.
+> **Pro tip:** With [pagination enabled](common.md#pagination), to just get the number of available records set `$limit` to `0`. This will only run a (fast) counting query against the database and return a page object with the `total` and an empty `data` array.
 
 ## `$skip`
 

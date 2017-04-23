@@ -166,7 +166,7 @@ Through the REST API:
 
 In a `find` call, `params.knex` can be passed a KnexJS query (without pagination) to customize the find results.
 
-Combined with `.createQuery(query)`, which returns a new KnexJS query with the [common filter criteria](./querying.md) applied, this can be used to create more complex queries. The best way to customize the query is in a [before hook](../hooks/index.md) for `find`.
+Combined with `.createQuery(query)`, which returns a new KnexJS query with the [common filter criteria](./querying.md) applied, this can be used to create more complex queries. The best way to customize the query is in a [before hook](../hooks.md) for `find`.
 
 ```js
 app.service('mesages').hooks({

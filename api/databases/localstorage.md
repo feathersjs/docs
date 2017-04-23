@@ -35,7 +35,7 @@ __Options:__
 - `startId` (*optional*, default: `0`) - An id number to start with that will be incremented for new record.
 - `name` (*optional*, default: `'feathers'`) - The key to store data under in local or async storage.
 - `store` (*optional*) - An object with id to item assignments to pre-initialize the data store
-- `paginate` (*optional*) - A [pagination object](./pagination.md) containing a `default` and `max` page size
+- `paginate` (*optional*) - A [pagination object](common.md#pagination) containing a `default` and `max` page size
 
 
 ## Example

@@ -54,11 +54,11 @@ __Options:__
 
 <!-- -->
 
-> **Note:** You can get access to the Mongoose model via `this.Model` inside a [hook](../hooks/readme.md) and use it as usual. See the [Mongoose Guide](http://mongoosejs.com/docs/guide.html) for more information on defining your model.
+> **Note:** You can get access to the Mongoose model via `this.Model` inside a [hook](../hooks.md) and use it as usual. See the [Mongoose Guide](http://mongoosejs.com/docs/guide.html) for more information on defining your model.
 
 ### params.mongoose
 
-When making a [service method](./services.md) call, `params` can contain an `mongoose` property which allows to modify the options used to run the Mongoose query. Normally this wil be set in a before [hook](./hooks.md):
+When making a [service method](../services.md) call, `params` can contain an `mongoose` property which allows to modify the options used to run the Mongoose query. Normally this wil be set in a before [hook](../hooks.md):
 
 ```js
 app.service('messages').hooks({
