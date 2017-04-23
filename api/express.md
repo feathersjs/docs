@@ -4,7 +4,7 @@ On the server, a Feathers application acts as a drop-in replacement for any [Exp
 
 > **Important:** This chapter assumes that you are familiar with [Express](http://expressjs.com/en/guide/routing.html).
 
-<!---->
+
 ## Setting service `params`
 
 All middleware registered after the [REST transport](./rest.md) will have access to the `req.feathers` object to set properties on the service method `params`:
@@ -134,9 +134,6 @@ function updateData(req, res, next) {
   next();
 }
 ```
-
-Keep in mind that shared authentication (between REST and websockets) should use a service based approach as described in the authentication configuration.
-<!--- Missing link to authentication configuration guide --->
 
 Information about how to use a custom formatter (e.g. to send something other than JSON) can be found in the [REST transport](./rest.md) chapter.
 

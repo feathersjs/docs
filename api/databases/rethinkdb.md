@@ -217,4 +217,4 @@ app.service('mesages').hooks({
 
 `.createQuery(query)` can also be used to listen to changefeeds and then send [custom events](../real-time/events.md).
 
-Since the service already sends real-time events for all changes the recommended way to listen to changes is with [feathers-reactive](../../ecosystem/readme.md#client--framework-integration) however.
+Since the service already sends real-time events for all changes the recommended way to listen to changes is with [feathers-reactive](https://github.com/feathersjs/feathers-reactive) however.
