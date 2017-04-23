@@ -1,6 +1,11 @@
 # Add authentication
 
-We can now use the generator to add some local authentication to the app.
+We can now use the generator to add some local authentication to the app by running
+
+```
+feathers generate authentication
+```
+
 ![Generate authentication](../assets/gen-authentication.jpg)
 
 The generator will add some new modules and modify some existing ones.
@@ -95,21 +100,18 @@ The changes to our app have introduced new dependencies and they need to be defi
 [Split](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-docs/blob/master/examples/step/_diff/02-gen2-package-side.html))
 records them.
 
-## Recap
+## What's next?
 
 We have not previously covered Feathers authentication,
 so the authentication service written for that is brand new to us.
 You can refer to the authentication
-[API](https://auk.docs.feathersjs.com/api/authentication/server.html)
-and guides for more details.
+[API](../../../api/authentication/server.md) and [guides](../../authentication/readme.md) for more details.
 
 A `users` service was created as its needed for the local authentication.
 That generated code contains no surprises for us as we have covered it before.
 
-> **Generators.**
-Feathers generators produce very little code because Feathers is so succinct.
-You can easily understand the generated code because its no different from what we've been
-coding "by hand" so far.
+Next, we will [generate a new service](./gen-service.md).
 
 ### Is anything wrong, unclear, missing?
+
 [Leave a comment.](https://github.com/feathersjs/feathers-guide/issues/new?title=Comment:Step-Generators-Auth&body=Comment:Step-Generators-Auth)

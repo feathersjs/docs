@@ -138,3 +138,7 @@ This will now only allow users with a valid JWT to access the service.
 ## What's next?
 
 In this chapter we initialized authentication and created a user and JWT. We can now use that user information to [process new message data](./processing.md).
+
+### Is anything wrong, unclear, missing?
+
+[Leave a comment.](https://github.com/feathersjs/feathers-guide/issues/new?title=Comment:Chat-Authentication)

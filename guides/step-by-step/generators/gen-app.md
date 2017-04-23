@@ -7,7 +7,19 @@ We want to display teams with all their members.
 
 ## Create the app
 
-The first thing we do is generate the basic app using:
+The first thing we do is generate the basic app. For that, we will first have to create and move into a new folder:
+
+```
+mkdir feathers-app
+cd feathers-app
+```
+
+Then we can run:
+
+```
+feathers generate app
+```
+
 ![Generate app](../assets/gen-app.jpg)
 
 The generator creates some
@@ -108,7 +120,7 @@ which
 [yarn](https://yarnpkg.com/en/)
 and other package managers need to install and use your package.
 
-## Recap
+## What's next?
 
 The generated code will look familiar.
 It contains nothing more than what we have covered previously.
@@ -124,14 +136,8 @@ So you don't have to.
 The generators will generate code for different databases.
 So you don't have to investigate how to do so.
 
-> **Generators.**
-Feathers generators produce very little code because Feathers is so succinct.
-You can easily understand the generated code because its no different from what we've been
-coding "by hand" so far.
-Some other frameworks make things “seem” easy by generating thousands of lines of code for you
-and, in the process, making it almost impossible to implement anything not supported out of the box
-by their generators.
-Not so with Feathers
+Next we will [add authentication to the application we just generated](./gen-authentication.md).
 
 ### Is anything wrong, unclear, missing?
+
 [Leave a comment.](https://github.com/feathersjs/feathers-guide/issues/new?title=Comment:Step-Generators-App&body=Comment:Step-Generators-App)

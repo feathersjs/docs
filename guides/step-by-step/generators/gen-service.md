@@ -1,6 +1,10 @@
 # Add the teams service
 
-We now generate the teams service using:
+We now generate the teams service using
+
+```
+feathers generate service
+```
 
 ![Generate service](../assets/gen-service.jpg)
 
@@ -31,4 +35,5 @@ The generators will write most of the boilerplate you need,
 while you concentrate on the unique needs of the project.
 
 ### Is anything wrong, unclear, missing?
+
 [Leave a comment.](https://github.com/feathersjs/feathers-guide/issues/new?title=Comment:Step-Generators-Service&body=Comment:Step-Generators-Service)
