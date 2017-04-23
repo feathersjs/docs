@@ -23,7 +23,7 @@ The following plugins are complementary, but entirely optional:
 - [feathers-authentication-jwt](./jwt.md)
 - [feathers-authentication-oauth1](./oauth1.md)
 - [feathers-authentication-oauth2](./oauth2.md)
-- [feathers-permissions](https://github.com/feathersjs/feathers-permissions) 
+
 ## API
 
 This module contains:
