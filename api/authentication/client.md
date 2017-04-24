@@ -153,3 +153,4 @@ const errorHandler = error => {
 
 // Handle when auth fails during a reconnect or a transport upgrade
 app.on('reauthentication-error', errorHandler)
+```
