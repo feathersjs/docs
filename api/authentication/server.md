@@ -139,7 +139,7 @@ app.service('authentication').hooks({
 });
 ```
 
-The hooks that were once bundled with this module are now located at [feathers-legacy-authentication-hooks](https://github.com/feathersjs/feathers-legacy-authentication-hooks). They are completely compatible but are deprecated and will not be supported by the core team going forward.
+The hooks that were once bundled with this module are now located at [feathers-authentication-hooks](https://github.com/feathersjs/feathers-authentication-hooks).
 
 ## Express Middleware
 
