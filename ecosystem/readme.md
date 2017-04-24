@@ -52,6 +52,7 @@ Submit yours by creating a pull request.
 - [feathers-authentication-popups](https://github.com/feathersjs/feathers-authentication-popups) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
 - [feathers-permissions](https://github.com/feathersjs/feathers-permissions) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
 - [feathers-authentication-management](https://github.com/feathersjs/feathers-authentication-management) ![Official Feathers Repo](/img/tiny-feathers-logo.png) - User email verification and password reset capabilities to local feathers-authentication (service)
+- [feathers-authentication-compatibility](https://www.npmjs.com/package/feathers-authentication-compatibility) - Keep `v0.x` clients compatible with `v1.0+` authentication
 
 
 ## Communications
