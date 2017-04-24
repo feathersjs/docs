@@ -121,7 +121,7 @@ The `remove` method will be used less often.  It mostly exists to allow for addi
 
 `auth.hooks.authenticate(strategies)`, where `strategies` is an array of passport strategy names.
 
-`feathers-authentication` only includes a single hook. This bundled `authenticate` hook is used to register an array of authentication strategies on a service method.
+`feathers-authentication` only includes a single hook. This bundled `authenticate` hook is used to register an array of authentication strategies on a service method.  When authenticating, the client must send the `strategy` as part of the payload.
 
 > **Note:** This should usually be used on your `/authentication` service. Without it you can hit the `authentication` service and generate a JWT `accessToken` without authentication (ie. anonymous authentication).
 
