@@ -48,7 +48,10 @@ The following default options will be mixed in with the settings you pass in whe
 }
 ```
 
-To enable `localStorage` on the client, be sure to set `storage: window.localStorage` in the client options.  You can also provide other WebStorage-compatible objects.  One particularly handy storage package is [localForage](https://www.npmjs.com/package/localforage), which helps deal with older browsers and browsers in Incognito / Private Browsing mode.
+To enable `localStorage` on the client, be sure to set `storage: window.localStorage` in the client options.  You can also provide other WebStorage-compatible objects.  Here are a couple of useful storage packages:
+
+- [localForage](https://www.npmjs.com/package/localforage) helps deal with older browsers and browsers in Incognito / Private Browsing mode.
+- [cookie-storage](https://www.npmjs.com/package/cookie-storage) uses cookies. It can be useful devices that don't support `localStorage`.
 
 ## Additional feathersClient methods
 
