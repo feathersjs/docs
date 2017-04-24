@@ -3,6 +3,10 @@
 When we obtain a teams record, we want to add the team's users to the team record.
 This requires a hook and therefore we generate the scaffolding for a hook using:
 
+```
+feathers generate hook
+```
+
 ![Generate hook](../assets/gen-hook.jpg)
 
 The generator will add some new modules and modify some existing ones.
@@ -42,13 +46,10 @@ uses the `populateTeams`.
 We told the generator to create an `after` hook for the `find` method,
 and that is when it is being run.
 
-## Recap
+## What's next?
 
-The generated code, once again, contains no surprises for us as we have covered it before.
-
-> **Generators.**
-The Feathers generators are great for roughing out a project,
-creating something in its approximate, but not finished, form.
+The generated code, once again, contains no surprises for us as we have covered it before. Now we can [run our application](./gen-run.md).
 
 ### Is anything wrong, unclear, missing?
+
 [Leave a comment.](https://github.com/feathersjs/feathers-guide/issues/new?title=Comment:Step-Generators-Hook&body=Comment:Step-Generators-Hook)

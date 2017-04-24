@@ -161,3 +161,8 @@ If you now open [localhost:3030](http://localhost:3030) you can see an input fie
 ## What's next?
 
 In this chapter we looked at how to use Feathers on the client and created a simple real-time chat application frontend to show and send messages. In the next chapters we will move back to the server and add [authentication](./authentication.md) and learn about [processing data](./processing.md).
+
+### Is anything wrong, unclear, missing?
+
+[Leave a comment.](https://github.com/feathersjs/feathers-guide/issues/new?title=Comment:Chat-Frontend)
+

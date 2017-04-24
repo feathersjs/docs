@@ -1,20 +1,6 @@
-# Run the Roughed Out App
+# Run the generated application
 
-
-## Install dependencies
-
-The generator will automatically install the dependencies it needs when you run it.
-However they have not been included with this repo in order to save space.
-
-So we will install them manually.
-
-```text
-cd path/to/feathers-docs/examples/step/02/gen4
-npm install
-```
-
-This will install the dependencies needed by the generator example into
-`/examples/step/02/gen4/node_modules`.
+Now we are good to run the automated tests for our application and start the server.
 
 
 ## Run the tests
@@ -57,7 +43,7 @@ So we can now be sure that:
 
 Since everything looks OK, let's start the server.
 
-![Generate hook](../assets/gen-rough-start.jpg)
+![Start the server](../assets/gen-rough-start.jpg)
 
 The `info` line indicates the server for our roughed out app started properly.
 
@@ -94,7 +80,7 @@ SET NODE_CONFIG_DIR=path/to/app/config
 node path/to/app/src
 ```
 
-## Recap
+## What's next?
 
 The Feathers generators are great for roughing out a project,
 creating something in its approximate, but not finished, form.
@@ -104,11 +90,9 @@ You can also use them later on to add additional services and hooks as your app 
 
 We now have the boilerplate for our app, and we start adding the custom code it requires.
 
-## What next?
-
 We've learned how the generator works, and we understand the code it produces.
-Let's now use this knowledge to build a
-[Chat Application](../../readme.md).
+Let's now use this knowledge to build a [Chat Application](../../chat/readme.md).
 
 ### Is anything wrong, unclear, missing?
+
 [Leave a comment.](https://github.com/feathersjs/feathers-guide/issues/new?title=Comment:Step-Generators-Run&body=Comment:Step-Generators-Run)

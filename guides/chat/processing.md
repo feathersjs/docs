@@ -183,3 +183,7 @@ In this section we added three hooks to pre- and postprocess our message and use
 In the [frameworks](../frameworks/readme.md) you can now find more resources on specific frameworks like React, React Native, Angular or VueJS and how to create a complete chat frontend with signup, loging, user listing and messages.
 
 You can also browse the [API](../../api/readme.md) which has a lot of information on the usage of Feathers and its database datapers.
+
+### Is anything wrong, unclear, missing?
+
+[Leave a comment.](https://github.com/feathersjs/feathers-guide/issues/new?title=Comment:Chat-Processing)
