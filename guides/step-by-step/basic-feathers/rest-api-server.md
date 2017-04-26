@@ -3,7 +3,7 @@
 Our database connector will now function as a full fledged REST API server.
 We need only add a HTTP server to it.
 
->**HTTP servers.** The Feathers presently is tied into
+>**HTTP servers.** Feathers is currently tied into
 the popular HTTP server framework [Express](http://expressjs.com/).
 Future versions will support multiple frameworks, starting with
 [koa](http://koajs.com/).
@@ -77,7 +77,7 @@ GET all users
 ```
 
 > **Feathers.** REST API calls are automatically converted into Feathers database method calls
-like the `users.create()` and `users.find()` ones we use in the previous example.
+like the `users.create()` and `users.find()` methods we used in the previous example.
 How's that for convenience?
  
 ### Is anything wrong, unclear, missing?

@@ -5,12 +5,12 @@ which would allow you to run those examples.
 
 This however is not a requirement and we suggest you first just read
 through the guide.
-You can always the install the examples later if you want to work with them.
+You can always install the examples later if you want to work with them.
 
 ## Install Node
 
 [Node](https://nodejs.org/en/) is a server platform which runs JavaScript.
-Its lightweight and efficient.
+It's lightweight and efficient.
 It has the largest ecosystem of open source libraries in the world.
 
 - [Default install.](https://nodejs.org/en/)
@@ -22,12 +22,12 @@ It has the largest ecosystem of open source libraries in the world.
 There are many resources available for installing it.
 
 - [Linux.](https://www.atlassian.com/git/tutorials/install-git#linux)
-- [Mac OSX.](https://www.atlassian.com/git/tutorials/install-git#mac-os-x)
+- [macOS.](https://www.atlassian.com/git/tutorials/install-git#mac-os-x)
 - [Windows.](https://www.atlassian.com/git/tutorials/install-git#windows)
 
 ## Install the examples
 
-Linux and Windows:
+From your terminal:
 ```text
 cd the/folder/above/which/you/want/the/guide/to/reside
 git clone https://github.com/feathersjs/feathers-docs
@@ -53,12 +53,12 @@ This will install the dependencies needed by the Basics examples into
 
 Each guide is divided into sections, each section backed by working examples in `examples/`.
 The code samples in the guides are extracts from those examples.
-Code snippets may be ambiguous, misleading or confusing.
+Code snippets may be ambiguous, misleading, or confusing.
 Working examples reduce these problems,
-as well as letting you learn more by modifying them yourself.
+as well as let you learn more by modifying them yourself.
 
 One example may continue with changes from a previous example.
-In such cases, a recap of the differences between the 2 examples may be shown
+In such cases, a recap of the differences between the two examples may be shown
 to help in understanding the changes.
 
 The guides go into details about how each example was created.

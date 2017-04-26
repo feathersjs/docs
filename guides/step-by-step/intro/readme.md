@@ -33,8 +33,8 @@ and an idea of what [WebSockets](https://www.html5rocks.com/en/tutorials/websock
 Having some experience with [ExpressJS](http://expressjs.com/) is an asset.
 We assume everyone has worked with database tables.
 
-This guide should be an comfortable introduction to Feathers for people learning new technologies,
-such as those coming from PHP, Ruby or Meteor.
+This guide should be a comfortable introduction to Feathers for people learning new technologies,
+such as those coming from PHP, Ruby, or Meteor.
 
 It may be productive for seasoned developers, experienced in Node, REST and WebSockets,
 to skim the text, paying more attention to the code extracts.
