@@ -81,4 +81,4 @@ like the `users.create()` and `users.find()` ones we use in the previous example
 How's that for convenience?
  
 ### Is anything wrong, unclear, missing?
-[Leave a comment.](https://github.com/feathersjs/feathers-guide/issues/new?title=Comment:Step-Basic-Rest-api-server&body=Comment:Step-Basic-Rest-api-server)
+[Leave a comment.](https://github.com/feathersjs/feathers-docs/issues/new?title=Comment:Step-Basic-Rest-api-server&body=Comment:Step-Basic-Rest-api-server)

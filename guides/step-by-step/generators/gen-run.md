@@ -95,4 +95,4 @@ Let's now use this knowledge to build a [Chat Application](../../chat/readme.md)
 
 ### Is anything wrong, unclear, missing?
 
-[Leave a comment.](https://github.com/feathersjs/feathers-guide/issues/new?title=Comment:Step-Generators-Run&body=Comment:Step-Generators-Run)
+[Leave a comment.](https://github.com/feathersjs/feathers-docs/issues/new?title=Comment:Step-Generators-Run&body=Comment:Step-Generators-Run)

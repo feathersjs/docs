@@ -107,4 +107,4 @@ find all items
 ```
  
 ### Is anything wrong, unclear, missing?
-[Leave a comment.](https://github.com/feathersjs/feathers-guide/issues/new?title=Comment:Step-Basic-Rest-client&body=Comment:Step-Basic-Rest-client)
+[Leave a comment.](https://github.com/feathersjs/feathers-docs/issues/new?title=Comment:Step-Basic-Rest-client&body=Comment:Step-Basic-Rest-client)

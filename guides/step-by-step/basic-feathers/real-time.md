@@ -79,4 +79,4 @@ users.filter((data, connection) => {
 ```
  
 ### Is anything wrong, unclear, missing?
-[Leave a comment.](https://github.com/feathersjs/feathers-guide/issues/new?title=Comment:Step-Basic-Real-time&body=Comment:Step-Basic-Real-time)
+[Leave a comment.](https://github.com/feathersjs/feathers-docs/issues/new?title=Comment:Step-Basic-Real-time&body=Comment:Step-Basic-Real-time)

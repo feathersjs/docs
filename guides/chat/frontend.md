@@ -164,5 +164,5 @@ In this chapter we looked at how to use Feathers on the client and created a sim
 
 ### Is anything wrong, unclear, missing?
 
-[Leave a comment.](https://github.com/feathersjs/feathers-guide/issues/new?title=Comment:Chat-Frontend)
+[Leave a comment.](https://github.com/feathersjs/feathers-docs/issues/new?title=Comment:Chat-Frontend)
 

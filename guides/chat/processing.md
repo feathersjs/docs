@@ -186,4 +186,4 @@ You can also browse the [API](../../api/readme.md) which has a lot of informatio
 
 ### Is anything wrong, unclear, missing?
 
-[Leave a comment.](https://github.com/feathersjs/feathers-guide/issues/new?title=Comment:Chat-Processing)
+[Leave a comment.](https://github.com/feathersjs/feathers-docs/issues/new?title=Comment:Chat-Processing)
