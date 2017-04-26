@@ -10,7 +10,7 @@ Learn about Feathers features, philosophy and how it compares with some other fr
 
 The goal of this guide is to get you to the "A-ha!" moment as efficiently as possible.  You will learn how the primary parts of the core work together.  You'll also learn how to start new applications with the generator.
 
-### [The generator (CLI)](./step-by-step/generators/readme.md)
+### [The Generator (CLI)](./step-by-step/generators/readme.md)
 
 An overview of the `feathers-cli` and the application it generates.
 
