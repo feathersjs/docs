@@ -27,14 +27,14 @@ we already have.
 
 ## Working example
 
-- Server code: [examples/step/01/WebSocket/1.js](https://github.com/feathersjs/feathers-docs/blob/master/examples/step/01/websocket/1.js)
+- Server code: [examples/step/01/websocket/1.js](https://github.com/feathersjs/feathers-docs/blob/master/examples/step/01/websocket/1.js)
 - Listener code: [common/public/listener.html](https://github.com/feathersjs/feathers-docs/blob/master/examples/step/01/common/public/listener.html)
 and
 [listener-app.js](https://github.com/feathersjs/feathers-docs/blob/master/examples/step/01/common/public/listener-app.js)
 - Client code: [common/public/socketio.html](https://github.com/feathersjs/feathers-docs/blob/master/examples/step/01/common/public/socketio.html)
 and
 [feathers-app.js](https://github.com/feathersjs/feathers-docs/blob/master/examples/step/01/common/public/feathers-app.js)
-- Start the server: `node ./examples/step/01/WebSocket/1.js`
+- Start the server: `node ./examples/step/01/websocket/1.js`
 - Start the listener by pointing a browser tab at `localhost:3030/listener.html`
 - Start making changes by pointing a browser tab at: `localhost:3030/socketio.html`
 
