@@ -1,7 +1,7 @@
 # A Feathers REST Client
 
 We already have a Feathers REST API server from the previous example.
-Let's write a Javascript frontend for it.
+Let's write a JavaScript frontend for it.
 
 ## Working example
 
@@ -36,9 +36,8 @@ Compare the two:
 
 We'll soon see most of the frontend doesn't care if we're communicating with the server
 using REST or WebSockets.
-To keep things DRY, we are isolating in
-[common/public/rest.html](https://github.com/feathersjs/feathers-docs/blob/master/examples/step/01/common/public/rest.html)
-the code which is unique to REST.
+To keep things DRY, we are isolating code unique to REST in
+[common/public/rest.html](https://github.com/feathersjs/feathers-docs/blob/master/examples/step/01/common/public/rest.html).
 [import](../../../examples/step/01/common/public/rest.html)
 
 - `//cdnjs.cloudflare.com/ajax/libs/core-js/2.1.4/core.min.js`
@@ -58,7 +57,7 @@ and passes the `fetch` instruction as the interface for fetching resources.
 
 Writing the HTML was actually the hard part.
 The frontend
-[common/public/feathers-app.js.](https://github.com/feathersjs/feathers-docs/blob/master/examples/step/01/common/public/feathers-app.js)
+[common/public/feathers-app.js](https://github.com/feathersjs/feathers-docs/blob/master/examples/step/01/common/public/feathers-app.js)
 is essentially the same as the server code we used in
 [Writing a Database Connector](./database-connector.md)!
 [import](../../../examples/step/01/common/public/feathers-app.js)

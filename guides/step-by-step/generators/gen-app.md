@@ -44,8 +44,8 @@ i.e. when you run `NODE_ENV=production node path/to/your/server.js`.
 ## node_modules/
 
 The generator installs the project dependencies here using either
-[npm](https://docs.npmjs.com/),or [yarn](https://yarnpkg.com/en/) if that's installed.
-The dependencies are itemized in `package.json`.
+[npm](https://docs.npmjs.com/), or [yarn](https://yarnpkg.com/en/) if that's installed.
+The dependencies are enumerated in `package.json`.
 
 ## public/
  
@@ -88,7 +88,7 @@ tests that the index page appears, as well as 404 errors for HTML pages and JSON
 
 ## [.editorconfig](https://github.com/feathersjs/feathers-docs/blob/master/examples/step/02/gen1/.editorconfig)
 is compatible with the [EditorConfig project](http://editorconfig.org/)
-and helps developers define and maintain consistent coding styles between different editors and IDEs.
+and helps developers define and maintain consistent coding styles among different editors and IDEs.
 
 ## [.eslintrc.json](https://github.com/feathersjs/feathers-docs/blob/master/examples/step/02/gen1/.eslintrc.json)
 contains defaults for liniting your code with
@@ -124,17 +124,17 @@ and other package managers need to install and use your package.
 
 The generated code will look familiar.
 It contains nothing more than what we have covered previously.
-The main advantage of the Feathers generators is
+The main advantages of the Feathers generators are
 
 - Generators structure your app.
 The generated modules are structured as recommended by the Feathers team.
 
-- Generators write the repetitive boilerplate.
-So you don't have to.
+- Generators write the repetitive boilerplate
+so you don't have to.
 
 - Generators handle database specifics.
-The generators will generate code for different databases.
-So you don't have to investigate how to do so.
+The generators will generate code for different databases
+so you don't have to investigate how to do so.
 
 Next we will [add authentication to the application we just generated](./gen-authentication.md).
 

@@ -52,7 +52,8 @@ Feathers team prioritizes them.
 
 > ** Promise Refresher.** `Promise.all([ ... ]).then(results => { ... });`
 Promise.all takes an array whose elements are JavaScript values or Promises.
-It resolves each element, i.e. it waits for that async Promise to complete.
+It returns a single Promise that will resolve if **every** promise in the array
+is resolved or reject if **any** promise in the array is rejected.
 The elements are resolved in parallel, not sequentially,
 so Promise.all is a great pattern with which to start independent actions.
 The `then` portion is called once all elements are resolved.

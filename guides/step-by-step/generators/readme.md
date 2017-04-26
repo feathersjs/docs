@@ -1,6 +1,6 @@
 # Generators
 
-We've been writing code "by hand" till now in order to understand how basic Feathers works.
+We've been writing code "by hand" in order to understand how basic Feathers works.
 We will now start using Feathers generators since we have the background to understand what they produce.
 
 ## Generators help eliminate boilerplate.
@@ -23,8 +23,8 @@ The generated modules are structured as recommended by the Feathers team.
 
 ### Generators handle database specifics.
 
-The generators will generate code for different databases.
-So you don't have to investigate how to do so.
+The generators will generate code for different databases
+so you don't have to investigate how to do so.
 
 ## Install the generators
 
