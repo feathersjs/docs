@@ -50,7 +50,7 @@ tests that the service gets configured.
 
 The service has to be wired into the app, so the generator made the following changes:
 
-- **src/config/default.json** now
+- **config/default.json** now
 ([Unified](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-docs/blob/master/examples/step/_diff/02-gen2-default-line.html)
 |
 [Split](http://htmlpreview.github.io/?https://github.com/feathersjs/feathers-docs/blob/master/examples/step/_diff/02-gen2-default-side.html))
