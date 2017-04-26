@@ -79,6 +79,15 @@ feathersClient.authenticate({
 })
 ```
 
+When using `feathers-socketio` or `feathers-primus`, the WebSocket connection has to be authenticated by calling `app.authenticate()` in order to make requests using a stored `accessToken`.
+
+```js
+app.authenticate().then(response => {
+  /* make authenticated requests here */
+  return response
+})
+```
+
 ### `feathersClient.logout()` [source](https://github.com/feathersjs/feathers-authentication-client/blob/master/src/passport.js#L212)
 Removes the JWT accessToken from storage on the client.  It also calls the `remove` method of the `/authentication` service on the Feathers server.
 
