@@ -34,4 +34,4 @@ The #general, #help and #suggestion channels will be helpful.
 And don't be shy, speak to us on **slack**. We're there to help.
 
 ### Is anything wrong, unclear, missing?
-[Leave a comment.](https://github.com/feathersjs/feathers-guide/issues/new?title=Comment:Step-What-next&body=Comment:Step-What-next)
+[Leave a comment.](https://github.com/feathersjs/feathers-docs/issues/new?title=Comment:Step-What-next&body=Comment:Step-What-next)

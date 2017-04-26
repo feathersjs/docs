@@ -51,5 +51,5 @@ With just one command, we created a fully functional REST and real-time API endp
 
 ### Is anything wrong, unclear, missing?
 
-[Leave a comment.](https://github.com/feathersjs/feathers-guide/issues/new?title=Comment:Chat-Service)
+[Leave a comment.](https://github.com/feathersjs/feathers-docs/issues/new?title=Comment:Chat-Service)
 

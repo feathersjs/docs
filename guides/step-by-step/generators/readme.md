@@ -38,4 +38,4 @@ Now that we installed the Feathers command line tool we can [generate the applic
 
 ### Is anything wrong, unclear, missing?
 
-[Leave a comment.](https://github.com/feathersjs/feathers-guide/issues/new?title=Comment:Step-Generators-Readme&body=Comment:Step-Generators-Readme)
+[Leave a comment.](https://github.com/feathersjs/feathers-docs/issues/new?title=Comment:Step-Generators-Readme&body=Comment:Step-Generators-Readme)

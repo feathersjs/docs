@@ -141,4 +141,4 @@ In this chapter we initialized authentication and created a user and JWT. We can
 
 ### Is anything wrong, unclear, missing?
 
-[Leave a comment.](https://github.com/feathersjs/feathers-guide/issues/new?title=Comment:Chat-Authentication)
+[Leave a comment.](https://github.com/feathersjs/feathers-docs/issues/new?title=Comment:Chat-Authentication)

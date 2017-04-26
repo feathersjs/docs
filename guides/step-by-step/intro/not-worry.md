@@ -31,4 +31,4 @@ This guide uses Promises as they are prioritized by the Feathers team.
 We'll be explaining what you need to know about Promises, when you need to know it.
 
 ### Is anything wrong, unclear, missing?
-[Leave a comment.](https://github.com/feathersjs/feathers-guide/issues/new?title=Comment:Step-Intro-Not-worry&body=Comment:Step-Intro-Not-worry)
+[Leave a comment.](https://github.com/feathersjs/feathers-docs/issues/new?title=Comment:Step-Intro-Not-worry&body=Comment:Step-Intro-Not-worry)

@@ -128,4 +128,4 @@ find all items
 It took only 15 lines of code to connect to a database.
 
 ### Is anything wrong, unclear, missing?
-[Leave a comment.](https://github.com/feathersjs/feathers-guide/issues/new?title=Comment:Step-Basic-Db-connector&body=Comment:Step-Basic-Db-connector)
+[Leave a comment.](https://github.com/feathersjs/feathers-docs/issues/new?title=Comment:Step-Basic-Db-connector&body=Comment:Step-Basic-Db-connector)

@@ -140,4 +140,4 @@ Next we will [add authentication to the application we just generated](./gen-aut
 
 ### Is anything wrong, unclear, missing?
 
-[Leave a comment.](https://github.com/feathersjs/feathers-guide/issues/new?title=Comment:Step-Generators-App&body=Comment:Step-Generators-App)
+[Leave a comment.](https://github.com/feathersjs/feathers-docs/issues/new?title=Comment:Step-Generators-App&body=Comment:Step-Generators-App)

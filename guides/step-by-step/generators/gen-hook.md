@@ -52,4 +52,4 @@ The generated code, once again, contains no surprises for us as we have covered 
 
 ### Is anything wrong, unclear, missing?
 
-[Leave a comment.](https://github.com/feathersjs/feathers-guide/issues/new?title=Comment:Step-Generators-Hook&body=Comment:Step-Generators-Hook)
+[Leave a comment.](https://github.com/feathersjs/feathers-docs/issues/new?title=Comment:Step-Generators-Hook&body=Comment:Step-Generators-Hook)

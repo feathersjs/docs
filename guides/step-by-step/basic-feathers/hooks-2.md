@@ -106,4 +106,4 @@ find all items
 because of how we conditioned the softDelete hook.
  
 ### Is anything wrong, unclear, missing?
-[Leave a comment.](https://github.com/feathersjs/feathers-guide/issues/new?title=Comment:Step-Basic-Hooks-2&body=Comment:Step-Basic-Hooks-2)
+[Leave a comment.](https://github.com/feathersjs/feathers-docs/issues/new?title=Comment:Step-Basic-Hooks-2&body=Comment:Step-Basic-Hooks-2)

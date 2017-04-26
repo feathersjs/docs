@@ -22,4 +22,4 @@ Enormous amounts of boilerplate simply disappear.
 > You might now start to appreciate why people are enthusiastic about Feathers.
 
 ### Is anything wrong, unclear, missing?
-[Leave a comment.](https://github.com/feathersjs/feathers-guide/issues/new?title=Comment:Step-Basic-Ahha&body=Comment:Step-Basic-Ahha)
+[Leave a comment.](https://github.com/feathersjs/feathers-docs/issues/new?title=Comment:Step-Basic-Ahha&body=Comment:Step-Basic-Ahha)
