@@ -51,7 +51,7 @@ Feathers provides
 and [OAuth2](../../api/authentication/oauth2.md) authentication
 (using [PassportJS](https://github.com/jaredhanson/passport))
 over [REST](https://en.wikipedia.org/wiki/Representational_state_transfer)
-and [WebSockets](https://en.wikipedia.org/wiki/WebSocket).
+and [WebSockets](https://en.wikipedia.org/wiki/websocket).
 
 ## Providers
 
