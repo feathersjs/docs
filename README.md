@@ -24,7 +24,7 @@ How to contribute with documentation.
 
 [**License**](./license.md)
 
-Different formats of documentation available here from latest version:
+Different formats of documentation available here of latest version:
 
 * [PDF](https://www.gitbook.com/download/pdf/book/feathersjs/feathers-docs)
 * [ePub](https://www.gitbook.com/download/epub/book/feathersjs/feathers-docs)
