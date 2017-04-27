@@ -5,7 +5,7 @@
 With Feathers it's easy to create scalable, real-time applications.  Make creating web and mobile apps fun with Feathers.
 
 [**Guides**](./guides/readme.md)<br/>
-Get familiar with Feathers by building your first apps. Learn beginner- and more advanced-level topics.
+Get familiar with Feathers by building your first apps. Learn topics from beginner to more advanced-levels.
 
 [**API**](./api/readme.md)<br/>
 Learn more about Feathers' Universal API, and plugins for Authentication and handling data.
