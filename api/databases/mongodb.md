@@ -110,6 +110,36 @@ Run the example with `node app` and go to [localhost:3030/messages](http://local
 
 Additionally to the [common querying mechanism](./querying.md) this adapter also supports [MongoDB's query syntax](https://docs.mongodb.com/v3.2/tutorial/query-documents/) and the `update` method also supports MongoDB [update operators](https://docs.mongodb.com/v3.2/reference/operator/update/).
 
+**Important:** External query values (especially through URLs) may have to be converted to the same type stored in MongoDB in a before [hook](../hooks.md) otherwise no matches will be found.
+
+For example, a `find` call for `_id` (which is a MongoDB object id) and `age` (which is a number) a hook like this can be used:
+
+```js
+const ObjectID = require('mongodb').ObjectID;
+
+app.service('users').hooks({
+  before: {
+    find(hook) {
+      const { query = {} } = hook.params;
+
+      if(query._id) {
+        query._id  = new ObjectID(query._id);
+      }
+
+      if(query.age !== undefined) {
+        query.age = parseInt(query.age, 10);
+      }
+
+      hook.params.query = query;
+
+      return Promise.resolve(hook);
+    }
+  }
+});
+```
+
+Which will allows queries like `/users?_id=507f1f77bcf86cd799439011&age=25`.
+
 ## Collation Support
 
 This adapter includes support for [collation and case insensitive indexes available in MongoDB v3.4](https://docs.mongodb.com/manual/release-notes/3.4/#collation-and-case-insensitive-indexes). Collation parameters may be passed using the special `collation` parameter to the `find()`, `remove()` and `patch()` methods.
