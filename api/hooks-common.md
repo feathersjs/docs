@@ -1387,7 +1387,7 @@ See also validateSchema.
 Validate an object using [JSON-Schema](http://json-schema.org/) through [AJV](https://github.com/epoberezkin/ajv)
 
 > **ProTip** There are some
-[good tutorials](//code.tutsplus.com/tutorials/validating-data-with-json-schema-part-1--cms-25343)
+[good tutorials](https://code.tutsplus.com/tutorials/validating-data-with-json-schema-part-1--cms-25343)
 on using JSON-Schema with [ajv](https://github.com/epoberezkin/ajv).
 
 - Used as a `before` or `after` hook.
