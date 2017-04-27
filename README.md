@@ -8,23 +8,23 @@ With Feathers it's easy to create scalable, real-time applications.  Make creati
 Get familiar with Feathers by building your first apps. Learn topics from beginner to more advanced-levels.
 
 [**API**](./api/readme.md)<br/>
-Learn more about Feathers' Universal API, and plugins for Authentication and handling data.
+Learn more about Feathers Universal API, and plugins for Authentication and handling data.
 
 [**Ecosystem**](./ecosystem/readme.md)<br/>
-See what amazing things the Feathers Core Team and Community have built.
+Feathers Core Team and Community are bulding amazing things.
 
 [**Help**](./help/readme.md)<br/>
-Learn how to plug in to the active and helpful FeathersJS Community.
+The community stay active and helpful to plug into FeathersJS, learn how you can do that too.
 
 [**FAQ**](./faq/readme.md)<br/>
-A collection of Frequently Asked Questions.
+Frequently Asked Questions reunion.
 
 [**Contributing**](./contributing/readme.md)<br/>
-Learn how you can contribute to this documentation.
+How to contribute with documentation.
 
 [**License**](./license.md)
 
-If you are looking for different formats we have the latest version of this doc available in:
+Different formats of documentation available here from latest version:
 
 * [PDF](https://www.gitbook.com/download/pdf/book/feathersjs/feathers-docs)
 * [ePub](https://www.gitbook.com/download/epub/book/feathersjs/feathers-docs)
