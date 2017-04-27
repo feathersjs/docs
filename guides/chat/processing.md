@@ -180,9 +180,9 @@ This will include the `user` property using the `userId`, retrieving it from the
 
 In this section we added three hooks to pre- and postprocess our message and user data. We now have a complete API to send and retrieve messages including authentication.
 
-In the [frameworks](../frameworks/readme.md) you can now find more resources on specific frameworks like React, React Native, Angular or VueJS and how to create a complete chat frontend with signup, loging, user listing and messages.
+In the [frameworks](../frameworks/readme.md) you can now find more resources on specific frameworks like React, React Native, Angular or VueJS and how to create a complete chat frontend with signup, logging, user listing and messages.
 
-You can also browse the [API](../../api/readme.md) which has a lot of information on the usage of Feathers and its database datapers.
+You can also browse the [API](../../api/readme.md) which has a lot of information on the usage of Feathers and its database adaptors.
 
 ### Is anything wrong, unclear, missing?
 
