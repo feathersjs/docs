@@ -105,7 +105,7 @@ records them.
 We have not previously covered Feathers authentication,
 so the authentication service written for that is brand new to us.
 You can refer to the authentication
-[API](../../../api/authentication/server.md) and [guides](../../authentication/readme.md) for more details.
+[API](../../../api/authentication/server.md) and [guides](../../auth/readme.html) for more details.
 
 A `users` service was created as its needed for the local authentication.
 That generated code contains no surprises for us as we have covered it before.
