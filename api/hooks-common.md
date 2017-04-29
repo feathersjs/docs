@@ -1397,9 +1397,21 @@ on using JSON-Schema with [ajv](https://github.com/epoberezkin/ajv).
 > **ProTip** You may customize the error message format with a custom formatting function.
 You could, for example, return `{ name1: message, name2: message }`
 which could be more suitable for a UI.
+        
+> **ProTip** If you need to customize `ajv` with new keywords, formats or schemas, then instead of passing the `Ajv` constructor, you may pass in an instance of `Ajv` as the second parameter. In this case you need to pass `ajv` options to the `ajv` instance when `new`ing, rather than passing them in the third parameter of `validateSchema`. See the second example below. 
 
 ```javascript
-const ajv = require('ajv');
+const Ajv = require('ajv');
+const createSchema = { /* JSON-Schema */ };
+module.before({
+  create: validateSchema(createSchema, Ajv)
+});
+```
+
+```javascript
+const Ajv = require('ajv');
+const ajv = new Ajv({ allErrors: true, $data: true });
+ajv.addFormat('allNumbers', '^\d+$');
 const createSchema = { /* JSON-Schema */ };
 module.before({
   create: validateSchema(createSchema, ajv)
@@ -1409,9 +1421,9 @@ module.before({
 __Options:__
 
 - `schema` (*required*) - The JSON-Schema.
-- `ajv` (*required*) - The `ajv` validator.
-- `options` (*optional*) - Options.
-    - Any `ajv` options.
+- `ajv` (*required*) - The `ajv` validator. Could be either the `Ajv` constructor or an instance of it.
+- `options` (*optional*) - Options. 
+    - Any `ajv` options. Only effective when the second parameter is the `Ajv` constructor.
     - `addNewError` (*optional*) - Custom message formatter.
     Its a reducing function which works similarly to `Array.reduce()`.
     Its signature is
@@ -1421,6 +1433,7 @@ __Options:__
         - `itemsLen` - How many data items there are. 1-based.
         - `index` - Which item this is. 0-based.
         - `newFormattedMessages` - The function returns the updated formatted messages.
+
 
 
 ## when
