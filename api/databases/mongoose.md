@@ -45,6 +45,7 @@ __Options:__
 - `id` (*optional*, default: `'_id'`) - The name of the id field property.
 - `events` (*optional*) - A list of [custom service events](../real-time/events.md#custom-events) sent by this service
 - `paginate` (*optional*) - A [pagination object](./pagination.md) containing a `default` and `max` page size
+- `discriminators` (*optional*) - A list of mongoose models that inherit from `Model`.
 
 > **Important:** To avoid odd error handling behaviour, always set `mongoose.Promise = global.Promise`. If not available already, Feathers comes with a polyfill for native Promises.
 
@@ -55,6 +56,55 @@ __Options:__
 <!-- -->
 
 > **Note:** You can get access to the Mongoose model via `this.Model` inside a [hook](../hooks.md) and use it as usual. See the [Mongoose Guide](http://mongoosejs.com/docs/guide.html) for more information on defining your model.
+
+__Discriminators__
+
+Instead of strict inheritance, Mongoose uses [discriminators](http://mongoosejs.com/docs/discriminators.html) as their schema inheritance model.
+To use them, pass in a `discriminatorKey` option to your schema object and use `Model.discriminator('modelName', schema)` instead of `mongoose.model()`
+
+Feathers comes with full support for mongoose discriminators, allowing for automatic fetching of inherited types. A typical use case might look like:
+
+```js
+var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
+var Post = require('./post');
+var feathers = require('feathers');
+var app = feathers();
+var service = require('feathers-mongoose');
+
+// Discriminator key, we'll use this later to refer to all text posts
+var options = {
+  discriminatorKey: '_type'
+};
+
+var TextPostSchema = new Schema({
+  text: { type: String, default: null }
+}, options);
+
+TextPostSchema.index({'updatedAt': -1, background: true});
+
+// Note the use of `Post.discriminator` rather than `mongoose.discriminator`.
+var TextPost = Post.discriminator('text', TextPostSchema);
+
+// Using the discriminators option, let feathers know about any inherited models you may have
+// for that service
+app.use('/posts', service({
+  Model: Post,
+  discriminators: [TextPost]
+}))
+
+```
+
+Without support for discriminators, when you perform a `.get` on the posts service, you'd only get back `Post` models, not `TextPost` models.
+Now in your query, you can specify a value for your discriminatorKey:
+
+```
+{
+  _type: 'text'
+}
+```
+
+and Feathers will automatically swap in the correct model and execute the query it instead of its parent model.
 
 ### params.mongoose
 
