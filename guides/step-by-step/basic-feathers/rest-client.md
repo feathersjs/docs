@@ -44,7 +44,7 @@ To keep things DRY, we are isolating code unique to REST in
 loads a polyfill for [fetch](https://davidwalsh.name/fetch) if required.
 - `src="//unpkg.com/feathers-client@^2.0.0/dist/feathers.js"` loads the Feathers client code.
 - `src="/serverUrl.js"` loads the URL of the server.
-The default is `var serverUrl = 'http:localhost:3030';`.
+The default is `var serverUrl = 'http://localhost:3030';`.
 Change the value if you need to.
 - `const feathersClient  = feathers()` instantiates a Feathers client.
 - `.configure(feathers.rest(serverUrl).fetch(fetch))` configures the client to use REST
