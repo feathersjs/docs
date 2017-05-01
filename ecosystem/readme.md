@@ -5,6 +5,7 @@ Below are some of the amazing things built with Feathers or for the Feathers eco
 
 ## Production Applications
 
+- [BeachfrontDigital](https://beachfront.digital)
 - [Foxflow](https://www.foxflow.com/)
 - [GenerousTickets](https://generoustickets.com/)
 - [Gratify](https://gratifyhq.com)
