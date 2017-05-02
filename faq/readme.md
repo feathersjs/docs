@@ -295,6 +295,23 @@ module.exports = {
 }
 ```
 
+## How do I set up HTTPS?
+
+[It's easy to set up an HTTPS Rest and SocketIO Server](https://github.com/feathersjs/feathers/pull/33):
+
+```
+app.configure(feathers.socketio()).use('/todos', todoService);
+
+var https = require('https');
+var server = https.createServer({
+  key: fs.readFileSync('privatekey.pem'),
+  cert: fs.readFileSync('certificate.pem')
+}, app).listen(443);
+
+// Call app.setup to initialize all services and SocketIO
+app.setup(server);
+```
+
 ## Is Feathers production ready?
 
 Yes! It's being used in production by a bunch of companies from startups to fortune 500s. For some more details see [this answer on Quora](https://www.quora.com/Is-FeathersJS-production-ready).
