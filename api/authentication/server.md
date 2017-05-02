@@ -24,6 +24,8 @@ The following plugins are complementary, but entirely optional:
 - [feathers-authentication-oauth1](./oauth1.md)
 - [feathers-authentication-oauth2](./oauth2.md)
 
+**For the auth middleware to work as expected, the plugins must be configured before creating any services.**
+
 ## API
 
 This module contains:
@@ -163,6 +165,8 @@ Refer to [the migration guide](https://github.com/feathersjs/feathers-authentica
 
 ## Complete Example
 Here's an example of a Feathers server that uses `feathers-authentication` for local auth. You can try it out on your own machine by running the [example](https://github.com/feathersjs/feathers-authentication/tree/master/example)
+
+**For the auth middleware to work as expected, the plugins must be configured before creating any services.**
 
 **Note:** This example does NOT implement any authorization. Use [feathers-permissions](https://github.com/feathersjs/feathers-permissions) for that.
 
