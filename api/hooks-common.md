@@ -700,9 +700,11 @@ Controls pagination for this service.
     - `true` Use the configuration provided when the service was configured/
     - A number. The maximum number of items to include.
 - `provider` [optional] `find` calls are made to obtain the items to be joined.
-By default these are initialized to look like they were made by the same provider as that getting the base record.
-So when populating the result of call made via `socketio`, all the join calls will look like they
-were made via `socketio`. Alternative you can set `provider: undefined` and the calls for that join will
+These, by default, are initialized to look like they were made
+by the same provider as that getting the base record.
+So when populating the result of call made via `socketio`,
+all the join calls will look like they were made via `socketio`.
+Alternative you can set `provider: undefined` and the calls for that join will
 look like they were made by the server.
 The hooks on the service may behave differently in different situations. 
 - `include` [optional] The new items may themselves include other items. The includes are recursive.
