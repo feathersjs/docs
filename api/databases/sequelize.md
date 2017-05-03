@@ -149,16 +149,16 @@ Follow up in the [Sequelize documentation for associations](http://docs.sequeliz
 
 ## Working with Sequelize Model instances
 
-It is highly recommended to use `raw` queries by default. However, there are times when you will want to take advantage of [Sequelize Instance](http://docs.sequelizejs.com/en/latest/api/instance/) methods. There are two ways to tell feathers to return Sequelize instances:
+It is highly recommended to use `raw` queries, which is the default. However, there are times when you will want to take advantage of [Sequelize Instance](http://docs.sequelizejs.com/en/latest/api/instance/) methods. There are two ways to tell feathers to return Sequelize instances:
 
-1. Set `{ raw: true }` in a "before" hook:
+1. Set `{ raw: false }` in a "before" hook:
     ```js
-    function makeRaw(hook) {
+    function rawFalse(hook) {
         if (!hook.params.sequelize) hook.params.sequelize = {};
         Object.assign(hook.params.sequelize, { raw: false });
         return hook;
     }
-    hooks.before.find = [makeRaw];
+    hooks.before.find = [rawFalse];
     ```
 1. Use the new `hydrate` hook in the "after" phase:
     ```js
@@ -166,6 +166,15 @@ It is highly recommended to use `raw` queries by default. However, there are tim
     hooks.after.find = [hydrate()];
     ```
 
+> **Important:** When working with Sequelize Instances, most of the feathers-hooks-common will no longer work. If you need to use a common hook or other 3rd party hooks, you should use the "dehydrate" hook to convert data back to a plain object:
+> ```js
+> const hydrate = require('feathers-sequelize/hooks/hydrate');
+> const dehydrate = require('feathers-sequelize/hooks/dehydrate');
+> const { populate } = require('feathers-hooks-common');
+> 
+> hooks.after.find = [hydrate(), doSomethingCustom(), dehydrate(), populate()];
+> ```
+    
 ## Validation
 
 Sequelize by default gives you the ability to [add validations at the model level](http://docs.sequelizejs.com/en/latest/docs/models-definition/#validations). Using an error handler like the one that [comes with Feathers](https://github.com/feathersjs/feathers-errors/blob/master/src/error-handler.js) your validation errors will be formatted nicely right out of the box!
