@@ -296,7 +296,7 @@ module.exports = {
 ```
 
 ## How do I set up HTTPS?
-Check out the Feathers [Express HTTPS docs](https://docs.feathersjs.com/api/express.html#https).
+Check out the Feathers [Express HTTPS docs](../api/express.md#https).
 
 ## Is Feathers production ready?
 
