@@ -2,6 +2,9 @@
 
 Below are some of the amazing things built with Feathers or for the Feathers ecosystem.
 
+We also have a very helpful community in Slack.
+
+[![Slack Status](http://slack.feathersjs.com/badge.svg)](http://slack.feathersjs.com)
 
 ## Production Applications
 
