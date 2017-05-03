@@ -296,21 +296,7 @@ module.exports = {
 ```
 
 ## How do I set up HTTPS?
-
-[It's easy to set up an HTTPS Rest and SocketIO Server](https://github.com/feathersjs/feathers/pull/33):
-
-```
-app.configure(feathers.socketio()).use('/todos', todoService);
-
-var https = require('https');
-var server = https.createServer({
-  key: fs.readFileSync('privatekey.pem'),
-  cert: fs.readFileSync('certificate.pem')
-}, app).listen(443);
-
-// Call app.setup to initialize all services and SocketIO
-app.setup(server);
-```
+Check out the Feathers [Express HTTPS docs](https://docs.feathersjs.com/api/express.html#https).
 
 ## Is Feathers production ready?
 
