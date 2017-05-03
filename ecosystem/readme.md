@@ -110,6 +110,11 @@ Submit yours by creating a pull request.
 - [feathers-mailgun](https://www.npmjs.com/package/feathers-mailgun) ![Official Feathers Module](/img/tiny-feathers-logo.png) - A Mailgun Service for FeatherJS. (service) 
 - [feathers-sendgrid](https://www.npmjs.com/package/feathers-sendgrid) ![Official Feathers Module](/img/tiny-feathers-logo.png) - A SendGrid Service for FeatherJS. (service) 
 
+## Microservices
+
+- [mostly-feathers](https://github.com/MostlyJS/mostly-feathers) - Convert your Feathers APIs into microservices
+- [mostly-feathers-rest](https://github.com/MostlyJS/mostly-feathers-rest) - Expose your microservice as a RESTful API
+
 ## Multiple instances
 
 - [feathers-cluster](https://www.npmjs.com/package/feathers-cluster) - Easily take advantage of multi-core systems for Feathers. (configure)
@@ -197,12 +202,6 @@ The Feathers client works with React Native but here is a collection of native l
 - [can-connect-feathers](https://www.npmjs.com/package/can-connect-feathers) - Feathers client library for DoneJS (feathers-client)
 - [canjs-feathers](https://www.npmjs.com/package/canjs-feathers) - CanJS model implementation that connects to Feathers services through feathers-client. (feathers-client)
 - [donejs-feathers](https://www.npmjs.com/package/donejs-feathers) - A generator to quickly add FeathersJS to your DoneJS project. Includes Auth! (generator)
-
-## MostlyJS
-
-- [mostly-feathers](https://github.com/MostlyJS/mostly-feathers) - Convert your Feathers APIs into microservices
-- [mostly-feathers-rest](https://github.com/MostlyJS/mostly-feathers-rest) - Expose your microservice as a RESTful API
-
 
 ## React, Redux
 
