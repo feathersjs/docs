@@ -195,6 +195,11 @@ The Feathers client works with React Native but here is a collection of native l
 - [canjs-feathers](https://www.npmjs.com/package/canjs-feathers) - CanJS model implementation that connects to Feathers services through feathers-client. (feathers-client)
 - [donejs-feathers](https://www.npmjs.com/package/donejs-feathers) - A generator to quickly add FeathersJS to your DoneJS project. Includes Auth! (generator)
 
+## MostlyJS
+
+- [mostly-feathers](https://github.com/MostlyJS/mostly-feathers) - Convert your Feathers APIs into microservices
+- [mostly-feathers-rest](https://github.com/MostlyJS/mostly-feathers-rest) - Expose your microservice as a RESTful API
+
 
 ## React, Redux
 
