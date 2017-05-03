@@ -42,6 +42,7 @@ __Options:__
 
 - `Model` (**required**) - The Sequelize model definition
 - `id` (*optional*, default: `'_id'`) - The name of the id field property.
+- `raw` (*optional*, default: `true`) - Runs queries faster by returning plain objects instead of Sequelize models.
 - `events` (*optional*) - A list of [custom service events](../real-time/events.md#custom-events) sent by this service
 - `paginate` (*optional*) - A [pagination object](./pagination.md) containing a `default` and `max` page size
 
@@ -145,6 +146,25 @@ Additionally to the [common querying mechanism](./querying.md) this adapter also
 ## Associations and relations
 
 Follow up in the [Sequelize documentation for associations](http://docs.sequelizejs.com/en/v3/docs/associations/), [this issue](https://github.com/feathersjs/feathers-sequelize/issues/20) and [this example for many to many relationships](https://github.com/feathersjs/feathers-demos/tree/master/examples/app-structure/many-to-many-sequelize).
+
+## Working with Sequelize Model instances
+
+It is highly recommended to use `raw` queries by default. However, there are times when you will want to take advantage of [Sequelize Instance](http://docs.sequelizejs.com/en/latest/api/instance/) methods. There are two ways to tell feathers to return Sequelize instances:
+
+1. Set `{ raw: true }` in a "before" hook:
+    ```js
+    function makeRaw(hook) {
+        if (!hook.params.sequelize) hook.params.sequelize = {};
+        Object.assign(hook.params.sequelize, { raw: false });
+        return hook;
+    }
+    hooks.before.find = [makeRaw];
+    ```
+1. Use the new `hydrate` hook in the "after" phase:
+    ```js
+    const hydrate = require('feathers-sequelize/hooks/hydrate');
+    hooks.after.find = [hydrate()];
+    ```
 
 ## Validation
 
