@@ -229,6 +229,10 @@ They may include other conditional hooks.
 
 See also iff, iffElse, when, unless, isNot, isProvider.
 
+> **This** The predicate and hook functions in the if, else and iffElse hooks
+will not be called with `this` set to the service.
+Use `hook.service` instead.
+
 
 ## every
 
@@ -299,6 +303,9 @@ They may include other conditional hooks.
 
 See also iffElse, else, when, unless, isNot, isProvider.
 
+> **This** The predicate and hook functions in the if, else and iffElse hooks
+will not be called with `this` set to the service.
+Use `hook.service` instead.
 
 ## iffElse
 
@@ -333,6 +340,9 @@ It returns either a boolean or a Promise that evaluates to a boolean
 
 See also iff, else, when, unless, isNot, isProvider.
 
+> **This** The predicate and hook functions in the if, else and iffElse hooks
+will not be called with `this` set to the service.
+Use `hook.service` instead.
 
 ## isNot
 
