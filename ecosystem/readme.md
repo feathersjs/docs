@@ -195,6 +195,7 @@ The Feathers client works with React Native but here is a collection of native l
 - [feathers-reactive](https://www.npmjs.com/package/feathers-reactive) ![Official Feathers Module](/img/tiny-feathers-logo.png) - Turns a Feathers service call into an RxJS observables that automatically updates on real-time events. (configure)
 - [feathers-polymer](https://github.com/thosakwe/polymer-feathers)
 - [ng-feathers](https://www.npmjs.com/package/ng-feathers) - Feathers client for AngularJS. FeatherJS for plain old AngularJS (1.X)
+- [aurelia-feathersjs-socket-demo](https://bitbucket.org/praveengandhi/aurelia-feathersjs-socket-demo) - Aurelia app (built with Aurelia-CLI) connected to Feathers server application via websockets (socket.io)
 
 
 ## DoneJS
