@@ -173,6 +173,39 @@ query: {
 }
 ```
 
+### $and
+This operator does not translate directly to any Elasticsearch query, but it provides support for [Elasticsearch array datatype](https://www.elastic.co/guide/en/elasticsearch/reference/current/array.html).
+Find all documents which match all of the given criteria. As any field in Elasticsearch can contain an array, therefore sometimes it is important to match more than one value per field.
+
+
+```js
+query: {
+  $and: [
+    { notes: { $match: 'javascript' } },
+    { notes: { $match: 'project' } }
+  ]
+}
+```
+
+There is also a shorthand version of `$and` for equality. For instance:
+
+```js
+query: {
+  $and: [
+    { tags: 'javascript' },
+    { tags: 'react' }
+  ]
+}
+```
+
+Can be also expressed as:
+
+```js
+query: {
+  tags: ['javascript', 'react']
+}
+```
+
 ## Parent-child relationship
 Elasticsearch supports [parent-child relationship](https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping-parent-field.html), however it is not exactly the same as in relational databases. feathers-elasticsearch supports all CRUD operations for Elasticsearch types with parent mapping, and does that with the Elasticsearch constrains. Therefore:
 
