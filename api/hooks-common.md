@@ -1012,6 +1012,28 @@ employees.after({
 ```
 
 
+## preventChanges
+
+### `preventChanges(... fieldNames)` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/services/prevent-changes.js)
+
+Prevents the specified fields from being patched.
+
+- Used as a `before` hook for `patch`.
+- Field names support dot notation e.g. `name.address.city`.
+
+```js
+const { preventChanges } = require('feathers-hooks-common');
+
+app.service('users').before({
+  patch: preventChanges('security.badge')
+})
+```
+
+__Options:__
+
+- `fieldNames` (*required*) - One or more fields which may not be patched.
+
+
 ## setCreatedAt
 
 ### `setCreatedAt(fieldName = 'createdAt', ... fieldNames)` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/services/set-created-at.js)
