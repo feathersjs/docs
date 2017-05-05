@@ -1552,7 +1552,32 @@ __Options:__
 - `obj` (*required*) - The object containing the property we want to delete.
 - `path` (*required*) - The path to the data, e.g. `security.passcode`. Array notion is _not_ supported, e.g. `order.lineItems[1].quantity`.
 
-See also getByDot, setByDot.
+See also existsByDot, getByDot, setByDot.
+
+
+## Util: existsByDot
+
+### `existsByDot(obj, path)` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/common/exists-by-dot.js)
+
+`existsByDot` checks if a property exists in an object using dot notation, e.g. `employee.address.city`.
+Properties with a value of `undefined` are considered to exist.
+
+```javascript
+import { discard, existsByDot, iff } from 'feathers-hooks-common';
+
+const discardBadge = () => iff(!existsByDot('security.passcode'), discard('security.badge'));
+
+app.service('directories').before = {
+  find: discardBadge()
+};
+```
+
+__Options:__
+
+- `obj` (*required*) - The object containing the property.
+- `path` (*required*) - The path to the property, e.g. `security.passcode`. Array notion is _not_ supported, e.g. `order.lineItems[1].quantity`.
+
+See also existsByDot, getByDot, setByDot.
 
 
 ## Util: getByDot, setByDot
@@ -1584,7 +1609,7 @@ __Options:__
 - `path` (*required*) - The path to the data, e.g. `person.address.city`. Array notion is _not_ supported, e.g. `order.lineItems[1].quantity`.
 - `value` (*required*) - The value to set the data to.
 
-See also deleteByDot.
+See also existsByDot, deleteByDot.
 
 
 ## Util: getItems, replaceItems
