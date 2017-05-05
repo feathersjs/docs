@@ -52,8 +52,8 @@ const app = httpServerConfig()
 We replace the REST code we had in the HTML with the equivalent WebSocket code.
 
 ```html
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/core-js/2.1.4/core.min.js"></script>
-<script src="//unpkg.com/feathers-client@^2.0.0/dist/feathers.js"></script>
+<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/core-js/2.1.4/core.min.js"></script>
+<script src="https://unpkg.com/feathers-client@^2.0.0/dist/feathers.js"></script>
 <script src="/socket.io.min.js"></script>
 <script src="/serverUrl.js"></script>
 <script>
