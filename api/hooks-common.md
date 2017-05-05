@@ -210,7 +210,7 @@ If the predicate in the `iff()` is falsey, run the hooks in `else()` sequentiall
 ```javascript
 service.before({
   create:
-    hooks.iff(isServer,
+    hooks.iff(isProvider('server'),
       hookA,
       hooks.iff(isProvider('rest'), hook1, hook2, hook3)
         .else(hook4, hook5),
@@ -1236,7 +1236,7 @@ Run the hooks sequentially if the result is falsey.
 ```javascript
 service.before({
   create:
-    unless(isServer,
+    unless(isProvider('server'),
       hookA,
       unless(isProvider('rest'), hook1, hook2, hook3),
       hookB
