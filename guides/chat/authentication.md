@@ -1,6 +1,6 @@
 # Adding authentication
 
-In the previous chapters we [created our Feathers chat application](./creating.md) and [initialized a service](./service.md) for storing messsages. We also build a simple [real-time frontend for the browser](./frontend.md). However, for a proper chat application we need to be able to register and authenticate users.
+In the previous chapters we [created our Feathers chat application](./creating.md) and [initialized a service](./service.md) for storing messages. We also build a simple [real-time frontend for the browser](./frontend.md). However, for a proper chat application we need to be able to register and authenticate users.
 
 ## Generating authentication
 
