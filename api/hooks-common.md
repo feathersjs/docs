@@ -1033,6 +1033,8 @@ __Options:__
 
 - `fieldNames` (*required*) - One or more fields which may not be patched.
 
+> Consider using `verifySchema` if you would rather specify which fields are allowed to change.
+
 
 ## setCreatedAt
 
