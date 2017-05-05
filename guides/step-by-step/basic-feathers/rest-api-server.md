@@ -71,7 +71,7 @@ POST Judy Doe
 GET all users
 [
  {"email":"judy.doe@gmail.com","password":"7jHw","role":"user","_id":"pvcmh9X2i9VZgqWJ"},
- {"email"::"jane.doe@gmail.com","password":"X2y6","role":"admin","_id":"sbkXV7LVkMhx1NyY"},
+ {"email":"jane.doe@gmail.com","password":"X2y6","role":"admin","_id":"sbkXV7LVkMhx1NyY"},
  {"email":"john.doe@gmail.com","password":"i6He","role":"user","_id":"uKhqOp4R4hABw9oO"}
 ]
 ```
