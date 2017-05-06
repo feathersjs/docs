@@ -1663,6 +1663,13 @@ app.service('messages').before = {
 };
 ```
 
+The common hooks usually mutate the items in place, so a `replaceItems` is not required.
+
+```javascript
+const items = getItems(hook);
+(Array.isArray(items) ? items : [items]).forEach(item => { item.setCreateAt = new Date(); });
+```
+
 __Options:__
 
 - `hook` (*required*) - The hook provided to the hook function.
