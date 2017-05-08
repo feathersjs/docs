@@ -221,11 +221,28 @@ service.before({
       )
 });
 ```
+or: 
+
+```javascript
+service.before({
+  create:
+    hooks.iff(isServer, [
+      hookA,
+      hooks.iff(isProvider('rest'), [hook1, hook2, hook3])
+        .else([hook4, hook5]),
+      hookB
+    ])
+      .else([
+        hooks.iff(hook => hook.path === 'users', [hook6, hook7])
+      ])
+});
+```
 
 __Options:__
 
 - `hookFuncs` (*optional*) - Zero or more hook functions.
 They may include other conditional hooks.
+Or you can use an array of hook functions as the second parameter.
 
 See also iff, iffElse, when, unless, isNot, isProvider.
 
@@ -293,13 +310,21 @@ app.service('workOrders').after({
 });
 ```
 
+or with the array syntax:
+
+```javascript
+app.service('workOrders').after({
+  find: [ iff(isNotAdmin(), [hooks.remove('budget'), hooks.remove('password')]
+});
+```
 __Options:__
 
 - `predicate` (*required*) - Determines if hookFuncs should be run or not.
 If a function, `predicate` is called with the hook as its param.
 It returns either a boolean or a Promise that evaluates to a boolean
-- `hookFuncs` (*optional*) - Zero or more hook functions.
-They may include other conditional hooks.
+- `hookFuncs` (*optional*) - Zero or more hook functions. 
+They may include other conditional hooks. 
+Or you can use an array of hook functions as the second parameter.
 
 See also iffElse, else, when, unless, isNot, isProvider.
 
