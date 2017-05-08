@@ -21,6 +21,9 @@ A hook for passing params from the client to the server.
 
 - Used as a `before` hook.
 
+> You should use the `paramsFromClient` hook instead.
+It does exactly the same thing as `client`.
+
 Only the `hook.params.query` object is transferred to the server from a Feathers client,
 for security among other reasons.
 However if you can include a `hook.params.query.$client` object, e.g.
@@ -51,6 +54,8 @@ __Options:__
 Other props are ignored. This is a security feature.
 
 > **ProTip** You can use the same technique for service calls made on the server.
+
+See `Util: paramsForServer` and `paramsFromClient`.
 
 
 ## combine
@@ -450,6 +455,48 @@ __Options:__
 - `fieldNames` (*required*) - One or more fields that you want to lowercase from the retrieved object(s).
 
 See also upperCase.
+
+
+## paramsFromClient
+
+### `paramsFromClient(... whitelist)` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/services/params-from-client.js)
+
+A hook for passing params from the client to the server.
+
+- Used as a `before` hook.
+- Companion to the utility `paramsForServer`.
+
+By default, only the `hook.params.query` object is transferred
+to the server from a Feathers client,
+for security among other reasons.
+However you can explicitly transfer other `params` props with
+the utility function `paramsForServer` in conjunction with the hook function 'paramsFromClient`.'
+
+```js
+// client
+import { paramsForServer } from 'feathers-hooks-common';
+service.patch(null, data, paramsForServer({
+  query: { dept: 'a' }, populate: 'po-1', serialize: 'po-mgr'
+}));
+
+// server
+const { paramsFromClient } = require('feathers-hooks-common');
+service.before({ all: [
+  paramsFromClient('populate', 'serialize', 'otherProp'), myHook
+]});
+
+// hook.params will now be
+// { query: { dept: 'a' }, populate: 'po-1', serialize: 'po-mgr' } }
+```
+
+__Options:__
+
+- `whitelist` (*optional*) Names of the potential props to transfer from `query.client`.
+Other props are ignored. This is a security feature.
+
+> **ProTip** You can use the same technique for service calls made on the server.
+
+See `util: paramsForServer`.
 
 
 ## pluck
@@ -1699,6 +1746,47 @@ __Options:__
 
 - `hook` (*required*) - The hook provided to the hook function.
 - `items` (*required*) - The updated item or array of items.
+
+
+## paramsToServer
+
+### `paramsToServer(params, ... whitelist)` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/services/params-to-server.js)
+
+A utility to pass selected `params` properties to the server.
+
+- Companion to the hook `paramsFromClient`.
+
+By default, only the `hook.params.query` object is transferred
+to the server from a Feathers client,
+for security among other reasons.
+However you can explicitly transfer other `params` props with
+the utility function `paramsForServer` in conjunction with the hook function 'paramsFromClient`.'
+
+```js
+// client
+import { paramsForServer } from 'feathers-hooks-common';
+service.patch(null, data, paramsForServer({
+  query: { dept: 'a' }, populate: 'po-1', serialize: 'po-mgr'
+}));
+
+// server
+const { paramsFromClient } = require('feathers-hooks-common');
+service.before({ all: [
+  paramsFromClient('populate', 'serialize', 'otherProp'), myHook
+]});
+
+// hook.params will now be
+// { query: { dept: 'a' }, populate: 'po-1', serialize: 'po-mgr' } }
+```
+
+__Options:__
+
+- `params` (*optional*) The `params` object to pass to the server, including any `query` prop.
+- `whitelist` (*optional*) Names of the props to transfer to the server.
+This is a security feature. All props are transfered if no whitelist is specified.
+
+See `util: paramsForServer`.
+
 
 ## Util: promiseToCallback
 
