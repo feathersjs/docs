@@ -849,6 +849,30 @@ purchaseOrders.after({
 See also dePopulate, serialize.
 
 
+## preventChanges
+
+### `preventChanges(... fieldNames)` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/services/prevent-changes.js)
+
+Prevents the specified fields from being patched.
+
+- Used as a `before` hook for `patch`.
+- Field names support dot notation e.g. `name.address.city`.
+
+```js
+const { preventChanges } = require('feathers-hooks-common');
+
+app.service('users').before({
+  patch: preventChanges('security.badge')
+})
+```
+
+__Options:__
+
+- `fieldNames` (*required*) - One or more fields which may not be patched.
+
+> Consider using `verifySchema` if you would rather specify which fields are allowed to change.
+
+
 ## remove
 
 ### `remove(... fieldNames)` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/services/remove.js)
@@ -1035,30 +1059,6 @@ employees.after({
   ]
 });
 ```
-
-
-## preventChanges
-
-### `preventChanges(... fieldNames)` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/services/prevent-changes.js)
-
-Prevents the specified fields from being patched.
-
-- Used as a `before` hook for `patch`.
-- Field names support dot notation e.g. `name.address.city`.
-
-```js
-const { preventChanges } = require('feathers-hooks-common');
-
-app.service('users').before({
-  patch: preventChanges('security.badge')
-})
-```
-
-__Options:__
-
-- `fieldNames` (*required*) - One or more fields which may not be patched.
-
-> Consider using `verifySchema` if you would rather specify which fields are allowed to change.
 
 
 ## setCreatedAt
