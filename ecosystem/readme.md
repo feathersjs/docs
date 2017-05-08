@@ -18,7 +18,7 @@ We also have a very helpful community in Slack.
 - [J.A.B. Property Investments](https://jabpi.com)
 - [Koola](http://koola.io/)
 - [Shakepay](https://shakepay.co)
-- [Sleekr](https://sleeker.co)
+- [Sleeker](https://sleeker.co)
 - [Simpla](https://www.simpla.io/)
 - [Stoplight](https://stoplight.io/)
 - [Taxfyle](https://www.taxfyle.com/)
