@@ -9,13 +9,16 @@ We also have a very helpful community in Slack.
 ## Production Applications
 
 - [BeachfrontDigital](https://beachfront.digital)
+- [ContactImpact](https://www.contactimpact.de)
 - [Foxflow](https://www.foxflow.com/)
 - [GenerousTickets](https://generoustickets.com/)
 - [Gratify](https://gratifyhq.com)
 - [Headstart](http://www.headstartapp.com/)
 - [HaulHound](https://haulhound.com/)
 - [J.A.B. Property Investments](https://jabpi.com)
+- [Koola](http://koola.io/)
 - [Shakepay](https://shakepay.co)
+- [Sleekr](https://sleeker.co)
 - [Simpla](https://www.simpla.io/)
 - [Stoplight](https://stoplight.io/)
 - [Taxfyle](https://www.taxfyle.com/)
