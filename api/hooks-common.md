@@ -1120,6 +1120,8 @@ Add the fields with the current date-time.
 - Field names support dot notation.
 - Supports multiple data items, including paginated `find`.
 
+> **ProTip** `setCreatedAt` will be deprecated, so use `setNow` instead.
+
 ```js
 const { setCreatedAt } = require('feathers-hooks-common');
 
@@ -1209,6 +1211,8 @@ Add or update the fields with the current date-time.
 - Used as an `after` hook.
 - Field names support dot notation.
 - Supports multiple data items, including paginated `find`.
+
+> **ProTip** `setUpdated` will be deprecated, so use `setNow` instead.
 
 ```js
 const { setCreatedAt } = require('feathers-hooks-common');
