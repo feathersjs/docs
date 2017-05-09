@@ -1137,6 +1137,32 @@ __Options:__
 See also setUpdatedAt.
 
 
+## setNow
+
+### `setNow(... fieldNames)` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/services/set-now.js)
+
+Add the fields with the current date-time.
+
+- Used as a `before` hook for `create`, `update` or `patch`.
+- Used as an `after` hook.
+- Field names support dot notation.
+- Supports multiple data items, including paginated `find`.
+
+```js
+const { setCreatedAt } = require('feathers-hooks-common');
+
+app.service('users').before({
+  create: setNow('createdAt', updatedAt)
+});
+```
+
+__Options:__
+
+- `fieldNames` (*required*, at least one) - The fields that you want to add with the current date-time to the retrieved object(s).
+
+> **ProTip** Use `setNow` rather than `setCreatedAt` or `setUpdatedAt`.
+
+
 ## setSlug
 
 ### `setSlug(slug, fieldName = 'query.' + slug)` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/services/set-slug.js)
