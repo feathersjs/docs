@@ -1235,11 +1235,6 @@ See also setCreatedAt.
 
 ### `sifter(mongoQueryFunc))` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/services/sifter.js)
 
-Databases differ in their capabilities for selecting records,
-and in the syntax they use. This can result in:
-- `find` calls being customized for a particular database.
-- using custom hooks for further record selection.
-
 All official Feathers database adapters support a common way for querying,
 sorting, limiting and selecting find method calls.
 These are limited to what is commonly supported by all the databases.
