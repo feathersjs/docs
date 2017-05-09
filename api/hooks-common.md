@@ -1231,6 +1231,58 @@ __Options:__
 See also setCreatedAt.
 
 
+## sifter
+
+### `sifter(mongoQueryFunc))` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/services/sifter.js)
+
+Databases differ in their capabilities for selecting records,
+and in the syntax they use. This can result in:
+- `find` calls being customized for a particular database.
+- using custom hooks for further record selection.
+
+All official Feathers database adapters support a common way for querying,
+sorting, limiting and selecting find method calls.
+These are limited to what is commonly supported by all the databases.
+
+The `sifter` hook provides an extensive MongoDB-like selection capabilities,
+and it may be used to more extensively select records.
+
+- Used as an `after` hook for `find`.
+- SProvides extensive MongoDB-like selection capabilities.
+
+> **ProTip** `sifter` filters the result of a `find` call.
+Therefore more records will be physically read than needed.
+You can use the Feathers database adapters `query` to reduce this number.
+
+```js
+const sift = require('sift');
+const { sifter } = require('feathers-hooks-common');
+
+const selectCountry = hook => sift({ 'address.country': hook.params.country });
+
+app.service('stores').after({
+  find: sifter(selectCountry),
+});
+```
+
+```js
+const sift = require('sift');
+const { sifter } = require('feathers-hooks-common');
+
+const selectCountry = country => () => sift({ address : { country: country } });
+
+app.service('stores').after({
+  find: sifter(selectCountry('Canada')),
+});
+```
+
+__Options:__
+
+- `mongoQueryFunc` (*required*) - Function similar to `hook => sift(mongoQueryObj)`.
+Information about the `mongoQueryObj` syntax is available at
+[sift](https://github.com/crcn/sift.js).
+
+
 ## softDelete
 
 ### `softDelete(fieldName = 'deleted')` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/services/soft-delete.js)
