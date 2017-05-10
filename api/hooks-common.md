@@ -10,6 +10,8 @@ $ npm install feathers-hooks-common --save
 
 `feathers-hooks-common` is a collection of common [hooks](./hooks.md) and utilities.
 
+[Authentication hooks](./authentication/hooks.md) are documented separately.
+
 > **Note:** Many hooks are just a few lines of code to implement from scratch. If you can't find a hook here but are unsure how to implement it or have an idea for a generally useful hook create a new issue [here](https://github.com/feathersjs/feathers-hooks-common/issues/new).
 
 
