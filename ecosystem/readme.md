@@ -175,7 +175,7 @@ The Feathers client works with React Native but here is a collection of native l
 - [feathers-hooks-common](../api/hooks-common.md) ![Official Feathers Module](/img/tiny-feathers-logo.png) - Useful hooks for use with Feathersjs services. (hooks) 
 - [feathers-hooks-utils](https://www.npmjs.com/package/feathers-hooks-utils) - Utility library for writing Feathersjs hooks. (hooks)
 - [feathers-logger](https://github.com/feathersjs/feathers-logger) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
-- [feathers-query-filters](https://github.com/feathersjs/feathers-logger) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
+- [feathers-query-filters](https://github.com/feathersjs/feathers-query-filters) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
 - [feathers-service-logger-stats](https://github.com/feathersjs/feathers-service-logger-stats) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
 - [feathers-socket-commons](https://github.com/feathersjs/feathers-socket-commons) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
 - [generator-feathers](https://github.com/feathersjs/generator-feathers) ![Official Feathers Module](/img/tiny-feathers-logo.png) 
