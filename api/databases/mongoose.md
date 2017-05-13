@@ -59,7 +59,7 @@ __Options:__
 
 ### params.mongoose
 
-When making a [service method](../services.md) call, `params` can contain an `mongoose` property which allows to modify the options used to run the Mongoose query. Normally this wil be set in a before [hook](../hooks.md):
+When making a [service method](../services.md) call, `params` can contain an `mongoose` property (for exmaple, `{upsert: true}`) which allows to modify the options used to run the Mongoose query. Normally this wil be set in a before [hook](../hooks.md):
 
 ```js
 app.service('messages').hooks({
