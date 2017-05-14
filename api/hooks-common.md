@@ -1129,7 +1129,7 @@ const { setCreatedAt } = require('feathers-hooks-common');
 
 // set the `createdAt` field before a user is created
 app.service('users').before({
-  create: [ setCreatedAt('createdAt') ]
+  create: [ setCreatedAt() ]
 });
 ```
 
@@ -1138,7 +1138,7 @@ __Options:__
 - `fieldName` (*optional*, default: `createdAt`) - The field that you want to add with the current date-time to the retrieved object(s).
 - `fieldNames` (*optional*) - Other fields to add with the current date-time.
 
-See also setUpdatedAt.
+See also `setUpdatedAt`.
 
 
 ## setNow
@@ -1153,10 +1153,10 @@ Add the fields with the current date-time.
 - Supports multiple data items, including paginated `find`.
 
 ```js
-const { setCreatedAt } = require('feathers-hooks-common');
+const { setNow } = require('feathers-hooks-common');
 
 app.service('users').before({
-  create: setNow('createdAt', updatedAt)
+  create: setNow('createdAt', 'updatedAt')
 });
 ```
 
@@ -1214,14 +1214,14 @@ Add or update the fields with the current date-time.
 - Field names support dot notation.
 - Supports multiple data items, including paginated `find`.
 
-> **ProTip** `setUpdated` will be deprecated, so use `setNow` instead.
+> **ProTip** `setUpdatedAt` will be deprecated, so use `setNow` instead.
 
 ```js
-const { setCreatedAt } = require('feathers-hooks-common');
+const { setUpdatedAt } = require('feathers-hooks-common');
 
 // set the `updatedAt` field before a user is created
 app.service('users').before({
-  create: [ setCreatedAt('updatedAt') ]
+  create: [ setUpdatedAt() ]
 });
 ```
 
@@ -1230,7 +1230,7 @@ __Options:__
 - `fieldName` (*optional*, default: `updatedAt`) - The fields that you want to add or update in the retrieved object(s).
 - `fieldNames` (*optional*) - Other fields to add or update with the current date-time.
 
-See also setCreatedAt.
+See also `setCreatedAt`.
 
 
 ## sifter
