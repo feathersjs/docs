@@ -1138,7 +1138,7 @@ __Options:__
 - `fieldName` (*optional*, default: `createdAt`) - The field that you want to add with the current date-time to the retrieved object(s).
 - `fieldNames` (*optional*) - Other fields to add with the current date-time.
 
-See also `setUpdatedAt`.
+See also setUpdatedAt.
 
 
 ## setNow
@@ -1230,7 +1230,7 @@ __Options:__
 - `fieldName` (*optional*, default: `updatedAt`) - The fields that you want to add or update in the retrieved object(s).
 - `fieldNames` (*optional*) - Other fields to add or update with the current date-time.
 
-See also `setCreatedAt`.
+See also setCreatedAt.
 
 
 ## sifter
