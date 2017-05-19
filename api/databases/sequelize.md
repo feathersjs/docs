@@ -161,10 +161,21 @@ It is highly recommended to use `raw` queries, which is the default. However, th
     hooks.before.find = [rawFalse];
     ```
 1. Use the new `hydrate` hook in the "after" phase:
+
     ```js
     const hydrate = require('feathers-sequelize/hooks/hydrate');
     hooks.after.find = [hydrate()];
-    ```
+    
+    // Or, if you need to include associated models, you can do the following:
+     function includeAssociated (hook) {
+         return hydrate({
+            include: [{ model: hook.app.services.fooservice.Model }]
+         }).call(this, hook);
+     }
+     hooks.after.find = [includeAssociated];
+     ```
+
+  For a more complete example see this [gist](https://gist.github.com/sicruse/bfaa17008990bab2fd1d76a670c3923f).
 
 > **Important:** When working with Sequelize Instances, most of the feathers-hooks-common will no longer work. If you need to use a common hook or other 3rd party hooks, you should use the "dehydrate" hook to convert data back to a plain object:
 > ```js
