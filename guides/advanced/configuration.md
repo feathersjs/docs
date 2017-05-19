@@ -93,4 +93,15 @@ PORT=8080 MONGOHQ_URL=mongodb://localhost:27017/production NODE_ENV=production n
 // -> path/to/templates
 ```
 
+You can prevent interpolation of environment variables by prefacing the value with \\
+
+```js
+"authentication": {
+  "local": {
+    "entity": "\\USER",
+    "usernameField": "\\USERNAME",
+   }
+ }
+ ```
+ 
 You can also override these variables with arguments. Read more about how with [node-config](https://github.com/lorenwest/node-config)
