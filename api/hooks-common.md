@@ -727,6 +727,7 @@ postService.hooks({
 // ]}
 ```
 
+
 #### Options
 
 - `schema` (*required*, object or function) How to populate the items. [Details are below.](#schema)
