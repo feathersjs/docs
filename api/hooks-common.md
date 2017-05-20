@@ -701,6 +701,32 @@ module.exports.after = {
 };
 ```
 
+- Flexible relationship, similar to the n:1 relationship example above
+
+```javascript
+// posts like { _id: '111', body: '...' }
+// comments like { _id: '555', text: '...', postId: '111' }
+const postCommentsSchema = {
+  include: {
+    service: 'comments',
+    nameAs: 'comments',
+    select: (hook, parentItem) => ({ postId: parentItem._id }),
+  }
+};
+
+postService.hooks({
+  after: {
+    all: populate({ schema: postCommentsSchema })
+  }
+});
+
+// result like
+// { _id: '111', body: '...' }, comments: [
+//   { _id: '555', text: '...', postId: '111' }
+//   { _id: '666', text: '...', postId: '111' }
+// ]}
+```
+
 #### Options
 
 - `schema` (*required*, object or function) How to populate the items. [Details are below.](#schema)
@@ -768,9 +794,9 @@ e.g. `include: { service: ..., nameAs: ..., ... }`.
 - `nameAs` [optional, string, default is service] Where to place the items from the join.
 Dot notation is allowed.
 - `permissions` [optional, any type of value] Who is allowed to perform this join. See `checkPermissions` above.
-- `parentField` [required, string] The name of the field in the parent item for the [relation](#relation).
+- `parentField` [required if neither query nor select, string] The name of the field in the parent item for the [relation](#relation).
 Dot notation is allowed.
-- `childField` [required, string] The name of the field in the child item for the [relation](#relation).
+- `childField` [required if neither query nor select, string] The name of the field in the child item for the [relation](#relation).
 Dot notation is allowed and will result in a query like `{ 'name.first': 'John' }`
 which is not suitable for all DBs.
 You may use `query` or `select` to create a query suitable for your DB.
@@ -844,6 +870,16 @@ This delay is mostly attributed to your DB.
 
 The [depopulate](#depopulate) hook uses these fields to remove all joined and computed values.
 This allows you to then `service.patch()` the item in the hook.
+
+#### Joining without using related fields
+
+Populate can join child records to a parent record using the related columns
+`parentField` and `childField`.
+However populate's `query` and `select` options may be used to related the
+records without needing to use the related columns.
+This is a more flexible, non-SQL-like way of relating records.
+It easily supports dynamic, run-time schemas since the `select` option may be
+a function.
 
 #### Populate examples
 
