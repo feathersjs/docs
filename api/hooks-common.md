@@ -754,6 +754,8 @@ The `include` array has an element for each service to join. They each may have:
   select: (hook, parent, depth) => ({ $limit: 6 }),
   asArray: true,
   paginate: false,
+  provider: undefined,
+  userInnerPopulate: false,
   include: [ ... ]
 }
 ```
@@ -787,11 +789,17 @@ Controls pagination for this service.
 - `provider` [optional] `find` calls are made to obtain the items to be joined.
 These, by default, are initialized to look like they were made
 by the same provider as that getting the base record.
-So when populating the result of call made via `socketio`,
+So when populating the result of a call made via `socketio`,
 all the join calls will look like they were made via `socketio`.
 Alternative you can set `provider: undefined` and the calls for that join will
 look like they were made by the server.
-The hooks on the service may behave differently in different situations. 
+The hooks on the service may behave differently in different situations.
+- `userInnerPopulate` [optional] Populate, when including records from a child service,
+ignores any populate hooks defined for that child service.
+The userInnerPopulate option will run those populate hooks.
+This allows the populate for a base record to include child records
+containing their own immediate child records,
+without the populate for the base record knowing what those grandchildren populates are.
 - `include` [optional] The new items may themselves include other items. The includes are recursive.
 
 Populate forms the query `[childField]: parentItem[parentField]` when the parent value is not an array.
