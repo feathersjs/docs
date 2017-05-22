@@ -1938,3 +1938,13 @@ __Options:__
 - `promise` (*required*) - A function returning a promise.
 
 See also callbackToPromise.
+
+
+## FAQ: Coerce data types
+
+A common need is converting fields coming in from query params.
+These fields are provided as string values by default and you may need them as numbers, boolenas, etc.
+  
+The [`validateSchema`](#validateSchema) does a wide selection of
+[type coercions](https://github.com/epoberezkin/ajv/blob/master/COERCION.md),
+as well as checking for missing and unexpected fields.
