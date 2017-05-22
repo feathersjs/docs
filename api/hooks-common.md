@@ -1948,3 +1948,4 @@ These fields are provided as string values by default and you may need them as n
 The [`validateSchema`](#validateSchema) does a wide selection of
 [type coercions](https://github.com/epoberezkin/ajv/blob/master/COERCION.md),
 as well as checking for missing and unexpected fields.
+
