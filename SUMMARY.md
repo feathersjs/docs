@@ -16,6 +16,8 @@
     * [A Feathers REST client](guides/step-by-step/basic-feathers/rest-client.md)
     * [A Feathers WebSocket client](guides/step-by-step/basic-feathers/socket-client.md)
     * [The "a-ha!" moment](guides/step-by-step/basic-feathers/a-ha.md)
+    * [Hooks middleware](guides/step-by-step/basic-feathers/hooks-middleware.md)
+    * [All about hooks](guides/step-by-step/basic-feathers/all-about-hooks.md)
     * [Hooks, part 1](guides/step-by-step/basic-feathers/hooks-1.md)
     * [Hooks, part 2](guides/step-by-step/basic-feathers/hooks-2.md)
     * [Real-time](guides/step-by-step/basic-feathers/real-time.md)
