@@ -1,10 +1,14 @@
 # Hooks, part 1
 
-Applications are more than reading and writing database items.
-Application-specific logic often needs to run before and after service methods execute.
+## Common hooks
 
-This is what Feathers [hooks](../../../api/hooks.md) are for.
-We'll be introducing specific hooks as we need them.
+Hooks allows us to combine simple functions to build complicated solutions.
+Most hooks will be general in nature and they may be used with multiple services.
+
+Feathers comes with a set of
+[commonly useful hooks](../../../api/hooks-common.md).
+Let's work with some of them.
+
 
 ## Working example
 
