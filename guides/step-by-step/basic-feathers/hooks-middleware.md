@@ -79,6 +79,10 @@ These hooks may, for example:
 - Update the record's `updatedAt` value, thus modifying the `context` object,
 - Perhaps not allow the service call to proceed, or return a specified response for it.
 
+> **ProTip** Hooks may be synchronous or async (using promises or async/await).
+The next hook will run only when the current one finishes (sync) or resolves (async),
+so hooks are always run sequentially.
+
 A series of hooks is also run after the actual call to the database, if that call was successful.
 These hooks may:
 - Populate the response with related information,
