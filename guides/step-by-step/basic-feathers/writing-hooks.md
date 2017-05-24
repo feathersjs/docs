@@ -27,6 +27,7 @@ a new context object, or `undefined`.
 > **ProTip** The context object is not changed if `undefined` is returned.
 
 
+
 > **ProTip** Mutating the `context` param inside a hook function
 does not change the context object passed to the next hook.
 
@@ -55,7 +56,7 @@ The context object does not change as the inner hook function returns `undefined
 
 `debug` is great for debugging other hooks.
 Once you place this hook before and after the hook under test,
-and you'll see the context object the test hook received, and what it returned.
+you'll see the context object the test hook received, and what it returned.
 
 This example
 - Shows several context properties.
