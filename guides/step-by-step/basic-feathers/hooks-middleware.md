@@ -104,3 +104,6 @@ Hooks may be defined for all services, regardless of their type.
 
 > **ProTip** Some people may call the `context` object the `hook` object.
 The two terms are interchangeable.
+ 
+### Is anything wrong, unclear, missing?
+[Leave a comment.](https://github.com/feathersjs/feathers-docs/issues/new?title=Comment:Step-Basic-Middleware&body=Comment:Step-Basic-Middleware)

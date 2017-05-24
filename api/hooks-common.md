@@ -1383,6 +1383,27 @@ __Options:__
 See also every.
 
 
+## stashBefore
+
+### `stashBefore(name)` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/services/stash-before.js)
+
+Stash current value of record before mutating it.
+
+- Used as a `before` hook for `get`, `update`, `patch` or `remove`.
+- An `id` is required in the method call.
+
+```javascript
+service.before({
+  patch: stashBefore()
+});
+```
+
+__Options:__
+
+- `name` (*optional* defaults to 'before') The name of the params property
+to contain the current record value.
+
+
 ## traverse
 
 ### `traverse(transformer, getObject)` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/services/traverse.js)
