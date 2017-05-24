@@ -102,3 +102,7 @@ app.hooks({
   }
 });
 ```
+
+### Is anything wrong, unclear, missing?
+[Leave a comment.](https://github.com/feathersjs/feathers-docs/issues/new?title=Comment:Step-Basic-About-Hooks-2&body=Comment:Step-Basic-About-Hooks-2)
+
