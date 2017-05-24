@@ -20,6 +20,7 @@
     * [All about hooks](guides/step-by-step/basic-feathers/all-about-hooks.md)
     * [Hooks, part 1](guides/step-by-step/basic-feathers/hooks-1.md)
     * [Hooks, part 2](guides/step-by-step/basic-feathers/hooks-2.md)
+    * [Writing your own hooks](guides/step-by-step/basic-feathers/writing-hooks.md)
     * [Real-time](guides/step-by-step/basic-feathers/real-time.md)
   * [The Generator (CLI)](guides/step-by-step/generators/readme.md)
     * [Generate the application](guides/step-by-step/generators/gen-app.md)
