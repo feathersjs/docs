@@ -178,8 +178,10 @@ This example
 
 ## Simple async hook
 
-Let's write a hook which will call an async function which returns a Promise.
-That function will determine if the values in `hook.data` are valid.
+Now that we've covered synchronous hooks, let's look at async ones.
+
+Here is a simple before hook which calls an async function.
+That function is supposed to determine if the values in `context.data` are valid.
 
 ```javascript
 import errors from 'feathers-errors';
@@ -196,9 +198,9 @@ export default function (validator) {
 ```
 
 The hook either returns a Promise which resolves to the existing context object,
-or it throws with an error object.
+or it throws with an error object contains the errors found.
 
-The next hook will not be run until this Promise resolves and this hook logically ends.
+The hook after this one will not run until this Promise resolves and the hook logically ends.
 
 > **ProTip** Perhaps the most common error made when writing async hooks
 is to *not return* the Promise.
@@ -207,6 +209,63 @@ It must be `return validator(context.data)`.
 
 This example
 - Shows how to code async hooks.
+
+
+## Calling a service
+
+Here is an after hook which attaches user info to one record (for simplicity).
+
+```javascript
+export default function () {
+    return context => {
+      const service = context.app.service('users');
+      const item = getItems(context)[0];
+      
+      if (item.userId !== null && item.userId !== undefined) {
+        return service.get(item.userId, context.params)
+          .then(data => {
+            item.user = data;
+            return context;
+          })
+          .catch(() => context);
+      }
+    };
+};
+```
+
+- `context.app` is the Feathers app, so `context.app.service(path/to/service)` returns that service.
+- The hook returns a Promise which resolves to a mutated context, or
+- the hook returns synchronously without modifying the context if there is no `userId`.
+
+Its important that `context.params` is used in the `get`.
+You always need to consider `params` when calling a service within a hook.
+If you don't assign a value, the `get` will run as being called on the server
+(it is being called by the server after all)
+even if the method call causing the hook to be run originated on a client.
+
+This may not be OK.
+The user password may be returned when a user record is read by the server,
+but you would not want a client to have access to it.
+
+This hook has taken a simple approach, passing along the `context.params` of the method call.
+Thus the `get` is run with the same `context.provider` (e.g. "socketio", "rest", undefined),
+`context.authenticated`, etc. as the method call.
+
+This is often satisfactory and, if not, the next example contains something more comprehensive.
+
+> **ProTip** Always consider `params` when doing service calls within a hook.
+
+An interesting detail is shown here: `replaceItems` is never called.
+The array returned by `getItems` contains are the same objects as are in the context.
+So changing an object in the array changes that object in the context.
+Its similar to:
+
+```javascript
+const foo = { name: 'John' };
+const bar = [ foo ];
+bar[0].project = 'Feathers';
+console.log(foo); // { name: 'John', project: 'Feathers
+```
 
 
 ## stashBefore [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/services/stash-before.js)
@@ -253,8 +312,8 @@ export default function (prop) {
 }
 ```
 
-This hook is more complex than the previous ones.
-Let's look at some of its key parts.
+Its more complicated to call the hook's current service than to call another service.
+Let's look at some of this hook's key parts.
 
 This is what the hook returns.
 
@@ -281,20 +340,10 @@ will place that record in `context.params`,
 and will return the possibly modified `context`.
 The method call will continue as if nothing has happened.
 
-You always need to consider what value to assign `params` when calling a service within a hook.
-If you don't assign a value, the `get` will run as being called on the server
-(it is being called by the server after all)
-even if the method call originated on a client.
-
-This may not be OK.
-The user password may be returned when a user record is read by the server,
-but you would not want a client to have access to it.
-
-There may be other issues if, for example, you are using Sequelize and the method call
-includes parameters that are passed through to Sequelize.
+`stashBefore` does not use `context.params` in the `get` call
+as `context.params` may be inappropriate if, for example, you are using Sequelize
+and the method call includes parameters that are passed through to Sequelize.
 What may be appropriate for an `update` may not be acceptable for a `get`.
-
-`stashBefore` handles this with
 
 ```javascript
 const params = context.method === 'get' ? context.params : {
@@ -312,8 +361,6 @@ const params = context.method === 'get' ? context.params : {
 Will this satisfy every use case?
 No, but it will satisfy most.
 You can always fork the hook and customize it.
-
-> **ProTip** Setting `provider` is common and you should always consider doing so.
 
 There is one more thing to consider.
 The `stashBefore` hook will run again when we call the inner `get`.
@@ -342,14 +389,6 @@ This example
 - Shows how to call the current service.
 - Discusses how to handle `params` for service calls.
 - Shows how to prevent recursion.
-
-
-## Using other services
-
-You can get a handle to another service, while in a hook, with `context.app.service(path)`.
-
-It may be easier, frankly, to use a service other than the current one,
-as you are less likely to have to worry about recursion.
 
  
 ### Is anything wrong, unclear, missing?
