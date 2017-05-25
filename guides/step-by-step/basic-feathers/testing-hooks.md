@@ -162,7 +162,7 @@ describe('services pluck', () => {
 ## Hooks requiring a Feathers app
 
 Some hooks call services, or they depend on other hooks running.
-Its just easiest in such cases to create a Feathers app and a memory-backed service
+Its much simpler to create a Feathers app plus a memory-backed service
 than to try to mock them out.
 
 Here is part of the mocha test for `stashBefore`.
