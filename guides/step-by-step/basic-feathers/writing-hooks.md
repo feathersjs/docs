@@ -256,9 +256,9 @@ This is often satisfactory and, if not, the next example contains something more
 > **ProTip** Always consider `params` when doing service calls within a hook.
 
 An interesting detail is shown here: `replaceItems` is never called.
-The array returned by `getItems` contains are the same objects as are in the context.
+The array returned by `getItems` contains the same objects as those in the context.
 So changing an object in the array changes that object in the context.
-Its similar to:
+This is similar to:
 
 ```javascript
 const foo = { name: 'John' };
@@ -266,6 +266,11 @@ const bar = [ foo ];
 bar[0].project = 'Feathers';
 console.log(foo); // { name: 'John', project: 'Feathers
 ```
+
+This example
+- Shows how to call a service.
+- Shows how to deal with `params` in such calls.
+- Talks about using `getItems` with mutations.
 
 
 ## stashBefore [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/services/stash-before.js)
@@ -313,7 +318,7 @@ export default function (prop) {
 ```
 
 Its more complicated to call the hook's current service than to call another service.
-Let's look at some of this hook's key parts.
+Let's look at some of the code in this hook.
 
 This is what the hook returns.
 
