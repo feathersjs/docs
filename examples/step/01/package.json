@@ -34,7 +34,7 @@
     "feathers-configuration": "0.4.1",
     "feathers-errors": "2.6.2",
     "feathers-hooks": "1.8.1",
-    "feathers-hooks-common": "2.0.3",
+    "feathers-hooks-common": "^3.5.0",
     "feathers-nedb": "2.6.2",
     "feathers-rest": "1.7.1",
     "feathers-socketio": "1.5.2",
