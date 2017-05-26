@@ -165,25 +165,24 @@ The hooks that were once bundled with this module are now located at [feathers-a
 
 ## Authentication Events
 
-The `login` and `logout` events are emitted on the `app` object whenever a client successfully authenticates or "logs out". (With JWT, logging out doesn't invalidate the JWT.  Read the section about how JWT work for more information.)
+The `login` and `logout` events are emitted on the `app` object whenever a client successfully authenticates or "logs out". (With JWT, logging out doesn't invalidate the JWT.  Read the section about how JWT work for more information.) These events are only emitted on the server.
 
 ### `app.on('login', callback))` and `app.on('logout', callback))`
 
 These two events use a callback with the same signature.
 
-- `callback` {Function} - a function in the format `function (result, meta) {}`. The available attributes of the `meta` argument vary depending on the transport / provider plugin used (`feathers-socketio`, `feathers-primus` or `feathers-rest`).
+- `callback` {Function} - a function in the format `function (result, meta) {}`.
 
   - `result` {Object} - The final `hook.result` from the `authentication` service. Unless you customize the `hook.response` in an after hook, this will only contain the `accessToken`, which is the JWT.
-
-- `meta` {Object} - information about the request.  *The `meta` data varies per provider as follows.*
-  - Using `feathers-rest`
-    - `provider` {String} - will always be `"rest"`
-    - `req` {Object} - the Express request object.
-    - `res` {Object} - the Express response object.
-  - Using `feathers-socketio` and `feathers-primus`:
-    - `provider` {String} - the name of the transport: either `socketio` or `primus`.
-    - `connection` {Object} - the same data as `hook.params` when working inside hooks
-    - `socket` {SocketObject} - the Socket.io or Primus object for the current user's WebSocket connection.  It contains the `feathers` attribute, which holds the same data as `hook.params` when working inside hooks.
+  - `meta` {Object} - information about the request.  *The `meta` data varies per transport / provider as follows.*
+    - Using `feathers-rest`
+      - `provider` {String} - will always be `"rest"`
+      - `req` {Object} - the Express request object.
+      - `res` {Object} - the Express response object.
+    - Using `feathers-socketio` and `feathers-primus`:
+      - `provider` {String} - the transport name: `socketio` or `primus`
+      - `connection` {Object} - the same as `params` in the hook context
+      - `socket` {SocketObject} - the current user's WebSocket object.  It also contains the `feathers` attribute, which is the same as `params` in the hook context.
 
 
 ## Express Middleware
