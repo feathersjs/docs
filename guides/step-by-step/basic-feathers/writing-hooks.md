@@ -133,8 +133,8 @@ The context object is modified and returned,
 thus modifying what context is passed to the next hook.
 
 This example
-- Introduces `_pluck`.
 - Modifies and synchronously returns the context object.
+- Introduces `_pluck`.
 
 
 ## pluck [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/services/pluck.js)
@@ -174,6 +174,39 @@ is the reverse of `getItems`, returning the items where they came from.
 
 This example
 - Introduces the convenient `getItems` and `replaceItems` utilities.
+
+
+## Returning a result
+
+Assume that for a service with static data the record is added to `cache`
+whenever a `get` call has completed.
+We can then potentially improve performance for future `get` calls
+by checking if we already have the record.
+
+```javascript
+import { checkContext } from 'feathers-hooks-common';
+
+export default function (cache) {
+  return context => {
+    checkContext(context, 'before', ['get'], 'memoize');
+    
+    if (context.id in cache) {
+      context.result = cache[context.id];
+      return context;
+    }
+  };
+};
+```
+
+Feathers checks after every `before` hook if `hook.result` is set.
+If so, Feathers skips any remaining `before` hooks and the database call,
+and starts running the `after` hooks.
+
+Should this hook find a cached record,
+placing it in `hook.result` is the same as if the database had returned the record.
+
+This example
+- Shows how `before` hooks can determine the result for the call.
 
 
 ## Simple async hook
