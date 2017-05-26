@@ -61,10 +61,10 @@ The Feathers code for these application level hooks would be:
 ```javascript
 app.hooks({
   before: {
-    create: hook38
+    create: hook30a
   },
   after: {
-    create: hook39
+    create: hook39a
   },
 });
 ```
@@ -97,8 +97,8 @@ Your Feathers code would *additionally* include:
 ```javascript
 app.hooks({
   error: {
-    all: hook90,
-    create: hook30
+    all: hook00e,
+    create: hook30e
   }
 });
 ```
