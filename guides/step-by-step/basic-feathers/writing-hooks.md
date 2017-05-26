@@ -428,6 +428,28 @@ This example
 - Discusses how to handle `params` for service calls.
 - Shows how to prevent recursion.
 
- 
+
+## iff, when, else
+
+Conditional hooks like `iff(predicate, hook1, hook2).else(hook3, hook4)` can be very useful.
+
+Its easy to write your own predicates.
+They are functions with a signature of `context => boolean`,
+which receive the context as a parameter and return either a boolean (synchronous)
+or a Promise which resolves to a boolean.
+
+You can combine predicates provided with the common hooks, such as `isProvider`
+([source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/services/is-provider.js)).
+You can write your own, or mix and match.
+
+```javascript
+iff (hook => !isProvider('service')(hook) && hook.params.user.security >= 3, ...)
+```
+
+The `isNot` conditional utility
+([source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/common/is-not.js))
+is useful because it will negate either a boolean or a Promise resolving to a boolean.
+
+
 ### Is anything wrong, unclear, missing?
 [Leave a comment.](https://github.com/feathersjs/feathers-docs/issues/new?title=Comment:Step-Basic-Writing-Hooks&body=Comment:Step-Basic-Writing-Hooks)
