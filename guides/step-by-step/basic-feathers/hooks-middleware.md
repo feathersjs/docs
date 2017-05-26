@@ -61,10 +61,10 @@ and the corresponding Feathers code would be:
 ```javascript
 const messagesHooks = {
   before: {
-    create: [ hook11(), hook12() ]
+    create: [ hook31(), hook32() ]
   },
   after: {
-    create: [ hook15(), hook16() ]
+    create: hook35()
   }
 };
 const messages = app.service('messages');
