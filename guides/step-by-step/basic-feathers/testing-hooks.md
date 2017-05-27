@@ -252,6 +252,10 @@ function clone (obj) {
 }
 ```
 
+You might not want to use the Feathers NeDB adapter as it may not be opened more than once in a process.
+You can work around this with mocha's `--require` option,
+opening it once and attaching it to Nodejs' `global` object to the tests.
+
  
 ### Is anything wrong, unclear, missing?
 [Leave a comment.](https://github.com/feathersjs/feathers-docs/issues/new?title=Comment:Step-Basic-Testing-Hooks&body=Comment:Step-Basic-Testing-Hooks)
