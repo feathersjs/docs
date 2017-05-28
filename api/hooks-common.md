@@ -1893,7 +1893,7 @@ __Options:__
 - `items` (*required*) - The updated item or array of items.
 
 
-## Util: paramsToServer
+## Util: paramsForServer
 
 ### `paramsForServer(params, ... whitelist)` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/services/params-to-server.js)
 
