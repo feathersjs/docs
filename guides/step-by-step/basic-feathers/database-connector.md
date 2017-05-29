@@ -36,7 +36,7 @@ Now you can see where Feathers got its name.
 ## We start an instance of Feathers and define its services.
 [import:'feathers'](../../../examples/step/01/db-connector/1.js)
 
-users is the only service we need  and its a database table located at examples/step/data/users.db.
+users is the only service we need and it's a database table located at examples/step/data/users.db.
 [import:'services'](../../../examples/step/01/db-connector/1.js)
 
 ## Create 3 users using Promises.
