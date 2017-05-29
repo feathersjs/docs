@@ -226,4 +226,3 @@ The Feathers client works with React Native but here is a collection of native l
 - [feathers-vuex](https://github.com/feathersjs/feathers-vuex) ![Official Feathers Module](/img/tiny-feathers-logo.png)  - Integration of Feathers services with your Vuex store.
 - [vue-syncers-feathers](https://www.npmjs.com/package/vue-syncers-feathers) - Synchronises feathers services with vue objects, updated in real time (connector)
 - [vue-feathers](https://github.com/sunabozu/vue-feathers) - A plugin for Vuejs 1.x & 2.x to easily access your feathers services.
-- [feathers-polymer](https://github.com/thosakwe/polymer-feathers)
