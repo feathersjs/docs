@@ -195,6 +195,11 @@ app.service('users').before({
 > **ProTip:** This hook will always delete the fields,
 unlike the `remove` hook which only deletes the fields if the service call was made by a client.
 
+---
+
+> **ProTip:** You can replace `remove('name')` with `iff(isProvider('external'), discard('name))`.
+The latter does not contains any hidden "magic".
+
 __Options:__
 
 - `fieldNames` (*required*) - One or more fields you want to remove from the object(s).
