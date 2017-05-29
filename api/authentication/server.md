@@ -119,6 +119,26 @@ These properties can be modified to change the behavior of the `/authentication`
 
 The `remove` method will be used less often.  It mostly exists to allow for adding hooks the the "logout" process.  For example, in services that require high control over security, a developer could register hooks on the `remove` method that perform token blacklisting.
 
+#### `after` hook API:
+- `hook.result {Object}` - After logout, useful information regarding the previous session will be populated here.
+
+Below is the example of the hook usage:
+```javascript
+    after: {
+      remove: [
+        function (hook) {
+          return app.passport.verifyJWT(hook.result.accessToken, { secret: app.passport.options('jwt').secret })
+              .then((data) => {
+                // removing the user who decided to logout
+                app.service('users').remove(data.userId).then(() => {
+                  return hook;
+                });
+              });
+        }
+      ]
+    }
+```
+
 ## The `authenticate` hook
 
 `auth.hooks.authenticate(strategies)`, where `strategies` is an array of passport strategy names.
