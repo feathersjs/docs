@@ -37,9 +37,12 @@
     "feathers-hooks-common": "^3.5.0",
     "feathers-nedb": "2.6.2",
     "feathers-rest": "1.7.1",
+    "feathers-sequelize": "^2.0.0",
     "feathers-socketio": "1.5.2",
     "helmet": "3.5.0",
     "nedb": "1.8.0",
+    "pg": "^6.2.3",
+    "sequelize": "^3.30.4",
     "serve-favicon": "2.4.2",
     "socket.io-client": "1.7.3",
     "winston": "2.3.1"
