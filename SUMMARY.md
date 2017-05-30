@@ -90,6 +90,7 @@
     * [Knex](api/databases/knexjs.md)
     * [RethinkDB](api/databases/rethinkdb.md)
     * [Elasticsearch](api/databases/elasticsearch.md)
+* [Security](SECURITY.md)
 * [Ecosystem](ecosystem/readme.md)
 * [Help](help/readme.md)
 * [FAQ](faq/readme.md)
