@@ -11,7 +11,7 @@ Get familiar with Feathers by building your first apps. Learn topics from beginn
 Learn more about Feathers' Universal API, and plugins for Authentication and handling data.
 
 [**Security**](./SECURITY.md)<br/>
-Understand our commitment to security and how it affects your applications build.
+Understand our commitment to security and how it affects your applications.
 
 [**Ecosystem**](./ecosystem/readme.md)<br/>
 See what amazing things the Feathers Core Team and Community have built.
