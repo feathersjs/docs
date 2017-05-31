@@ -786,7 +786,7 @@ The `include` array has an element for each service to join. They each may have:
   asArray: true,
   paginate: false,
   provider: undefined,
-  userInnerPopulate: false,
+  useInnerPopulate: false,
   include: [ ... ]
 }
 ```
@@ -825,9 +825,9 @@ all the join calls will look like they were made via `socketio`.
 Alternative you can set `provider: undefined` and the calls for that join will
 look like they were made by the server.
 The hooks on the service may behave differently in different situations.
-- `userInnerPopulate` [optional] Populate, when including records from a child service,
+- `useInnerPopulate` [optional] Populate, when including records from a child service,
 ignores any populate hooks defined for that child service.
-The userInnerPopulate option will run those populate hooks.
+The useInnerPopulate option will run those populate hooks.
 This allows the populate for a base record to include child records
 containing their own immediate child records,
 without the populate for the base record knowing what those grandchildren populates are.
