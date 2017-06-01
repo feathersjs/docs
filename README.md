@@ -10,6 +10,9 @@ Get familiar with Feathers by building your first apps. Learn topics from beginn
 [**API**](./api/readme.md)<br/>
 Learn more about Feathers' Universal API, and plugins for Authentication and handling data.
 
+[**Security**](./SECURITY.md)<br/>
+Understand our commitment to security and how it affects your applications.
+
 [**Ecosystem**](./ecosystem/readme.md)<br/>
 See what amazing things the Feathers Core Team and Community have built.
 
@@ -29,6 +32,3 @@ If you are looking for different formats we have the latest version of this doc 
 * [PDF](https://www.gitbook.com/download/pdf/book/feathersjs/feathers-docs)
 * [ePub](https://www.gitbook.com/download/epub/book/feathersjs/feathers-docs)
 * [Mobi](https://www.gitbook.com/download/mobi/book/feathersjs/feathers-docs)
-
-
-
