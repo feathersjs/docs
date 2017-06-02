@@ -118,8 +118,8 @@ The data has a `password` field.
 This specialized authentication hook will replace it with a hashed version
 so the password may be stored safely.
 
-> **bcrypt.** Feathers hashes passwords using [bycrypt](https://www.npmjs.com/package/bcryptjs).
-Bcrypt has the best kind of repute that can be achieved for a cryptographic algorithm:
+> **bcrypt.** Feathers hashes passwords using [bcrypt](https://www.npmjs.com/package/bcryptjs).
+bcrypt has the best kind of repute that can be achieved for a cryptographic algorithm:
 it has been around for quite some time, used quite widely, "attracted attention",
 and yet remains unbroken to date.
 [(Reference.)](http://security.stackexchange.com/questions/4781/do-any-security-experts-recommend-bcrypt-for-password-storage)
