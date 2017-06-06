@@ -89,8 +89,6 @@ Submit yours by creating a pull request.
 - [feathers-mongodb](../api/databases/mongodb.md) ![Official Feathers Module](/img/tiny-feathers-logo.png)
 - [feathers-mongodb-revisions](https://www.npmjs.com/package/feathers-mongodb-revisions) - This Feathers database adapter extends the basic MongoDB adapter, adding revision support. (service)
 - [feathers-mongoose](../api/databases/mongoose.md) ![Official Feathers Module](/img/tiny-feathers-logo.png)
-- [feathers-mongoose-advanced](https://www.npmjs.com/package/feathers-mongoose-advanced) - Create a flexible Mongoose Service for FeathersJS. (service)
-- [feathers-mongoose-service](https://www.npmjs.com/package/feathers-mongoose-service) - Easily create a Mongoose Service for Featherjs. (service)
 - [feathers-nedb](../api/databases/nedb.md) ![Official Feathers Module](/img/tiny-feathers-logo.png)
 - [feathers-nedb-dump](https://www.npmjs.com/package/feathers-nedb-dump) - Middleware for Feathers.js - dumps and restores NeDB database for a given service (middleware)
 - [feathers-objection](https://github.com/mcchrish/feathers-objection) - A service adapter for [Objection.js](https://vincit.github.io/objection.js) - A minimal SQL ORM built on top of Knex.
