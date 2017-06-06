@@ -79,7 +79,7 @@ The following default options will be mixed in with your global `auth` object fr
 
 ## Additional `app` methods
 The Feathers `app` will contain two useful methods once you've configured the auth plugin:
-- [app.passport.createJWT](#apppassportcreatejwtpayload-options-source)
+- [app.passport.createJWT](#apppassportcreatejwtpayload-options--promise-source)
 - [app.passport.verifyJWT](#apppassportverifyjwttoken-options-source)
 
 ### `app.passport.createJWT(payload, options) => promise` [source](https://github.com/feathersjs/feathers-authentication/blob/master/src/utils.js#L8)
