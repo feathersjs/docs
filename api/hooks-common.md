@@ -305,7 +305,7 @@ Run the hooks sequentially if the result is truthy.
 - `feathers-hooks` catches any errors thrown in the predicate or hook.
 
 ```javascript
-const { iff, populate } = require('feathers-hooks-common');
+const { iff, populate, remove } = require('feathers-hooks-common');
 const isNotAdmin = adminRole => hook => hook.params.user.roles.indexOf(adminRole || 'admin') === -1;
 
 app.service('workOrders').after({
@@ -318,7 +318,7 @@ app.service('workOrders').after({
 
 app.service('workOrders').after({
   // sync predicate and hook
-  find: [ iff(isNotAdmin(), hooks.remove('budget')) ]
+  find: [ iff(isNotAdmin(), remove('budget')) ]
 });
 ```
 
@@ -326,7 +326,7 @@ or with the array syntax:
 
 ```javascript
 app.service('workOrders').after({
-  find: [ iff(isNotAdmin(), [hooks.remove('budget'), hooks.remove('password')]
+  find: [ iff(isNotAdmin(), [remove('budget'), remove('password')]
 });
 ```
 __Options:__
@@ -392,11 +392,11 @@ Negate the `predicate`.
 - `feathers-hooks` catches any errors thrown in the predicate.
 
 ```javascript
-import hooks, { iff, isNot, isProvider } from 'feathers-hooks-common';
+import { iff, isNot, isProvider, remove } from 'feathers-hooks-common';
 const isRequestor = () => hook => new Promise(resolve, reject) => ... );
 
 app.service('workOrders').after({
-  iff(isNot(isRequestor()), hooks.remove( ... ))
+  iff(isNot(isRequestor()), remove( ... ))
 });
 ```
 
@@ -1294,7 +1294,7 @@ The `sifter` hook provides an extensive MongoDB-like selection capabilities,
 and it may be used to more extensively select records.
 
 - Used as an `after` hook for `find`.
-- SProvides extensive MongoDB-like selection capabilities.
+- Provides extensive MongoDB-like selection capabilities.
 
 > **ProTip** `sifter` filters the result of a `find` call.
 Therefore more records will be physically read than needed.
