@@ -78,6 +78,19 @@ __Options:__
 
 - `hooks` (*optional*) - The hooks to run.
 
+> **ProTip:** `combine` is primarily intended to be used within your custom hooks,
+not when [registering hooks.](./hooks.md#registering-hooks).
+Its more convenient to use the following when registering hooks:
+```javascript
+const workflow = [hook1(), hook2(), ...];
+app.service(...).hooks({
+  before: {
+    update: [...workflow],
+    patch: [...workflow],
+  },
+});
+```
+
 
 ## debug
 
@@ -305,7 +318,7 @@ Run the hooks sequentially if the result is truthy.
 - `feathers-hooks` catches any errors thrown in the predicate or hook.
 
 ```javascript
-const { iff, populate, remove } = require('feathers-hooks-common');
+const { iff, populate } = require('feathers-hooks-common');
 const isNotAdmin = adminRole => hook => hook.params.user.roles.indexOf(adminRole || 'admin') === -1;
 
 app.service('workOrders').after({
@@ -318,7 +331,7 @@ app.service('workOrders').after({
 
 app.service('workOrders').after({
   // sync predicate and hook
-  find: [ iff(isNotAdmin(), remove('budget')) ]
+  find: [ iff(isNotAdmin(), hooks.remove('budget')) ]
 });
 ```
 
@@ -326,7 +339,7 @@ or with the array syntax:
 
 ```javascript
 app.service('workOrders').after({
-  find: [ iff(isNotAdmin(), [remove('budget'), remove('password')]
+  find: [ iff(isNotAdmin(), [hooks.remove('budget'), hooks.remove('password')]
 });
 ```
 __Options:__
@@ -392,11 +405,11 @@ Negate the `predicate`.
 - `feathers-hooks` catches any errors thrown in the predicate.
 
 ```javascript
-import { iff, isNot, isProvider, remove } from 'feathers-hooks-common';
+import hooks, { iff, isNot, isProvider } from 'feathers-hooks-common';
 const isRequestor = () => hook => new Promise(resolve, reject) => ... );
 
 app.service('workOrders').after({
-  iff(isNot(isRequestor()), remove( ... ))
+  iff(isNot(isRequestor()), hooks.remove( ... ))
 });
 ```
 
@@ -786,7 +799,7 @@ The `include` array has an element for each service to join. They each may have:
   asArray: true,
   paginate: false,
   provider: undefined,
-  useInnerPopulate: false,
+  userInnerPopulate: false,
   include: [ ... ]
 }
 ```
@@ -825,9 +838,9 @@ all the join calls will look like they were made via `socketio`.
 Alternative you can set `provider: undefined` and the calls for that join will
 look like they were made by the server.
 The hooks on the service may behave differently in different situations.
-- `useInnerPopulate` [optional] Populate, when including records from a child service,
+- `userInnerPopulate` [optional] Populate, when including records from a child service,
 ignores any populate hooks defined for that child service.
-The useInnerPopulate option will run those populate hooks.
+The userInnerPopulate option will run those populate hooks.
 This allows the populate for a base record to include child records
 containing their own immediate child records,
 without the populate for the base record knowing what those grandchildren populates are.
@@ -1294,7 +1307,7 @@ The `sifter` hook provides an extensive MongoDB-like selection capabilities,
 and it may be used to more extensively select records.
 
 - Used as an `after` hook for `find`.
-- Provides extensive MongoDB-like selection capabilities.
+- SProvides extensive MongoDB-like selection capabilities.
 
 > **ProTip** `sifter` filters the result of a `find` call.
 Therefore more records will be physically read than needed.
