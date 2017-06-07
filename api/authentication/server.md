@@ -87,7 +87,7 @@ This is the method used by the `/authentication` service to generate JSON Web To
 - `payload {Object}` - becomes the JWT payload. Will also include an `exp` property denoting the expiry timestamp.
 - `options {Object}` - the options passed to [jsonwebtoken `sign()`](https://www.npmjs.com/package/jsonwebtoken#jwtsignpayload-secretorprivatekey-options-callback)
   - `secret {String | Buffer}` - either the secret for HMAC algorithms, or the PEM encoded private key for RSA and ECDSA.
-  - See the [`jsonwebtoken`](https://www.npmjs.com/package/jsonwebtoken#jwtsignpayload-secretorprivatekey-options-callback) package docs for other available options.  The authenticate method uses the [default `jwt` options](#default-options). When using this package, directly, they will have to be passed in manually.
+  - `jwt` - See the [`jsonwebtoken`](https://www.npmjs.com/package/jsonwebtoken#jwtsignpayload-secretorprivatekey-options-callback) package docs for other available options. The authenticate method uses the [default `jwt` options](#default-options). When using this package, directly, they will have to be passed in manually.
 
 The returned `promise` resolves with the JWT or fails with an error.
 
