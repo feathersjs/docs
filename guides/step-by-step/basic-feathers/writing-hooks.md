@@ -198,9 +198,8 @@ export default function (cache) {
 };
 ```
 
-Feathers checks after every `before` hook if `hook.result` is set.
-If so, Feathers skips any remaining `before` hooks and the database call,
-and starts running the `after` hooks.
+Feathers will not make the database call if `hook.result` is set.
+Any remaining before and after hooks are still run, along with the after hooks..
 
 Should this hook find a cached record,
 placing it in `hook.result` is the same as if the database had returned the record.
