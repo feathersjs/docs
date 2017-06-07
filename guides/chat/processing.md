@@ -118,7 +118,7 @@ Here we use [Node's crypto library](https://nodejs.org/api/crypto.html) to creat
 
 ## Populating the message sender
 
-In the `process-message` hook we are currently just storing the users `_id` in the message. In order to show the right user information we do want to include that information in our messages.
+In the `process-message` hook we are currently just storing the users `_id` in the message. We want to show more than the `_id` in the UI, so we'll need to populate more data in the message response. In order to show the right user information we want to include that information in our messages.
 
 We could do this by creating our own hook but adding related entities is quite common and already implement in the [populate common hook](). In order to use the hook we have to update the `src/services/messages/messages.hooks.js` file to look like this:
 
@@ -175,12 +175,14 @@ module.exports = {
 
 This will include the `user` property using the `userId`, retrieving it from the `users` service to all messages.
 
+You can learn more about how the `populate` hook works by checking out he API docs for [`feathers-hooks-common`](/api/hooks-common.md).
+
 
 ## What's next?
 
 In this section we added three hooks to pre- and postprocess our message and user data. We now have a complete API to send and retrieve messages including authentication.
 
-In the [frameworks](../frameworks/readme.md) you can now find more resources on specific frameworks like React, React Native, Angular or VueJS and how to create a complete chat frontend with signup, logging, user listing and messages.
+See the [frameworks section](../frameworks/readme.md) for more resources on specific frameworks like React, React Native, Angular or VueJS.  You'll find guides for creating a complete chat frontend with signup, logging, user listing and messages.  There are also links to full example chat applications built with some popular frontend frameworks.
 
 You can also browse the [API](../../api/readme.md) which has a lot of information on the usage of Feathers and its database adaptors.
 
