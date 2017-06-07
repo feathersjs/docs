@@ -207,7 +207,7 @@ query: {
 ```
 
 ### $sqs
-[simple_query_string](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-simple-query-string-query.html). A query that uses the SimpleQueryParser to parse its context. Optional `$default_operator` which is set to `or` by default but can be set to `and` if required.
+[simple_query_string](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-simple-query-string-query.html). A query that uses the SimpleQueryParser to parse its context. Optional `$operator` which is set to `or` by default but can be set to `and` if required.
 
 ```js
 query: {
@@ -217,13 +217,13 @@ query: {
       'description'
     ],
     $query: '+like +javascript',
-    $default_operator: 'and'
+    $operator: 'and'
   }
 }
 ```
 This can also be expressed in an URL as the following:
 ```http
-http://localhost:3030/users?$sqs[$fields][]=title^5&$sqs[$fields][]=description&$sqs[$query]=+like +javascript&$sqs[$default_operator]=and
+http://localhost:3030/users?$sqs[$fields][]=title^5&$sqs[$fields][]=description&$sqs[$query]=+like +javascript&$sqs[$operator]=and
 ```
 
 ## Parent-child relationship
