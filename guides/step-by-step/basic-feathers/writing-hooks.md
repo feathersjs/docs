@@ -199,7 +199,7 @@ export default function (cache) {
 ```
 
 Feathers will not make the database call if `hook.result` is set.
-Any remaining before and after hooks are still run, along with the after hooks..
+Any remaining before and after hooks are still run.
 
 Should this hook find a cached record,
 placing it in `hook.result` is the same as if the database had returned the record.
