@@ -40,7 +40,7 @@ module.exports = function() {
 
     // Override the original data
     hook.data = {
-      text,
+      text: text,
       // Set the user id
       userId: user._id,
       // Add the current time via `getTime`
