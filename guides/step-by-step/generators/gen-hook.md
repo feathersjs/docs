@@ -46,6 +46,11 @@ uses the `populateTeams`.
 We told the generator to create an `after` hook for the `find` method,
 and that is when it is being run.
 
+> **ProTip:** What you put in populate-teams.js is up to you.
+You'd likely use the `populate` hook for DB adapters other than Sequelize.
+You may decide to use the more performant internal populate features for Sequelize.
+The generator creates a hook which does nothing.
+
 ## What's next?
 
 The generated code, once again, contains no surprises for us as we have covered it before. Now we can [run our application](./gen-run.md).
