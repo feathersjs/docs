@@ -70,6 +70,7 @@ We issue a find for the entire table and print the results.
 i.e. for the find to finish.
 The zero, one or more items found in the table are returned in the `results` param.
 
+
 | View the completed file [db-connector/1.js.](https://github.com/feathersjs/feathers-docs/blob/master/examples/step/01/db-connector/1.js)
 
 ## Service methods
@@ -85,8 +86,12 @@ patch(id, data, params)
 remove(id, params)
 ```
 
-params may be `{ query: { ... }, ... }` for find;
-also for patch and remove if id is `null`.
+Feathers supports [a common way](../../../api/databses/querying.md)
+for querying, sorting, limiting and selecting find method calls
+as part of `params`, e.g. `{ query: { ... }, ... }`.
+Querying also applies to update, patch and remove method calls if the `id` is set to `null`.
+
+> ** ProTip:** The find method does not guarantee an order for the returned items.
 
 ## Results
 
