@@ -13,7 +13,7 @@ Guide not yet published on the blog.  See the full example app [here](https://gi
 Guide not yet published on the blog.
 
 [**Feathers Chat - Vue.js 2 with `feathers-vuex`**]()<br/>
-Guide not yet published on the blog.  See the full example app [here](https://github.com/feathersjs/feathers-vuex-chat)
+Guide not yet published on the blog.  See the full example app [here](https://github.com/feathersjs/feathers-chat-vuex)
 
 
 ## Vue.js
