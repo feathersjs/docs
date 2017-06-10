@@ -181,6 +181,7 @@ The Feathers client works with React Native but here is a collection of native l
 - [feathers-socket-commons](https://github.com/feathersjs/feathers-socket-commons) ![Official Feathers Module](/img/tiny-feathers-logo.png)
 - [generator-feathers](https://github.com/feathersjs/generator-feathers) ![Official Feathers Module](/img/tiny-feathers-logo.png)
 - [generator-feathers-plugin](https://github.com/feathersjs/generator-feathers-plugin) ![Official Feathers Module](/img/tiny-feathers-logo.png)
+- [feathers-versionate](https://github.com/luke3butler/feathers-versionate) - Utility for creating and working with nested service paths.
 
 
 ## Validation
