@@ -205,13 +205,15 @@ Of particular note are:
 - `className` returns the type of error, e.g. `not-found`.
 Your code can check this field rather than the text of the error message.
 - `errors` can return error messages for individual fields.
-You can customize the format to that expected by your client-side forms handler,
+You can customize the format to that expected by your client-side forms handler.
 ```javascript
 throw new errors.BadRequest('Bad request.', { errors: {
   username: 'Already in use', password: 'Must be at least 8 characters long'
 }});
 ```
 
+This example
+- Shows how to stop a method call by throwing an error.
 
 ## Returning a result
 
