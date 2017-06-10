@@ -1,4 +1,4 @@
-![Feathers Logo](/img/logo-title.jpg)
+![Feathers Logo](https://feathersjs.com/img/feathers-logo-wide.png)
 
 > An open source REST and realtime API layer for modern applications.
 
