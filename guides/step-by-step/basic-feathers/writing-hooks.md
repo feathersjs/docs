@@ -176,6 +176,43 @@ This example
 - Introduces the convenient `getItems` and `replaceItems` utilities.
 
 
+## Throwing an error - disableMultiItemChange [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/services/disable-multi-item-change.js)
+
+You will, sooner or later, want to return an error to the caller, skipping the DB call.
+You can do this by throwing a [Feathers error](../../../api/errors.md).
+
+`disableMultiItemChange` disables update, patch and remove methods from using null as an id.
+
+```javascript
+import errors from 'feathers-errors';
+import checkContext from './check-context';
+
+export default function () {
+  return function (context) {
+    checkContext(context, 'before', ['update', 'patch', 'remove'], 'disableMultiItemChange');
+
+    if (context.id === null) {
+      throw new errors.BadRequest(
+        `Multi-record changes not allowed for ${context.path} ${context.method}. (disableMultiItemChange)`
+      );
+    }
+  };
+}
+```
+
+Feathers errors are flexible, containing [useful fields](../../../api/errors.md).
+Of particular note are:
+- `className` returns the type of error, e.g. `not-found`.
+Your code can check this field rather than the text of the error message.
+- `errors` can return error messages for individual fields.
+You can customize the format to that expected by your client-side forms handler,
+```javascript
+throw new errors.BadRequest('Bad request.', { errors: {
+  username: 'Already in use', password: 'Must be at least 8 characters long'
+}});
+```
+
+
 ## Returning a result
 
 Assume that for a service with static data the record is added to `cache`
