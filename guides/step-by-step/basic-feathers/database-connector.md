@@ -86,7 +86,7 @@ patch(id, data, params)
 remove(id, params)
 ```
 
-Feathers supports [a common way](../../../api/databses/querying.md)
+Feathers supports [a common way](../../../api/databases/querying.md)
 for querying, sorting, limiting and selecting find method calls
 as part of `params`, e.g. `{ query: { ... }, ... }`.
 Querying also applies to update, patch and remove method calls if the `id` is set to `null`.
