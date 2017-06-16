@@ -175,7 +175,7 @@ module.exports = {
 
 This will include the `user` property using the `userId`, retrieving it from the `users` service to all messages.
 
-You can learn more about how the `populate` hook works by checking out he API docs for [`feathers-hooks-common`](/api/hooks-common.md).
+You can learn more about how the `populate` hook works by checking out the API docs for [`feathers-hooks-common`](/api/hooks-common.md).
 
 
 ## What's next?
