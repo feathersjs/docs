@@ -143,7 +143,7 @@ feathersClient.authenticate({
 })
 .then(user => {
   feathersClient.set('user', user);
-  console.log('User', client.get('user'));
+  console.log('User', feathersClient.get('user'));
 })
 .catch(function(error){
   console.error('Error authenticating!', error);
