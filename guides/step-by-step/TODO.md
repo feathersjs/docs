@@ -21,6 +21,107 @@ ryan.wheale [3:50 PM]
 That's one way to do it. The generators are not to be taken "seriously" - they're just a starting point.
 You could also create a single service which accepts a query param to determine what to do - `GET /foo-service?action=[1-12]` (edited)
 
+## How to initialize a service
+```
+app.use('/c', {
+  find() {},
+
+  init() {
+    // Do async initialization
+    return Promise.resolve(); // return a promise
+  }
+});
+
+app.service('c').init().then(() => {
+  app.listen(3030);
+})
+```
+An example might be better to explain what I'm actually trying to achieve and what my problem is. 
+I want to create is a REST API for a Raspbery Pi with a bunch of sensors attached. For this I have a service called `meta` that will store meta-data about a sensor (type, location, and etc.) and a service called `item` that stores the actual reading of a sensor. I will expose the data of `meta` and `item` through a custom service that is called `tree`. 
+I have an initial configuration file that looks like this:
+```[
+    {
+        "item": {
+            "n": "humid",
+            "value type": "number",
+            "gpio": 12
+        },
+        "meta": {
+            "type": "humidity sensor",
+            "location": "room 1"
+        },
+        "endpoint": "/humid"
+    },
+    {
+        "item": {
+            "n": "temp",
+            "value type": "number",
+            "gpio": 10
+        },
+        "meta": {
+            "type": "temp sensor",
+            "location": "room 2"
+        },
+        "endpoint": "/temp"
+    }
+]
+```
+During boot (and before the server starts) two thing must happen:
+1. For each sensor in config file I need to establish the connection with it and wait for the first reading.
+2. Next I will grab the config file and store the data of each meta object in `meta` DB and item object in `item` DB.  ( At this point service `meta` and the `item` must already be running)
+ When this is done I will have a structure that looks like this:
+```{
+    "/": {
+        "temp": {
+            "itemID": "gfd58g1d5g1d5",
+            "metaID": "5gd98g4d81gd5",
+        },
+        "humid": {
+            "itemID": "1234567989",
+            "metaID": "556f5dfd6f5",
+        }
+    }
+}
+```
+This structure will act as a resource tree and it will be stored in the custom service called `tree`. Only after this structure is created I may start the server.
+An example of interaction with this `tree` service will look like this: 
+1 Client makes a request like `GET /tree/temp Content-Type: application/link+json`
+2 `tree`service will search for the requested endpoint in the resource tree structure get the metaID of `temp`
+3  The response will only contain the meta-data about the `temp` sensor.
+
+My first approach was to add to the to the `tree`s constructor (`src/service/tree/tree.class.js`) something like this:
+```class Service {
+  constructor (options) {
+    this.options = options || {}
+    this.tree = boot.bootstrapper('../boot-config.json', this.options.app) --> this will create the resource tree structure presented above
+  }
+
+  find () {...}
+  get () {...}
+}
+```
+But when I start the server it goes up before that `boot.bootstrapper()` get resolved...
+
+So what I need is to delay the start of the server until the `boot.bootstrapper()` get resolved.
+Does this makes sense to you? (edited)
+
+## Timezones
+
+https://www.youtube.com/watch?v=-5wpm-gesOY
+
+Channel #help
+ramsestom [12:12 PM] 
+well it doesn't as dates are converted to UTC (`Z`) by feathers/sequelize before beeing passed to the user as said (If I log received data or debug on the server I can see that what is stored as `1980-12-24 00:00:00+01` in my postgresql database has become `1980-12-23T23:00:00.000Z` in feathers json objects as I said.... (edited)
+
+ryan.wheale [12:15 PM] 
+That's a JSON thing, as feathers/express is going to convert data to JSON before transporting the data over the wire.
+
+[12:16] 
+You could override the `toJSON` method on your date object to generate a non-zulu ISO timestamp
+
+ramsestom [12:17 PM] 
+yes seems to be the solution
+
 ## Solid example
 
 genyded commented on Mar 8

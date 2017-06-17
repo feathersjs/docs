@@ -156,7 +156,7 @@ app.service('users').before({
 
 __Options:__
 
-- providers (*optional*, default: disallows everything) - The transports that you want to disallow this service method for. Options are:
+- `providers` (*optional*, default: disallows everything) - The transports that you want to disallow this service method for. Options are:
     - `socketio` - will disallow the method for the Socket.IO provider
     - `primus` - will disallow the method for the Primus provider
     - `rest` - will disallow the method for the REST provider
