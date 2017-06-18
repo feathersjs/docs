@@ -61,7 +61,7 @@ It receives an array as a parameter.
 The n-th element of the array is the resolved value of the n-th element in Promise.all.
 
 
-The 3 user items are now are in the database, their values are returned in `results`.
+The 3 user items are now in the database, their values are returned in `results`.
 We issue a find for the entire table and print the results.
 [import:'results'](../../../examples/step/01/db-connector/1.js)
 
