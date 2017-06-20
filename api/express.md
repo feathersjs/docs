@@ -61,7 +61,7 @@ Will set `params.query` to
 }
 ```
 
-For additional query string examples see the [database querying](./databases/querying.md) chatper.
+For additional query string examples see the [database querying](./databases/querying.md) chapter.
 
 > **ProTip:** Since the URL is just a string, there will be **no type conversion**. This can be done manually in a [hook](./hooks.md).
 
