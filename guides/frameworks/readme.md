@@ -7,7 +7,7 @@ These guides show how to integrate the [Feathers Chat application](../chat/readm
 While we're working on the guides, you can check out example applications in the [feathers-chat](https://github.com/feathersjs/feathers-chat) and [feathers-vuex-chat](https://github.com/feathersjs/feathers-vuex-chat) repos.
 
 [**Feathers Chat - React**]()<br/>
-Guide not yet published on the blog.  See the full example app [here](https://github.com/feathersjs/feathers-chat/tree/master/public/react)
+Guide not yet published on the blog.  See the full example app [here](https://github.com/feathersjs/feathers-chat-react)
 
 [**Feathers Chat - Vue.js 2**]()<br/>
 Guide not yet published on the blog.
