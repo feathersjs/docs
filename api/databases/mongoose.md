@@ -157,6 +157,21 @@ app.listen(port, () => {
 
 You can run this example by using `node app` and go to [localhost:3030/messages](http://localhost:3030/messages).
 
+## Querying, Validation
+
+Mongoose by default gives you the ability to add [validations at the model level](http://mongoosejs.com/docs/validation.html). Using an error handler like the one that [comes with Feathers](https://github.com/feathersjs/feathers-errors/blob/master/src/error-handler.js) your validation errors will be formatted nicely right out of the box!
+
+For more information on querying and validation refer to the [Mongoose documentation](http://mongoosejs.com/docs/guide.html).
+
+### $populate
+
+For Mongoose, the special `$populate` query parameter can be used to allow [Mongoose query population](http://mongoosejs.com/docs/populate.html).
+
+```js
+app.service('posts').find({
+  query: { $populate: 'user' }
+});
+```
 
 ## Discriminators (Inheritance)
 
@@ -206,10 +221,3 @@ Now in your query, you can specify a value for your discriminatorKey:
 ```
 
 and Feathers will automatically swap in the correct model and execute the query it instead of its parent model.
-
-
-## Querying, Validation
-
-Mongoose by default gives you the ability to add [validations at the model level](http://mongoosejs.com/docs/validation.html). Using an error handler like the one that [comes with Feathers](https://github.com/feathersjs/feathers-errors/blob/master/src/error-handler.js) your validation errors will be formatted nicely right out of the box!
-
-For more information on querying and validation refer to the [Mongoose documentation](http://mongoosejs.com/docs/guide.html).
