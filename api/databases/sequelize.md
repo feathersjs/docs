@@ -145,7 +145,7 @@ Additionally to the [common querying mechanism](./querying.md) this adapter also
 
 ## Associations and relations
 
-Follow up in the [Sequelize documentation for associations](http://docs.sequelizejs.com/en/v3/docs/associations/), [this issue](https://github.com/feathersjs/feathers-sequelize/issues/20) and [this example for many to many relationships](https://github.com/feathersjs/feathers-demos/tree/master/examples/app-structure/many-to-many-sequelize).
+Follow up in the [Sequelize documentation for associations](http://docs.sequelizejs.com/en/v3/docs/associations/), [this issue](https://github.com/feathersjs/feathers-sequelize/issues/20) and [this Stackoverflow answer](https://stackoverflow.com/questions/42841810/feathers-js-sequelize-service-with-relations-between-two-models/42846215#42846215).
 
 ## Working with Sequelize Model instances
 
