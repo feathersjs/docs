@@ -116,6 +116,8 @@ app.authenticate({
 
 ## Direct Usage
 
+### Using a HTTP Request
+
 If you are not using the `feathers-authentication-client` and you have registered this module server side then you can simply include the access token in an `Authorization` header.
 
 Here is what that looks like with curl:
@@ -123,3 +125,22 @@ Here is what that looks like with curl:
 ```bash
 curl -H "Content-Type: application/json" -H "Authorization: <your access token>" -X POST http://localhost:3030/authentication
 ```
+
+### Using Sockets
+
+Authenticating using an access token via sockets is done by emitting the following message:
+
+```js
+const io = require('socket.io-client');
+const socket = io('http://localhost:3030');
+
+socket.emit('authenticate', {
+  strategy: 'jwt',
+  accessToken: 'your token'
+}, function(message, data) {
+  console.log(message); // message will be null
+  console.log(data); // data will be {"accessToken": "your token"}
+  // You can now send authenticated messages to the server
+});
+```
+
