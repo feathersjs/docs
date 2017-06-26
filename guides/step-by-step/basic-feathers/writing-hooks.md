@@ -28,7 +28,7 @@ a new context object, or `undefined`.
 
 
 
-> **ProTip** Mutating the `context` param inside a hook function
+> **ProTip** Mutating the `context` param inside a hook function without returning it
 does not change the context object passed to the next hook.
 
 Let's review the source of some of the [common hooks](../../../api/hooks-common.md)
