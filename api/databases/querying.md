@@ -208,3 +208,19 @@ app.service('messages').find({
 ```
 GET /messages?$or[0][archived][$ne]=true&$or[1][roomId]=2
 ```
+
+## `$search`
+`$search` is not a public API, but may be added through hooks. For example, hooks exists for NeDB and MongoDB:
+
+- [feathers-nedb-fuzzy-search](https://www.npmjs.com/package/feathers-nedb-fuzzy-search)
+- [feathers-mongodb-fuzzy-search](https://www.npmjs.com/package/feathers-mongodb-fuzzy-search)
+
+Example usage:
+```js
+// Find all messages that contains the text 'hello'
+app.service('messages').find({
+  query: {
+    $search: 'hello'
+  }
+});
+```
