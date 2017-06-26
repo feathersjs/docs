@@ -140,6 +140,8 @@ app.authenticate({
 
 ## Direct Usage
 
+### Using a HTTP Request
+
 If you are not using the `feathers-authentication-client` and you have registered this module server side then you can simply make a `POST` request to `/authentication` with the following payload:
 
 ```json
@@ -156,3 +158,23 @@ Here is what that looks like with curl:
 ```bash
 curl -H "Content-Type: application/json" -X POST -d '{"strategy":"local","email":"your email","password":"your password"}' http://localhost:3030/authentication
 ```
+
+### Using Sockets
+
+Authenticating using a local strategy via sockets is done by emitting the following message:
+
+```js
+const io = require('socket.io-client');
+const socket = io('http://localhost:3030');
+
+socket.emit('authenticate', {
+  strategy: 'local',
+  email: 'your email',
+  password: 'your password'
+}, function(message, data) {
+  console.log(message); // message will be null
+  console.log(data); // data will be {"accessToken": "your token"}
+  // You can now send authenticated messages to the server
+});
+```
+
