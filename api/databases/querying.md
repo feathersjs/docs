@@ -224,3 +224,7 @@ app.service('messages').find({
   }
 });
 ```
+
+```
+GET /messages?$search=hello
+```
