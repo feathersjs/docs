@@ -46,7 +46,7 @@ Submit yours by creating a pull request.
 - [Observables with Angular2 and FeathersJS](https://berndsgn.ch/angular2-and-feathersjs)
 - [Feathers + React + Redux + Webpack + local auth. Production quality](https://github.com/eddyystop/feathers-starter-react-redux-login-roles).
 - [Live query. Mirror part of a DB on the client.](https://github.com/eddyystop/feathers-live-query)
-- [Feathers + React + Redux + Webpack + complete auth + offline mode (with generator & ideal for production)](https://github.com/bertho-zero/react-redux-universal-hot-example)
+- [Feathers + React + Redux + Webpack + complete auth + offline mode (ideal for production)](https://github.com/bertho-zero/react-redux-universal-hot-example)
 - [Build a CRUD App Using React, Redux and FeathersJS](https://www.sitepoint.com/crud-app-react-redux-feathersjs/)
 - [feathers-nuxt](https://github.com/silvestreh/feathers-nuxt) - A sample/starter for server-side rendered Vue.js + Feathers applications that supports user authentication
 
