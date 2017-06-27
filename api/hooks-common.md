@@ -922,7 +922,7 @@ purchaseOrders.get(id, paramsForServer({ schema: 'po-rec' }));
 // on server
 import { paramsFromClient } from 'feathers-hooks-common';
 const poSchemas = {
-  'po-acct': /* populate schema for Accounting oriented PO e.g. { schema: { ...} } */,
+  'po-acct': /* populate schema for Accounting oriented PO e.g. { include: ... } */,
   'po-rec': /* populate schema for Receiving oriented PO */
 };
 
@@ -931,7 +931,7 @@ purchaseOrders.before({
 });
 
 purchaseOrders.after({
-  all: populate(hook => poSchemas[hook.params.schema])
+  all: populate({ schema: hook => poSchemas[hook.params.schema] }),
 });
 ```
 
