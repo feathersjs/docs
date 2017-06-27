@@ -912,24 +912,26 @@ The following example shows how the client can ask for the type of schema it nee
 
 ```javascript
 // on client
-purchaseOrders.get(id, { query: { $client: { schema: 'po-acct' }}}) // pass schema name to server
+import { paramsForServer } from 'feathers-hooks-common';
+purchaseOrders.get(id, paramsForServer({ schema: 'po-acct' })); // pass schema name to server
 // or
-purchaseOrders.get(id, { query: { $client: { schema: 'po-rec' }}})
+purchaseOrders.get(id, paramsForServer({ schema: 'po-rec' }));
 ```
 
 ```javascript
 // on server
+import { paramsFromClient } from 'feathers-hooks-common';
 const poSchemas = {
-  'po-acct': { /* populate schema for Accounting oriented PO */},
-  'po-rec': { /* populate schema for Receiving oriented PO */}
+  'po-acct': /* populate schema for Accounting oriented PO e.g. { schema: { ...} } */,
+  'po-rec': /* populate schema for Receiving oriented PO */
 };
 
 purchaseOrders.before({
-  all: $client('schema')
+  all: paramsfromClient('schema')
 });
 
 purchaseOrders.after({
-  all: populate(() => poSchemas[hook.params.schema])
+  all: populate(hook => poSchemas[hook.params.schema])
 });
 ```
 
