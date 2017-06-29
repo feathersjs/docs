@@ -42,7 +42,7 @@ users is the only service we need and it's a database table located at examples/
 ## Create 3 users using Promises.
 [import:'create'](../../../examples/step/01/db-connector/1.js)
 Each create returns a promise which resolves into the item added into the database.
-NeDB will always adds a unique `_id` property to the user item and the returned item will contain it.
+NeDB will always add a unique `_id` property to the user item and the returned item will contain it.
 
 > **Callbacks and Promises.**
 `users.create({ ... }, {}, (err, data) => { ... })`
