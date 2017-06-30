@@ -10,6 +10,7 @@ We also have a very helpful community in Slack.
 
 - [BeachfrontDigital](https://beachfront.digital)
 - [ContactImpact](https://www.contactimpact.de)
+- [Equibit Group](https://equibitgroup.com/)
 - [Foxflow](https://www.foxflow.com/)
 - [GenerousTickets](https://generoustickets.com/)
 - [Gratify](https://gratifyhq.com)
