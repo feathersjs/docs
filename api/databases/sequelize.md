@@ -32,7 +32,7 @@ Returns a new service instance initialized with the given options.
 
 ```js
 const Model = require('./models/mymodel');
-const sequelize = service('feathers-sequelize');
+const service = service('feathers-sequelize');
 
 app.use('/messages', service({ Model }));
 app.use('/messages', service({ Model, id, events, paginate }));
