@@ -10,7 +10,7 @@ On the server, a Feathers application acts as a drop-in replacement for any [Exp
 All middleware registered after the [REST transport](./rest.md) will have access to the `req.feathers` object to set properties on the service method `params`:
 
 ```js
-const app = require('feathers');
+const app = require('feathers')();
 const rest = require('feathers-rest');
 const bodyParser = require('body-parser');
 
