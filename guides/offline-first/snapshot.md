@@ -9,7 +9,7 @@ When synchronization occurs, the entire snapshot is generated and sent to client
 
 Using Snapshot by itself is most appropriate when one or more of the following is true:
 - Data changes infrequently.
-- It is acceptable to have copies of data that are out of date with respect to the rempte service for a period of time.
+- It is acceptable to have copies of data that are out of date with respect to the remote service for a period of time.
 - Replicating small or medium volumes of data.
 - A large volume of changes occurs over a short period of time.
 - Keep the current values after having lost connection for some time.

@@ -16,7 +16,6 @@ Realtime is appropriate in each of the following cases:
 For example, if a row changes five times, realtime allows an application to respond to each change
 (such as running hooks), not simply to the net data change to the row.
 - The remote has a very high volume of create, update, patch, and remove activity.
-- Realtime should be treated as **read-only**, because local changes are not propagated back to the remote.
 
 ## Realtime Case Study
 
@@ -25,7 +24,7 @@ Let's consider an application which shows historical stock prices.
 ![stock price panel](./assets/realtime-3a.jpg)
 
 The realtime strategy would snapshot the initial historical data.
-It would then the local data with every addition or other mutation made on the remote.
+It would then update the local data with every addition or other mutation made on the remote.
 
 
 #### Sources:
