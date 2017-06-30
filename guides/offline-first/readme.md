@@ -20,7 +20,7 @@ On the opposite end of the spectrum are applications that automatically deal wit
 
 Offline first is a way of building applications where having network connectivity is an enhancement, not a necessity. Instead of building applications with the always-on desktop mindset, when you build applications in which the default mode is offline, you’re prone to deliver a better overall customer experience.
 
-Offline-first techniques and technologies exist to prepare an application to deliver a good experience to customers while it’s offline.
+Offline first techniques and technologies exist to prepare an application to deliver a good experience to customers while it’s offline.
  
 (*)
 
@@ -52,11 +52,14 @@ You can use tools, such as those provided by IBM, which maintain only one databa
 
 A second issue is that the remote and local databases synchronize by replication.
 The only way to make replication realtime is to start a synchronization cycle every time any data changes on either the remote of the local database.
-This is a lot of overhead especially on the server.
+
+This is overhead to consider even when you have one database per client.
+When the same data is shared by clients, providing realtime updates to all of them is problematic, 
+as a replication cycle is needed for each client.
 
 ## Feathers Offline First
 
-Feathers has unique foundational features which are useful for implementing offline-first.
+Feathers has unique foundational features which are useful for implementing offline first.
 
 First, local applications can easily mutate remote databases.
 This means we can add a hook to a local database so that, whenever it is locally mutated, the hook can optimistically mutate the remote database.
