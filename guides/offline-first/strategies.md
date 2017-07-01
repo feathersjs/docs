@@ -1,6 +1,6 @@
 # Strategies
 
-## Comparison of Strategies
+### Comparison of Strategies
 
 Feathers offline-first provides several increasingly sophisticated strategies.
 Its generally straightforward to change your application to use a more sophisticated one (except for snapshot).
