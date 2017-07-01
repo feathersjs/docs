@@ -16,7 +16,7 @@ The features for each strategy are shown below.
 | - using query syntax              | Y         | Y         | Y                   | Y     | Y     |             |
 | - using JS functions              | -         | Y         | Y                   | Y     | Y     |             |
 | **Snapshot data on connect**      | Y         | Y         | Y                   | Y     | Y     |             |
-| **Is a uuid field required?**     | -         | -         | Y                   | Y     | Y     |             |
+| **Is a uuid(1) field required?**  | -         | -         | Y                   | Y     | Y     |             |
 |                                   |           |           |                     |       |       |             |
 | **Remote changes mutate client**  | -         | Y         | Y                   | Y     | Y     |             |
 | - minimal service events          | -         | Y         | Y                   | Y     | Y     |             |
@@ -32,8 +32,9 @@ The features for each strategy are shown below.
 | - Conflict resolution handling    | -         | -         | -                   | -     | Y     |             |
 | **Snapshot data on reconnect**    | -         | Y         | Y                   | Y     | Y     |             |
 |                                   |           |           |                     |       |       |             |
-| **Repository**                    | (1) | (2) | (3) | tba | tba | tba | tba | tba |
+| **Repository**                    | (2) | (3) | (4) | tba | tba | tba | tba | tba |
 
+- (1) [Universally unique identifier](https://en.wikipedia.org/wiki/Universally_unique_identifier) (uuid)
 - (1) feathers-offline-snapshot
 - (2) feathers-offline-realtime
 - (3) feathers-offline-realtime with /optimistic-mutator
