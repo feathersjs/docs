@@ -49,6 +49,7 @@
     * [Recipe: Mixed Auth Endpoints](guides/auth/recipe.mixed-auth.md)
     * [Recipe: Basic OAuth](guides/auth/recipe.oauth-basic.md)
   * [Offline first](guides/offline-first/readme.md)
+    * [Strategies](guides/offline-first/strategies.md)
     * [Snapshot](guides/offline-first/snapshot.md)
     * [Realtime](guides/offline-first/realtime.md)
   * [Advanced topics](guides/advanced/readme.md)

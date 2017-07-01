@@ -1,4 +1,4 @@
-# Offline First
+# Offline-first
 
 ## The Landscape
 
@@ -16,11 +16,11 @@ On the opposite end of the spectrum are applications that automatically deal wit
 
 (*)
 
-## What is Offline First?
+## What is Offline-first?
 
-Offline first is a way of building applications where having network connectivity is an enhancement, not a necessity. Instead of building applications with the always-on desktop mindset, when you build applications in which the default mode is offline, you’re prone to deliver a better overall customer experience.
+Offline-first is a way of building applications where having network connectivity is an enhancement, not a necessity. Instead of building applications with the always-on desktop mindset, when you build applications in which the default mode is offline, you’re prone to deliver a better overall customer experience.
 
-Offline first techniques and technologies exist to prepare an application to deliver a good experience to customers while it’s offline.
+Offline-first techniques and technologies exist to prepare an application to deliver a good experience to customers while it’s offline.
  
 (*)
 
@@ -30,7 +30,7 @@ The only way that an application can access data while it’s offline is, of cou
 
 Your application prefers reading from the local source, while that local data is updated from remote sources.
 
-## The First Generation of Offline First (*)
+## The First Generation of Offline-first (*)
 
 Some database technologies exist that work on the client side. SQLite is the reference of embeddable databases and it’s often used on native applications. In the web realm, PouchDB offers a document store on top of the storage the browser offers. PouchDB also has some nice features —  it can sync with a back-end CouchDB server, Cloudant, a PouchDB Node.js server or any other database that implements the CouchDB replication protocol.
 
@@ -57,9 +57,9 @@ This is overhead to consider even when you have one database per client.
 When the same data is shared by clients, providing realtime updates to all of them is problematic, 
 as a replication cycle is needed for each client.
 
-## Feathers Offline First
+## Feathers Offline-first
 
-Feathers has unique foundational features which are useful for implementing offline first.
+Feathers has unique foundational features which are useful for implementing offline-first.
 
 First, local applications can easily mutate remote databases.
 This means we can add a hook to a local database so that, whenever it is locally mutated, the hook can optimistically mutate the remote database.
@@ -70,15 +70,15 @@ Second, local applications know when a remote database is mutated as that mutati
 
 ![realtime events](./assets/realtime-events-flow.jpg)
 
-Feathers Offline First therefore reacts in realtime when connected, employing a replication strategy only when disconnected.
+Feathers offline-first therefore reacts in realtime when connected, employing a replication strategy only when disconnected.
 This makes applications using it less sluggish.
 
-Importantly, Feathers Offline First allows a client database to reflect only a portion of the remote database.
+Importantly, Feathers offline-first allows a client database to reflect only a portion of the remote database.
 So information for all customers can reside in one database, with each client seeing only those items its allowed to.
 
 ## No universal solution
 
-There is no one universal solution to implementing offline first. The end.
+There is no one universal solution to implementing offline-first. The end.
 
 For each application, you have to:
 - assess the problem
@@ -90,7 +90,7 @@ For each application, you have to:
 Many mobile applications only need a read-only local database which is infrequently refreshed.
 Why would you implement a complex replication strategy in such cases?
 
-Feathers Offline First provides several strategies for implementing offline first.
+Feathers offline-first provides several strategies for implementing offline-first.
 Determine your application's needs and then choose the simplest strategy which satisfies them.
 
 #### Sources:
