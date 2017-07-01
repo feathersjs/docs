@@ -185,7 +185,11 @@ There is virtually
 [no chance of collision](https://github.com/dylang/shortid/issues/81#issuecomment-259812835)
 unless you work at high scale.
 
-You can change the default to use 32-char uuid values by running `replicator.useShortUuid(false);`.
+You can change the default to use the standard 32-char uuid values by running
+```javascript
+const messagesRealtime = new Realtime(messages, { ... });
+messagesRealtime.useShortUuid(false);
+```
 
 > **ProTip:** Two events are emitted for each optimistic mutation of the client replica.
 The first occurs when the client replica is mutated.
