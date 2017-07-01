@@ -10,8 +10,8 @@ Its generally straightforward to change your application to use a more sophistic
 The features for each strategy are shown below.
 
 
-| Feature                           | snap shot | real time | optimistic mutation | own-data | own-net | sync-data | sync-net | time-travel |
-|-----------------------------------|-----------|-----------|---------------------|----------|---------|-----------|----------|-------------|
+| Feature...................        | snap shot | real time | optimistic mutation | own-data | own-net | sync-data | sync-net | time-travel |
+|-|-|-|-|-|-|-|-|-|
 | **Replicate partial table**       |           |           |                     |          |         |           |          |             |
 | - using query syntax              | Y         | Y         | Y                   | Y        | Y       | Y         | Y        |             |
 | - using JS functions              | -         | Y         | Y                   | Y        | Y       | Y         | Y        |             |
