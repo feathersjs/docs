@@ -1,4 +1,4 @@
-# sync-data and sync-net
+# Sync-data and Sync-net
 
 ## What are the sync-data and sync-net strategies?
 
@@ -8,7 +8,7 @@ and help the server resolve them.
 
 Each queue entry contains the contents of the record before the mutation.
 So each queue-entry for sync-data contains what the record contained on the client before each mutation.
-Each entry for sync-data contains what the record contained before the series of mutations.
+Each entry for sync-net contains what the record contained before the series of mutations.
 
 The remote service, when processing the queued entries,
 compares what the client service record contained before the mutation to what the remote service's record currently contains.
@@ -44,7 +44,7 @@ The resolver may indicate:
 ![sync conflict output](./assets/sync-1c.jpg)
 
 This allows the remote service great control over conflicts.
-However, in your particular use case, it may be appropriate to adapt as last-mutation-wins strategy
+However, in your particular use case, it may be appropriate to adapt a last-mutation-wins strategy
 and also use the client service's mutation.
 
 Other use cases may require analyzing the contents of the two records and applying business rules.

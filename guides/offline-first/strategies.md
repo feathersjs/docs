@@ -19,11 +19,11 @@ The features for each strategy are shown below.
 | **Is a uuid field required?**     | -         | -         | Y                   | Y        | Y       | Y         | Y        |             |
 |                                   |           |           |                     |          |         |           |          |             |
 | **Remote changes mutate client**  | -         | Y         | Y                   | Y        | Y       | Y         | Y        |             |
-| - minimize service events         | -         | Y         | Y                   | Y        | Y       | Y         | Y        |             |
+| - minimal service events          | -         | Y         | Y                   | Y        | Y       | Y         | Y        |             |
 |                                   |           |           |                     |          |         |           |          |             |
 | **Client can mutate remote data** |           |           |                     |          |         |           |          |             |
 | - with remote service calls       | -         | Y         | Y                   | Y        | Y       | Y         | Y        |             |
-| - with optimistic client mutation | -         |           | Y                   | Y        | Y       | Y         | Y        |             |
+| - optimistic client mutation      | -         |           | Y                   | Y        | Y       | Y         | Y        |             |
 | **Keep queue while disconnected** |           |           |                     |          |         |           |          |             |
 | - Keep every call                 | -         | -         | -                   | Y        | -       | Y         | -        |             |
 | - Only record net change          | -         | -         | -                   | -        | Y       | -         | Y        |             |
