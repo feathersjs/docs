@@ -117,7 +117,7 @@ you can always make direct remote service calls and live with the latency.
 Optimistic mutation requires that the records contain a
 [uuid](https://en.wikipedia.org/wiki/Universally_unique_identifier)
 property.
-Its the only way the replicator can match an optimistic create to the created service event.
+()Its the only way the replicator can match an optimistic create to the created service event.)
 
 > **ProTip:** The `id` value for optimistic mutation service calls
 must be the value of the `uuid` property in the data.
@@ -136,3 +136,6 @@ You can configure use of the 32-char uuid, instead of the default shorter value,
 const messagesRealtime = new Realtime(messages, { ... });
 messagesRealtime.useShortUuid(false);
 ```
+
+> **ProTip:** The replicator can provide you with uuid's for other purposes with
+`messagesRealtime.getUuid()`.
