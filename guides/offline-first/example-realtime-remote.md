@@ -3,35 +3,16 @@
 | Let's see how mutations on the server are handled by realtime replication,
 along with disconnections and reconnections.
 
-Realtime starts with a snapshot of the remote database data.
+Realtime starts with a snapshot of the remote service data.
 Subsequent data changes made at the remote are delivered to the client as they occur in near real time.
 The data changes are applied at the client in the same order as they occurred at the remote.
 
 Replication stops when communication is lost with the server.
 It can be restarted on reconnection.
 
-## Replicate the entire file
-
-The client service will contain all the same records as the remote service.
-All service events are emitted to the client, because they are all required.
-
-Configure the replication and start it:
-```javascript
-import Realtime from 'feathers-offline-realtime';
-const stockRemote = feathersApp.service('/stock');
-
-const stockRealtime = new Realtime(stockRemote);
-
-stockRealtime.connect()
-  .then(() => {
-    console.log(stockRealtime.connected);
-    console.log(stockRealtime.store.records);
-  });
-```
-
 #### Example
 
-You can run an example using this strategy.
+You can run this example with:
 ```text
 cd path/to/feathers-mobile/examples
 npm install
@@ -41,7 +22,28 @@ npm start
 ```
 Then point a browser at `localhost:3030`.
 
-A snapshot of the remote service is made to the client when replication starts.
+You can see the client source
+[here](https://github.com/feathersjs/feathers-docs/blob/master/examples/offline/realtime-1/client/index.js),
+[here](https://github.com/feathersjs/feathers-docs/blob/master/examples/offline/realtime-1/client/1-third-party.js)
+and [here](https://github.com/feathersjs/feathers-docs/blob/master/examples/offline/realtime-1/client/2-reconnect.js).
+
+
+## Replicate the entire file
+
+The client replica will contain the same data as the remote service.
+All service events are emitted to the client, because they are all required.
+
+Configure the replication and start it:
+```javascript
+import Realtime from 'feathers-offline-realtime';
+const stockRemote = feathersApp.service('/stock');
+
+const stockRealtime = new Realtime(stockRemote);
+
+stockRealtime.connect().then( ... );
+```
+
+A snapshot of the remote service data is sent to the client when replication starts.
 ```text
 ===== stockRemote, before mutations
 {dept: "a", stock: "a1", _id: "fY6ezNH9Rlw2WVzX"}
@@ -49,6 +51,11 @@ A snapshot of the remote service is made to the client when replication starts.
 {dept: "a", stock: "a3", _id: "b2wVdYJeiCNTGLc6"}
 {dept: "a", stock: "a4", _id: "wtTVYE15plCOb2vW"}
 {dept: "a", stock: "a5", _id: "cnWD1Yzr8WJruOfi"}
+```
+```javascript
+stockRealtime.store.records.forEach(record => console.log(record))
+```
+```text
 ===== clientReplica, before mutations
 {dept: "a", stock: "a2", _id: "7a0b00diX18WO3Gm"}
 {dept: "a", stock: "a3", _id: "b2wVdYJeiCNTGLc6"}
@@ -93,8 +100,8 @@ stockRemote.create stock: a98
 stockRemote.remove stock: a5
 ```
 
-After we infor the replicator of a reconnection,
-the client replica is brought up to data with a snapshot.
+After we inform the replicator of a reconnection,
+the client replica is brought up to data with a new snapshot.
 ```javascript
 stockRealtime.connect();
 ```
