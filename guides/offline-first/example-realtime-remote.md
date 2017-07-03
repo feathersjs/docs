@@ -11,7 +11,7 @@ It can be restarted on reconnection.
 
 #### Running the example
 
-| Let's see how mutations made on the server are handled by realtime replication,
+> Let's see how mutations made on the server are handled by realtime replication,
 along with disconnections and reconnections.
 
 You can run this example with:
@@ -32,10 +32,10 @@ You can see the client source
 [here](https://github.com/feathersjs/feathers-docs/blob/master/examples/offline/realtime-1/client/1-third-party.js)
 and [here](https://github.com/feathersjs/feathers-docs/blob/master/examples/offline/realtime-1/client/2-reconnect.js).
 
-#### Looking at the log on the client console
+#### Looking at the log
 
 The client replica will contain the same data as the remote service.
-All service events are emitted to the client, because they are all required.
+All service events are emitted to the client because they are all required.
 
 Configure the replication and start it:
 
@@ -64,7 +64,7 @@ stockRealtime.store.records.forEach(record => console.log(record))
 ```
 
 ```text
-===== clientReplica, before mutations
+===== client replica, before mutations
 {dept: "a", stock: "a2", _id: "7a0b00diX18WO3Gm"}
 {dept: "a", stock: "a3", _id: "b2wVdYJeiCNTGLc6"}
 {dept: "a", stock: "a5", _id: "cnWD1Yzr8WJruOfi"}
@@ -90,7 +90,7 @@ The mutations are replicated to the client.
 {dept: "a", stock: "a4", _id: "wtTVYE15plCOb2vW"}
 {dept: "a", stock: "a5", _id: "cnWD1Yzr8WJruOfi"}
 {dept: "a", stock: "a99", _id: "Yiu8R0fHQkEaGjPz"}
-===== clientReplica, after mutations
+===== client replica, after mutations
 {dept: "a", stock: "a3", _id: "b2wVdYJeiCNTGLc6"}
 {dept: "a", stock: "a5", _id: "cnWD1Yzr8WJruOfi"}
 {dept: "a", stock: "a4", _id: "wtTVYE15plCOb2vW"}
@@ -127,7 +127,7 @@ stockRealtime.connect();
 {dept: "a", stock: "a4", _id: "wtTVYE15plCOb2vW"}
 {dept: "a", stock: "a98", _id: "XCZorVYjeHBlwz93"}
 {dept: "a", stock: "a99", _id: "Yiu8R0fHQkEaGjPz"}
-===== clientReplica, after reconnection
+===== client replica, after reconnection
 {dept: "a", stock: "a98", _id: "XCZorVYjeHBlwz93"}
 {dept: "a", stock: "a99", _id: "Yiu8R0fHQkEaGjPz"}
 {dept: "a", stock: "a3", _id: "b2wVdYJeiCNTGLc6", foo: 1}
