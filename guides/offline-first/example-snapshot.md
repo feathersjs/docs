@@ -1,6 +1,7 @@
 # Snapshot replication example
 
-You can see the [source]().
+You can see the
+[source](https://github.com/feathersjs/feathers-docs/blob/master/examples/offline/snapshot/client/2-snapshot-service.js).
 
 ## Snapshot the entire file
 

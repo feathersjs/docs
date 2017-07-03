@@ -59,6 +59,7 @@
     * [Configure realtime](guides/offline-first/configure-realtime.md)
     * [Configure publication](guides/offline-first/configure-publication.md)
     * [Example snapshot](guides/offline-first/example-snapshot.md)
+    * [Example realtime](guides/offline-first/example-realtime.md)
     * [Tests as examples](guides/offline-first/example-tests.md)
   * [Advanced topics](guides/advanced/readme.md)
     * [Debugging](guides/advanced/debugging.md)
