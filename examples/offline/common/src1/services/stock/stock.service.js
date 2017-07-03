@@ -2,9 +2,9 @@
 
 // Initializes the `remoteService` service on path `/remote-service`
 const createService = require('../../../../node_modules/feathers-nedb');
-const createModel = require('../../models/remote-service.model');
-const hooks = require('./remote-service.hooks');
-const filters = require('./remote-service.filters');
+const createModel = require('../../models/stock.model');
+const hooks = require('./stock.hooks');
+const filters = require('./stock.filters');
 
 module.exports = function () {
   const app = this;
@@ -12,16 +12,16 @@ module.exports = function () {
   const paginate = app.get('paginate');
 
   const options = {
-    name: 'remote-service',
+    name: 'stock',
     Model,
     paginate
   };
 
   // Initialize our service with any options it requires
-  app.use('/remote-service', createService(options));
+  app.use('/stock', createService(options));
 
   // Get our initialized service so that we can register hooks and filters
-  const service = app.service('remote-service');
+  const service = app.service('stock');
 
   service.hooks(hooks);
 

@@ -3,12 +3,12 @@ const snapshot = require('feathers-offline-snapshot');
 const { sortArrayByProp } = require('../../common/utils');
 
 module.exports = function (feathersApp, recCount) {
-  const remoteService = feathersApp.service('remote-service');
+  const stockRemote = feathersApp.service('stock');
   
   return Promise.resolve()
 
   // Example 1
-    .then(() => snapshot(remoteService))
+    .then(() => snapshot(stockRemote))
     .then(result => {
       console.log('===== snapshot, all records');
     
@@ -18,7 +18,7 @@ module.exports = function (feathersApp, recCount) {
     })
 
     // Example 2
-    .then(() => snapshot(remoteService, { dept: 'a', $sort: { stock: 1 } }))
+    .then(() => snapshot(stockRemote, { dept: 'a', $sort: { stock: 1 } }))
     .then(result => {
       console.log('===== snapshot, dept: \'a\'');
     
