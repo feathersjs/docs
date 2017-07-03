@@ -1,10 +1,11 @@
-# Example of a snapshot replication
-
-| Let's look at some snapshot replications.
+# Examples of snapshot replication
 
 #### Example
 
-You can run an example using this strategy.
+| Let's look at some snapshot replications.
+
+You can run this example with
+
 ```text
 cd path/to/feathers-docs/examples/offline
 npm install
@@ -12,6 +13,7 @@ cd ./snapshot
 npm run build
 npm start
 ```
+
 Then point a browser at `localhost:3030`.
 
 You can see the client source
@@ -22,6 +24,7 @@ and [here](https://github.com/feathersjs/feathers-docs/blob/master/examples/offl
 ## Snapshot the entire collection
 
 The remote service data is
+
 ```text
 ===== Read stockRemote service directly
 {dept: "a", stock: "a1", _id: "LANJQx24cg9Jy2Hr"}
@@ -37,13 +40,15 @@ The remote service data is
 ```
 
 Snapshot all of it.
-```js
+
+```javascript
 const snapshot = require('feathers-offline-snapshot');
 const stockRemote = app.service('/stock');
 
 snapshot(stockRemote)
   .then(records => console.log(records));
 ```
+
 ```text
 ===== snapshot, all records
 {dept: "a", stock: "a1", _id: "LANJQx24cg9Jy2Hr"}
@@ -58,20 +63,16 @@ snapshot(stockRemote)
 {dept: "b", stock: "b5", _id: "4RQ5BL8PHER5DEGX"}
 ```
 
-## Snapshot a portion of the file
+## Snapshot part of the collection
 
-Snapshot part of it.
 ```javascript
 const snapshot = require('feathers-offline-snapshot');
 const stockRemote = app.service('/stock');
 
-snapshot(stockRemote, { dept: 'a' })
+snapshot(stockRemote, { dept: 'a', $sort: { stock: 1 } })
   .then(records => console.log(records));
 ```
 
-#### Example
-
-The above example also runs this, reading part of the file.
 ```text
 ===== snapshot, dept: 'a'
 {dept: "a", stock: "a1", _id: "LANJQx24cg9Jy2Hr"}
