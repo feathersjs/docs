@@ -17,10 +17,9 @@ This capability allows us to code integration tests, testing end to end, within 
 You will see this design being used in the more complicated tests, e.g. feathers-offline-publication.
 
 [**Snapshot**](https://github.com/feathersjs/feathers-offline-snapshot/blob/master/test/snapshot.test.js)
-
-    - non-paginated service
-    - paginated service
-    - selection
+- non-paginated service
+- paginated service
+- selection
 
 **Realtime**
 - [Snapshot](https://github.com/feathersjs/feathers-offline-realtime/blob/master/test/commons/helpers/snapshot.test.js)
@@ -40,7 +39,6 @@ You will see this design being used in the more complicated tests, e.g. feathers
     - no publication, remote service returns error
     
 **Publication**
-
-    - [adds, removes publication](https://github.com/feathersjs/feathers-offline-publication/blob/master/test/integration.test.js)
-    - [filtering](https://github.com/feathersjs/feathers-offline-publication/blob/master/test/filter.test.js)
+- [adds, removes publication](https://github.com/feathersjs/feathers-offline-publication/blob/master/test/integration.test.js)
+- [filtering](https://github.com/feathersjs/feathers-offline-publication/blob/master/test/filter.test.js)
     
