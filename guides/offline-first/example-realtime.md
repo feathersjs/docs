@@ -7,7 +7,7 @@ The data changes are applied at the client in the same order as they occurred at
 Replication stops when communication is lost with the server.
 It can be restarted on reconnection.
 
-## Example 1 - Replicate the entire file
+## Example 1 - Replicate all the remote service data
 
 #### Running the example
 
@@ -135,3 +135,15 @@ stockRealtime.connect();
 {dept: "a", stock: "a4", _id: "wtTVYE15plCOb2vW"}
 ===== Example finished.
 ```
+
+## Example 2 - Replicate part of the remote service data
+
+> All service events are sent to the client as no "publication" is used
+
+To do.
+
+## Example 3 - Filter the publication of the server
+
+> The "publication" ensures the minimal number of service events are sent to the client.
+
+To do.
