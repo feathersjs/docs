@@ -7,7 +7,7 @@ Working examples will shortly be added to the guide.
 The tests in each repo can, unsurprisingly, be a valuable source of information,
 especially about details.
 
-Its frankly amazing that one Mocha test module can act as both the server and the client.
+I find it frankly amazing that one Mocha test module can act as both the server and the client.
 You configure a Feathers server the normal way and have it listen to, say, `localhost:3030`.
 You then configure a Feathers WebSockets client the normal way and have it connect to that same url.
 Because of Feathers' design, the code runs in exactly the same way as if the server and client were
@@ -17,6 +17,7 @@ This capability allows us to code integration tests, testing end to end, within 
 You will see this design being used in the more complicated tests, e.g. feathers-offline-publication.
 
 [**Snapshot**](https://github.com/feathersjs/feathers-offline-snapshot/blob/master/test/snapshot.test.js)
+
     - non-paginated service
     - paginated service
     - selection
@@ -39,6 +40,7 @@ You will see this design being used in the more complicated tests, e.g. feathers
     - no publication, remote service returns error
     
 **Publication**
+
     - [adds, removes publication](https://github.com/feathersjs/feathers-offline-publication/blob/master/test/integration.test.js)
     - [filtering](https://github.com/feathersjs/feathers-offline-publication/blob/master/test/filter.test.js)
     
