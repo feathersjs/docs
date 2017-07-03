@@ -2,7 +2,7 @@
 
 ## Example
 
-| Let's look at some snapshot replications.
+> Let's look at some snapshot replications.
 
 You can run this example with
 
