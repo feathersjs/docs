@@ -1,7 +1,8 @@
 # Snapshot replication example
 
-You can see the
-[source](https://github.com/feathersjs/feathers-docs/blob/master/examples/offline/snapshot/client/2-snapshot-service.js).
+| Let's look at the
+[source](https://github.com/feathersjs/feathers-docs/blob/master/examples/offline/snapshot/client/2-snapshot-service.js)
+needed for the snapshot strategy.
 
 ## Snapshot the entire file
 
@@ -10,9 +11,9 @@ You can see the
 ```js
 const snapshot = require('feathers-offline-snapshot');
 
-const remoteService = app.service('/remote-service');
+const stockRemote = app.service('/stock');
 
-snapshot(remoteService)
+snapshot(stockRemote)
   .then(records => {
     console.log(records);
   });
@@ -32,7 +33,7 @@ Then point a browser at `localhost:3030`.
 
 The entire file is read.
 ```text
-===== Read remoteService service directly
+===== Read stockRemote service directly
 {dept: "a", stock: "a1", _id: "LANJQx24cg9Jy2Hr"}
 {dept: "a", stock: "a2", _id: "rTk5oK6gLupjbsyP"}
 {dept: "a", stock: "a3", _id: "nOxWx97QKzp89qA9"}
@@ -63,9 +64,9 @@ The entire file is read.
 ```javascript
 const snapshot = require('feathers-offline-snapshot');
 
-const remoteService = app.service('/remote-service');
+const stockRemote = app.service('/stock');
 
-snapshot(remoteService, { dept: 'a' })
+snapshot(stockRemote, { dept: 'a' })
   .then(records => {
     console.log(records);
   });
