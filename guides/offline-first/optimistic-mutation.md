@@ -98,6 +98,19 @@ When the remote service returns an error, the replicator emits:
 | mutated          |  created  |   yes  |   yes   |    1   | optimistic update
 | remove           |  removed  |   yes  |   yes   |    2   | remote service error
 
+## Using data in the client replica
+
+The optimistic mutator adapter has `find` and `get` methods
+which support the same feature set as `feathers-memory`.
+This makes it a great way to retrieve data from the client replica.
+```javascript
+clientServices.find({ query: { username: 'john', $sort: { ... } } })
+  .then(data => ... );
+```
+
+You can also access the client replica
+[directly](https://docs.feathersjs.com/guides/offline-first/configure-realtime.html#example-using-periodic-inspection).
+
 ## Hooks
 
 The remote service may run before and after hooks, and these may affect the data returned.
