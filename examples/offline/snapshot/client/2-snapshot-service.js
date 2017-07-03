@@ -18,11 +18,11 @@ module.exports = function (feathersApp, recCount) {
     })
 
     // Example 2
-    .then(() => snapshot(remoteService, { dept: 'a' }))
+    .then(() => snapshot(remoteService, { dept: 'a', $sort: { stock: 1 } }))
     .then(result => {
       console.log('===== snapshot, dept: \'a\'');
     
-      sortArrayByProp(result, 'stock').forEach(record => {
+      result.forEach(record => {
         console.log(record);
       });
     });
