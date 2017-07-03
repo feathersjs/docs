@@ -1,6 +1,6 @@
 # Examples of snapshot replication
 
-#### Example
+## Example
 
 | Let's look at some snapshot replications.
 
@@ -14,7 +14,8 @@ npm run build
 npm start
 ```
 
-Then point a browser at `localhost:3030`.
+Then point a browser at `localhost:3030`
+and look at the log on the browser console.
 
 You can see the client source
 [here](https://github.com/feathersjs/feathers-docs/blob/master/examples/offline/snapshot/client/index.js),

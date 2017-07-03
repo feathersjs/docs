@@ -7,7 +7,9 @@ The data changes are applied at the client in the same order as they occurred at
 Replication stops when communication is lost with the server.
 It can be restarted on reconnection.
 
-#### Example 1
+## Example 1 - Replicate the entire file
+
+#### Running the example
 
 | Let's see how mutations made on the server are handled by realtime replication,
 along with disconnections and reconnections.
@@ -22,15 +24,15 @@ npm run build
 npm start
 ```
 
-Then point a browser at `localhost:3030`.
+Then point a browser at `localhost:3030`
+and look at the log on the browser console.
 
 You can see the client source
 [here](https://github.com/feathersjs/feathers-docs/blob/master/examples/offline/realtime-1/client/index.js),
 [here](https://github.com/feathersjs/feathers-docs/blob/master/examples/offline/realtime-1/client/1-third-party.js)
 and [here](https://github.com/feathersjs/feathers-docs/blob/master/examples/offline/realtime-1/client/2-reconnect.js).
 
-
-## Replicate the entire file
+#### Looking at the log on the client console
 
 The client replica will contain the same data as the remote service.
 All service events are emitted to the client, because they are all required.
