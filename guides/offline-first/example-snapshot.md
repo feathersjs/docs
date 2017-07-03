@@ -1,8 +1,8 @@
 # Examples of snapshot replication
 
-## Example
-
 > Let's look at some snapshot replications.
+
+## Example
 
 You can run this example with
 
