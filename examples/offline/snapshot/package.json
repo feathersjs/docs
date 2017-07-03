@@ -1,0 +1,7 @@
+{
+  "scripts": {
+    "build": " EXAMPLE=snapshot ../node_modules/.bin/webpack --config ../webpack.config.js --colors",
+    "build:watch": "NODE_ENV=development EXAMPLE=snapshot ../node_modules/.bin/webpack --config ../webpack.config.js --colors --watch",
+    "start": "node src/"
+  }
+}

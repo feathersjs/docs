@@ -1,8 +1,4 @@
-# Examples
-
-Working examples will shortly be added to the guide.
-
-## Tests as examples
+# Tests as Examples
 
 The tests in each repo can, unsurprisingly, be a valuable source of information,
 especially about details.
