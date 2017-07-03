@@ -1,23 +1,6 @@
-# Snapshot replication example
+# Example of a snapshot replication
 
-| Let's look at the
-[source](https://github.com/feathersjs/feathers-docs/blob/master/examples/offline/snapshot/client/2-snapshot-service.js)
-needed for the snapshot strategy.
-
-## Snapshot the entire file
-
-#### Client code
-
-```js
-const snapshot = require('feathers-offline-snapshot');
-
-const stockRemote = app.service('/stock');
-
-snapshot(stockRemote)
-  .then(records => {
-    console.log(records);
-  });
-```
+| Let's look at some snapshot replications.
 
 #### Example
 
@@ -31,7 +14,14 @@ npm start
 ```
 Then point a browser at `localhost:3030`.
 
-The entire file is read.
+You can see the client source
+[here](https://github.com/feathersjs/feathers-docs/blob/master/examples/offline/snapshot/client/index.js),
+[here](https://github.com/feathersjs/feathers-docs/blob/master/examples/offline/snapshot/client/1-read-remote-service.js)
+and [here](https://github.com/feathersjs/feathers-docs/blob/master/examples/offline/snapshot/client/2-snapshot-service.js).
+
+## Snapshot the entire collection
+
+The remote service data is
 ```text
 ===== Read stockRemote service directly
 {dept: "a", stock: "a1", _id: "LANJQx24cg9Jy2Hr"}
@@ -44,6 +34,17 @@ The entire file is read.
 {dept: "b", stock: "b3", _id: "xyVeDj7BRXJlPo9F"}
 {dept: "b", stock: "b4", _id: "mZddKB7THrbv8dHV"}
 {dept: "b", stock: "b5", _id: "4RQ5BL8PHER5DEGX"}
+```
+
+Snapshot all of it.
+```js
+const snapshot = require('feathers-offline-snapshot');
+const stockRemote = app.service('/stock');
+
+snapshot(stockRemote)
+  .then(records => console.log(records));
+```
+```text
 ===== snapshot, all records
 {dept: "a", stock: "a1", _id: "LANJQx24cg9Jy2Hr"}
 {dept: "a", stock: "a2", _id: "rTk5oK6gLupjbsyP"}
@@ -59,17 +60,13 @@ The entire file is read.
 
 ## Snapshot a portion of the file
 
-#### Client code
-
+Snapshot part of it.
 ```javascript
 const snapshot = require('feathers-offline-snapshot');
-
 const stockRemote = app.service('/stock');
 
 snapshot(stockRemote, { dept: 'a' })
-  .then(records => {
-    console.log(records);
-  });
+  .then(records => console.log(records));
 ```
 
 #### Example
