@@ -291,3 +291,158 @@ The `stock: 'a1'` record was removed from the client replica because it no longe
 the publication filter after mutation.
 The `stock: 'b1'` record was added
 as its mutation caused it to now satisfied the publication filter.
+
+----------------------------------------
+
+## **Example 3** - Using a publication
+
+> Let's redo Example 2 using a "publication" rather than a filter function.
+We expect the "publication" to minimize the number of service events sent to the client.
+
+#### Running the example
+
+You can run this example with:
+
+```text
+cd path/to/feathers-mobile/examples
+npm install
+cd ./realtime-3
+npm run build
+npm start
+```
+
+Then point a browser at `localhost:3030`
+and look at the log on the browser console.
+
+You can see the key server source
+[here](https://github.com/feathersjs/feathers-docs/blob/master/examples/offline/realtime-3/src/index.js).
+
+You can see the client source
+[here](https://github.com/feathersjs/feathers-docs/blob/master/examples/offline/realtime-3/client/index.js),
+and [here](https://github.com/feathersjs/feathers-docs/blob/master/examples/offline/realtime-3/client/1-third-party.js).
+
+
+#### The key server code
+
+```javascript
+const serverPublication = require('feathers-offline-publication/lib/server');
+const commonPublications = require('feathers-offline-publication/lib/common-publications');
+const { stashBefore } = require('feathers-hooks-common');
+
+const port = app.get('port');
+const server = app.listen(port);
+
+const stockRemote = app.service('stock');
+stockRemote.hooks({
+  before: {
+    update: stashBefore(),
+    patch: stashBefore(),
+    remove: stashBefore(),
+  },
+});
+
+serverPublication(app, commonPublications, 'stock');
+```
+
+The `stashBefore` hooks will stash the current value of the record into `context.params`
+before the record is mutated.
+The service filter will use the stashed value to check if the record used to belong to the publication.
+
+The `serverPublication` call configures the service filters,
+in this case for the stock service.
+You can use syntax like `['messages', 'comments']` to configure multiple services at once.
+
+#### The key client code
+
+```javascript
+const clientPublication = require('feathers-offline-publication/lib/client');
+const commonPublications = require('feathers-offline-publication/lib/common-publications');
+const Realtime = require('feathers-offline-realtime');
+
+const stockRemote = feathersApp.service('/stock');
+
+const stockRealtime = new Realtime(stockRemote, {
+  publication: clientPublication.addPublication(feathersApp, 'stock', {
+    module: commonPublications,
+    name: 'query',
+    params: { dept: 'a' },
+  }),
+});
+
+stockRealtime.connect().then( ... );
+```
+
+The `publication` option is now a "publication" rather than a filter function.
+The `addPublication` emits the `name` and `params` values to the server,
+while returning a filter function as the actual value for `publication`.
+The server will start using `name` and `params` in the server-side service filters.
+
+#### Looking at the log
+
+The previous example #2 log contained
+
+```text
+===== mutate stockRemote
+stockRemote.patch stock: a1 move to dept: b
+stockRemote.patch stock: b1 move to dept: a
+.service event. patched
+    {dept: "b", stock: "a1", _id: "raBDpgjM4ilKa0PX"}
+.replicator event. action=left-pub eventName=patched source=0
+    {dept: "b", stock: "a1", _id: "raBDpgjM4ilKa0PX"}
+.service event. patched
+    {dept: "a", stock: "b1", _id: "RKbbo7EgaAeWqqnu"}
+.replicator event. action=mutated eventName=patched source=0
+    {dept: "a", stock: "b1", _id: "RKbbo7EgaAeWqqnu"}
+===== patch some stockRemote records without changing their contents
+.service event. patched
+    {dept: "a", stock: "a2", _id: "r9VPWIdwZsYNEAvI"}
+.replicator event. action=mutated eventName=patched source=0
+    {dept: "a", stock: "a2", _id: "r9VPWIdwZsYNEAvI"}
+.service event. patched
+    {dept: "a", stock: "a3", _id: "n66vXg1lBuh3XX4O"}
+.replicator event. action=mutated eventName=patched source=0
+    {dept: "a", stock: "a3", _id: "n66vXg1lBuh3XX4O"}
+.service event. patched
+    {dept: "b", stock: "b2", _id: "77rLKbncUcxOFHJM"}
+.service event. patched
+    {dept: "b", stock: "b3", _id: "1IIQqVn8TYcopdzl"}
+.service event. patched
+    {dept: "b", stock: "b4", _id: "rSfCl9WXfTi7oa6N"}
+.service event. patched
+    {dept: "b", stock: "b5", _id: "LqXhzpPLidkIVGuG"}
+```
+
+We pointed out that the last 4 service events were not relevant to example #2's publication filter
+and so no replication events occurred for them.
+We also pointed out that **there was no need to send these 4 service events to the client.**
+
+Our example #3 log contains
+
+```text
+===== mutate stockRemote
+stockRemote.patch stock: a1 move to dept: b
+stockRemote.patch stock: b1 move to dept: a
+.service event. patched
+    {dept: "b", stock: "a1", _id: "qR5KkXAP0TAdCXBm"}
+.replicator event. action=left-pub eventName=patched source=0
+    {dept: "b", stock: "a1", _id: "qR5KkXAP0TAdCXBm"}
+.service event. patched
+    {dept: "a", stock: "b1", _id: "LDtB9YvbJTHpOau2"}
+.replicator event. action=mutated eventName=patched source=0
+    {dept: "a", stock: "b1", _id: "LDtB9YvbJTHpOau2"}
+===== patch some stockRemote records without changing their contents
+.service event. patched
+    {dept: "a", stock: "a2", _id: "fmMfWefDVeu9qrRt"}
+.replicator event. action=mutated eventName=patched source=0
+    {dept: "a", stock: "a2", _id: "fmMfWefDVeu9qrRt"}
+.service event. patched
+    {dept: "a", stock: "a3", _id: "WULt4o6N69G9x0Vf"}
+.replicator event. action=mutated eventName=patched source=0
+    {dept: "a", stock: "a3", _id: "WULt4o6N69G9x0Vf"}
+```
+
+The example #3 does not contain the last 4 `.service event` entries.
+**The server-side service filters recognized those mutations were not relevant to our publication
+and did not emit them to the client.**
+
+Job done!
