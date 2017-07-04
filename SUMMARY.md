@@ -60,6 +60,7 @@
     * [Configure publication](guides/offline-first/configure-publication.md)
     * [Example snapshot](guides/offline-first/example-snapshot.md)
     * [Example realtime](guides/offline-first/example-realtime.md)
+    * [Example publication](guides/offline-first/example-publication.md)
     * [Tests as examples](guides/offline-first/example-tests.md)
     * [More examples](guides/offline-first/example-more.md)
   * [Advanced topics](guides/advanced/readme.md)

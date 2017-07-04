@@ -136,16 +136,17 @@ stockRealtime.connect();
 ===== Example finished.
 ```
 
-========================
+----------------------------------------
 
-## **Example 2** - Part of the remote service data
-
-> All service events are sent to the client as no "publication" is used
+## **Example 2** - Selected remote service data
 
 #### Running the example
 
 > Let's see how a filter function (not a "publication")
-allows you to replicate some of the remote service data.
+allows you to replicate a selection of the remote service data.
+
+
+> All service events are sent to the client as no "publication" is used
 
 You can run this example with:
 
@@ -167,16 +168,17 @@ and [here](https://github.com/feathersjs/feathers-docs/blob/master/examples/offl
 #### Looking at the log
 
 The client replica will contain those records with `record.dept === 'a'`.
-All service events are emitted to the client because a filter function is used,
+All service events are sent to the client because a filter function is used,
 not a "publication".
 Filter functions run on the client only,
-while a "publications" runs both on the server (to minimize events sent the client)
+while a "publication" runs both on the server (to minimize the service events sent the client)
 and on the client.
 
 Configure the replication and start it:
 
 ```javascript
 import Realtime from 'feathers-offline-realtime';
+
 const stockRemote = feathersApp.service('/stock');
 stockRemote.on('patched', record => console.log(`.service event. patched`, record));
 
@@ -289,10 +291,3 @@ The `stock: 'a1'` record was removed from the client replica because it no longe
 the publication filter after mutation.
 The `stock: 'b1'` record was added
 as its mutation caused it to now satisfied the publication filter.
-
-
-## Example 3 - Filter on the server
-
-> The "publication" ensures the minimal number of service events are sent to the client.
-
-To do.
