@@ -1,7 +1,4 @@
 
-const clientPublication = require('feathers-offline-publication/lib/client');
-const commonPublications = require('feathers-offline-publication/lib/common-publications');
-
 const feathers = require('../../node_modules/feathers-client');
 const io = require('../../node_modules/socket.io-client');
 const Realtime = require('feathers-offline-realtime');
@@ -12,18 +9,13 @@ const feathersApp = feathers()
   .configure(feathers.socketio(io('http://localhost:3030')));
 
 const stockRemote = feathersApp.service('/stock');
+stockRemote.on('created', record => console.log(`.service event. created`, record));
+stockRemote.on('updated', record => console.log(`.service event. updated`, record));
 stockRemote.on('patched', record => console.log(`.service event. patched`, record));
+stockRemote.on('removed', record => console.log(`.service event. removed`, record));
 
-const stockRealtime = new Realtime(stockRemote, {
-  sort: Realtime.sort('stock'), // sort the client replica
-  query: { dept: 'a' },         // makes snapshots more efficient
-  subscriber,                   // logs replicator events
-  publication: clientPublication.addPublication(feathersApp, 'stock', {
-    module: commonPublications,
-    name: 'query',
-    params: { dept: 'a' },
-  }),
-});
+const stockRealtime = new Realtime(stockRemote, { uuid: true, subscriber });
+
 
 stockRealtime.connect()
   // run tests
