@@ -63,18 +63,18 @@ This would also marginally improve performance since `stashBefore` makes a `get`
 
 On server:
 ```javascript
-const serverPublications = require('feathers-publications/lib/server');
-const commonPublications = require('feathers-publications/lib/common-publications');
+const serverPublication = require('feathers-offline-publication/lib/server');
+const commonPublications = require('feathers-offline-publication/lib/common-publications');
 const app = feathers()...
 
 // Configure service event filters for 2 services
-serverPublications(app, commonPublications, ['messages', 'channels']);
+serverPublication(app, commonPublications, ['messages', 'channels']);
 ```
 
 On client:
 ```javascript
-const clientPublications = require('feathers-publications/lib//client');
-const commonPublications = require('feathers-publications/lib/common-publications');
+const clientPublication = require('feathers-offline-publication/lib/client');
+const commonPublications = require('feathers-offline-publication/lib/common-publications');
 const feathersClient = feathers()...
 
 const messages = feathersClient.service('messages');
@@ -87,7 +87,7 @@ messages.on('patched', data => ...);
 messages.on('remove', data => ...);
 
 // Configure the publication
-const selector = clientPublications.addPublication(feathersClient, 'messages', {
+const selector = clientPublication.addPublication(feathersClient, 'messages', {
   module: commonPublications,
   name: 'query',
   params: { username },
@@ -104,12 +104,12 @@ Also note the client may use the resultant selector function.
 
 ## Security
 
-An attacker may modify the `clientPublications.addPublication` call on the client
+An attacker may modify the `clientPublication.addPublication` call on the client
 or issue one of their own.
 
 Feathers supports multiple service events filters for a method,
 and a mutation must satisfy them all before being emitted to the client.
-You can therefore add filters both before and after the `serverPublications` call
+You can therefore add filters both before and after the `serverPublication` call
 to establish any additional security you need.
 
 
@@ -122,7 +122,7 @@ npm install feathers-offline-publication --save
 
 ## Documentation
 
-### `serverPublications(app, publications, ...serviceNames)`
+### `serverPublication(app, publications, ...serviceNames)`
 
 Configures services on the server which may have publications.
 This also configures the service event filters for you.
@@ -131,11 +131,11 @@ __Options:__
 
 - `app` (*required*) - The Feathers server app.
 - `publications` (*required*, object) - The publications object.
-The same object must be used in `clientPublications.addPublication`.
+The same object must be used in `clientPublication.addPublication`.
 - `serviceNames` (*required*, string or array of strings) -
 The service name or names to configure for publications.
 
-### `clientPublications.addPublication(clientApp, serviceName, options)`
+### `clientPublication.addPublication(clientApp, serviceName, options)`
 
 Configures a publication on the client for a remote service.
 
@@ -145,14 +145,14 @@ __Options:__
 - `serviceName` (*required*, string) - The service name for which a publication is being configured.
 - `options` (*required*, objects) - Contains
     - `module` (*required*, object) - The publications object.
-    The same object must be used in `serverPublications`.
+    The same object must be used in `serverPublication`.
     - `name` (*required*, string) - The prop name of the publication in `module`.
     - `params` (*optional*, any or array of any) - The parameters to call `name` with.
     - `ifServer` (*optional*, boolean, default true) - If false,
     no server publication is created, but the selector function is still returned to the client.
 
 
-### `clientPublications.removePublication(clientApp, serviceName)`
+### `clientPublication.removePublication(clientApp, serviceName)`
 
 Removes the publication for a remote service, and stops filtering on the server.
 
