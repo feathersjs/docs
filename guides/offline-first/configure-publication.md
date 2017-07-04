@@ -15,20 +15,30 @@ const publications = {
 The publication `publications.username('john')` selects all records whose `username` is `john`;
 `publications.active()` selects all logically active records.
 
-The builtin `commonPublications.query({ username: 'john' })` selects records based on the
+You can use the builtin `query` publication to selects records based on the
 [query syntax used by MongoDB](https://docs.mongodb.com/manual/reference/operator/query/).
+For example:
+```javascript
+import commonPublications from 'feathers-offline-publication/lib/common-publications';
+commonPublications.query({ username: 'john' })
+````
+
 
 
 ## Minimize service events
 
 Once a client associates a Feathers service with
-- a publications object,
+- a publications object, like the one above or commonPublications,
 - a publication function name, and
 - params for that function,
 
 then that client will only be sent service events relevant to that publication.
 This may improve performance, especially for mobile devices, as the bandwidth consumed by the client
 is reduced.
+
+The server-side filtering for offline-first generally needs to look at
+both the previous and the new contents of the record,
+to see if it used to belong or if it now belongs to the publication.
 
 You can stash the current value of a record inside the hook object, before mutating it, with:
 ```javascript
@@ -67,12 +77,18 @@ const serverPublication = require('feathers-offline-publication/lib/server');
 const commonPublications = require('feathers-offline-publication/lib/common-publications');
 const app = feathers()...
 
+const port = app.get('port');
+const server = app.listen(port);
+
 // Configure service event filters for 2 services
 serverPublication(app, commonPublications, ['messages', 'channels']);
 ```
 
+> **ProTip:** `serverPublication` must be called after the server starts listening.
+
 On client:
 ```javascript
+const Realtime = require('feathers-offline-realtime');
 const clientPublication = require('feathers-offline-publication/lib/client');
 const commonPublications = require('feathers-offline-publication/lib/common-publications');
 const feathersClient = feathers()...
@@ -87,19 +103,22 @@ messages.on('patched', data => ...);
 messages.on('remove', data => ...);
 
 // Configure the publication
-const selector = clientPublication.addPublication(feathersClient, 'messages', {
+const messagesPublication = clientPublication.addPublication(feathersClient, 'messages', {
   module: commonPublications,
   name: 'query',
   params: { username },
 });
 
 // The publication's filter function is also available on the client
-console.log(selector({ username: 'john' })); // true
-console.log(selector({ username: 'jack' })); // false
+console.log(messagesPublication({ username: 'john' })); // true
+console.log(messagesPublication({ username: 'jack' })); // false
+
+// Configure the replicator
+const messagesRealtime = new Realtime(messages, { publication: messagesPublication });
 ```
 
 Note that the same `publications` object must be provided both on the server and the client.
-Also note the client may use the resultant selector function.
+Also note the client may use the resultant function for any of its own filtering.
 
 
 ## Security

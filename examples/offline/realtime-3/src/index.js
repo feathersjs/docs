@@ -6,6 +6,9 @@ const { stashBefore } = require('feathers-hooks-common');
 const logger = require('../../node_modules/winston');
 const app = require('../../common/src1/app');
 
+const port = app.get('port');
+const server = app.listen(port);
+
 
 // "publication" support
 const stockRemote = app.service('stock');
@@ -18,11 +21,8 @@ stockRemote.hooks({
 });
 
 serverPublication(app, commonPublications, 'stock');
+// end
 
-
-
-const port = app.get('port');
-const server = app.listen(port);
 
 const testSetup = require('./test-setup');
 
