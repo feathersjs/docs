@@ -178,6 +178,7 @@ Configure the replication and start it:
 ```javascript
 import Realtime from 'feathers-offline-realtime';
 const stockRemote = feathersApp.service('/stock');
+stockRemote.on('patched', record => console.log(`.service event. patched`, record));
 
 const stockRealtime = new Realtime(stockRemote, {
   publication: record => record.dept === 'a', // this is a filter func, not a "publication"
@@ -196,8 +197,8 @@ function subscriber(records, { action, eventName, source }) {
 A snapshot of part of the remote service data is sent to the client when replication starts.
 
 ```text
-.replicator event. action=snapshot eventName=undefined source=undefined
-.replicator event. action=add-listeners eventName=undefined source=undefined
+.replicator event. action=snapshot eventName=undefined source=undefined undefined
+.replicator event. action=add-listeners eventName=undefined source=undefined undefined
 ===== stockRemote, before mutations
 {dept: "a", stock: "a1", _id: "lwKU5HpWnumm51wK"}
 {dept: "a", stock: "a2", _id: "xC2ZVq6xaUpJOBgb"}
@@ -230,9 +231,36 @@ We can simulate other people changing data on the remote service.
 ===== mutate stockRemote
 stockRemote.patch stock: a1 move to dept: b
 stockRemote.patch stock: b1 move to dept: a
+.service event. patched
+    {dept: "b", stock: "a1", _id: "raBDpgjM4ilKa0PX"}
 .replicator event. action=left-pub eventName=patched source=0
+    {dept: "b", stock: "a1", _id: "raBDpgjM4ilKa0PX"}
+.service event. patched
+    {dept: "a", stock: "b1", _id: "RKbbo7EgaAeWqqnu"}
 .replicator event. action=mutated eventName=patched source=0
+    {dept: "a", stock: "b1", _id: "RKbbo7EgaAeWqqnu"}
+===== patch some stockRemote records without changing their contents
+.service event. patched
+    {dept: "a", stock: "a2", _id: "r9VPWIdwZsYNEAvI"}
+.replicator event. action=mutated eventName=patched source=0
+    {dept: "a", stock: "a2", _id: "r9VPWIdwZsYNEAvI"}
+.service event. patched
+    {dept: "a", stock: "a3", _id: "n66vXg1lBuh3XX4O"}
+.replicator event. action=mutated eventName=patched source=0
+    {dept: "a", stock: "a3", _id: "n66vXg1lBuh3XX4O"}
+.service event. patched
+    {dept: "b", stock: "b2", _id: "77rLKbncUcxOFHJM"}
+.service event. patched
+    {dept: "b", stock: "b3", _id: "1IIQqVn8TYcopdzl"}
+.service event. patched
+    {dept: "b", stock: "b4", _id: "rSfCl9WXfTi7oa6N"}
+.service event. patched
+    {dept: "b", stock: "b5", _id: "LqXhzpPLidkIVGuG"}
 ```
+
+Notice that the last 4 service events were not relevant to our publication filter
+and so no replication events occurred for them.
+**There was no need to send these 4 service events to the client.**
 
 The mutations are replicated to the client.
 
