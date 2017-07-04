@@ -3,18 +3,18 @@
 The realtime replicator's optimistic mutation may be used
 to produce a snappier response at the client.
 
-> Its also an important step toward allowing the client to continue working when its offline.
+> Its also an important step towards allowing the client to continue working while its offline.
 
 The optimistic-mutator service immediately updates the client replica
 to what it **optimistically** expects the final result will be,
 and **the user can see the change right away**.
-The replicator then emits a replication event because the client replica changed.
+The replicator then emits a replication event because the client replica data has changed.
 
 Next, the same processing occurs as for a remote service call:
 the call to the server, the database processing, the filter, the service event on the client.
 Finally the replicator replaces the optimistic copy of the record
 with the one provided by the server.
-Then replicator emits another event because the client replica has again changed.
+Then replicator emits another event because the client replica (may have) changed.
 
 But what happens if the remote service rejects the mutation with an error?
 The replicator has kept a copy of the record from before the mutation
@@ -51,7 +51,7 @@ and look at the log on the browser console.
 
 You can see the client source
 [here](https://github.com/feathersjs/feathers-docs/blob/master/examples/offline/optimistic/client/index.js),
-and [here](https://github.com/feathersjs/feathers-docs/blob/master/examples/offline/optimisticclient/1-third-party.js).
+and [here](https://github.com/feathersjs/feathers-docs/blob/master/examples/offline/optimistic/client/1-third-party.js).
 
 #### Looking at the log
 
