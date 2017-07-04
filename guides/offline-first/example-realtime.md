@@ -34,9 +34,6 @@ and [here](https://github.com/feathersjs/feathers-docs/blob/master/examples/offl
 
 #### Looking at the log
 
-The client replica will contain the same data as the remote service.
-All service events are emitted to the client because they are all required.
-
 Configure the replication and start it:
 
 ```javascript
