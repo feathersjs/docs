@@ -352,6 +352,8 @@ The `serverPublication` call configures the service filters,
 in this case for the stock service.
 You can use syntax like `['messages', 'comments']` to configure multiple services at once.
 
+> **ProTip:** `serverPublication` must be run only after the server has started listening.
+
 #### The key client code
 
 ```javascript

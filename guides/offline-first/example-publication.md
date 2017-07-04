@@ -1,2 +1,0 @@
-# Example using a "publication"
-
