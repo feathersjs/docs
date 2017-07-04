@@ -134,7 +134,7 @@ messagesRealtime.connect()
     - `sort` (*required* Function with signature `(a, b) => 1 || -1 || 0`) - A function
     compatible with `array.sort(...)`.
     - `subscriber` (*optional* Function with signature
-    `(records, { action, eventName, record }) => ...`) - Function to call on mutation events.
+    `(records, { action, eventName, source, record }) => ...`) - Function to call on mutation events.
     See example below.
     - `uuid` (*optional* boolean) - The records contain a `uuid` field
     and it should be used as the key rather than `id` or `_id`.

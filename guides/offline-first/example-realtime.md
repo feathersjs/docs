@@ -7,7 +7,7 @@ The data changes are applied at the client in the same order as they occurred at
 Replication stops when communication is lost with the server.
 It can be restarted on reconnection.
 
-## Example 1 - Replicate all the remote service data
+## **Example 1** - All the remote service data
 
 #### Running the example
 
@@ -136,13 +136,134 @@ stockRealtime.connect();
 ===== Example finished.
 ```
 
-## Example 2 - Replicate part of the remote service data
+========================
+
+## **Example 2** - Part of the remote service data
 
 > All service events are sent to the client as no "publication" is used
 
-To do.
+#### Running the example
 
-## Example 3 - Filter the publication of the server
+> Let's see how a filter function (not a "publication")
+allows you to replicate some of the remote service data.
+
+You can run this example with:
+
+```text
+cd path/to/feathers-mobile/examples
+npm install
+cd ./realtime-2
+npm run build
+npm start
+```
+
+Then point a browser at `localhost:3030`
+and look at the log on the browser console.
+
+You can see the client source
+[here](https://github.com/feathersjs/feathers-docs/blob/master/examples/offline/realtime-2/client/index.js),
+and [here](https://github.com/feathersjs/feathers-docs/blob/master/examples/offline/realtime-2/client/1-third-party.js).
+
+#### Looking at the log
+
+The client replica will contain those records with `record.dept === 'a'`.
+All service events are emitted to the client because a filter function is used,
+not a "publication".
+Filter functions run on the client only,
+while a "publications" runs both on the server (to minimize events sent the client)
+and on the client.
+
+Configure the replication and start it:
+
+```javascript
+import Realtime from 'feathers-offline-realtime';
+const stockRemote = feathersApp.service('/stock');
+
+const stockRealtime = new Realtime(stockRemote, {
+  publication: record => record.dept === 'a', // this is a filter func, not a "publication"
+  sort: Realtime.sort('stock'), // sort the client replica
+  query: { dept: 'a' },         // makes snapshots more efficient
+  subscriber                    // logs replicator events
+});
+
+stockRealtime.connect().then( ... );
+
+function subscriber(records, { action, eventName, source }) {
+  console.log(`.replicator event. action=${action} eventName=${eventName} source=${source}`);
+}
+```
+
+A snapshot of part of the remote service data is sent to the client when replication starts.
+
+```text
+.replicator event. action=snapshot eventName=undefined source=undefined
+.replicator event. action=add-listeners eventName=undefined source=undefined
+===== stockRemote, before mutations
+{dept: "a", stock: "a1", _id: "lwKU5HpWnumm51wK"}
+{dept: "a", stock: "a2", _id: "xC2ZVq6xaUpJOBgb"}
+{dept: "a", stock: "a3", _id: "Z0Y16Pn8d3RA7rXU"}
+{dept: "a", stock: "a4", _id: "kfWCtTo1p2cpN9oN"}
+{dept: "a", stock: "a5", _id: "JxlD78JV6S5uZHvD"}
+{dept: "b", stock: "b1", _id: "meldJsoQSM80mSJM"}
+{dept: "b", stock: "b2", _id: "iujwY33XVFIjLm0U"}
+{dept: "b", stock: "b3", _id: "Pws5I5A8a3dC7yyJ"}
+{dept: "b", stock: "b4", _id: "n4R9UxQQxR4HMbFi"}
+{dept: "b", stock: "b5", _id: "lpFPGhIInYba698P"}
+```
+
+```javascript
+stockRealtime.store.records.forEach(record => console.log(record))
+```
+
+```text
+===== client replica of dept: a, before mutations
+{dept: "a", stock: "a5", _id: "JxlD78JV6S5uZHvD"}
+{dept: "a", stock: "a3", _id: "Z0Y16Pn8d3RA7rXU"}
+{dept: "a", stock: "a4", _id: "kfWCtTo1p2cpN9oN"}
+{dept: "a", stock: "a1", _id: "lwKU5HpWnumm51wK"}
+{dept: "a", stock: "a2", _id: "xC2ZVq6xaUpJOBgb"}
+```
+
+We can simulate other people changing data on the remote service.
+
+```text
+===== mutate stockRemote
+stockRemote.patch stock: a1 move to dept: b
+stockRemote.patch stock: b1 move to dept: a
+.replicator event. action=left-pub eventName=patched source=0
+.replicator event. action=mutated eventName=patched source=0
+```
+
+The mutations are replicated to the client.
+
+```text
+===== stockRemote, after mutations
+{dept: "b", stock: "a1", _id: "lwKU5HpWnumm51wK"}
+{dept: "a", stock: "a2", _id: "xC2ZVq6xaUpJOBgb"}
+{dept: "a", stock: "a3", _id: "Z0Y16Pn8d3RA7rXU"}
+{dept: "a", stock: "a4", _id: "kfWCtTo1p2cpN9oN"}
+{dept: "a", stock: "a5", _id: "JxlD78JV6S5uZHvD"}
+{dept: "a", stock: "b1", _id: "meldJsoQSM80mSJM"}
+{dept: "b", stock: "b2", _id: "iujwY33XVFIjLm0U"}
+{dept: "b", stock: "b3", _id: "Pws5I5A8a3dC7yyJ"}
+{dept: "b", stock: "b4", _id: "n4R9UxQQxR4HMbFi"}
+{dept: "b", stock: "b5", _id: "lpFPGhIInYba698P"}
+===== client replica of dept a, after mutations
+{dept: "a", stock: "a2", _id: "xC2ZVq6xaUpJOBgb"}
+{dept: "a", stock: "a3", _id: "Z0Y16Pn8d3RA7rXU"}
+{dept: "a", stock: "a4", _id: "kfWCtTo1p2cpN9oN"}
+{dept: "a", stock: "a5", _id: "JxlD78JV6S5uZHvD"}
+{dept: "a", stock: "b1", _id: "meldJsoQSM80mSJM"}
+===== Example finished.
+```
+
+The `stock: 'a1'` record was removed from the client replica because it no longer satisfied
+the publication filter after mutation.
+The `stock: 'b1'` record was added
+as its mutation caused it to now satisfied the publication filter.
+
+
+## Example 3 - Filter on the server
 
 > The "publication" ensures the minimal number of service events are sent to the client.
 
