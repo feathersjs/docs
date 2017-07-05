@@ -1,9 +1,5 @@
 # Local Authentication Management
 
-[![GitHub stars](https://img.shields.io/github/stars/feathersjs/feathers-authentication-management.png?style=social&label=Star)](https://github.com/feathersjs/feathers-authentication-management/)
-[![npm version](https://img.shields.io/npm/v/feathers-authentication-management.png?style=flat-square)](https://www.npmjs.com/package/feathers-authentication-management)
-[![Changelog](https://img.shields.io/badge/changelog-.md-blue.png?style=flat-square)](https://github.com/feathersjs/feathers-authentication-management/blob/master/CHANGELOG.md)
-
 ```
 $ npm install feathers-authentication-management --save
 ```
