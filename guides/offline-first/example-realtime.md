@@ -217,11 +217,11 @@ stockRealtime.store.records.forEach(record => console.log(record))
 
 ```text
 ===== client replica of dept: a, before mutations
-{dept: "a", stock: "a5", _id: "JxlD78JV6S5uZHvD"}
-{dept: "a", stock: "a3", _id: "Z0Y16Pn8d3RA7rXU"}
-{dept: "a", stock: "a4", _id: "kfWCtTo1p2cpN9oN"}
 {dept: "a", stock: "a1", _id: "lwKU5HpWnumm51wK"}
 {dept: "a", stock: "a2", _id: "xC2ZVq6xaUpJOBgb"}
+{dept: "a", stock: "a3", _id: "Z0Y16Pn8d3RA7rXU"}
+{dept: "a", stock: "a4", _id: "kfWCtTo1p2cpN9oN"}
+{dept: "a", stock: "a5", _id: "JxlD78JV6S5uZHvD"}
 ```
 
 We can simulate other people changing data on the remote service.
