@@ -96,6 +96,9 @@ stockClient.find()
   .then(result => console.log(result.data || result);
 ```
 
+> **ProTip:** The `find(data, params)` and `get(uuid, params)` methods of the
+optimistic mutator are the preferred ways to obtain data from the client replica.
+
 ```text
 ===== client replica, before mutations
 {dept: "a", stock: "a1", uuid: "a1", _id: "AHjkPclOKcf25xy2"}
