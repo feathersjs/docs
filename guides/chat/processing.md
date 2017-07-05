@@ -120,7 +120,7 @@ Here we use [Node's crypto library](https://nodejs.org/api/crypto.html) to creat
 
 In the `process-message` hook we are currently just storing the users `_id` in the message. We want to show more than the `_id` in the UI, so we'll need to populate more data in the message response. In order to show the right user information we want to include that information in our messages.
 
-We could do this by creating our own hook but adding related entities is quite common and already implement in the [populate common hook](). In order to use the hook we have to update the `src/services/messages/messages.hooks.js` file to look like this:
+We could do this by creating our own hook but adding related entities is quite common and already implement in the [populate common hook](/api/hooks-common.md). In order to use the hook we have to update the `src/services/messages/messages.hooks.js` file to look like this:
 
 ```js
 'use strict';
