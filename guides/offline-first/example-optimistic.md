@@ -102,10 +102,10 @@ optimistic mutator are the preferred ways to obtain data from the client replica
 ```text
 ===== client replica, before mutations
 {dept: "a", stock: "a1", uuid: "a1", _id: "AHjkPclOKcf25xy2"}
-{dept: "a", stock: "a3", uuid: "a3", _id: "WcaLplDzLmQYdX1E"}
 {dept: "a", stock: "a2", uuid: "a2", _id: "XhnvXIvFWegBRH3G"}
-{dept: "a", stock: "a5", uuid: "a5", _id: "oDMhPbWCfQAglHbz"}
+{dept: "a", stock: "a3", uuid: "a3", _id: "WcaLplDzLmQYdX1E"}
 {dept: "a", stock: "a4", uuid: "a4", _id: "xEVdEXBlTOzJ9HB8"}
+{dept: "a", stock: "a5", uuid: "a5", _id: "oDMhPbWCfQAglHbz"}
 ```
 
 
