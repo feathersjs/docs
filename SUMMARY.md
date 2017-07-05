@@ -89,6 +89,7 @@
     * [Server](api/authentication/server.md)
     * [Client](api/authentication/client.md)
     * [Local](api/authentication/local.md)
+    * [Local management](api/authentication/local-management.md)
     * [JWT](api/authentication/jwt.md)
     * [OAuth1](api/authentication/oauth1.md)
     * [OAuth2](api/authentication/oauth2.md)
