@@ -32,9 +32,9 @@ The features for each strategy are shown below.
 | - Conflict resolution handling    | -         | -         | -                   | -        | Y         |             |
 | **Snapshot data on reconnect**    | -         | Y         | Y                   | Y        | Y         |             |
 |                                   |           |           |                     |          |           |             |
-| **Repository**                    | (2) | (3) | (4) | tba | tba | tba | tba | tba |
+| **Repository**                    | (2) | (3) | (4) | tba | tba | tba | tba |
 
 - (1) [Universally unique identifier](https://en.wikipedia.org/wiki/Universally_unique_identifier) (uuid)
-- (1) feathers-offline-snapshot
-- (2) feathers-offline-realtime
-- (3) feathers-offline-realtime with /optimistic-mutator
+- (2) feathers-offline-snapshot
+- (3) feathers-offline-realtime
+- (4) feathers-offline-realtime with /optimistic-mutator
