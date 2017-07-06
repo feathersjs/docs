@@ -26,7 +26,7 @@ messsages.once('removed', message =>
 );
 
 // A reference to a handler
-const onCreated = message => console.log('New message created', message);
+const onCreatedListener = message => console.log('New message created', message);
 
 // Listen `created` with a handler reference
 messages.on('created', onCreatedListener);
