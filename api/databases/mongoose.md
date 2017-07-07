@@ -59,7 +59,7 @@ __Options:__
 
 ### params.mongoose
 
-When making a [service method](../services.md) call, `params` can contain a `mongoose` property (for example, `{upsert: true}`) which allows you to modify the options used to run the Mongoose query. Normally, this will be set in a before [hook](../hooks.md):
+When making a [service method](../services.md) call, `params` can contain a `mongoose` property which allows you to modify the options used to run the Mongoose query. Normally, this will be set in a before [hook](../hooks.md):
 
 ```js
 app.service('messages').hooks({
@@ -75,6 +75,17 @@ app.service('messages').hooks({
     }
   }
 });
+```
+
+The `mongoose` property is also useful for performing upserts on a `patch` request.  "Upserts" do an update if a matching record is found, or insert a record if there's no existing match.  The following example will create a document that matches the `data`, or if there's already a record that matches the `params.query`, that record will be updated.
+
+```js
+const data = { address: '123', identifier: 'my-identifier' }
+const params = {
+  query: { address: '123' },
+  mongoose: { upsert: true }
+}
+app.service('address-meta').patch(null, data, params)
 ```
 
 
