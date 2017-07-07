@@ -26,10 +26,10 @@ messsages.once('removed', message =>
 );
 
 // A reference to a handler
-const onCreated = message => console.log('New message created', message);
+const onCreatedListener = message => console.log('New message created', message);
 
 // Listen `created` with a handler reference
-messages.on('created', onCreated);
+messages.on('created', onCreatedListener);
 
 // Unbind the `created` event listener
 messages.removeListener('created', onCreatedListener);
@@ -119,7 +119,7 @@ app.use('/messages', {
 
 const messages = app.service('messages');
 
-messages.on('removed', messages => console.log('removed', messages));
+messages.on('removed', message => console.log('removed', message));
 messages.remove(1);
 ```
 
