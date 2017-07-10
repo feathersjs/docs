@@ -5,7 +5,8 @@
 Feathers offline-first provides several increasingly sophisticated strategies.
 Its generally straightforward to change your application to use a more sophisticated one (except for snapshot).
 
-> **ProTip:** The snapshot, realtime, and realtime with optimistic mutation strategies are available at this time.
+> **ProTip:** The snapshot and realtime (with optimistic mutation while connected) strategies
+are available at this time.
 
 The features for each strategy are shown below.
 
@@ -33,6 +34,8 @@ The features for each strategy are shown below.
 | **Snapshot data on reconnect**    | -         | Y         | Y                   | Y        | Y         |             |
 |                                   |           |           |                     |          |           |             |
 | **Repository**                    | (2) | (3) | (4) | tba | tba | tba | tba |
+
+> **ProTip:** Note the realtime strategy supports optimistic mutation only while connected.
 
 - (1) [Universally unique identifier](https://en.wikipedia.org/wiki/Universally_unique_identifier) (uuid)
 - (2) feathers-offline-snapshot
