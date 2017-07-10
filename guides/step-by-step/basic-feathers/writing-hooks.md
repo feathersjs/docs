@@ -335,7 +335,7 @@ This is similar to:
 const foo = { name: 'John' };
 const bar = [ foo ];
 bar[0].project = 'Feathers';
-console.log(foo); // { name: 'John', project: 'Feathers
+console.log(foo); // { name: 'John', project: 'Feathers' }
 ```
 
 This example
