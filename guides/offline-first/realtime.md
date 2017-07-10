@@ -26,6 +26,11 @@ Let's consider an application which shows historical stock prices.
 The realtime strategy would snapshot the initial historical data.
 It would then update the local data with every addition or other mutation made on the remote.
 
+> **ProTip:** You should check that `replicator.connected === true` before doing
+a mutation either by calling the remote service directly or using the optimistic mutator.
+You could display an app-wide status message on the UI while disconnected,
+for example "There is no connection to the server. Only inquiries are allowed at the moment." 
+
 
 #### Sources:
 
