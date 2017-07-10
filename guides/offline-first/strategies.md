@@ -35,7 +35,11 @@ The features for each strategy are shown below.
 |                                   |           |           |                     |          |           |             |
 | **Repository**                    | (2) | (3) | (4) | tba | tba | tba | tba |
 
-> **ProTip:** Note the realtime strategy supports optimistic mutation only while connected.
+> **ProTip:** Note that the realtime strategy supports optimistic mutation only while connected.
+
+> **ProTip:** It is also your responsibility to inform the replicator when a connection
+is (re)established or lost using `replicator.connect()` and `replicator.disconnect()`.
+A repo handling this for both browser and react native is planned but not yet avalilable.
 
 - (1) [Universally unique identifier](https://en.wikipedia.org/wiki/Universally_unique_identifier) (uuid)
 - (2) feathers-offline-snapshot
