@@ -126,7 +126,7 @@ export default function (...fieldNames) {
 ```
 
 The `_pluck` utility, given an object and an array of property name,
-returns an object consisting of just those peoperties.
+returns an object consisting of just those properties.
 The property names may be in dot notation, e.g. `destination.address.city`.
 
 The context object is modified and returned,
