@@ -1,3 +1,4 @@
+
 --- client/jquery/public/client.html	2017-01-05 09:15:06.373000000 -0500
 +++ client/webpack/public/client.html	2017-01-15 21:09:18.727000000 -0500
 @@ -3,13 +3,13 @@
@@ -24,7 +25,7 @@
 -<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.12.0/moment.js"></script>
 -<script src="//code.jquery.com/jquery-2.2.1.js"></script>
 -<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/core-js/2.1.4/core.min.js"></script>
--<script src="//unpkg.com/feathers-client@^1.8.0/dist/feathers.js"></script>
+-<script src="//unpkg.com/feathers-client@^2.0.0/dist/feathers.js"></script>
 -<script src="/socket.io.min.js"></script>
 -<script src="/serverUrl.js"></script>
 -<script>

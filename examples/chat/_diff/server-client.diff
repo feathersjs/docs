@@ -80,7 +80,7 @@ diff -bdur --new-file server/start/public/socketio-app.js server/client/public/s
 +/// [user-helpers]
 +function signUpUser() {
 +  const user = { email: els['email-signup'].value.trim(), password: els['password-signup'].value.trim() };
-+  
++
 +  if (!user.email || !user.password) {
 +    console.log('ERROR: enter name, email and password');
 +    return;
@@ -94,12 +94,12 @@ diff -bdur --new-file server/start/public/socketio-app.js server/client/public/s
 +function signInUser() {
 +  const email = els['email-signin'].value.trim();
 +  const password = els['password-signin'].value.trim();
-+  
++
 +  if (!email || !password) {
 +    console.log('ERROR: enter email and password');
 +    return;
 +  }
-+  
++
 +  app.authenticate({ type: 'local', email, password })
 +    .then(() => {
 +      getUserList();
@@ -126,12 +126,12 @@ diff -bdur --new-file server/start/public/socketio-app.js server/client/public/s
 +/// [message-helpers]
 +function sendMessage() {
 +  const message = { text: els['message'].value.trim() };
-+  
++
 +  if (!message.text) {
 +    console.log('ERROR: enter message');
 +    return;
 +  }
-+  
++
 +  messages.create(message)
 +    .then(() => els['message'].value = '')
 +    .catch(err => console.log('ERROR creating message:', err));
@@ -180,7 +180,7 @@ diff -bdur --new-file server/start/public/socketio.html server/client/public/soc
 +  <input type="button" id="signout-user" value="Sign out" />
 +</div>
 +<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/core-js/2.1.4/core.min.js"></script>
-+<script src="//unpkg.com/feathers-client@^1.8.0/dist/feathers.js"></script>
++<script src="//unpkg.com/feathers-client@^2.0.0/dist/feathers.js"></script>
 +<script src="/socket.io.min.js"></script>
 +<script src="/serverUrl.js"></script>
 +<script>
@@ -203,12 +203,12 @@ diff -bdur --new-file server/start/src/services/message/hooks/index.js server/cl
 --- server/start/src/services/message/hooks/index.js	2017-01-01 14:34:49.594000000 -0500
 +++ server/client/src/services/message/hooks/index.js	2017-01-01 15:22:15.104000000 -0500
 @@ -2,10 +2,14 @@
- 
+
  const globalHooks = require('../../../hooks');
  const hooks = require('feathers-hooks');
 -
 +const auth = require('feathers-authentication').hooks;
- 
+
  exports.before = {
 -  all: [],
 +  all: [
@@ -223,10 +223,10 @@ diff -bdur --new-file server/start/src/services/message/index.js server/client/s
 --- server/start/src/services/message/index.js	2017-01-01 14:34:49.594000000 -0500
 +++ server/client/src/services/message/index.js	2017-01-03 08:20:05.854000000 -0500
 @@ -32,4 +32,7 @@
- 
+
    // Set up our after hooks
    messageService.after(hooks.after);
-+  
++
 +  // Send message events only to authenticated users.
 +  messageService.filter((data, connection) => connection.user ? data : false);
  };
@@ -234,7 +234,7 @@ diff -bdur --new-file server/start/src/services/user/index.js server/client/src/
 --- server/start/src/services/user/index.js	2017-01-01 14:24:18.338000000 -0500
 +++ server/client/src/services/user/index.js	2017-01-03 08:20:05.400000000 -0500
 @@ -32,4 +32,7 @@
- 
+
    // Set up our after hooks
    userService.after(hooks.after);
 +
