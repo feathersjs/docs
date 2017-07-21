@@ -23,6 +23,17 @@ npm install --save tedious // MSSQL
 
 > For more information about models and general Sequelize usage, follow up in the [Sequelize documentation](http://docs.sequelizejs.com/en/latest/).
 
+## A quick note about `raw` queries
+
+By default, all `feathers-sequlize` operations will return `raw` data (using `raw: true` when querying the database). This results in faster execution and allows feathers-sequelize to interoperate with feathers-common hooks and other 3rd party integrations. However, this will bypass some of the "goodness" you get when using Sequelize as an ORM: 
+
+ - custom getters/setters will be bypassed
+ - model-level validations are bypassed
+ - associated data loads a bit differently
+ - ...and several other issues that one might not expect
+ 
+Don't worry! The solution is easy. Please read the guides about [working with model instances](working-with-sequelize-model-instances).
+
 
 ## API
 
