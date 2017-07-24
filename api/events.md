@@ -226,7 +226,7 @@ app.service('payments').filter('status', function(data, connection, hook) {
 
 By default, real-time clients will only receive the [standard events](#service-events). However, it is possible to define a list of custom events on a service as `service.events` that should also be passed.
 
-> **Important:** The [database adapters](./databases/commond.md) also take a list of custom events as an initialization option.
+> **Important:** The [database adapters](./databases/common.md) also take a list of custom events as an initialization option.
 
 <!-- -->
 
