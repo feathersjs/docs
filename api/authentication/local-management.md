@@ -365,14 +365,14 @@ const verifyHooks = require('feathers-authentication-management').hooks;
 module.exports.before = {
   create: [
     auth.hashPassword(),
-    verifyHooks.addVerification() // adds .isVerified, .verifyExpires, .verifyToken, .verifyChanges
+    verifyHooks.addVerification() // adds .isVerified, .verifyExpires, .verifyToken, .verifyChanges to the incoming data
   ]
 };
 module.exports.after = {
   create: [
     hooks.remove('password'),
     aHookToEmailYourVerification(),
-    verifyHooks.removeVerification() // removes verification/reset fields other than .isVerified
+    verifyHooks.removeVerification() // removes verification/reset fields other than .isVerified from the outgoing response
   ]
 };
 ```
