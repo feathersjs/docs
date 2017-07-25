@@ -98,7 +98,7 @@ Feathers works just like Express so it's the exact same. We've created a [helpfu
 
 ## How do I create channels or rooms
 
-Although Socket.io has a [concept of rooms](http://socket.io/docs/rooms-and-namespaces/) and you can always fall back to it other websocket libraries that Feathers supports do not. The Feathers way of letting a user listen to e.g. messages on a room is through [event filtering](../api/events.md#event-filtering). There are two ways:
+Although Socket.io has a [concept of rooms](http://socket.io/docs/rooms-and-namespaces/) that you can always fall back to, other websocket libraries that Feathers supports do not. The Feathers way of letting a user listen to e.g. messages on a room is through [event filtering](../api/events.md#event-filtering). There are two ways:
 
 1. Update the user object with the rooms they are subscribed to and filter based on those
 
