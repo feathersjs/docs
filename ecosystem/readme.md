@@ -41,6 +41,7 @@ Submit yours by creating a pull request.
 - [Feathers + Quasar](https://github.com/claustres/quasar-feathers-tutorial)
 - [Feathers + Apollo](https://github.com/swarthout/feathers-apollo)
 - [Feathers 2 + Vue 2 + SSR + Email Verification](https://github.com/codingfriend1/Feathers-Vue)
+- [Feathers 2 + Vue 2 + Email Verification + Cordova + Framework 7](https://github.com/codingfriend1/Feathers-Vue/tree/cordova)
 - [Feathers + React + Mobx](https://github.com/foxhound87/rfx-stack)
 - [Feathers + React + Webpack](https://github.com/sscaff1/feathers-webpack-react)
 - [Observables with Angular2 and FeathersJS](https://berndsgn.ch/angular2-and-feathersjs)
