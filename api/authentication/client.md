@@ -31,6 +31,8 @@ import auth from 'feathers-authentication-client';
 feathersClient.configure(auth(options))
 ```
 
+> The [transports plugins](../client.md) must have been initialized previously to the authentication plugin on the client side
+
 ### Default `options`
 
 The following default options will be mixed in with the settings you pass in when configuring authentication. It will set the mixed options back to to the app so that they are available at any time by `app.get('auth')`. They can all be overridden.
@@ -141,7 +143,7 @@ feathersClient.authenticate({
 })
 .then(user => {
   feathersClient.set('user', user);
-  console.log('User', client.get('user'));
+  console.log('User', feathersClient.get('user'));
 })
 .catch(function(error){
   console.error('Error authenticating!', error);

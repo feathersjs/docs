@@ -9,7 +9,10 @@ The new `feathers-authentication` introduces a lot of changes.  See what's new.
 [**Migrating to `feathers-authentication@1.x`**](https://github.com/feathersjs/feathers-authentication/blob/master/docs/migrating.md)<br/>
 See what needs to change to upgrade your existing Feathers application from `feathers-authentication@0.7.x`.
 
-[**Auth Recipe: Customizing the Login Response**](./recipe.customize-response.md)<br/>
+[**Auth Recipe: Customize the JWT Payload**](./recipe.customize-jwt-payload.md)<br/>
+You can customize the JWT payload. Learn important security implications before you decide to do it.
+
+[**Auth Recipe: Customize the Login Response**](./recipe.customize-response.md)<br/>
 Learn how you can customize the response after a user has attempted to login.
 
 [**Auth Recipe: Create Endpoints with Mixed Auth**](./recipe.mixed-auth.md)<br/>

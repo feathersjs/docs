@@ -59,7 +59,7 @@ __Options:__
 
 ### params.mongoose
 
-When making a [service method](../services.md) call, `params` can contain an `mongoose` property (for exmaple, `{upsert: true}`) which allows to modify the options used to run the Mongoose query. Normally this wil be set in a before [hook](../hooks.md):
+When making a [service method](../services.md) call, `params` can contain a `mongoose` property which allows you to modify the options used to run the Mongoose query. Normally, this will be set in a before [hook](../hooks.md):
 
 ```js
 app.service('messages').hooks({
@@ -75,6 +75,17 @@ app.service('messages').hooks({
     }
   }
 });
+```
+
+The `mongoose` property is also useful for performing upserts on a `patch` request.  "Upserts" do an update if a matching record is found, or insert a record if there's no existing match.  The following example will create a document that matches the `data`, or if there's already a record that matches the `params.query`, that record will be updated.
+
+```js
+const data = { address: '123', identifier: 'my-identifier' }
+const params = {
+  query: { address: '123' },
+  mongoose: { upsert: true }
+}
+app.service('address-meta').patch(null, data, params)
 ```
 
 
@@ -157,6 +168,21 @@ app.listen(port, () => {
 
 You can run this example by using `node app` and go to [localhost:3030/messages](http://localhost:3030/messages).
 
+## Querying, Validation
+
+Mongoose by default gives you the ability to add [validations at the model level](http://mongoosejs.com/docs/validation.html). Using an error handler like the one that [comes with Feathers](https://github.com/feathersjs/feathers-errors/blob/master/src/error-handler.js) your validation errors will be formatted nicely right out of the box!
+
+For more information on querying and validation refer to the [Mongoose documentation](http://mongoosejs.com/docs/guide.html).
+
+### $populate
+
+For Mongoose, the special `$populate` query parameter can be used to allow [Mongoose query population](http://mongoosejs.com/docs/populate.html).
+
+```js
+app.service('posts').find({
+  query: { $populate: 'user' }
+});
+```
 
 ## Discriminators (Inheritance)
 
@@ -206,10 +232,3 @@ Now in your query, you can specify a value for your discriminatorKey:
 ```
 
 and Feathers will automatically swap in the correct model and execute the query it instead of its parent model.
-
-
-## Querying, Validation
-
-Mongoose by default gives you the ability to add [validations at the model level](http://mongoosejs.com/docs/validation.html). Using an error handler like the one that [comes with Feathers](https://github.com/feathersjs/feathers-errors/blob/master/src/error-handler.js) your validation errors will be formatted nicely right out of the box!
-
-For more information on querying and validation refer to the [Mongoose documentation](http://mongoosejs.com/docs/guide.html).

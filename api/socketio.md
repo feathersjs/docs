@@ -151,7 +151,7 @@ app.listen(3030);
 
 ### Middleware and service parameters
 
-[Socket.io middleware](http://socket.io/docs/server-api/#namespace#use(fn:function):namespace) can modify the `feathers` property on the `socket` which will then be used as the service parameters:
+[Socket.io middleware](https://socket.io/docs/server-api/#namespace-use-fn) can modify the `feathers` property on the `socket` which will then be used as the service parameters:
 
 ```js
 app.configure(socketio(function(io) {

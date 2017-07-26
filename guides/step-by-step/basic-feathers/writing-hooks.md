@@ -28,7 +28,7 @@ a new context object, or `undefined`.
 
 
 
-> **ProTip** Mutating the `context` param inside a hook function
+> **ProTip** Mutating the `context` param inside a hook function without returning it
 does not change the context object passed to the next hook.
 
 Let's review the source of some of the [common hooks](../../../api/hooks-common.md)
@@ -126,15 +126,15 @@ export default function (...fieldNames) {
 ```
 
 The `_pluck` utility, given an object and an array of property name,
-returns an object consisting of just those peoperties.
+returns an object consisting of just those properties.
 The property names may be in dot notation, e.g. `destination.address.city`.
 
 The context object is modified and returned,
 thus modifying what context is passed to the next hook.
 
 This example
-- Introduces `_pluck`.
 - Modifies and synchronously returns the context object.
+- Introduces `_pluck`.
 
 
 ## pluck [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/services/pluck.js)
@@ -174,6 +174,77 @@ is the reverse of `getItems`, returning the items where they came from.
 
 This example
 - Introduces the convenient `getItems` and `replaceItems` utilities.
+
+
+## Throwing an error - disableMultiItemChange [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/services/disable-multi-item-change.js)
+
+You will, sooner or later, want to return an error to the caller, skipping the DB call.
+You can do this by throwing a [Feathers error](../../../api/errors.md).
+
+`disableMultiItemChange` disables update, patch and remove methods from using null as an id.
+
+```javascript
+import errors from 'feathers-errors';
+import checkContext from './check-context';
+
+export default function () {
+  return function (context) {
+    checkContext(context, 'before', ['update', 'patch', 'remove'], 'disableMultiItemChange');
+
+    if (context.id === null) {
+      throw new errors.BadRequest(
+        `Multi-record changes not allowed for ${context.path} ${context.method}. (disableMultiItemChange)`
+      );
+    }
+  };
+}
+```
+
+Feathers errors are flexible, containing [useful fields](../../../api/errors.md).
+Of particular note are:
+- `className` returns the type of error, e.g. `not-found`.
+Your code can check this field rather than the text of the error message.
+- `errors` can return error messages for individual fields.
+You can customize the format to that expected by your client-side forms handler.
+```javascript
+throw new errors.BadRequest('Bad request.', { errors: {
+  username: 'Already in use', password: 'Must be at least 8 characters long'
+}});
+```
+
+This example
+- Shows how to stop a method call by throwing an error.
+
+## Returning a result
+
+Assume that for a service with static data the record is added to `cache`
+whenever a `get` call has completed.
+We can then potentially improve performance for future `get` calls
+by checking if we already have the record.
+
+```javascript
+import { checkContext } from 'feathers-hooks-common';
+
+export default function (cache) {
+  return context => {
+    checkContext(context, 'before', ['get'], 'memoize');
+    
+    if (context.id in cache) {
+      context.result = cache[context.id];
+      return context;
+    }
+  };
+};
+```
+
+Feathers will not make the database call if `hook.result` is set.
+Any remaining before and after hooks are still run.
+
+Should this hook find a cached record,
+placing it in `hook.result` is the same as if the database had returned the record.
+
+This example
+- Shows how `before` hooks can determine the result for the call.
 
 
 ## Simple async hook
@@ -264,7 +335,7 @@ This is similar to:
 const foo = { name: 'John' };
 const bar = [ foo ];
 bar[0].project = 'Feathers';
-console.log(foo); // { name: 'John', project: 'Feathers
+console.log(foo); // { name: 'John', project: 'Feathers' }
 ```
 
 This example
@@ -395,6 +466,28 @@ This example
 - Discusses how to handle `params` for service calls.
 - Shows how to prevent recursion.
 
- 
+
+## iff, when, else
+
+Conditional hooks like `iff(predicate, hook1, hook2).else(hook3, hook4)` can be very useful.
+
+Its easy to write your own predicates.
+They are functions with a signature of `context => boolean`,
+which receive the context as a parameter and return either a boolean (synchronous)
+or a Promise which resolves to a boolean.
+
+You can combine predicates provided with the common hooks, such as `isProvider`
+([source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/services/is-provider.js)).
+You can write your own, or mix and match.
+
+```javascript
+iff (hook => !isProvider('service')(hook) && hook.params.user.security >= 3, ...)
+```
+
+The `isNot` conditional utility
+([source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/common/is-not.js))
+is useful because it will negate either a boolean or a Promise resolving to a boolean.
+
+
 ### Is anything wrong, unclear, missing?
 [Leave a comment.](https://github.com/feathersjs/feathers-docs/issues/new?title=Comment:Step-Basic-Writing-Hooks&body=Comment:Step-Basic-Writing-Hooks)

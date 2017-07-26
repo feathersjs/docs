@@ -18,8 +18,8 @@ part of a database table.
 It can keep it up to date by listening to events for that table.
 
 > **Real-time.** Real-time events are sent only to Feathers WebSocket clients.
-They are not sent to Feathers REST ot HTTP REST clients.
-These would have implement a traditional long-polling design.
+They are not sent to Feathers REST nor HTTP REST clients.
+These would have to implement a traditional long-polling design.
 **Conclusion:** Use Feathers WebSocket clients.
 
 Let's create an event listener for the [Feathers Websocket Client](./socket-client.md)

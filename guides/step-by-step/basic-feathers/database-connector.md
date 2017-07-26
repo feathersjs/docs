@@ -36,13 +36,13 @@ Now you can see where Feathers got its name.
 ## We start an instance of Feathers and define its services.
 [import:'feathers'](../../../examples/step/01/db-connector/1.js)
 
-users is the only service we need  and its a database table located at examples/step/data/users.db.
+users is the only service we need and it's a database table located at examples/step/data/users.db.
 [import:'services'](../../../examples/step/01/db-connector/1.js)
 
 ## Create 3 users using Promises.
 [import:'create'](../../../examples/step/01/db-connector/1.js)
 Each create returns a promise which resolves into the item added into the database.
-NeDB will always adds a unique `_id` property to the user item and the returned item will contain it.
+NeDB will always add a unique `_id` property to the user item and the returned item will contain it.
 
 > **Callbacks and Promises.**
 `users.create({ ... }, {}, (err, data) => { ... })`
@@ -61,7 +61,7 @@ It receives an array as a parameter.
 The n-th element of the array is the resolved value of the n-th element in Promise.all.
 
 
-The 3 user items are now are in the database, their values are returned in `results`.
+The 3 user items are now in the database, their values are returned in `results`.
 We issue a find for the entire table and print the results.
 [import:'results'](../../../examples/step/01/db-connector/1.js)
 
@@ -69,6 +69,7 @@ We issue a find for the entire table and print the results.
 `user.find()` returns a Promise. `.then(results => ...)` waits for the Promise to resolve,
 i.e. for the find to finish.
 The zero, one or more items found in the table are returned in the `results` param.
+
 
 | View the completed file [db-connector/1.js.](https://github.com/feathersjs/feathers-docs/blob/master/examples/step/01/db-connector/1.js)
 
@@ -85,8 +86,12 @@ patch(id, data, params)
 remove(id, params)
 ```
 
-params may be `{ query: { ... }, ... }` for find;
-also for patch and remove if id is `null`.
+Feathers supports [a common way](../../../api/databases/querying.md)
+for querying, sorting, limiting and selecting find method calls
+as part of `params`, e.g. `{ query: { ... }, ... }`.
+Querying also applies to update, patch and remove method calls if the `id` is set to `null`.
+
+> ** ProTip:** The find method does not guarantee an order for the returned items.
 
 ## Results
 

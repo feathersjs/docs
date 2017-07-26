@@ -52,58 +52,58 @@ The browser console displays
 
 ```text
 created Jane Doe item
- Object {email: "jane.doe@gmail.com", role: "admin", createdAt: "2016-12-28T17:11:42.006Z", updatedAt: "2016-12-28T17:11:42.006Z", _id: "jcWgKJyCgkMdvFff"}
+  Object {email: "jane.doe@gmail.com", role: "admin", createdAt: "2017-05-31T08:41:48.640Z", updatedAt: "2017-05-31T08:41:48.640Z", _id: "CfLheOpJ3rve1IPh"}
 created John Doe item
- Object {email: "john.doe@gmail.com", role: "user", createdAt: "2016-12-28T17:11:42.763Z", updatedAt: "2016-12-28T17:11:42.763Z", _id: "pyDLAdhTWBEXDgMm"}
+  Object {email: "john.doe@gmail.com", role: "user", createdAt: "2017-05-31T08:41:48.623Z", updatedAt: "2017-05-31T08:41:48.623Z", _id: "sQy34FUrDC8gJOUR"}
 created Judy Doe item
- Object {email: "judy.doe@gmail.com", role: "user", createdAt: "2016-12-28T17:11:43.186Z", updatedAt: "2016-12-28T17:11:43.186Z", _id: "sczE6q1Y60XPAR76"}
+  Object {email: "judy.doe@gmail.com", role: "user", createdAt: "2017-05-31T08:41:48.641Z", updatedAt: "2017-05-31T08:41:48.641Z", _id: "eKNolHDBO6qXH2MU"}
 created Jack Doe item
- Object {email: "jack.doe@gmail.com", role: "user", createdAt: "2016-12-28T17:11:43.510Z", updatedAt: "2016-12-28T17:11:43.511Z", _id: "rw5faDl0KZaqh3K0"}
+  Object {email: "jack.doe@gmail.com", role: "user", createdAt: "2017-05-31T08:41:48.641Z", updatedAt: "2017-05-31T08:41:48.641Z", _id: "5iQCl2oDLbVXMfHo"}
 deleted Jack Doe item
- Object
-   id: "rw5faDl0KZaqh3K0"
-   createdAt: "2016-12-28T17:11:43.510Z"
-   deleted: true
-   email: "jack.doe@gmail.com"
-   role:"user"
-   updatedAt: "2016-12-28T17:11:43.511Z"
+  Object
+    email: "jack.doe@gmail.com",
+    role: "user",
+    deleted: true
+    createdAt: "2017-05-31T08:41:48.641Z",
+    updatedAt: "2017-05-31T08:41:48.641Z",
+    _id: "5iQCl2oDLbVXMfHo"
 find all items
- [Object, Object, Object, Object]
-   0: Object
-     _id: "jcWgKJyCgkMdvFff"
-     createdAt: "2016-12-28T17:11:42.006Z"
-     email: "jane.doe@gmail.com"
-     password: "$2a$10$Bdy4uyxRO7iqpEQJrbVJCOefaeYazPYo86HNqNtSHhixMetN1xRta"
-     role: "admin"
-     updatedAt: "2016-12-28T17:11:42.006Z"
-   1: Object
-     _id: "pyDLAdhTWBEXDgMm"
-     createdAt: "2016-12-28T17:11:42.763Z"
-     email: "john.doe@gmail.com"
-     password: "$2a$10$givjPRc3ZfYNCVYjtup8ZuwpjP28n6.OhpJiaAMg89y/lhlz5p1LG"
-     role: "user"
-     updatedAt: "2016-12-28T17:11:42.763Z"
-   2: Object
-     _id: "rw5faDl0KZaqh3K0"
-     createdAt: "2016-12-28T17:11:43.510Z"
-     deleted: true
-     email: "jack.doe@gmail.com"
-     password: "$2a$10$sHmDunPCU76hF.LdKYRo2OwopWCAftJCgayRH/mL5m4FcCUMUEv16"
-     role: "user"
-     updatedAt: "2016-12-28T17:11:43.511Z"
-   3: Object
-     _id: "sczE6q1Y60XPAR76"
-     createdAt: "2016-12-28T17:11:43.186Z"
-     email: "judy.doe@gmail.com"
-     password: "$2a$10$IHTz519U8jxcPJUuKAr7ieuqN473vGD24.BbRGlA5jvHvdpu8QwQW"
-     role: "user"
-     updatedAt: "2016-12-28T17:11:43.186Z"
-   length: 4
+  [Object, Object, Object, Object]
+    0: Object
+      email: "jack.doe@gmail.com"
+      role: "user"
+      password: "$2a$10$So9MhiVGW.P31CZnUefXXOcuacwKMm7nTgCAPSBZB9rO10how.X.G"
+      deleted: true
+      createdAt: "2017-05-31T08:41:48.641Z"
+      updatedAt: "2017-05-31T08:41:48.641Z"
+      _id: "5iQCl2oDLbVXMfHo"
+    1: Object
+      email: "jane.doe@gmail.com"
+      password: "$2a$10$TAz6SD6WxEostxvCNMOubuEY68pS8Jv9pLvrrgCiWTIOjIs3yIlO."
+      role: "admin"
+      createdAt: "2017-05-31T08:41:48.640Z"
+      updatedAt: "2017-05-31T08:41:48.640Z"
+      _id: "CfLheOpJ3rve1IPh"
+    2: Object
+      email: "judy.doe@gmail.com"
+      password: "$2a$10$GvUEJfPTQLGY8JKTuH8yeeML9auVLo1IGDVyGFOOImZ0Nuxtd7uji"
+      role: "user"
+      createdAt: "2017-05-31T08:41:48.641Z"
+      updatedAt: "2017-05-31T08:41:48.641Z"
+      _id: "eKNolHDBO6qXH2MU"
+    3: Object
+      email: "john.doe@gmail.com"
+      password: "$2a$10$MX0LJerCfLoGx31mGh2x0eR7CyE2t2STeHhpcV9vYbpD3m8i8OZ.S"
+      role: "user"
+      createdAt: "2017-05-31T08:41:48.623Z"
+      updatedAt: "2017-05-31T08:41:48.623Z"
+      _id: "sQy34FUrDC8gJOUR"
+    length: 4
 ```
 
 - The result returned when the Jack Doe item was deleted contains `deleted: true`.
 - The results returned for find also contain `deleted: true` for Jack Doe
 because of how we conditioned the softDelete hook.
- 
+
 ### Is anything wrong, unclear, missing?
 [Leave a comment.](https://github.com/feathersjs/feathers-docs/issues/new?title=Comment:Step-Basic-Hooks-2&body=Comment:Step-Basic-Hooks-2)

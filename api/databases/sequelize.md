@@ -23,6 +23,17 @@ npm install --save tedious // MSSQL
 
 > For more information about models and general Sequelize usage, follow up in the [Sequelize documentation](http://docs.sequelizejs.com/en/latest/).
 
+## A quick note about `raw` queries
+
+By default, all `feathers-sequlize` operations will return `raw` data (using `raw: true` when querying the database). This results in faster execution and allows feathers-sequelize to interoperate with feathers-common hooks and other 3rd party integrations. However, this will bypass some of the "goodness" you get when using Sequelize as an ORM: 
+
+ - custom getters/setters will be bypassed
+ - model-level validations are bypassed
+ - associated data loads a bit differently
+ - ...and several other issues that one might not expect
+ 
+Don't worry! The solution is easy. Please read the guides about [working with model instances](working-with-sequelize-model-instances).
+
 
 ## API
 
@@ -32,7 +43,7 @@ Returns a new service instance initialized with the given options.
 
 ```js
 const Model = require('./models/mymodel');
-const sequelize = service('feathers-sequelize');
+const service = require('feathers-sequelize');
 
 app.use('/messages', service({ Model }));
 app.use('/messages', service({ Model, id, events, paginate }));
@@ -140,12 +151,12 @@ Run the example with `node app` and go to [localhost:3030/messages](http://local
 
 ## Querying
 
-Additionally to the [common querying mechanism](./querying.md) this adapter also supports all [Sequelize query operators](http://docs.sequelizejs.com/en/v3/docs/querying/).
+Additionally to the [common querying mechanism](./querying.md) this adapter also supports all [Sequelize query operators](http://docs.sequelizejs.com/manual/tutorial/querying.html).
 
 
 ## Associations and relations
 
-Follow up in the [Sequelize documentation for associations](http://docs.sequelizejs.com/en/v3/docs/associations/), [this issue](https://github.com/feathersjs/feathers-sequelize/issues/20) and [this example for many to many relationships](https://github.com/feathersjs/feathers-demos/tree/master/examples/app-structure/many-to-many-sequelize).
+Follow up in the [Sequelize documentation for associations](http://docs.sequelizejs.com/manual/tutorial/associations.html), [this issue](https://github.com/feathersjs/feathers-sequelize/issues/20) and [this Stackoverflow answer](https://stackoverflow.com/questions/42841810/feathers-js-sequelize-service-with-relations-between-two-models/42846215#42846215).
 
 ## Working with Sequelize Model instances
 

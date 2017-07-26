@@ -10,6 +10,7 @@ We also have a very helpful community in Slack.
 
 - [BeachfrontDigital](https://beachfront.digital)
 - [ContactImpact](https://www.contactimpact.de)
+- [Equibit Group](https://equibitgroup.com/)
 - [Foxflow](https://www.foxflow.com/)
 - [GenerousTickets](https://generoustickets.com/)
 - [Gratify](https://gratifyhq.com)
@@ -47,7 +48,7 @@ Submit yours by creating a pull request.
 - [Observables with Angular2 and FeathersJS](https://berndsgn.ch/angular2-and-feathersjs)
 - [Feathers + React + Redux + Webpack + local auth. Production quality](https://github.com/eddyystop/feathers-starter-react-redux-login-roles).
 - [Live query. Mirror part of a DB on the client.](https://github.com/eddyystop/feathers-live-query)
-- [Feathers + React + Redux + Webpack + complete auth + offline mode (with generator & ideal for production)](https://github.com/bertho-zero/react-redux-universal-hot-example)
+- [Feathers + React + Redux + Webpack + complete auth + offline mode (ideal for production)](https://github.com/bertho-zero/react-redux-universal-hot-example)
 - [Build a CRUD App Using React, Redux and FeathersJS](https://www.sitepoint.com/crud-app-react-redux-feathersjs/)
 - [feathers-nuxt](https://github.com/silvestreh/feathers-nuxt) - A sample/starter for server-side rendered Vue.js + Feathers applications that supports user authentication
 
@@ -61,6 +62,7 @@ Submit yours by creating a pull request.
 - [feathers-authentication-oauth1](../api/authentication/oauth1.md) ![Official Feathers Module](/img/tiny-feathers-logo.png)
 - [feathers-authentication-oauth2](../api/authentication/oauth2.md) ![Official Feathers Module](/img/tiny-feathers-logo.png)
 - [feathers-authentication-popups](https://github.com/feathersjs/feathers-authentication-popups) ![Official Feathers Module](/img/tiny-feathers-logo.png)
+- [feathers-authentication-keystone](https://github.com/virtuozzo/feathers-authentication-keystone)
 - [feathers-permissions](https://github.com/feathersjs/feathers-permissions) ![Official Feathers Module](/img/tiny-feathers-logo.png)
 - [feathers-authentication-management](https://github.com/feathersjs/feathers-authentication-management) ![Official Feathers Repo](/img/tiny-feathers-logo.png) - User email verification and password reset capabilities to local feathers-authentication (service)
 - [feathers-authentication-compatibility](https://www.npmjs.com/package/feathers-authentication-compatibility) - Keep `v0.x` clients compatible with `v1.0+` authentication
@@ -90,11 +92,9 @@ Submit yours by creating a pull request.
 - [feathers-mongodb](../api/databases/mongodb.md) ![Official Feathers Module](/img/tiny-feathers-logo.png)
 - [feathers-mongodb-revisions](https://www.npmjs.com/package/feathers-mongodb-revisions) - This Feathers database adapter extends the basic MongoDB adapter, adding revision support. (service)
 - [feathers-mongoose](../api/databases/mongoose.md) ![Official Feathers Module](/img/tiny-feathers-logo.png)
-- [feathers-mongoose-advanced](https://www.npmjs.com/package/feathers-mongoose-advanced) - Create a flexible Mongoose Service for FeathersJS. (service)
-- [feathers-mongoose-service](https://www.npmjs.com/package/feathers-mongoose-service) - Easily create a Mongoose Service for Featherjs. (service)
 - [feathers-nedb](../api/databases/nedb.md) ![Official Feathers Module](/img/tiny-feathers-logo.png)
 - [feathers-nedb-dump](https://www.npmjs.com/package/feathers-nedb-dump) - Middleware for Feathers.js - dumps and restores NeDB database for a given service (middleware)
-- [feathers-objection](https://github.com/mcchrish/feathers-objection) - A service adapter for [Objection.js](http://vincit.github.io/objection.js.html) - A minimal SQL ORM built on top of Knex.
+- [feathers-objection](https://github.com/mcchrish/feathers-objection) - A service adapter for [Objection.js](https://vincit.github.io/objection.js) - A minimal SQL ORM built on top of Knex.
 - [feathers-orm-service](https://www.npmjs.com/package/feathers-orm-service) - Easily create a Object Relational Mapping Service for Featherjs.
 - [feathers-rethinkdb](../api/databases/rethinkdb.md) ![Official Feathers Module](/img/tiny-feathers-logo.png)
 - [feathers-rethinky](https://www.npmjs.com/package/feathers-rethinky) - Thinky.js RethinkDB Adaptor for Feathers JS
@@ -180,10 +180,11 @@ The Feathers client works with React Native but here is a collection of native l
 - [feathers-hooks-utils](https://www.npmjs.com/package/feathers-hooks-utils) - Utility library for writing Feathersjs hooks. (hooks)
 - [feathers-logger](https://github.com/feathersjs/feathers-logger) ![Official Feathers Module](/img/tiny-feathers-logo.png)
 - [feathers-query-filters](https://github.com/feathersjs/feathers-query-filters) ![Official Feathers Module](/img/tiny-feathers-logo.png)
-- [feathers-service-logger-stats](https://github.com/feathersjs/feathers-service-logger-stats) ![Official Feathers Module](/img/tiny-feathers-logo.png)
+- [feathers-profiler](https://github.com/feathersjs/feathers-profiler) ![Official Feathers Module](/img/tiny-feathers-logo.png)
 - [feathers-socket-commons](https://github.com/feathersjs/feathers-socket-commons) ![Official Feathers Module](/img/tiny-feathers-logo.png)
 - [generator-feathers](https://github.com/feathersjs/generator-feathers) ![Official Feathers Module](/img/tiny-feathers-logo.png)
 - [generator-feathers-plugin](https://github.com/feathersjs/generator-feathers-plugin) ![Official Feathers Module](/img/tiny-feathers-logo.png)
+- [feathers-versionate](https://github.com/luke3butler/feathers-versionate) - Utility for creating and working with nested service paths.
 
 
 ## Validation
@@ -227,4 +228,3 @@ The Feathers client works with React Native but here is a collection of native l
 - [feathers-vuex](https://github.com/feathersjs/feathers-vuex) ![Official Feathers Module](/img/tiny-feathers-logo.png)  - Integration of Feathers services with your Vuex store.
 - [vue-syncers-feathers](https://www.npmjs.com/package/vue-syncers-feathers) - Synchronises feathers services with vue objects, updated in real time (connector)
 - [vue-feathers](https://github.com/sunabozu/vue-feathers) - A plugin for Vuejs 1.x & 2.x to easily access your feathers services.
-- [feathers-polymer](https://github.com/thosakwe/polymer-feathers)

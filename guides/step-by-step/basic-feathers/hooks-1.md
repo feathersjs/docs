@@ -42,12 +42,12 @@ function services() {
 
 function user() {
   const app = this;
-  
+
   app.use('/users', service({ Model: userModel() }));
   const userService = app.service('users');
-  
+
   const { validateSchema, setCreatedAt, setUpdatedAt, unless, remove } = commonHooks;
-  
+
   userService.before({
     create: [
       validateSchema(userSchema(), Ajv), authHooks.hashPassword(), setCreatedAt(), setUpdatedAt()
@@ -62,11 +62,12 @@ function userSchema() {
     title: 'User Schema',
     $schema: 'http://json-schema.org/draft-04/schema#',
     type: 'object',
-    required: [ 'email', 'password' ],
+    required: [ 'email', 'password', 'role' ],
     additionalProperties: false,
     properties: {
       email: { type: 'string', maxLength: 100, minLength: 6 },
-      password: { type: 'string', maxLength: 30, minLength: 8 }
+      password: { type: 'string', maxLength: 30, minLength: 8 },
+      role: { type: 'string' }
     }
   };
 }
@@ -84,7 +85,7 @@ We include support for hooks in the configuration.
 ### - this.configure(user);
 
 The user service is now more complex, so we configure it on its own.
- 
+
 ### - const { validateSchema, setCreatedAt, setUpdatedAt, unless, remove } = commonHooks;
 
 Feathers comes with a library of useful hooks.
@@ -117,8 +118,8 @@ The data has a `password` field.
 This specialized authentication hook will replace it with a hashed version
 so the password may be stored safely.
 
-> **bcrypt.** Feathers hashes passwords using [bycrypt](https://www.npmjs.com/package/bcryptjs).
-Bcrypt has the best kind of repute that can be achieved for a cryptographic algorithm:
+> **bcrypt.** Feathers hashes passwords using [bcrypt](https://www.npmjs.com/package/bcryptjs).
+bcrypt has the best kind of repute that can be achieved for a cryptographic algorithm:
 it has been around for quite some time, used quite widely, "attracted attention",
 and yet remains unbroken to date.
 [(Reference.)](http://security.stackexchange.com/questions/4781/do-any-security-experts-recommend-bcrypt-for-password-storage)
@@ -186,35 +187,35 @@ The browser console displays
 
 ```text
 created Jane Doe item
- Object {email: "jane.doe@gmail.com", role: "admin", createdAt: "2016-12-28T16:18:59.966Z", updatedAt: "2016-12-28T16:18:59.967Z", _id: "SvpqdHbP8GfHDbOa"}
+  Object {email: "jane.doe@gmail.com", role: "admin", createdAt: "2017-05-31T08:33:07.642Z", updatedAt: "2017-05-31T08:33:07.643Z", _id: "VNSm7SxZnMeVxN6Z"}
 created John Doe item
- Object {email: "john.doe@gmail.com", role: "user", createdAt: "2016-12-28T16:19:01.665Z", updatedAt: "2016-12-28T16:19:01.665Z", _id: "YDGhVttoOtejjq3B"}
+  Object {email: "john.doe@gmail.com", role: "user", createdAt: "2017-05-31T08:33:07.643Z", updatedAt: "2017-05-31T08:33:07.643Z", _id: "SHyBbGehbEiZGpQS"}
 created Judy Doe item
- Object {email: "judy.doe@gmail.com", role: "user", createdAt: "2016-12-28T16:19:02.354Z", updatedAt: "2016-12-28T16:19:02.354Z", _id: "XjAAImIfmTreqMN0"}
+  Object {email: "judy.doe@gmail.com", role: "user", createdAt: "2017-05-31T08:33:07.645Z", updatedAt: "2017-05-31T08:33:07.645Z", _id: "2zFj0CoGjczuQP5B"}
 find all items
- [Object, Object, Object]
-   0: Object
-     _id: "SvpqdHbP8GfHDbOa"
-     createdAt: "2016-12-28T16:18:59.966Z"
-     email: "jane.doe@gmail.com"
-     password: "$2a$10$/2DeO4iazHoLKnF81dbQEeVPapC2BScYTqhVzNB4pDYyRbAn0.FJW"
-     role: "admin"
-     updatedAt: "2016-12-28T16:18:59.967Z"
-   1: Object
-     _id: "XjAAImIfmTreqMN0"
-     createdAt: "2016-12-28T16:19:02.354Z"
-     email: "judy.doe@gmail.com"
-     password: "$2a$10$dTlvOUpdl2fARRVT6JjI.OqSdlX2cLXF0omv0uS.o/apE/3gdnjGu"
-     role: "user"
-     updatedAt: "2016-12-28T16:19:02.354Z"
-   2: Object
-     _id: "YDGhVttoOtejjq3B"
-     createdAt: "2016-12-28T16:19:01.665Z"
-     email: "john.doe@gmail.com"
-     password: "$2a$10$AByXn5KERLioglTnrhse.e5wRVBTfJznyDC6nuUpElyCncN4X7noe"
-     role: "user"
-     updatedAt: "2016-12-28T16:19:01.665Z"
-   length: 3
+  [Object, Object, Object]
+    0: Object
+      email: "judy.doe@gmail.com"
+      password: "$2a$10$TnuSw.O9Jfss61BUFB0TteT9dDOdtSX00C.19vX484eICygo7xXMe"
+      role: "user"
+      createdAt: "2017-05-31T08:33:07.645Z"
+      updatedAt: "2017-05-31T08:33:07.645Z"
+      _id: "2zFj0CoGjczuQP5B"
+    1: Object
+      email: "john.doe@gmail.com"
+      password: "$2a$10$jI7lypIIiImLw7Kf9mN.NOfaRkdP0sM0CeR1anH0J/f6p3fI9s2nu"
+      role: "user"
+      createdAt: "2017-05-31T08:33:07.643Z"
+      updatedAt: "2017-05-31T08:33:07.643Z"
+      _id: "SHyBbGehbEiZGpQS"
+    2: Object
+      email: "jane.doe@gmail.com"
+      password: "$2a$10$Dx3e/3vSn4Eq2MRvKAUGYeUMWMUeuTG6PCJpxx9/Uyov5IZRb1B.6"
+      role: "admin"
+      createdAt: "2017-05-31T08:33:07.642Z"
+      updatedAt: "2017-05-31T08:33:07.643Z"
+      _id: "VNSm7SxZnMeVxN6Z"
+    length: 3
 ```
 
 - `createdAt` and `updatedAt` have been added to the items.

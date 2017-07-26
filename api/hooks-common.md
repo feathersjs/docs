@@ -78,6 +78,19 @@ __Options:__
 
 - `hooks` (*optional*) - The hooks to run.
 
+> **ProTip:** `combine` is primarily intended to be used within your custom hooks,
+not when [registering hooks.](./hooks.md#registering-hooks).
+Its more convenient to use the following when registering hooks:
+```javascript
+const workflow = [hook1(), hook2(), ...];
+app.service(...).hooks({
+  before: {
+    update: [...workflow],
+    patch: [...workflow],
+  },
+});
+```
+
 
 ## debug
 
@@ -143,7 +156,7 @@ app.service('users').before({
 
 __Options:__
 
-- providers (*optional*, default: disallows everything) - The transports that you want to disallow this service method for. Options are:
+- `providers` (*optional*, default: disallows everything) - The transports that you want to disallow this service method for. Options are:
     - `socketio` - will disallow the method for the Socket.IO provider
     - `primus` - will disallow the method for the Primus provider
     - `rest` - will disallow the method for the REST provider
@@ -194,6 +207,11 @@ app.service('users').before({
 
 > **ProTip:** This hook will always delete the fields,
 unlike the `remove` hook which only deletes the fields if the service call was made by a client.
+
+---
+
+> **ProTip:** You can replace `remove('name')` with `iff(isProvider('external'), discard('name))`.
+The latter does not contains any hidden "magic".
 
 __Options:__
 
@@ -781,7 +799,7 @@ The `include` array has an element for each service to join. They each may have:
   asArray: true,
   paginate: false,
   provider: undefined,
-  userInnerPopulate: false,
+  useInnerPopulate: false,
   include: [ ... ]
 }
 ```
@@ -820,9 +838,9 @@ all the join calls will look like they were made via `socketio`.
 Alternative you can set `provider: undefined` and the calls for that join will
 look like they were made by the server.
 The hooks on the service may behave differently in different situations.
-- `userInnerPopulate` [optional] Populate, when including records from a child service,
+- `useInnerPopulate` [optional] Populate, when including records from a child service,
 ignores any populate hooks defined for that child service.
-The userInnerPopulate option will run those populate hooks.
+The useInnerPopulate option will run those populate hooks.
 This allows the populate for a base record to include child records
 containing their own immediate child records,
 without the populate for the base record knowing what those grandchildren populates are.
@@ -894,24 +912,26 @@ The following example shows how the client can ask for the type of schema it nee
 
 ```javascript
 // on client
-purchaseOrders.get(id, { query: { $client: { schema: 'po-acct' }}}) // pass schema name to server
+import { paramsForServer } from 'feathers-hooks-common';
+purchaseOrders.get(id, paramsForServer({ schema: 'po-acct' })); // pass schema name to server
 // or
-purchaseOrders.get(id, { query: { $client: { schema: 'po-rec' }}})
+purchaseOrders.get(id, paramsForServer({ schema: 'po-rec' }));
 ```
 
 ```javascript
 // on server
+import { paramsFromClient } from 'feathers-hooks-common';
 const poSchemas = {
-  'po-acct': { /* populate schema for Accounting oriented PO */},
-  'po-rec': { /* populate schema for Receiving oriented PO */}
+  'po-acct': /* populate schema for Accounting oriented PO e.g. { include: ... } */,
+  'po-rec': /* populate schema for Receiving oriented PO */
 };
 
 purchaseOrders.before({
-  all: $client('schema')
+  all: paramsfromClient('schema')
 });
 
 purchaseOrders.after({
-  all: populate(() => poSchemas[hook.params.schema])
+  all: populate({ schema: hook => poSchemas[hook.params.schema] }),
 });
 ```
 
@@ -964,7 +984,7 @@ __Options:__
 
 - `fieldNames` (*required*) - One or more fields which may not be patched.
 
-> Consider using `verifySchema` if you would rather specify which fields are allowed to change.
+> Consider using `validateSchema` if you would rather specify which fields are allowed to change.
 
 
 ## remove
@@ -1893,7 +1913,7 @@ __Options:__
 - `items` (*required*) - The updated item or array of items.
 
 
-## Util: paramsToServer
+## Util: paramsForServer
 
 ### `paramsForServer(params, ... whitelist)` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/services/params-to-server.js)
 

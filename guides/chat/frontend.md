@@ -36,6 +36,7 @@ Now we can create `public/app.js` with the following Feathers client setup:
 ```js
 const socket = io();
 const client = feathers();
+client.configure(feathers.hooks());
 
 // Create the Feathers application with a `socketio` connection
 client.configure(feathers.socketio(socket));

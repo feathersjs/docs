@@ -38,12 +38,16 @@ function databaseConnect() {
     dialect: 'postgres',
     logging: false
   });
-  app.set('sequelize', sequelize);
+  return sequelize;
+  // app isn't defined at that moment
+  //app.set('sequelize', sequelize);
 }
 
 function userModel() {
-  const sequelize = app.get('sequelize');
-  
+  // app isn't defined at that moment
+  //const sequelize = app.get('sequelize');
+  const sequelize = databaseConnect();
+
   const tableSchema = sequelize.define('users', {
       email: { type: Sequelize.STRING, allowNull: false, unique: true },
       password: { type: Sequelize.STRING, allowNull: false },
