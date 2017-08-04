@@ -204,7 +204,7 @@ Sequelize by default gives you the ability to [add validations at the model leve
 
 ## Migrations
 
-Migrations with feathers and sequelize are quite simple and we have provided some [sample code](https://github.com/feathersjs/feathers-demos/blob/master/examples/migrations/sequelize) to get you started. This guide will follow the directory structure used by the sample code, but you are free to rearrange things as you see fit. The following assumes you have a `migrations` folder in the root of your app.
+Migrations with feathers and sequelize are quite simple. This guide will walk you through creating the recommended file structure, but you are free to rearrange things as you see fit. The following assumes you have a `migrations` folder in the root of your app.
 
 ### Initial Setup: one-time tasks
 
@@ -232,23 +232,24 @@ module.exports = {
 ```js
 const app = require('../../src/app');
 const env = process.env.NODE_ENV || 'development';
+const dialect = 'mysql'|'sqlite'|'postgres'|'mssql';
 
 module.exports = {
   [env]: {
-    url: app.get('db_url'),
-    dialect: app.get('db_dialect'),
+    dialect,
+    url: app.get(dialect),
     migrationStorageTableName: '_migrations'
   }
 };
 ```
 
-- Register your models. The following assumes you have defined your models using the method [described here](https://github.com/feathersjs/generator-feathers/issues/94#issuecomment-204165134).
+- Define your models config in `migrations/models/index.js`:
 
 ```js
 const Sequelize = require('sequelize');
 const app = require('../../src/app');
-const models = app.get('models');
-const sequelize = app.get('sequelize');
+const sequelize = app.get('sequelizeClient');
+const models = sequelize.models;
 
 // The export object must be a dictionary of model names -> models
 // It must also include sequelize (instance) and Sequelize (constructor) properties
