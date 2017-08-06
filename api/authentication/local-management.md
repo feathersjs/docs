@@ -122,6 +122,7 @@ app.configure(authentication)
 - shortTokenDigits: Short token is digits if true, else alphanumeric. Default is true.
 - delay: Duration for sign up email verification token in ms. Default is 5 days.
 - resetDelay: Duration for password reset token in ms. Default is 2 hours.
+- skipIsVerifiedCheck: Allow 'sendResetPwd' and 'resetPwd' for unverified users. Default is false. 
 - identifyUserProps: Prop names in `user` item which uniquely identify the user,
 e.g. `['username', 'email', 'cellphone']`.
 The default is `['email']`.
