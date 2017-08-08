@@ -40,19 +40,18 @@ __Options:__
 Here is an example of a Feathers server with a `messages` in-memory service that supports pagination:
 
 ```
-$ npm install feathers body-parser feathers-rest feathers-socketio feathers-memory
+$ npm install feathers body-parser feathers-rest feathers-socketio feathers-memory feathers-errors
 ```
 
 In `app.js`:
 
 ```js
 const feathers = require('feathers');
-const errorHandler = require('feathers-errors/handler');
 const bodyParser = require('body-parser');
 const rest = require('feathers-rest');
 const socketio = require('feathers-socketio');
 const memory = require('feathers-memory');
-const handler = require('feathers-errors/handler');
+const errorHandler = require('feathers-errors/handler');
 
 // Create a feathers instance.
 const app = feathers()
