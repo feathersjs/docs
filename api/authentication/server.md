@@ -210,8 +210,6 @@ Here's an example of a Feathers server that uses `feathers-authentication` for l
 
 **For the auth middleware to work as expected, the plugins must be configured before creating any services.**
 
-**Note:** This example does NOT implement any authorization. Use [feathers-permissions](https://github.com/feathersjs/feathers-permissions) for that.
-
 ```js
 const feathers = require('feathers');
 const rest = require('feathers-rest');
