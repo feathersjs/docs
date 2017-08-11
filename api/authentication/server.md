@@ -33,8 +33,8 @@ This module contains:
 1. [The main entry function](#configuration)
 2. [The `/authentication` service](#the-authentication-service)
 3. [The `authenticate` hook](#the-authenticate-hook)
-4. Socket listeners
-5. Express middleware
+4. [Authentication Events](#authentication-events)
+5. [Express middleware](#express-middleware)
 6. A [Passport](http://passportjs.org/) adapter for Feathers
 
 ## Configuration
@@ -79,7 +79,7 @@ The following default options will be mixed in with your global `auth` object fr
 
 ## Additional `app` methods
 The Feathers `app` will contain two useful methods once you've configured the auth plugin:
-- [app.passport.createJWT](#apppassportcreatejwtpayload-options-source)
+- [app.passport.createJWT](#apppassportcreatejwtpayload-options--promise-source)
 - [app.passport.verifyJWT](#apppassportverifyjwttoken-options-source)
 
 ### `app.passport.createJWT(payload, options) => promise` [source](https://github.com/feathersjs/feathers-authentication/blob/master/src/utils.js#L8)
@@ -87,7 +87,7 @@ This is the method used by the `/authentication` service to generate JSON Web To
 - `payload {Object}` - becomes the JWT payload. Will also include an `exp` property denoting the expiry timestamp.
 - `options {Object}` - the options passed to [jsonwebtoken `sign()`](https://www.npmjs.com/package/jsonwebtoken#jwtsignpayload-secretorprivatekey-options-callback)
   - `secret {String | Buffer}` - either the secret for HMAC algorithms, or the PEM encoded private key for RSA and ECDSA.
-  - See the [`jsonwebtoken`](https://www.npmjs.com/package/jsonwebtoken#jwtsignpayload-secretorprivatekey-options-callback) package docs for other available options.  The authenticate method uses the [default `jwt` options](#default-options). When using this package, directly, they will have to be passed in manually.
+  - `jwt` - See the [`jsonwebtoken`](https://www.npmjs.com/package/jsonwebtoken#jwtsignpayload-secretorprivatekey-options-callback) package docs for other available options. The authenticate method uses the [default `jwt` options](#default-options). When using this package, directly, they will have to be passed in manually.
 
 The returned `promise` resolves with the JWT or fails with an error.
 
@@ -119,6 +119,26 @@ These properties can be modified to change the behavior of the `/authentication`
 
 The `remove` method will be used less often.  It mostly exists to allow for adding hooks the the "logout" process.  For example, in services that require high control over security, a developer could register hooks on the `remove` method that perform token blacklisting.
 
+#### `after` hook API:
+- `hook.result {Object}` - After logout, useful information regarding the previous session will be populated here.
+
+Below is the example of the hook usage:
+```javascript
+    after: {
+      remove: [
+        function (hook) {
+          return app.passport.verifyJWT(hook.result.accessToken, { secret: app.passport.options('jwt').secret })
+              .then((data) => {
+                // removing the user who decided to logout
+                app.service('users').remove(data.userId).then(() => {
+                  return hook;
+                });
+              });
+        }
+      ]
+    }
+```
+
 ## The `authenticate` hook
 
 `auth.hooks.authenticate(strategies)`, where `strategies` is an array of passport strategy names.
@@ -142,6 +162,28 @@ app.service('authentication').hooks({
 ```
 
 The hooks that were once bundled with this module are now located at [feathers-authentication-hooks](https://github.com/feathersjs/feathers-authentication-hooks).
+
+## Authentication Events
+
+The `login` and `logout` events are emitted on the `app` object whenever a client successfully authenticates or "logs out". (With JWT, logging out doesn't invalidate the JWT.  Read the section about how JWT work for more information.) These events are only emitted on the server.
+
+### `app.on('login', callback))` and `app.on('logout', callback))`
+
+These two events use a callback with the same signature.
+
+- `callback` {Function} - a function in the format `function (result, meta) {}`.
+
+  - `result` {Object} - The final `hook.result` from the `authentication` service. Unless you customize the `hook.response` in an after hook, this will only contain the `accessToken`, which is the JWT.
+  - `meta` {Object} - information about the request.  *The `meta` data varies per transport / provider as follows.*
+    - Using `feathers-rest`
+      - `provider` {String} - will always be `"rest"`
+      - `req` {Object} - the Express request object.
+      - `res` {Object} - the Express response object.
+    - Using `feathers-socketio` and `feathers-primus`:
+      - `provider` {String} - the transport name: `socketio` or `primus`
+      - `connection` {Object} - the same as `params` in the hook context
+      - `socket` {SocketObject} - the current user's WebSocket object.  It also contains the `feathers` attribute, which is the same as `params` in the hook context.
+
 
 ## Express Middleware
 
@@ -167,8 +209,6 @@ Refer to [the migration guide](https://github.com/feathersjs/feathers-authentica
 Here's an example of a Feathers server that uses `feathers-authentication` for local auth. You can try it out on your own machine by running the [example](https://github.com/feathersjs/feathers-authentication/tree/master/example)
 
 **For the auth middleware to work as expected, the plugins must be configured before creating any services.**
-
-**Note:** This example does NOT implement any authorization. Use [feathers-permissions](https://github.com/feathersjs/feathers-permissions) for that.
 
 ```js
 const feathers = require('feathers');

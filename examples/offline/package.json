@@ -1,0 +1,52 @@
+{
+  "name": "offline-first-examples",
+  "description": "Examples of different replication strategies",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/feathersjs/feathers-docs.git"
+  },
+  "engines": {
+    "node": ">= 6.0.0",
+    "npm": ">= 3.0.0"
+  },
+  "dependencies": {
+    "body-parser": "1.17.1",
+    "component-emitter": "1.2.1",
+    "compression": "1.6.2",
+    "cors": "2.8.3",
+    "debug": "2.6.8",
+    "feathers": "2.1.3",
+    "feathers-client": "2.1.0",
+    "feathers-commons": "0.8.7",
+    "feathers-configuration": "0.4.1",
+    "feathers-errors": "2.8.1",
+    "feathers-hooks": "2.0.1",
+    "feathers-memory": "1.1.0",
+    "feathers-nedb": "2.6.2",
+    "feathers-offline-publication": "^0.0.2",
+    "feathers-offline-realtime": "0.1.1",
+    "feathers-offline-snapshot": "^0.0.1",
+    "feathers-query-filters": "2.1.2",
+    "feathers-socketio": "1.6.0",
+    "helmet": "3.5.0",
+    "nedb": "1.8.0",
+    "serve-favicon": "2.4.2",
+    "shortid": "2.2.8",
+    "socket.io-client": "1.7.3",
+    "uberproto": "1.2.0",
+    "uuid": "3.1.0",
+    "winston": "2.3.1"
+  },
+  "devDependencies": {
+    "babel-cli": "6.24.1",
+    "babel-core": "6.24.1",
+    "babel-loader": "6.4.1",
+    "babel-plugin-transform-runtime": "6.23.0",
+    "babel-preset-es2015": "6.24.1",
+    "babel-preset-react": "6.24.1",
+    "babel-preset-stage-0": "6.24.1",
+    "shx": "0.2.2",
+    "webpack": "2.4.1"
+  }
+}

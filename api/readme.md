@@ -20,6 +20,7 @@
   * [JWT](/api/authentication/jwt.md)
   * [OAuth1](/api/authentication/oauth1.md)
   * [OAuth2](/api/authentication/oauth2.md)
+  * [Hooks](/api/authentication/hooks.md)
 * Databases
   * [Common API](/api/databases/common.md)
   * [Querying](/api/databases/querying.md)

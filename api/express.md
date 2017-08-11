@@ -10,7 +10,7 @@ On the server, a Feathers application acts as a drop-in replacement for any [Exp
 All middleware registered after the [REST transport](./rest.md) will have access to the `req.feathers` object to set properties on the service method `params`:
 
 ```js
-const app = require('feathers');
+const app = require('feathers')();
 const rest = require('feathers-rest');
 const bodyParser = require('body-parser');
 
@@ -61,7 +61,7 @@ Will set `params.query` to
 }
 ```
 
-For additional query string examples see the [database querying](./databases/querying.md) chatper.
+For additional query string examples see the [database querying](./databases/querying.md) chapter.
 
 > **ProTip:** Since the URL is just a string, there will be **no type conversion**. This can be done manually in a [hook](./hooks.md).
 

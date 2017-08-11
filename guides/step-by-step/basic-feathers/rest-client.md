@@ -40,9 +40,9 @@ To keep things DRY, we are isolating code unique to REST in
 [common/public/rest.html](https://github.com/feathersjs/feathers-docs/blob/master/examples/step/01/common/public/rest.html).
 [import](../../../examples/step/01/common/public/rest.html)
 
-- `//cdnjs.cloudflare.com/ajax/libs/core-js/2.1.4/core.min.js`
+- `https://cdnjs.cloudflare.com/ajax/libs/core-js/2.1.4/core.min.js`
 loads a polyfill for [fetch](https://davidwalsh.name/fetch) if required.
-- `src="//unpkg.com/feathers-client@^2.0.0/dist/feathers.js"` loads the Feathers client code.
+- `src="https://unpkg.com/feathers-client@^2.0.0/dist/feathers.js"` loads the Feathers client code.
 - `src="/serverUrl.js"` loads the URL of the server.
 The default is `var serverUrl = 'http://localhost:3030';`.
 Change the value if you need to.

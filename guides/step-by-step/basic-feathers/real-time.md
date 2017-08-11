@@ -18,8 +18,8 @@ part of a database table.
 It can keep it up to date by listening to events for that table.
 
 > **Real-time.** Real-time events are sent only to Feathers WebSocket clients.
-They are not sent to Feathers REST ot HTTP REST clients.
-These would have implement a traditional long-polling design.
+They are not sent to Feathers REST nor HTTP REST clients.
+These would have to implement a traditional long-polling design.
 **Conclusion:** Use Feathers WebSocket clients.
 
 Let's create an event listener for the [Feathers Websocket Client](./socket-client.md)
@@ -64,14 +64,15 @@ You usually wouldn't want to send passwords to clients.
 In many cases you probably want to be able to send certain events to certain clients,
 say maybe only ones that are authenticated.
 
-You can control what data is sent to which clients with
+The server can control what data is sent to which clients with
 [event filters](../../../api/events.html#event-filtering).
 
 ![Feathers Realtime](/img/event-filter-diagram.jpg)
 
 For example, we could send `users` events only to authenticated users
-and remove `password` from the payload with:
+and remove `password` from the payload by adding this to the server code:
 ```javascript
+const users = app.service('users');
 users.filter((data, connection) => {
   delete data.password;
   return connection.user ? data : false;

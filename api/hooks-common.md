@@ -10,6 +10,8 @@ $ npm install feathers-hooks-common --save
 
 `feathers-hooks-common` is a collection of common [hooks](./hooks.md) and utilities.
 
+[Authentication hooks](./authentication/hooks.md) are documented separately.
+
 > **Note:** Many hooks are just a few lines of code to implement from scratch. If you can't find a hook here but are unsure how to implement it or have an idea for a generally useful hook create a new issue [here](https://github.com/feathersjs/feathers-hooks-common/issues/new).
 
 
@@ -20,6 +22,9 @@ $ npm install feathers-hooks-common --save
 A hook for passing params from the client to the server.
 
 - Used as a `before` hook.
+
+> **ProTip** Use the `paramsFromClient` hook instead.
+It does exactly the same thing as `client` but is less likely to be deprecated.
 
 Only the `hook.params.query` object is transferred to the server from a Feathers client,
 for security among other reasons.
@@ -52,6 +57,8 @@ Other props are ignored. This is a security feature.
 
 > **ProTip** You can use the same technique for service calls made on the server.
 
+See `Util: paramsForServer` and `paramsFromClient`.
+
 
 ## combine
 
@@ -70,6 +77,19 @@ function (hook) { // an arrow func cannot be used because we need 'this'
 __Options:__
 
 - `hooks` (*optional*) - The hooks to run.
+
+> **ProTip:** `combine` is primarily intended to be used within your custom hooks,
+not when [registering hooks.](./hooks.md#registering-hooks).
+Its more convenient to use the following when registering hooks:
+```javascript
+const workflow = [hook1(), hook2(), ...];
+app.service(...).hooks({
+  before: {
+    update: [...workflow],
+    patch: [...workflow],
+  },
+});
+```
 
 
 ## debug
@@ -136,7 +156,7 @@ app.service('users').before({
 
 __Options:__
 
-- providers (*optional*, default: disallows everything) - The transports that you want to disallow this service method for. Options are:
+- `providers` (*optional*, default: disallows everything) - The transports that you want to disallow this service method for. Options are:
     - `socketio` - will disallow the method for the Socket.IO provider
     - `primus` - will disallow the method for the Primus provider
     - `rest` - will disallow the method for the REST provider
@@ -188,6 +208,11 @@ app.service('users').before({
 > **ProTip:** This hook will always delete the fields,
 unlike the `remove` hook which only deletes the fields if the service call was made by a client.
 
+---
+
+> **ProTip:** You can replace `remove('name')` with `iff(isProvider('external'), discard('name))`.
+The latter does not contains any hidden "magic".
+
 __Options:__
 
 - `fieldNames` (*required*) - One or more fields you want to remove from the object(s).
@@ -210,7 +235,7 @@ If the predicate in the `iff()` is falsey, run the hooks in `else()` sequentiall
 ```javascript
 service.before({
   create:
-    hooks.iff(isServer,
+    hooks.iff(isProvider('server'),
       hookA,
       hooks.iff(isProvider('rest'), hook1, hook2, hook3)
         .else(hook4, hook5),
@@ -221,13 +246,34 @@ service.before({
       )
 });
 ```
+or: 
+
+```javascript
+service.before({
+  create:
+    hooks.iff(isServer, [
+      hookA,
+      hooks.iff(isProvider('rest'), [hook1, hook2, hook3])
+        .else([hook4, hook5]),
+      hookB
+    ])
+      .else([
+        hooks.iff(hook => hook.path === 'users', [hook6, hook7])
+      ])
+});
+```
 
 __Options:__
 
 - `hookFuncs` (*optional*) - Zero or more hook functions.
 They may include other conditional hooks.
+Or you can use an array of hook functions as the second parameter.
 
 See also iff, iffElse, when, unless, isNot, isProvider.
+
+> **This** The predicate and hook functions in the if, else and iffElse hooks
+will not be called with `this` set to the service.
+Use `hook.service` instead.
 
 
 ## every
@@ -289,16 +335,27 @@ app.service('workOrders').after({
 });
 ```
 
+or with the array syntax:
+
+```javascript
+app.service('workOrders').after({
+  find: [ iff(isNotAdmin(), [hooks.remove('budget'), hooks.remove('password')]
+});
+```
 __Options:__
 
 - `predicate` (*required*) - Determines if hookFuncs should be run or not.
 If a function, `predicate` is called with the hook as its param.
 It returns either a boolean or a Promise that evaluates to a boolean
-- `hookFuncs` (*optional*) - Zero or more hook functions.
-They may include other conditional hooks.
+- `hookFuncs` (*optional*) - Zero or more hook functions. 
+They may include other conditional hooks. 
+Or you can use an array of hook functions as the second parameter.
 
 See also iffElse, else, when, unless, isNot, isProvider.
 
+> **This** The predicate and hook functions in the if, else and iffElse hooks
+will not be called with `this` set to the service.
+Use `hook.service` instead.
 
 ## iffElse
 
@@ -333,6 +390,9 @@ It returns either a boolean or a Promise that evaluates to a boolean
 
 See also iff, else, when, unless, isNot, isProvider.
 
+> **This** The predicate and hook functions in the if, else and iffElse hooks
+will not be called with `this` set to the service.
+Use `hook.service` instead.
 
 ## isNot
 
@@ -415,6 +475,49 @@ __Options:__
 - `fieldNames` (*required*) - One or more fields that you want to lowercase from the retrieved object(s).
 
 See also upperCase.
+
+
+## paramsFromClient
+
+### `paramsFromClient(... whitelist)` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/services/params-from-client.js)
+
+A hook, on the server, for passing `params` from the client to the server.
+
+- Used as a `before` hook.
+- Companion to the client utility function `paramsForServer`.
+
+By default, only the `hook.params.query` object is transferred
+to the server from a Feathers client,
+for security among other reasons.
+However you can explicitly transfer other `params` props with
+the client utility function `paramsForServer` in conjunction with
+the hook function `paramsFromClient` on the server.
+
+```js
+// client
+import { paramsForServer } from 'feathers-hooks-common';
+service.patch(null, data, paramsForServer({
+  query: { dept: 'a' }, populate: 'po-1', serialize: 'po-mgr'
+}));
+
+// server
+const { paramsFromClient } = require('feathers-hooks-common');
+service.before({ all: [
+  paramsFromClient('populate', 'serialize', 'otherProp'), myHook
+]});
+
+// hook.params will now be
+// { query: { dept: 'a' }, populate: 'po-1', serialize: 'po-mgr' } }
+```
+
+__Options:__
+
+- `whitelist` (*optional*) Names of the permitted props;
+other props are ignored. This is a security feature.
+
+> **ProTip** You can use the same technique for service calls made on the server.
+
+See `util: paramsForServer`.
 
 
 ## pluck
@@ -616,6 +719,32 @@ module.exports.after = {
 };
 ```
 
+- Flexible relationship, similar to the n:1 relationship example above
+
+```javascript
+// posts like { _id: '111', body: '...' }
+// comments like { _id: '555', text: '...', postId: '111' }
+const postCommentsSchema = {
+  include: {
+    service: 'comments',
+    nameAs: 'comments',
+    select: (hook, parentItem) => ({ postId: parentItem._id }),
+  }
+};
+
+postService.hooks({
+  after: {
+    all: populate({ schema: postCommentsSchema })
+  }
+});
+
+// result like
+// { _id: '111', body: '...' }, comments: [
+//   { _id: '555', text: '...', postId: '111' }
+//   { _id: '666', text: '...', postId: '111' }
+// ]}
+```
+
 #### Options
 
 - `schema` (*required*, object or function) How to populate the items. [Details are below.](#schema)
@@ -669,6 +798,8 @@ The `include` array has an element for each service to join. They each may have:
   select: (hook, parent, depth) => ({ $limit: 6 }),
   asArray: true,
   paginate: false,
+  provider: undefined,
+  useInnerPopulate: false,
   include: [ ... ]
 }
 ```
@@ -681,9 +812,9 @@ e.g. `include: { service: ..., nameAs: ..., ... }`.
 - `nameAs` [optional, string, default is service] Where to place the items from the join.
 Dot notation is allowed.
 - `permissions` [optional, any type of value] Who is allowed to perform this join. See `checkPermissions` above.
-- `parentField` [required, string] The name of the field in the parent item for the [relation](#relation).
+- `parentField` [required if neither query nor select, string] The name of the field in the parent item for the [relation](#relation).
 Dot notation is allowed.
-- `childField` [required, string] The name of the field in the child item for the [relation](#relation).
+- `childField` [required if neither query nor select, string] The name of the field in the child item for the [relation](#relation).
 Dot notation is allowed and will result in a query like `{ 'name.first': 'John' }`
 which is not suitable for all DBs.
 You may use `query` or `select` to create a query suitable for your DB.
@@ -702,11 +833,17 @@ Controls pagination for this service.
 - `provider` [optional] `find` calls are made to obtain the items to be joined.
 These, by default, are initialized to look like they were made
 by the same provider as that getting the base record.
-So when populating the result of call made via `socketio`,
+So when populating the result of a call made via `socketio`,
 all the join calls will look like they were made via `socketio`.
 Alternative you can set `provider: undefined` and the calls for that join will
 look like they were made by the server.
-The hooks on the service may behave differently in different situations. 
+The hooks on the service may behave differently in different situations.
+- `useInnerPopulate` [optional] Populate, when including records from a child service,
+ignores any populate hooks defined for that child service.
+The useInnerPopulate option will run those populate hooks.
+This allows the populate for a base record to include child records
+containing their own immediate child records,
+without the populate for the base record knowing what those grandchildren populates are.
 - `include` [optional] The new items may themselves include other items. The includes are recursive.
 
 Populate forms the query `[childField]: parentItem[parentField]` when the parent value is not an array.
@@ -752,6 +889,16 @@ This delay is mostly attributed to your DB.
 The [depopulate](#depopulate) hook uses these fields to remove all joined and computed values.
 This allows you to then `service.patch()` the item in the hook.
 
+#### Joining without using related fields
+
+Populate can join child records to a parent record using the related columns
+`parentField` and `childField`.
+However populate's `query` and `select` options may be used to related the
+records without needing to use the related columns.
+This is a more flexible, non-SQL-like way of relating records.
+It easily supports dynamic, run-time schemas since the `select` option may be
+a function.
+
 #### Populate examples
 
 ##### Selecting schema based on UI needs
@@ -765,24 +912,26 @@ The following example shows how the client can ask for the type of schema it nee
 
 ```javascript
 // on client
-purchaseOrders.get(id, { query: { $client: { schema: 'po-acct' }}}) // pass schema name to server
+import { paramsForServer } from 'feathers-hooks-common';
+purchaseOrders.get(id, paramsForServer({ schema: 'po-acct' })); // pass schema name to server
 // or
-purchaseOrders.get(id, { query: { $client: { schema: 'po-rec' }}})
+purchaseOrders.get(id, paramsForServer({ schema: 'po-rec' }));
 ```
 
 ```javascript
 // on server
+import { paramsFromClient } from 'feathers-hooks-common';
 const poSchemas = {
-  'po-acct': { /* populate schema for Accounting oriented PO */},
-  'po-rec': { /* populate schema for Receiving oriented PO */}
+  'po-acct': /* populate schema for Accounting oriented PO e.g. { include: ... } */,
+  'po-rec': /* populate schema for Receiving oriented PO */
 };
 
 purchaseOrders.before({
-  all: $client('schema')
+  all: paramsfromClient('schema')
 });
 
 purchaseOrders.after({
-  all: populate(() => poSchemas[hook.params.schema])
+  all: populate({ schema: hook => poSchemas[hook.params.schema] }),
 });
 ```
 
@@ -812,6 +961,30 @@ purchaseOrders.after({
 ```
 
 See also dePopulate, serialize.
+
+
+## preventChanges
+
+### `preventChanges(... fieldNames)` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/services/prevent-changes.js)
+
+Prevents the specified fields from being patched.
+
+- Used as a `before` hook for `patch`.
+- Field names support dot notation e.g. `name.address.city`.
+
+```js
+const { preventChanges } = require('feathers-hooks-common');
+
+app.service('users').before({
+  patch: preventChanges('security.badge')
+})
+```
+
+__Options:__
+
+- `fieldNames` (*required*) - One or more fields which may not be patched.
+
+> Consider using `validateSchema` if you would rather specify which fields are allowed to change.
 
 
 ## remove
@@ -1013,12 +1186,14 @@ Add the fields with the current date-time.
 - Field names support dot notation.
 - Supports multiple data items, including paginated `find`.
 
+> **ProTip** `setCreatedAt` will be deprecated, so use `setNow` instead.
+
 ```js
 const { setCreatedAt } = require('feathers-hooks-common');
 
 // set the `createdAt` field before a user is created
 app.service('users').before({
-  create: [ setCreatedAt('createdAt') ]
+  create: [ setCreatedAt() ]
 });
 ```
 
@@ -1028,6 +1203,32 @@ __Options:__
 - `fieldNames` (*optional*) - Other fields to add with the current date-time.
 
 See also setUpdatedAt.
+
+
+## setNow
+
+### `setNow(... fieldNames)` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/services/set-now.js)
+
+Add the fields with the current date-time.
+
+- Used as a `before` hook for `create`, `update` or `patch`.
+- Used as an `after` hook.
+- Field names support dot notation.
+- Supports multiple data items, including paginated `find`.
+
+```js
+const { setNow } = require('feathers-hooks-common');
+
+app.service('users').before({
+  create: setNow('createdAt', 'updatedAt')
+});
+```
+
+__Options:__
+
+- `fieldNames` (*required*, at least one) - The fields that you want to add with the current date-time to the retrieved object(s).
+
+> **ProTip** Use `setNow` rather than `setCreatedAt` or `setUpdatedAt`.
 
 
 ## setSlug
@@ -1077,12 +1278,14 @@ Add or update the fields with the current date-time.
 - Field names support dot notation.
 - Supports multiple data items, including paginated `find`.
 
+> **ProTip** `setUpdatedAt` will be deprecated, so use `setNow` instead.
+
 ```js
-const { setCreatedAt } = require('feathers-hooks-common');
+const { setUpdatedAt } = require('feathers-hooks-common');
 
 // set the `updatedAt` field before a user is created
 app.service('users').before({
-  create: [ setCreatedAt('updatedAt') ]
+  create: [ setUpdatedAt() ]
 });
 ```
 
@@ -1092,6 +1295,53 @@ __Options:__
 - `fieldNames` (*optional*) - Other fields to add or update with the current date-time.
 
 See also setCreatedAt.
+
+
+## sifter
+
+### `sifter(mongoQueryFunc))` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/services/sifter.js)
+
+All official Feathers database adapters support a common way for querying,
+sorting, limiting and selecting find method calls.
+These are limited to what is commonly supported by all the databases.
+
+The `sifter` hook provides an extensive MongoDB-like selection capabilities,
+and it may be used to more extensively select records.
+
+- Used as an `after` hook for `find`.
+- SProvides extensive MongoDB-like selection capabilities.
+
+> **ProTip** `sifter` filters the result of a `find` call.
+Therefore more records will be physically read than needed.
+You can use the Feathers database adapters `query` to reduce this number.
+
+```js
+const sift = require('sift');
+const { sifter } = require('feathers-hooks-common');
+
+const selectCountry = hook => sift({ 'address.country': hook.params.country });
+
+app.service('stores').after({
+  find: sifter(selectCountry),
+});
+```
+
+```js
+const sift = require('sift');
+const { sifter } = require('feathers-hooks-common');
+
+const selectCountry = country => () => sift({ address : { country: country } });
+
+app.service('stores').after({
+  find: sifter(selectCountry('Canada')),
+});
+```
+
+__Options:__
+
+- `mongoQueryFunc` (*required*) - Function similar to `hook => sift(mongoQueryObj)`.
+Information about the `mongoQueryObj` syntax is available at
+[sift](https://github.com/crcn/sift.js).
 
 
 ## softDelete
@@ -1153,6 +1403,27 @@ __Options:__
 See also every.
 
 
+## stashBefore
+
+### `stashBefore(name)` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/services/stash-before.js)
+
+Stash current value of record before mutating it.
+
+- Used as a `before` hook for `get`, `update`, `patch` or `remove`.
+- An `id` is required in the method call.
+
+```javascript
+service.before({
+  patch: stashBefore()
+});
+```
+
+__Options:__
+
+- `name` (*optional* defaults to 'before') The name of the params property
+to contain the current record value.
+
+
 ## traverse
 
 ### `traverse(transformer, getObject)` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/services/traverse.js)
@@ -1204,7 +1475,7 @@ Run the hooks sequentially if the result is falsey.
 ```javascript
 service.before({
   create:
-    unless(isServer,
+    unless(isProvider('server'),
       hookA,
       unless(isProvider('rest'), hook1, hook2, hook3),
       hookB
@@ -1542,7 +1813,32 @@ __Options:__
 - `obj` (*required*) - The object containing the property we want to delete.
 - `path` (*required*) - The path to the data, e.g. `security.passcode`. Array notion is _not_ supported, e.g. `order.lineItems[1].quantity`.
 
-See also getByDot, setByDot.
+See also existsByDot, getByDot, setByDot.
+
+
+## Util: existsByDot
+
+### `existsByDot(obj, path)` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/common/exists-by-dot.js)
+
+`existsByDot` checks if a property exists in an object using dot notation, e.g. `employee.address.city`.
+Properties with a value of `undefined` are considered to exist.
+
+```javascript
+import { discard, existsByDot, iff } from 'feathers-hooks-common';
+
+const discardBadge = () => iff(!existsByDot('security.passcode'), discard('security.badge'));
+
+app.service('directories').before = {
+  find: discardBadge()
+};
+```
+
+__Options:__
+
+- `obj` (*required*) - The object containing the property.
+- `path` (*required*) - The path to the property, e.g. `security.passcode`. Array notion is _not_ supported, e.g. `order.lineItems[1].quantity`.
+
+See also existsByDot, getByDot, setByDot.
 
 
 ## Util: getByDot, setByDot
@@ -1574,7 +1870,7 @@ __Options:__
 - `path` (*required*) - The path to the data, e.g. `person.address.city`. Array notion is _not_ supported, e.g. `order.lineItems[1].quantity`.
 - `value` (*required*) - The value to set the data to.
 
-See also deleteByDot.
+See also existsByDot, deleteByDot.
 
 
 ## Util: getItems, replaceItems
@@ -1604,10 +1900,60 @@ app.service('messages').before = {
 };
 ```
 
+The common hooks usually mutate the items in place, so a `replaceItems` is not required.
+
+```javascript
+const items = getItems(hook);
+(Array.isArray(items) ? items : [items]).forEach(item => { item.setCreateAt = new Date(); });
+```
+
 __Options:__
 
 - `hook` (*required*) - The hook provided to the hook function.
 - `items` (*required*) - The updated item or array of items.
+
+
+## Util: paramsForServer
+
+### `paramsForServer(params, ... whitelist)` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/services/params-to-server.js)
+
+A client utility to pass selected `params` properties to the server.
+
+- Companion to the server-side hook `paramsFromClient`.
+
+By default, only the `hook.params.query` object is transferred
+to the server from a Feathers client,
+for security among other reasons.
+However you can explicitly transfer other `params` props with
+the client utility function `paramsForServer` in conjunction with
+the hook function `paramsFromClient` on the server.
+
+```js
+// client
+import { paramsForServer } from 'feathers-hooks-common';
+service.patch(null, data, paramsForServer({
+  query: { dept: 'a' }, populate: 'po-1', serialize: 'po-mgr'
+}));
+
+// server
+const { paramsFromClient } = require('feathers-hooks-common');
+service.before({ all: [
+  paramsFromClient('populate', 'serialize', 'otherProp'),
+  myHook
+]});
+
+// myHook's `hook.params` will now be
+// { query: { dept: 'a' }, populate: 'po-1', serialize: 'po-mgr' } }
+```
+
+__Options:__
+
+- `params` (*optional*) The `params` object to pass to the server, including any `query` prop.
+- `whitelist` (*optional*) Names of the props in `params` to transfer to the server.
+This is a security feature. All props are transferred if no whitelist is specified.
+
+See `paramsFromClient`.
+
 
 ## Util: promiseToCallback
 
@@ -1633,3 +1979,14 @@ __Options:__
 - `promise` (*required*) - A function returning a promise.
 
 See also callbackToPromise.
+
+
+## FAQ: Coerce data types
+
+A common need is converting fields coming in from query params.
+These fields are provided as string values by default and you may need them as numbers, boolenas, etc.
+  
+The [`validateSchema`](#validateSchema) does a wide selection of
+[type coercions](https://github.com/epoberezkin/ajv/blob/master/COERCION.md),
+as well as checking for missing and unexpected fields.
+

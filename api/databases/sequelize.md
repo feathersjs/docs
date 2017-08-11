@@ -23,6 +23,17 @@ npm install --save tedious // MSSQL
 
 > For more information about models and general Sequelize usage, follow up in the [Sequelize documentation](http://docs.sequelizejs.com/en/latest/).
 
+## A quick note about `raw` queries
+
+By default, all `feathers-sequlize` operations will return `raw` data (using `raw: true` when querying the database). This results in faster execution and allows feathers-sequelize to interoperate with feathers-common hooks and other 3rd party integrations. However, this will bypass some of the "goodness" you get when using Sequelize as an ORM: 
+
+ - custom getters/setters will be bypassed
+ - model-level validations are bypassed
+ - associated data loads a bit differently
+ - ...and several other issues that one might not expect
+ 
+Don't worry! The solution is easy. Please read the guides about [working with model instances](working-with-sequelize-model-instances).
+
 
 ## API
 
@@ -32,7 +43,7 @@ Returns a new service instance initialized with the given options.
 
 ```js
 const Model = require('./models/mymodel');
-const sequelize = service('feathers-sequelize');
+const service = require('feathers-sequelize');
 
 app.use('/messages', service({ Model }));
 app.use('/messages', service({ Model, id, events, paginate }));
@@ -140,12 +151,12 @@ Run the example with `node app` and go to [localhost:3030/messages](http://local
 
 ## Querying
 
-Additionally to the [common querying mechanism](./querying.md) this adapter also supports all [Sequelize query operators](http://docs.sequelizejs.com/en/v3/docs/querying/).
+Additionally to the [common querying mechanism](./querying.md) this adapter also supports all [Sequelize query operators](http://docs.sequelizejs.com/manual/tutorial/querying.html).
 
 
 ## Associations and relations
 
-Follow up in the [Sequelize documentation for associations](http://docs.sequelizejs.com/en/v3/docs/associations/), [this issue](https://github.com/feathersjs/feathers-sequelize/issues/20) and [this example for many to many relationships](https://github.com/feathersjs/feathers-demos/tree/master/examples/app-structure/many-to-many-sequelize).
+Follow up in the [Sequelize documentation for associations](http://docs.sequelizejs.com/manual/tutorial/associations.html), [this issue](https://github.com/feathersjs/feathers-sequelize/issues/20) and [this Stackoverflow answer](https://stackoverflow.com/questions/42841810/feathers-js-sequelize-service-with-relations-between-two-models/42846215#42846215).
 
 ## Working with Sequelize Model instances
 
@@ -161,10 +172,21 @@ It is highly recommended to use `raw` queries, which is the default. However, th
     hooks.before.find = [rawFalse];
     ```
 1. Use the new `hydrate` hook in the "after" phase:
+
     ```js
     const hydrate = require('feathers-sequelize/hooks/hydrate');
     hooks.after.find = [hydrate()];
-    ```
+    
+    // Or, if you need to include associated models, you can do the following:
+     function includeAssociated (hook) {
+         return hydrate({
+            include: [{ model: hook.app.services.fooservice.Model }]
+         }).call(this, hook);
+     }
+     hooks.after.find = [includeAssociated];
+     ```
+
+  For a more complete example see this [gist](https://gist.github.com/sicruse/bfaa17008990bab2fd1d76a670c3923f).
 
 > **Important:** When working with Sequelize Instances, most of the feathers-hooks-common will no longer work. If you need to use a common hook or other 3rd party hooks, you should use the "dehydrate" hook to convert data back to a plain object:
 > ```js
@@ -182,7 +204,7 @@ Sequelize by default gives you the ability to [add validations at the model leve
 
 ## Migrations
 
-Migrations with feathers and sequelize are quite simple and we have provided some [sample code](https://github.com/feathersjs/feathers-demos/blob/master/examples/migrations/sequelize) to get you started. This guide will follow the directory structure used by the sample code, but you are free to rearrange things as you see fit. The following assumes you have a `migrations` folder in the root of your app.
+Migrations with feathers and sequelize are quite simple. This guide will walk you through creating the recommended file structure, but you are free to rearrange things as you see fit. The following assumes you have a `migrations` folder in the root of your app.
 
 ### Initial Setup: one-time tasks
 
@@ -210,23 +232,24 @@ module.exports = {
 ```js
 const app = require('../../src/app');
 const env = process.env.NODE_ENV || 'development';
+const dialect = 'mysql'|'sqlite'|'postgres'|'mssql';
 
 module.exports = {
   [env]: {
-    url: app.get('db_url'),
-    dialect: app.get('db_dialect'),
+    dialect,
+    url: app.get(dialect),
     migrationStorageTableName: '_migrations'
   }
 };
 ```
 
-- Register your models. The following assumes you have defined your models using the method [described here](https://github.com/feathersjs/generator-feathers/issues/94#issuecomment-204165134).
+- Define your models config in `migrations/models/index.js`:
 
 ```js
 const Sequelize = require('sequelize');
 const app = require('../../src/app');
-const models = app.get('models');
-const sequelize = app.get('sequelize');
+const sequelize = app.get('sequelizeClient');
+const models = sequelize.models;
 
 // The export object must be a dictionary of model names -> models
 // It must also include sequelize (instance) and Sequelize (constructor) properties

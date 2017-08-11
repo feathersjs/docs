@@ -30,14 +30,14 @@ function services() {
 
 function user() {
   const app = this;
-  
+
   app.use('/users', service({ Model: userModel() }));
   const userService = app.service('users');
-  
+
   const {
-    setCreatedAt, setUpdatedAt, unless, remove /* , validateSchema */
+    setCreatedAt, setUpdatedAt, unless, remove, validateSchema
   } = commonHooks;
-  
+
   userService.before({
     create: [
       validateSchema(userSchema(), Ajv),
@@ -60,17 +60,14 @@ function userModel() {
 function userSchema() {
   return {
     title: 'User Schema',
-    $schema: 'http://json-schema.org/draft-04/schema#',
+    //$schema: 'http://json-schema.org/draft-04/schema#',
     type: 'object',
-    required: [ 'email', 'password' ],
+    required: [ 'email', 'password', 'role' ],
     additionalProperties: false,
     properties: {
       email: { type: 'string', maxLength: 100, minLength: 6 },
-      password: { type: 'string', maxLength: 30, minLength: 8 }
+      password: { type: 'string', maxLength: 30, minLength: 8 },
+      role: { type: 'string' }
     }
   };
-}
-
-function validateSchema() { // todo replace
-  return hook => hook;
 }

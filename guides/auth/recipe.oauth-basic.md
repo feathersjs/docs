@@ -130,7 +130,7 @@ Now add the following code to the same page.  The first script tag loads Feather
 </script>
 ```
 
-Now, run the server, open `http://localhost:3030`.  Before you click the button, open the console.  If you refresh you'll see the message in the catch block.  Since we haven't logged in, yet, we don't have a stored JWT access token.  Now, click the `Login with GitHub` button.  Assuming you haven't logged in to Github with this application, before, you'll see a GitHub login page.  Once you login to GitHub, you'll be redirected back to `http://localhost:3030`.  Now, if you look at your console, you should see a success message.
+Now, run the server, open `http://localhost:3030`.  Before you click the "Login with GitHub" link, open the console.  If you refresh you'll see the message in the catch block.  Since we haven't logged in, yet, we don't have a stored JWT access token.  Now, click the `Login with GitHub` button.  Assuming you haven't logged in to Github with this application, before, you'll see a GitHub login page.  Once you login to GitHub, you'll be redirected back to `http://localhost:3030`.  Now, if you look at your console, you should see a success message.
 
 What just happened?  When you clicked on that link, it opened the `/auth/github` link, which is just a shortcut for redirecting to GitHub with your `Client ID`.  The entire OAuth process that we described earlier took place.  The browser received a `feathers-jwt` cookie from the server.  Finally the script that we added in the last step used the `feathers-authentication-client` to authenticate using the JWT returned from the server.  There were a lot of steps that happened in a very short time.  The best news is that you're authenticated with OAuth.
 

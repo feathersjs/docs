@@ -42,7 +42,7 @@ __Options:__
 
 ### params.mongodb
 
-When making a [service method](./services.md) call, `params` can contain an `mongodb` property which allows to modify the options used to run the MongoDB query.
+When making a [service method](./services.md) call, `params` can contain an `mongodb` property (for exmaple, `{upsert: true}`) which allows to modify the options used to run the MongoDB query.
 
 
 ## Example

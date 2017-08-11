@@ -22,7 +22,7 @@ This chapter describes how to use Feathers as the client in Node, React Native a
 | `feathers-rest`           | `feathers-rest/client`           | [REST Transport API](./rest.md) |
 | `feathers-socketio`       | `feathers-socketio/client`       | [Socket.io Transport API](./socketio.md) |
 | `feathers-primus`         | `feathers-primus/client`         | [Primus Transport API](./primus.md) |
-| `feathers-authentication` | `feathers-authentication/client` | [Feathers Authentication Client API]() |
+| `feathers-authentication` | `feathers-authentication-client` | [Feathers Authentication Client API](./authentication/client.md) |
 
 ## Universal (Isomorphic) API
 
