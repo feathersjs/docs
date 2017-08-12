@@ -99,7 +99,7 @@ Run the program with `node ./examples/step/01/db-connector/1.js`.
 The console displays:
 
 ```text
-feathers-guide$ node ./examples/step/01/a/1
+feathers-guide$ node ./examples/step/01/db-connector/1.js
 created Jane Doe item
  { email: 'jane.doe@gmail.com',
   password: 'X2y6',

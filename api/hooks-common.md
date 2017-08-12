@@ -1714,7 +1714,9 @@ __Options:__
         - `index` - Which item this is. 0-based.
         - `newFormattedMessages` - The function returns the updated formatted messages.
 
-
+> **ProTip:** You can consider using [ajv-i18n](https://github.com/epoberezkin/ajv-i18n),
+together with the [messages](https://github.com/epoberezkin/ajv#advanced-options)
+option, to internationalize your error messages.
 
 ## when
 
