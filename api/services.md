@@ -212,7 +212,7 @@ Provided by the core [NodeJS EventEmitter .on](https://nodejs.org/api/events.htm
 > **Important:** For more information about service event see the [Events chapter](./events.md).
 
 
-## .emit(eventname, data)
+## .emit(eventname, data, hook)
 
 Provided by the core [NodeJS EventEmitter .emit](https://nodejs.org/api/events.html#events_emitter_emit_eventname_args). Emits the event `eventname` to all event listeners.
 
