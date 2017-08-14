@@ -30,6 +30,15 @@ const messages = app.service('messages');
 messages.hooks(messagesHooks);
 ```
 
+> **ProTip:** The Feathers service call handler expects the functions it calls to have the
+signature `context => {}`.
+So if you have such a hook you would code `{ before: { all: myHook } }`.
+You however commonly want to pass params to the hook, such as which field in the record to delete.
+So you need to use a signature like `params => context => { /* use params */ }` and code
+`all: myHook(params)`.
+The common hooks and the Feathers community tend to use the latter signature for consistency.
+So it would be best to set up your hooks to use `myHook()`.
+
 ## Service hooks
 
 Some hooks, such as authentication, may need to be run for every method.
@@ -61,10 +70,10 @@ The Feathers code for these application level hooks would be:
 ```javascript
 app.hooks({
   before: {
-    create: hook30a
+    create: hook30a()
   },
   after: {
-    create: hook39a
+    create: hook39a()
   },
 });
 ```
@@ -97,8 +106,8 @@ Your Feathers code would *additionally* include:
 ```javascript
 app.hooks({
   error: {
-    all: hook00e,
-    create: hook30e
+    all: hook00e(),
+    create: hook30e()
   }
 });
 ```
