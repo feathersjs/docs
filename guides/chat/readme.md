@@ -8,23 +8,23 @@ In this tutorial you go from nothing to a real-time chat app complete with signu
 
 You can find a complete working example [here](https://github.com/feathersjs/feathers-chat).
 
-[**Chapter 1: Creating the application**](./creating.md)
+[**Creating the application**](./creating.md)
 
 Create a new application using the generator.
 
-[**Chapter 2: Generating a service**](./service.md)
+[**Generating a service**](./service.md)
 
 Add an API endpoint to store messages.
 
-[**Chapter 3: Building a frontend**](./frontend.md)
+[**Building a frontend**](./frontend.md)
 
 Learn how to use Feathers in the browser by creating a small real-time chat frontend.
 
-[**Chapter 3: Adding Authentication**](./authentication.md)
+[**Adding Authentication**](./authentication.md)
 
 Add user registration and login.
 
-[**Chapter 4: Processing data**](./processing.md)
+[**Processing data**](./processing.md)
 
 Add and sanitize data.
 
