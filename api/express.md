@@ -41,6 +41,8 @@ You can see the parameters set by running the example and visiting `http://local
 
 Avoid setting `req.feathers = something` directly since it may already contain information that other Feathers plugins rely on. Adding individual properties or using `Object.assign(req.feathers, something)` is the more reliable option.
 
+> __Very important:__ Since the order of Express middleware matters, any middleware that sets service parameters has to be registered _before_ your services (in a generated application before `app.configure(services)` or in `middleware/index.js`).
+
 > __ProTip:__ Although it may be convenient to set `req.feathers.req = req;` to have access to the request object in the service, we recommend keeping your services as provider independent as possible. There usually is a way to pre-process your data in a middleware so that the service does not need to know about the HTTP request or response.
 
 
