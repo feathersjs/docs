@@ -22,6 +22,14 @@ feathers generate app
 
 ![Generate app](../assets/gen-app.jpg)
 
+You can start the generated base application using
+
+```
+npm start
+```
+
+And then go to [localhost:3030](http://localhost:3030) to see a standard welcome page.
+
 The generator creates some
 [modules](https://github.com/feathersjs/feathers-docs/blob/master/examples/step/02/gen1/)
 reflecting your choices.
