@@ -106,6 +106,9 @@ Submit yours by creating a pull request.
 - [feathers-waterline](https://www.npmjs.com/package/feathers-waterline)
 - [nextql-feathers](https://github.com/giapnguyen74/nextql-feathers) - Featherjs plugin for NextQL-Yet Another Data Query Language. Equivalent GraphQL but much more simple
 
+## Caching
+- [feathers-hooks-rediscache](https://github.com/idealley/feathers-hooks-rediscache) - API endpoint caching with Redis.  
+
 
 ## Documentation
 
