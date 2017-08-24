@@ -22,6 +22,7 @@
     "feathers-configuration": "0.4.1",
     "feathers-errors": "2.8.1",
     "feathers-hooks": "2.0.1",
+    "feathers-hooks-common": "3.7.2",
     "feathers-memory": "1.1.0",
     "feathers-nedb": "2.6.2",
     "feathers-offline-publication": "^0.0.2",
