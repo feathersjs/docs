@@ -21,7 +21,7 @@ First, let's add the browser version of Feathers to the page. We can do so by li
   </head>
   <body>
     <div id="app" class="flex flex-column"></div>
-    <script src="//npmcdn.com/feathers-client@^2.0.0-pre.1/dist/feathers.js">
+    <script src="//unpkg.com/feathers-client@^2.0.0-pre.1/dist/feathers.js">
     </script>
     <script src="/socket.io/socket.io.js"></script>
     <script src="app.js"></script>
@@ -101,7 +101,7 @@ Alright. We can create and listen to new messages and also list all messages. Al
         </div>
       </main>
     </div>
-    <script src="//npmcdn.com/feathers-client@^2.0.0-pre.1/dist/feathers.js">
+    <script src="//unpkg.com/feathers-client@^2.0.0-pre.1/dist/feathers.js">
     </script>
     <script src="/socket.io/socket.io.js"></script>
     <script src="app.js"></script>
