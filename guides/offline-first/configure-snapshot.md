@@ -10,7 +10,7 @@ npm install feathers-offline-snapshot --save
 
 ```javascript
 import snapshot from 'feathers-offline-snapshot';
-snapshort(service, query).then(records => ...);
+snapshot(service, query).then(records => ...);
 ```
 
 - `service` (*required*) - The service to read.
