@@ -303,7 +303,16 @@ module.exports = {
 
 If you are using REST and queries with larger arrays (more than 21 items to be exact) are failing you are probably running into an issue with the [querystring](https://github.com/ljharb/qs) module which [limits the size of arrays to 21 items](https://github.com/ljharb/qs#parsing-arrays) by default. The recommended solution is to implement a custom query string parser function via `app.set('query parser', parserFunction)` with the `arrayLimit` option set to a higher value. For more information see the [Express application settings](http://expressjs.com/en/4x/api.html#app.set) [feathers-rest#88](https://github.com/feathersjs/feathers-rest/issues/88) and [feathers-mongoose#205](https://github.com/feathersjs/feathers-mongoose/issues/205).
 
+## I always get a 404 for my custom middleware
+
+Just like in Express itself, the order of middleware matters. If you registered a custom middleware outside of the generator, you have to make sure that it runs before the `notFound()` error midlleware.
+
+## How do I get OAuth working across different domains
+
+The standard Feathers oAuth setup sets the JWT in a cookie which can only be passed between the same domain. If your frontend is running on a different domain you will have to use query string redirects as outlined in [this Gist](https://gist.github.com/marshallswain/3c9e5b3b177b977468b5b711b6254f67).
+
 ## How do I set up HTTPS?
+
 Check out the Feathers [Express HTTPS docs](../api/express.md#https).
 
 ## Is Feathers production ready?
