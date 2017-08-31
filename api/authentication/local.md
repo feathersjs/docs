@@ -145,7 +145,7 @@ app.authenticate({
 If you are not using the `feathers-authentication-client` and you have registered this module server side then you can simply make a `POST` request to `/authentication` with the following payload:
 
 ```json
-// POST /authentication
+// POST /authentication the Content-Type header set to application/json
 {
   "strategy": "local",
   "email": "your email",
