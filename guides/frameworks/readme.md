@@ -4,7 +4,7 @@
 These guides show how to integrate the [Feathers Chat application](../chat/readme.md) with various frontend frameworks.  
 
 **Full Feathers Chat Examples**<br/>
-While we're working on the guides, you can check out example applications in the [feathers-chat](https://github.com/feathersjs/feathers-chat) and [feathers-vuex-chat](https://github.com/feathersjs/feathers-vuex-chat) repos.
+While we're working on the guides, you can check out example applications in the [feathers-chat](https://github.com/feathersjs/feathers-chat) and [feathers-chat-vuex](https://github.com/feathersjs/feathers-chat-vuex) repos.
 
 [**Feathers Chat - React**]()<br/>
 Guide not yet published on the blog.  See the full example app [here](https://github.com/feathersjs/feathers-chat-react)
