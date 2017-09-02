@@ -162,6 +162,58 @@ Through the REST API:
 ```
 
 
+# Transaction Support
+
+The Knex adapter comes with three hooks that allows to run service method calls in a transaction. They can be used as application wide (`app.hooks.js`) hooks or per service like this:
+
+```javascript
+// A common hooks file
+const { hooks } = require('feathers-knex');
+
+const { transaction } = hooks;
+
+module.exports = {
+  before: {
+    all: [ transaction.start() ],
+    find: [],
+    get: [],
+    create: [],
+    update: [],
+    patch: [],
+    remove: []
+  },
+
+  after: {
+    all: [ transaction.end() ],
+    find: [],
+    get: [],
+    create: [],
+    update: [],
+    patch: [],
+    remove: []
+  },
+
+  error: {
+    all: [ transaction.rollback() ],
+    find: [],
+    get: [],
+    create: [],
+    update: [],
+    patch: [],
+    remove: []
+  }
+};
+```
+
+To use the transactions feature, you must ensure that the three hooks (start, commit and rollback) are being used.
+
+At the start of any request, a new transaction will be started. All the changes made during the request to the services that are using the `feathers-knex` will use the transaction. At the end of the request, if sucessful, the changes will be commited. If an error occurs, the changes will be forfeit, all the `creates`, `patches`, `updates` and `deletes` are not going to be commited.
+
+The object that contains `transaction` is stored in the `params.transaction` of each request.
+
+> __Important:__ If you call another Knex service within a hook and want to share the transaction you will have to pass `hook.params.transaction` in the parameters of the service call.
+
+
 ## Customizing the query
 
 In a `find` call, `params.knex` can be passed a KnexJS query (without pagination) to customize the find results.
