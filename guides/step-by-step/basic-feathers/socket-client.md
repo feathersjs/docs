@@ -36,7 +36,7 @@ either REST **or** WebSocket calls from the Feathers client.
 const rest = require('feathers-rest');
 const socketio = require('feathers-socketio'); // new
 
-const app = httpServerConfig()
+const app = expressServerConfig()
   .configure(rest())
   .configure(socketio()) // new
   .configure(services)
