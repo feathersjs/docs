@@ -68,6 +68,7 @@ payload === {
   test: true // Here's the new claim we just added
 }
 ```
+> Note: The payload is not automatically decoded and made available in the hooks, thus, requiring you to implement this functionality in your app. Using `jwt-decode` is a simple solution that could be dropped in a hook as needed.
 
 ## Important Security Information
 As you add data to the JWT payload the token size gets larger.  Try it out on [jwt.io](https://jwt.io/) to see for yourself.   There is an important security issue to keep in mind when customizing the payload.  This issue involves the default `HS256` algorithm used to sign the token.
