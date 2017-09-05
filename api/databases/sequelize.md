@@ -32,7 +32,7 @@ By default, all `feathers-sequlize` operations will return `raw` data (using `ra
  - associated data loads a bit differently
  - ...and several other issues that one might not expect
  
-Don't worry! The solution is easy. Please read the guides about [working with model instances](working-with-sequelize-model-instances).
+Don't worry! The solution is easy. Please read the guides about [working with model instances](#working-with-sequelize-model-instances).
 
 
 ## API
