@@ -81,6 +81,7 @@ Submit yours by creating a pull request.
 - [feathers-blueprints](https://www.npmjs.com/package/feathers-blueprints) - Add some of the Sails.js blueprints functionality to Feathers. (configure)
 - [feathers-bookshelf](https://www.npmjs.com/package/feathers-bookshelf) - A bookshelf ORM service adapter.  (service)
 - [feathers-couchdb](https://github.com/lontongcorp/feathers-couchdb)
+- [feathers-dynamodb](https://github.com/jus101/feathers-dynamodb) - Work in progress - help wanted!
 - [feathers-elasticsearch](https://github.com/feathersjs/feathers-elasticsearch) ![Official Feathers Module](/img/tiny-feathers-logo.png)
 - [feathers-filemaker](https://www.npmjs.com/package/feathers-filemaker) - Filemaker adapter for feathers.js
 - [feathers-knex](../api/databases/knexjs.md) ![Official Feathers Module](/img/tiny-feathers-logo.png)
