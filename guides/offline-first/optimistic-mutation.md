@@ -65,7 +65,7 @@ messagesRealtime.connect()
   .then(data => ... );
 ```
 
-However what ensures is rather different.
+However what ensues is rather different.
 The optimistic-mutator service immediately updates the client replica
 to what it **optimistically** expects the final result will be,
 and **the user can see the change right away**.
