@@ -1,0 +1,50 @@
+<html>
+<head>
+  <title>Chat (JavaScript client)</title>
+  <style>
+    body {
+      font-family: 'Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif';
+      font-weight: 400;
+      font-size: 16px;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+<h1>Chat (JavaScript client)</h1>
+<br />
+<div id="sign-up">
+  <h3>Sign up</h3>
+   <input type="text" id="email-signup" placeholder="email: a@a.com" size="15" />
+  <input type="text" id="password-signup" placeholder="password: a" size="15" />
+  <br />
+  <input type="button" id="signup-user" value="Add user" />
+  <input type="button" id="to-signin-user" value="Sign in" />
+</div>
+<div id="sign-in" style="display: none;">
+  <h3>Sign in</h3>
+  <input type="text" id="email-signin" placeholder="email: a@a.com" size="15" />
+  <input type="text" id="password-signin" placeholder="password: a" size="15" />
+  <br />
+  <input type="button" id="signin-user" value="Sign in" />
+  <input type="button" id="to-signup-user" value="Sign up" />
+</div>
+<div id="chat" style="display: none;">
+  <h3>Chat room</h3>
+  <input type="text" id="message" placeholder="New message" size="30" />
+  <br />
+  <input type="button" id="send-message" value="Send message" />
+  <input type="button" id="signout-user" value="Sign out" />
+</div>
+<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/core-js/2.1.4/core.min.js"></script>
+<script src="https://unpkg.com/feathers-client@^2.0.0/dist/feathers.js"></script>
+<script src="/socket.io.min.js"></script>
+<script src="/serverUrl.js"></script>
+<script>
+  const socket = io(serverUrl);
+  const feathersClient = feathers()
+      .configure(feathers.socketio(socket))
+</script>
+<script src="/socketio-app.js"></script>
+</body>
+</html>

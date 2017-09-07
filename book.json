@@ -5,9 +5,10 @@
   "plugins": [
     "feathers-collapsible-menu",
     "heading-anchors",
+    "include-codeblock",
     "edit-link",
     "ga",
-    "versions"
+    "feathers-versions"
   ],
   "pluginsConfig": {
     "edit-link": {
@@ -25,12 +26,12 @@
       "gitbookConfigURL": "https://raw.githubusercontent.com/feathersjs/feathers-docs/master/book.json",
       "options": [
         {
-          "value": "https://docs.feathersjs.com/v/master",
-          "text": "Latest Stable"
+          "value": "https://docs.feathersjs.com",
+          "text": "Latest Stable (Auk)"
         },
         {
-          "value": "https://docs.feathersjs.com/v/auk/",
-          "text": "Auk"
+          "value": "https://legacy.docs.feathersjs.com",
+          "text": "Legacy (Pre-Auk)"
         }
       ]
     }

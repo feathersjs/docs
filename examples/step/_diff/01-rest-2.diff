@@ -1,0 +1,9 @@
+--- 01/rest/1.js	2017-03-29 08:57:36.697999415 -0400
++++ 01/rest/2.js	2017-03-29 08:57:36.697999415 -0400
+@@ -1,5 +1,5 @@
+ 
+-// Example - Create REST API
++// Example - Create REST API, and serve static files
+ 
+ const expressServerConfig = require('../common/expressServerConfig');
+ const expressMiddleware = require('../common/expressMiddleware');
