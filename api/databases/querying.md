@@ -214,6 +214,7 @@ GET /messages?$or[0][archived][$ne]=true&$or[1][roomId]=2
 
 - [feathers-nedb-fuzzy-search](https://www.npmjs.com/package/feathers-nedb-fuzzy-search)
 - [feathers-mongodb-fuzzy-search](https://www.npmjs.com/package/feathers-mongodb-fuzzy-search)
+- [feathers-solr](https://www.npmjs.com/package/feathers-solr)
 
 Example usage:
 ```js
