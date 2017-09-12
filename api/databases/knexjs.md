@@ -162,7 +162,7 @@ Through the REST API:
 ```
 
 
-# Transaction Support
+## Transaction Support
 
 The Knex adapter comes with three hooks that allows to run service method calls in a transaction. They can be used as application wide (`app.hooks.js`) hooks or per service like this:
 
