@@ -25,7 +25,7 @@ npm install --save tedious // MSSQL
 
 ## A quick note about `raw` queries
 
-By default, all `feathers-sequlize` operations will return `raw` data (using `raw: true` when querying the database). This results in faster execution and allows feathers-sequelize to interoperate with feathers-common hooks and other 3rd party integrations. However, this will bypass some of the "goodness" you get when using Sequelize as an ORM: 
+By default, all `feathers-sequelize` operations will return `raw` data (using `raw: true` when querying the database). This results in faster execution and allows feathers-sequelize to interoperate with feathers-common hooks and other 3rd party integrations. However, this will bypass some of the "goodness" you get when using Sequelize as an ORM: 
 
  - custom getters/setters will be bypassed
  - model-level validations are bypassed
