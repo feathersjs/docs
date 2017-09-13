@@ -218,13 +218,13 @@ The object that contains `transaction` is stored in the `params.transaction` of 
 
 In a `find` call, `params.knex` can be passed a KnexJS query (without pagination) to customize the find results.
 
-Combined with `.createQuery(query)`, which returns a new KnexJS query with the [common filter criteria](./querying.md) applied, this can be used to create more complex queries. The best way to customize the query is in a [before hook](../hooks.md) for `find`.
+Combined with `.createQuery({ query: {...} })`, which returns a new KnexJS query with the [common filter criteria](./querying.md) applied, this can be used to create more complex queries. The best way to customize the query is in a [before hook](../hooks.md) for `find`.
 
 ```js
 app.service('mesages').hooks({
   before: {
     find(hook) {
-      const query = this.createQuery(hook.params.query);
+      const query = this.createQuery({ query: hook.params.query });
 
       // do something with query here
       query.orderBy('name', 'desc');
