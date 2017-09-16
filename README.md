@@ -4,6 +4,8 @@
 
 With Feathers it's easy to create scalable, real-time applications.  Make creating web and mobile apps fun with Feathers.
 
+This documentation is also available as a [PDF](https://docs.feathersjs.com/feathersjs.pdf).
+
 [**Guides**](./guides/readme.md)<br/>
 Get familiar with Feathers by building your first apps. Learn topics from beginner to more advanced-levels.
 
@@ -26,9 +28,3 @@ A collection of Frequently Asked Questions.
 Learn how you can contribute to this documentation.
 
 [**License**](./license.md)
-
-If you are looking for different formats we have the latest version of this doc available in:
-
-* [PDF](https://www.gitbook.com/download/pdf/book/feathersjs/feathers-docs)
-* [ePub](https://www.gitbook.com/download/epub/book/feathersjs/feathers-docs)
-* [Mobi](https://www.gitbook.com/download/mobi/book/feathersjs/feathers-docs)

@@ -27,14 +27,15 @@
     "node": ">= 0.12.0"
   },
   "scripts": {
-    "build": "gitbook build",
     "build:diffs": "./examples/make-diffs.sh && npm run build",
-    "postinstall": "npm run build",
     "publish": "git push origin && git push origin --tags",
     "release:patch": "npm version patch && npm run publish",
     "release:minor": "npm version minor && npm run publish",
     "release:major": "npm version major && npm run publish",
-    "test": "echo \"Error: no test specified.\""
+    "build": "gitbook build",
+    "build:pdf": "gitbook pdf . ./_book/feathersjs.pdf",
+    "install-calibre": "sudo -v && wget -nv -O- https://download.calibre-ebook.com/linux-installer.py",
+    "netlify": "npm run install-calibre && npm run build && npm run build:pdf"
   },
   "directories": {},
   "dependencies": {
