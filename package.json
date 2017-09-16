@@ -31,7 +31,7 @@
     "build": "gitbook build",
     "build:pdf": "gitbook pdf . ./_book/feathersjs.pdf",
     "setup": "npm install svgexport -g",
-    "netlify": "npm run setup && npm run build && npm run build:pdf"
+    "netlify": "npm run setup && npm run build"
   },
   "directories": {},
   "dependencies": {
