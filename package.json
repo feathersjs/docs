@@ -28,10 +28,6 @@
   },
   "scripts": {
     "build:diffs": "./examples/make-diffs.sh && npm run build",
-    "publish": "git push origin && git push origin --tags",
-    "release:patch": "npm version patch && npm run publish",
-    "release:minor": "npm version minor && npm run publish",
-    "release:major": "npm version major && npm run publish",
     "build": "gitbook build",
     "build:pdf": "gitbook pdf . ./_book/feathersjs.pdf",
     "setup": "npm install svgexport -g",
