@@ -34,7 +34,7 @@
     "release:major": "npm version major && npm run publish",
     "build": "gitbook build",
     "build:pdf": "gitbook pdf . ./_book/feathersjs.pdf",
-    "install-calibre": "sudo -v && wget -nv -O- https://download.calibre-ebook.com/linux-installer.py",
+    "install-calibre": "wget -nv -O- https://download.calibre-ebook.com/linux-installer.py",
     "netlify": "npm run install-calibre && npm run build && npm run build:pdf"
   },
   "directories": {},
