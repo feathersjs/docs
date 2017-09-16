@@ -34,7 +34,7 @@
     "release:major": "npm version major && npm run publish",
     "build": "gitbook build",
     "build:pdf": "gitbook pdf . ./_book/feathersjs.pdf",
-    "setup": "npm install svgexport -g && wget -nv -O- https://download.calibre-ebook.com/linux-installer.py",
+    "setup": "npm install svgexport -g && sudo -v && wget -nv -O- https://download.calibre-ebook.com/linux-installer.py",
     "netlify": "npm run setup && npm run build && npm run build:pdf"
   },
   "directories": {},
