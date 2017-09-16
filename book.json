@@ -8,8 +8,7 @@
     "include-codeblock",
     "edit-link",
     "ga",
-    "feathers-versions",
-    "-search"
+    "feathers-versions"
   ],
   "pluginsConfig": {
     "edit-link": {
