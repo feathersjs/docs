@@ -101,6 +101,23 @@ class CustomVerifier extends Verifier {
 app.configure(jwt({ Verifier: CustomVerifier }));
 ```
 
+### Adding Entries to Claim Payload
+By default, the claim of the token issued by the authentication service will contain the user's ID. By simply adding a hook to the service, the claim can be extended to contain additional entries. For instance, we can include the user's email address within the payload:
+```js
+app.service('authentication').hooks({
+  before: {
+    create: [
+      authentication.hooks.authenticate(config.strategies),
+      hook => {
+        hook.params.payload.email = hook.params.user.email;
+      },
+    ],
+    remove: [
+      authentication.hooks.authenticate('jwt'),
+    ],
+  },
+});
+```
 ## Client Usage
 
 When this module is registered server side, using the default config values this is how you can authenticate using `feathers-authentication-client`:
