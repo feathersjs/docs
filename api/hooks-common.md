@@ -210,7 +210,7 @@ unlike the `remove` hook which only deletes the fields if the service call was m
 
 ---
 
-> **ProTip:** You can replace `remove('name')` with `iff(isProvider('external'), discard('name))`.
+> **ProTip:** You can replace `remove('name')` with `iff(isProvider('external'), discard('name'))`.
 The latter does not contains any hidden "magic".
 
 __Options:__
