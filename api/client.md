@@ -172,7 +172,7 @@ define(function (require) {
   const socketio = feathers.socketio;
   const hooks = feathers.hooks;
   const errors = feathers.errors; // An object with all of the custom error types.
-  const auth = feathers.auth;
+  const authentication = feathers.authentication;
   const io = require('socket.io-client');
 
   const socket = io('http://localhost:3030', {
@@ -182,7 +182,7 @@ define(function (require) {
   const feathersClient = feathers()
     .configure(socketio(socket))
     .configure(hooks())
-    .configure(auth())
+    .configure(authentication())
 
   return feathersClient;
 });
