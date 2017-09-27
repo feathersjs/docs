@@ -35,6 +35,6 @@ We like to think of Feathers as a _"batteries included but easily swappable"_ fr
   </tr>
   <tr>
     <td width="30%"><strong>Error Handling</strong></td>
-    <td width="70%">Feathers removes the pain of defining errors and handling them. Feathers services automatically return appropriate errors, including validation errors, and return them to the client in a easily consumable format.</td>
+    <td width="70%">Feathers removes the pain of defining errors and handling them. Feathers services automatically return appropriate errors, including validation errors, and return them to the client in an easily consumable format.</td>
   </tr>
 </table>
