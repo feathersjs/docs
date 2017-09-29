@@ -20,7 +20,9 @@ Promise.all([
   users.create({ email: 'jane.doe@gmail.com', password: '11111', role: 'admin' }),
   users.create({ email: 'john.doe@gmail.com', password: '22222', role: 'user' }),
   users.create({ email: 'judy.doe@gmail.com', password: '33333', role: 'user' })
-]) //! [create] /// [results]
+])
+//! [create]
+/// [results]
   .then(results => {
     console.log('created Jane Doe item\n', results[0]);
     console.log('created John Doe item\n', results[1]);
