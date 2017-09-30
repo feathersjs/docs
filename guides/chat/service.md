@@ -1,6 +1,6 @@
 # Creating a service
 
-Now that we have a our [Feathers application generated](./creating.md) we can create a new API endpoint to store messages.
+Now that we have our [Feathers application generated](./creating.md) we can create a new API endpoint to store messages.
 
 ## Generating a service
 

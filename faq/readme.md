@@ -74,7 +74,7 @@ For more information about URL routing and parameters, refer to [the Express cha
 
 This depends on the database adapter you are using. Many databases already support their own search syntax:
 
-- Regular expressions (converted in a a hook) for Mongoose, MongoDB and NeDB, see [this comment](https://github.com/feathersjs/feathers/issues/334#issuecomment-234432108)
+- Regular expressions (converted in a hook) for Mongoose, MongoDB and NeDB, see [this comment](https://github.com/feathersjs/feathers/issues/334#issuecomment-234432108)
 - [$like for Sequelize](http://docs.sequelizejs.com/en/latest/docs/querying/) which can be set in [params.sequelize](../api/databases/sequelize.md#paramssequelize)
 - Some database adapters like [KnexJS](../api/databases/knexjs.md), [RethinkDB](../api/databases/rethinkdb.md) and [Elasticsearch](../api/databases/elasticsearch.md) also support non-standard query parameters which are described in their documentation pages.
 

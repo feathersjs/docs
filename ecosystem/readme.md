@@ -97,7 +97,7 @@ Submit yours by creating a pull request.
 - [feathers-nedb](../api/databases/nedb.md) ![Official Feathers Module](/img/tiny-feathers-logo.png)
 - [feathers-nedb-dump](https://www.npmjs.com/package/feathers-nedb-dump) - Middleware for Feathers.js - dumps and restores NeDB database for a given service (middleware)
 - [feathers-objection](https://github.com/mcchrish/feathers-objection) - A service adapter for [Objection.js](https://vincit.github.io/objection.js) - A minimal SQL ORM built on top of Knex.
-- [feathers-orm-service](https://www.npmjs.com/package/feathers-orm-service) - Easily create a Object Relational Mapping Service for Featherjs.
+- [feathers-orm-service](https://www.npmjs.com/package/feathers-orm-service) - Easily create an Object Relational Mapping Service for Featherjs.
 - [feathers-rethinkdb](../api/databases/rethinkdb.md) ![Official Feathers Module](/img/tiny-feathers-logo.png)
 - [feathers-rethinky](https://www.npmjs.com/package/feathers-rethinky) - Thinky.js RethinkDB Adaptor for Feathers JS
 - [feathers-seeder](https://www.npmjs.com/package/feathers-seeder) - Straightforward data seeder for FeathersJS services.

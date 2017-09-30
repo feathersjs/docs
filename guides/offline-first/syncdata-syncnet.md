@@ -75,7 +75,7 @@ the client services's latest record, or
 based solely on when the clients do the mutation.
 
 Whenever you decide to always use the client mutation in the conflict resolver,
-consider switching from the sync- strategy to a own- one,
+consider switching from the sync- strategy to the own- one,
 as in such cases the results are the same.
 
 ## Keep things simple
