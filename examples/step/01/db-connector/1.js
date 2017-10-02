@@ -10,7 +10,7 @@ const service = require('feathers-nedb');
 
 /// [feathers]
 const app = feathers()
-  .configure(services);
+  .configure(services); // hoisted
 //! [feathers]
 
 /// [create]
@@ -27,7 +27,7 @@ Promise.all([
     console.log('created Jane Doe item\n', results[0]);
     console.log('created John Doe item\n', results[1]);
     console.log('created Judy Doe item\n', results[2]);
-    
+
     return users.find()
       .then(results => console.log('find all items\n', results));
   })
@@ -36,7 +36,7 @@ Promise.all([
 
 /// [services]
 function services() {
-  this.use('/users', service({ Model: userModel() }));
+  this.use('/users', service({ Model: userModel() })); // userModel is hoisted
 }
 
 function userModel() {
