@@ -65,8 +65,8 @@ The 3 user items are now in the database, their values are returned in `results`
 We issue a find for the entire table and print the results.
 [import:'results'](../../../examples/step/01/db-connector/1.js)
 
-> ** Promise Refresher.** `user.find().then(results => ...);`
-`user.find()` returns a Promise. `.then(results => ...)` waits for the Promise to resolve,
+> ** Promise Refresher.** `users.find().then(results => ...);`
+`users.find()` returns a Promise. `.then(results => ...)` waits for the Promise to resolve,
 i.e. for the find to finish.
 The zero, one or more items found in the table are returned in the `results` param.
 
