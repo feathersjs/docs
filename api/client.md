@@ -39,7 +39,7 @@ const socketio = require('feathers-socketio/client');
 const hooks = require('feathers-hooks');
 const errors = require('feathers-errors'); // An object with all of the custom error types.
 const auth = require('feathers-authentication-client');
-const io = require('socket.io-client/dist/socket.io');
+const io = require('socket.io-client');
 
 const socket = io('http://localhost:3030', {
   transports: ['websocket']
