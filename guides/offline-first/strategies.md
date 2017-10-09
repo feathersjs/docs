@@ -3,7 +3,7 @@
 ### Comparison of Strategies
 
 Feathers offline-first provides several increasingly sophisticated strategies.
-Its generally straightforward to change your application to use a more sophisticated one (except for snapshot).
+It's generally straightforward to change your application to use a more sophisticated one (except for snapshot).
 
 > **ProTip:** The snapshot and realtime (with optimistic mutation while connected) strategies
 are available at this time.
