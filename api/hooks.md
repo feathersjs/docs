@@ -245,3 +245,28 @@ app.hooks({
   }
 });
 ```
+
+## Access another service from inside a hook
+
+To access a feathers service from inside a hook using ```hook.app.service('servicename')```
+
+The following example we access the ```users``` service from within the message service hook
+
+```js
+app.service('messages').hooks({
+  after: {
+    create: [
+      function(hook) {        
+        // We access another service called hook.app.service('users') and fun the create function
+        return hook.app.service('users').create(hook.data,{}).then(user => {
+          // Update the result (the message)
+          hook.result.user = user;
+
+          // Returning will resolve the promise with the `hook` object
+          return hook;
+        });
+      }
+    ]
+  }
+});
+```
