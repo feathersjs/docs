@@ -13,7 +13,7 @@ We want to implement an upload service to accomplish a few important things:
 3. The files need to be validated.
 4. At the moment there is no third party storage service involved, but this will change in the near future, so it has to be prepared.
 5. It has to show the upload progress.
- 
+
 The plan is to upload the files to a feathers service so we can take advantage of hooks for authentication, authorization and validation, and for service events.
 
 Fortunately, there exists a file storage service: [feathers-blob](https://github.com/feathersjs/feathers-blob). With it we can meet our goals, but (spoiler alert) it isn't an ideal solution.  We discuss some of its problems below.
@@ -21,7 +21,7 @@ Fortunately, there exists a file storage service: [feathers-blob](https://github
 
 ## Basic upload with feathers-blob and feathers-client
 
-For the sake of simplicity, we will be working over a very basic feathers server, with just the upload service. 
+For the sake of simplicity, we will be working over a very basic feathers server, with just the upload service.
 
 Lets look at the server code:
 
@@ -71,6 +71,50 @@ app.use(handler());
 app.listen(3030, function(){
     console.log('Feathers app started at localhost:3030')
 });
+```
+
+Let's look at this implmented in the `feathers-cli` generated server code:
+```javascript
+/* --- /src/services/uploads/uploads.service.js --- */
+
+// Initializes the `uploads` service on path `/uploads'
+
+// Here we used the nedb database, but you can
+// use any other ORM database.
+const createService = require('feathers-nedb');
+
+const createModel = require("../../models/uploads.model");
+const hooks = require("./uploads.hooks");
+const filters = require("./uploads.filters");
+
+// feathers-blob service
+const blobService = require("feathers-blob");
+// Here we initialize a FileSystem storage,
+// but you can use feathers-blob with any other
+// storage service like AWS or Google Drive.
+const fs = require("fs-blob-store");
+
+// File storage location. Folder must be created before upload.
+// Example: "./uploads" will be located under feathers app top level.
+const blobStorage = fs("./uploads");
+
+module.exports = function() {
+  const app = this;
+  const Model = createModel(app);
+  const paginate = app.get("paginate");
+
+  // Initialize our service with any options it requires
+  app.use("/uploads", blobService({ Model: blobStorage}));
+
+  // Get our initialized service so that we can register hooks and filters
+  const service = app.service("uploads");
+
+  service.hooks(hooks);
+
+  if (service.filter) {
+    service.filter(filters);
+  }
+};
 ```
 
 `feathers-blob` works over abstract-blob-store, which is an abstract interface to various storage backends, such as filesystem, AWS, or Google Drive. It only accepts and retrieves files encoded as dataURI strings.
@@ -133,7 +177,7 @@ Or we can implement a very basic frontend with `feathers-client` and `jQuery`:
                 $('input#file').change(function(){
                     var file = this.files[0];
                     // encode dataURI
-                    reader.readAsDataURL(file); 
+                    reader.readAsDataURL(file);
                 })
             });
 
@@ -160,7 +204,7 @@ Or we can implement a very basic frontend with `feathers-client` and `jQuery`:
 
 This code watches for file selection, then encodes it and does an ajax post to upload it, watching the upload progress via the xhr object. Everything works as expected.
 
-Every file we select gets uploaded and saved to the `./uploads` directory. 
+Every file we select gets uploaded and saved to the `./uploads` directory.
 
 Work done!, let's call it a day, shall we?
 
@@ -168,9 +212,9 @@ Work done!, let's call it a day, shall we?
 
 ### DataURI upload problems
 
-It doesn't feels right because it is not. Let's imagine what would happen if we try to upload a large file, say 25MB or more: The entire file (plus some extra MB due to the encoding) has to be kept in memory for the entire upload process, this could look like nothing for a normal computer but for mobile devices it's a big deal. 
+It doesn't feels right because it is not. Let's imagine what would happen if we try to upload a large file, say 25MB or more: The entire file (plus some extra MB due to the encoding) has to be kept in memory for the entire upload process, this could look like nothing for a normal computer but for mobile devices it's a big deal.
 
-We have a big RAM consumption problem. Not to mention we have to encode the file before sending it... 
+We have a big RAM consumption problem. Not to mention we have to encode the file before sending it...
 
 The solution would be to modify the service, adding support for splitting the dataURI into small chunks, then uploading one at a time, collecting and reassembling everything on the server. But hey, it's not that the same thing   browsers and web servers has been doing since maybe the very early days of the web?  maybe since Netscape Navigator?
 
@@ -188,14 +232,14 @@ const multipartMiddleware = multer();
 
 // Upload Service with multipart support
 app.use('/uploads',
-    
+
     // multer parses the file named 'uri'.
-    // Without extra params the data is 
+    // Without extra params the data is
     // temporarely kept in memory
     multipartMiddleware.single('uri'),
 
-    // another middleware, this time to 
-    // transfer the received file to feathers 
+    // another middleware, this time to
+    // transfer the received file to feathers
     function(req,res,next){
         req.feathers.file = req.file;
         next();
@@ -216,7 +260,7 @@ const dauria = require('dauria');
 
 // before-create Hook to get the file (if there is any)
 // and turn it into a datauri,
-// transparently getting feathers-blob to work 
+// transparently getting feathers-blob to work
 // with multipart file uploads
 app.service('/uploads').before({
     create: [
@@ -231,18 +275,18 @@ app.service('/uploads').before({
 });
 ```
 
-*Et voilà!*. Now we have a FeathersJS file storage service working, with support for traditional multipart uploads, and a variety of storage options to choose. 
+*Et voilà!*. Now we have a FeathersJS file storage service working, with support for traditional multipart uploads, and a variety of storage options to choose.
 
 **Simply awesome.**
 
 
 ## Further improvements
 
-The service always return the dataURI back to us, which may not be necessary as we'd just uploaded the file, also we need to validate the file and check for authorization. 
+The service always return the dataURI back to us, which may not be necessary as we'd just uploaded the file, also we need to validate the file and check for authorization.
 
 All those things can be easily done with more Hooks, and that's the benefit of keeping all inside FeathersJS services. I left that to you.
 
-For the frontend, there is a problem with the client: in order to show the upload progress it's stuck with only REST functionality and not real-time with socket.io. 
+For the frontend, there is a problem with the client: in order to show the upload progress it's stuck with only REST functionality and not real-time with socket.io.
 
 The solution is to switch `feathers-client` from REST to `socket.io`, and just use wherever you like for uploading the files, that's an easy task now that we are able to do a traditional `form-multipart` upload.
 
@@ -298,6 +342,6 @@ Here is an example using dropzone:
 All the code is available via github here: https://github.com/CianCoders/feathers-example-fileupload
 
 
-Hope you have learned something today, as I learned a lot writing this. 
+Hope you have learned something today, as I learned a lot writing this.
 
 Cheers!
