@@ -79,6 +79,7 @@ Let's look at this implmented in the `feathers-cli` generated server code:
 
 // Initializes the `uploads` service on path `/uploads'
 
+
 // Here we used the nedb database, but you can
 // use any other ORM database.
 const createService = require('feathers-nedb');
@@ -87,12 +88,14 @@ const createModel = require("../../models/uploads.model");
 const hooks = require("./uploads.hooks");
 const filters = require("./uploads.filters");
 
+
 // feathers-blob service
 const blobService = require("feathers-blob");
 // Here we initialize a FileSystem storage,
 // but you can use feathers-blob with any other
 // storage service like AWS or Google Drive.
 const fs = require("fs-blob-store");
+
 
 // File storage location. Folder must be created before upload.
 // Example: "./uploads" will be located under feathers app top level.
