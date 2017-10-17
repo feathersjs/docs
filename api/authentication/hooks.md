@@ -31,6 +31,7 @@ app.service('messages').before({
 
 - `idField` (default: '_id') [optional] - The id field on your user object.
 - `as` (default: 'userId') [optional] - The id field for a user on the resource you are requesting.
+- `expandPaths` (default: true) [optional] - Prevent path expansion when the DB Adapter doesn't support it. Ex: With this option set to false, a value like 'foo.userId' won't be expanded to a nested `{ "foo": { "userId": 51 } }` but instead be set as `{ "foo.userId": 51 }`.
 
 When using this hook with the default options the `User._id` will be copied into `hook.params.query.userId`.
 
@@ -55,6 +56,7 @@ app.service('messages').before({
 
 - `idField` (default: '_id') [optional] - The id field on your user object.
 - `ownerField` (default: 'userId') [optional] - The id field for a user on your resource.
+- `expandPaths` (default: true) [optional] - Prevent path expansion when the DB Adapter doesn't support it. Also see [queryWithCurrentUser](#queryWithCurrentUser).
 
 
 ## restrictToAuthenticated
