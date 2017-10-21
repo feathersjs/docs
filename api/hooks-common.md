@@ -450,6 +450,33 @@ __Options:__
 See also iff, iffElse, else, when, unless, isNot, isProvider.
 
 
+## keep
+
+### `keep(... fieldNames)` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/services/keep.js)
+
+Keeps the given fields either in the data submitted or in the result. If the data is an array or a paginated `find` result the hook will Keep the field(s) for every item.
+
+- Used as a `before` hook for `create`, `update` or `patch`.
+- Used as an `after` hook.
+- Field names support dot notation.
+- Supports multiple data items, including paginated `find`.
+
+```js
+const { keep } = require('feathers-hooks-common');
+
+// Keep the `userId` and `comment` field before a post is created
+app.service('posts').before({
+  create: keep('userId', 'comment')
+});
+```
+
+__Options:__
+
+- `fieldNames` (*required*) - One or more fields you want to keep from the object(s).
+
+See also discard.
+
+
 ## lowerCase
 
 ### `lowerCase(... fieldNames)` [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/services/lower-case.js)
