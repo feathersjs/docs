@@ -51,7 +51,7 @@ Application-specific logic often needs to run before and after service calls.
 You will implement most of your business requirements with [service hooks](../../../api/hooks.md),
 which are middleware functions that run for each service method.
 Feathers calls the data passed between these hooks the `context` object
-(in order not to confused them with the HTTP `request` object).
+(in order not to confuse them with the HTTP `request` object).
 
 Hook middleware is organized like this:
 
