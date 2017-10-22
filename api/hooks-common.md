@@ -470,11 +470,19 @@ app.service('posts').before({
 });
 ```
 
+> **ProTip:** This hook will always keep the fields,
+unlike the `pluck` hook which only keep the fields if the service call was made by a client.
+
+---
+
+> **ProTip:** You can replace `pluck('name')` with `iff(isProvider('external'), keep('name'))`.
+The latter does not contains any hidden "magic".
+
 __Options:__
 
 - `fieldNames` (*required*) - One or more fields you want to keep from the object(s).
 
-See also discard.
+See also pluck.
 
 
 ## lowerCase
