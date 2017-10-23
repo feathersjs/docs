@@ -98,6 +98,7 @@ Verifies the signature and payload of the passed in JWT `token` using the `optio
   - `secret {String | Buffer}` - - either the secret for HMAC algorithms, or the PEM encoded private key for RSA and ECDSA.
   - See the [`jsonwebtoken`](https://www.npmjs.com/package/jsonwebtoken#jwtsignpayload-secretorprivatekey-options-callback) package docs for other available options.
 
+The returned `promise` resolves with the payload or fails with an error.
 
 ## The `authentication` service
 The heart of this plugin is simply a service for creating JWT.  It's a normal Feathers service that implements only the `create` and `remove` methods.  The `/authentication` service provides all of the functionality that the `/auth/local` and `/auth/token` endpoints did.  To choose a strategy, the client must pass the `strategy` name in the request body.  This will be different based on the plugin used.  See the documentation for the plugins listed at the top of this page for more information.
