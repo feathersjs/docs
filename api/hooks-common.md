@@ -470,8 +470,7 @@ app.service('posts').before({
 });
 ```
 
-> **ProTip:** This hook will always keep the fields,
-unlike the `pluck` hook which only keep the fields if the service call was made by a client.
+> **ProTip:** The `keep` hook will remove any fields not specified even if the service is called the server.
 
 ---
 
