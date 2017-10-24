@@ -48,7 +48,7 @@
     * [Recipe: Custom JWT Payload](guides/auth/recipe.customize-jwt-payload.md)
     * [Recipe: Mixed Auth Endpoints](guides/auth/recipe.mixed-auth.md)
     * [Recipe: Basic OAuth](guides/auth/recipe.oauth-basic.md)
-    * [Recipe: Custom Auth Strategies](guides/auth/recipe.custom-auth-strategy)
+    * [Recipe: Custom Auth Strategies](guides/auth/recipe.custom-auth-strategy.md)
   * [Offline first](guides/offline-first/readme.md)
     * [Strategies](guides/offline-first/strategies.md)
     * [Snapshot](guides/offline-first/snapshot.md)
