@@ -470,11 +470,18 @@ app.service('posts').before({
 });
 ```
 
+> **ProTip:** The `keep` hook will remove any fields not specified even if the service is called the server.
+
+---
+
+> **ProTip:** You can replace `pluck('name')` with `iff(isProvider('external'), keep('name'))`.
+The latter does not contains any hidden "magic".
+
 __Options:__
 
 - `fieldNames` (*required*) - One or more fields you want to keep from the object(s).
 
-See also discard.
+See also pluck.
 
 
 ## lowerCase
