@@ -41,6 +41,8 @@ module.exports = function() {
     // Override the original data
     hook.data = {
       text,
+      // Preserve the name in the message
+      name: hook.data.name,
       // Set the user id
       userId: user._id,
       // Add the current time via `getTime`
