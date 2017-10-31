@@ -28,8 +28,8 @@ The [feathers-socketio](https://github.com/feathersjs/feathers-socketio) module 
 Sets up the Socket.io transport with the default configuration using either the server provided by [app.listen](./application.md#listen) or passed in [app.setup(server)](./application.md#setup).
 
 ```js
-const feathers = require('feathers');
-const socketio = require('feathers-socketio');
+const feathers = require('@feathersjs/feathers');
+const socketio = require('@feathersjs/socketio');
 
 const app = feathers();
 
@@ -45,8 +45,8 @@ app.listen(3030);
 Sets up the Socket.io transport with the default configuration and call `callback` with the [Socket.io server object](http://socket.io/docs/server-api/). This is a good place to listen to custom events or add [authorization](https://github.com/LearnBoost/socket.io/wiki/Authorizing):
 
 ```js
-const feathers = require('feathers');
-const socketio = require('feathers-socketio');
+const feathers = require('@feathersjs/feathers');
+const socketio = require('@feathersjs/socketio');
 
 const app = feathers();
 
@@ -77,8 +77,8 @@ This can be used to e.g. configure the path where Socket.io is initialize (`sock
 
 
 ```js
-const feathers = require('feathers');
-const socketio = require('feathers-socketio');
+const feathers = require('@feathersjs/feathers');
+const socketio = require('@feathersjs/socketio');
 
 const app = feathers()
   .configure(socketio({
@@ -96,8 +96,8 @@ app.listen(3030);
 Creates a new Socket.io server on a separate port. Options and a callback are optional and work as described above.
 
 ```js
-const feathers = require('feathers');
-const socketio = require('feathers-socketio');
+const feathers = require('@feathersjs/feathers');
+const socketio = require('@feathersjs/socketio');
 
 const app = feathers()
   .configure(socketio(3031));
@@ -137,8 +137,8 @@ $ npm install uws --save
 ```
 
 ```js
-const feathers = require('feathers');
-const socketio = require('feathers-socketio');
+const feathers = require('@feathersjs/feathers');
+const socketio = require('@feathersjs/socketio');
 
 const app = feathers();
 

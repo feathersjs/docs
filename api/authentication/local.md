@@ -22,7 +22,7 @@ This module contains 3 core pieces:
 In most cases initializing the module is as simple as doing this:
 
 ```js
-const feathers = require('feathers');
+const feathers = require('@feathersjs/feathers');
 const authentication = require('feathers-authentication');
 const local = require('feathers-authentication-local');
 const app = feathers();

@@ -238,7 +238,7 @@ There are two ways to extend existing database adapters. Either by extending the
 The most flexible option is weaving in functionality through [hooks](../hooks.md). For example, `createdAt` and `updatedAt` timestamps could be added like this:
 
 ```js
-const feathers = require('feathers');
+const feathers = require('@feathersjs/feathers');
 const hooks = require('feathers-hooks');
 
 // Import the database adapter of choice

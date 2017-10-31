@@ -1,10 +1,10 @@
 # LocalStorage and AsyncStorage
 
-[![GitHub stars](https://img.shields.io/github/stars/feathersjs/feathers-localstorage.png?style=social&label=Star)](https://github.com/feathersjs/feathers-localstorage/)
+[![GitHub stars](https://img.shields.io/github/stars/feathersjs-ecosystem/feathers-localstorage.png?style=social&label=Star)](https://github.com/feathersjs-ecosystem/feathers-localstorage/)
 [![npm version](https://img.shields.io/npm/v/feathers-localstorage.png?style=flat-square)](https://www.npmjs.com/package/feathers-localstorage)
-[![Changelog](https://img.shields.io/badge/changelog-.md-blue.png?style=flat-square)](https://github.com/feathersjs/feathers-localstorage/blob/master/CHANGELOG.md)
+[![Changelog](https://img.shields.io/badge/changelog-.md-blue.png?style=flat-square)](https://github.com/feathersjs-ecosystem/feathers-localstorage/blob/master/CHANGELOG.md)
 
-[feathers-localstorage](https://github.com/feathersjs/feathers-localstorage/) is a database service adapter that extends [feathers-memory](./memory.md) and stores data in [localStorage](https://developer.mozilla.org/en/docs/Web/API/Window/localStorage) in the browser or [AsyncStorage](https://facebook.github.io/react-native/docs/asyncstorage.html) in React Native.
+[feathers-localstorage](https://github.com/feathersjs-ecosystem/feathers-localstorage/) is a database service adapter that extends [feathers-memory](./memory.md) and stores data in [localStorage](https://developer.mozilla.org/en/docs/Web/API/Window/localStorage) in the browser or [AsyncStorage](https://facebook.github.io/react-native/docs/asyncstorage.html) in React Native.
 
 ```bash
 $ npm install --save feathers-localstorage
@@ -69,13 +69,13 @@ See the [clients](../clients/readme.md) chapter for more information about using
 ### React Native
 
 ```bash
-$ npm install feathers feathers-localstorage --save
+$ npm install @feathersjs/feathers feathers-localstorage --save
 ```
 
 ```js
 import React from 'react-native';
+import feathers from '@feathersjs/feathers';
 import localstorage from 'feathers-localstorage';
-import feathers from 'feathers';
 
 const { AsyncStorage } = React;
 

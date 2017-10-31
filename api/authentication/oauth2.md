@@ -26,7 +26,7 @@ This module contains 2 core pieces:
 In most cases initializing the module is as simple as doing this:
 
 ```js
-const feathers = require('feathers');
+const feathers = require('@feathersjs/feathers');
 const authentication = require('feathers-authentication');
 const jwt = require('feathers-authentication-jwt');
 const oauth2 = require('feathers-authentication-oauth2');

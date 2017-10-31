@@ -10,8 +10,8 @@ On the server, a Feathers application acts as a drop-in replacement for any [Exp
 All middleware registered after the [REST transport](./rest.md) will have access to the `req.feathers` object to set properties on the service method `params`:
 
 ```js
-const app = require('feathers')();
-const rest = require('feathers-rest');
+const app = require('@feathersjs/feathers')();
+const rest = require('@feathersjs/express/rest');
 const bodyParser = require('body-parser');
 
 app.configure(rest())
@@ -77,8 +77,8 @@ For additional query string examples see the [database querying](./databases/que
 Express route placeholder parameters in a service URL will be added to the service `params`:
 
 ```js
-const feathers = require('feathers');
-const rest = require('feathers-rest');
+const feathers = require('@feathersjs/feathers');
+const rest = require('@feathersjs/express/rest');
 
 const app = feathers();
 
@@ -146,7 +146,7 @@ Sub-apps allow to provide different versions for an API. Currently, when using t
 
 ```js
 const express = require('express');
-const feathers = require('feathers');
+const feathers = require('@feathersjs/feathers');
 const api = feathers().use('/service', myService);
 
 const mainApp = express().use('/api/v1', api);

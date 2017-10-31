@@ -212,14 +212,14 @@ Here's an example of a Feathers server that uses `feathers-authentication` for l
 **For the auth middleware to work as expected, the plugins must be configured before creating any services.**
 
 ```js
-const feathers = require('feathers');
-const rest = require('feathers-rest');
-const socketio = require('feathers-socketio');
+const feathers = require('@feathersjs/feathers');
+const rest = require('@feathersjs/express/rest');
+const socketio = require('@feathersjs/socketio');
 const hooks = require('feathers-hooks');
 const memory = require('feathers-memory');
 const bodyParser = require('body-parser');
-const errors = require('feathers-errors');
-const errorHandler = require('feathers-errors/handler');
+const errors = require('@feathersjs/errors');
+const errorHandler = require('@feathersjs/errors/handler');
 const local = require('feathers-authentication-local');
 const jwt = require('feathers-authentication-jwt');
 const auth = require('feathers-authentication');

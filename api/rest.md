@@ -39,9 +39,9 @@ $ npm install body-parser --save
 Configures the transport provider with a standard formatter sending JSON response via [res.json](http://expressjs.com/en/4x/api.html#res.json).
 
 ```js
-const feathers = require('feathers');
+const feathers = require('@feathersjs/feathers');
 const bodyParser = require('body-parser');
-const rest = require('feathers-rest');
+const rest = require('@feathersjs/express/rest');
 const app = feathers();
 
 // Turn on JSON parser for REST services
@@ -59,7 +59,7 @@ The default REST response formatter is a middleware that formats the data retrie
 ```js
 const app = feathers();
 const bodyParser = require('body-parser');
-const rest = require('feathers-rest');
+const rest = require('@feathersjs/express/rest');
 
 // Turn on JSON parser for REST services
 app.use(bodyParser.json())

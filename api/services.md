@@ -152,8 +152,8 @@ For services registered before `app.listen` is invoked, the `setup` function of 
 // app.js
 'use strict';
 
-const feathers = require('feathers');
-const rest = require('feathers-rest');
+const feathers = require('@feathersjs/feathers');
+const rest = require('@feathersjs/express/rest');
 
 class MessageService {
   get(id, params) {

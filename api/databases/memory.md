@@ -1,10 +1,10 @@
 # In Memory
 
-[![GitHub stars](https://img.shields.io/github/stars/feathersjs/feathers-memory.png?style=social&label=Star)](https://github.com/feathersjs/feathers-memory/)
+[![GitHub stars](https://img.shields.io/github/stars/feathersjs-ecosystem/feathers-memory.png?style=social&label=Star)](https://github.com/feathersjs-ecosystem/feathers-memory/)
 [![npm version](https://img.shields.io/npm/v/feathers-memory.png?style=flat-square)](https://www.npmjs.com/package/feathers-memory)
-[![Changelog](https://img.shields.io/badge/changelog-.md-blue.png?style=flat-square)](https://github.com/feathersjs/feathers-memory/blob/master/CHANGELOG.md)
+[![Changelog](https://img.shields.io/badge/changelog-.md-blue.png?style=flat-square)](https://github.com/feathersjs-ecosystem/feathers-memory/blob/master/CHANGELOG.md)
 
-[feathers-memory](https://github.com/feathersjs/feathers-memory/) is a database service adapter for in-memory data storage that works on all platforms.
+[feathers-memory](https://github.com/feathersjs-ecosystem/feathers-memory/) is a database service adapter for in-memory data storage that works on all platforms.
 
 ```bash
 $ npm install --save feathers-memory
@@ -40,39 +40,39 @@ __Options:__
 Here is an example of a Feathers server with a `messages` in-memory service that supports pagination:
 
 ```
-$ npm install feathers body-parser feathers-rest feathers-socketio feathers-memory feathers-errors
+$ npm install @feathersjs/feathers @feathersjs/express @feathersjs/socketio @feathersjs/errors feathers-memory
 ```
 
 In `app.js`:
 
 ```js
-const feathers = require('feathers');
-const bodyParser = require('body-parser');
-const rest = require('feathers-rest');
-const socketio = require('feathers-socketio');
-const memory = require('feathers-memory');
-const errorHandler = require('feathers-errors/handler');
+const feathers = require('@feathersjs/feathers');
+const expressify = require('@feathersjs/express');
+const socketio = require('@feathersjs/socketio');
+const errorHandler = require('@feathersjs/errors/handler');
 
-// Create a feathers instance.
-const app = feathers()
-  // Enable REST services
-  .configure(rest())
-  // Enable REST services
-  .configure(socketio())
-  // Turn on JSON parser for REST services
-  .use(bodyParser.json())
-  // Turn on URL-encoded parser for REST services
-  .use(bodyParser.urlencoded({ extended: true }))
-  // Create an in-memory Feathers service with a default page size of 2 items
-  // and a maximum size of 4
-  .use('/messages', memory({
-    paginate: {
-      default: 2,
-      max: 4
-    }
-  }))
-  // Set up default error handler
-  .use(errorHandler());
+const memory = require('feathers-memory');
+
+// Create an Express compatible Feathers application instance.
+const app = expressify(feathers());
+// Enable REST services
+app.configure(expressify.rest());
+// Enable REST services
+app.configure(socketio());
+// Turn on JSON parser for REST services
+app.use(expressify.json());
+// Turn on URL-encoded parser for REST services
+app.use(expressify.urlencoded({ extended: true }));
+// Create an in-memory Feathers service with a default page size of 2 items
+// and a maximum size of 4
+app.use('/messages', memory({
+  paginate: {
+    default: 2,
+    max: 4
+  }
+}));
+// Set up default error handler
+app.use(errorHandler());
 
 // Create a dummy Message
 app.service('messages').create({

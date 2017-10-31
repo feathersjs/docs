@@ -17,7 +17,7 @@ Hooks are commonly used to handle things like validation, logging, populating re
 The following example adds a `createdAt` and `updatedAt` property before sending the data to the database.
 
 ```js
-const feathers = require('feathers');
+const feathers = require('@feathersjs/feathers');
 const hooks = require('feathers-hooks');
 
 const app = feathers();
