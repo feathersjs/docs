@@ -1,10 +1,10 @@
 # RethinkDB
 
-[![GitHub stars](https://img.shields.io/github/stars/feathersjs/feathers-rethinkdb.png?style=social&label=Star)](https://github.com/feathersjs/feathers-rethinkdb/)
+[![GitHub stars](https://img.shields.io/github/stars/feathersjs-ecosystem/feathers-rethinkdb.png?style=social&label=Star)](https://github.com/feathersjs-ecosystem/feathers-rethinkdb/)
 [![npm version](https://img.shields.io/npm/v/feathers-rethinkdb.png?style=flat-square)](https://www.npmjs.com/package/feathers-rethinkdb)
-[![Changelog](https://img.shields.io/badge/changelog-.md-blue.png?style=flat-square)](https://github.com/feathersjs/feathers-rethinkdb/blob/master/CHANGELOG.md)
+[![Changelog](https://img.shields.io/badge/changelog-.md-blue.png?style=flat-square)](https://github.com/feathersjs-ecosystem/feathers-rethinkdb/blob/master/CHANGELOG.md)
 
-[feathers-rethinkdb](https://github.com/feathersjs/feathers-rethinkdb) is a database adapter for [RethinkDB](https://rethinkdb.com), a real-time database.
+[feathers-rethinkdb](https://github.com/feathersjs-ecosystem/feathers-rethinkdb) is a database adapter for [RethinkDB](https://rethinkdb.com), a real-time database.
 
 ```bash
 $ npm install --save rethinkdbdash feathers-rethinkdb
@@ -77,7 +77,7 @@ When making a [service method](./services.md) call, `params` can contain an `ret
 To run the complete RethinkDB example we need to install
 
 ```
-$ npm install feathers feathers-errors feathers-rest feathers-socketio feathers-rethinkdb rethinkdbdash body-parser
+$ npm install @feathersjs/feathers @feathersjs/errors @feathersjs/express @feathersjs/socketio feathers-rethinkdb rethinkdbdash
 ```
 
 We also need access to a RethinkDB server. You can install a local server on your local development machine by downloading one of the packages [from the RethinkDB website](https://rethinkdb.com/docs/install/). It might also be helpful to review their docs on [starting a RethinkDB server](http://rethinkdb.com/docs/start-a-server/).
@@ -85,12 +85,12 @@ We also need access to a RethinkDB server. You can install a local server on you
 Then add the following into `app.js`:
 
 ```js
+const feathers = require('@feathersjs/feathers');
+const errorHandler = require('@feathersjs/errors/handler');
+const expressify = require('@feathersjs/express');
+const socketio = require('@feathersjs/socketio');
+
 const rethink = require('rethinkdbdash');
-const feathers = require('feathers');
-const errorHandler = require('feathers-errors/handler');
-const rest = require('feathers-rest');
-const socketio = require('feathers-socketio');
-const bodyParser = require('body-parser');
 const service = require('feathers-rethinkdb');
 
 // Connect to a local RethinkDB server.
@@ -98,26 +98,27 @@ const r = rethink({
   db: 'feathers'
 });
 
-// Create a feathers instance.
-var app = feathers()
-  // Enable the REST provider for services.
-  .configure(rest())
-  // Enable the socketio provider for services.
-  .configure(socketio())
-  // Turn on JSON parser for REST services
-  .use(bodyParser.json())
-  // Turn on URL-encoded parser for REST services
-  .use(bodyParser.urlencoded({extended: true}))
-  // Register the service
-  .use('messages', service({
-    Model: r,
-    name: 'messages',
-    paginate: {
-      default: 10,
-      max: 50
-    }
-  }))
-  .use(errorHandler());
+// Create an Express compatible Feathers applicaiton instance.
+const app = expressify(feathers());
+
+// Enable the REST provider for services.
+app.configure(expressify.rest());
+// Enable the socketio provider for services.
+app.configure(socketio());
+// Turn on JSON parser for REST services
+app.use(expressify.json());
+// Turn on URL-encoded parser for REST services
+app.use(expressify.urlencoded({extended: true}));
+// Register the service
+app.use('messages', service({
+  Model: r,
+  name: 'messages',
+  paginate: {
+    default: 10,
+    max: 50
+  }
+}));
+app.use(errorHandler());
 
 // Initialize database and messages table if it does not exists yet
 app.service('messages').init().then(() => {

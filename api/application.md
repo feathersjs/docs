@@ -12,7 +12,7 @@ The core `feathers` module provides the ability to initialize new Feathers appli
 
 ```js
 // To create a Feathers server application
-const feathers = require('feathers');
+const feathers = require('@feathersjs/feathers');
 
 // To create a client side application
 const feathers = require('feathers/client');

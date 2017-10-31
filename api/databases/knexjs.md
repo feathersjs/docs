@@ -1,10 +1,10 @@
 # KnexJS
 
-[![GitHub stars](https://img.shields.io/github/stars/feathersjs/feathers-knex.png?style=social&label=Star)](https://github.com/feathersjs/feathers-knex/)
+[![GitHub stars](https://img.shields.io/github/stars/feathersjs-ecosystem/feathers-knex.png?style=social&label=Star)](https://github.com/feathersjs-ecosystem/feathers-knex/)
 [![npm version](https://img.shields.io/npm/v/feathers-knex.png?style=flat-square)](https://www.npmjs.com/package/feathers-knex)
-[![Changelog](https://img.shields.io/badge/changelog-.md-blue.png?style=flat-square)](https://github.com/feathersjs/feathers-knex/blob/master/CHANGELOG.md)
+[![Changelog](https://img.shields.io/badge/changelog-.md-blue.png?style=flat-square)](https://github.com/feathersjs-ecosystem/feathers-knex/blob/master/CHANGELOG.md)
 
-[feathers-knex](https://github.com/feathersjs/feathers-knex) is a database adapter for [KnexJS](http://knexjs.org/), an SQL query builder for Postgres, MSSQL, MySQL, MariaDB, SQLite3, and Oracle.
+[feathers-knex](https://github.com/feathersjs-ecosystem/feathers-knex) is a database adapter for [KnexJS](http://knexjs.org/), an SQL query builder for Postgres, MSSQL, MySQL, MariaDB, SQLite3, and Oracle.
 
 ```bash
 npm install --save mysql knex feathers-knex
@@ -66,17 +66,17 @@ When making a [service method](./services.md) call, `params` can contain an `kne
 Here's a complete example of a Feathers server with a `messages` SQLite service. We are using the [Knex schema builder](http://knexjs.org/#Schema) and [SQLite](https://sqlite.org/) as the database.
 
 ```
-$ npm install feathers feathers-errors feathers-rest feathers-socketio body-parser feathers-knex knex sqlite3
+$ npm install @feathersjs/feathers @feathersjs/errors @feathersjs/express @feathersjs/socketio feathers-knex knex sqlite3
 ```
 
 In `app.js`:
 
 ```js
-const feathers = require('feathers');
-const errorHandler = require('feathers-errors/handler');
-const rest = require('feathers-rest');
-const socketio = require('feathers-socketio');
-const bodyParser = require('body-parser');
+const feathers = require('@feathersjs/feathers');
+const errorHandler = require('@feathersjs/errors/handler');
+const expressify = require('@feathersjs/express');
+const socketio = require('@feathersjs/socketio');
+
 const service = require('feathers-knex');
 const knex = require('knex');
 
@@ -88,26 +88,26 @@ const db = knex({
 });
 
 // Create a feathers instance.
-const app = feathers()
-  // Enable REST services
-  .configure(rest())
-  // Enable Socket.io services
-  .configure(socketio())
-  // Turn on JSON parser for REST services
-  .use(bodyParser.json())
-  // Turn on URL-encoded parser for REST services
-  .use(bodyParser.urlencoded({ extended: true }))
-  // Create Knex Feathers service with a default page size of 2 items
-  // and a maximum size of 4
-  .use('/messages', service({
-    Model: db,
-    name: 'messages',
-    paginate: {
-      default: 2,
-      max: 4
-    }
-  }))
-  .use(errorHandler());
+const app = expressify(feathers());
+// Enable REST services
+app.configure(expressify.rest());
+// Enable Socket.io services
+app.configure(socketio());
+// Turn on JSON parser for REST services
+app.use(expressify.json());
+// Turn on URL-encoded parser for REST services
+app.use(expressify.urlencoded({ extended: true }));
+// Create Knex Feathers service with a default page size of 2 items
+// and a maximum size of 4
+app.use('/messages', service({
+  Model: db,
+  name: 'messages',
+  paginate: {
+    default: 2,
+    max: 4
+  }
+}))
+app.use(errorHandler());
 
 // Clean up our data. This is optional and is here
 // because of our integration tests

@@ -1,10 +1,10 @@
 # Sequelize
 
-[![GitHub stars](https://img.shields.io/github/stars/feathersjs/feathers-sequelize.png?style=social&label=Star)](https://github.com/feathersjs/feathers-sequelize/)
+[![GitHub stars](https://img.shields.io/github/stars/feathersjs-ecosystem/feathers-sequelize.png?style=social&label=Star)](https://github.com/feathersjs-ecosystem/feathers-sequelize/)
 [![npm version](https://img.shields.io/npm/v/feathers-sequelize.png?style=flat-square)](https://www.npmjs.com/package/feathers-sequelize)
-[![Changelog](https://img.shields.io/badge/changelog-.md-blue.png?style=flat-square)](https://github.com/feathersjs/feathers-sequelize/blob/master/CHANGELOG.md)
+[![Changelog](https://img.shields.io/badge/changelog-.md-blue.png?style=flat-square)](https://github.com/feathersjs-ecosystem/feathers-sequelize/blob/master/CHANGELOG.md)
 
-[feathers-sequelize](https://github.com/feathersjs/feathers-sequelize) is a database adapter for [Sequelize](http://sequelizejs.com), an ORM for Node.js. It supports PostgreSQL, MySQL, MariaDB, SQLite and MSSQL and features transaction support, relations, read replication and more.
+[feathers-sequelize](https://github.com/feathersjs-ecosystem/feathers-sequelize) is a database adapter for [Sequelize](http://sequelizejs.com), an ORM for Node.js. It supports PostgreSQL, MySQL, MariaDB, SQLite and MSSQL and features transaction support, relations, read replication and more.
 
 ```bash
 npm install --save feathers-sequelize
@@ -81,18 +81,18 @@ app.service('messages').hooks({
 Here is an example of a Feathers server with a `messages` SQLite Sequelize Model:
 
 ```
-$ npm install feathers feathers-errors feathers-rest feathers-socketio body-parser sequelize feathers-sequelize sqlite3
+$ npm install @feathersjs/feathers @feathersjs/errors @feathersjs/express @feathersjs/socketio sequelize feathers-sequelize sqlite3
 ```
 
 In `app.js`:
 
 ```js
 const path = require('path');
-const feathers = require('feathers');
-const errorHandler = require('feathers-errors/handler')
-const rest = require('feathers-rest');
-const socketio = require('feathers-socketio');
-const bodyParser = require('body-parser');
+const feathers = require('@feathersjs/feathers');
+const errorHandler = require('@feathersjs/errors/handler')
+const expressify = require('@feathersjs/express');
+const socketio = require('@feathersjs/socketio');
+
 const Sequelize = require('sequelize');
 const service = require('feathers-sequelize');
 
@@ -110,32 +110,33 @@ const Message = sequelize.define('message', {
   freezeTableName: true
 });
 
-// Create a feathers instance.
-const app = feathers()
-  // Enable REST services
-  .configure(rest())
-  // Enable Socket.io services
-  .configure(socketio())
-  // Turn on JSON parser for REST services
-  .use(bodyParser.json())
-  // Turn on URL-encoded parser for REST services
-  .use(bodyParser.urlencoded({ extended: true }))
-  // Create an in-memory Feathers service with a default page size of 2 items
-  // and a maximum size of 4
-  .use('/messages', service({
-    Model: Message,
-    paginate: {
-      default: 2,
-      max: 4
-    }
-  }))
-  .use(errorHandler());
+// Create an Express compatible Feathers application instance.
+const app = expressify(feathers());
+
+// Enable REST services
+app.configure(expressify.rest());
+// Enable Socket.io services
+app.configure(socketio());
+// Turn on JSON parser for REST services
+app.use(expressify.json());
+// Turn on URL-encoded parser for REST services
+app.use(expressify.urlencoded({ extended: true }));
+// Create an in-memory Feathers service with a default page size of 2 items
+// and a maximum size of 4
+app.use('/messages', service({
+  Model: Message,
+  paginate: {
+    default: 2,
+    max: 4
+  }
+}));
+app.use(errorHandler());
 
 Message.sync({ force: true }).then(() => {
   // Create a dummy Message
   app.service('messages').create({
     text: 'Message created on server'
-  }).then(message => console.log('Created message', message.toJSON()));
+  }).then(message => console.log('Created message', message));
 });
 
 // Start the server
@@ -156,7 +157,7 @@ Additionally to the [common querying mechanism](./querying.md) this adapter also
 
 ## Associations and relations
 
-Follow up in the [Sequelize documentation for associations](http://docs.sequelizejs.com/manual/tutorial/associations.html), [this issue](https://github.com/feathersjs/feathers-sequelize/issues/20) and [this Stackoverflow answer](https://stackoverflow.com/questions/42841810/feathers-js-sequelize-service-with-relations-between-two-models/42846215#42846215).
+Follow up in the [Sequelize documentation for associations](http://docs.sequelizejs.com/manual/tutorial/associations.html), [this issue](https://github.com/feathersjs-ecosystem/feathers-sequelize/issues/20) and [this Stackoverflow answer](https://stackoverflow.com/questions/42841810/feathers-js-sequelize-service-with-relations-between-two-models/42846215#42846215).
 
 ## Working with Sequelize Model instances
 
@@ -259,7 +260,6 @@ module.exports = Object.assign({
 }, models);
 ```
 
-___
 ### Migrations workflow
 
 The migration commands will load your application and it is therefore required that you define the same environment variables as when running you application. For example, many applications will define the database connection string in the startup command:

@@ -36,7 +36,7 @@ Sets up the Primus transport with the given [Primus options](https://github.com/
 > **Pro tip:** Once the server has been started with `app.listen()` or `app.setup(server)` the Primus server object is available as `app.primus`.
 
 ```js
-const feathers = require('feathers');
+const feathers = require('@feathersjs/feathers');
 const primus = require('feathers-primus');
 
 const app = feathers();
@@ -138,7 +138,7 @@ const socket = new Socket('http://api.feathersjs.com');
 Initialize the Socket.io client using a given socket and the default options.
 
 ```js
-const feathers = require('feathers');
+const feathers = require('@feathersjs/feathers');
 const primus = require('feathers-primus/client');
 const socket = new Primus('http://api.my-feathers-server.com');
 
@@ -165,7 +165,7 @@ Options can be:
 - `timeout` (default: 5000ms) - The time after which a method call fails and times out. This usually happens when calling a service or service method that does not exist.
 
 ```js
-const feathers = require('feathers');
+const feathers = require('@feathersjs/feathers');
 const primus = require('feathers-primus/client');
 const socket = new Primus('http://api.my-feathers-server.com');
 

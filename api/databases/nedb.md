@@ -1,10 +1,10 @@
 # NeDB
 
-[![GitHub stars](https://img.shields.io/github/stars/feathersjs/feathers-nedb.png?style=social&label=Star)](https://github.com/feathersjs/feathers-nedb/)
+[![GitHub stars](https://img.shields.io/github/stars/feathersjs-ecosystem/feathers-nedb.png?style=social&label=Star)](https://github.com/feathersjs-ecosystem/feathers-nedb/)
 [![npm version](https://img.shields.io/npm/v/feathers-nedb.png?style=flat-square)](https://www.npmjs.com/package/feathers-nedb)
-[![Changelog](https://img.shields.io/badge/changelog-.md-blue.png?style=flat-square)](https://github.com/feathersjs/feathers-nedb/blob/master/CHANGELOG.md)
+[![Changelog](https://img.shields.io/badge/changelog-.md-blue.png?style=flat-square)](https://github.com/feathersjs-ecosystem/feathers-nedb/blob/master/CHANGELOG.md)
 
-[feathers-nedb](https://github.com/feathersjs/feathers-nedb/) is a database service adapter for [NeDB](https://github.com/louischatriot/nedb), an embedded datastore with a [MongoDB](https://www.mongodb.org/) like API. NeDB can store data in-memory or on the filesystem which makes it useful as a persistent storage without a separate database server.
+[feathers-nedb](https://github.com/feathersjs-ecosystem/feathers-nedb/) is a database service adapter for [NeDB](https://github.com/louischatriot/nedb), an embedded datastore with a [MongoDB](https://www.mongodb.org/) like API. NeDB can store data in-memory or on the filesystem which makes it useful as a persistent storage without a separate database server.
 
 ```bash
 $ npm install --save nedb feathers-nedb
@@ -56,18 +56,18 @@ app.service('messages').update('someid', {
 Here is an example of a Feathers server with a `messages` NeDB service that supports pagination and persists to `db-data/messages`:
 
 ```
-$ npm install feathers feathers-errors feathers-rest feathers-socketio feathers-nedb nedb body-parser
+$ npm install @feathersjs/feathers @feathersjs/errors @feathersjs/express @feathersjs/socketio feathers-nedb nedb
 ```
 
 In `app.js`:
 
 ```js
+const feathers = require('@feathersjs/feathers');
+const errorHandler = require('@feathersjs/errors/handler');
+const expressify = require('@feathersjs/express');
+const socketio = require('@feathersjs/socketio');
+
 const NeDB = require('nedb');
-const feathers = require('feathers');
-const errorHandler = require('feathers-errors/handler');
-const rest = require('feathers-rest');
-const socketio = require('feathers-socketio');
-const bodyParser = require('body-parser');
 const service = require('feathers-nedb');
 
 const db = new NeDB({
@@ -75,26 +75,26 @@ const db = new NeDB({
   autoload: true
 });
 
-// Create a feathers instance.
-const app = feathers()
-  // Enable REST services
-  .configure(rest())
-  // Enable Socket.io services
-  .configure(socketio())
-  // Turn on JSON parser for REST services
-  .use(bodyParser.json())
-  // Turn on URL-encoded parser for REST services
-  .use(bodyParser.urlencoded({extended: true}))
-  // Connect to the db, create and register a Feathers service.
-  .use('/messages', service({
-    Model: db,
-    paginate: {
-      default: 2,
-      max: 4
-    }
-  }))
-  // Set up default error handler
-  .use(errorHandler());
+// Create an Express compatible Feathers application instance.
+const app = expressify(feathers());
+// Enable REST services
+app.configure(expressify.rest());
+// Enable Socket.io services
+app.configure(socketio());
+// Turn on JSON parser for REST services
+app.use(expressify.json());
+// Turn on URL-encoded parser for REST services
+app.use(expressify.urlencoded({extended: true}));
+// Connect to the db, create and register a Feathers service.
+app.use('/messages', service({
+  Model: db,
+  paginate: {
+    default: 2,
+    max: 4
+  }
+}));
+// Set up default error handler
+app.use(errorHandler());
 
 // Create a dummy Message
 app.service('messages').create({

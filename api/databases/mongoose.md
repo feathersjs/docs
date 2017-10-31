@@ -1,10 +1,10 @@
 # Mongoose
 
-[![GitHub stars](https://img.shields.io/github/stars/feathersjs/feathers-mongoose.png?style=social&label=Star)](https://github.com/feathersjs/feathers-mongoose/)
+[![GitHub stars](https://img.shields.io/github/stars/feathersjs-ecosystem/feathers-mongoose.png?style=social&label=Star)](https://github.com/feathersjs-ecosystem/feathers-mongoose/)
 [![npm version](https://img.shields.io/npm/v/feathers-mongoose.png?style=flat-square)](https://www.npmjs.com/package/feathers-mongoose)
-[![Changelog](https://img.shields.io/badge/changelog-.md-blue.png?style=flat-square)](https://github.com/feathersjs/feathers-mongoose/blob/master/CHANGELOG.md)
+[![Changelog](https://img.shields.io/badge/changelog-.md-blue.png?style=flat-square)](https://github.com/feathersjs-ecosystem/feathers-mongoose/blob/master/CHANGELOG.md)
 
-[feathers-mongoose](https://github.com/feathersjs/feathers-mongoose) is a database adapter for [Mongoose](http://mongoosejs.com/), an object modeling tool for [MongoDB](https://www.mongodb.org/).
+[feathers-mongoose](https://github.com/feathersjs-ecosystem/feathers-mongoose) is a database adapter for [Mongoose](http://mongoosejs.com/), an object modeling tool for [MongoDB](https://www.mongodb.org/).
 
 ```bash
 $ npm install --save mongoose feathers-mongoose
@@ -94,7 +94,7 @@ app.service('address-meta').patch(null, data, params)
 Here's a complete example of a Feathers server with a `messages` Mongoose service.
 
 ```
-$ npm install feathers feathers-errors feathers-rest body-parser mongoose feathers-mongoose
+$ npm install @feathersjs/feathers @feathersjs/errors @feathersjs/express mongoose feathers-mongoose
 ```
 
 In `message-model.js`:
@@ -117,40 +117,41 @@ module.exports = Model;
 Then in `app.js`:
 
 ```js
-const feathers = require('feathers');
-const errorHandler = require('feathers-errors/handler');
-const rest = require('feathers-rest');
-const bodyParser = require('body-parser');
+const feathers = require('@feathersjs/feathers');
+const errorHandler = require('@feathersjs/errors/handler');
+const expressify = require('@feathersjs/express');
+
 const mongoose = require('mongoose');
 const service = require('feathers-mongoose');
 
 const Model = require('./message-model');
 
-// Tell mongoose to use native promises
-// See http://mongoosejs.com/docs/promises.html
 mongoose.Promise = global.Promise;
 
 // Connect to your MongoDB instance(s)
-mongoose.connect('mongodb://localhost:27017/feathers');
+mongoose.connect('mongodb://localhost:27017/feathers', {
+  useMongoClient: true
+});
 
-// Create a feathers instance.
-const app = feathers()
-  // Enable REST services
-  .configure(rest())
-  // Turn on JSON parser for REST services
-  .use(bodyParser.json())
-  // Turn on URL-encoded parser for REST services
-  .use(bodyParser.urlencoded({extended: true}))
-  // Connect to the db, create and register a Feathers service.
-  .use('/messages', service({
-    Model,
-    lean: true, // set to false if you want Mongoose documents returned
-    paginate: {
-      default: 2,
-      max: 4
-    }
-  }))
-  .use(errorHandler());
+// Create an Express compatible Feathers application instance.
+const app = expressify(feathers());
+
+// Enable REST services
+app.configure(expressify.rest());
+// Turn on JSON parser for REST services
+app.use(expressify.json());
+// Turn on URL-encoded parser for REST services
+app.use(expressify.urlencoded({extended: true}));
+// Connect to the db, create and register a Feathers service.
+app.use('/messages', service({
+  Model,
+  lean: true, // set to false if you want Mongoose documents returned
+  paginate: {
+    default: 2,
+    max: 4
+  }
+}));
+app.use(errorHandler());
 
 // Create a dummy Message
 app.service('messages').create({
@@ -195,7 +196,7 @@ Feathers comes with full support for mongoose discriminators, allowing for autom
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var Post = require('./post');
-var feathers = require('feathers');
+var feathers = require('@feathersjs/feathers');
 var app = feathers();
 var service = require('feathers-mongoose');
 
@@ -225,7 +226,7 @@ app.use('/posts', service({
 Without support for discriminators, when you perform a `.get` on the posts service, you'd only get back `Post` models, not `TextPost` models.
 Now in your query, you can specify a value for your discriminatorKey:
 
-```
+```js
 {
   _type: 'text'
 }

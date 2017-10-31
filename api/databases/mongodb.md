@@ -1,10 +1,10 @@
 # MongoDB
 
-[![GitHub stars](https://img.shields.io/github/stars/feathersjs/feathers-mongodb.png?style=social&label=Star)](https://github.com/feathersjs/feathers-mongodb/)
+[![GitHub stars](https://img.shields.io/github/stars/feathersjs-ecosystem/feathers-mongodb.png?style=social&label=Star)](https://github.com/feathersjs-ecosystem/feathers-mongodb/)
 [![npm version](https://img.shields.io/npm/v/feathers-mongodb.png?style=flat-square)](https://www.npmjs.com/package/feathers-mongodb)
-[![Changelog](https://img.shields.io/badge/changelog-.md-blue.png?style=flat-square)](https://github.com/feathersjs/feathers-mongodb/blob/master/CHANGELOG.md)
+[![Changelog](https://img.shields.io/badge/changelog-.md-blue.png?style=flat-square)](https://github.com/feathersjs-ecosystem/feathers-mongodb/blob/master/CHANGELOG.md)
 
-[feathers-mongodb](https://github.com/feathersjs/feathers-mongodb) is a database adapter for [MongoDB](https://www.mongodb.org/). It uses the [official NodeJS driver for MongoDB](https://www.npmjs.com/package/mongodb).
+[feathers-mongodb](https://github.com/feathersjs-ecosystem/feathers-mongodb) is a database adapter for [MongoDB](https://www.mongodb.org/). It uses the [official NodeJS driver for MongoDB](https://www.npmjs.com/package/mongodb).
 
 ```bash
 $ npm install --save mongodb feathers-mongodb
@@ -50,57 +50,60 @@ When making a [service method](./services.md) call, `params` can contain an `mon
 Here is an example of a Feathers server with a `messages` endpoint that writes to the `feathers` database and the `messages` collection.
 
 ```
-$ npm install feathers feathers-errors feathers-rest feathers-socketio feathers-mongodb mongodb body-parser
+$ npm install @feathersjs/feathers @feathersjs/errors @feathersjs/express @feathersjs/socketio feathers-mongodb mongodb
 ```
 
 In `app.js`:
 
 ```js
-const feathers = require('feathers');
-const errorHandler = require('feathers-errors/handler');
-const rest = require('feathers-rest');
-const socketio = require('feathers-socketio');
-const bodyParser = require('body-parser');
+const feathers = require('@feathersjs/feathers');
+const expressify = require('@feathersjs/express');
+const socketio = require('@feathersjs/socketio');
+const errorHandler = require('@feathersjs/errors/handler');
+
 const MongoClient = require('mongodb').MongoClient;
 const service = require('feathers-mongodb');
 
-// Create a feathers instance.
-const app = feathers()
-  // Enable Socket.io
-  .configure(socketio())
-  // Enable REST services
-  .configure(rest())
-  // Turn on JSON parser for REST services
-  .use(bodyParser.json())
-  // Turn on URL-encoded parser for REST services
-  .use(bodyParser.urlencoded({extended: true}));
+// Create an Express compatible Feathers application instance.
+const app = expressify(feathers());
+// Enable Socket.io
+app.configure(socketio());
+// Enable REST services
+app.configure(expressify.rest());
+// Turn on JSON parser for REST services
+app.use(expressify.json());
+// Turn on URL-encoded parser for REST services
+app.use(expressify.urlencoded({extended: true}));
+
+// Connect to the db, create and register a Feathers service.
+app.use('/messages', service({
+  paginate: {
+    default: 2,
+    max: 4
+  }
+}));
+
+// A basic error handler, just like Express
+app.use(errorHandler());
 
 // Connect to your MongoDB instance(s)
-MongoClient.connect('mongodb://localhost:27017/feathers').then(function(db){
-  // Connect to the db, create and register a Feathers service.
-  app.use('/messages', service({
-    Model: db.collection('messages'),
-    paginate: {
-      default: 2,
-      max: 4
-    }
-  }));
+MongoClient.connect('mongodb://localhost:27017/feathers')
+  .then(function(db){
+    // Set the model now that we are connected
+    app.service('messages').Model = db.collection('messages');
 
-  // A basic error handler, just like Express
-  app.use(errorHandler());
+    // Now that we are connected, create a dummy Message
+    app.service('messages').create({
+      text: 'Message created on server'
+    }).then(message => console.log('Created message', message));
+  }).catch(error => console.error(error));
 
-  // Create a dummy Message
-  app.service('messages').create({
-    text: 'Message created on server'
-  }).then(message => console.log('Created message', message));
+// Start the server.
+const port = 3030;
 
-  // Start the server.
-  const port = 3030;
-
-  app.listen(port, () => {
-    console.log(`Feathers server listening on port ${port}`);
-  });
-}).catch(error => console.error(error));
+app.listen(port, () => {
+  console.log(`Feathers server listening on port ${port}`);
+});
 ```
 
 Run the example with `node app` and go to [localhost:3030/messages](http://localhost:3030/messages).

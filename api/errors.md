@@ -45,7 +45,7 @@ Feathers errors are pretty flexible. They contain the following fields:
 Here are a few ways that you can use them:
 
 ```js
-const errors = require('feathers-errors');
+const errors = require('@feathersjs/errors');
 
 // If you were to create an error yourself.
 const notFound = new errors.NotFound('User does not exist');
@@ -103,7 +103,7 @@ The separate `feathers-errors/handler` module is an [Express error handler](http
 Set up the error handler with the default configuration.
 
 ```js
-const errorHandler = require('feathers-errors/handler');
+const errorHandler = require('@feathersjs/errors/handler');
 const app = feathers();
 
 // before starting the app
@@ -113,7 +113,7 @@ app.use(errorHandler())
 ### `app.use(handler(options))`
 
 ```js
-const error = require('feathers-errors/handler');
+const error = require('@feathersjs/errors');
 const app = feathers();
 
 // Just like Express your error middleware needs to be
