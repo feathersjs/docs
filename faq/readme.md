@@ -98,43 +98,7 @@ Feathers works just like Express so it's the exact same. We've created a [helpfu
 
 ## How do I create channels or rooms
 
-Although Socket.io has a [concept of rooms](http://socket.io/docs/rooms-and-namespaces/) that you can always fall back to, other websocket libraries that Feathers supports do not. The Feathers way of letting a user listen to e.g. messages on a room is through [event filtering](../api/events.md#event-filtering). There are two ways:
-
-1. Update the user object with the rooms they are subscribed to and filter based on those
-
-```
-// On the client
-function joinRoom(roomId) {
-  const user = app.get('user');
-  
-  return app.service('users').patch(user.id, { rooms: user.rooms.concat(roomId) });
-}
-
-// On the server
-app.service('messages').filter(function(message, connection) {
-  return connection.user.rooms.indexOf(message.room_id) !== -1;
-});
-```
-
-The advantage of this method is that you can show offline/online users that are subscribed to a room.
-
-2. Create a custom `join` event with a room id and then filter based on it
-
-```js
-app.use(socketio(function(io) {
-  io.on('connection', function(socket) {
-    socket.on('join', function(roomId) {
-      socket.feathers.rooms.push(roomId);
-    });
-  });
-}));
-
-app.service('messages').filter(function(message, connection) {
-  return connection.rooms.indexOf(message.room_id) !== -1;
-});
-```
-
-The room assignment will persist only for the duration of the socket connection.
+In Feathers [channels](../channels.md) are the way to send [real-time events](../events.md) to only certain clients.
 
 ## How do I do validation?
 
