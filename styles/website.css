@@ -184,5 +184,5 @@ section.markdown-section table {
 /* make nav buttons smaller as to not accidentally trigger when you mean to click on white space. */
 .navigation {
   max-height: 40px;
-  margin-top: 56%;
+  margin-top: 46%;
 }
