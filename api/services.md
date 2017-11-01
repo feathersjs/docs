@@ -46,7 +46,7 @@ Service methods have to return a [Promise](https://developer.mozilla.org/en-US/d
 - `data` - the resource data.
 - `params` - can contain any extra parameters, for example the authenticated user.
 
-> **Important:** `params.query` contains the query parameters from the client, either passed as URL query paramters (see the [REST](./rest.md) chapter) or through websockets (see [Socket.io](./socketio.md) or [Primus](./primus.md)).
+> **Important:** `params.query` contains the query parameters from the client, either passed as URL query parameters (see the [REST](./rest.md) chapter) or through websockets (see [Socket.io](./socketio.md) or [Primus](./primus.md)).
 
 Once registered the service can be retrieved and used via [app.service()](./application.md#servicepath):
 
