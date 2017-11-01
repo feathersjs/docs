@@ -76,10 +76,11 @@
     * [Application](api/application.md)
     * [Services](api/services.md)
     * [Hooks](api/hooks.md)
+    * [Events](api/events.md)
+    * [Channels](api/channels.md)
+    * [Errors](api/errors.md)
     * [Common Hooks](api/hooks-common.md)
     * [Client](api/client.md)
-    * [Events](api/events.md)
-    * [Errors](api/errors.md)
   * Transports
     * [REST](api/rest.md)
     * [Express](api/express.md)
