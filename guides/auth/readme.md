@@ -1,5 +1,8 @@
 # Authentication Guides & Recipes
 
+[**API documentation**](/api/authentication/server.md)
+Currently, the API documentation is the most coherent documentation for authentication.
+
 [**How JWT Works**](./how-jwt-works.md)<br/>
 Learn more about JWT and how it might differ from authentication methods you've used, previously. (This guide is a work in progress.)
 
