@@ -170,7 +170,7 @@ You can run this example by using `node app` and go to [localhost:3030/messages]
 
 ## Querying, Validation
 
-Mongoose by default gives you the ability to add [validations at the model level](http://mongoosejs.com/docs/validation.html). Using an error handler like the one that [comes with Feathers](https://github.com/feathersjs/feathers-errors/blob/master/src/error-handler.js) your validation errors will be formatted nicely right out of the box!
+Mongoose by default gives you the ability to add [validations at the model level](http://mongoosejs.com/docs/validation.html). Using an error handler like the one that [comes with Feathers](https://github.com/feathersjs/feathers-errors/blob/master/lib/error-handler.js) your validation errors will be formatted nicely right out of the box!
 
 For more information on querying and validation refer to the [Mongoose documentation](http://mongoosejs.com/docs/guide.html).
 

@@ -59,7 +59,7 @@ To enable `localStorage` on the client, be sure to set `storage: window.localSto
 
 After configuring this plugin, the Feathers client will have a few additional methods:
 
-### `feathersClient.authenticate(options)` [source](https://github.com/feathersjs/feathers-authentication-client/blob/master/src/passport.js#L136)
+### `feathersClient.authenticate(options)` [source](https://github.com/feathersjs/feathers-authentication-client/blob/master/lib/passport.js#L136)
 Authenticate with a Feathers server by passing a `strategy` and other properties as credentials. It will use whichever transport has been setup on the client (feathers-rest, feathers-socketio, or feathers-primus). Returns a Promise.
 
 ```js
@@ -90,16 +90,16 @@ app.authenticate().then(response => {
 })
 ```
 
-### `feathersClient.logout()` [source](https://github.com/feathersjs/feathers-authentication-client/blob/master/src/passport.js#L212)
+### `feathersClient.logout()` [source](https://github.com/feathersjs/feathers-authentication-client/blob/master/lib/passport.js#L212)
 Removes the JWT accessToken from storage on the client.  It also calls the `remove` method of the `/authentication` service on the Feathers server.
 
-### `feathersClient.passport.getJWT()` [source](https://github.com/feathersjs/feathers-authentication-client/blob/master/src/passport.js#L245)
+### `feathersClient.passport.getJWT()` [source](https://github.com/feathersjs/feathers-authentication-client/blob/master/lib/passport.js#L245)
 Pull the JWT from localstorage or the cookie. Returns a Promise.
 
-### `feathersClient.passport.verifyJWT(token)` [source](https://github.com/feathersjs/feathers-authentication-client/blob/master/src/passport.js#L268)
+### `feathersClient.passport.verifyJWT(token)` [source](https://github.com/feathersjs/feathers-authentication-client/blob/master/lib/passport.js#L268)
 Verify that a JWT is not expired and decode it to get the payload. Returns a Promise.
 
-### `feathersClient.passport.payloadIsValid(token)` [source](https://github.com/feathersjs/feathers-authentication-client/blob/master/src/utils.js#L21)
+### `feathersClient.passport.payloadIsValid(token)` [source](https://github.com/feathersjs/feathers-authentication-client/blob/master/lib/utils.js#L21)
 Synchronously verify that a token has not expired. Returns a Boolean.
 
 ## Hooks
