@@ -119,7 +119,8 @@ Then in `app.js`:
 ```js
 const feathers = require('@feathersjs/feathers');
 const errorHandler = require('@feathersjs/errors/handler');
-const expressify = require('@feathersjs/express');
+const express = require('@feathersjs/express');
+const socketio = require('@feathersjs/socketio');
 
 const mongoose = require('mongoose');
 const service = require('feathers-mongoose');
@@ -134,14 +135,16 @@ mongoose.connect('mongodb://localhost:27017/feathers', {
 });
 
 // Create an Express compatible Feathers application instance.
-const app = expressify(feathers());
+const app = express(feathers());
 
-// Enable REST services
-app.configure(expressify.rest());
 // Turn on JSON parser for REST services
-app.use(expressify.json());
+app.use(express.json());
 // Turn on URL-encoded parser for REST services
-app.use(expressify.urlencoded({extended: true}));
+app.use(express.urlencoded({extended: true}));
+// Enable REST services
+app.configure(express.rest());
+// Enable Socket.io services
+app.configure(socketio());
 // Connect to the db, create and register a Feathers service.
 app.use('/messages', service({
   Model,

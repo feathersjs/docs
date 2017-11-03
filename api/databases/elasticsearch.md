@@ -49,7 +49,7 @@ Here's an example of a Feathers server that uses `feathers-elasticsearch`.
 ```js
 const feathers = require('@feathersjs/feathers');
 const rest = require('@feathersjs/express/rest');
-const expressify = require('@feathersjs/express');
+const express = require('@feathersjs/express');
 const errorHandler = require('@feathersjs/errors/handler');
 
 const service = require('feathers-elasticsearch');
@@ -71,12 +71,13 @@ const messageService = service({
 });
 
 // Initialize the application
-const app = expressify(feathers());
+const app = express(feathers());
 
-app.configure(expressify.rest());
 // Needed for parsing bodies (login)
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+// Enable REST services
+app.configure(express.rest());
 // Initialize your feathers plugin
 app.use('/messages', messageService);
 app.use(errorHandler());;

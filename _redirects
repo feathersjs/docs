@@ -16,3 +16,4 @@
 /scaling/*          https://docs.feathersjs.com/guides/advanced/scaling.html
 /services/*         https://docs.feathersjs.com/api/services.html
 /why/*              https://docs.feathersjs.com/guides/about/readme.html
+api/rest.html       api/express.html

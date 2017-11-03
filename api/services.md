@@ -200,9 +200,14 @@ When registering a service, Feathers (or its plugins) can also add its own metho
 Register [hooks](./hooks.md) for this service.
 
 
-## .filter(filters)
+## .publish([event, ] publisher)
 
-Register a set of [event filters](./events.md#event-filtering) to filter Feathers real-time events to specific clients.
+Register an event publishing callback. For more information see the [channels chapter](./channels.md).
+
+
+## .mixin(mixin)
+
+`.mixin` allows to extend the functionality of a service. For more information see the [Uberproto](https://github.com/daffl/uberproto) project page.
 
 
 ## .on(eventname, listener)

@@ -46,6 +46,8 @@ Any service automaticaly emits `created`, `updated`, `patched` and `removed` eve
 
 > **ProTip:** Events are not fired until all of your [hooks](./hooks.md) have executed.
 
+> **Important:** For information how those events are published for real-time updates to connected clients, see the [channel chapter](./channels.md).
+
 ### created
 
 The `created` event will fire with the result data when a service `create` returns successfully.
@@ -152,4 +154,4 @@ class PaymentService {
 }
 ```
 
-Now clients can listen to the `<servicepath> status` event. Custom events can be [published](./channels.md#publishing-events) just like standard events.
+Now clients can listen to the `<servicepath> status` event. Custom events can be [published](./channels.md#publishing) just like standard events.

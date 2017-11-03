@@ -64,7 +64,7 @@ In `app.js`:
 ```js
 const feathers = require('@feathersjs/feathers');
 const errorHandler = require('@feathersjs/errors/handler');
-const expressify = require('@feathersjs/express');
+const express = require('@feathersjs/express');
 const socketio = require('@feathersjs/socketio');
 
 const NeDB = require('nedb');
@@ -76,15 +76,15 @@ const db = new NeDB({
 });
 
 // Create an Express compatible Feathers application instance.
-const app = expressify(feathers());
+const app = express(feathers());
+// Turn on JSON parser for REST services
+app.use(express.json());
+// Turn on URL-encoded parser for REST services
+app.use(express.urlencoded({extended: true}));
 // Enable REST services
-app.configure(expressify.rest());
+app.configure(express.rest());
 // Enable Socket.io services
 app.configure(socketio());
-// Turn on JSON parser for REST services
-app.use(expressify.json());
-// Turn on URL-encoded parser for REST services
-app.use(expressify.urlencoded({extended: true}));
 // Connect to the db, create and register a Feathers service.
 app.use('/messages', service({
   Model: db,

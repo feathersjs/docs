@@ -74,7 +74,7 @@ In `app.js`:
 ```js
 const feathers = require('@feathersjs/feathers');
 const errorHandler = require('@feathersjs/errors/handler');
-const expressify = require('@feathersjs/express');
+const express = require('@feathersjs/express');
 const socketio = require('@feathersjs/socketio');
 
 const service = require('feathers-knex');
@@ -88,15 +88,15 @@ const db = knex({
 });
 
 // Create a feathers instance.
-const app = expressify(feathers());
+const app = express(feathers());
+// Turn on JSON parser for REST services
+app.use(express.json());
+// Turn on URL-encoded parser for REST services
+app.use(express.urlencoded({ extended: true }));
 // Enable REST services
-app.configure(expressify.rest());
+app.configure(express.rest());
 // Enable Socket.io services
 app.configure(socketio());
-// Turn on JSON parser for REST services
-app.use(expressify.json());
-// Turn on URL-encoded parser for REST services
-app.use(expressify.urlencoded({ extended: true }));
 // Create Knex Feathers service with a default page size of 2 items
 // and a maximum size of 4
 app.use('/messages', service({

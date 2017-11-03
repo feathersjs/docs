@@ -2,6 +2,12 @@
 
 On a Feathers server with a real-time transport ([Socket.io](./socketio.md) or [Primus](./primus.md)) set up, event channels determine which connected clients to send [real-time events](./events.md) to and how the sent data should look like.
 
+This chapter describes:
+
+- [Real-time Connections](#connections) and how to acces them
+- [Channel creation and usage](#channels)
+- [Publishing events](#publishing) to channels
+
 > __Important:__ If you are not using a real-time transport (usually when making a REST only API) channel functionality is unnecessary and will not be available.
 
 Some examples where channels should be used are:
@@ -12,6 +18,45 @@ Some examples where channels should be used are:
 - Only admins should be notified when new users are created
 - When a user is created, modified or removed, non-admins should only receive a "safe" version of the user object (e.g. only `email`, `id` and `avatar`)
 
+## Example
+
+The example below shows the generated `channels.js` file illustrating how the different parts fit together:
+
+```js
+module.exports = function(app) {
+  app.on('connection', connection => {
+    // On a new real-time connection, add it to the
+    // anonymous channel
+    app.channel('anonymous').join(connection);
+  });
+
+  app.on('login', (user, { connection }) => {
+    // connection can be undefined if there is no
+    // real-time connection, e.g. when logging in via REST
+    if(connection) {
+      // The connection is no longer anonymous, remove it
+      app.channel('anonymous').leave(connection);
+
+      // Add it to the authenticated user channel
+      app.channel('authenticated').join(connection);
+
+      // Channels can be named anything and joined on any condition 
+      // E.g. to send real-time events only to admins use
+
+      // if(user.isAdmin) { app.channel('admins').join(conneciton); }
+
+      // If the user has joined e.g. chat rooms
+      
+      // user.rooms.forEach(room => app.channel(`rooms/${room.id}`).join(channel))
+    }
+  });
+
+  // A global publisher that sends all events to all authenticated clients
+  app.publish((data, hook) => {
+    return app.channel('authenticated);
+  });
+};
+```
 
 ## Connections
 
@@ -35,7 +80,7 @@ app.on('connection', connection => {
 
 ### app.on('login')
 
-The `login` event sent by the [authentication module](./authentication/server.md) also contains the connection in the `meta` object that is passed as the second parameter. Note that it can also be `undefined` if the login happened through e.g. REST which does not support real-time connectivity. 
+`app.on('login', (user, info) => {})` is sent by the [authentication module](./authentication/server.md) also contains the connection in the `meta` object that is passed as the second parameter. Note that it can also be `undefined` if the login happened through e.g. REST which does not support real-time connectivity. 
 
 This is a good place to add the connection to channels related to the user (e.g. chat rooms, admin status etc.)
 
@@ -73,14 +118,14 @@ A channel is an object that contains a number of connections. It can be created 
 
 ### app.channel(...names)
 
-When given a single name `app.channel(name)` returns an existing or new named channel:
+`app.channel(name) -> Channel`, when given a single name, returns an existing or new named channel:
 
 ```js
 app.channel('admins') // the admin channel
 app.channel('authenticated') // the authenticated channel
 ```
 
-When given multiples names, `app.channel(...names)` will return a combined channel. A combined channel contains a list of all connections (without duplicates) and re-directs `channel.join` and `channel.leave` calls to all its child channels.
+`app.channel(name1, name2, ... nameN) -> Channel`, when given multiples names, will return a combined channel. A combined channel contains a list of all connections (without duplicates) and re-directs `channel.join` and `channel.leave` calls to all its child channels.
 
 ```js
 // Combine the anonymous and authenticated channel
@@ -100,7 +145,7 @@ app.channel('admins', 'chat').leave(connection => {
 
 ### app.channels
 
-`app.channels` returns a list of all existing channel names.
+`app.channels -> [string]` returns a list of all existing channel names.
 
 ```js
 app.channel('authenticated');
@@ -124,7 +169,7 @@ app.service('users').on('removed', user => {
 
 ### channel.join(connection)
 
-Add a connection to this channel. If the channel is a combined channel, add the connection to all its child channels. If the connection is already in the channel it does nothing. Returns the channel object.
+`channel.join(connection) -> Channel` adds a connection to this channel. If the channel is a combined channel, add the connection to all its child channels. If the connection is already in the channel it does nothing. Returns the channel object.
 
 ```js
 app.on('login', (user, { connection }) => {
@@ -140,7 +185,7 @@ app.on('login', (user, { connection }) => {
 
 ### channel.leave(connection|fn)
 
-Remove a connection from this channel. If the channel is a combined channel, remove the connection from all its child channels. Also allows to pass a callback that is run for every connection and returns if the connection should be removed or not. Returns the channel object.
+`channel.leave(connection|fn) -> Channel` removes a connection from this channel. If the channel is a combined channel, remove the connection from all its child channels. Also allows to pass a callback that is run for every connection and returns if the connection should be removed or not. Returns the channel object.
 
 ```js
 // Make the user with `_id` 5 leave the `admins` channel
@@ -151,7 +196,7 @@ app.channel('admins').leave(connection => {
 
 ### channel.filter(fn)
 
-Returns a new channel filtered by a given function which gets passed the connection.
+`channel.filter(fn) -> Channel` reutrns a new channel filtered by a given function which gets passed the connection.
 
 ```js
 // Returns a new channel with all connections of the user with `_id` 5
@@ -161,7 +206,7 @@ const userFive = app.channel(app.channels)
 
 ### channel.send(data)
 
-Returns a copy of this channel with customized data that should be sent for this event. Usually this should be handled by modifying either the service method result or setting client "safe" data in `hook.dispatch` but in some cases it might make sense to still change the event data for certain channels.
+`channel.send(data) -> Channel` returns a copy of this channel with customized data that should be sent for this event. Usually this should be handled by modifying either the service method result or setting client "safe" data in `hook.dispatch` but in some cases it might make sense to still change the event data for certain channels.
 
 What data will be sent as the event data will be determined by the first available in the following order:
 
@@ -189,11 +234,11 @@ app.service('users').publish('created', data => {
 
 ### channel.connections
 
-The list of all connections in this channel.
+`channel.connections -> [ object ]` contains a list of all connections in this channel.
 
 ### channel.length
 
-Returns the total number of connections in this channel.
+`channel.length -> integer` returns the total number of connections in this channel.
 
 
 ## Publishing
@@ -202,7 +247,7 @@ Publishers are callback functions that return which channel(s) to send an event 
 
 ### service.publish([event,] fn)
 
-Register a publishing function for a specific service for a specific event or all events if no event name was given.
+`service.publish([event,] fn) -> service` registers a publishing function for a specific service for a specific event or all events if no event name was given.
 
 ```js
 app.on('login', (user, { connection }) => {
@@ -226,7 +271,7 @@ app.service('users').publish('created', (data, hook) => {
 
 ### app.publish([event,] fn)
 
-Register a publishing function for all services for a specific event or all events if no event name was given.
+`app.publish([event,] fn) -> app` registersa publishing function for all services for a specific event or all events if no event name was given.
 
 ```js
 app.on('login', (user, { connection }) => {

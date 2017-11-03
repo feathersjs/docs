@@ -90,7 +90,7 @@ In `app.js`:
 const path = require('path');
 const feathers = require('@feathersjs/feathers');
 const errorHandler = require('@feathersjs/errors/handler')
-const expressify = require('@feathersjs/express');
+const express = require('@feathersjs/express');
 const socketio = require('@feathersjs/socketio');
 
 const Sequelize = require('sequelize');
@@ -111,16 +111,16 @@ const Message = sequelize.define('message', {
 });
 
 // Create an Express compatible Feathers application instance.
-const app = expressify(feathers());
+const app = express(feathers());
 
+// Turn on JSON parser for REST services
+app.use(express.json());
+// Turn on URL-encoded parser for REST services
+app.use(express.urlencoded({ extended: true }));
 // Enable REST services
-app.configure(expressify.rest());
+app.configure(express.rest());
 // Enable Socket.io services
 app.configure(socketio());
-// Turn on JSON parser for REST services
-app.use(expressify.json());
-// Turn on URL-encoded parser for REST services
-app.use(expressify.urlencoded({ extended: true }));
 // Create an in-memory Feathers service with a default page size of 2 items
 // and a maximum size of 4
 app.use('/messages', service({
