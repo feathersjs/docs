@@ -481,7 +481,7 @@ You can combine predicates provided with the common hooks, such as `isProvider`
 You can write your own, or mix and match.
 
 ```javascript
-iff (hook => !isProvider('service')(hook) && hook.params.user.security >= 3, ...)
+iff (hook => !isProvider('server')(hook) && hook.params.user.security >= 3, ...)
 ```
 
 The `isNot` conditional utility
