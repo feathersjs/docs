@@ -16,7 +16,7 @@ We also have a very helpful community in Slack.
 - [Gratify](https://gratifyhq.com)
 - [Headstart](http://www.headstartapp.com/)
 - [HaulHound](https://haulhound.com/)
-- [J.A.B. Property Investments](https://jabpi.com)
+- [Lexsury](https://lexsury.com)
 - [Koola](http://koola.io/)
 - [Shakepay](https://shakepay.co)
 - [Sleeker](https://sleeker.co)
