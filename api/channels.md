@@ -5,16 +5,16 @@ On a Feathers server with a real-time transport ([Socket.io](./socketio.md) or [
 This chapter describes:
 
 - [Real-time Connections](#connections) and how to acces them
-- [Channel creation and usage](#channels)
+- [Channel usage](#channels) and how to retrieve, join and leave channels
 - [Publishing events](#publishing) to channels
 
-> __Important:__ If you are not using a real-time transport (usually when making a REST only API) channel functionality is unnecessary and will not be available.
+> __Important:__ If you are not using a real-time transport server (e.g. when making a REST only API or using Feathers on the client), channel functionality is not going to be available.
 
-Some examples where channels should be used are:
+Some examples where channels are used:
 
 - Real-time events should only be sent to authenticated users
-- Users should only get updates about messages if they joined the messages chat room
-- Only users in the same organization should receive real-time updates about data changes
+- Users should only get updates about messages if they joined a certain chat room
+- Only users in the same organization should receive real-time updates about their data changes
 - Only admins should be notified when new users are created
 - When a user is created, modified or removed, non-admins should only receive a "safe" version of the user object (e.g. only `email`, `id` and `avatar`)
 
@@ -110,7 +110,6 @@ app.on('login', (user, { connection }) => {
 ```
 
 > __Note:__ `(user, { connection })` is an ES6 shorthand for `(user, meta) => { const connection = meta.connection; }`, see [Destructuring assignment](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment).
-
 
 ## Channels
 
@@ -239,7 +238,6 @@ app.service('users').publish('created', data => {
 ### channel.length
 
 `channel.length -> integer` returns the total number of connections in this channel.
-
 
 ## Publishing
 
