@@ -39,6 +39,9 @@
 /* 3rd level menu items */
 .book .book-summary nav ul.summary ul.page-headings > li > a {
   padding: 5px 10px;
+}
+
+.book .book-summary nav ul.summary ul.page-headings > li > ul > li > a {
   font-size: 0.9em;
 }
 

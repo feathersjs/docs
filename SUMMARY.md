@@ -81,15 +81,14 @@
     * [Errors](api/errors.md)
     * [Common Hooks](api/hooks-common.md)
   * Transports
-    * [REST](api/rest.md)
     * [Express](api/express.md)
     * [Socket.io](api/socketio.md)
     * [Primus](api/primus.md)
   * Client
     * [Usage](api/client.md)
-    * [REST]()
-    * [Socket.io]()
-    * [Primus]()
+    * [REST](api/client/rest.md)
+    * [Socket.io](api/client/socketio.md)
+    * [Primus](api/client/primus.md)
   * Authentication
     * [Server](api/authentication/server.md)
     * [Client](api/authentication/client.md)

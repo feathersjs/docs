@@ -8,7 +8,7 @@
 $ npm install @feathersjs/feathers --save
 ```
 
-The core `@feathersjs/feathers` module provides the ability to initialize new Feathers application instances. It works in Node, React Native and the browser (see the [client](./client.md) chapter for more information). Each instance allows for registration and retrieval of [services](./services.md), [hooks](./hooks.md), plugin configuration, and getting and setting global configuration options. An initialized Feathers application is referred to as the **app object**.
+The core `@feathersjs/feathers` module provides the ability to initialize new Feathers application instances. It works in Node, React Native and the browser (see the [client](./client.md) chapter for more information). Each instance allows for registration and retrieval of [services](./services.md), [hooks](./hooks.md), plugin configuration, and getting and setting configuration options. An initialized Feathers application is referred to as the **app object**.
 
 ```js
 const feathers = require('@feathersjs/feathers');
@@ -54,7 +54,6 @@ todoService.on('created', todo =>
 );
 ```
 
-
 ## .mixins
 
 `app.mixins` contains a list of service mixins. A mixin is a callback (`(service, path) => {}`) that gets run for every service that is being registered. Adding your own mixins allows to add functionality to every registered service.
@@ -80,16 +79,13 @@ app.service('todos').sayHello();
 // -> Hello from service at 'todos'
 ```
 
-
 ## .hooks(hooks)
 
 `app.hooks(hooks) -> app` allows registration of application-level hooks. For more information see the [application hooks section in the hooks chapter](./hooks.md#application-hooks).
 
-
 ## .publish([event, ] publisher)
 
 `app.publish([event, ] publisher) -> app` registers a global event publisher. For more information see the [channels publishing](./channels.md#publishing) chapter.
-
 
 ## .configure(callback)
 
@@ -103,13 +99,11 @@ function setupService(app) {
 app.configure(setupService);
 ```
 
-
 ## .listen(port)
 
 `app.listen([port]) -> HTTPServer` starts the application on the given port. It will set up all configured transports (if any) and then run `app.setup(server)` (see below) with the server object and then return the server object.
 
 `listen` will only be available if a server side transport (REST, Socket.io or Primus) has been configured.
-
 
 ## .setup([server])
 
@@ -118,11 +112,9 @@ It will also use the `server` instance passed (e.g. through `http.createServer`)
 
 Normally `app.setup` will be called automatically when starting the application via `app.listen([port])` but there are cases when it needs to be called explicitly.
 
-
 ## .set(name, value)
 
 `app.set(name, value) -> app` assigns setting `name` to `value`. 
-
 
 ## .get(name)
 
@@ -134,7 +126,6 @@ app.set('port', 3030);
 app.listen(app.get('port'));
 ```
 
-
 ## .on(eventname, listener)
 
 Provided by the core [NodeJS EventEmitter .on](https://nodejs.org/api/events.html#events_emitter_on_eventname_listener). Registers a `listener` method (`function(data) {}`) for the given `eventname`.
@@ -142,7 +133,6 @@ Provided by the core [NodeJS EventEmitter .on](https://nodejs.org/api/events.htm
 ```js
 app.on('login', user => console.log('Logged in', user));
 ```
-
 
 ## .emit(eventname, data)
 
@@ -155,7 +145,6 @@ app.emit('myevent', {
 
 app.on('myevent', data => console.log('myevent happened', data));
 ```
-
 
 ## .removeListener(eventname, [ listener ])
 

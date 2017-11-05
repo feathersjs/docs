@@ -1,14 +1,14 @@
 # Errors
 
-[![GitHub stars](https://img.shields.io/github/stars/feathersjs/feathers-errors.png?style=social&label=Star)](https://github.com/feathersjs/feathers-errors/)
-[![npm version](https://img.shields.io/npm/v/feathers-errors.png?style=flat-square)](https://www.npmjs.com/package/feathers-errors)
-[![Changelog](https://img.shields.io/badge/changelog-.md-blue.png?style=flat-square)](https://github.com/feathersjs/feathers-errors/blob/master/CHANGELOG.md)
+[![GitHub stars](https://img.shields.io/github/stars/feathersjs/errors.png?style=social&label=Star)](https://github.com/feathersjs/errors/)
+[![npm version](https://img.shields.io/npm/v/@feathersjs/errors.png?style=flat-square)](https://www.npmjs.com/package/@feathersjs/errors)
+[![Changelog](https://img.shields.io/badge/changelog-.md-blue.png?style=flat-square)](https://github.com/feathersjs/errors/blob/master/CHANGELOG.md)
 
 ```
-$ npm install feathers-errors --save
+$ npm install @feathersjs/errors --save
 ```
 
-The `feathers-errors` module contains a set of standard error classes used by all other Feathers modules as well as an [Express error handler](https://expressjs.com/en/guide/error-handling.html) to format those - and other - errors and setting the correct HTTP status codes for REST calls.
+The `@feathersjs/errors` module contains a set of standard error classes used by all other Feathers modules as well as an [Express error handler](https://expressjs.com/en/guide/error-handling.html) to format those - and other - errors and setting the correct HTTP status codes for REST calls.
 
 ## Feathers errors
 
@@ -32,7 +32,6 @@ The following error types, all of which are instances of `FeathersError` are ava
 
 Feathers errors are pretty flexible. They contain the following fields:
 
-- `type` - `FeathersError`
 - `name` - The error name (ie. "BadRequest", "ValidationError", etc.)
 - `message` - The error message string
 - `code` - The HTTP status code
@@ -41,6 +40,8 @@ Feathers errors are pretty flexible. They contain the following fields:
 - `errors` - An object containing whatever was passed to a Feathers error inside `errors`. This is typically validation errors or if you want to group multiple errors together.
 
 > **ProTip:** To convert a Feathers error back to an object call `error.toJSON()`. A normal `console.log` of a JavaScript Error object will not automatically show those additional properties described above (even though they can be accessed directly).
+
+## Examples
 
 Here are a few ways that you can use them:
 
@@ -76,7 +77,6 @@ const validationErrors = new errors.BadRequest({
 });
 ```
 
-
 ## Server Side Errors
 
 Promises swallow errors if you forget to add a `catch()` statement. Therefore, you should make sure that you **always** call `.catch()` on your promises. To catch uncaught errors at a global level you can add the code below to your top-most file.
@@ -86,51 +86,3 @@ process.on('unhandledRejection', (reason, p) => {
   console.log('Unhandled Rejection at: Promise ', p, ' reason: ', reason);
 });
 ```
-
-
-## REST (Express) errors
-
-The separate `feathers-errors/handler` module is an [Express error handler](https://expressjs.com/en/guide/error-handling.html) middleware that formats any error response to a REST call as JSON (or HTML if e.g. someone hits our API directly in the browser) and sets the appropriate error code.
-
-> **ProTip:** Because Feathers extends Express you can use any Express compatible [error middleware](http://expressjs.com/en/guide/error-handling.html) with Feathers. In fact, the error handler bundled with `feathers-errors` is just a slightly customized one.
-
-<!-- -->
-
-> **Very Important:** Just as in Express, the error handler has to be registered *after* all middleware and services.
-
-### `app.use(handler())`
-
-Set up the error handler with the default configuration.
-
-```js
-const errorHandler = require('@feathersjs/errors/handler');
-const app = feathers();
-
-// before starting the app
-app.use(errorHandler())
-```
-
-### `app.use(handler(options))`
-
-```js
-const error = require('@feathersjs/errors');
-const app = feathers();
-
-// Just like Express your error middleware needs to be
-// set up last in your middleware chain.
-app.use(error({
-    html: function(error, req, res, next) {
-      // render your error view with the error object
-      res.render('error', error);
-    }
-}))
-```
-
-> **ProTip:** If you want to have the response in json format be sure to set the `Accept` header in your request to `application/json` otherwise the default error handler will return HTML.
-
-
-The following options can be passed when creating a new localstorage service:
-
-- `html` (Function|Object) [optional] - A custom formatter function or an object that contains the path to your custom html error pages.
-
-> **ProTip:** `html` can also be set to `false` to disable html error pages altogether so that only JSON is returned.
