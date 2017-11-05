@@ -50,7 +50,7 @@ Here's an example of a Feathers server that uses `feathers-elasticsearch`.
 const feathers = require('@feathersjs/feathers');
 const rest = require('@feathersjs/express/rest');
 const express = require('@feathersjs/express');
-const errorHandler = require('@feathersjs/errors/handler');
+const errorHandler = require('@feathersjs/express/errors');
 
 const service = require('feathers-elasticsearch');
 const elasticsearch = require('elasticsearch');

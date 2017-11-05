@@ -118,7 +118,7 @@ Then in `app.js`:
 
 ```js
 const feathers = require('@feathersjs/feathers');
-const errorHandler = require('@feathersjs/errors/handler');
+const errorHandler = require('@feathersjs/express/errors');
 const express = require('@feathersjs/express');
 const socketio = require('@feathersjs/socketio');
 

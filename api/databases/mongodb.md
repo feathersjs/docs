@@ -59,7 +59,7 @@ In `app.js`:
 const feathers = require('@feathersjs/feathers');
 const express = require('@feathersjs/express');
 const socketio = require('@feathersjs/socketio');
-const errorHandler = require('@feathersjs/errors/handler');
+const errorHandler = require('@feathersjs/express/errors');
 
 const MongoClient = require('mongodb').MongoClient;
 const service = require('feathers-mongodb');

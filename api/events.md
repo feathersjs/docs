@@ -6,8 +6,7 @@ Events are the key part of Feathers real-time functionality. All events in Feath
 - The standard [service events](#service-events)
 - How to allow sending [custom events](#custom-events) from the server to the client
 
-> **Important:** For more information on how to send real-time events to clients, see the [Channels chapter](./channels.md)
-
+> **Important:** For more information on how to send real-time events to clients, see the [Channels chapter](./channels.md).
 
 ## EventEmitters
 
@@ -123,7 +122,6 @@ const messages = app.service('messages');
 messages.on('removed', message => console.log('removed', message));
 messages.remove(1);
 ```
-
 
 ## Custom events
 

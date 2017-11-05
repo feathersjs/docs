@@ -1,86 +1,86 @@
 # Hooks
 
-[![GitHub stars](https://img.shields.io/github/stars/feathersjs/feathers-hooks.png?style=social&label=Star)](https://github.com/feathersjs/feathers-hooks/)
-[![npm version](https://img.shields.io/npm/v/feathers-hooks.png?style=flat-square)](https://www.npmjs.com/package/feathers-hooks)
-[![Changelog](https://img.shields.io/badge/changelog-.md-blue.png?style=flat-square)](https://github.com/feathersjs/feathers-hooks/blob/master/CHANGELOG.md)
-
-```
-$ npm install feathers-hooks --save
-```
-
 Hooks are pluggable middleware functions that can be registered __before__, __after__ or on __error__s of a [service method](./services.md). You can register a single hook function or create a chain of them to create complex work-flows. Most of the time multiple hooks are registered so the examples show the "hook chain" array style registration.
 
 A hook is **transport independent**, which means it does not matter if it has been called through HTTP(S) (REST), Socket.io, Primus or any other transport Feathers may support in the future. They are also service agnostic, meaning they can be used with ​**any**​ service regardless of whether they have a model or not.
 
 Hooks are commonly used to handle things like validation, logging, populating related entities, sending notifications and more. This pattern keeps your application logic flexible, composable, and much easier to trace through and debug. For more information about the design patterns behind hooks see [this blog post](https://blog.feathersjs.com/api-service-composition-with-hooks-47af13aa6c01).
 
-The following example adds a `createdAt` and `updatedAt` property before sending the data to the database.
+## Quick Example
+
+The following example adds a `createdAt` and `updatedAt` property before saving the data to the database and logs any errors on the service:
 
 ```js
 const feathers = require('@feathersjs/feathers');
-const hooks = require('feathers-hooks');
 
 const app = feathers();
 
-app.configure(hooks());
-
 app.service('messages').hooks({
   before: {
-    create(hook) {
-      hook.data.createdAt = new Date();
+    create(context) {
+      context.data.createdAt = new Date();
     },
 
-    update(hook) {
-      hook.data.updatedAt = new Date();
+    update(context) {
+      context.data.updatedAt = new Date();
     },
 
-    patch(hook) {
-      hook.data.updatedAt = new Date();
+    patch(context) {
+      context.data.updatedAt = new Date();
+    }
+  },
+
+  error: {
+    all(context) {
+      console.error(`Error in ${context.path} calling ${context.method} method`, context.error);
     }
   }
 });
 ```
 
-
-## Hook objects
-
-The `hook` object is passed to a hook function and contains information about the service method call. Hook objects have __read only__ properties that should not be modified and __writeable__ properties that can be changed for subsequent hooks.
-
-- __Read Only:__
-  - `app` - The [app object](./application.md) (used to e.g. retrieve other services)
-  - `service` - The service this hook currently runs on
-  - `path` - The path (name) of the service
-  - `method` - The service method name
-  - `type` - The hook type (`before`, `after` or `error`)
-- __Writeable:__
-  - `params` - The service method parameters (including `params.query`)
-  - `id` - The id (for `get`, `remove`, `update` and `patch`)
-  - `data` - The request data (for `create`, `update` and `patch`)
-  - `error` - The error that was thrown (only in `error` hooks)
-  - `result` - The result of the successful method call (only in `after` hooks).
-
-> **Pro Tip:** `hook.result` Can also be set in a `before` hook which will skip the service method call (but run all other hooks).
-
-<!-- -->
-
-> **Pro Tip:** `hook.id` can also be `null` for `update`, `patch` and `remove`. See the [service methods](./services.md) for more information.
-
-<!-- -->
-
-> **Pro Tip:** The `hook` object is the same throughout a service method call so it is possible to add properties and use them in other hooks at a later time.
-
-
 ## Hook functions
 
-A hook function (or just _hook_) takes a [hook object](#hook-objects) as the parameter (`function(hook) {}` or `hook => {}`) and can
+A hook function can be a normal or `async` function or arrow function that takes the [hook context](#hook-context) as the parameter and can
 
 - return nothing (`undefined`)
-- return the `hook` object
+- return the `context` object
 - `throw` an error
 - for asynchronous operations return a [Promise](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Promise) that
-  - resolves with a `hook` object
+  - resolves with a `context` object
   - resolves with `undefined`
   - rejects with an error
+
+```js
+// normal hook function
+function(context) {
+  return context;
+}
+
+// asynchronous hook function with promise
+function(context) {
+  return Promise.resolve(context);
+}
+
+// async hook function
+async function(context) {
+  return context;
+}
+
+// normal arrow function
+context => {
+  return context;
+}
+
+// asynchronous arrow function with promise
+context => {
+  return Promise.resolve(context);
+}
+
+// async arrow function
+async context => {
+  return context;
+}
+```
 
 When an error is thrown (or the promise is rejected), all subsequent hooks - and the service method call if it didn't run already - will be skipped and only the error hooks will run.
 
@@ -100,12 +100,99 @@ app.service('messages').hooks({
 });
 ```
 
+## Hook context
+
+The hook `context` is passed to a hook function and contains information about the service method call. It has __read only__ properties that should not be modified and ___writeable___ properties that can be changed for subsequent hooks.
+
+> **Pro Tip:** The `context` object is the same throughout a service method call so it is possible to add properties and use them in other hooks at a later time.
+
+### context.app
+
+`context.app` is a _read only_ property that contains the [Feathers application object](./application.md). This can be used to retrieve other services (via `hook.app.service('name')`) or configuration values.
+
+### context.service
+
+`context.service` is a _read only_ property and contains the service this hook currently runs on.
+
+### context.path
+
+`context.path` is a _read only_ property and contains the service name (or path) without leading or trailing slashes.
+
+### context.method
+
+`context.method` is a _read only_ property with the name of the [service method](./services.md) (one of `find`, `get`, `create`, `update`, `patch`, `remove`).
+
+### context.type
+
+`context.type` is a _read only_ property with the hook type (one of `before`, `after` or `error`).
+
+### context.params
+
+`context.params` is a __writeable__ property that contains the [service method](./services.md) parameters (including `params.query`).
+
+### context.id
+
+`context.id` is a __writeable__ property and the `id` for a `get`, `remove`, `update` and `patch` service method call. For `remove`, `update` and `patch` `context.id` can also be `null` when modifying multiple entries. In all other cases it will be `undefined`.
+
+> __Note:__ `context.id` is only available for method types `get`, `remove`, `update` and `patch`.
+
+### context.data
+
+`context.data` is a __writeable__ property containing the data of a `create`, `update` and `patch` service method call.
+
+> __Note:__ `context.data` will only be available for method types `create`, `update` and `patch`.
+
+### context.error
+
+`context.error` is a __writeable__ property with the error object that was thrown in a failed method call. It is only available in `error` hooks.
+
+> __Note:__ `context.error` will only be available if `context.type` is `error`.
+
+### context.result
+
+`context.result` is a ___writeable___ property containing the result of the successful service method call. It is only available in `after` hooks. `context.result` can also be set in
+
+- A `before` hook to skip the actual service method (database) call
+- An `error` hook to swallow the error and return a result instead
+
+> __Note:__ `context.result` will only be available if `context.type` is `after` or if `context.result` has been set.
 
 ## Asynchronous hooks
 
-When a Promise is returned the hook will wait until it resolves or rejects before continuing.
+When the hook function is `async` or a Promise is returned it will wait until all asynchronous operations resolve or reject before continuing to the next hook.
 
-> **Important:** As stated in the [hook functions](#hook-functions) section the promise has to either resolve with the `hook` object (usually done with `.then(() => hook)` at the end of the promise chain) or with `undefined`.
+> **Important:** As stated in the [hook functions](#hook-functions) section the promise has to either resolve with the `context` object (usually done with `.then(() => context)` at the end of the promise chain) or with `undefined`.
+
+> **Note:** A common case when 
+
+### async/await
+
+When using Node v8.0.0 or later the use of [async/await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function) is highly recommended. This will avoid many common issues when using Promises and asynchronous hook flows. Any hook function can be `async` in which case it will wait until all `await` operations are completed. Just like a normal hook it should return the `context` object or `undefined`.
+
+The following example shows an async/await hook that uses another service to retrieve and populate the messages `user` when getting a single message:
+
+```js
+app.service('messages').hooks({
+  after: {
+    get: [
+      async function(context) {
+        const userId = hook.result.userId;
+
+        // Since hook.app.service('users').get returns a promise we can `await` it
+        const user = await context.app.service('users').get(userId);
+        
+        // Update the result (the message)
+        context.result.user = user;
+
+        // Returning will resolve the promise with the `hook` object
+        return context;
+      }
+    ]
+  }
+});
+```
+
+### Returning promises
 
 The following example shows an asynchronous hook that uses another service to retrieve and populate the messages `user` when getting a single message.
 
@@ -113,16 +200,16 @@ The following example shows an asynchronous hook that uses another service to re
 app.service('messages').hooks({
   after: {
     get: [
-      function(hook) {
+      function(context) {
         const userId = hook.result.userId;
 
         // hook.app.service('users').get returns a Promise already
-        return hook.app.service('users').get(userId).then(user => {
+        return context.app.service('users').get(userId).then(user => {
           // Update the result (the message)
-          hook.result.user = user;
+          context.result.user = user;
 
           // Returning will resolve the promise with the `hook` object
-          return hook;
+          return context;
         });
       }
     ]
@@ -130,40 +217,37 @@ app.service('messages').hooks({
 });
 ```
 
-When the asynchronous operation is using a _callback_ instead of returning a promise you have to create and return a new Promise (`new Promise((resolve, reject) => {})`).
-
-The following example reads a JSON file with [fs.readFile](https://nodejs.org/api/fs.html#fs_fs_readfile_file_options_callback) and adds it to the message:
-
-```js
-app.service('messages').hooks({
-  after: {
-    get: [
-      function(hook) {
-        return new Promise((resolve, reject) => {
-          require('fs').readFile('./myfile.json', (error, data) => {
-            // Check if the callback got an error, if so reject the promise and return
-            if(error) {
-              return reject(error);
-            }
-
-            hook.result.myFile = JSON.parse(data.toString());
-
-            // Resolve the promise with the `hook` object
-            resolve(hook);
-          });
-        });
-      }
-    ]
-  }
-});
-```
-
-> **Pro Tip:** Tools like [Bluebird](https://github.com/petkaantonov/bluebird) make converting between callbacks and promises easier.
-
-<!-- -->
+> __Note:__ A common issue when hooks are not running in the expected order is a missing `return` statement of a promise at the top level of the hook function.
 
 > **Important:** Most Feathers service calls and newer Node packages already return Promises. They can be returned and chained directly. There is no need to instantiate your own `new` Promise instance in those cases.
 
+### Converting callbacks
+
+When the asynchronous operation is using a _callback_ instead of returning a promise you have to create and return a new Promise (`new Promise((resolve, reject) => {})`) or use [util.promisify](https://nodejs.org/api/util.html#util_util_promisify_original).
+
+The following example reads a JSON file converting [fs.readFile](https://nodejs.org/api/fs.html#fs_fs_readfile_file_options_callback) with `util.promisify`:
+
+```js
+const fs = require('fs');
+const utils = require('utils');
+const readFile = utils.promisify(fs.readFile);
+
+app.service('messages').hooks({
+  after: {
+    get: [
+      function(context) {
+        return readFile('./myfile.json').then(data => {
+          context.result.myFile = data.toString();
+
+          return context;
+        });
+      }
+    ]
+  }
+});
+```
+
+> **Pro Tip:** Other tools like [Bluebird](https://github.com/petkaantonov/bluebird) also help converting between callbacks and promises.
 
 ## Registering hooks
 
