@@ -14,11 +14,11 @@ If you find something invalid or out of date in the comparisons, please [create 
 
 #### Legend
 
-✅ : Officially supported with a guide or core module
+ :white_check_mark: : Officially supported with a guide or core module
 
-❌ : Not supported
+ :x: : Not supported
 
-🤓 : Community supported or left to developer
+ :revolving_hearts: : Community supported or left to developer
 
 <table>
     <thead>
@@ -34,147 +34,147 @@ If you find something invalid or out of date in the comparisons, please [create 
     <tbody>
         <tr>
             <td><strong>REST API</strong></td>
-            <td>✅</td>
-            <td>✅</td>
-            <td>✅</td>
-            <td>✅</td>
-            <td>✅</td>
+            <td> :white_check_mark: </td>
+            <td> :white_check_mark: </td>
+            <td> :white_check_mark: </td>
+            <td> :white_check_mark: </td>
+            <td> :white_check_mark: </td>
         </tr>
         <tr>
             <td><strong>Real Time From Server</strong></td>
-            <td>✅</td>
-            <td>❌ 🤓</td>
-            <td>✅</td>
-            <td>✅</td>
-            <td>✅</td>
+            <td> :white_check_mark: </td>
+            <td> :x:   :revolving_hearts: </td>
+            <td> :white_check_mark: </td>
+            <td> :white_check_mark: </td>
+            <td> :white_check_mark: </td>
         </tr>
         <tr>
             <td><strong>Real Time From Client</strong></td>
-            <td>✅</td>
-            <td>❌ 🤓</td>
-            <td>✅ (DDP)</td>
-            <td>❌ 🤓</td>
-            <td>✅</td>
+            <td> :white_check_mark: </td>
+            <td> :x:    :revolving_hearts: </td>
+            <td> :white_check_mark:  (DDP)</td>
+            <td> :x:    :revolving_hearts: </td>
+            <td> :white_check_mark: </td>
         </tr>
         <tr>
             <td><strong>Universal JavaScript</strong></td>
-            <td>✅</td>
-            <td>❌</td>
-            <td>✅ (sort of)</td>
-            <td>❌</td>
-            <td>❌</td>
+            <td> :white_check_mark: </td>
+            <td> :x: </td>
+            <td> :white_check_mark:  (sort of)</td>
+            <td> :x: </td>
+            <td> :x: </td>
         </tr>
         <tr>
             <td><strong>React Native Support</strong></td>
-            <td>✅</td>
-            <td>❌</td>
-            <td>❌ 🤓</td>
-            <td>❌</td>
-            <td>❌</td>
+            <td> :white_check_mark: </td>
+            <td> :x: </td>
+            <td> :x:    :revolving_hearts: </td>
+            <td> :x: </td>
+            <td> :x: </td>
         </tr>
         <tr>
             <td><strong>Client Agnostic</strong></td>
-            <td>✅</td>
-            <td>✅</td>
-            <td>❌ 🤓</td>
-            <td>✅</td>
-            <td>✅ 🤓 (SDKs)</td>
+            <td> :white_check_mark: </td>
+            <td> :white_check_mark: </td>
+            <td> :x:    :revolving_hearts: </td>
+            <td> :white_check_mark: </td>
+            <td> :white_check_mark:    :revolving_hearts:  (SDKs)</td>
         </tr>
         <tr>
             <td><strong>Email/Password Auth</strong></td>
-            <td>✅</td>
-            <td>❌ 🤓</td>
-            <td>✅</td>
-            <td>❌ 🤓</td>
-            <td>✅</td>
+            <td> :white_check_mark: </td>
+            <td> :x:    :revolving_hearts: </td>
+            <td> :white_check_mark: </td>
+            <td> :x:    :revolving_hearts: </td>
+            <td> :white_check_mark: </td>
         </tr>
         <tr>
             <td><strong>Token Auth</strong></td>
-            <td>✅</td>
-            <td>❌ 🤓</td>
-            <td>✅</td>
-            <td>❌ 🤓</td>
-            <td>✅</td>
+            <td> :white_check_mark: </td>
+            <td> :x:    :revolving_hearts: </td>
+            <td> :white_check_mark: </td>
+            <td> :x:    :revolving_hearts: </td>
+            <td> :white_check_mark: </td>
         </tr>
         <tr>
             <td><strong>OAuth</strong></td>
-            <td>✅</td>
-            <td>❌ 🤓</td>
-            <td>✅</td>
-            <td>❌ 🤓</td>
-            <td>✅</td>
+            <td> :white_check_mark: </td>
+            <td> :x:    :revolving_hearts: </td>
+            <td> :white_check_mark: </td>
+            <td> :x:    :revolving_hearts: </td>
+            <td> :white_check_mark: </td>
         </tr>
         <tr>
             <td><strong>Self Hosted</strong></td>
-            <td>✅</td>
-            <td>✅</td>
-            <td>✅</td>
-            <td>✅</td>
-            <td>❌</td>
+            <td> :white_check_mark: </td>
+            <td> :white_check_mark: </td>
+            <td> :white_check_mark: </td>
+            <td> :white_check_mark: </td>
+            <td> :x: </td>
         </tr>
         <tr>
             <td><strong>Hosting Support</strong></td>
-            <td>❌</td>
-            <td>❌</td>
-            <td>✅</td>
-            <td>❌</td>
-            <td>✅</td>
+            <td> :x: </td>
+            <td> :x: </td>
+            <td> :white_check_mark: </td>
+            <td> :x: </td>
+            <td> :white_check_mark: </td>
         </tr>
         <tr>
             <td><strong>Pagination</strong></td>
-            <td>✅</td>
-            <td>❌ 🤓</td>
-            <td>❌ 🤓</td>
-            <td>✅</td>
-            <td>✅</td>
+            <td> :white_check_mark: </td>
+            <td> :x:    :revolving_hearts: </td>
+            <td> :x:    :revolving_hearts: </td>
+            <td> :white_check_mark: </td>
+            <td> :white_check_mark: </td>
         </tr>
         <tr>
             <td><strong>Databases</strong></td>
             <td>10+ databases. Multiple ORMs</td>
-            <td>❌ 🤓</td>
+            <td> :x:    :revolving_hearts: </td>
             <td>MongoDB</td>
             <td>10+ databases. 1 ORM</td>
             <td>Unknown</td>
         </tr>
         <tr>
             <td><strong>Analytics</strong></td>
-            <td>❌ 🤓</td>
-            <td>❌ 🤓</td>
-            <td>❌ 🤓</td>
-            <td>❌ 🤓</td>
-            <td>✅</td>
+            <td> :x:    :revolving_hearts: </td>
+            <td> :x:    :revolving_hearts: </td>
+            <td> :x:    :revolving_hearts: </td>
+            <td> :x:    :revolving_hearts: </td>
+            <td> :white_check_mark: </td>
         </tr>
         <tr>
             <td><strong>Admin Dashboard</strong></td>
-            <td>❌ 🤓</td>
-            <td>❌ 🤓</td>
-            <td>❌ 🤓</td>
-            <td>❌ 🤓</td>
-            <td>✅</td>
+            <td> :x:    :revolving_hearts: </td>
+            <td> :x:    :revolving_hearts: </td>
+            <td> :x:    :revolving_hearts: </td>
+            <td> :x:    :revolving_hearts: </td>
+            <td> :white_check_mark: </td>
         </tr>
         <tr>
             <td><strong>Push Notifications</strong></td>
-            <td>❌ 🤓</td>
-            <td>❌ 🤓</td>
-            <td>❌ 🤓</td>
-            <td>❌ 🤓</td>
-            <td>❌</td>
+            <td> :x:    :revolving_hearts: </td>
+            <td> :x:    :revolving_hearts: </td>
+            <td> :x:    :revolving_hearts: </td>
+            <td> :x:    :revolving_hearts: </td>
+            <td> :x: </td>
         </tr>
         <tr>
             <td><strong>Offline Mode</strong></td>
-            <td>❌ 🤓</td>
-            <td>❌ 🤓</td>
-            <td>✅</td>
-            <td>❌ 🤓</td>
-            <td>✅</td>
+            <td> :x:    :revolving_hearts: </td>
+            <td> :x:    :revolving_hearts: </td>
+            <td> :white_check_mark: </td>
+            <td> :x:    :revolving_hearts: </td>
+            <td> :white_check_mark: </td>
         </tr>
         <tr>
             <td><strong>Hot Code Push</strong></td>
-            <td>❌ 🤓</td>
-            <td>❌ 🤓</td>
-            <td>✅</td>
-            <td>❌ 🤓</td>
-            <td>❌</td>
+            <td> :x:    :revolving_hearts: </td>
+            <td> :x:    :revolving_hearts: </td>
+            <td> :white_check_mark: </td>
+            <td> :x:    :revolving_hearts: </td>
+            <td> :x: </td>
         </tr>
     </tbody>
 </table>
@@ -183,7 +183,7 @@ If you find something invalid or out of date in the comparisons, please [create 
 
 Firebase is a hosted platform for mobile or web applications. Just like Feathers, Firebase provides REST and real-time APIs but also includes CDN support. Feathers on the other hand leaves setting up a CDN and hosting your Feathers app up to the developer.
 
-Firebase is a closed-source, paid hosted service starting at 5$/month with the next plan level starting at 49$/month. Feathers is open source and can run on any hosting platform like Heroku, Modulus or on your own servers like Amazon AWS, Microsoft Azure, Digital Ocean and your local machine. Because Firebase can't be run locally you typically need to pay for both a shared development environment on top of any production and testing environment. 
+Firebase is a closed-source, paid hosted service starting at 5$/month with the next plan level starting at 49$/month. Feathers is open source and can run on any hosting platform like Heroku, Modulus or on your own servers like Amazon AWS, Microsoft Azure, Digital Ocean and your local machine. Because Firebase can't be run locally you typically need to pay for both a shared development environment on top of any production and testing environment.
 
 Firebase has JavaScript and mobile clients and also provides framework specific bindings. Feathers currently focuses on universal usage in JavaScript environments and does not have any framework specific bindings. Mobile applications can use Feathers REST and websocket endpoints directly but at the moment there are no Feathers specific iOS and Android SDKs.
 
