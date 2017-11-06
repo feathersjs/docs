@@ -1,5 +1,8 @@
 # Authentication Guides & Recipes
 
+[**API documentation**](/api/authentication/server.md)
+Currently, the API documentation is the most coherent documentation for authentication.
+
 [**How JWT Works**](./how-jwt-works.md)<br/>
 Learn more about JWT and how it might differ from authentication methods you've used, previously. (This guide is a work in progress.)
 
@@ -20,3 +23,6 @@ Learn how to setup an endpoint so that it handles unauthenticated and authentica
 
 [**Auth Recipe: Basic OAuth**](./recipe.oauth-basic.md)<br/>
 Learn how OAuth (Facebook, Google, GitHub) login works, and how you can use it in your application.
+
+[**Auth Recipe: Custom Auth Strategy**](./recipe.custom-auth-strategy.md)<br/>
+Learn how to setup a completely custom passport based auth stratgies

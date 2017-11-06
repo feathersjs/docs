@@ -16,8 +16,8 @@ We also have a very helpful community in Slack.
 - [Gratify](https://gratifyhq.com)
 - [Headstart](http://www.headstartapp.com/)
 - [HaulHound](https://haulhound.com/)
-- [J.A.B. Property Investments](https://jabpi.com)
 - [Koola](http://koola.io/)
+- [Lexsury](https://lexsury.com)
 - [Shakepay](https://shakepay.co)
 - [Sleeker](https://sleeker.co)
 - [Simpla](https://www.simpla.io/)
@@ -45,7 +45,7 @@ Submit yours by creating a pull request.
 - [Feathers 2 + Vue 2 + Email Verification + Cordova + Framework 7](https://github.com/codingfriend1/Feathers-Vue/tree/cordova)
 - [Feathers + React + Mobx](https://github.com/foxhound87/rfx-stack)
 - [Feathers + React + Webpack](https://github.com/sscaff1/feathers-webpack-react)
-- [Observables with Angular2 and FeathersJS](https://berndsgn.ch/angular2-and-feathersjs)
+- [Observables with Angular2 and FeathersJS](https://berndsgn.ch/observables-with-angular-and-feathersjs/)
 - [Feathers + React + Redux + Webpack + local auth. Production quality](https://github.com/eddyystop/feathers-starter-react-redux-login-roles).
 - [Live query. Mirror part of a DB on the client.](https://github.com/eddyystop/feathers-live-query)
 - [Feathers + React + Redux + Webpack + complete auth + offline mode (ideal for production)](https://github.com/bertho-zero/react-redux-universal-hot-example)

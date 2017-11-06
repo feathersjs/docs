@@ -161,6 +161,26 @@ Through the REST API:
 /messages?text[$like]=Hello%
 ```
 
+### $ilike
+
+For PostgreSQL only, the keywork $ilike can be used instead of $like to make the match case insensitive. The following query retrieves all messages that start with `hello` (case insensitive):
+
+```js
+app.service('messages').find({
+  query: {
+    text: {
+      $ilike: 'hello%'
+    }
+  }
+});
+```
+
+Through the REST API:
+
+```
+/messages?text[$ilike]=hello%
+```
+
 
 ## Transaction Support
 

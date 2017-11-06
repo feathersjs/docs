@@ -35,7 +35,7 @@ Let's review the source of some of the [common hooks](../../../api/hooks-common.
 to learn how to write our own.
 
 
-## debug [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/services/debug.js)
+## debug [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/lib/services/debug.js)
 
 `debug` logs the context to the console.
 
@@ -63,7 +63,7 @@ This example
 - Leaves the context object unchanged with a sync `return`.
 
 
-## disableMultiItemChange [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/services/disable-multi-item-change.js)
+## disableMultiItemChange [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/lib/services/disable-multi-item-change.js)
 
 `disableMultiItemChange` disables update, patch and remove methods from using `null` as an id,
 e.g. `remove(null)`.
@@ -104,7 +104,7 @@ This example
 - Shows how to throw an error in hooks.
 
 
-## pluckQuery [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/services/pluck-query.js)
+## pluckQuery [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/lib/services/pluck-query.js)
 
 `pluckQuery` discards all fields from the query params except for the specified ones.
 This helps sanitize the query.
@@ -137,7 +137,7 @@ This example
 - Introduces `_pluck`.
 
 
-## pluck [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/services/pluck.js)
+## pluck [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/lib/services/pluck.js)
 
 `pluck` discards all fields except for the specified ones,
 either from the data submitted or from the result.
@@ -176,7 +176,7 @@ This example
 - Introduces the convenient `getItems` and `replaceItems` utilities.
 
 
-## Throwing an error - disableMultiItemChange [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/services/disable-multi-item-change.js)
+## Throwing an error - disableMultiItemChange [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/lib/services/disable-multi-item-change.js)
 
 You will, sooner or later, want to return an error to the caller, skipping the DB call.
 You can do this by throwing a [Feathers error](../../../api/errors.md).
@@ -344,7 +344,7 @@ This example
 - Talks about using `getItems` with mutations.
 
 
-## stashBefore [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/services/stash-before.js)
+## stashBefore [source](https://github.com/feathersjs/feathers-hooks-common/blob/master/lib/services/stash-before.js)
 
 `stashBefore` saves the current value of record before mutating it.
 
@@ -477,15 +477,15 @@ which receive the context as a parameter and return either a boolean (synchronou
 or a Promise which resolves to a boolean.
 
 You can combine predicates provided with the common hooks, such as `isProvider`
-([source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/services/is-provider.js)).
+([source](https://github.com/feathersjs/feathers-hooks-common/blob/master/lib/services/is-provider.js)).
 You can write your own, or mix and match.
 
 ```javascript
-iff (hook => !isProvider('service')(hook) && hook.params.user.security >= 3, ...)
+iff (hook => !isProvider('server')(hook) && hook.params.user.security >= 3, ...)
 ```
 
 The `isNot` conditional utility
-([source](https://github.com/feathersjs/feathers-hooks-common/blob/master/src/common/is-not.js))
+([source](https://github.com/feathersjs/feathers-hooks-common/blob/master/lib/common/is-not.js))
 is useful because it will negate either a boolean or a Promise resolving to a boolean.
 
 

@@ -29,6 +29,7 @@ and
 Let's add some hooks to the server we've used with the Feathers REST and WebSocket clients.
 
 ```javascript
+const Ajv = require('ajv');
 const authHooks = require('feathers-authentication-local').hooks;
 const hooks = require('feathers-hooks');
 const commonHooks = require('feathers-hooks-common');

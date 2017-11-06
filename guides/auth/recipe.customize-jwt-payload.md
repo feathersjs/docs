@@ -65,7 +65,7 @@ payload === {
   iss: 'feathers',
   sub: 'anonymous',
   userId: 1
-  test: true // Here's the new claim we just added
+  test: 'test' // Here's the new claim we just added
 }
 ```
 
