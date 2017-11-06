@@ -8,7 +8,8 @@
     "include-codeblock",
     "edit-link",
     "ga",
-    "feathers-versions"
+    "feathers-versions",
+    "advanced-emoji"
   ],
   "pluginsConfig": {
     "edit-link": {

@@ -36,6 +36,7 @@
   "directories": {},
   "dependencies": {
     "feathers-hooks-common": "3.5.5",
+    "gitbook-plugin-advanced-emoji": "^0.2.2",
     "gitbook-plugin-edit-link": "^2.0.2",
     "gitbook-plugin-feathers-collapsible-menu": "^2.0.0",
     "gitbook-plugin-feathers-versions": "^0.1.0",
