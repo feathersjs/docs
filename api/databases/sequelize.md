@@ -153,6 +153,9 @@ Run the example with `node app` and go to [localhost:3030/messages](http://local
 
 Additionally to the [common querying mechanism](./querying.md) this adapter also supports all [Sequelize query operators](http://docs.sequelizejs.com/manual/tutorial/querying.html).
 
+> **Note**: This adapter supports an additional `$returning` parameter for patch and remove queries. By setting `params.$returning = false` it will disable feathers and sequelize from returning what was changed, so mass updates can be done without overwhelming node and/or clients.
+
+
 
 ## Associations and relations
 
