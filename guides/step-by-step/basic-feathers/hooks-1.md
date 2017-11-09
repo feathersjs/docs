@@ -54,7 +54,7 @@ function user() {
       validateSchema(userSchema(), Ajv), authHooks.hashPassword(), setCreatedAt(), setUpdatedAt()
     ]});
   userService.after({
-    all: unless(hook => hook.method === 'find', remove('password')),
+    all: unless(context => context.method === 'find', remove('password')),
   });
 }
 
@@ -140,10 +140,10 @@ These hooks add `createdAt` and `updatedAt` properties to the data.
 These hooks are run after the operation on the database.
 They act on all the results returned by the operation.
 
-### - unless(hook => hook.method === 'find', remove('password'))
+### - unless(context => context.method === 'find', remove('password'))
 
-- `hook => hook.method === 'find'` returns true if the database operation was a `find`.
-All hooks are passed a [hook object](../../../api/hooks.md#hook-objects)
+- `context => context.method === 'find'` returns true if the database operation was a `find`.
+All hooks are passed a [context object](../../../api/hooks.md#hook-objects)
 which contains information about the operation.
 
 - `remove('password')`

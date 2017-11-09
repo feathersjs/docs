@@ -734,7 +734,7 @@
     <td class="d2h-ins">
         <div class="d2h-code-line d2h-ins">
             <span class="d2h-code-line-prefix">+</span>
-            <span class="d2h-code-line-ctn">module.exports = () =&gt; hook =&gt; {</span>
+            <span class="d2h-code-line-ctn">module.exports = () =&gt; context =&gt; {</span>
         </div>
     </td>
 </tr><tr>
@@ -745,7 +745,7 @@
     <td class="d2h-ins">
         <div class="d2h-code-line d2h-ins">
             <span class="d2h-code-line-prefix">+</span>
-            <span class="d2h-code-line-ctn">  hook.data.text = hook.data.text</span>
+            <span class="d2h-code-line-ctn">  context.data.text = context.data.text</span>
         </div>
     </td>
 </tr><tr>
@@ -778,7 +778,7 @@
     <td class="d2h-ins">
         <div class="d2h-code-line d2h-ins">
             <span class="d2h-code-line-prefix">+</span>
-            <span class="d2h-code-line-ctn">  hook.data.userId = hook.params.user._id; // Add the authenticated user _id</span>
+            <span class="d2h-code-line-ctn">  context.data.userId = context.params.user._id; // Add the authenticated user _id</span>
         </div>
     </td>
 </tr><tr>
@@ -800,7 +800,7 @@
     <td class="d2h-ins">
         <div class="d2h-code-line d2h-ins">
             <span class="d2h-code-line-prefix">+</span>
-            <span class="d2h-code-line-ctn">  return hook;</span>
+            <span class="d2h-code-line-ctn">  return context;</span>
         </div>
     </td>
 </tr><tr>
@@ -953,7 +953,7 @@
     <td class="d2h-ins">
         <div class="d2h-code-line d2h-ins">
             <span class="d2h-code-line-prefix">+</span>
-            <span class="d2h-code-line-ctn">  return function(hook) {</span>
+            <span class="d2h-code-line-ctn">  return function(context) {</span>
         </div>
     </td>
 </tr><tr>
@@ -964,7 +964,7 @@
     <td class="d2h-ins">
         <div class="d2h-code-line d2h-ins">
             <span class="d2h-code-line-prefix">+</span>
-            <span class="d2h-code-line-ctn">    const messageService = hook.app.service('messages');</span>
+            <span class="d2h-code-line-ctn">    const messageService = context.app.service('messages');</span>
         </div>
     </td>
 </tr><tr>
@@ -997,7 +997,7 @@
     <td class="d2h-ins">
         <div class="d2h-code-line d2h-ins">
             <span class="d2h-code-line-prefix">+</span>
-            <span class="d2h-code-line-ctn">    return messageService.get(hook.id, hook.params).then(message =&gt; {</span>
+            <span class="d2h-code-line-ctn">    return messageService.get(context.id, context.params).then(message =&gt; {</span>
         </div>
     </td>
 </tr><tr>
@@ -1019,7 +1019,7 @@
     <td class="d2h-ins">
         <div class="d2h-code-line d2h-ins">
             <span class="d2h-code-line-prefix">+</span>
-            <span class="d2h-code-line-ctn">      if (message.sentBy._id !== hook.params.user._id &amp;&amp; hook.provider) {</span>
+            <span class="d2h-code-line-ctn">      if (message.sentBy._id !== context.params.user._id &amp;&amp; context.provider) {</span>
         </div>
     </td>
 </tr><tr>
@@ -1063,7 +1063,7 @@
     <td class="d2h-ins">
         <div class="d2h-code-line d2h-ins">
             <span class="d2h-code-line-prefix">+</span>
-            <span class="d2h-code-line-ctn">      // Otherwise just return the hook</span>
+            <span class="d2h-code-line-ctn">      // Otherwise just return the context</span>
         </div>
     </td>
 </tr><tr>
@@ -1074,7 +1074,7 @@
     <td class="d2h-ins">
         <div class="d2h-code-line d2h-ins">
             <span class="d2h-code-line-prefix">+</span>
-            <span class="d2h-code-line-ctn">      return hook;</span>
+            <span class="d2h-code-line-ctn">      return context;</span>
         </div>
     </td>
 </tr><tr>
@@ -1217,7 +1217,7 @@
     <td class="d2h-ins">
         <div class="d2h-code-line d2h-ins">
             <span class="d2h-code-line-prefix">+</span>
-            <span class="d2h-code-line-ctn">    const mockHook = {</span>
+            <span class="d2h-code-line-ctn">    const mockContext = {</span>
         </div>
     </td>
 </tr><tr>
@@ -1304,7 +1304,7 @@
     <td class="d2h-ins">
         <div class="d2h-code-line d2h-ins">
             <span class="d2h-code-line-prefix">+</span>
-            <span class="d2h-code-line-ctn">    process()(mockHook);</span>
+            <span class="d2h-code-line-ctn">    process()(mockContext);</span>
         </div>
     </td>
 </tr><tr>
@@ -1325,7 +1325,7 @@
     <td class="d2h-ins">
         <div class="d2h-code-line d2h-ins">
             <span class="d2h-code-line-prefix">+</span>
-            <span class="d2h-code-line-ctn">    assert.ok(mockHook.process);</span>
+            <span class="d2h-code-line-ctn">    assert.ok(mockContext.process);</span>
         </div>
     </td>
 </tr><tr>
@@ -1457,7 +1457,7 @@
     <td class="d2h-ins">
         <div class="d2h-code-line d2h-ins">
             <span class="d2h-code-line-prefix">+</span>
-            <span class="d2h-code-line-ctn">    const mockHook = {</span>
+            <span class="d2h-code-line-ctn">    const mockContext = {</span>
         </div>
     </td>
 </tr><tr>
@@ -1544,7 +1544,7 @@
     <td class="d2h-ins">
         <div class="d2h-code-line d2h-ins">
             <span class="d2h-code-line-prefix">+</span>
-            <span class="d2h-code-line-ctn">    restrictToSender()(mockHook);</span>
+            <span class="d2h-code-line-ctn">    restrictToSender()(mockContext);</span>
         </div>
     </td>
 </tr><tr>
@@ -1565,7 +1565,7 @@
     <td class="d2h-ins">
         <div class="d2h-code-line d2h-ins">
             <span class="d2h-code-line-prefix">+</span>
-            <span class="d2h-code-line-ctn">    assert.ok(mockHook.restrictToSender);</span>
+            <span class="d2h-code-line-ctn">    assert.ok(mockContext.restrictToSender);</span>
         </div>
     </td>
 </tr><tr>

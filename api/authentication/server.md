@@ -56,7 +56,7 @@ The following default options will be mixed in with your global `auth` object fr
 {
   path: '/authentication', // the authentication service path
   header: 'Authorization', // the header to use when using JWT auth
-  entity: 'user', // the entity that will be added to the request, socket, and hook.params. (ie. req.user, socket.user, hook.params.user)
+  entity: 'user', // the entity that will be added to the request, socket, and context.params. (ie. req.user, socket.user, context.params.user)
   service: 'users', // the service to look up the entity
   passReqToCallback: true, // whether the request object should be passed to the strategies `verify` function
   session: false, // whether to use sessions
@@ -105,34 +105,34 @@ The heart of this plugin is simply a service for creating JWT.  It's a normal Fe
 
 ### `app.service('/authentication').create(data, params)`
 
-The `create` method will be used in nearly every Feathers application.  It creates a JWT based on the `jwt` options configured on the plugin.  The API of this method utilizes the `hook` object:
+The `create` method will be used in nearly every Feathers application.  It creates a JWT based on the `jwt` options configured on the plugin.  The API of this method utilizes the `context` object:
 
 #### `before` hook API:
 These properties can be modified to change the behavior of the `/authentication` service.
-- `hook.data.payload {Object}` - determines the payload of the JWT
-- `hook.params.payload {Object}` - also determines the payload of the JWT. Any matching attributes in the `hook.data.payload` will be overwritten by these. Persists into after hooks.
-- `hook.params.authenticated {Boolean}` - After successful authentication, will be set to `true`, unless it's set to `false` in a before hook.  If you set it to `false` in a before hook, it will prevent the websocket from being flagged as authenticated. Persists into after hooks.
+- `context.data.payload {Object}` - determines the payload of the JWT
+- `context.params.payload {Object}` - also determines the payload of the JWT. Any matching attributes in the `context.data.payload` will be overwritten by these. Persists into after hooks.
+- `context.params.authenticated {Boolean}` - After successful authentication, will be set to `true`, unless it's set to `false` in a before hook.  If you set it to `false` in a before hook, it will prevent the websocket from being flagged as authenticated. Persists into after hooks.
 
 #### `after` hook API:
-- `hook.params[entity] {Object}` - After successful authentication, the `entity` looked up from the database will be populated here. (The default option is `user`.)
+- `context.params[entity] {Object}` - After successful authentication, the `entity` looked up from the database will be populated here. (The default option is `user`.)
 
 ### `app.service('/authentication').remove(data)`
 
 The `remove` method will be used less often.  It mostly exists to allow for adding hooks the the "logout" process.  For example, in services that require high control over security, a developer could register hooks on the `remove` method that perform token blacklisting.
 
 #### `after` hook API:
-- `hook.result {Object}` - After logout, useful information regarding the previous session will be populated here.
+- `context.result {Object}` - After logout, useful information regarding the previous session will be populated here.
 
 Below is the example of the hook usage:
 ```javascript
     after: {
       remove: [
-        function (hook) {
-          return app.passport.verifyJWT(hook.result.accessToken, { secret: app.passport.options('jwt').secret })
+        function (context) {
+          return app.passport.verifyJWT(context.result.accessToken, { secret: app.passport.options('jwt').secret })
               .then((data) => {
                 // removing the user who decided to logout
                 app.service('users').remove(data.userId).then(() => {
-                  return hook;
+                  return context;
                 });
               });
         }
@@ -174,7 +174,7 @@ These two events use a callback with the same signature.
 
 - `callback` {Function} - a function in the format `function (result, meta) {}`.
 
-  - `result` {Object} - The final `hook.result` from the `authentication` service. Unless you customize the `hook.response` in an after hook, this will only contain the `accessToken`, which is the JWT.
+  - `result` {Object} - The final `context.result` from the `authentication` service. Unless you customize the `context.response` in an after hook, this will only contain the `accessToken`, which is the JWT.
   - `meta` {Object} - information about the request.  *The `meta` data varies per transport / provider as follows.*
     - Using `feathers-rest`
       - `provider` {String} - will always be `"rest"`
@@ -199,8 +199,8 @@ Additional middleware are included and exposed but typically you don't need to w
 - `emitEvents` [source](https://github.com/feathersjs/feathers-authentication/blob/master/src/express/emit-events.js) - emit `login` and `logout` events
 - `exposeCookies` [source](https://github.com/feathersjs/feathers-authentication/blob/master/src/express/expose-cookies.js) - expose cookies to Feathers so they are available to hooks and services.  **This is NOT used by default as its use exposes your API to CSRF vulnerabilities.**  Only use it if you really know what you're doing.
 - `exposeHeaders` [source](https://github.com/feathersjs/feathers-authentication/blob/master/src/express/expose-headers.js) - expose headers to Feathers so they are available to hooks and services. **This is NOT used by default as its use exposes your API to CSRF vulnerabilities.** Only use it if you really know what you're doing.
-- `failureRedirect` [source](https://github.com/feathersjs/feathers-authentication/blob/master/src/express/failure-redirect.js) - support redirecting on auth failure. Only triggered if `hook.redirect` is set.
-- `successRedirect` [source](https://github.com/feathersjs/feathers-authentication/blob/master/src/express/success-redirect.js) - support redirecting on auth success. Only triggered if `hook.redirect` is set.
+- `failureRedirect` [source](https://github.com/feathersjs/feathers-authentication/blob/master/src/express/failure-redirect.js) - support redirecting on auth failure. Only triggered if `context.redirect` is set.
+- `successRedirect` [source](https://github.com/feathersjs/feathers-authentication/blob/master/src/express/success-redirect.js) - support redirecting on auth success. Only triggered if `context.redirect` is set.
 - `setCookie` [source](https://github.com/feathersjs/feathers-authentication/blob/master/src/express/set-cookie.js) - support setting the JWT access token in a cookie. Only enabled if cookies are enabled.  **Note: Feathers will NOT read an access token from a cookie.  This would expose the API to CSRF attacks.**  This `setCookie` feature is available primarily for helping with Server Side Rendering.
 
 ## Migrating to 1.x

@@ -52,7 +52,7 @@ module.exports = function(app) {
   });
 
   // A global publisher that sends all events to all authenticated clients
-  app.publish((data, hook) => {
+  app.publish((data, context) => {
     return app.channel('authenticated');
   });
 };
@@ -195,7 +195,7 @@ app.channel('admins').leave(connection => {
 
 ### channel.filter(fn)
 
-`channel.filter(fn) -> Channel` reutrns a new channel filtered by a given function which gets passed the connection.
+`channel.filter(fn) -> Channel` returns a new channel filtered by a given function which gets passed the connection.
 
 ```js
 // Returns a new channel with all connections of the user with `_id` 5
@@ -205,13 +205,13 @@ const userFive = app.channel(app.channels)
 
 ### channel.send(data)
 
-`channel.send(data) -> Channel` returns a copy of this channel with customized data that should be sent for this event. Usually this should be handled by modifying either the service method result or setting client "safe" data in `hook.dispatch` but in some cases it might make sense to still change the event data for certain channels.
+`channel.send(data) -> Channel` returns a copy of this channel with customized data that should be sent for this event. Usually this should be handled by modifying either the service method result or setting client "safe" data in `context.dispatch` but in some cases it might make sense to still change the event data for certain channels.
 
 What data will be sent as the event data will be determined by the first available in the following order:
 
 1. `data` from `channel.send(data)`
-2. `hook.dispatch`
-3. `hook.result`
+2. `context.dispatch`
+3. `context.result`
 
 ```js
 app.on('connection', connection => {
@@ -241,7 +241,7 @@ app.service('users').publish('created', data => {
 
 ## Publishing
 
-Publishers are callback functions that return which channel(s) to send an event to. They can be registered at the application and the service level and for all or specific events. A publishing function gets the event data and hook object (`(data, hook) => {}`) and returns a named or combined channel or an array of channels. Multiple publishers can be registered. Besides the standard [service event names](./events.md#service-events) an event name can also be a [custom event](./events.md#custom-events). `hook` is the [hook object](./hooks.md) from the service call or an object containing `{ path, service, app, result }` for custom events.
+Publishers are callback functions that return which channel(s) to send an event to. They can be registered at the application and the service level and for all or specific events. A publishing function gets the event data and context object (`(data, context) => {}`) and returns a named or combined channel or an array of channels. Multiple publishers can be registered. Besides the standard [service event names](./events.md#service-events) an event name can also be a [custom event](./events.md#custom-events). `context` is the [context object](./hooks.md) from the service call or an object containing `{ path, service, app, result }` for custom events.
 
 ### service.publish([event,] fn)
 
@@ -257,12 +257,12 @@ app.on('login', (user, { connection }) => {
 });
 
 // Publish all messages service events only to its room channel
-app.service('messages').publish((data, hook) => {
+app.service('messages').publish((data, context) => {
   return app.channel(`rooms/${data.roomId}`);
 });
 
 // Publish the `created` event only to admins
-app.service('users').publish('created', (data, hook) => {
+app.service('users').publish('created', (data, context) => {
   return app.channel('admins');
 });
 ```
@@ -281,12 +281,12 @@ app.on('login', (user, { connection }) => {
 });
 
 // Publish all events to all authenticated users
-app.publish((data, hook) => {
+app.publish((data, context) => {
   return app.channel('authenticated');
 });
 
 // Publish the `log` custom event to all connections
-app.publish('log', (data, hook) => {
+app.publish('log', (data, context) => {
   return app.channel(app.channels);
 });
 ```

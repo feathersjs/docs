@@ -45,7 +45,7 @@ Any service automaticaly emits `created`, `updated`, `patched` and `removed` eve
 
 > **ProTip:** Events are not fired until all of your [hooks](./hooks.md) have executed.
 
-> **Important:** For information how those events are published for real-time updates to connected clients, see the [channel chapter](./channels.md).
+> **Important:** For information on how those events are published for real-time updates to connected clients, see the [channel chapter](./channels.md).
 
 ### created
 

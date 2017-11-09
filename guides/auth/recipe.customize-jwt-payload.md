@@ -36,11 +36,11 @@ app.service('authentication').hooks({
 
       // This hook adds the `test` attribute to the JWT payload by
       // modifying params.payload.
-      hook => {
+      context => {
         // make sure params.payload exists
-        hook.params.payload = hook.params.payload || {}
+        context.params.payload = context.params.payload || {}
         // merge in a `test` property
-        Object.assign(hook.params.payload, {test: 'test'})
+        Object.assign(context.params.payload, {test: 'test'})
       }
     ],
     remove: [

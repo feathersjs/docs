@@ -64,11 +64,11 @@ When making a [service method](./services.md) call, `params` can contain an `seq
 ```js
 app.service('messages').hooks({
   before: {
-    find(hook) {
+    find(context) {
       // Get the Sequelize instance. In the generated application via:
-      const sequelize = hook.app.get('sequelizeClient');
+      const sequelize = context.app.get('sequelizeClient');
       
-      hook.params.sequelize = {
+      context.params.sequelize = {
         include: [ User ]
       }
     }
@@ -165,10 +165,10 @@ It is highly recommended to use `raw` queries, which is the default. However, th
 
 1. Set `{ raw: false }` in a "before" hook:
     ```js
-    function rawFalse(hook) {
-        if (!hook.params.sequelize) hook.params.sequelize = {};
-        Object.assign(hook.params.sequelize, { raw: false });
-        return hook;
+    function rawFalse(context) {
+        if (!context.params.sequelize) context.params.sequelize = {};
+        Object.assign(context.params.sequelize, { raw: false });
+        return context;
     }
     hooks.before.find = [rawFalse];
     ```
@@ -179,10 +179,10 @@ It is highly recommended to use `raw` queries, which is the default. However, th
     hooks.after.find = [hydrate()];
     
     // Or, if you need to include associated models, you can do the following:
-     function includeAssociated (hook) {
+     function includeAssociated (context) {
          return hydrate({
-            include: [{ model: hook.app.services.fooservice.Model }]
-         }).call(this, hook);
+            include: [{ model: context.app.services.fooservice.Model }]
+         }).call(this, context);
      }
      hooks.after.find = [includeAssociated];
      ```
