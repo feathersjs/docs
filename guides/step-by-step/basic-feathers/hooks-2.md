@@ -37,7 +37,7 @@ const {
 } = commonHooks;
 // ...
 userService.before({
-    all: when(hook => hook.method !== 'find', softDelete()), // new
+    all: when(context => context.method !== 'find', softDelete()), // new
     create: [ /* ... */ ]
 });
 ```

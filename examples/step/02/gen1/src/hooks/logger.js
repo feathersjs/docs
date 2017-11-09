@@ -4,23 +4,23 @@
 const logger = require('winston');
 
 module.exports = function () {
-  return function (hook) {
-    let message = `${hook.type}: ${hook.path} - Method: ${hook.method}`;
+  return function (context) {
+    let message = `${context.type}: ${context.path} - Method: ${context.method}`;
 
-    if (hook.type === 'error') {
-      message += `: ${hook.error.message}`;
+    if (context.type === 'error') {
+      message += `: ${context.error.message}`;
     }
 
     logger.info(message);
-    logger.debug('hook.data', hook.data);
-    logger.debug('hook.params', hook.params);
+    logger.debug('context.data', context.data);
+    logger.debug('context.params', context.params);
 
-    if (hook.result) {
-      logger.debug('hook.result', hook.result);
+    if (context.result) {
+      logger.debug('context.result', context.result);
     }
 
-    if (hook.error) {
-      logger.error(hook.error);
+    if (context.error) {
+      logger.error(context.error);
     }
   };
 };

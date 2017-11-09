@@ -1,16 +1,16 @@
 --- 01/websocket/1.js	2017-03-29 08:57:36.697999415 -0400
 +++ 01/hooks/1.js	2017-03-29 08:57:36.697999415 -0400
 @@ -1,5 +1,5 @@
- 
+
 -// Example - Create REST & socketio API, and serve static files
 +// Example - Use hooks with service
- 
+
  const expressServerConfig = require('../common/expressServerConfig');
  const expressMiddleware = require('../common/expressMiddleware');
 @@ -9,7 +9,13 @@
  const path = require('path');
  const service = require('feathers-nedb');
- 
+
 +const Ajv = require('ajv');
 +const authHooks = require('feathers-authentication-local').hooks;
 +const hooks = require('feathers-hooks');
@@ -23,7 +23,7 @@
    .configure(services)
 @@ -19,7 +25,29 @@
  server.on('listening', () => console.log(`Feathers application started on port 3030`));
- 
+
  function services() {
 -  this.use('/users', service({ Model: userModel() }));
 +  this.configure(user);
@@ -31,14 +31,14 @@
 +
 +function user() {
 +  const app = this;
-+  
++
 +  app.use('/users', service({ Model: userModel() }));
 +  const userService = app.service('users');
-+  
++
 +  const {
 +    setCreatedAt, setUpdatedAt, unless, remove /* , validateSchema */
 +  } = commonHooks;
-+  
++
 +  userService.before({
 +    create: [
 +      validateSchema(userSchema(), Ajv),
@@ -47,10 +47,10 @@
 +      setUpdatedAt()
 +    ]});
 +  userService.after({
-+    all: unless(hook => hook.method === 'find', remove('password')),
++    all: unless(context => context.method === 'find', remove('password')),
 +  });
  }
- 
+
  function userModel() {
 @@ -28,3 +56,21 @@
      autoload: true
@@ -72,5 +72,5 @@
 +}
 +
 +function validateSchema() { // todo replace
-+  return hook => hook;
++  return context => context;
 +}

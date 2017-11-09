@@ -64,11 +64,11 @@ When making a [service method](../services.md) call, `params` can contain a `mon
 ```js
 app.service('messages').hooks({
   before: {
-    patch(hook) {
+    patch(context) {
       // Set some additional Mongoose options
       // The adapter tries to use sane defaults
       // but they can always be changed here
-      hook.params.mongoose = {
+      context.params.mongoose = {
         runValidators: true,
         setDefaultsOnInsert: true
       }

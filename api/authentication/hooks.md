@@ -33,7 +33,7 @@ app.service('messages').before({
 - `as` (default: 'userId') [optional] - The id field for a user on the resource you are requesting.
 - `expandPaths` (default: true) [optional] - Prevent path expansion when the DB Adapter doesn't support it. Ex: With this option set to false, a value like 'foo.userId' won't be expanded to a nested `{ "foo": { "userId": 51 } }` but instead be set as `{ "foo.userId": 51 }`.
 
-When using this hook with the default options the `User._id` will be copied into `hook.params.query.userId`.
+When using this hook with the default options the `User._id` will be copied into `context.params.query.userId`.
 
 
 ## restrictToOwner
@@ -61,7 +61,7 @@ app.service('messages').before({
 
 ## restrictToAuthenticated
 
-The `restrictToAuthenticated` hook throws an error if there isn't a logged-in user by checking for the `hook.params.user` object. It can be used on **any** service method and is intended to be used as a **before** hook. It doesn't take any arguments.
+The `restrictToAuthenticated` hook throws an error if there isn't a logged-in user by checking for the `context.params.user` object. It can be used on **any** service method and is intended to be used as a **before** hook. It doesn't take any arguments.
 
 ```js
 const hooks = require('feathers-authentication-hooks');
@@ -75,7 +75,7 @@ app.service('user').before({
 
 #### Options
 
-- `entity` (default: 'user') [optional] - The property name on `hook.params` to check for
+- `entity` (default: 'user') [optional] - The property name on `context.params` to check for
 
 
 ## associateCurrentUser

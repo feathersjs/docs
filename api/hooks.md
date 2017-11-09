@@ -42,8 +42,8 @@ app.service('messages').hooks({
 
 A hook function can be a normal or `async` function or arrow function that takes the [hook context](#hook-context) as the parameter and can
 
+- return a `context` object
 - return nothing (`undefined`)
-- return the `context` object
 - `throw` an error
 - for asynchronous operations return a [Promise](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Promise) that
   - resolves with a `context` object
@@ -90,8 +90,8 @@ The following example throws an error when the text for creating a new message i
 app.service('messages').hooks({
   before: {
     create: [
-      function(hook) {
-        if(hook.data.text.trim() === '') {
+      function(context) {
+        if(context.data.text.trim() === '') {
           throw new Error('Message text can not be empty');
         }
       }
@@ -108,7 +108,7 @@ The hook `context` is passed to a hook function and contains information about t
 
 ### context.app
 
-`context.app` is a _read only_ property that contains the [Feathers application object](./application.md). This can be used to retrieve other services (via `hook.app.service('name')`) or configuration values.
+`context.app` is a _read only_ property that contains the [Feathers application object](./application.md). This can be used to retrieve other services (via `context.app.service('name')`) or configuration values.
 
 ### context.service
 
@@ -163,8 +163,6 @@ When the hook function is `async` or a Promise is returned it will wait until al
 
 > **Important:** As stated in the [hook functions](#hook-functions) section the promise has to either resolve with the `context` object (usually done with `.then(() => context)` at the end of the promise chain) or with `undefined`.
 
-> **Note:** A common case when 
-
 ### async/await
 
 When using Node v8.0.0 or later the use of [async/await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function) is highly recommended. This will avoid many common issues when using Promises and asynchronous hook flows. Any hook function can be `async` in which case it will wait until all `await` operations are completed. Just like a normal hook it should return the `context` object or `undefined`.
@@ -176,15 +174,15 @@ app.service('messages').hooks({
   after: {
     get: [
       async function(context) {
-        const userId = hook.result.userId;
+        const userId = context.result.userId;
 
-        // Since hook.app.service('users').get returns a promise we can `await` it
+        // Since context.app.service('users').get returns a promise we can `await` it
         const user = await context.app.service('users').get(userId);
-        
+
         // Update the result (the message)
         context.result.user = user;
 
-        // Returning will resolve the promise with the `hook` object
+        // Returning will resolve the promise with the `context` object
         return context;
       }
     ]
@@ -201,14 +199,14 @@ app.service('messages').hooks({
   after: {
     get: [
       function(context) {
-        const userId = hook.result.userId;
+        const userId = context.result.userId;
 
-        // hook.app.service('users').get returns a Promise already
+        // context.app.service('users').get returns a Promise already
         return context.app.service('users').get(userId).then(user => {
           // Update the result (the message)
           context.result.user = user;
 
-          // Returning will resolve the promise with the `hook` object
+          // Returning will resolve the promise with the `context` object
           return context;
         });
       }
@@ -260,12 +258,12 @@ app.service('servicename').hooks({
   before: {
     all: [
       // Use normal functions
-      function(hook) { console.log('before all hook ran'); }
+      function(context) { console.log('before all hook ran'); }
     ],
     find: [
       // Use ES6 arrow functions
-      hook => console.log('before find hook 1 ran'),
-      hook => console.log('before find hook 2 ran')
+      context => console.log('before find hook 1 ran'),
+      context => console.log('before find hook 2 ran')
     ],
     get: [ /* other hook functions here */ ],
     create: [],
@@ -295,13 +293,13 @@ app.service('servicename').hooks({
 
 // Register a single hook before, after and on error for all methods
 app.service('servicename').hooks({
-  before(hook) {
+  before(context) {
     console.log('before all hook ran');
   },
-  after(hook) {
+  after(context) {
     console.log('after all hook ran');
   },
-  error(hook) {
+  error(context) {
     console.log('error all hook ran');
   }
 });
@@ -310,7 +308,6 @@ app.service('servicename').hooks({
 > **Pro Tip:** When using the full object, `all` is a special keyword meaning this hook will run for all methods. `all` hooks will be registered before other method specific hooks.
 
 > **Pro Tip:** `app.service(<servicename>).hooks(hooks)` can be called multiple times and the hooks will be registered in that order. Normally all hooks should be registered at once however to see at a glance what what the service is going to do.
-
 
 ## Application hooks
 
@@ -324,8 +321,8 @@ Here is an example for a very useful application hook that logs every service me
 
 ```js
 app.hooks({
-  error(hook) {
-    console.error(`Error in '${hook.path}' service method '${hook.method}`, hook.error.stack);
+  error(context) {
+    console.error(`Error in '${context.path}' service method '${context.method}`, context.error.stack);
   }
 });
 ```

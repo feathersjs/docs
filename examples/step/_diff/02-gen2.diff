@@ -62,16 +62,16 @@ diff -bdur --new-file 02/gen1/src/app.js 02/gen2/src/app.js
 @@ -17,6 +17,8 @@
  const services = require('./services');
  const appHooks = require('./app.hooks');
- 
+
 +const authentication = require('./authentication');
 +
  const app = feathers();
- 
+
  // Load app configuration
 @@ -36,6 +38,8 @@
  app.configure(rest());
  app.configure(socketio());
- 
+
 +app.configure(authentication);
 +
  // Set up our services (see `services/index.js`)
@@ -134,7 +134,7 @@ diff -bdur --new-file 02/gen1/src/services/index.js 02/gen2/src/services/index.j
 +++ 02/gen2/src/services/index.js	2017-04-09 09:12:41.798007000 -0400
 @@ -1,5 +1,8 @@
  'use strict';
- 
+
 +const users = require('./users/users.service.js');
 +
  module.exports = function () {
@@ -148,7 +148,7 @@ diff -bdur --new-file 02/gen1/src/services/users/users.filters.js 02/gen2/src/se
 +/* eslint no-console: 1 */
 +console.warn('You are using the default filter for the users service. For more information about event filters see https://docs.feathersjs.com/api/events.html#event-filtering'); // eslint-disable-line no-console
 +
-+module.exports = function (data, connection, hook) { // eslint-disable-line no-unused-vars
++module.exports = function (data, connection, context) { // eslint-disable-line no-unused-vars
 +  return data;
 +};
 diff -bdur --new-file 02/gen1/src/services/users/users.hooks.js 02/gen2/src/services/users/users.hooks.js
@@ -184,7 +184,7 @@ diff -bdur --new-file 02/gen1/src/services/users/users.hooks.js 02/gen2/src/serv
 +  after: {
 +    all: [
 +      commonHooks.when(
-+        hook => hook.params.provider,
++        context => context.params.provider,
 +        commonHooks.discard('password')
 +      )
 +    ],

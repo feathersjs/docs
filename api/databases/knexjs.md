@@ -231,7 +231,7 @@ At the start of any request, a new transaction will be started. All the changes 
 
 The object that contains `transaction` is stored in the `params.transaction` of each request.
 
-> __Important:__ If you call another Knex service within a hook and want to share the transaction you will have to pass `hook.params.transaction` in the parameters of the service call.
+> __Important:__ If you call another Knex service within a hook and want to share the transaction you will have to pass `context.params.transaction` in the parameters of the service call.
 
 
 ## Customizing the query
@@ -243,13 +243,13 @@ Combined with `.createQuery({ query: {...} })`, which returns a new KnexJS query
 ```js
 app.service('mesages').hooks({
   before: {
-    find(hook) {
-      const query = this.createQuery({ query: hook.params.query });
+    find(context) {
+      const query = this.createQuery({ query: context.params.query });
 
       // do something with query here
       query.orderBy('name', 'desc');
 
-      hook.params.knex = query;
+      context.params.knex = query;
     }
   }
 });

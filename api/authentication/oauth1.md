@@ -142,25 +142,25 @@ app.configure(oauth1({
 }));
 
 function customizeTwitterProfile() {
-  return function(hook) {
+  return function(context) {
     console.log('Customizing Twitter Profile');
     // If there is a twitter field they signed up or
     // signed in with twitter so let's pull the email. If
-    if (hook.data.twitter) {
-      hook.data.email = hook.data.twitter.email; 
+    if (context.data.twitter) {
+      context.data.email = context.data.twitter.email; 
     }
 
     // If you want to do something whenever any OAuth
     // provider authentication occurs you can do this.
-    if (hook.params.oauth) {
+    if (context.params.oauth) {
       // do something for all OAuth providers
     }
 
-    if (hook.params.oauth.provider === 'twitter') {
+    if (context.params.oauth.provider === 'twitter') {
       // do something specific to the twitter provider
     }
 
-    return Promise.resolve(hook);
+    return Promise.resolve(context);
   };
 }
 

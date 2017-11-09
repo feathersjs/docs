@@ -163,9 +163,9 @@ export default function (...fieldNames) {
 ```
 
 The [`getItems` utility](../../../api/hooks-common.md#util-getitems-replaceitems)
-returns the items in either `hook.data` or `hook.result`
+returns the items in either `context.data` or `context.result`
 depending on whether the hook is being used as a before or after hook.
-`hook.result.data` or `hook.result` is returned for a `find` method.
+`context.result.data` or `context.result` is returned for a `find` method.
 
 The returned items are always an array to simplify further processing.
 
@@ -237,11 +237,11 @@ export default function (cache) {
 };
 ```
 
-Feathers will not make the database call if `hook.result` is set.
+Feathers will not make the database call if `context.result` is set.
 Any remaining before and after hooks are still run.
 
 Should this hook find a cached record,
-placing it in `hook.result` is the same as if the database had returned the record.
+placing it in `context.result` is the same as if the database had returned the record.
 
 This example
 - Shows how `before` hooks can determine the result for the call.
@@ -481,7 +481,7 @@ You can combine predicates provided with the common hooks, such as `isProvider`
 You can write your own, or mix and match.
 
 ```javascript
-iff (hook => !isProvider('service')(hook) && hook.params.user.security >= 3, ...)
+iff (context => !isProvider('service')(context) && context.params.user.security >= 3, ...)
 ```
 
 The `isNot` conditional utility

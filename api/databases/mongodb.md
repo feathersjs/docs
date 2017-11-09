@@ -122,8 +122,8 @@ const ObjectID = require('mongodb').ObjectID;
 
 app.service('users').hooks({
   before: {
-    find(hook) {
-      const { query = {} } = hook.params;
+    find(context) {
+      const { query = {} } = context.params;
 
       if(query._id) {
         query._id  = new ObjectID(query._id);
@@ -133,9 +133,9 @@ app.service('users').hooks({
         query.age = parseInt(query.age, 10);
       }
 
-      hook.params.query = query;
+      context.params.query = query;
 
-      return Promise.resolve(hook);
+      return Promise.resolve(context);
     }
   }
 });

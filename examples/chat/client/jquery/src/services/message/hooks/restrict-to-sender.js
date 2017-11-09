@@ -8,18 +8,18 @@
 const errors = require('feathers-errors');
 
 module.exports = function(options) {
-  return function(hook) {
-    const messageService = hook.app.service('messages');
-    
+  return function(context) {
+    const messageService = context.app.service('messages');
+
     // First get the message that the user wants to access
-    return messageService.get(hook.id, hook.params).then(message => {
+    return messageService.get(context.id, context.params).then(message => {
       // Throw a not authenticated error if the message and user id don't match
-      if (message.sentBy._id !== hook.params.user._id && hook.provider) {
+      if (message.sentBy._id !== context.params.user._id && context.provider) {
         throw new errors.NotAuthenticated('Access not allowed');
       }
-      
-      // Otherwise just return the hook
-      return hook;
+
+      // Otherwise just return the context
+      return context;
     });
   };
 };

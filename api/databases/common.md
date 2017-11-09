@@ -256,11 +256,11 @@ const app = feathers()
 app.service('todos').hooks({
   before: {
     create: [
-      (hook) => hook.data.createdAt = new Date()
+      (context) => context.data.createdAt = new Date()
     ],
     
     update: [
-      (hook) => hook.data.updatedAt = new Date()
+      (context) => context.data.updatedAt = new Date()
     ]
   }
 });

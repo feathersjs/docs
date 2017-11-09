@@ -1,22 +1,22 @@
 --- 01/hooks/1.js	2017-03-29 08:57:36.697999415 -0400
 +++ 01/hooks/2.js	2017-03-29 08:57:36.697999415 -0400
 @@ -1,5 +1,5 @@
- 
+
 -// Example - Use hooks with service
 +// Example - Use soft deletes with a service
- 
+
  const expressServerConfig = require('../common/expressServerConfig');
  const expressMiddleware = require('../common/expressMiddleware');
 @@ -35,10 +35,12 @@
    const userService = app.service('users');
-   
+
    const {
 +    softDelete, when,
      setCreatedAt, setUpdatedAt, unless, remove /* , validateSchema */
    } = commonHooks;
-   
+
    userService.before({
-+    all: when(hook => hook.method !== 'find', softDelete()),
++    all: when(context => context.method !== 'find', softDelete()),
      create: [
        validateSchema(userSchema(), Ajv),
        authHooks.hashPassword(),
