@@ -267,11 +267,11 @@ const dauria = require('dauria');
 // with multipart file uploads
 app.service('/uploads').before({
     create: [
-        function(hook) {
-            if (!hook.data.uri && hook.params.file){
-                const file = hook.params.file;
+        function(context) {
+            if (!context.data.uri && context.params.file){
+                const file = context.params.file;
                 const uri = dauria.getBase64DataURI(file.buffer, file.mimetype);
-                hook.data = {uri: uri};
+                context.data = {uri: uri};
             }
         }
     ]

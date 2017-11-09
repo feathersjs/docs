@@ -79,7 +79,7 @@ app.service('users').hooks({
 
 ```js
 {
-  passwordField: 'password', // key name of password field to look on hook.data
+  passwordField: 'password', // key name of password field to look on context.data
   hash: customHashFunction // default is the bcrypt hash function. Takes in a password and returns a hash.
 }
 ```

@@ -127,33 +127,33 @@ describe('services pluck', () => {
     });
 
     it('does not throw if field is missing', () => {
-      const hook = {
+      const context = {
         type: 'before',
         method: 'create',
         params: { provider: 'rest' },
         data: { first: 'John', last: 'Doe' } };
-      hooks.pluck('last', 'xx')(hook);
-      assert.deepEqual(hook.data, { last: 'Doe' });
+      hooks.pluck('last', 'xx')(context);
+      assert.deepEqual(context.data, { last: 'Doe' });
     });
 
     it('does not throw if field is undefined', () => {
-      const hook = {
+      const context = {
         type: 'before',
         method: 'create',
         params: { provider: 'rest' },
         data: { first: undefined, last: undefined } };
-      hooks.pluck('first')(hook);
-      assert.deepEqual(hook.data, {}); // todo note this
+      hooks.pluck('first')(context);
+      assert.deepEqual(context.data, {}); // todo note this
     });
 
     it('does not throw if field is null', () => {
-      const hook = {
+      const context = {
         type: 'before',
         method: 'create',
         params: { provider: 'rest' },
         data: { first: null, last: null } };
-      hooks.pluck('last')(hook);
-      assert.deepEqual(hook.data, { last: null });
+      hooks.pluck('last')(context);
+      assert.deepEqual(context.data, { last: null });
     });
   });
 });

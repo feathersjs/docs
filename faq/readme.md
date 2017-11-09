@@ -45,17 +45,17 @@ app.use('/users', userService);
 app.use('/users/:userId/posts', app.service('posts'));
 
 // A hook that updates `data` with the route parameter
-function mapUserIdToData(hook) {
-  if(hook.data && hook.params.userId) {
-    hook.data.userId = hook.params.userId;
+function mapUserIdToData(context) {
+  if(context.data && context.params.userId) {
+    context.data.userId = context.params.userId;
   }
 }
 
 // For the new route, map the `:userId` route parameter to the query in a hook
 app.service('users/:userId/posts').hooks({
   before: {
-    find(hook) {
-      hook.params.query.userId = hook.params.userId;
+    find(context) {
+      context.params.query.userId = context.params.userId;
     },
     create: mapUserIdToData,
     update: mapUserIdToData,
@@ -191,20 +191,20 @@ It's pretty much exactly the same as Express. More information can be found [her
 The hooks workflow allows you to handle these situations quite gracefully.  It depends on the promise that you return in your hook. Here's an example of a hook that sends an email, but doesn't wait for a success message.
 
 ```js
-function (hook) {
+function (context) {
   
   // Send an email by calling to the email service.
-  hook.app.service('emails').create({
+  context.app.service('emails').create({
     to: 'user@email.com',
     body: 'You are so great!'
   });
   
   // Send a message to some logging service.
-  hook.app.service('logging').create(hook.data);
+  context.app.service('logging').create(context.data);
   
   // Return a resolved promise to immediately move to the next hook
   // and not wait for the two previous promises to resolve.
-  return Promise.resolve(hook);
+  return Promise.resolve(context);
 }
 ```
 
@@ -227,22 +227,22 @@ client.service('users').patch(1, { admin: true }, params).then(result => {
 });
 ```
 
-on the client the `hook.params` object will only be available in your client side hooks. It will not be provided to the server. The reason for this is because `hook.params` on the server usually contains information that should be server-side only. This can be database options, whether a request is authenticated, etc. If we passed those directly from the client to the server this would be a big security risk. Only the client side `hook.params.query` and `hook.params.headers` objects are provided to the server.
+on the client the `context.params` object will only be available in your client side hooks. It will not be provided to the server. The reason for this is because `context.params` on the server usually contains information that should be server-side only. This can be database options, whether a request is authenticated, etc. If we passed those directly from the client to the server this would be a big security risk. Only the client side `context.params.query` and `context.params.headers` objects are provided to the server.
 
-If you need to pass info from the client to the server that is not part of the query you need to add it to `hook.params.query` on the client side and explicitly pull it out of `hook.params.query` on the server side. This can be achieved like so:
+If you need to pass info from the client to the server that is not part of the query you need to add it to `context.params.query` on the client side and explicitly pull it out of `context.params.query` on the server side. This can be achieved like so:
 
 ```js
 // client side
 client.hooks({
   before: {
     all: [
-      hook => {
-        hook.params.query.$client = {
+      context => {
+        context.params.query.$client = {
           platform: 'ios',
           version: '1.0'
         };
         
-        return hook;
+        return context;
       }
     ]
   }
@@ -254,9 +254,9 @@ const hooks = require('feathers-hooks-common');
 module.exports = {
   before: {
     all: [
-      // remove values from hook.params.query.$client and move them to hook.params
-      // so hook.params.query.$client.version -> hook.params.version
-      // and hook.params.query.$client is removed.
+      // remove values from context.params.query.$client and move them to context.params
+      // so context.params.query.$client.version -> context.params.version
+      // and context.params.query.$client is removed.
       hooks.client('version', 'platform')
     ]
   }

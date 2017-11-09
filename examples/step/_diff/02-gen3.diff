@@ -18,9 +18,9 @@ diff -bdur --new-file 02/gen2/src/services/index.js 02/gen3/src/services/index.j
 --- 02/gen2/src/services/index.js	2017-04-09 09:12:41.798007000 -0400
 +++ 02/gen3/src/services/index.js	2017-04-09 09:15:24.634007000 -0400
 @@ -2,7 +2,10 @@
- 
+
  const users = require('./users/users.service.js');
- 
+
 +const teams = require('./teams/teams.service.js');
 +
  module.exports = function () {
@@ -35,7 +35,7 @@ diff -bdur --new-file 02/gen2/src/services/teams/teams.filters.js 02/gen3/src/se
 +/* eslint no-console: 1 */
 +console.warn('You are using the default filter for the teams service. For more information about event filters see https://docs.feathersjs.com/api/events.html#event-filtering'); // eslint-disable-line no-console
 +
-+module.exports = function (data, connection, hook) { // eslint-disable-line no-unused-vars
++module.exports = function (data, connection, context) { // eslint-disable-line no-unused-vars
 +  return data;
 +};
 diff -bdur --new-file 02/gen2/src/services/teams/teams.hooks.js 02/gen3/src/services/teams/teams.hooks.js

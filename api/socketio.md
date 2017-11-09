@@ -112,9 +112,9 @@ For any [service method call](./services.md) made through Socket.io `params.prov
 ```js
 app.service('users').hooks({
   before: {
-    remove(hook) {
-      // check for if(hook.params.provider) to prevent any external call
-      if(hook.params.provider === 'socketio') {
+    remove(context) {
+      // check for if(context.params.provider) to prevent any external call
+      if(context.params.provider === 'socketio') {
         throw new Error('You can not delete a user via Socket.io');
       }
     }

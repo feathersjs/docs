@@ -40,7 +40,7 @@ The server-side filtering for offline-first generally needs to look at
 both the previous and the new contents of the record,
 to see if it used to belong or if it now belongs to the publication.
 
-You can stash the current value of a record inside the hook object, before mutating it, with:
+You can stash the current value of a record inside the context object, before mutating it, with:
 ```javascript
 module.exports = {
   before: {

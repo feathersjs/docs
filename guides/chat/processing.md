@@ -28,18 +28,18 @@ This will create our hook and wire it up to the service we selected. Now it is t
 // For more information on hooks see: http://docs.feathersjs.com/api/hooks.html
 
 module.exports = function() {
-  return function(hook) {
+  return function(context) {
     // The authenticated user
-    const user = hook.params.user;
+    const user = context.params.user;
     // The actual message text
-    const text = hook.data.text
+    const text = context.data.text
       // Messages can't be longer than 400 characters
       .substring(0, 400)
       // Do some basic HTML escaping
       .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 
     // Override the original data
-    hook.data = {
+    context.data = {
       text,
       // Set the user id
       userId: user._id,
@@ -48,8 +48,8 @@ module.exports = function() {
     };
 
     // Hooks can either return nothing or a promise
-    // that resolves with the `hook` object for asynchronous operations
-    return Promise.resolve(hook);
+    // that resolves with the `context` object for asynchronous operations
+    return Promise.resolve(context);
   };
 };
 ```
@@ -61,7 +61,7 @@ This will do several things:
   - The new truncated and sanitized text
   - The currently authenticated user (so we always know who sent it)
   - The current (creation) date 
-3. Return a Promise that resolves with the hook object (this is what any hook should return)
+3. Return a Promise that resolves with the context object (this is what any hook should return)
 
 
 ## Adding a user avatar
@@ -98,17 +98,17 @@ const gravatarUrl = 'https://s.gravatar.com/avatar';
 const query = 's=60';
 
 module.exports = function() {
-  return function(hook) {
+  return function(context) {
     // The user email
-    const { email } = hook.data;
+    const { email } = context.data;
     // Gravatar uses MD5 hashes from an email address to get the image
     const hash = crypto.createHash('md5').update(email).digest('hex');
 
-    hook.data.avatar = `${gravatarUrl}/${hash}?${query}`;
+    context.data.avatar = `${gravatarUrl}/${hash}?${query}`;
 
     // Hooks can either return nothing or a promise
-    // that resolves with the `hook` object for asynchronous operations
-    return Promise.resolve(hook);
+    // that resolves with the `context` object for asynchronous operations
+    return Promise.resolve(context);
   };
 };
 ```

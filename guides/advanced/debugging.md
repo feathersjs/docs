@@ -47,10 +47,10 @@ Since [hooks](../../api/hooks.md) can be registered dynamically anywhere in your
 ```js
 const hooks = require('feathers-authentication').hooks;
 
-const myDebugHook = function(hook) {
-  // check to see what is in my hook object after
+const myDebugHook = function(context) {
+  // check to see what is in my context object after
   // the token was verified.
-  console.log(hook);
+  console.log(context);
 };
 
 // Must be logged in do anything with messages.
@@ -64,4 +64,4 @@ app.service('messages').before({
 });
 ```
 
-You can then move that hook around the hook chain and inspect what your `hook` object looks like.
+You can then move that hook around the hook chain and inspect what your `context` object looks like.

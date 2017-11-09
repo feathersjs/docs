@@ -154,7 +154,7 @@ therefore `patch` may *not* have a `auth.hashPassword()` hook.
 The user must be signed in before being allowed to change their password or communication values.
 The service, for feathers-authenticate v1.x, requires hooks similar to:
 ```javascript
-    const isAction = (...args) => hook => args.includes(hook.data.action);
+    const isAction = (...args) => context => args.includes(context.data.action);
     app.service('authManagement').before({
       create: [
         hooks.iff(isAction('passwordChange', 'identityChange'), auth.hooks.authenticate('jwt')),

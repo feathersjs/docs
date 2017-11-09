@@ -4,7 +4,7 @@ diff -bdur --new-file server/client/src/services/message/hooks/index.js server/f
 @@ -4,6 +4,28 @@
  const hooks = require('feathers-hooks');
  const auth = require('feathers-authentication').hooks;
- 
+
 +const restrictToSender = require('./restrict-to-sender');
 +const process = require('./process');
 +const { setCreatedAt, populate, dePopulate, serialize } = require('feathers-hooks-common');
@@ -43,7 +43,7 @@ diff -bdur --new-file server/client/src/services/message/hooks/index.js server/f
 +  patch: [ dePopulate(), restrictToSender() ],
 +  remove: [ restrictToSenderOrServer ]
  };
- 
+
  exports.after = {
    all: [],
 -  find: [],
@@ -66,13 +66,13 @@ diff -bdur --new-file server/client/src/services/message/hooks/process.js server
 +// Use this hook to manipulate incoming or outgoing data.
 +// For more information on hooks see: http://docs.feathersjs.com/hooks/readme.html
 +
-+module.exports = () => hook => {
-+  hook.data.text = hook.data.text
++module.exports = () => context => {
++  context.data.text = context.data.text
 +    .substring(0, 400) // Messages can't be longer than 400 characters
 +    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); // Do basic HTML escaping
-+  hook.data.userId = hook.params.user._id; // Add the authenticated user _id
-+  
-+  return hook;
++  context.data.userId = context.params.user._id; // Add the authenticated user _id
++
++  return context;
 +};
 diff -bdur --new-file server/client/src/services/message/hooks/restrict-to-sender.js server/finish/src/services/message/hooks/restrict-to-sender.js
 --- server/client/src/services/message/hooks/restrict-to-sender.js	1969-12-31 19:00:00.000000000 -0500
@@ -88,18 +88,18 @@ diff -bdur --new-file server/client/src/services/message/hooks/restrict-to-sende
 +const errors = require('feathers-errors');
 +
 +module.exports = function(options) {
-+  return function(hook) {
-+    const messageService = hook.app.service('messages');
-+    
++  return function(context) {
++    const messageService = context.app.service('messages');
++
 +    // First get the message that the user wants to access
-+    return messageService.get(hook.id, hook.params).then(message => {
++    return messageService.get(context.id, context.params).then(message => {
 +      // Throw a not authenticated error if the message and user id don't match
-+      if (message.sentBy._id !== hook.params.user._id && hook.provider) {
++      if (message.sentBy._id !== context.params.user._id && context.provider) {
 +        throw new errors.NotAuthenticated('Access not allowed');
 +      }
-+      
-+      // Otherwise just return the hook
-+      return hook;
++
++      // Otherwise just return the context
++      return context;
 +    });
 +  };
 +};
@@ -114,7 +114,7 @@ diff -bdur --new-file server/client/test/services/message/hooks/process.test.js 
 +
 +describe('message process hook', function() {
 +  it('hook can be used', function() {
-+    const mockHook = {
++    const mockContext = {
 +      type: 'before',
 +      app: {},
 +      params: {},
@@ -122,9 +122,9 @@ diff -bdur --new-file server/client/test/services/message/hooks/process.test.js 
 +      data: {}
 +    };
 +
-+    process()(mockHook);
++    process()(mockContext);
 +
-+    assert.ok(mockHook.process);
++    assert.ok(mockContext.process);
 +  });
 +});
 diff -bdur --new-file server/client/test/services/message/hooks/restrict-to-sender.test.js server/finish/test/services/message/hooks/restrict-to-sender.test.js
@@ -138,7 +138,7 @@ diff -bdur --new-file server/client/test/services/message/hooks/restrict-to-send
 +
 +describe('message restrictToSender hook', function() {
 +  it('hook can be used', function() {
-+    const mockHook = {
++    const mockContext = {
 +      type: 'before',
 +      app: {},
 +      params: {},
@@ -146,8 +146,8 @@ diff -bdur --new-file server/client/test/services/message/hooks/restrict-to-send
 +      data: {}
 +    };
 +
-+    restrictToSender()(mockHook);
++    restrictToSender()(mockContext);
 +
-+    assert.ok(mockHook.restrictToSender);
++    assert.ok(mockContext.restrictToSender);
 +  });
 +});

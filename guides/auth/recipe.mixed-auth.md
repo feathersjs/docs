@@ -98,7 +98,7 @@ Now we need to setup an endpoint to handle both unauthenticated and authenticate
 
 If a `user` record contains `public: true`, then **unauthenticated** users should be able to access it. Let’s see how to use the `iff` and `else` conditional hooks from [`feathers-hooks-common`](../../api/hooks-common.md) to make this happen. Be sure to read the [`iff hook API docs`](../../api/hooks-common.md#iff) and [`else hook API docs`](../../api/hooks-common.md#else) if you haven’t, yet.
 
-We’re going to use the `iff` hook to authenticate users only if a token is in the request. The [`feathers-authentication-jwt` plugin](../../api/authentication/jwt.md), which we used in `src/authentication.js`, includes a token extractor. If a request includes a token, it will automatically be available inside the `hook` object at `hook.params.token`.
+We’re going to use the `iff` hook to authenticate users only if a token is in the request. The [`feathers-authentication-jwt` plugin](../../api/authentication/jwt.md), which we used in `src/authentication.js`, includes a token extractor. If a request includes a token, it will automatically be available inside the `context` object at `context.params.token`.
 
 **src/services/users/users.hooks.js**<br/>
 (This example only shows the `find` method's `before` hooks.)
@@ -113,10 +113,10 @@ module.exports = {
     find: [
       // If a token was included, authenticate it with the `jwt` strategy.
       commonHooks.iff(
-        hook => hook.params.token,
+        context => context.params.token,
         authenticate('jwt')
       // No token was found, so limit the query to include `public: true`
-      ).else( hook => Object.assign(hook.params.query, { public: true }) )
+      ).else( context => Object.assign(context.params.query, { public: true }) )
     ]
   }
 };
@@ -127,7 +127,7 @@ Let’s break down the above example. We setup the `find` method of the `/users`
 
 ```js
 iff(
-  hook => hook.params.token,
+  context => context.params.token,
   authenticate(‘jwt’)
 )
 ```
@@ -135,11 +135,11 @@ iff(
 For this application, the above snippet is equivalent to the snippet, below.
 
 ```js
-hook => {
-  if (hook.params.token) {
+context => {
+  if (context.params.token) {
     return authenticate(‘jwt’)
   } else {
-    return Promise.resolve(hook)
+    return Promise.resolve(context)
   }
 }
 ```
@@ -147,10 +147,10 @@ hook => {
 The `iff` hook is actually more capable than the simple demonstration, above. It can handle an async predicate expression. This would be equivalent to being able to pass a `promise` inside the `if` statement's parentheses. It also allows us to chain an `.else()` statement, which will run if the predicate evaluates to false.
 
 ```js
-.else( hook => Object.assign(hook.params.query, { public: true }) )
+.else( context => Object.assign(context.params.query, { public: true }) )
 ```
 
 The above statement simply adds `public: true` to the query parameters. This limits the query to only find `user` records that have the `public` property set to `true`.
 
 ## Wrapping Up
-With the above code, we’ve successfully setup a `/users` service that responds differently to unauthenticated and authenticated users. We used the `hook.params.token` attribute to either authenticate a user or to limit the search query to only public users. If you become familiar with the [Common Hooks API](../../api/hooks-common.md), you’ll be able to solve almost any authentication puzzle.
+With the above code, we’ve successfully setup a `/users` service that responds differently to unauthenticated and authenticated users. We used the `context.params.token` attribute to either authenticate a user or to limit the search query to only public users. If you become familiar with the [Common Hooks API](../../api/hooks-common.md), you’ll be able to solve almost any authentication puzzle.

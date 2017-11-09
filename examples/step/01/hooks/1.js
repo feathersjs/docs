@@ -46,7 +46,7 @@ function user() {
       setUpdatedAt()
     ]});
   userService.after({
-    all: unless(hook => hook.method === 'find', remove('password')),
+    all: unless(context => context.method === 'find', remove('password')),
   });
 }
 
