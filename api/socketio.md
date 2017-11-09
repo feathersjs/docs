@@ -1,29 +1,34 @@
 # Socket.io
 
-[![GitHub stars](https://img.shields.io/github/stars/feathersjs/feathers-socketio.png?style=social&label=Star)](https://github.com/feathersjs/feathers-socketio/)
-[![npm version](https://img.shields.io/npm/v/feathers-socketio.png?style=flat-square)](https://www.npmjs.com/package/feathers-socketio)
-[![Changelog](https://img.shields.io/badge/changelog-.md-blue.png?style=flat-square)](https://github.com/feathersjs/feathers-socketio/blob/master/CHANGELOG.md)
+[![GitHub stars](https://img.shields.io/github/stars/feathersjs/socketio.png?style=social&label=Star)](https://github.com/feathersjs/socketio/)
+[![npm version](https://img.shields.io/npm/v/@feathersjs/socketio.png?style=flat-square)](https://www.npmjs.com/package/@feathersjs/socketio)
+[![Changelog](https://img.shields.io/badge/changelog-.md-blue.png?style=flat-square)](https://github.com/feathersjs/socketio/blob/master/CHANGELOG.md)
 
 ```
-$ npm install feathers-socketio --save
+$ npm install @feathersjs/socketio --save
 ```
 
-The [feathers-socketio](https://github.com/feathersjs/feathers-socketio) module allows to call [service methods](./services.md) and receive [real-time events](./events.md) via [Socket.io](http://socket.io/), a NodeJS library which enables real-time bi-directional, event-based communication.
+The [@feathersjs/socketio](https://github.com/feathersjs/socketio) module allows to call [service methods](./services.md) and receive [real-time events](./events.md) via [Socket.io](http://socket.io/), a NodeJS library which enables real-time bi-directional, event-based communication.
+
+> **Important:** This page describes how to set up a Socket.io server. The [Socket.io client chapter](./client/socketio.md) shows how to use this server on the client.
+
 
 | Service method  | Method event name   | Real-time event    |
 |-----------------|---------------------|--------------------|
-| .find()         | `messages::find`    | -                  |
-| .get()          | `messages::get`     | -                  |
-| .create()       | `messages::create`  | `messages created` |
-| .update()       | `messages::update`  | `messages updated` |
-| .patch()        | `messages::patch`   | `messages patched` |
-| .remove()       | `messages::removed` | `messages removed` |
+| .find()         | `find`              | -                  |
+| .get()          | `get`               | -                  |
+| .create()       | `create`            | `messages created` |
+| .update()       | `update`            | `messages updated` |
+| .patch()        | `patch`             | `messages patched` |
+| .remove()       | `remove`            | `messages removed` |
 
-> **Important:** Socket.io is also used to *call* service methods. Using sockets for both, calling methods and receiving real-time events is generally faster than using [REST](rest.md) and there is usually no need to use both, REST and Socket.io in the same client application at the same time.
+> **Important:** Socket.io is also used to *call* service methods. Using sockets for both, calling methods and receiving real-time events is generally faster than using [REST](./express.md) and there is usually no need to use both, REST and Socket.io in the same client application at the same time.
 
-## Server
+## Configuration
 
-### `app.configure(socketio())`
+`@feathersjs/socketio` can be used standalone or together with a Feathers framework integration like [Express](./express.md).
+
+### app.configure(socketio())
 
 Sets up the Socket.io transport with the default configuration using either the server provided by [app.listen](./application.md#listen) or passed in [app.setup(server)](./application.md#setup).
 
@@ -40,7 +45,7 @@ app.listen(3030);
 
 > **Pro tip:** Once the server has been started with `app.listen()` or `app.setup(server)` the Socket.io object is available as `app.io`.
 
-### `app.configure(socketio(callback))`
+### app.configure(socketio(callback))
 
 Sets up the Socket.io transport with the default configuration and call `callback` with the [Socket.io server object](http://socket.io/docs/server-api/). This is a good place to listen to custom events or add [authorization](https://github.com/LearnBoost/socket.io/wiki/Authorizing):
 
@@ -69,7 +74,7 @@ app.configure(socketio(function(io) {
 app.listen(3030);
 ```
 
-### `app.configure(socketio(options [, callback]))`
+### app.configure(socketio(options [, callback]))
 
 Sets up the Socket.io transport with the given [Socket.io options object](https://github.com/socketio/engine.io#methods-1) and optionally calls the callback described above.
 
@@ -80,18 +85,19 @@ This can be used to e.g. configure the path where Socket.io is initialize (`sock
 const feathers = require('@feathersjs/feathers');
 const socketio = require('@feathersjs/socketio');
 
-const app = feathers()
-  .configure(socketio({
-    path: '/ws/'
-  }, function(io) {
-    // Do something here
-    // This function is optional
-  }));
+const app = feathers();
+
+app.configure(socketio({
+  path: '/ws/'
+}, function(io) {
+  // Do something here
+  // This function is optional
+}));
 
 app.listen(3030);
 ```
 
-### `app.configure(socketio(port, [options], [callback]))`
+### app.configure(socketio(port, [options], [callback]))
 
 Creates a new Socket.io server on a separate port. Options and a callback are optional and work as described above.
 
@@ -99,13 +105,34 @@ Creates a new Socket.io server on a separate port. Options and a callback are op
 const feathers = require('@feathersjs/feathers');
 const socketio = require('@feathersjs/socketio');
 
-const app = feathers()
-  .configure(socketio(3031));
-  
+const app = feathers();
+
+app.configure(socketio(3031));
 app.listen(3030);
 ```
 
-### `params.provider`
+## params
+
+[Socket.io middleware](https://socket.io/docs/server-api/#namespace-use-fn) can modify the `feathers` property on the `socket` which will then be used as the service call `params`:
+
+```js
+app.configure(socketio(function(io) {
+  io.use(function (socket, next) {
+    socket.feathers.user = { name: 'David' };
+    next();
+  });
+}));
+
+app.use('messages', {
+  create(data, params, callback) {
+    // When called via SocketIO:
+    params.provider // -> socketio
+    params.user // -> { name: 'David' }
+  }
+});
+```
+
+### params.provider
 
 For any [service method call](./services.md) made through Socket.io `params.provider` will be set to `socketio`. In a [hook](./hooks.md) this can for example be used to prevent external users from making a service method call:
 
@@ -122,13 +149,13 @@ app.service('users').hooks({
 });
 ```
 
-### `params.query`
+### params.query
 
 `params.query` will contain the query parameters sent from the client.
 
 > **Important:** Only `params.query` is passed between the server and the client, other parts of `params` are not. This is for security reasons so that a client can't set things like `params.user` or the database options. You can always map from `params.query` to `params` in a before [hook](./hooks.md).
 
-### uWebSocket
+## uWebSocket
 
 The options can also be used to initialize [uWebSocket](https://github.com/uwebsockets/uwebsockets) which is a WebSocket server implementation that provides better performace and reduced latency.
 
@@ -148,32 +175,3 @@ app.configure(socketio({
 
 app.listen(3030);
 ```
-
-### Middleware and service parameters
-
-[Socket.io middleware](https://socket.io/docs/server-api/#namespace-use-fn) can modify the `feathers` property on the `socket` which will then be used as the service parameters:
-
-```js
-app.configure(socketio(function(io) {
-  io.use(function (socket, next) {
-    socket.feathers.user = { name: 'David' };
-    next();
-  });
-}));
-
-app.use('messages', {
-  create(data, params, callback) {
-    // When called via SocketIO:
-    params.provider // -> socketio
-    params.user // -> { name: 'David' }
-  }
-});
-```
-
-## Client
-
-For connecting to a Socket.io server as the client see the [Socket.io client chapter](./client/socketio.md).
-
-## Direct connection
-
-For the message and event format for a direct Socket.io connection also see the [Socket.io client chapter](./client/socketio.md).

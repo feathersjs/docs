@@ -1,29 +1,29 @@
 # Primus
 
-[![GitHub stars](https://img.shields.io/github/stars/feathersjs/feathers-primus.png?style=social&label=Star)](https://github.com/feathersjs/feathers-primus/)
-[![npm version](https://img.shields.io/npm/v/feathers-primus.png?style=flat-square)](https://www.npmjs.com/package/feathers-primus)
-[![Changelog](https://img.shields.io/badge/changelog-.md-blue.png?style=flat-square)](https://github.com/feathersjs/feathers-primus/blob/master/CHANGELOG.md)
+[![GitHub stars](https://img.shields.io/github/stars/feathersjs/primus.png?style=social&label=Star)](https://github.com/feathersjs/primus/)
+[![npm version](https://img.shields.io/npm/v/@feathersjs/primus.png?style=flat-square)](https://www.npmjs.com/package/@feathersjs/primus)
+[![Changelog](https://img.shields.io/badge/changelog-.md-blue.png?style=flat-square)](https://github.com/feathersjs/primus/blob/master/CHANGELOG.md)
 
 ```
-$ npm install feathers-primus --save
+$ npm install @feathersjs/primus --save
 ```
 
-The [feathers-primus](https://github.com/feathersjs/feathers-primus) module allows to call [service methods](./services.md) and receive [real-time events](./events.md) via [Primus](https://github.com/primus/primus), a universal wrapper for real-time frameworks that supports Engine.IO, WebSockets, Faye, BrowserChannel, SockJS and Socket.IO.
+The [@feathersjs/primus](https://github.com/feathersjs/primus) module allows to call [service methods](./services.md) and receive [real-time events](./events.md) via [Primus](https://github.com/primus/primus), a universal wrapper for real-time frameworks that supports Engine.IO, WebSockets, Faye, BrowserChannel, SockJS and Socket.IO.
 
 | Service method  | Method event name   | Real-time event    |
 |-----------------|---------------------|--------------------|
-| .find()         | `messages::find`    | -                  |
-| .get()          | `messages::get`     | -                  |
-| .create()       | `messages::create`  | `messages created` |
-| .update()       | `messages::update`  | `messages updated` |
-| .patch()        | `messages::patch`   | `messages patched` |
-| .remove()       | `messages::removed` | `messages removed` |
+| .find()         | `find`              | -                  |
+| .get()          | `get`               | -                  |
+| .create()       | `create`            | `messages created` |
+| .update()       | `update`            | `messages updated` |
+| .patch()        | `patch`             | `messages patched` |
+| .remove()       | `removed`           | `messages removed` |
 
-> **Important:** Primus is also used to *call* service methods. Using sockets for both, calling methods and receiving real-time events is generally faster than using [REST](rest.md) and there is usually no need to use both, REST and Socket.io in the same client application at the same time.
+> **Important:** Primus is also used to *call* service methods. Using sockets for both, calling methods and receiving real-time events is generally faster than using [REST](./express.md) and there is usually no need to use both, REST and Socket.io in the same client application at the same time.
 
 ## Server
 
-Additionally to `feathers-primus` your websocket library of choice also has to be installed.
+Additionally to `@feathersjs/primus` your websocket library of choice also has to be installed.
 
 ```
 $ npm install ws --save
@@ -37,13 +37,13 @@ Sets up the Primus transport with the given [Primus options](https://github.com/
 
 ```js
 const feathers = require('@feathersjs/feathers');
-const primus = require('feathers-primus');
+const primus = require('@feathersjs/primus');
 
 const app = feathers();
 
 // Set up Primus with SockJS
-app.configure(feathers.primus({
-  transformer: 'sockjs'
+app.configure(primus({
+  transformer: 'ws'
 }, function(primus) {
   // Do something with primus object
 }));
@@ -51,7 +51,7 @@ app.configure(feathers.primus({
 
 ### `params.provider`
 
-For any [service method call](./services.md) made through `params.provider` will be set to `primus`. In a [hook](./hooks.md) this can for example be used to prevent external users from making a service method call:
+For any [service method call](./services.md) made through a Primus socket `params.provider` will be set to `primus`. In a [hook](./hooks.md) this can for example be used to prevent external users from making a service method call:
 
 ```js
 app.service('users').hooks({
@@ -78,29 +78,19 @@ The Primus request object has a `feathers` property that can be extended with ad
 
 ```js
 app.configure(primus({
-  transformer: 'sockjs'
+  transformer: 'ws'
 }, function(primus) {
   // Do something with primus
-  primus.use('todos::create', function(socket, done){
+  primus.use('feathers-referrer', function(req, res){
     // Exposing a request property to services and hooks
-    socket.request.feathers.referrer = socket.request.referrer;
-    done();
+    req.feathers.referrer = request.referrer;
   });
 }));
 
 app.use('messages', {
   create(data, params, callback) {
     // When called via Primus:
-    params.provider // -> primus
-    params.user // -> { name: 'David' }
+    params.referrer // referrer from request
   }
 });
 ```
-
-## Client
-
-For connecting to a Primus server as the client see the [Primus client chapter](./client/primus.md).
-
-## Direct connection
-
-For the message and event format for a direct Primus connection also see the [Primus client chapter](./client/primus.md).
