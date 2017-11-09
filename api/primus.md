@@ -56,9 +56,9 @@ For any [service method call](./services.md) made through `params.provider` will
 ```js
 app.service('users').hooks({
   before: {
-    remove(hook) {
-      // check for if(hook.params.provider) to prevent any external call
-      if(hook.params.provider === 'primus') {
+    remove(context) {
+      // check for if(context.params.provider) to prevent any external call
+      if(context.params.provider === 'primus') {
         throw new Error('You can not delete a user via Primus');
       }
     }

@@ -17,15 +17,15 @@ const query = `s=60`;
 const gravatarImage = email => {
   // Gravatar uses MD5 hashes from an email address to get the image
   const hash = crypto.createHash('md5').update(email).digest('hex');
-  
+
   return `${gravatarUrl}/${hash}?${query}`;
 };
 
 module.exports = function() {
-  return function(hook) {
+  return function(context) {
     // Assign the new data with the Gravatar image
-    hook.data = Object.assign({}, hook.data, {
-      avatar: gravatarImage(hook.data.email)
+    context.data = Object.assign({}, context.data, {
+      avatar: gravatarImage(context.data.email),
     });
   };
 };

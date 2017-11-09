@@ -40,7 +40,7 @@ function user() {
   } = commonHooks;
 
   userService.before({
-    all: when(hook => hook.method !== 'find', softDelete()),
+    all: when(context => context.method !== 'find', softDelete()),
     create: [
       validateSchema(userSchema(), Ajv),
       authHooks.hashPassword(),
@@ -48,7 +48,7 @@ function user() {
       setUpdatedAt()
     ]});
   userService.after({
-    all: unless(hook => hook.method === 'find', remove('password')),
+    all: unless(context => context.method === 'find', remove('password')),
   });
 }
 

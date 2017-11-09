@@ -5,7 +5,7 @@ const gravatar = require('../../../../src/services/user/hooks/gravatar.js');
 
 describe('user gravatar hook', function() {
   it('hook can be used', function() {
-    const mockHook = {
+    const mockContext = {
       type: 'before',
       app: {},
       params: {},
@@ -13,8 +13,8 @@ describe('user gravatar hook', function() {
       data: {}
     };
 
-    gravatar()(mockHook);
+    gravatar()(mockContext);
 
-    assert.ok(mockHook.gravatar);
+    assert.ok(mockContext.gravatar);
   });
 });

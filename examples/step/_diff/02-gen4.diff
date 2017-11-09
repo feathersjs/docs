@@ -8,26 +8,26 @@ diff -bdur --new-file 02/gen3/src/hooks/populate-teams.js 02/gen4/src/hooks/popu
 +// For more information on hooks see: http://docs.feathersjs.com/api/hooks.html
 +
 +module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
-+  return function (hook) {
++  return function (context) {
 +    // Hooks can either return nothing or a promise
-+    // that resolves with the `hook` object for asynchronous operations
-+    return Promise.resolve(hook);
++    // that resolves with the `context` object for asynchronous operations
++    return Promise.resolve(context);
 +  };
 +};
 diff -bdur --new-file 02/gen3/src/services/teams/teams.hooks.js 02/gen4/src/services/teams/teams.hooks.js
 --- 02/gen3/src/services/teams/teams.hooks.js	2017-04-09 09:15:24.638007000 -0400
 +++ 02/gen4/src/services/teams/teams.hooks.js	2017-04-09 09:18:59.418007000 -0400
 @@ -2,6 +2,8 @@
- 
+
  const { authenticate } = require('feathers-authentication').hooks;
- 
+
 +const populateTeams = require('../../hooks/populate-teams');
 +
  module.exports = {
    before: {
      all: [ authenticate('jwt') ],
 @@ -15,7 +17,7 @@
- 
+
    after: {
      all: [],
 -    find: [],
@@ -46,15 +46,15 @@ diff -bdur --new-file 02/gen3/test/hooks/populate-teams.test.js 02/gen4/test/hoo
 +
 +describe('\'populateTeams\' hook', () => {
 +  it('runs the hook', () => {
-+    // A mock hook object
++    // A mock context object
 +    const mock = {};
 +    // Initialize our hook with no options
 +    const hook = populateTeams();
 +
 +    // Run the hook function (which returns a promise)
-+    // and compare the resulting hook object
++    // and compare the resulting context object
 +    return hook(mock).then(result => {
-+      assert.equal(result, mock, 'Returns the expected hook object');
++      assert.equal(result, mock, 'Returns the expected context object');
 +    });
 +  });
 +});

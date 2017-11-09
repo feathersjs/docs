@@ -5,7 +5,7 @@ const restrictToSender = require('../../../../src/services/message/hooks/restric
 
 describe('message restrictToSender hook', function() {
   it('hook can be used', function() {
-    const mockHook = {
+    const mockContext = {
       type: 'before',
       app: {},
       params: {},
@@ -13,8 +13,8 @@ describe('message restrictToSender hook', function() {
       data: {}
     };
 
-    restrictToSender()(mockHook);
+    restrictToSender()(mockContext);
 
-    assert.ok(mockHook.restrictToSender);
+    assert.ok(mockContext.restrictToSender);
   });
 });

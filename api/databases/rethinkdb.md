@@ -200,14 +200,14 @@ Combined with `.createQuery(query)`, which returns a new RethinkDB query with th
 ```js
 app.service('mesages').hooks({
   before: {
-    find(hook) {
-      const query = this.createQuery(hook.params.query);
+    find(context) {
+      const query = this.createQuery(context.params.query);
       const r = this.options.r;
 
       const point = r.point(-122.422876, 37.777128);  // San Francisco
 
       // Update the query with an additional `getNearest` condition
-      hook.params.rethinkdb = query.getNearest(point, { index: 'location' });
+      context.params.rethinkdb = query.getNearest(point, { index: 'location' });
     }
   }
 });

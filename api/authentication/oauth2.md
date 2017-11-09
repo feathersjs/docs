@@ -143,25 +143,25 @@ app.configure(oauth2({
 }));
 
 function customizeGithubProfile() {
-  return function(hook) {
+  return function(context) {
     console.log('Customizing Github Profile');
     // If there is a github field they signed up or
     // signed in with github so let's pull the primary account email.
-    if (hook.data.github) {
-      hook.data.email = hook.data.github.profile.emails.find(email => email.primary).value;
+    if (context.data.github) {
+      context.data.email = context.data.github.profile.emails.find(email => email.primary).value;
     }
 
     // If you want to do something whenever any OAuth
     // provider authentication occurs you can do this.
-    if (hook.params.oauth) {
+    if (context.params.oauth) {
       // do something for all OAuth providers
     }
 
-    if (hook.params.oauth.provider === 'github') {
+    if (context.params.oauth.provider === 'github') {
       // do something specific to the github provider
     }
 
-    return Promise.resolve(hook);
+    return Promise.resolve(context);
   };
 }
 
