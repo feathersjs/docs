@@ -8,17 +8,23 @@
 $ npm install @feathersjs/express --save
 ```
 
-The `@feathersjs/express` module contains the Feathers to Express framework bindings and an Express based REST API transport.
+The `@feathersjs/express` module contains [Express](expressjs.com) framework integrations for Feathers:
+
+- The [Express framework bindings](#expressapp) to make a Feathers application Express compatible
+- An Express based transport to expose services throuhg a [REST API](#expressrest)
+- An [Express error handler](#expresserrors) for [Feathers errors](./errors.md)
 
 ```js
 const express = require('@feathersjs/express');
 ```
 
+> **Very Important:** This page describes how to set up an Express server and REST API. See the [REST client chapter](./client/rest.md) how to use this server on the client.
+
 > **Important:** This chapter assumes that you are familiar with [Express](http://expressjs.com/en/guide/routing.html).
 
 ## express(app)
 
-`express(app) -> app` is a function that turns a [Feathers application](./application.md) into a fully Express compatible application that additionally to Feathers functionality also lets you use the [Express API](http://expressjs.com/en/4x/api.html). It wil also override the Feathers application `app.use` to support both, services and [Express middleware](http://expressjs.com/en/guide/writing-middleware.html). If [a service object](./services.md) is passed it will use Feathers registration mechanism, for a middleware function Express.
+`express(app) -> app` is a function that turns a [Feathers application](./application.md) into a fully Express (4+) compatible application that additionally to Feathers functionality also lets you use the [Express API](http://expressjs.com/en/4x/api.html).
 
 ```js
 const feathers = require('@feathersjs/feathers');
@@ -26,7 +32,20 @@ const express = require('@feathersjs/express');
 
 // Create an app that is a Feathers AND Express application
 const app = express(feathers());
+```
 
+Note that `@feathersjs/express` (`express`) also exposes the standard [Express middleware](http://expressjs.com/en/4x/api.html#express):
+
+- `express.json` - A JSON body parser
+- `express.urlencoded` - A URL encoded form body parser
+- `express.static` - To statically host files in a folder
+- `express.Router` - Creates an Express router object
+
+## app.use(path, service|mw)
+
+`app.use(path, service|mw) -> app` registers either a [service object](./services.md) or an [Express middleware](http://expressjs.com/en/guide/writing-middleware.html) on the given path. If [a service object](./services.md) is passed it will use Feathers registration mechanism, for a middleware function Express.
+
+```js
 // Register a service
 app.use('/todos', {
   get(id) {
@@ -40,19 +59,92 @@ app.use('/test', (req, res) => {
     message: 'Hello world from Express middleware'
   });
 });
-
-// Listen on port 3030
-app.listen(3030);
 ```
 
-Note that `@feathersjs/express` (`express`) also exposes the standard [Express middleware](http://expressjs.com/en/4x/api.html#express):
+## app.listen(port)
 
-- `express.json` - A JSON body parser
-- `express.urlencoded` - A URL encoded form body parser
-- `express.static` - To statically host files in a folder
-- `express.Router` - Creates an Express router object
+`app.listen(port) -> HttpServer` will first call Express [app.listen](http://expressjs.com/en/4x/api.html#app.listen) and then internally also call the [Feathers app.setup(server)](./application.md#setupserver).
 
-## express.rest
+```js
+// Listen on port 3030
+const server = app.listen(3030);
+
+server.on('listening', () => console.log('Feathers application started'));
+```
+
+## app.setup(server)
+
+`app.setup(server) -> app` is usually called internally by `app.listen` but in the cases described below needs to be called explicitly.
+
+### Sub-Apps
+
+When registering an application as a sub-app, `app.setup(server)` has to be called to initialize the sub-apps services.
+
+```js
+const express = require('express');
+const feathers = require('@feathersjs/feathers');
+const feathersExpress = require('@feathersjs/express');
+
+const api = feathersExpress(feathers())
+  .configure(feathersExpress.rest())
+  .use('/service', myService);
+
+const mainApp = express().use('/api/v1', api);
+
+const server = mainApp.listen(3030);
+
+// Now call setup on the Feathers app with the server
+api.setup(server);
+```
+
+> **ProTip:** We recommend avoiding complex sub-app setups because websockets and Feathers built in authentication are not fully sub-app aware at the moment.
+
+### HTTPS
+
+HTTPS requires creating a separate server in which case `app.setup(server)` also has to be called explicitly.
+
+```js
+const fs = require('fs');
+const https  = require('https');
+
+const feathers = require('@feathersjs/feathers');
+const express = require('@feathersjs/express');
+
+const app = express(feathers());
+
+const server = https.createServer({
+  key: fs.readFileSync('privatekey.pem'),
+  cert: fs.readFileSync('certificate.pem')
+}, app).listen(443);
+
+// Call app.setup to initialize all services and SocketIO
+app.setup(server);
+```
+
+### Virtual Hosts
+
+The [vhost](https://github.com/expressjs/vhost) Express middleware can be used to run a Feathers application on a virtual host but again requires `app.setup(server)` to be called explicitly.
+
+```js
+const express = require('express');
+const vhost = require('vhost');
+
+const feathers = require('@feathersjs/feathers');
+const feathersExpress = require('@feathersjs/express');
+
+const app = feathersExpress(feathers());
+
+app.use('/todos', todoService);
+
+const host = express().use(vhost('foo.com', app));
+const server = host.listen(8080);
+
+// Here we need to call app.setup because .listen on our virtal hosted
+// app is never called
+app.setup(server);
+```
+
+## express.rest()
 
 `express.rest` registers a Feathers transport mechanism that allows you to expose and consume [services](./services.md) through a [RESTful API](https://en.wikipedia.org/wiki/Representational_state_transfer). This means that you can call a service method through the `GET`, `POST`, `PUT`, `PATCH` and `DELETE` [HTTP methods](https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol):
 
@@ -131,7 +223,12 @@ const todoService = {
 app.use('/todos', ensureAuthenticated, logRequest, todoService, updateData);
 ```
 
-Middleware that runs after the service will have `res.data` available which is the data returned by the service. For example `updateData` could look like this:
+Middleware that runs after the service has the service call information available as
+
+- `res.data` - The data that will be sent
+- `res.hook` - The [hook](./hooks.md) context of the service method call
+
+For example `updateData` could look like this:
 
 ```js
 function updateData(req, res, next) {
@@ -140,7 +237,7 @@ function updateData(req, res, next) {
 }
 ```
 
-> __ProTip:__ If you run `res.send` in a custom middleware after the service, other middleware (like the REST formatter) will be skipped.
+> __ProTip:__ If you run `res.send` in a custom middleware after the service and don't call `next`, other middleware (like the REST formatter) will be skipped. This can be used to e.g. render different views for certain service method calls.
 
 ### params
 
@@ -228,14 +325,18 @@ app.service('users').hooks({
 
 See the [routing section](#routing).
 
-## express.errors
+## express.notFound()
 
-`expres.errors` is an [Express error handler](https://expressjs.com/en/guide/error-handling.html) middleware that formats any error response to a REST call as JSON (or HTML if e.g. someone hits our API directly in the browser) and sets the appropriate error code.
+`express.notFound()` returns middleware that returns a `NotFound` (404) [Feathers error](./errors.md). It should be used as the last middleware __before__ the error handler.
+
+## express.errorHandler()
+
+`expres.errorHandler` is an [Express error handler](https://expressjs.com/en/guide/error-handling.html) middleware that formats any error response to a REST call as JSON (or HTML if e.g. someone hits our API directly in the browser) and sets the appropriate error code.
 
 > **ProTip:** You can still use any other Express compatible [error middleware](http://expressjs.com/en/guide/error-handling.html) with Feathers. In fact, the `express.errors` is just a slightly customized one.
 > **Very Important:** Just as in Express, the error handler has to be registered *after* all middleware and services.
 
-### `app.use(handler())`
+### `app.use(express.errorHandler())`
 
 Set up the error handler with the default configuration.
 
@@ -247,7 +348,7 @@ const app = feathers();
 app.use(errorHandler())
 ```
 
-### `app.use(handler(options))`
+### `app.use(express.errorHandler(options))`
 
 ```js
 const error = require('@feathersjs/errors');
@@ -273,11 +374,13 @@ The following options can be passed when creating a new localstorage service:
 
 ## Routing
 
-Express route placeholder parameters in a service URL will be added to the service `params.route`:
+Express route placeholders in a service URL will be added to the services `params.route`.
+
+> __Important:__ See the [FAQ entry on nested routes](../faq/readme.md#how-do-i-do-nested-or-custom-routes) for more details on when and when not to use nested routes.
 
 ```js
-const feathers = require('@feathersjs/feathers');
-const rest = require('@feathersjs/express/rest');
+const feathers = require('feathers');
+const rest = require('feathers-rest');
 
 const app = feathers();
 
@@ -292,7 +395,7 @@ app.use('/users/:userId/messages', {
     console.log(params.query); // -> ?query
     console.log(params.provider); // -> 'rest'
     console.log(params.fromMiddleware); // -> 'Hello world'
-    console.log(params.userId); // will be `1` for GET /users/1/messages
+    console.log(params.route.userId); // will be `1` for GET /users/1/messages
 
     return Promise.resolve({
       id,
@@ -305,63 +408,4 @@ app.use('/users/:userId/messages', {
 });
 
 app.listen(3030);
-```
-
-You can see all the passed parameters by going to something like `localhost:3030/users/213/messages/23?read=false&$sort[createdAt]=-1]`.
-
-## Sub-Apps
-
-Sub-apps allow to provide different versions for an API. Currently, when using the Socket.io and Primus [real-time providers](../real-time/readme.md) providers, `app.setup` will be called automatically, however, with only the REST provider or when using plain Express in the parent application you will have to call the sub-apps `setup` yourself:
-
-```js
-const express = require('express');
-const feathers = require('@feathersjs/feathers');
-const api = feathers().use('/service', myService);
-
-const mainApp = express().use('/api/v1', api);
-
-const server = mainApp.listen(3030);
-
-// Now call setup on the Feathers app with the server
-api.setup(server);
-```
-
-> **ProTip:** We recommend avoiding complex sub-app setups because websockets and Feathers built in authentication are not fully sub-app aware.
-
-
-## HTTPS
-
-With your Feathers application initialized it is easy to set up an HTTPS REST and SocketIO server:
-
-```js
-const fs = require('fs');
-const https  = require('https');
-
-app.configure(socketio()).use('/todos', todoService);
-
-const server = https.createServer({
-  key: fs.readFileSync('privatekey.pem'),
-  cert: fs.readFileSync('certificate.pem')
-}, app).listen(443);
-
-// Call app.setup to initialize all services and SocketIO
-app.setup(server);
-```
-
-
-## Virtual Hosts
-
-You can use the [vhost](https://github.com/expressjs/vhost) middleware to run your Feathers app on a virtual host:
-
-```js
-const vhost = require('vhost');
-
-app.use('/todos', todoService);
-
-const host = feathers().use(vhost('foo.com', app));
-const server = host.listen(8080);
-
-// Here we need to call app.setup because .listen on our virtal hosted
-// app is never called
-app.setup(server);
 ```
