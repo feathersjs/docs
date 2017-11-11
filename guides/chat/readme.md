@@ -1,6 +1,6 @@
 # Creating a Chat Application
 
-Well alright! Let's build our first Feathers app! We're going to build a real-time chat app with [NeDB](https://github.com/louischatriot/nedb) as the database. It's a great way to cover all the things that you'd need to do in a real world application and how Feathers can help. It also makes a lot more sense to have a real-time component than a Todo list. 😉
+Well alright! Let's build our first Feathers app! We're going to build a real-time chat app with [NeDB](https://github.com/louischatriot/nedb) as the database. It's a great way to cover all the things that you'd need to do in a real world application and how Feathers can help. It also makes a lot more sense to have a real-time component than a Todo list. :wink:
 
 ![Chat app screenshot](./assets/chat.gif)
 

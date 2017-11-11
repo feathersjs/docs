@@ -82,7 +82,7 @@ The Feathers `app` will contain two useful methods once you've configured the au
 - [app.passport.createJWT](#apppassportcreatejwtpayload-options--promise-source)
 - [app.passport.verifyJWT](#apppassportverifyjwttoken-options-source)
 
-### `app.passport.createJWT(payload, options) => promise` [source](https://github.com/feathersjs/feathers-authentication/blob/master/src/utils.js#L8)
+### `app.passport.createJWT(payload, options) => promise` [source](https://github.com/feathersjs/feathers-authentication/blob/master/lib/utils.js#L8)
 This is the method used by the `/authentication` service to generate JSON Web Tokens.
 - `payload {Object}` - becomes the JWT payload. Will also include an `exp` property denoting the expiry timestamp.
 - `options {Object}` - the options passed to [jsonwebtoken `sign()`](https://www.npmjs.com/package/jsonwebtoken#jwtsignpayload-secretorprivatekey-options-callback)
@@ -91,7 +91,7 @@ This is the method used by the `/authentication` service to generate JSON Web To
 
 The returned `promise` resolves with the JWT or fails with an error.
 
-### `app.passport.verifyJWT(token, options)` [source](https://github.com/feathersjs/feathers-authentication/blob/master/src/utils.js#L48)
+### `app.passport.verifyJWT(token, options)` [source](https://github.com/feathersjs/feathers-authentication/blob/master/lib/utils.js#L48)
 Verifies the signature and payload of the passed in JWT `token` using the `options`.
 - `token {JWT}` - the JWT to be verified.
 - `options {Object}` the options passed to [jsonwebtoken `verify()`](https://www.npmjs.com/package/jsonwebtoken#jwtverifytoken-secretorpublickey-options-callback)
@@ -196,12 +196,12 @@ app.post('/login', auth.express.authenticate('local', { successRedirect: '/app',
 
 Additional middleware are included and exposed but typically you don't need to worry about them:
 
-- `emitEvents` [source](https://github.com/feathersjs/feathers-authentication/blob/master/src/express/emit-events.js) - emit `login` and `logout` events
-- `exposeCookies` [source](https://github.com/feathersjs/feathers-authentication/blob/master/src/express/expose-cookies.js) - expose cookies to Feathers so they are available to hooks and services.  **This is NOT used by default as its use exposes your API to CSRF vulnerabilities.**  Only use it if you really know what you're doing.
-- `exposeHeaders` [source](https://github.com/feathersjs/feathers-authentication/blob/master/src/express/expose-headers.js) - expose headers to Feathers so they are available to hooks and services. **This is NOT used by default as its use exposes your API to CSRF vulnerabilities.** Only use it if you really know what you're doing.
-- `failureRedirect` [source](https://github.com/feathersjs/feathers-authentication/blob/master/src/express/failure-redirect.js) - support redirecting on auth failure. Only triggered if `context.redirect` is set.
-- `successRedirect` [source](https://github.com/feathersjs/feathers-authentication/blob/master/src/express/success-redirect.js) - support redirecting on auth success. Only triggered if `context.redirect` is set.
-- `setCookie` [source](https://github.com/feathersjs/feathers-authentication/blob/master/src/express/set-cookie.js) - support setting the JWT access token in a cookie. Only enabled if cookies are enabled.  **Note: Feathers will NOT read an access token from a cookie.  This would expose the API to CSRF attacks.**  This `setCookie` feature is available primarily for helping with Server Side Rendering.
+- `emitEvents` [source](https://github.com/feathersjs/feathers-authentication/blob/master/lib/express/emit-events.js) - emit `login` and `logout` events
+- `exposeCookies` [source](https://github.com/feathersjs/feathers-authentication/blob/master/lib/express/expose-cookies.js) - expose cookies to Feathers so they are available to hooks and services.  **This is NOT used by default as its use exposes your API to CSRF vulnerabilities.**  Only use it if you really know what you're doing.
+- `exposeHeaders` [source](https://github.com/feathersjs/feathers-authentication/blob/master/lib/express/expose-headers.js) - expose headers to Feathers so they are available to hooks and services. **This is NOT used by default as its use exposes your API to CSRF vulnerabilities.** Only use it if you really know what you're doing.
+- `failureRedirect` [source](https://github.com/feathersjs/feathers-authentication/blob/master/lib/express/failure-redirect.js) - support redirecting on auth failure. Only triggered if `hook.redirect` is set.
+- `successRedirect` [source](https://github.com/feathersjs/feathers-authentication/blob/master/lib/express/success-redirect.js) - support redirecting on auth success. Only triggered if `hook.redirect` is set.
+- `setCookie` [source](https://github.com/feathersjs/feathers-authentication/blob/master/lib/express/set-cookie.js) - support setting the JWT access token in a cookie. Only enabled if cookies are enabled.  **Note: Feathers will NOT read an access token from a cookie.  This would expose the API to CSRF attacks.**  This `setCookie` feature is available primarily for helping with Server Side Rendering.
 
 ## Migrating to 1.x
 Refer to [the migration guide](https://github.com/feathersjs/feathers-authentication/blob/master/docs/migrating.md).

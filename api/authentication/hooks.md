@@ -120,8 +120,8 @@ app.service('messages').before({
 
 #### Options
 
-- `roles` (**required**) - An array of roles that a user must have at least one of in order to access the resource.
-- `fieldName` (default: 'roles') [optional] - The field on your user object that denotes their roles.
+- `roles` (**required**) - An array of roles, or a role string that a user must have at least one of in order to access the resource.
+- `fieldName` (default: 'roles') [optional] - The field on your user object that denotes their role or roles.
 - `idField` (default: '_id') [optional] - The id field on your user object.
 - `ownerField` (default: 'userId') [optional] - The id field for a user on your resource.
 - `owner` (default: 'false') [optional] - Denotes whether it should also allow owners regardless of their role (ie. the user has the role **or** is an owner).
