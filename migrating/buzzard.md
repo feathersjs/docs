@@ -24,15 +24,10 @@ In short (for more details see below) this will:
 - Remove all `.filter` imports and calls to `service.filter` which has been replaced by channel functionality
 
 
-If you have Socket.io or Primus configured, add the following file as `src/channels.js`:
+If you are using real-time (with Socket.io or Primus), add the following file as `src/channels.js`:
 
 ```js
 module.exports = function(app) {
-  if(!app.channel) {
-    // If no real-time functionality has been configured just return
-    return;
-  }
-
   app.on('connection', connection => {
     // On a new real-time connection, add it to the
     // anonymous channel
@@ -59,40 +54,33 @@ module.exports = function(app) {
       // user.rooms.forEach(room => app.channel(`rooms/${room.id}`).join(channel))
     }
   });
+
+  app.publish((data, hook) => {
+    // Here you can add event publishers to channels set up in `channels.js`
+    // To publish only for a specific event use `app.publish(eventname, () => {})`
+
+    // publish all service events to all authenticated users users
+    // return app.channel('authenticated');
+  });
+
+  // you can also add service specific publisher via
+
+  // for a specific event
+  // app.service('name').publish(eventName, (data, hook) => {});
+
+  // For all events on that service
+  // app.service('name').publish((data, hook) => {});
 };
 ```
 
-And require and configure it in `src/app.js`:
+And require and configure it in `src/app.js` (note that it should be configured after all services so that
+`channels.js` can register service specific publishers):
 
 ```js
 const channels = require('./channels');
 
-// before `app.configure(services)`
+// after `app.configure(services)`
 app.configure(channels);
-```
-
-To get the previous real-time functionality (but only sending events to authenticated users) you can now at the end of the configuration function in each `src/services/<name>.service.js` file add:
-
-```js
-service.publish((data, hook) => {
-  // Here you can add event publishers to channels set up in `channels.js`
-  // To publish only for a specific event use `app.publish(eventname, () => {})`
-
-  // publish all service events to all authenticated users users
-  return app.channel('authenticated');
-});
-```
-
-The publisher can also be defined globally e.g. in `src/app.js`:
-
-```js
-app.publish((data, hook) => {
-  // Here you can add event publishers to channels set up in `channels.js`
-  // To publish only for a specific event use `app.publish(eventname, () => {})`
-
-  // publish all service events to all authenticated users users
-  return app.channel('authenticated');
-});
 ```
 
 ## `@feathersjs` npm scope
@@ -139,23 +127,31 @@ All Feathers core modules have been moved to the `@feathersjs` npm scope. This m
 
 `@feathersjs/feathers` v3 is framework independent and will work on the client and in Node out of the box. This means that it is not extending Express by default anymore.
 
-Instead `@feathersjs/express` provides the framework bindings and the REST provider (previously `feathers-rest`) in `@feathersjs/express/rest`. Once a Feathers application is "expressified" it can be used like the previous version:
+Instead `@feathersjs/express` provides the framework bindings and the REST provider (previously `feathers-rest`) in either `require('@feathersjs/express').rest` or `@feathersjs/express/rest`. `@feathersjs/express` also brings Express built-in middleware like `express.static` and the recently included `express.json` and `express.urlencoded` body parsers. Once a Feathers application is "expressified" it can be used like the previous version:
 
 __Before__
 
 ```js
 const feathers = require('feathers');
+const bodyParser = require('body-parser');
 const rest = require('feathers-rest');
+const errorHandler = require('feathers-errors/handler');
 
 const app = feathers();
 
 app.configure(rest());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
 // Register an Express middleware
 app.get('/somewhere', function(req, res) {
   res.json({ message: 'Data from somewhere middleware' });
 });
 // Statically host some files
 app.use('/', feathers.static(__dirname));
+
+// Use a Feathers friendly Express error handler
+app.use(errorHandler());
 ```
 
 __Now__
@@ -163,17 +159,25 @@ __Now__
 ```js
 const feathers = require('@feathersjs/feathers');
 const express = require('@feathersjs/express');
-const rest = require('@feathersjs/express/rest');
 
+// Create an Express compatible Feathers application
 const app = express(feathers());
 
-app.configure(rest());
+// Add body parsing middleware
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+// Initialize REST provider (previous in `feathers-rest`)
+app.configure(express.rest());
+
 // Register an Express middleware
 app.get('/somewhere', function(req, res) {
   res.json({ message: 'Data from somewhere middleware' });
 });
 // Statically host some files
 app.use('/', express.static(__dirname));
+
+// Use a Feathers friendly Express error handler
+app.use(express.errorHandler());
 ```
 
 ## Hooks in core
