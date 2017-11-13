@@ -111,7 +111,7 @@
     * [Knex](api/databases/knexjs.md)
     * [RethinkDB](api/databases/rethinkdb.md)
     * [Elasticsearch](api/databases/elasticsearch.md)
-* [Migrating](migrating/buzzard.md)
+* [Migrating](migrating.md)
 * [Security](SECURITY.md)
 * [Ecosystem](ecosystem/readme.md)
 * [Help](help/readme.md)

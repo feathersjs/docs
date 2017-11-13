@@ -5,9 +5,13 @@
   background: #FFFFFF;
 }
 
+.book-summary ul.summary li ul {
+  padding-left: 15px;
+}
+
 /* Sidebar Links */
 .book .book-summary nav ul.summary li a {
-  padding: 6px 10px;
+  padding: 6px 15px;
   font-size: 1em;
   color: #666666;
 }

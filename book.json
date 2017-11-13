@@ -23,6 +23,9 @@
     "lunr": {
       "maxIndexSize": 1000000000
     },
+    "menu": {
+      "deep": true
+    },
     "versions": {
       "gitbookConfigURL": "https://raw.githubusercontent.com/feathersjs/feathers-docs/master/book.json",
       "options": [

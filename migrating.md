@@ -73,8 +73,7 @@ module.exports = function(app) {
 };
 ```
 
-And require and configure it in `src/app.js` (note that it should be configured after all services so that
-`channels.js` can register service specific publishers):
+And require and configure it in `src/app.js` (note that it should be configured after all services so that `channels.js` can register service specific publishers):
 
 ```js
 const channels = require('./channels');
