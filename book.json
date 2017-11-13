@@ -13,9 +13,9 @@
   ],
   "pluginsConfig": {
     "edit-link": {
-      "placement": "left",
-      "base": "https://github.com/feathersjs/feathers-docs/edit/master",
-      "label": "Edit This Page"
+      "base": "https://github.com/feathersjs/docs/edit/buzzard",
+      "label": "Edit This Page",
+      "placement": "left"
     },
     "ga": {
       "token": "UA-64904930-1"
@@ -27,15 +27,19 @@
       "deep": true
     },
     "versions": {
-      "gitbookConfigURL": "https://raw.githubusercontent.com/feathersjs/feathers-docs/master/book.json",
+      "gitbookConfigURL": "https://raw.githubusercontent.com/feathersjs/docs/buzzard/book.json",
       "options": [
         {
           "value": "https://docs.feathersjs.com",
-          "text": "Latest Stable (Auk)"
+          "text": "Latest Stable - Auk (v2)"
+        },
+        {
+          "value": "https://buzzard.docs.feathersjs.com",
+          "text": "Next Release - Buzzard (v3)"
         },
         {
           "value": "https://legacy.docs.feathersjs.com",
-          "text": "Legacy (Pre-Auk)"
+          "text": "Legacy (v1)"
         }
       ]
     }
