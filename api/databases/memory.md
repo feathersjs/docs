@@ -49,7 +49,6 @@ In `app.js`:
 const feathers = require('@feathersjs/feathers');
 const express = require('@feathersjs/express');
 const socketio = require('@feathersjs/socketio');
-const errorHandler = require('@feathersjs/express/errors');
 
 const memory = require('feathers-memory');
 
@@ -72,7 +71,7 @@ app.use('/messages', memory({
   }
 }));
 // Set up default error handler
-app.use(errorHandler());
+app.use(express.errorHandler());
 
 // Create a dummy Message
 app.service('messages').create({

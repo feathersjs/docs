@@ -63,7 +63,6 @@ In `app.js`:
 
 ```js
 const feathers = require('@feathersjs/feathers');
-const errorHandler = require('@feathersjs/express/errors');
 const express = require('@feathersjs/express');
 const socketio = require('@feathersjs/socketio');
 
@@ -94,7 +93,7 @@ app.use('/messages', service({
   }
 }));
 // Set up default error handler
-app.use(errorHandler());
+app.use(express.errorHandler());
 
 // Create a dummy Message
 app.service('messages').create({

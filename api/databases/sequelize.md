@@ -23,18 +23,6 @@ npm install --save tedious // MSSQL
 
 > For more information about models and general Sequelize usage, follow up in the [Sequelize documentation](http://docs.sequelizejs.com/en/latest/).
 
-## A quick note about `raw` queries
-
-By default, all `feathers-sequelize` operations will return `raw` data (using `raw: true` when querying the database). This results in faster execution and allows feathers-sequelize to interoperate with feathers-common hooks and other 3rd party integrations. However, this will bypass some of the "goodness" you get when using Sequelize as an ORM: 
-
- - custom getters/setters will be bypassed
- - model-level validations are bypassed
- - associated data loads a bit differently
- - ...and several other issues that one might not expect
- 
-Don't worry! The solution is easy. Please read the guides about [working with model instances](#working-with-sequelize-model-instances).
-
-
 ## API
 
 ### `service(options)`
@@ -76,6 +64,17 @@ app.service('messages').hooks({
 });
 ```
 
+## Sequelize `raw` queries
+
+By default, all `feathers-sequelize` operations will return `raw` data (using `raw: true` when querying the database). This results in faster execution and allows feathers-sequelize to interoperate with feathers-common hooks and other 3rd party integrations. However, this will bypass some of the "goodness" you get when using Sequelize as an ORM: 
+
+ - custom getters/setters will be bypassed
+ - model-level validations are bypassed
+ - associated data loads a bit differently
+ - ...and several other issues that one might not expect
+ 
+Don't worry! The solution is easy. Please read the guides about [working with model instances](#working-with-sequelize-model-instances).
+
 ## Example
 
 Here is an example of a Feathers server with a `messages` SQLite Sequelize Model:
@@ -89,7 +88,6 @@ In `app.js`:
 ```js
 const path = require('path');
 const feathers = require('@feathersjs/feathers');
-const errorHandler = require('@feathersjs/express/errors')
 const express = require('@feathersjs/express');
 const socketio = require('@feathersjs/socketio');
 
@@ -130,7 +128,7 @@ app.use('/messages', service({
     max: 4
   }
 }));
-app.use(errorHandler());
+app.use(express.errorHandler());
 
 Message.sync({ force: true }).then(() => {
   // Create a dummy Message

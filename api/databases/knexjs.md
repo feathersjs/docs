@@ -73,7 +73,6 @@ In `app.js`:
 
 ```js
 const feathers = require('@feathersjs/feathers');
-const errorHandler = require('@feathersjs/express/errors');
 const express = require('@feathersjs/express');
 const socketio = require('@feathersjs/socketio');
 
@@ -107,7 +106,7 @@ app.use('/messages', service({
     max: 4
   }
 }))
-app.use(errorHandler());
+app.use(express.errorHandler());
 
 // Clean up our data. This is optional and is here
 // because of our integration tests

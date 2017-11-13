@@ -50,7 +50,6 @@ Here's an example of a Feathers server that uses `feathers-elasticsearch`.
 const feathers = require('@feathersjs/feathers');
 const rest = require('@feathersjs/express/rest');
 const express = require('@feathersjs/express');
-const errorHandler = require('@feathersjs/express/errors');
 
 const service = require('feathers-elasticsearch');
 const elasticsearch = require('elasticsearch');
@@ -74,13 +73,13 @@ const messageService = service({
 const app = express(feathers());
 
 // Needed for parsing bodies (login)
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 // Enable REST services
 app.configure(express.rest());
 // Initialize your feathers plugin
 app.use('/messages', messageService);
-app.use(errorHandler());;
+app.use(express.errorHandler());;
 
 app.listen(3030);
 
@@ -246,8 +245,6 @@ Elasticsearch supports [parent-child relationship](https://www.elastic.co/guide/
 - each operation concering a single document (create, get, patch, update, remove) is required to provide parent id
 - creating documents in bulk (providing a list of documents) is the same as many single document operations, so parent id is required as well
 - to avoid any doubts, each query based operation (find, bulk patch, bulk remove) cannot have the parent id
-
-### How to specify parent id
 
 Parent id should be provided as part of the data for the create operations (single and bulk):
 

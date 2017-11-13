@@ -118,7 +118,6 @@ Then in `app.js`:
 
 ```js
 const feathers = require('@feathersjs/feathers');
-const errorHandler = require('@feathersjs/express/errors');
 const express = require('@feathersjs/express');
 const socketio = require('@feathersjs/socketio');
 
@@ -154,7 +153,7 @@ app.use('/messages', service({
     max: 4
   }
 }));
-app.use(errorHandler());
+app.use(express.errorHandler());
 
 // Create a dummy Message
 app.service('messages').create({
@@ -178,7 +177,7 @@ Mongoose by default gives you the ability to add [validations at the model level
 
 For more information on querying and validation refer to the [Mongoose documentation](http://mongoosejs.com/docs/guide.html).
 
-### $populate
+## $populate
 
 For Mongoose, the special `$populate` query parameter can be used to allow [Mongoose query population](http://mongoosejs.com/docs/populate.html).
 
