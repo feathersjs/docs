@@ -1,14 +1,22 @@
-## Client
+# Socket.io Client
 
-The `client` module in `feathers-socketio` (`require('feathers-socketio/client')`) allows to connect to services exposed through the [Socket.io server](#server) via a Socket.io socket.
+> **Note:** We recommend using Feathers and the `@feathersjs/socketio-client` module on the client if possible. To use a direct Socket.io connection without using Feathers on the client however see the [Direct connection](#direct-connection) section.
 
-> **Very important:** The examples below assume you are using Feathers either in Node or in the browser with a module loader like Webpack or Browserify. For using Feathers with a `<script>` tag, AMD modules or with React Native see the [client chapter](./client.md).
+## @feathersjs/socketio-client
 
-<!-- -->
+[![GitHub stars](https://img.shields.io/github/stars/feathersjs/socketio-client.png?style=social&label=Star)](https://github.com/feathersjs/socketio-client/)
+[![npm version](https://img.shields.io/npm/v/@feathersjs/socketio-client.png?style=flat-square)](https://www.npmjs.com/package/@feathersjs/socketio-client)
+[![Changelog](https://img.shields.io/badge/changelog-.md-blue.png?style=flat-square)](https://github.com/feathersjs/socketio-client/blob/master/CHANGELOG.md)
 
-> **Note:** A client application can only use a single transport (either REST, Socket.io or Primus). Using two transports in the same client application is normally not necessary.
+```
+$ npm install @feathersjs/socketio-client --save
+```
 
-### `socketio(socket)`
+The `@feathersjs/socketio-client` module allows to connect to services exposed through the [Socket.io server](../socketio.md) via a Socket.io socket.
+
+> **Important:** Socket.io is also used to *call* service methods. Using sockets for both, calling methods and receiving real-time events is generally faster than using [REST](./express.md) and there is no need to use both, REST and Socket.io in the same client application at the same time.
+
+### socketio(socket)
 
 Initialize the Socket.io client using a given socket and the default options.
 
@@ -33,7 +41,7 @@ app.service('messages').create({
 });
 ```
 
-### `socketio(socket, options)`
+### socketio(socket, options)
 
 Initialize the Socket.io client using a given socket and the given options. 
 
@@ -56,9 +64,7 @@ app.configure(socketio(socket, {
 }));
 ```
 
-### Changing the socket client timeout
-
-Currently, the only way for clients to determine if a service or service method exists is through a timeout. You can set the timeout either through the option above or on a per-service level by setting the `timeout` property:
+To set a service specific timeout you can use:
 
 ```javascript
 app.service('messages').timeout = 3000;
@@ -85,107 +91,111 @@ Feathers sets up a normal Socket.io server that you can connect to with any Sock
 </script>
 ```
 
-### Calling service methods
+Service methods can be called by emitting a `<methodname>` event followed by the service path and method parameters. The service path is the name the service has been registered with (in `app.use`) without leading or trailing slashes. An optional callback following the `function(error, data)` Node convention will be called with the result of the method call or any errors that might have occurred.
 
-Service methods can be called by emitting a `<servicepath>::<methodname>` event with the method parameters. `servicepath` is the name the service has been registered with (in `app.use`) without leading or trailing slashes. An optional callback following the `function(error, data)` Node convention will be called with the result of the method call or any errors that might have occurred.
+`params` will be set as `params.query` in the service method call. Other service parameters can be set through a [Socket.io middleware](../socketio.md).
 
-`params` will be set as `params.query` in the service method call. Other service parameters can be set through a [Socket.io middleware](../real-time/socket-io.md).
+If the service path or method does not exist an appropriate Feathers error will be returned.
 
-#### `find`
+### Authentication
+
+See the [Authentication Client chapter](../authentication/client.md).
+
+### find
 
 Retrieves a list of all matching resources from the service
 
 ```js
-socket.emit('messages::find', { status: 'read', user: 10 }, (error, data) => {
+socket.emit('find', 'messages', { status: 'read', user: 10 }, (error, data) => {
   console.log('Found all messages', data);
 });
 ```
 
-Will call `messages.find({ query: { status: 'read', user: 10 } })` on the server.
+Will call `app.service('messages').find({ query: { status: 'read', user: 10 } })` on the server.
 
-#### `get`
+### get
 
 Retrieve a single resource from the service.
 
 ```js
-socket.emit('messages::get', 1, (error, message) => {
+socket.emit('get', 'messages', 1, (error, message) => {
   console.log('Found message', message);
 });
 ```
 
-Will call `messages.get(1, {})` on the server.
+Will call `app.service('messages').get(1, {})` on the server.
 
 ```js
-socket.emit('messages::get', 1, { fetch: 'all' }, (error, message) => {
+socket.emit('get', 'messages', 1, { fetch: 'all' }, (error, message) => {
   console.log('Found message', message);
 });
 ```
 
-Will call `messages.get(1, { query: { fetch: 'all' } })` on the server.
+Will call `app.service('messages').get(1, { query: { fetch: 'all' } })` on the server.
 
 #### `create`
 
 Create a new resource with `data` which may also be an array.
 
 ```js
-socket.emit('messages::create', {
-  "text": "I really have to iron"
+socket.emit('create', 'messages', {
+  text: 'I really have to iron'
 }, (error, message) => {
   console.log('Todo created', message);
 });
 ```
 
-Will call `messages.create({ "text": "I really have to iron" }, {})` on the server.
+Will call `app.service('messages').create({ text: 'I really have to iron' }, {})` on the server.
 
 ```js
-socket.emit('messages::create', [
-  { "text": "I really have to iron" },
-  { "text": "Do laundry" }
+socket.emit('create', 'messages', [
+  { text: 'I really have to iron' },
+  { text: 'Do laundry' }
 ]);
 ```
 
-Will call `messages.create` with the array.
+Will call `app.service('messages').create` with the array.
 
-#### `update`
+### update
 
 Completely replace a single or multiple resources.
 
 ```js
-socket.emit('messages::update', 2, {
-  "text": "I really have to do laundry"
+socket.emit('update', 'messages', 2, {
+  text: 'I really have to do laundry'
 }, (error, message) => {
   console.log('Todo updated', message);
 });
 ```
 
-Will call `messages.update(2, { "text": "I really have to do laundry" }, {})` on the server. The `id` can also be `null` to update multiple resources:
+Will call `app.service('messages').update(2, { text: 'I really have to do laundry' }, {})` on the server. The `id` can also be `null` to update multiple resources:
 
 ```js
-socket.emit('messages::update', null, {
+socket.emit('update', 'messages', null, {
   complete: true
 }, { complete: false });
 ```
 
-Will call `messages.update(null, { "complete": true }, { query: { complete: 'false' } })` on the server.
+Will call `app.service('messages').update(null, { complete: true }, { query: { complete: 'false' } })` on the server.
 
 > **ProTip:** `update` is normally expected to replace an entire resource which is why the database adapters only support `patch` for multiple records.
 
-#### `patch`
+### patch
 
 Merge the existing data of a single or multiple resources with the new `data`.
 
 ```js
-socket.emit('messages::patch', 2, {
+socket.emit('patch', 'messages', 2, {
   read: true
 }, (error, message) => {
   console.log('Patched message', message);
 });
 ```
 
-Will call `messages.patch(2, { "read": true }, {})` on the server. The `id` can also be `null` to update multiple resources:
+Will call `app.service('messages').patch(2, { read: true }, {})` on the server. The `id` can also be `null` to update multiple resources:
 
 ```js
-socket.emit('messages::patch', null, {
+socket.emit('patch', 'messages', null, {
   complete: true
 }, {
   complete: false
@@ -194,32 +204,32 @@ socket.emit('messages::patch', null, {
 });
 ```
 
-Will call `messages.patch(null, { complete: true }, { query: { complete: false } })` on the server to change the status for all read messages.
+Will call `app.service('messages').patch(null, { complete: true }, { query: { complete: false } })` on the server to change the status for all read app.service('messages').
 
 This is supported out of the box by the Feathers [database adapters](../databases/readme.md) 
 
-#### `remove`
+### remove
 
 Remove a single or multiple resources:
 
 ```js
-socket.emit('messages::remove', 2, { cascade: true }, (error, message) => {
+socket.emit('remove', 'messages', 2, { cascade: true }, (error, message) => {
   console.log('Removed a message', message);
 });
 ```
 
-Will call `messages.remove(2, { query: { cascade: true } })` on the server. The `id` can also be `null` to remove multiple resources:
+Will call `app.service('messages').remove(2, { query: { cascade: true } })` on the server. The `id` can also be `null` to remove multiple resources:
 
 ```js
-socket.emit('messages::remove', null, { read: true });
+socket.emit('remove', 'messages', null, { read: true });
 ```
 
-Will call `messages.remove(null, { query: { read: 'true' } })` on the server to delete all read messages.
+Will call `app.service('messages').remove(null, { query: { read: 'true' } })` on the server to delete all read app.service('messages').
 
 
 ### Listening to events
 
-Listening to service events allows real-time behaviour in an application. [Service events](../real-time/readme.md) are sent to the socket in the form of `servicepath eventname`.
+Listening to service events allows real-time behaviour in an application. [Service events](../events.md) are sent to the socket in the form of `servicepath eventname`.
 
 #### created
 
@@ -244,7 +254,7 @@ socket.on('my/messages updated', function(message) {
   console.log('Got an updated Todo!', message);
 });
 
-socket.emit('my/messages::update', 1, {
+socket.emit('update', 'my/messages', 1, {
   text: 'Updated text'
 }, {}, function(error, callback) {
  // Do something here

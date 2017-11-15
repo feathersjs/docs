@@ -1,33 +1,37 @@
 # Client
 
-One of the most notable features of Feathers is that it can also be used as the client. The difference to many other frameworks and services is that it isn't a separate library, you instead get the exact same functionality as on the server. This means you can use [services](./services.md) and [hooks](./hooks.md) and configure plugins. By default a Feathers client automatically creates services that talk to a Feathers server. How to initialize a connection can be found in
+One of the most notable features of Feathers is that it can also be used as the client. The difference to many other frameworks is that it isn't a separate library, you instead get the exact same functionality as on the server. This means you can use [services](./services.md) and [hooks](./hooks.md) and configure plugins. By default a Feathers client automatically creates services that talk to a Feathers server.
 
-- The [REST transport client chapter](./rest.md#client)
-- The [Socket.io transport client chapter](./socketio.md#client) (real-time)
-- The [Primus transport client chapter](./primus.md#client) (real-time)
+How to initialize a connection _or connecting to a Feathers server directly without Feathers on the client side_ can be found in
+
+- The [REST client chapter](./client/rest.md)
+- The [Socket.io client chapter](./client/socketio.md) (real-time)
+- The [Primus client chapter](./client/primus.md) (real-time)
 
 This chapter describes how to use Feathers as the client in Node, React Native and in the browser with a module loader like Webpack, Browserify, StealJS or through a `<script>` tag.
 
-> __Important:__ The Feathers client libraries come transpiled to ES5 but require ES6 shims either through the [babel-polyfill](https://www.npmjs.com/package/babel-polyfill) module or by including [core.js](https://github.com/zloirock/core-js) in older browsers e.g. via `<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/core-js/2.1.4/core.min.js"></script>`
+> __Important:__ If you are not using a module loader you can load the [@feathersjs/client](#feathersjs/client) directly through a script tag in the browser.
 
-<!-- -->
+## Node
 
-> __Important:__ If you are not using a module loader you can load the [feathers-client](#feathers-client) directly through a script tag in the browser.
+To connect to a Feathers server in NodeJS
 
-| Server package            | Client package                   | API page            |
-| ------------------------- | -------------------------------- | ------------------- |
-| `feathers`                | `feathers/client`                | [Application API](./application.md) |
-| `feathers-hooks`          | `feathers-hooks`                 | [Hooks API](./hooks.md) |
-| `feathers-errors`         | `feathers-errors`                | [Errors API](./errors.md) |
-| `feathers-rest`           | `feathers-rest/client`           | [REST Transport API](./rest.md) |
-| `feathers-socketio`       | `feathers-socketio/client`       | [Socket.io Transport API](./socketio.md) |
-| `feathers-primus`         | `feathers-primus/client`         | [Primus Transport API](./primus.md) |
-| `feathers-authentication` | `feathers-authentication-client` | [Feathers Authentication Client API](./authentication/client.md) |
+## Module loaders
+
+### Webpack
+
+### Browserify
+
+### StealJS
+
+### Others
+
+## React Native
+
 
 ## Universal (Isomorphic) API
 
-The Feathers Client uses the same [Application API](./application.md) as is available on the server.  It is extremely lightweight, however, with Express having been replaced by a [thin wrapper](https://github.com/feathersjs/feathers/blob/master/src/client/express.js).  There are differences between the client and server APIs.  Learn more under each method on the [Application API page](./application.md).
-
+The Feathers Client uses the same [Application API](./application.md) as is available on the server.
 
 ## Node and npm loaders
 
@@ -112,11 +116,17 @@ messageService.create({
 });
 ```
 
-## feathers-client
+## @feathersjs/client
 
 [![GitHub stars](https://img.shields.io/github/stars/feathersjs/feathers-client.png?style=social&label=Star)](https://github.com/feathersjs/feathers-client/)
 [![npm version](https://img.shields.io/npm/v/feathers-client.png?style=flat-square)](https://www.npmjs.com/package/feathers-client)
 [![Changelog](https://img.shields.io/badge/changelog-.md-blue.png?style=flat-square)](https://github.com/feathersjs/feathers-client/blob/master/CHANGELOG.md)
+
+
+> __Important:__ The Feathers client libraries come transpiled to ES5 but require ES6 shims either through the [babel-polyfill](https://www.npmjs.com/package/babel-polyfill) module or by including [core.js](https://github.com/zloirock/core-js) in older browsers e.g. via `<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/core-js/2.1.4/core.min.js"></script>`
+
+<!-- -->
+
 
 ```
 $ npm install feathers-client --save

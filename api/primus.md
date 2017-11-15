@@ -10,18 +10,9 @@ $ npm install @feathersjs/primus --save
 
 The [@feathersjs/primus](https://github.com/feathersjs/primus) module allows to call [service methods](./services.md) and receive [real-time events](./events.md) via [Primus](https://github.com/primus/primus), a universal wrapper for real-time frameworks that supports Engine.IO, WebSockets, Faye, BrowserChannel, SockJS and Socket.IO.
 
-| Service method  | Method event name   | Real-time event    |
-|-----------------|---------------------|--------------------|
-| .find()         | `find`              | -                  |
-| .get()          | `get`               | -                  |
-| .create()       | `create`            | `messages created` |
-| .update()       | `update`            | `messages updated` |
-| .patch()        | `patch`             | `messages patched` |
-| .remove()       | `removed`           | `messages removed` |
+> **Important:** This page describes how to set up Primus server. The [Primus client chapter](./client/primus.md) shows how to connect to this server on the client and the message format for service calls and real-time events.
 
-> **Important:** Primus is also used to *call* service methods. Using sockets for both, calling methods and receiving real-time events is generally faster than using [REST](./express.md) and there is usually no need to use both, REST and Socket.io in the same client application at the same time.
-
-## Server
+## Configuration
 
 Additionally to `@feathersjs/primus` your websocket library of choice also has to be installed.
 
@@ -29,11 +20,27 @@ Additionally to `@feathersjs/primus` your websocket library of choice also has t
 $ npm install ws --save
 ```
 
-### `app.configure(primus(options [, callback]))`
+### app.configure(primus(options))
 
-Sets up the Primus transport with the given [Primus options](https://github.com/primus/primus) and optionally calls the callback with the Primus server instance.
+Sets up the Primus transport with the given [Primus options](https://github.com/primus/primus).
 
 > **Pro tip:** Once the server has been started with `app.listen()` or `app.setup(server)` the Primus server object is available as `app.primus`.
+
+```js
+const feathers = require('@feathersjs/feathers');
+const primus = require('@feathersjs/primus');
+
+const app = feathers();
+
+// Set up Primus with SockJS
+app.configure(primus({ transformer: 'ws' }));
+
+app.listen(3030);
+```
+
+### app.configure(primus(options, callback))
+
+Sets up the Primus transport with the given [Primus options](https://github.com/primus/primus) and calls the callback with the Primus server instance.
 
 ```js
 const feathers = require('@feathersjs/feathers');
@@ -47,6 +54,31 @@ app.configure(primus({
 }, function(primus) {
   // Do something with primus object
 }));
+
+app.listen(3030);
+```
+
+## params
+
+The Primus request object has a `feathers` property that can be extended with additional service `params` during authorization:
+
+```js
+app.configure(primus({
+  transformer: 'ws'
+}, function(primus) {
+  // Do something with primus
+  primus.use('feathers-referrer', function(req, res){
+    // Exposing a request property to services and hooks
+    req.feathers.referrer = request.referrer;
+  });
+}));
+
+app.use('messages', {
+  create(data, params, callback) {
+    // When called via Primus:
+    params.referrer // referrer from request
+  }
+});
 ```
 
 ### `params.provider`
@@ -71,26 +103,3 @@ app.service('users').hooks({
 `params.query` will contain the query parameters sent from the client.
 
 > **Important:** Only `params.query` is passed between the server and the client, other parts of `params` are not. This is for security reasons so that a client can't set things like `params.user` or the database options. You can always map from `params.query` to `params` in a before [hook](./hooks.md).
-
-### Middleware and service parameters
-
-The Primus request object has a `feathers` property that can be extended with additional service `params` during authorization:
-
-```js
-app.configure(primus({
-  transformer: 'ws'
-}, function(primus) {
-  // Do something with primus
-  primus.use('feathers-referrer', function(req, res){
-    // Exposing a request property to services and hooks
-    req.feathers.referrer = request.referrer;
-  });
-}));
-
-app.use('messages', {
-  create(data, params, callback) {
-    // When called via Primus:
-    params.referrer // referrer from request
-  }
-});
-```

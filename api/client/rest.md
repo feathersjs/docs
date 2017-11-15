@@ -1,8 +1,18 @@
-## Client
+# REST Client
 
-The `client` module in `feathers-rest` (`require('feathers-rest/client')`) allows to connect to a service exposed through the [REST server](#server) using [jQuery](https://jquery.com/), [request](https://github.com/request/request), [Superagent](http://visionmedia.github.io/superagent/), [Axios](https://github.com/mzabriskie/axios) or [Fetch](https://facebook.github.io/react-native/docs/network.html) as the AJAX library.
+> **Note:** For directly using a Feathers REST API (via HTTP) without using Feathers on the client see the [HTTP API](#http-api) section.
 
-> **Very important:** The examples below assume you are using Feathers either in Node or in the browser with a module loader like Webpack or Browserify. For using Feathers with a `<script>` tag, AMD modules or with React Native see the [client chapter](./client.md).
+## @feathersjs/rest-client
+
+[![GitHub stars](https://img.shields.io/github/stars/feathersjs/rest-client.png?style=social&label=Star)](https://github.com/feathersjs/rest-client/)
+[![npm version](https://img.shields.io/npm/v/@feathersjs/rest-client.png?style=flat-square)](https://www.npmjs.com/package/@feathersjs/rest-client)
+[![Changelog](https://img.shields.io/badge/changelog-.md-blue.png?style=flat-square)](https://github.com/feathersjs/rest-client/blob/master/CHANGELOG.md)
+
+```
+$ npm install @feathersjs/rest-client --save
+```
+
+`@feathersjs/rest-client` allows to connect to a service exposed through the [Expres REST API](../express.md#expressrest) using [jQuery](https://jquery.com/), [request](https://github.com/request/request), [Superagent](http://visionmedia.github.io/superagent/), [Axios](https://github.com/mzabriskie/axios) or [Fetch](https://facebook.github.io/react-native/docs/network.html) as the AJAX library.
 
 <!-- -->
 
@@ -12,46 +22,34 @@ The `client` module in `feathers-rest` (`require('feathers-rest/client')`) allow
 
 > **Note:** A client application can only use a single transport (either REST, Socket.io or Primus). Using two transports in the same client application is normally not necessary.
 
-### `rest([baseUrl])`
+### rest([baseUrl])
 
 REST client services can be initialized by loading `feathers-rest/client` and initializing a client object with a base URL:
 
 ```js
-const feathers = require('feathers/client');
-const rest = require('feathers-rest/client');
+const feathers = require('@feathersjs/feathers');
+const rest = require('@feathersjs/rest-client');
 
-// Connect to REST endpoints
+const app = feathers();
+
+// Connect to the same as the browser URL (only in the browser)
 const restClient = rest();
+
 // Connect to a different URL
-const restClient = rest('http://feathers-api.com');
+const restClient = rest('http://feathers-api.com')
+
+// Configure an AJAX library (see below) with that client 
+app.configure(restClient.fetch(window.fetch));
+
+// Connect to the `http://feathers-api.com/messages` service
+const messages = app.service('messages');
 ```
 
 <!-- -->
 
-> **ProTip:** The base URL is relative from where services are registered. That means that a service at `http://api.feathersjs.com/api/v1/messages` with a base URL of `http://api.feathersjs.com` would be available as `app.service('api/v1/messages')`. With a base URL of `http://api.feathersjs.com/api/v1` it would be `app.service('messages')`.
+> **ProTip:** In the browser, the base URL is relative from where services are registered. That means that a service at `http://api.feathersjs.com/api/v1/messages` with a base URL of `http://api.feathersjs.com` would be available as `app.service('api/v1/messages')`. With a base URL of `http://api.feathersjs.com/api/v1` it would be `app.service('messages')`.
 
-
-REST client wrappers are always initialized using a base URL:
-
-```js
-app.configure(restClient.superagent(superagent [, options]));
-```
-
-Default headers can be set for all libaries (except [request](#request) which has its own defaults mechanism) in the options like this:
-
-```js
-app.configure(restClient.superagent(superagent, {
-  headers: { 'X-Requested-With': 'FeathersJS' }
-}));
-```
-
-Then services that automatically connect to that remote URL can be retrieved as usual via [app.service](./application.md#service):
-
-```js
-app.service('messages').create({
-  text: 'A message from a REST client'
-});
-```
+### params.headers
 
 Request specific headers can be through `params.headers` in a service call:
 
@@ -62,8 +60,6 @@ app.service('messages').create({
   headers: { 'X-Requested-With': 'FeathersJS' }
 });
 ```
-
-The supported AJAX libraries can be initialized as follows.
 
 ### jQuery
 
@@ -87,7 +83,7 @@ The [request](https://github.com/request/request) object needs to be passed expl
 
 ```js
 const request = require('request');
-const client = request.defaults({
+const requestClient = request.defaults({
   'auth': {
     'user': 'username',
     'pass': 'password',
@@ -95,7 +91,7 @@ const client = request.defaults({
   }
 });
 
-app.configure(restClient.request(client));
+app.configure(restClient.request(requestClient));
 ```
 
 ### Superagent
@@ -123,19 +119,27 @@ app.configure(restClient.axios(axios));
 Fetch also uses a default configuration:
 
 ```js
+// In Node
 const fetch = require('node-fetch');
 
 app.configure(restClient.fetch(fetch));
+
+// In modern browsers
+app.configure(restClient.fetch(window.fetch));
 ```
 
 
-## Direct connection
+## HTTP API
 
-You can communicate with a Feathers server using any HTTP REST client. The following section describes what HTTP method, body and query parameters belong to which service method call.
+You can communicate with a Feathers REST API using any other HTTP REST client. The following section describes what HTTP method, body and query parameters belong to which service method call.
 
 All query parameters in a URL will be set as `params.query` on the server. Other service parameters can be set through [hooks](./hooks.md) and [Express middleware](./express.md). URL query parameter values will always be strings. Conversion (e.g. the string `'true'` to boolean `true`) can be done in a hook as well.
 
-The body type for `POST`, `PUT` and `PATCH` requests is determined by the Express [body-parser](https://github.com/expressjs/body-parser) middleware which has to be registered *before* any service. You should also make sure you are setting your `Accept` header to `application/json`.
+The body type for `POST`, `PUT` and `PATCH` requests is determined by the Express [body-parser](http://expressjs.com/en/4x/api.html#express.json) middleware which has to be registered *before* any service. You should also make sure you are setting your `Accept` header to `application/json`.
+
+### Authentication
+
+See the [authentication client chapter](../authentication/client.md).
 
 ### find
 

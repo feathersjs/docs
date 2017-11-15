@@ -1,14 +1,8 @@
-## Client
+# Primus Client
 
-The `client` module in `feathers-primus` (`require('feathers-primus/client')`) allows to connect to services exposed through the [Primus server](#server) via a client socket.
+> **Note:** We recommend using Feathers and the `@feathersjs/primus-client` module on the client if possible. To use a direct Primus connection without using Feathers on the client however see the [Direct connection](#direct-connection) section.
 
-> **Very important:** The examples below assume you are using Feathers either in Node or in the browser with a module loader like Webpack or Browserify. For using Feathers with a `<script>` tag, AMD modules or with React Native see the [client chapter](./client.md).
-
-<!-- -->
-
-> **Note:** A client application can only use a single transport (either REST, Socket.io or Primus). Using two transports in the same client application is normally not necessary.
-
-### Loading the Primus client library
+## Loading the Primus client library
 
 In the browser the Primus client library (usually at `primus/primus.js`) always has to be loaded using a `<script>` tag:
 
@@ -18,7 +12,7 @@ In the browser the Primus client library (usually at `primus/primus.js`) always 
 
 > **Important:** This will make the `Primus` object globally available. Module loader options are currently not available.
 
-### Client use in NodeJS
+## Client use in NodeJS
 
 In NodeJS a Primus client can be initialized as follows:
 
@@ -34,13 +28,27 @@ const Socket = Primus.createSocket({
 const socket = new Socket('http://api.feathersjs.com');
 ```
 
+## @feathersjs/primus-client
+
+[![GitHub stars](https://img.shields.io/github/stars/feathersjs/primus-client.png?style=social&label=Star)](https://github.com/feathersjs/primus-client/)
+[![npm version](https://img.shields.io/npm/v/@feathersjs/primus-client.png?style=flat-square)](https://www.npmjs.com/package/@feathersjs/primus-client)
+[![Changelog](https://img.shields.io/badge/changelog-.md-blue.png?style=flat-square)](https://github.com/feathersjs/primus-client/blob/master/CHANGELOG.md)
+
+```
+$ npm install @feathersjs/primus-client --save
+```
+
+The `@feathersjs/primus-client` module allows to connect to services exposed through the [Socket.io server](../socketio.md) via a Socket.io socket.
+
+> **Important:** Primus sockets are also used to *call* service methods. Using sockets for both, calling methods and receiving real-time events is generally faster than using [REST](./express.md) and there is no need to use both, REST and websockets in the same client application at the same time.
+
 ### `primus(socket)`
 
 Initialize the Socket.io client using a given socket and the default options.
 
 ```js
 const feathers = require('@feathersjs/feathers');
-const primus = require('feathers-primus/client');
+const primus = require('@feathersjs/primus-client');
 const socket = new Primus('http://api.my-feathers-server.com');
 
 const app = feathers();
@@ -67,7 +75,7 @@ Options can be:
 
 ```js
 const feathers = require('@feathersjs/feathers');
-const primus = require('feathers-primus/client');
+const primus = require('@feathersjs/primus-client');
 const socket = new Primus('http://api.my-feathers-server.com');
 
 const app = feathers();
@@ -75,11 +83,9 @@ const app = feathers();
 app.configure(primus(socket, { timeout: 2000 }));
 ```
 
-### Changing the socket client timeout
+The timeout per service can be changed like this:
 
-Currently, the only way for clients to determine if a service or service method exists is through a timeout. You can set the timeout either through the option above or on a per-service level by setting the `timeout` property:
-
-```javascript
+```js
 app.service('messages').timeout = 3000;
 ```
 
@@ -98,107 +104,109 @@ See the [Primus docs](https://github.com/primus/primus#connecting-from-the-brows
 </script>
 ```
 
-### Calling service methods
-
 Service methods can be called by emitting a `<servicepath>::<methodname>` event with the method parameters. `servicepath` is the name the service has been registered with (in `app.use`) without leading or trailing slashes. An optional callback following the `function(error, data)` Node convention will be called with the result of the method call or any errors that might have occurred.
 
 `params` will be set as `params.query` in the service method call. Other service parameters can be set through a [Primus middleware](../real-time/primus.md).
 
-#### `find`
+### Authentication
+
+See the [Authentication Client chapter](../authentication/client.md).
+
+### `find`
 
 Retrieves a list of all matching resources from the service
 
 ```js
-primus.send('messages::find', { status: 'read', user: 10 }, (error, data) => {
+primus.send('find', 'messages', { status: 'read', user: 10 }, (error, data) => {
   console.log('Found all messages', data);
 });
 ```
 
-Will call `messages.find({ query: { status: 'read', user: 10 } })` on the server.
+Will call `app.service('messages').find({ query: { status: 'read', user: 10 } })` on the server.
 
-#### `get`
+### get
 
 Retrieve a single resource from the service.
 
 ```js
-primus.send('messages::get', 1, (error, message) => {
+primus.send('get', 'messages', 1, (error, message) => {
   console.log('Found message', message);
 });
 ```
 
-Will call `messages.get(1, {})` on the server.
+Will call `app.service('messages').get(1, {})` on the server.
 
 ```js
-primus.send('messages::get', 1, { fetch: 'all' }, (error, message) => {
+primus.send('get', 'messages', 1, { fetch: 'all' }, (error, message) => {
   console.log('Found message', message);
 });
 ```
 
-Will call `messages.get(1, { query: { fetch: 'all' } })` on the server.
+Will call `app.service('messages').get(1, { query: { fetch: 'all' } })` on the server.
 
-#### `create`
+### create
 
 Create a new resource with `data` which may also be an array.
 
 ```js
-primus.send('messages::create', {
-  "text": "I really have to iron"
+primus.send('create', 'messages', {
+  text: 'I really have to iron'
 }, (error, message) => {
   console.log('Message created', message);
 });
 ```
 
-Will call `messages.create({ "text": "I really have to iron" }, {})` on the server.
+Will call `app.service('messages').create({ "text": "I really have to iron" }, {})` on the server.
 
 ```js
-primus.send('messages::create', [
-  { "text": "I really have to iron" },
-  { "text": "Do laundry" }
+primus.send('create', 'messages', [
+  { text: 'I really have to iron' },
+  { text: 'Do laundry' }
 ]);
 ```
 
-Will call `messages.create` on the server with the array.
+Will call `app.service('messages').create` on the server with the array.
 
-#### `update`
+### update
 
 Completely replace a single or multiple resources.
 
 ```js
-primus.send('messages::update', 2, {
-  "text": "I really have to do laundry"
+primus.send('update', 'messages', 2, {
+  text: 'I really have to do laundry'
 }, (error, message) => {
   console.log('Message updated', message);
 });
 ```
 
-Will call `messages.update(2, { "text": "I really have to do laundry" }, {})` on the server. The `id` can also be `null` to update multiple resources:
+Will call `app.service('messages').update(2, { "text": "I really have to do laundry" }, {})` on the server. The `id` can also be `null` to update multiple resources:
 
 ```js
-primus.send('messages::update', null, {
+primus.send('update', 'messages', null, {
   complete: true
 }, { complete: false });
 ```
 
-Will call `messages.update(null, { "complete": true }, { query: { complete: 'false' } })` on the server.
+Will call `app.service('messages').update(null, { complete: true }, { query: { complete: false } })` on the server.
 
 > **ProTip:** `update` is normally expected to replace an entire resource which is why the database adapters only support `patch` for multiple records.
 
-#### `patch`
+### patch
 
 Merge the existing data of a single or multiple resources with the new `data`.
 
 ```js
-primus.send('messages::patch', 2, {
+primus.send('patch', 'messages', 2, {
   read: true
 }, (error, message) => {
   console.log('Patched message', message);
 });
 ```
 
-Will call `messages.patch(2, { "read": true }, {})` on the server. The `id` can also be `null` to update multiple resources:
+Will call `app.service('messages').patch(2, { "read": true }, {})` on the server. The `id` can also be `null` to update multiple resources:
 
 ```js
-primus.send('messages::patch', null, {
+primus.send('patch', 'messages', null, {
   complete: true
 }, {
   complete: false
@@ -207,32 +215,32 @@ primus.send('messages::patch', null, {
 });
 ```
 
-Will call `messages.patch(null, { complete: true }, { query: { complete: false } })` on the server to change the status for all read messages.
+Will call `app.service('messages').patch(null, { complete: true }, { query: { complete: false } })` on the server to change the status for all read app.service('messages').
 
 This is supported out of the box by the Feathers [database adapters](../databases/readme.md) 
 
-#### `remove`
+### remove
 
 Remove a single or multiple resources:
 
 ```js
-primus.send('messages::remove', 2, { cascade: true }, (error, message) => {
+primus.send('remove', 'messages', 2, { cascade: true }, (error, message) => {
   console.log('Removed a message', message);
 });
 ```
 
-Will call `messages.remove(2, { query: { cascade: true } })` on the server. The `id` can also be `null` to remove multiple resources:
+Will call `app.service('messages').remove(2, { query: { cascade: true } })` on the server. The `id` can also be `null` to remove multiple resources:
 
 ```js
-primus.send('messages::remove', null, { read: true });
+primus.send('remove', 'messages', null, { read: true });
 ```
 
-Will call `messages.remove(null, { query: { read: 'true' } })` on the server to delete all read messages.
+Will call `app.service('messages').remove(null, { query: { read: 'true' } })` on the server to delete all read app.service('messages').
 
 
 ### Listening to events
 
-Listening to service events allows real-time behaviour in an application. [Service events](../real-time/readme.md) are sent to the socket in the form of `servicepath eventname`.
+Listening to service events allows real-time behaviour in an application. [Service events](../events.md) are sent to the socket in the form of `servicepath eventname`.
 
 #### created
 
@@ -253,7 +261,7 @@ primus.on('my/messages updated', function(message) {
   console.log('Got an updated Message!', message);
 });
 
-primus.send('my/messages::update', 1, {
+primus.send('update', 'my/messages', 1, {
   text: 'Updated text'
 }, {}, function(error, callback) {
  // Do something here

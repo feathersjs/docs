@@ -10,19 +10,7 @@ $ npm install @feathersjs/socketio --save
 
 The [@feathersjs/socketio](https://github.com/feathersjs/socketio) module allows to call [service methods](./services.md) and receive [real-time events](./events.md) via [Socket.io](http://socket.io/), a NodeJS library which enables real-time bi-directional, event-based communication.
 
-> **Important:** This page describes how to set up a Socket.io server. The [Socket.io client chapter](./client/socketio.md) shows how to use this server on the client.
-
-
-| Service method  | Method event name   | Real-time event    |
-|-----------------|---------------------|--------------------|
-| .find()         | `find`              | -                  |
-| .get()          | `get`               | -                  |
-| .create()       | `create`            | `messages created` |
-| .update()       | `update`            | `messages updated` |
-| .patch()        | `patch`             | `messages patched` |
-| .remove()       | `remove`            | `messages removed` |
-
-> **Important:** Socket.io is also used to *call* service methods. Using sockets for both, calling methods and receiving real-time events is generally faster than using [REST](./express.md) and there is usually no need to use both, REST and Socket.io in the same client application at the same time.
+> **Important:** This page describes how to set up a Socket.io server. The [Socket.io client chapter](./client/socketio.md) shows how to connect to this server on the client and the message format for service calls and real-time events.
 
 ## Configuration
 
