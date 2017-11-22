@@ -1,112 +1,45 @@
-# Client
+# Feathers Client
 
 One of the most notable features of Feathers is that it can also be used as the client. The difference to many other frameworks is that it isn't a separate library, you instead get the exact same functionality as on the server. This means you can use [services](./services.md) and [hooks](./hooks.md) and configure plugins. By default a Feathers client automatically creates services that talk to a Feathers server.
 
-How to initialize a connection _or connecting to a Feathers server directly without Feathers on the client side_ can be found in
+In order to connect to a Feathers server, a client creates [Services](./services.md) that use a REST or websocket connection to relay method calls and allow listening to [events](./events.md) on the server. This means the [Feathers application instance](./application) instance usable the exact same way as you would on the server.
 
-- The [REST client chapter](./client/rest.md)
-- The [Socket.io client chapter](./client/socketio.md) (real-time)
-- The [Primus client chapter](./client/primus.md) (real-time)
+Modules relevant for use on the client are
 
-This chapter describes how to use Feathers as the client in Node, React Native and in the browser with a module loader like Webpack, Browserify, StealJS or through a `<script>` tag.
+- `@feathersjs/feathers` to initialize a new Feathers [application](./application.md)
+- `@feathersjs/rest-client` to connect to services through [REST HTTP](./express.md). See the [REST client chapter](./client/rest.md).
+- `@feathersjs/socketio-client` to connect to services through [Socket.io](./socketio.md). See the [Socket.io client chapter](./client/socketio.md).
+- `@feathersjs/primus-client` to connect to services through [Primus](./primus.md), See the [Primus client chapter](./client/primus.md)
+- `@feathersjs/authentication-client` to authenticate a client. See the [Authentication client chapter](./authentication/client.md)
 
-> __Important:__ If you are not using a module loader you can load the [@feathersjs/client](#feathersjs/client) directly through a script tag in the browser.
+> __Important:__ You do not have to use Feathers on the client to connect to a Feathers server. The client chapters above also describe how to use a REST HTTP, Socket.io or Primus connection directly without Feathers on the client side. For more information regarding authentication see the [Authentication client chapter](./authentication/client.md).
+
+This chapter describes how to set up Feathers as the client in Node, React Native and in the browser with a module loader like Webpack or Browserify or through a `<script>` tag. The examples are using [the Socket.io client](./client/socketio.md). For other connection methods see the chapters linked above.
 
 ## Node
 
-To connect to a Feathers server in NodeJS
+To connect to a Feathers server in NodeJS install the client connection library needed (here `socket.io-client`), Feathers core and appropriate client library:
 
-## Module loaders
+```
+npm install @feathersjs/feathers @feathersjs/socketio-client socket.io-client --save
+```
 
-### Webpack
-
-### Browserify
-
-### StealJS
-
-### Others
-
-## React Native
-
-
-## Universal (Isomorphic) API
-
-The Feathers Client uses the same [Application API](./application.md) as is available on the server.
-
-## Node and npm loaders
-
-The client utilities can be used directly on the server.  Just `require` each individual package or the `feathers-client` and use it the same way as shown for in the browser examples, below.  Node.js natively supports the CommonJS module syntax.  Here's an example of setting up the client in Node:
+Then initialize like this:
 
 ```js
-const feathers = require('feathers/client');
-const socketio = require('feathers-socketio/client');
-const hooks = require('feathers-hooks');
-const errors = require('@feathersjs/errors'); // An object with all of the custom error types.
-const auth = require('feathers-authentication-client');
 const io = require('socket.io-client');
-
-const socket = io('http://localhost:3030', {
-  transports: ['websocket']
-});
-
-const feathersClient = feathers()
-  .configure(socketio(socket))
-  .configure(hooks())
-  .configure(auth())
-
-module.exports = feathersClient;
-```
-
-## Browserify, StealJS, and Webpack
-
-Both, Browserify and StealJS support npm modules and require no additional configuration.  The client modules are all JavaScript, and should also work with any Webpack configuration.  Here's the same example from above, rewritten in ES Module syntax:
-
-```js
-import feathers from 'feathers/client';
-import socketio from 'feathers-socketio/client';
-import hooks from 'feathers-hooks';
-import errors from 'feathers-errors'; // An object with all of the custom error types.
-import auth from 'feathers-authentication-client';
-import io from 'socket.io-client';
-
-const socket = io('http://localhost:3030', {
-  transports: ['websocket']
-});
-
-const feathersClient = feathers()
-  .configure(socketio(socket))
-  .configure(hooks())
-  .configure(auth())
-
-export default feathersClient;
-```
-
-## React Native
-
-Install the required packages into your [React Native](https://facebook.github.io/react-native/) project.
-
-```bash
-$ npm install feathers feathers-socketio feathers-hooks socket.io-client babel-polyfill
-```
-
-Then in the main application file:
-
-```js
-import 'babel-polyfill';
-import io from 'socket.io-client';
-import feathers from 'feathers/client';
-import socketio from 'feathers-socketio/client';
-import hooks from 'feathers-hooks';
+const feathers = require('@feathersjs/feathers');
+const socketio = require('@feathersjs/socketio-client');
 
 const socket = io('http://api.my-feathers-server.com', {
   transports: ['websocket'],
   forceNew: true
 });
-const app = feathers()
-  .configure(hooks())
-  .configure(socketio(socket));
+const client = feathers();
 
-const messageService = app.service('messages');
+client.configure(socketio(socket));
+
+const messageService = client.service('messages');
 
 messageService.on('created', message => console.log('Created a message', message));
 
@@ -116,84 +49,150 @@ messageService.create({
 });
 ```
 
+## React Native
+
+React Native usage is the same as for the [Node client](#node). Install the required packages into your [React Native](https://facebook.github.io/react-native/) project.
+
+```bash
+$ npm install @feathers/feathers @feathers/socketio-client socket.io-client
+```
+
+Then in the main application file:
+
+```js
+import io from 'socket.io-client';
+import feathers from '@feathersjs/feathers';
+import socketio from '@feathersjs/socketio-client';
+
+const socket = io('http://api.my-feathers-server.com', {
+  transports: ['websocket'],
+  forceNew: true
+});
+const client = feathers();
+
+client.configure(socketio(socket));
+
+const messageService = client.service('messages');
+
+messageService.on('created', message => console.log('Created a message', message));
+
+// Use the messages service from the server
+messageService.create({
+  text: 'Message from client'
+});
+```
+
+## Module loaders
+
+All modules in the `@feathersjs` namespace are using ES6 and have to be transpiled for target browsers without full ES6 support. Most client side module loader exclude the `node_modules` folder from being transpiled and have to be configured to include modules in the `@feathersjs` namespace.
+
+### Webpack
+
+For Webpack, the recommended `babel-loader` rule normally excludes everything in `node_modules`. It has to be adjusted to skip `node_modules/@feathersjs`. In the `module` `rules` in your `webpack.config.js` update the `babel-loader` section to this:
+
+```js
+{
+  test: /\.jsx?$/,
+  exclude: /node_modules(\/|\\)(?!(@feathersjs))/,
+  loader: 'babel-loader'
+}
+```
+
+### create-react-app
+
+[create-react-app](https://github.com/facebookincubator/create-react-app) uses [Webpack](#webpack) but does not allow to modify the configuration unless you eject. If you do not want to eject, use the [@feathersjs/client]() module instead.
+
+### Browserify
+
+In Browserify the [babelify](https://github.com/babel/babelify) transform has to be used. All Feathers packages indicate that they need the transform and will be then transpiled automatically.
+
+### Others
+
+As mentioned above, `node_modules/@feathersjs` and all its subfolders have to be included in the ES6+ transpilation step when using any module loader that is using a transpiler. For non-CommonJS formats (like AMD) and an ES5 compatible version of Feathers and its client modules you can use the [@feathersjs/client module]().
+
 ## @feathersjs/client
 
 [![GitHub stars](https://img.shields.io/github/stars/feathersjs/feathers-client.png?style=social&label=Star)](https://github.com/feathersjs/feathers-client/)
 [![npm version](https://img.shields.io/npm/v/feathers-client.png?style=flat-square)](https://www.npmjs.com/package/feathers-client)
 [![Changelog](https://img.shields.io/badge/changelog-.md-blue.png?style=flat-square)](https://github.com/feathersjs/feathers-client/blob/master/CHANGELOG.md)
 
-
-> __Important:__ The Feathers client libraries come transpiled to ES5 but require ES6 shims either through the [babel-polyfill](https://www.npmjs.com/package/babel-polyfill) module or by including [core.js](https://github.com/zloirock/core-js) in older browsers e.g. via `<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/core-js/2.1.4/core.min.js"></script>`
-
-<!-- -->
-
-
 ```
-$ npm install feathers-client --save
+$ npm install @feathersjs/client --save
 ```
 
-`feathers-client` is a module that bundles the separate Feathers client side modules into one. It also provides a distributable file with everything you need to use Feathers in the browser through a `<script>` tag. Here is a table of which Feathers client module is included in `feathers-client`:
+`@feathersjs/client` is a module that bundles the separate Feathers client side modules into one providing the code as ES5 which is compatible with modern browsers (IE10+). It can also be used directly int the browser through a `<script>` tag. Here is a table of which Feathers client module is included:
 
-| Feathers module                 | feathers-client         |
-|---------------------------------|-------------------------|
-| feathers/client                 | feathers (default)      |
-| feathers-hooks                  | feathers.hooks          |
-| feathers-errors                 | feathers.errors         |
-| feathers-rest/client            | feathers.rest           |
-| feathers-socketio/client        | feathers.socketio       |
-| feathers-primus/client          | feathers.primus         |
-| feathers-authentication/client  | feathers.authentication |
+| Feathers module                   | @feathersjs/client      |
+|-----------------------------------|-------------------------|
+| @feathers/feathers                | feathers (default)      |
+| @feathers/errors                  | feathers.errors         |
+| @feathersjs/rest-client           | feathers.rest           |
+| @feathersjs/socketio-client       | feathers.socketio       |
+| @feathersjs/primus-client         | feathers.primus         |
+| @feathersjs/authentication-client | feathers.authentication |
+
+> __Important:__ The Feathers client libraries come transpiled to ES5 and require ES6 shims either through the [babel-polyfill](https://www.npmjs.com/package/babel-polyfill) module or by including [core.js](https://github.com/zloirock/core-js) in older browsers e.g. via `<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/core-js/2.1.4/core.min.js"></script>`
+
+### When to use
+
+`@feathersjs/client` can be used directly in the browser using a `<script>` tag without a module loader as well as with module loaders that do not support CommonJS (like RequireJS) or React applications created with a default `create-react-app`.
+
+If you are using the Feathers client with Node or React Native you should follow the steps described in the [Node](#node) and [React Native](#react-native) sections and __not__ use `@feathersjs/client`.
+
+You can use `@feathersjs/client` with other browser module loaders/bundlers but it may include packages you may not use and result in a slightly larger bundle size.
+
+> __Note:__ Except for this section, all other Feathers client examples assume you are using Node or a module loader so if you are using `@feathersjs/client` you will have to adjust the examples accordinly.
 
 ### Load from CDN with `<script>`
 
- Below is an example of the scripts you would use to load `feathers-client` from `unpkg.com`.  It's possible to use it with a module loader,  but using individual client packages will allow you to take advantage of Feathers' modularity.
+Below is an example of the scripts you would use to load `@feathersjs/client` from [unpkg.com](https://unpkg.com).
 
 ```html
-<script src="//unpkg.com/feathers-client@^2.0.0/dist/feathers.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/core-js/2.1.4/core.min.js"></script>
+<script src="//unpkg.com/@feathersjs/client@^3.0.0/dist/feathers.js"></script>
 <script src="//unpkg.com/socket.io-client@1.7.3/dist/socket.io.js"></script>
 <script>
   // Socket.io is exposed as the `io` global.
-  var socket = io('http://localhost:3030', {transports: ['websocket']});
-  // feathers-client is exposed as the `feathers` global.
-  var feathersClient = feathers()
-    .configure(feathers.hooks())
-    .configure(feathers.socketio(socket))
-    .configure(feathers.authentication())
+  var socket = io('http://localhost:3030', {
+    transports: ['websocket']
+  });
+  // @feathersjs/client is exposed as the `feathers` global.
+  var app = feathers();
+
+  app.configure(feathers.socketio(socket));
+  app.configure(feathers.authentication());
+
+  app.service('messages').create({
+    text: 'A new message'
+  });
 
   // feathers.errors is an object with all of the custom error types.
 </script>
 ```
 
-### When to use `feathers-client`
-
-- If you want to use Feathers in the browser with a `<script>` tag
-- With a module loader that does not support npm packages (like RequireJS)
-
-
-You can use `feathers-client` in NodeJS or with a browser module loader/bundler but it will include packages you may not use. It is also important to note that - except for this section - all other Feathers client examples assume you are using Node or a module loader.
-
 ### RequireJS
 
-Here's an example of loading feathers-client using RequireJS Syntax:
+Here is an example of loading feathers-client using RequireJS Syntax:
 
 ```js
 define(function (require) {
-  const feathers = require('feathers-client');
-  const socketio = feathers.socketio;
-  const hooks = feathers.hooks;
-  const errors = feathers.errors; // An object with all of the custom error types.
-  const authentication = feathers.authentication;
+  const feathers = require('@feathersjs/client');
+  const { socketio, authentication } = feathers;
   const io = require('socket.io-client');
 
   const socket = io('http://localhost:3030', {
     transports: ['websocket']
   });
+  // @feathersjs/client is exposed as the `feathers` global.
+  const app = feathers();
 
-  const feathersClient = feathers()
-    .configure(socketio(socket))
-    .configure(hooks())
-    .configure(authentication())
+  app.configure(socketio(socket));
+  app.configure(authentication());
 
-  return feathersClient;
+  app.service('messages').create({
+    text: 'A new message'
+  });
+
+  return const;
 });
 ```
