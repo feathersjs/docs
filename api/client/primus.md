@@ -110,7 +110,21 @@ Service methods can be called by emitting a `<servicepath>::<methodname>` event 
 
 ### Authentication
 
-See the [Authentication Client chapter](../authentication/client.md).
+Sockets can be authenticated by sending the `authenticate` event with the `strategy` and the payload. For specific examples see the "Direct Connection" section in the [local](./local.md) and [jwt](./jwt.md) authentication chapters.
+
+```js
+const io = require('socket.io-client');
+const socket = io('http://localhost:3030');
+
+socket.send('authenticate', {
+  strategy: 'strategyname',
+  ... otherData
+}, function(message, data) {
+  console.log(message); // message will be null
+  console.log(data); // data will be {"accessToken": "your token"}
+  // You can now send authenticated messages to the server
+});
+```
 
 ### `find`
 

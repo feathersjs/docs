@@ -139,7 +139,30 @@ The body type for `POST`, `PUT` and `PATCH` requests is determined by the Expres
 
 ### Authentication
 
-See the [authentication client chapter](../authentication/client.md).
+Authenticating HTTP (REST) requests is a two step process. Frist you have to obtain a JWT from the [authentication service](./server.md) by POSTing the strategy you want to use:
+
+```json
+// POST /authentication the Content-Type header set to application/json
+{
+  "strategy": "local",
+  "email": "your email",
+  "password": "your password"
+}
+```
+
+Here is what that looks like with curl:
+
+```bash
+curl -H "Content-Type: application/json" -X POST -d '{"strategy":"local","email":"your email","password":"your password"}' http://localhost:3030/authentication
+```
+
+Then to authenticate subsequent requests, add the returned `accessToken` to the `Authorization` header:
+
+```bash
+curl -H "Content-Type: application/json" -H "Authorization: <your access token>" -X POST http://localhost:3030/authentication
+```
+
+Also see the [JWT](./jwt.md) and [local](./local.md) authentication chapter.
 
 ### find
 
