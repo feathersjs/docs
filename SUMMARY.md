@@ -80,7 +80,6 @@
     * [Events](api/events.md)
     * [Channels](api/channels.md)
     * [Errors](api/errors.md)
-    * [Common Hooks](api/hooks-common.md)
   * Transports
     * [Express](api/express.md)
     * [Socket.io](api/socketio.md)
@@ -94,11 +93,9 @@
     * [Server](api/authentication/server.md)
     * [Client](api/authentication/client.md)
     * [Local](api/authentication/local.md)
-    * [Local management](api/authentication/local-management.md)
     * [JWT](api/authentication/jwt.md)
     * [OAuth1](api/authentication/oauth1.md)
     * [OAuth2](api/authentication/oauth2.md)
-    * [Hooks](api/authentication/hooks.md)
   * Databases
     * [Common API](api/databases/common.md)
     * [Querying](api/databases/querying.md)
