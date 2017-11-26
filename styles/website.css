@@ -6,12 +6,19 @@
 }
 
 .book-summary ul.summary li ul {
-  padding-left: 15px;
+  padding-left: 10px;
+}
+
+.book .book-summary ul.summary > li[data-level="1.2"] > ul > li > a {
+  font-weight: bold;
+}
+
+.book-summary ul.summary li a, .book-summary ul.summary li span {
+  padding: 10px 20px;
 }
 
 /* Sidebar Links */
 .book .book-summary nav ul.summary li a {
-  padding: 6px 15px;
   font-size: 1em;
   color: #666666;
 }
@@ -37,17 +44,9 @@
   font-weight: 700;
 }
 
-.book .book-summary nav ul.summary > li > ul > li > ul {
-  padding-left: 8px !important;
-}
-
-/* 3rd level menu items */
-.book .book-summary nav ul.summary ul.page-headings > li > a {
-  padding: 5px 10px;
-}
-
 .book .book-summary nav ul.summary ul.page-headings > li a {
   font-size: 0.9em;
+  padding: 5px 20px;
 }
 
 /* Sidebar Title */
@@ -183,9 +182,4 @@
 section.markdown-section table {
   display: block;
   overflow-x: auto;
-}
-
-.book .book-summary ul.summary > li[data-level="1.2"] > ul > li > a {
-  font-weight: bold;
-  padding: 10px 0;
 }
