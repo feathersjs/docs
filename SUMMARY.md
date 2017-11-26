@@ -80,6 +80,7 @@
     * [Events](api/events.md)
     * [Channels](api/channels.md)
     * [Errors](api/errors.md)
+    * [Configuration](api/configuration.md)
   * Transports
     * [Express](api/express.md)
     * [Socket.io](api/socketio.md)
