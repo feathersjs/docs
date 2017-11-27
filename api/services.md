@@ -4,11 +4,13 @@ Services are the heart of every Feathers application and JavaScript objects (or 
 
 ## Service methods
 
-Service methods are pre-defined [CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete) methods that your service object can implement (or that has already been implemented by one of the [database adapters](./databases/common.md)). Below is a complete example of the Feathers *service interface*:
+Service methods are pre-defined [CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete) methods that your service object can implement (or that has already been implemented by one of the [database adapters](./databases/common.md)). Below is a complete example of the Feathers *service interface* as a normal JavaScript object returning eihter a Promise or using [async/await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function):
 
-```js
+{% codetabs name="Promise", type="js" -%}
 const myService = {
-  find(params) {},
+  find(params) {
+    return Promise.resolve([]);
+  },
   get(id, params) {},
   create(data, params) {},
   update(id, data, params) {},
@@ -18,15 +20,29 @@ const myService = {
 }
 
 app.use('/my-service', myService);
-```
+{%- language name="async/await", type="js" -%}
+const myService = {
+  async find(params) {
+    return return [];
+  },
+  async get(id, params) {},
+  async create(data, params) {},
+  async update(id, data, params) {},
+  async patch(id, data, params) {},
+  async remove(id, params) {},
+  setup(app, path) {}
+}
 
-Or as an [ES6 class](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Classes):
+app.use('/my-service', myService);
+{%- endcodetabs %}
 
-```js
-'use strict';
+Services can also be an instance of an [ES6 class](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Classes):
 
+{%- codetabs name="Promise", type="js" -%}
 class MyService {
-  find(params) {}
+  find(params) {
+    return Promise.resolve([]);
+  }
   get(id, params) {}
   create(data, params) {}
   update(id, data, params) {}
@@ -36,7 +52,21 @@ class MyService {
 }
 
 app.use('/my-service', new MyService());
-```
+{%- language name="async/await", type="js" -%}
+class MyService {
+  async find(params) {
+    return [];
+  }
+  async get(id, params) {}
+  async create(data, params) {}
+  async update(id, data, params) {}
+  async patch(id, data, params) {}
+  async remove(id, params) {}
+  setup(app, path) {}
+}
+
+app.use('/my-service', new MyService());
+{%- endcodetabs %}
 
 > **ProTip:** Methods are optional, and if a method is not implemented Feathers will automatically emit a `NotImplemented` error.
 

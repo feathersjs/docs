@@ -9,7 +9,8 @@
     "edit-link",
     "ga",
     "feathers-versions",
-    "advanced-emoji"
+    "advanced-emoji",
+    "codetabs"
   ],
   "pluginsConfig": {
     "edit-link": {
