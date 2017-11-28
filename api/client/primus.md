@@ -38,13 +38,13 @@ const socket = new Socket('http://api.feathersjs.com');
 $ npm install @feathersjs/primus-client --save
 ```
 
-The `@feathersjs/primus-client` module allows to connect to services exposed through the [Socket.io server](../socketio.md) via a Socket.io socket.
+The `@feathersjs/primus-client` module allows to connect to services exposed through the [Primus server](../primus.md) via the configured websocket library.
 
 > **Important:** Primus sockets are also used to *call* service methods. Using sockets for both, calling methods and receiving real-time events is generally faster than using [REST](./express.md) and there is no need to use both, REST and websockets in the same client application at the same time.
 
 ### `primus(socket)`
 
-Initialize the Socket.io client using a given socket and the default options.
+Initialize the Primus client using a given socket and the default options.
 
 ```js
 const feathers = require('@feathersjs/feathers');
@@ -55,7 +55,7 @@ const app = feathers();
 
 app.configure(primus(socket));
 
-// Receive real-time events through Socket.io
+// Receive real-time events through Primus
 app.service('messages')
   .on('created', message => console.log('New message created', message));
 
@@ -67,7 +67,7 @@ app.service('messages').create({
 
 ### `primus(socket, options)`
 
-Initialize the Socket.io client using a given socket and the given options. 
+Initialize the Primus client using a given socket and the given options. 
 
 Options can be:
 
@@ -113,9 +113,6 @@ Service methods can be called by emitting a `<servicepath>::<methodname>` event 
 Sockets can be authenticated by sending the `authenticate` event with the `strategy` and the payload. For specific examples see the "Direct Connection" section in the [local](./local.md) and [jwt](./jwt.md) authentication chapters.
 
 ```js
-const io = require('socket.io-client');
-const socket = io('http://localhost:3030');
-
 socket.send('authenticate', {
   strategy: 'strategyname',
   ... otherData

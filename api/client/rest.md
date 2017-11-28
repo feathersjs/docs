@@ -24,7 +24,7 @@ $ npm install @feathersjs/rest-client --save
 
 ### rest([baseUrl])
 
-REST client services can be initialized by loading `feathers-rest/client` and initializing a client object with a base URL:
+REST client services can be initialized by loading `@feathersjs/rest-client` and initializing a client object with a base URL:
 
 ```js
 const feathers = require('@feathersjs/feathers');
