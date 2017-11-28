@@ -158,7 +158,7 @@ app.service('messages').hooks({
 });
 ```
 
-> **Pro Tip:** Tools like [Bluebird](https://github.com/petkaantonov/bluebird) make converting between callbacks and promises easier.
+> **Pro Tip:** Tools like [util.promisify](https://nodejs.org/dist/latest-v8.x/docs/api/util.html#util_util_promisify_original) or [Bluebird](https://github.com/petkaantonov/bluebird) make converting between callbacks and promises easier.
 
 <!-- -->
 
