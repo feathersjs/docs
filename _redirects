@@ -22,3 +22,7 @@
 
 /api/authentication/hooks.html              https://github.com/feathersjs-ecosystem/feathers-authentication-hooks
 /api/hooks-common.html                      https://feathers-plus.github.io/v1/feathers-hooks-common/
+
+/guides/step-by-step/generators/*           /guides/generator/readme.html
+/guides/step-by-step/basic-feathers/*       /guides/basics/readme.html
+/guides/step-by-step/readme.html            /guides/basics/readme.html
