@@ -54,7 +54,3 @@ npm test
 ## What's next?
 
 We scaffolded a new Feathers application. The next step is to [create a service for messages](./service.md).
-
-### Is anything wrong, unclear, missing?
-
-[Leave a comment.](https://github.com/feathersjs/feathers-docs/issues/new?title=Comment:Chat-Creating)

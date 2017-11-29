@@ -1,22 +1,17 @@
 # Integrating with Frontend Frameworks
 
-## Feathers Chat Applications
-These guides show how to integrate the [Feathers Chat application](../chat/readme.md) with various frontend frameworks.  
+Feathers is front-end framework agnostic! You can use with Vue, React, React Native, Angular, or whatever other front-end tech stack you choose.
 
-**Full Feathers Chat Examples**<br/>
-While we're working on the guides, you can check out example applications in the [feathers-chat](https://github.com/feathersjs/feathers-chat) and [feathers-chat-vuex](https://github.com/feathersjs/feathers-chat-vuex) repos.
+## Client Side Docs
 
-[**Feathers Chat - React**]()<br/>
-Guide not yet published on the blog.  See the full example app [here](https://github.com/feathersjs/feathers-chat-react)
+If you want to learn how to Feathers as a client in Node.js, React Native, or in the browser with a module loader like Webpack refer to the [client API docs](/api/client.md).
 
-[**Feathers Chat - Vue.js 2**]()<br/>
-Guide not yet published on the blog.
+## Examples
 
-[**Feathers Chat - Vue.js 2 with `feathers-vuex`**]()<br/>
-Guide not yet published on the blog.  See the full example app [here](https://github.com/feathersjs/feathers-chat-vuex)
+The [Feathers Chat application](../chat/readme.md) guide gives a basic intro to using the Feathers Client with vanilla JavaScript. That's a good place to start.
 
+Beyond the basics, see [this list](https://github.com/feathersjs/awesome-feathersjs#examples) in awesome-feathersjs.
 
-## Vue.js
+## Framework Integrations
 
-[**Integrating Nuxt into your Feathers Application**](https://blog.feathersjs.com/ssr-vuejs-app-with-feathers-and-nuxt-bb7dfd3e6397)<br/>
-Learn how to integrate the Nuxt server-side rendering framework for Vue.js into your Feathers application.
+See [this list](https://github.com/feathersjs/awesome-feathersjs#js-clients) in awesome-feathersjs.

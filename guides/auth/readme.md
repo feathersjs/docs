@@ -1,16 +1,7 @@
 # Authentication Guides & Recipes
 
-[**API documentation**](/api/authentication/server.md)
-Currently, the API documentation is the most coherent documentation for authentication.
-
 [**How JWT Works**](./how-jwt-works.md)<br/>
 Learn more about JWT and how it might differ from authentication methods you've used, previously. (This guide is a work in progress.)
-
-[**What's new in `feathers-authentication@1.x`**](https://github.com/feathersjs/feathers-authentication/blob/master/docs/new-1.0-features.md)<br/>
-The new `feathers-authentication` introduces a lot of changes.  See what's new.
-
-[**Migrating to `feathers-authentication@1.x`**](https://github.com/feathersjs/feathers-authentication/blob/master/docs/migrating.md)<br/>
-See what needs to change to upgrade your existing Feathers application from `feathers-authentication@0.7.x`.
 
 [**Auth Recipe: Customize the JWT Payload**](./recipe.customize-jwt-payload.md)<br/>
 You can customize the JWT payload. Learn important security implications before you decide to do it.

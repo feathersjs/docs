@@ -28,7 +28,7 @@
       "deep": true
     },
     "versions": {
-      "gitbookConfigURL": "https://raw.githubusercontent.com/feathersjs/docs/buzzard/book.json",
+      "gitbookConfigURL": "https://raw.githubusercontent.com/feathersjs/docs/master/book.json",
       "options": [
         {
           "value": "https://docs.feathersjs.com",
