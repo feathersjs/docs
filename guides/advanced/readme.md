@@ -1,6 +1,6 @@
 # Advanced guides
 
-In this section you can find some guides for advanced topics once you [learned the basics](../step-by-step/readme.md) and created [your first app](../chat/readme.md).
+In this section you can find some guides for advanced topics once you have [learned the basics](../basics/readme.md) and created [your first app](../chat/readme.md).
 
 * [Debugging](https://blog.feathersjs.com/debugging-feathers-with-visual-studio-code-406e6adf2882)
 * [File uploads](guides/advanced/file-uploading.md)
