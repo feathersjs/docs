@@ -34,7 +34,7 @@
     * [Recipe: Mixed Auth Endpoints](guides/auth/recipe.mixed-auth.md)
     * [Recipe: Basic OAuth](guides/auth/recipe.oauth-basic.md)
     * [Recipe: Custom Auth Strategies](guides/auth/recipe.custom-auth-strategy.md)
-  * [Advanced topics](guides/advanced/readme.md)
+  * [Advanced Topics](guides/advanced/readme.md)
 * [API](api/readme.md)
   * Core
     * [Application](api/application.md)
