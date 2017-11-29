@@ -30,6 +30,7 @@
     "build:diffs": "./examples/make-diffs.sh && npm run build",
     "build": "gitbook build",
     "build:pdf": "gitbook pdf . ./_book/feathersjs.pdf",
+    "watch": "gitbook serve",
     "setup": "npm install svgexport -g",
     "netlify": "npm run setup && npm run build"
   },

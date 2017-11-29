@@ -35,7 +35,3 @@ You can install the Feathers generators with
 ## What's next?
 
 Now that we installed the Feathers command line tool we can [generate the application](./gen-app.md).
-
-### Is anything wrong, unclear, missing?
-
-[Leave a comment.](https://github.com/feathersjs/feathers-docs/issues/new?title=Comment:Step-Generators-Readme&body=Comment:Step-Generators-Readme)

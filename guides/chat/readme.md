@@ -27,7 +27,3 @@ Add user registration and login.
 [**Processing data**](./processing.md)
 
 Add and sanitize data.
-
-### Is anything wrong, unclear, missing?
-
-[Leave a comment.](https://github.com/feathersjs/feathers-docs/issues/new?title=Comment:Chat-Introduction)
