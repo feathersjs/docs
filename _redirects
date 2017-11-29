@@ -1,24 +1,7 @@
-/v/auk/*                                    https://docs.feathersjs.com/:splat
-/v/auk-reorg/*                              https://docs.feathersjs.com/:splat
-/authentication/*                           https://docs.feathersjs.com/api/authentication/server.html
-/authorization/*                            https://docs.feathersjs.com/api/authentication/hooks.html
-/clients/*                                  https://docs.feathersjs.com/api/client.html
-/configuration/*                            https://github.com/feathersjs/configuration
-/databases/*                                https://docs.feathersjs.com/api/databases/common.html
-/debugging/*                                https://docs.feathersjs.com/guides/advanced/debugging.html
-/frameworks/*                               https://docs.feathersjs.com/guides/frameworks/readme.html
-/getting-started/*                          https://docs.feathersjs.com/guides/step-by-step/readme.html
-/hooks/*                                    https://docs.feathersjs.com/api/hooks.html
-/middleware/*                               https://docs.feathersjs.com/api/express.html
-/providers/*                                https://docs.feathersjs.com/api/rest.html
-/rest/*                                     https://docs.feathersjs.com/api/rest.html
-/real-time/*                                https://docs.feathersjs.com/api/events.html
-/scaling/*                                  https://docs.feathersjs.com/guides/advanced/scaling.html
-/services/*                                 https://docs.feathersjs.com/api/services.html
-/why/*                                      https://docs.feathersjs.com/guides/about/readme.html
+# v2 Redirects
 
 /api/rest.html                              /api/express.html
-/api/authentication/local-management.html   /guides/advanced/local-management.html
+/api/authentication/local-management.html   https://github.com/feathers-plus/feathers-authentication-management/blob/master/docs.md
 
 /api/authentication/hooks.html              https://github.com/feathersjs-ecosystem/feathers-authentication-hooks
 /api/hooks-common.html                      https://feathers-plus.github.io/v1/feathers-hooks-common/
@@ -26,3 +9,7 @@
 /guides/step-by-step/generators/*           /guides/generator/readme.html
 /guides/step-by-step/basic-feathers/*       /guides/basics/readme.html
 /guides/step-by-step/readme.html            /guides/basics/readme.html
+/guides/advanced/configuration.html         /api/configuration.html
+/guides/advanced/debugging.html             https://blog.feathersjs.com/debugging-feathers-with-visual-studio-code-406e6adf2882
+
+/ecosystem/readme.html                      https://github.com/feathersjs-ecosystem/awesome-feathersjs

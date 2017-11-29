@@ -186,6 +186,3 @@ See the [frameworks section](../frameworks/readme.md) for more resources on spec
 
 You can also browse the [API](../../api/readme.md) which has a lot of information on the usage of Feathers and its database adaptors.
 
-### Is anything wrong, unclear, missing?
-
-[Leave a comment.](https://github.com/feathersjs/feathers-docs/issues/new?title=Comment:Chat-Processing)
