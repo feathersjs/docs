@@ -1,9 +1,6 @@
 # Summary
 
 * [Introduction](README.md)
-  * [Features](guides/about/features.md)
-  * [Philosophy](guides/about/philosophy.md)
-  * [Feathers vs. X](guides/about/vs.md)
 * [Guides](guides/readme.md)  
   * [The Basics](guides/basics/readme.md)
     * [Getting started](guides/basics/starting.md)
