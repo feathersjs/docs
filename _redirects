@@ -1,3 +1,20 @@
+# Legacy docs Redirects
+
+/authentication/*   /api/authentication/server.html
+/authorization/*    https://github.com/feathersjs-ecosystem/feathers-authentication-hooks
+/clients/*          /api/client.html
+/configuration/*    /api/configuration.html
+/databases/*        /databases/common.html
+/frameworks/*       /guides/frameworks/readme.html
+/getting-started/*  /guides/readme.html
+/hooks/*            /api/hooks.html
+/middleware/*       /api/express.html
+/providers/*        /api/express.html
+/rest/*             /api/express.html
+/real-time/*        /api/events.html
+/services/*         /api/services.html
+/why/*              /
+
 # v2 Redirects
 
 /api/rest.html                              /api/express.html
