@@ -9,8 +9,11 @@
 /guides/step-by-step/generators/*           /guides/generator/readme.html
 /guides/step-by-step/basic-feathers/*       /guides/basics/readme.html
 /guides/step-by-step/readme.html            /guides/basics/readme.html
-/guides/offline-first/readme.html            https://auk.docs.feathersjs.com/guides/offline-first/readme.html
+/guides/offline-first/readme.html           https://auk.docs.feathersjs.com/guides/offline-first/readme.html
 /guides/advanced/configuration.html         /api/configuration.html
 /guides/advanced/debugging.html             https://blog.feathersjs.com/debugging-feathers-with-visual-studio-code-406e6adf2882
+/guides/about/philosophy.html               https://blog.feathersjs.com/why-we-built-the-best-web-framework-you-ve-probably-never-heard-of-until-now-176afc5c6aac
+/guides/about/features.html                 https://feathersjs.com/features
+/guides/about/vs.html                       https://feathersjs.com/comparison
 
 /ecosystem/readme.html                      https://github.com/feathersjs-ecosystem/awesome-feathersjs
