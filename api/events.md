@@ -45,7 +45,11 @@ Any service automaticaly emits `created`, `updated`, `patched` and `removed` eve
 
 > **ProTip:** Events are not fired until all of your [hooks](./hooks.md) have executed.
 
+<!-- -->
+
 > **Important:** For information on how those events are published for real-time updates to connected clients, see the [channel chapter](./channels.md).
+
+Additionally to the event `data`, all events also get the [hook context](./hooks) from their method call passed as the second parameter.
 
 ### created
 
@@ -64,7 +68,7 @@ app.use('/messages', {
 // Retrieve the wrapped service object which will be an event emitter
 const messages = app.service('messages');
 
-messages.on('created', message => console.log('created', message));
+messages.on('created', (message, context) => console.log('created', message));
 
 messages.create({
   text: 'We have to do something!'
@@ -91,7 +95,7 @@ app.use('/my/messages/', {
 
 const messages = app.service('my/messages');
 
-messages.on('updated', message => console.log('updated', message));
+messages.on('updated', (message, context) => console.log('updated', message));
 messages.on('patched', message => console.log('patched', message));
 
 messages.update(0, {
@@ -119,13 +123,13 @@ app.use('/messages', {
 
 const messages = app.service('messages');
 
-messages.on('removed', message => console.log('removed', message));
+messages.on('removed', (message, context) => console.log('removed', message));
 messages.remove(1);
 ```
 
 ## Custom events
 
-By default, real-time clients will only receive the [standard events](#service-events). However, it is possible to define a list of custom events on a service as `service.events` that should also be passed.
+By default, real-time clients will only receive the [standard events](#service-events). However, it is possible to define a list of custom events on a service as `service.events` that should also be passed. The `context` for custom events won't be a full hook context but just an object containing `{ app, service, path, result }`.
 
 > **Important:** The [database adapters](./databases/common.md) also take a list of custom events as an initialization option.
 
