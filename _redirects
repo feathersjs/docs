@@ -23,11 +23,21 @@
 /api/authentication/hooks.html              https://github.com/feathersjs-ecosystem/feathers-authentication-hooks
 /api/hooks-common.html                      https://feathers-plus.github.io/v1/feathers-hooks-common/
 
+/api/databases/memory.html                  https://github.com/feathersjs-ecosystem/feathers-memory
+/api/databases/localstorage.html            https://github.com/feathersjs-ecosystem/feathers-localstorage
+/api/databases/nedb.html                    https://github.com/feathersjs-ecosystem/feathers-nedb
+/api/databases/mongodb.html                 https://github.com/feathersjs-ecosystem/feathers-mongodb
+/api/databases/mongoose.html                https://github.com/feathersjs-ecosystem/feathers-mongoose
+/api/databases/knexjs.html                  https://github.com/feathersjs-ecosystem/feathers-knex
+/api/databases/sequelize.html               https://github.com/feathersjs-ecosystem/feathers-sequelize
+/api/databases/elasticsearch.html           https://github.com/feathersjs-ecosystem/feathers-elasticsearch
+/api/databases/rethinkdb.html               https://github.com/feathersjs-ecosystem/feathers-rethinkdb
+
 /guides/step-by-step/generators/*           /guides/generator/readme.html
 /guides/step-by-step/basic-feathers/*       /guides/basics/readme.html
 /guides/step-by-step/readme.html            /guides/basics/readme.html
-/guides/offline-first/readme.html           https://auk.docs.feathersjs.com/guides/offline-first/readme.html
 /guides/advanced/configuration.html         /api/configuration.html
+/guides/offline-first/readme.html           https://auk.docs.feathersjs.com/guides/offline-first/readme.html
 /guides/advanced/debugging.html             https://blog.feathersjs.com/debugging-feathers-with-visual-studio-code-406e6adf2882
 /guides/about/philosophy.html               https://blog.feathersjs.com/why-we-built-the-best-web-framework-you-ve-probably-never-heard-of-until-now-176afc5c6aac
 /guides/about/features.html                 https://feathersjs.com/features
