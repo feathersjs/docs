@@ -30,10 +30,8 @@ app.service('messages').hooks({
     }
   },
 
-  error: {
-    all(context) {
-      console.error(`Error in ${context.path} calling ${context.method} method`, context.error);
-    }
+  error(context) {
+    console.error(`Error in ${context.path} calling ${context.method} method`, context.error);
   }
 });
 ```
@@ -150,12 +148,18 @@ The hook `context` is passed to a hook function and contains information about t
 
 ### context.result
 
-`context.result` is a ___writeable___ property containing the result of the successful service method call. It is only available in `after` hooks. `context.result` can also be set in
+`context.result` is a __writeable__ property containing the result of the successful service method call. It is only available in `after` hooks. `context.result` can also be set in
 
 - A `before` hook to skip the actual service method (database) call
 - An `error` hook to swallow the error and return a result instead
 
 > __Note:__ `context.result` will only be available if `context.type` is `after` or if `context.result` has been set.
+
+### context.dispatch
+
+`context.dispatch` is a __writeable, optional__ property and contains a "safe" version of the data that should be sent to any client. If `context.dispatch` has not been set `context.result` will be sent to the client instead.
+
+> __Note:__ `context.dispatch` only affects the data sent through a Feathers Transport like [REST](./express) or [Socket.io](./socketio.md). An internal method call will still get the data set in `context.result`.
 
 ## Asynchronous hooks
 
