@@ -34,6 +34,44 @@ app.hooks({
 app.listen(8080);
 ```
 
+## Middleware to access Headers and Origin in Params
+It's pretty common to use headers or the origin in an authentication strategy, so let's write some middlewares to tackle that. Though in the current examples we'll not use origins in the logic.
+```js
+// middleware.js
+
+const rest = () => (req, res, next) => {
+  req.feathers = {
+    ...req.feathers,
+    headers: req.headers,
+    origin: req.get('origin')
+  };
+  next();
+};
+
+const socketio = () => (socket, next) => {
+  socket.feathers = {
+    ...socket.feathers,
+    headers: socket.handshake.headers,
+    origin: socket.handshake.headers.origin
+  };
+  next();
+};
+
+module.exports = {
+  rest,
+  socketio
+};
+```
+Let's add it to our app next.
+```js
+app.use(middleware.headers.rest());
+app.configure(
+  socketio(io => {
+    io.use(middleware.headers.socketio());
+  })
+);
+```
+
 ## Creating a Custom API Key Auth Strategy
 The first custom strategy example we can look at is an API Key Strategy. Within it, we'll check if there is a specific header in the request containing a specific API key. If true, we'll successfully authorize the request.
 
@@ -115,6 +153,7 @@ const auth = require('feathers-authentication');
 const jwt = require('feathers-authentication-jwt');
 const memory = require('feathers-memory');
 const commonHooks = require('feathers-hooks-common');
+const middleware = require('./middleware') 
 
 const apiKey = require('./apiKey');
 
@@ -123,6 +162,13 @@ app.configure(hooks());
 app.configure(rest());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use(middleware.headers.rest());
+app.configure(
+  socketio(io => {
+    io.use(middleware.headers.socketio());
+  })
+);
 
 app.configure(auth({ secret: 'secret' }));
 app.configure(jwt());
@@ -217,6 +263,7 @@ const auth = require('feathers-authentication');
 const jwt = require('feathers-authentication-jwt');
 const memory = require('feathers-memory');
 const commonHooks = require('feathers-hooks-common');
+const middleware = require('./middleware') 
 
 const apiKey = require('./apiKey');
 const anonymous = require('./anonymous');
@@ -226,6 +273,13 @@ app.configure(hooks());
 app.configure(rest());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use(middleware.headers.rest());
+app.configure(
+  socketio(io => {
+    io.use(middleware.headers.socketio());
+  })
+);
 
 app.configure(auth({ secret: 'secret' }));
 app.configure(jwt());
