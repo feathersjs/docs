@@ -29,21 +29,21 @@ Every Feathers service exposes a uniform interface modeled after REST. Where, ju
 ```js
 const myService = {
   // GET /path
-  find(params, callback) {},
+  find(params) {},
   // GET /path/<id>
-  get(id, params, callback) {},
+  get(id, params) {},
   // POST /path
-  create(data, params, callback) {},
+  create(data, params) {},
   // PUT /path/<id>
-  update(id, data, params, callback) {},
+  update(id, data, params) {},
   // PATCH /path/<id>
-  patch(id, data, params, callback) {},
+  patch(id, data, params) {},
   // DELETE /path/<id>
-  remove(id, params, callback) {}
+  remove(id, params) {}
 }
 ```
 
-This interface also makes it easier to "hook" into the execution of those methods and emit events when they return which can naturally be used to provide real-time functionality.
+This interface also makes it easier to "hook" into the execution of those methods and emit events when they return which can naturally be used to provide real-time functionality. 
 
 ## [Hooks](../../api/hooks.md)
 
