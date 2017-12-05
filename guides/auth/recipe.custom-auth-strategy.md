@@ -71,6 +71,7 @@ app.configure(
   })
 );
 ```
+Now both headers and origin should be available to us in the `ctx.params`.
 
 ## Creating a Custom API Key Auth Strategy
 The first custom strategy example we can look at is an API Key Strategy. Within it, we'll check if there is a specific header in the request containing a specific API key. If true, we'll successfully authorize the request.
