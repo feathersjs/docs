@@ -43,7 +43,7 @@ module.exports = function(app) {
       // Channels can be named anything and joined on any condition 
       // E.g. to send real-time events only to admins use
 
-      // if(user.isAdmin) { app.channel('admins').join(conneciton); }
+      // if(user.isAdmin) { app.channel('admins').join(connection); }
 
       // If the user has joined e.g. chat rooms
       
