@@ -28,19 +28,19 @@
       "deep": true
     },
     "versions": {
-      "gitbookConfigURL": "https://raw.githubusercontent.com/feathersjs/docs/buzzard/book.json",
+      "gitbookConfigURL": "https://rawgit.com/feathersjs/feathers-docs/master/book.json",
       "options": [
         {
           "value": "https://docs.feathersjs.com",
-          "text": "Latest Stable - Auk (v2)"
+          "text": "Latest Stable - Auk"
         },
         {
           "value": "https://buzzard.docs.feathersjs.com",
-          "text": "Next Release - Buzzard (v3)"
+          "text": "Next Release - Buzzard"
         },
         {
           "value": "https://legacy.docs.feathersjs.com",
-          "text": "Legacy (v1)"
+          "text": "Legacy"
         }
       ]
     }
