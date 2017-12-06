@@ -22,9 +22,7 @@
       "maxIndexSize": 1000000000
     },
     "versions": {
-      "versions": {
-        "gitbookConfigURL": "https://rawgit.com/feathersjs/feathers-docs/master/book.json"
-      }
+      "gitbookConfigURL": "https://rawgit.com/feathersjs/feathers-docs/master/book.json"
     }
   }
 }
