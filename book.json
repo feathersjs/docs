@@ -24,15 +24,19 @@
       "maxIndexSize": 1000000000
     },
     "versions": {
-      "gitbookConfigURL": "https://raw.githubusercontent.com/feathersjs/feathers-docs/master/book.json",
+      "gitbookConfigURL": "https://rawgit.com/feathersjs/feathers-docs/master/book.json",
       "options": [
         {
           "value": "https://docs.feathersjs.com",
-          "text": "Latest Stable (Auk)"
+          "text": "Latest Stable - Auk"
+        },
+        {
+          "value": "https://buzzard.docs.feathersjs.com",
+          "text": "Next Release - Buzzard"
         },
         {
           "value": "https://legacy.docs.feathersjs.com",
-          "text": "Legacy (Pre-Auk)"
+          "text": "Legacy"
         }
       ]
     }
