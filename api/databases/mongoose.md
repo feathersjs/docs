@@ -43,8 +43,8 @@ __Options:__
 - `Model` (**required**) - The Mongoose model definition
 - `lean` (*optional*, default: `true`) - Runs queries faster by returning plain objects instead of Mongoose models.
 - `id` (*optional*, default: `'_id'`) - The name of the id field property.
-- `events` (*optional*) - A list of [custom service events](../real-time/events.md#custom-events) sent by this service
-- `paginate` (*optional*) - A [pagination object](./pagination.md) containing a `default` and `max` page size
+- `events` (*optional*) - A list of [custom service events](../events.md#custom-events) sent by this service
+- `paginate` (*optional*) - A [pagination object](./common.md#pagination) containing a `default` and `max` page size
 - `discriminators` (*optional*) - A list of mongoose models that inherit from `Model`.
 
 > **Important:** To avoid odd error handling behaviour, always set `mongoose.Promise = global.Promise`. If not available already, Feathers comes with a polyfill for native Promises.
