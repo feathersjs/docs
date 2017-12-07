@@ -43,8 +43,8 @@ __Options:__
 - `Model` (**required**) - The Mongoose model definition
 - `lean` (*optional*, default: `true`) - Runs queries faster by returning plain objects instead of Mongoose models.
 - `id` (*optional*, default: `'_id'`) - The name of the id field property.
-- `events` (*optional*) - A list of [custom service events](../real-time/events.md#custom-events) sent by this service
-- `paginate` (*optional*) - A [pagination object](./pagination.md) containing a `default` and `max` page size
+- `events` (*optional*) - A list of [custom service events](../events.md#custom-events) sent by this service
+- `paginate` (*optional*) - A [pagination object](./common.md#pagination) containing a `default` and `max` page size
 - `discriminators` (*optional*) - A list of mongoose models that inherit from `Model`.
 
 > **Important:** To avoid odd error handling behaviour, always set `mongoose.Promise = global.Promise`. If not available already, Feathers comes with a polyfill for native Promises.
@@ -170,7 +170,7 @@ You can run this example by using `node app` and go to [localhost:3030/messages]
 
 ## Querying, Validation
 
-Mongoose by default gives you the ability to add [validations at the model level](http://mongoosejs.com/docs/validation.html). Using an error handler like the one that [comes with Feathers](https://github.com/feathersjs/feathers-errors/blob/master/src/error-handler.js) your validation errors will be formatted nicely right out of the box!
+Mongoose by default gives you the ability to add [validations at the model level](http://mongoosejs.com/docs/validation.html). Using an error handler like the one that [comes with Feathers](https://github.com/feathersjs/errors/blob/master/lib/error-handler.js) your validation errors will be formatted nicely right out of the box!
 
 For more information on querying and validation refer to the [Mongoose documentation](http://mongoosejs.com/docs/guide.html).
 
