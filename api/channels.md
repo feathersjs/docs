@@ -269,7 +269,7 @@ app.service('users').publish('created', (data, context) => {
 
 ### app.publish([event,] fn)
 
-`app.publish([event,] fn) -> app` registersa publishing function for all services for a specific event or all events if no event name was given.
+`app.publish([event,] fn) -> app` registers a publishing function for all services for a specific event or all events if no event name was given.
 
 ```js
 app.on('login', (user, { connection }) => {
