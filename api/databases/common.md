@@ -272,7 +272,7 @@ All modules also export an [ES6 class](https://developer.mozilla.org/en/docs/Web
 ```js
 'use strict';
 
-const Service = require( 'feathers-<database>').Service;
+const { Service } = require( 'feathers-<database>');
 
 class MyService extends Service {
   create(data, params) {

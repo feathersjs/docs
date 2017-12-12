@@ -3,12 +3,12 @@
 Services are the heart of every Feathers application and JavaScript objects or instances of [a class](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Classes) that implement certain methods. Services provide a uniform, protocol independent interface for how to interact with any kind of data like:
 
 - Reading and/or writing from a database
-- Call another microservice/API
 - Interacting with the file system
-- Call other service
-    - Send an email,
-    - Process a payment,
-    - Return the current weather for a location, etc.
+- Call another API
+- Call other services like
+  - Send an email,
+  - Process a payment,
+  - Return the current weather for a location, etc.
 
 Protocol independent means that to a Feathers service it does not matter if it has been called internally, through a REST API or websockets (both of which we will look at later).
 
@@ -67,7 +67,7 @@ The parameters for service methods are:
 
 ## A messages service
 
-Now that we know how service methods look like we can implement our own chat message service that allows us to find, create, remove and update messages in-memory. Here we will use a JavaScript class to work with our messages but as we've seen in the previous chapter it could als be a normal object.
+Now that we know how service methods look like we can implement our own chat message service that allows us to find, create, remove and update messages in-memory. Here we will use a JavaScript class to work with our messages but as we've above it could als be a normal object.
 
 Below is the complete updated `app.js` with comments:
 
@@ -87,7 +87,7 @@ class Messages {
 
   async get(id, params) {
     // Find the message by id
-    const message = this.messages.find(message => message.id === id);
+    const message = this.messages.find(message => message.id === parseInt(id, 10));
 
     // Throw an error if it wasn't found
     if(!message) {
@@ -102,7 +102,7 @@ class Messages {
     // Create a new object with the original data and an id
     // taken from the incrementing `currentId` counter
     const message = Object.assign({
-      id: this.currentId++
+      id: ++this.currentId
     }, data);
 
     this.messages.push(message);
@@ -112,7 +112,7 @@ class Messages {
 
   async patch(id, data, params) {
     // Get the existing message. Will throw an error if not found
-    const message = this.get(id);
+    const message = await this.get(id);
 
     // Merge the existing message with the new data
     // and return the result
@@ -121,7 +121,7 @@ class Messages {
 
   async remove(id, params) {
     // Get the message by id (will throw an error if not found)
-    const message = this.get(id);
+    const message = await this.get(id);
     // Find the index of the message in our message array
     const index = this.messages.indexOf(message);
 
@@ -142,69 +142,19 @@ app.use('messages', new Messages());
 
 ## Using services
 
-As we've seen above, a service object can be registered on a Feathers application by calling `app.use(path, service)`. `path` will be the name of the service (and the URL if it is exposed as an API which we will learn later).
+A service object can be registered on a Feathers application by calling `app.use(path, service)`. `path` will be the name of the service (and the URL if it is exposed as an API which we will learn later).
 
-We can retrieve the service via `app.service(path)` and then call any of its service methods. Add the following to the end of `app.js`:
-
-```js
-async function createMessages() {
-  await app.service('messages').create({
-    text: 'First message'
-  });
-
-  await app.service('messages').create({
-    text: 'Second message'
-  });
-
-  const messageList = await app.service('messages').find();
-
-  console.log('Available messages', messageList);
-}
-
-createMessages();
-```
-
-And run it with
-
-```
-node app
-```
-
-> __Important:__ Always use the service returned by `app.service(path)` not the service object (what we called `messageService` above) directly. See the [app.service API documentation](../../api/application.md#servicepath) for more information.
-
-## Service events
-
-All Feathers services automatically send events with the new data when a service method that modifies data (`create`, `update`, `patch` and `remove`) returns:
-
-| Service method     | Service event           |
-| ------------------ | ----------------------- |
-| `service.create()` | `service.on('created')` |
-| `service.update()` | `service.on('updated')` |
-| `service.patch()`  | `service.on('patched')` |
-| `service.remove()` | `service.on('removed')` |
-
-We will see later that this is the key to how Feathers enables real-time functionality.
+We can retrieve that service via `app.service(path)` and then call any of its service methods. Add the following to the end of `app.js`:
 
 ```js
-app.service('messages').on('created', message => {
-  console.log('Someone created a new message', message);
-});
-
-app.service('messages').on('removed', message => {
-  console.log('Someone created a new message', message);
-});
-
 async function processMessages() {
   await app.service('messages').create({
     text: 'First message'
   });
 
-  const second = await app.service('messages').create({
+  await app.service('messages').create({
     text: 'Second message'
   });
-
-  // Remove the second message again
-  await app.service('messages').remove(second.id);
 
   const messageList = await app.service('messages').find();
 
@@ -213,3 +163,79 @@ async function processMessages() {
 
 processMessages();
 ```
+
+And run it with
+
+```
+node app
+```
+
+We should see this:
+
+```
+Available messages [ { id: 0, text: 'First message' },
+  { id: 1, text: 'Second message' } ]
+```
+
+> __Important:__ Always use the service returned by `app.service(path)` not the service object (what we called `messageService` above) directly. See the [app.service API documentation](../../api/application.md#servicepath) for more information.
+
+## Service events
+
+When you register a service it will automatically become a [NodeJS EventEmitter](https://nodejs.org/api/events.html) that sends events with the new data when a service method that modifies data (`create`, `update`, `patch` and `remove`) returns. Events can be listened to with `app.service('messages').on('eventName', data => {})`. Here is a list of the service methods and their correspondingn events:
+
+| Service method     | Service event           |
+| ------------------ | ----------------------- |
+| `service.create()` | `service.on('created')` |
+| `service.update()` | `service.on('updated')` |
+| `service.patch()`  | `service.on('patched')` |
+| `service.remove()` | `service.on('removed')` |
+
+We will see later that this is the key to how Feathers enables real-time functionality. For now, let's update the `processMessage` function in `app.js` as follows:
+
+```js
+async function processMessages() {
+  app.service('messages').on('created', message => {
+    console.log('Created a new message', message);
+  });
+
+  app.service('messages').on('removed', message => {
+    console.log('Deleted message', message);
+  });
+
+  await app.service('messages').create({
+    text: 'First message'
+  });
+
+  const lastMessage = await app.service('messages').create({
+    text: 'Second message'
+  });
+
+  // Remove the message we just created
+  await app.service('messages').remove(lastMessage.id);
+
+  const messageList = await app.service('messages').find();
+
+  console.log('Available messages', messageList);
+}
+
+processMessages();
+```
+
+If we now run the file via
+
+```
+node app
+```
+
+We will see how the event handlers are logging the information of created and deleted message like this:
+
+```
+Created a new message { id: 0, text: 'First message' }
+Created a new message { id: 1, text: 'Second message' }
+Deleted message { id: 1, text: 'Second message' }
+Available messages [ { id: 0, text: 'First message' } ]
+```
+
+## What's next?
+
+In this chapter we learned about services as Feathers core concept for abstracting data manipulation and other operations. We also saw how a service sends events which we will use later to create real-time applications. First, we will look at [Feathers Hooks](./hooks.md) which is the other key part of how Feathers works.

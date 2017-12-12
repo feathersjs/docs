@@ -102,8 +102,8 @@ app.service('messages').get(1, {
 ```
 
 ```
-GET /messages?$select=text&$select=userId
-GET /messages/1?$select=text
+GET /messages?$select[]=text&$select[]=userId
+GET /messages/1?$select[]=text
 ```
 
 To exclude fields from a result the [remove hook](../hooks-common.md) can be used.
