@@ -71,8 +71,8 @@ If your app starts to get a bit busier you might decide to move your API to a co
 app.set('view engine', 'jade');
 
 // Include the Feathers client modules
-const client = require('feathers/client');
-const socketio = require('feathers-socketio/client');
+const client = require('@feathersjs/client');
+const socketio = require('@feathersjs/socketio-client');
 const io = require('socket.io-client');
 ​
 // Set up a socket connection to our remote API

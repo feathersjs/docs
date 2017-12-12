@@ -27,7 +27,6 @@
     "node": ">= 0.12.0"
   },
   "scripts": {
-    "build:diffs": "./examples/make-diffs.sh && npm run build",
     "build": "gitbook build",
     "build:pdf": "gitbook pdf . ./_book/feathersjs.pdf",
     "watch": "gitbook serve",

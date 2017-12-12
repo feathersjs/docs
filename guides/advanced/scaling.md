@@ -23,8 +23,8 @@ There are notable side effects to be aware of when disabling the HTTP transport 
 
 ```js
 import cluster from 'cluster';
-import feathers from 'feathers';
-import socketio from 'feathers-socketio';
+import feathers from '@feathersjs/feathers';
+import socketio from '@feathersjs/socketio';
 
 const CLUSTER_COUNT = 4;
 
@@ -45,13 +45,11 @@ if (cluster.isMaster) {
 In your feathers client code, limit the socket.io-client to the `websocket` transport and disable `upgrade`.
 
 ```js
-import hooks from 'feathers-hooks';
-import feathers from 'feathers/client';
+import feathers from '@feathersjs/client';
 import io from 'socket.io-client';
 import socketio from 'feathers-socketio/client';
 
 const app = feathers()
-  .configure(hooks())
   .configure(socketio(
     io('http://api.feathersjs.com', {
       transports: ['websocket'],

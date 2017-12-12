@@ -1,13 +1,13 @@
-# Getting started
+# Our first Feathers application
 
-Now that we are [set up](./setup.md) we can create our first Feathers application. It will work in both, NodeJS and the browser. First, let's put the examples into their own folder:
+Now that we are [set up](./setup.md) we can create our first Feathers application. It will work in both, NodeJS and the browser. First, let's create a new folder for all our examples to run in:
 
 ```
 mkdir feathers-basics
 cd feathers-basics
 ```
 
-Since any Feathers application is a Node application, we should create a default [package.json](https://docs.npmjs.com/files/package.json) using `npm`:
+Since any Feathers application is a Node application, we now create a default [package.json](https://docs.npmjs.com/files/package.json) using `npm`:
 
 ```
 npm init --yes
@@ -32,7 +32,7 @@ const feathers = require('@feathersjs/feathers');
 const app = feathers();
 ```
 
-This application object has several methods, most importantly it allows us to register services. We will learn more about services in the next chapter, for now let's register and use a simple service that has only a `get` method by creating an `app.js` file in the current folder like this:
+This application object has several methods, most importantly it allows us to register services. We will learn more about services in the next chapter, for now let's register and use a simple service that has only a `get` method by creating an `app.js` file (in the current folder) like this:
 
 ```js
 const feathers = require('@feathersjs/feathers');
@@ -50,7 +50,7 @@ app.use('todos', {
 });
 
 // A function that gets and logs a todo from the service
-async function logTodo(name) {
+async function getTodo(name) {
   // Get the service we registered above
   const service = app.service('todos');
   // Call the `get` method with a name
@@ -60,7 +60,7 @@ async function logTodo(name) {
   console.log(todo);
 }
 
-logTodo('dishes');
+getTodo('dishes');
 ```
 
 We can run it with
@@ -71,7 +71,7 @@ node app
 
 And should see
 
-```
+```js
 { name: 'dishes', text: 'You have to do dishes' }
 ```
 
@@ -81,13 +81,13 @@ And should see
 
 The Feathers application we created above can also run just the same in the browser. The easiest way to load Feathers here is through a `<script>` tag pointing to the CDN version of Feathers. Loading it will make a `feathers` global variable available.
 
-Let's create a new folder
+Let's put the browser files into a new folder
 
 ```
 mkdir public
 ```
 
-We will also need to host the folder with a webserver. This can be done with any webserver like Apache or with a [Node module]() that we can install and host the `public/` folder like this:
+We will also need to host the folder with a webserver. This can be done with any webserver like Apache or with a [the http-server module](https://www.npmjs.com/package/http-server) that we can install and host the `public/` folder like this:
 
 ```
 npm install http-server -g
@@ -96,7 +96,7 @@ http-server public/
 
 > __Note:__ You may have to set the `-p` argument with a port number other than the default 8080 if that port is already taken on your machine (e.g. `http-server -p 3030 public/`).
 
-In the `public/` folder we add two files, a `public/index.html` that will load Feathers and an `app.js` like this:
+In the `public/` folder we add two files, an `index.html` that will load Feathers:
 
 ```html
 <!DOCTYPE html>
@@ -114,7 +114,7 @@ In the `public/` folder we add two files, a `public/index.html` that will load F
 </html>
 ```
 
-And a `public/app.js` looking like this:
+And an `app.js` looking like this:
 
 ```js
 const app = feathers();
@@ -152,4 +152,4 @@ If you now go to [localhost:8080](http://localhost:8080) with the console open y
 
 ## What's next?
 
-In this chapter we created our first Feathers application with a simple service that works in Node and the browser. Next, let's learn a little more about [Services and Service events](./services.md).
+In this chapter we created our first Feathers application with a simple service that works in Node and the browser. Next, let's learn more about [Services and Service events](./services.md).
