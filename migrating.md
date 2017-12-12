@@ -35,7 +35,7 @@ module.exports = function(app) {
   });
 
   app.on('login', (user, { connection }) => {
-    // connection can be undefined if there is no
+    // Connection can be undefined if there is no
     // real-time connection, e.g. when logging in via REST
     if(connection) {
       // The connection is no longer anonymous, remove it
@@ -47,7 +47,7 @@ module.exports = function(app) {
       // Channels can be named anything and joined on any condition 
       // E.g. to send real-time events only to admins use
 
-      // if(user.isAdmin) { app.channel('admins').join(conneciton); }
+      // if(user.isAdmin) { app.channel('admins').join(connection); }
 
       // If the user has joined e.g. chat rooms
       
@@ -59,13 +59,13 @@ module.exports = function(app) {
     // Here you can add event publishers to channels set up in `channels.js`
     // To publish only for a specific event use `app.publish(eventname, () => {})`
 
-    // publish all service events to all authenticated users users
+    // Publish all service events to all authenticated users
     // return app.channel('authenticated');
   });
 
-  // you can also add service specific publisher via
+  // You can also add service specific publishers via
 
-  // for a specific event
+  // For a specific event
   // app.service('name').publish(eventName, (data, hook) => {});
 
   // For all events on that service
@@ -78,7 +78,7 @@ And require and configure it in `src/app.js` (note that it should be configured 
 ```js
 const channels = require('./channels');
 
-// after `app.configure(services)`
+// After `app.configure(services)`
 app.configure(channels);
 ```
 
@@ -288,8 +288,8 @@ Also see [/feathers/issues/608](https://github.com/feathersjs/feathers/issues/60
 ## Deprecations and other API changes
 
 - Callbacks are no longer supported in Feathers service methods. All service methods always return a Promise. Custom services must return a Promise or use `async/await`.
-- `service.before` an `service.after` have been replaced with a single `app.hooks({ before, after })`
-- `app.service(path)` only returns a service and can not be used to register a new service anymore (via `app.service(path, service)`). Use `app.use(path, service)` instead.
+- `service.before` and `service.after` have been replaced with a single `app.hooks({ before, after })`
+- `app.service(path)` only returns a service and cannot be used to register a new service anymore (via `app.service(path, service)`). Use `app.use(path, service)` instead.
 - Route parameters which were previously added directly to `params` are now in `params.route`
 - Express middleware like `feathers.static` is now located in `const express = require('@feathersjs/express')` using `express.static`
 
@@ -301,7 +301,7 @@ This section contains some quick backwards compatibility polyfills for the break
 
 ### Basic service filter
 
-This is a basic emulation of the previous event filter functionality. It does not use promises or allows modifying the data (which should now be handled by setting `hook.dispatch`).
+This is a basic emulation of the previous event filter functionality. It does not use promises or allow modifying the data (which should now be handled by setting `hook.dispatch`).
 
 ```js
 app.mixins.push(service => {
