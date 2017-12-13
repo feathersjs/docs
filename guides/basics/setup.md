@@ -34,7 +34,7 @@ Although Feathers works with many database this guide will only use examples of 
 
 Authentication will be shown later in the [chat application guide](../chat/readme.md).
 
-All examples will reside within a single file. We will learn more on a recommended way to structure your application in the [Generator guide](../generator/readme.md).
+All examples will reside within a single file. The Feathers generator (CLI) will create a recommended structure for a Feathers application. You can see what it does to structure an application in the [Generator guide](./generator.md) and how to use it in the [chat application guide](../chat/readme.md).
 
 ## What's next?
 

@@ -8,7 +8,7 @@ At it's core, it's a set of tools and an architecture pattern that make it easy 
 
 Feathers achieves this by being the glue code between some amazing battle tested open source technologies - adding a few minimal abstractions and introducing an application architecture that is easier to understand, maintain, and scale than the traditional MVC architecture.
 
-If you're interested, you can read more about [how and why Feathers came to be](https://blog.feathersjs.com/why-we-built-the-best-web-framework-you-ve-probably-never-heard-of-until-now-176afc5c6aac) or you can [see how Feathers compares to others](https://feathersjs.com/comparison).
+If you're interested, you can read more about [how and why Feathers came to be](https://blog.feathersjs.com/why-we-built-the-best-web-framework-you-ve-probably-never-heard-of-until-now-176afc5c6aac) or you can read about Feathers [featuers](guides/about/features.md) and [philosophy](guides/about/philosophy.md).
 
 If you've decided that Feathers might be for you, feel free to dive right in and [learn about the basics](./guides/basics/readme.md).
 
