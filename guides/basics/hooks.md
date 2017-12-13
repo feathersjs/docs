@@ -49,7 +49,7 @@ app.service('messages').hooks({
 });
 ```
 
-Now we have a re-usable hook that can set the timestamp on any property.
+Now we have a re-usable hook that can set the timestamp on any property. Hook functions run in the order they are registered and will only continue to the next once the current hook function completes. If a hook function throws an error, all remaining hooks (and possibly the service call) will be skipped and the error will be returned.
 
 ## Hook context
 
@@ -73,23 +73,84 @@ Writeable properties are:
 
 ## Registering hooks
 
+The most common way to register hooks is in an object like this:
+
+```js
+const messagesHooks = {
+  before: {
+    all: [],
+    find: [],
+    get: [],
+    create: [],
+    update: [],
+    patch: [],
+    remove: [],
+  },
+  after: {
+    all: [],
+    find: [],
+    create: [],
+    update: [],
+    patch: [],
+    remove: [],
+  }
+};
+
+app.service('messages').hooks(messagesHooks);
+```
+
+This makes it easy to see at one glance in which order hooks are executed and for which method.
+
+> __Note:__ `all` is a special keyword which means those hooks will run before the method specific hooks in this chain.
+
+A flow how different hooks will be executed like this:
+
+![Hook flow](./assets/hook-flow.jpg)
+
+Can be registered like this:
+
+```js
+const messagesHooks = {
+  before: {
+    all: [ hook01() ],
+    find: [ hook11() ],
+    get: [ hook21() ],
+    create: [ hook31(), hook32() ],
+    update: [ hook41() ],
+    patch: [ hook51() ],
+    remove: [ hook61() ],
+  },
+  after: {
+    all: [ hook05() ],
+    find: [ hook15(), hook16() ],
+    create: [ hook35() ],
+    update: [ hook45() ],
+    patch: [ hook55() ],
+    remove: [ hook65() ],
+  }
+};
+
+app.service('messages').hooks(messagesHooks);
+```
 
 ## Validating data
 
-If a hook throws an error, all following hooks will be skipped and the error will be returned to the user. This makes `before` hooks a great place to validate incoming data.  We will only need the hook for `create`, `update` and `patch` since those are the only service methods that allow user submitted data:
+If a hook throws an error, all following hooks will be skipped and the error will be returned to the user. This makes `before` hooks a great place to validate incoming data by throwing an error for invalid data. We can throw a normal [JavaScript error](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error) or [Feathers error](../../api/errors.md) which has some additional functionality (like returning the proper error code for REST calls). We will only need the hook for `create`, `update` and `patch` since those are the only service methods that allow user submitted data:
 
 ```js
+const { BadRequest } = require('@feathersjs/errors');
+
 const validate = async context => {
   const { data } = context;
 
   // Check if there is `text` property
   if(!data.text) {
-    throw new Error('Message text must exist');
+    throw new BadRequest('Message text must exist');
   }
 
   // Check if it is a string and not just whitespace
   if(typeof data.text !== 'string' || data.text.trim() === '') {
-    throw new Error('Message text is invalid');
+    throw new BadRequest('Message text is invalid');
   }
 
   // Change the data to be only the text
@@ -110,16 +171,8 @@ app.service('messages').hooks({
 });
 ```
 
-Feathers comes with its own [error library](../../api/errors.md). Throwing a Feathers error allows us to return additional information and will make sure that the error will be formatter
+
 > __Note:__ Throwing an appropriate [Feathers errors](../../api/errors.md) allows to add more information and return the correc
-
-## Associating data
-
-Let's take our messages service from the previous chapter and add three things:
-
-1. Before the services `create` or `patch` is called we will add a `createdAt` and `updatedAt` property with the current date
-2. After a `find` (getting all messages) wrap the result in an object with a `data` property and some additional information.
-3. Whenever an error happens (e.g. when a message wasn't found), log it to the console
 
 ## Application hooks
 
@@ -141,6 +194,10 @@ app.hooks({
 });
 ```
 
+## More examples
+
+The [chat application guide](../chat/readme.md) will show several more examples like how to associate data and adding user information for hooks created by [the generator](./generator.md).
+
 ## What's next?
 
- how to turn the messages service we just created into a REST API in the [next chapter](./rest.md).
+In this chapter we learned how Feathers hooks can be used middleware for service method calls to validate and manipulate incoming and outgoing data without having to change our service. In the next chapter we will turn our messages service into a [fully functional REST API](./rest.md).

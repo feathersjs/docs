@@ -128,6 +128,11 @@ The hook `context` is passed to a hook function and contains information about t
 
 `context.params` is a __writeable__ property that contains the [service method](./services.md) parameters (including `params.query`).
 
+Important properties that usually are available in `params`:
+
+- `context.params.query` - The query from the client
+- `context.params.provider` - The transport (`rest`, `socketio` or `primus`) used for this service call. Will be `undefined` for internal calls from the server.
+
 ### context.id
 
 `context.id` is a __writeable__ property and the `id` for a `get`, `remove`, `update` and `patch` service method call. For `remove`, `update` and `patch` `context.id` can also be `null` when modifying multiple entries. In all other cases it will be `undefined`.

@@ -22,6 +22,15 @@ Confirming the last prompt will create a couple of files and wire our service up
 
 Et voilà! We have a fully functional REST and real-time API for our messages.
 
+## The generated files
+
+As we can see, several files were created:
+
+- `src/services/messages/messages.service.js` - The service setup file which returns a [configure function](../basics/generator.md)
+- `src/services/messages/messages.hooks.js` - A file that returns an [object with all hooks](../basics/hooks.md) that should be registered on the service.
+- `src/models/messages.model.js` - The model for our messages. Since we are using NeDB this will just instantiate the filesystem database.
+- `test/services/messages.test.js` - A Mocha test for the service which by default just makes sure that it exists.
+
 ## Testing the API
 
 If we now start our API with
