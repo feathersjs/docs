@@ -4,13 +4,13 @@ Now that we have our [Feathers application generated](./creating.md) we can crea
 
 ## Generating a service
 
-In Feathers any API endpoint is represented as a [service](../../api/services.md) which we already learned about in the [basics guide](../step-by-step/readme.md). To generate a new service we can run
+In Feathers any API endpoint is represented as a [service](../../api/services.md) which we already learned about in the [basics guide](../basics/services.md). To generate a new service we can run
 
 ```
 feathers generate service
 ```
 
-First we have to choose what kind of service we would like to create. You can choose between many databases and ORMs but for this guide we will just go with the default [NeDB](https://github.com/louischatriot/nedb). NeDB is a database that stores its data locally in a file and requires no additional configuration or a database server running.
+First we have to choose what kind of service we would like to create. You can choose between many databases and ORMs but for this guide we will go with the default [NeDB](https://github.com/louischatriot/nedb). NeDB is a database that stores its data locally in a file and requires no additional configuration or a database server running.
 
 Next we are asked for the name of the service which we can answer with `messages` and then can answer the next question for the path with the default (`/messages`) by pressing enter.
 
@@ -21,7 +21,6 @@ Confirming the last prompt will create a couple of files and wire our service up
 ![Final Configuration](./assets/service.png)
 
 Et voilà! We have a fully functional REST and real-time API for our messages.
-
 
 ## Testing the API
 
@@ -47,5 +46,4 @@ If we now go to [localhost:3030/messages](http://localhost:3030/messages) again 
 
 ## What's next?
 
-With just one command, we created a fully functional REST and real-time API endpoint. Before we dive into authentication and processing data, [let's create a simple web application](./frontend.md) that uses our new chat message endpoint.
-
+With just one command, we created a fully functional REST and real-time API endpoint. Next, let's [add authentication](./authentication.md) and make sure messages only go to users that are allowed to see them.

@@ -151,7 +151,7 @@ socket.emit('create', 'messages', {
   text: 'Hello from socket'
 }, (error, result) => {
   socket.emit('find', 'messages', (error, messageList) => {
-    console.log('Current message', messageList);
+    console.log('Current messages', messageList);
   });
 });
 ```

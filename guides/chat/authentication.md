@@ -1,6 +1,6 @@
 # Adding authentication
 
-In the previous chapters we [created our Feathers chat application](./creating.md) and [initialized a service](./service.md) for storing messages. We also build a simple [real-time frontend for the browser](./frontend.md). However, for a proper chat application we need to be able to register and authenticate users.
+In the previous chapters we [created our Feathers chat application](./creating.md) and [initialized a service](./service.md) for storing messages. For a proper chat application we need to be able to register and authenticate users.
 
 ## Generating authentication
 
@@ -41,17 +41,7 @@ With a REST client, e.g. [Postman](https://chrome.google.com/webstore/detail/pos
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/9668636a9596d1e4a496)
 
-Or via the client we used in the [frontend chapter](./frontend.md) by adding the following to `public/app.js`:
-
-```js
-// Create a test new user
-client.service('users').create({
-  email: 'feathers@example.com',
-  password: 'secret'
-});
-```
-
-> **Note:** Creating a user with the same email address will only work once and fail when it already exists in the database.
+> **Note:** Creating a user with the same email address will only work once and fail when it already exists in the database. This is a restriction implemented for NeDB and might have to be implemented manually when using a different database.
 
 ### Getting a token
 
@@ -75,91 +65,14 @@ With a REST client, e.g. [Postman](https://chrome.google.com/webstore/detail/pos
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/9668636a9596d1e4a496)
 
-The returned token can now be used to authenticate the user it was created for by adding it to the `Authorization` header of new HTTP requests.
-
-The Feathers client from the [frontend chapter](./frontend.md) already has authentication (and storing the generated token in LocalStorage) built in and can be used by adding this to `public/app.js`:
-
-```js
-client.configure(feathers.authentication({
-  storage: window.localStorage
-}));
-
-client.authenticate({
-  strategy: 'local',
-  email: 'feathers@example.com',
-  password: 'secret'
-}).then(token => {
-  console.log('User is logged in');
-});
-```
-
-Then we can update `public/app.js` to look like this:
-```js
-const socket = io();
-const client = feathers();
-
-// Create the Feathers application with a `socketio` connection
-client.configure(feathers.socketio(socket));
-
-// Get the service for our `messages` endpoint
-const messages = client.service('messages');
-
-// Configure authentication
-client.configure(feathers.authentication({
-  storage: window.localStorage
-}));
-
-client.authenticate({
-  strategy: 'local',
-  email: 'feathers@example.com',
-  password: 'secret'
-}).then((token) => {
-  console.log('User is logged in', token);
-
-  // At this point we have a valid token, so we can fetch restricted data.
-  messages.find().then(page => page.data.forEach(addMessage));
-  messages.on('created', addMessage);
-});
-
-// Add a new message to the list
-function addMessage(message) {
-  const chat = document.querySelector('.chat');
-
-  chat.insertAdjacentHTML('beforeend', `<div class="message flex flex-row">
-    <img src="https://placeimg.com/64/64/any" alt="${message.name}" class="avatar">
-    <div class="message-wrapper">
-      <p class="message-header">
-        <span class="username font-600">${message.name}</span>
-      </p>
-      <p class="message-content font-300">${message.text}</p>
-    </div>
-  </div>`);
-
-  chat.scrollTop = chat.scrollHeight - chat.clientHeight;
-}
-
-document.getElementById('send-message').addEventListener('submit', function(ev) {
-  const nameInput = document.querySelector('[name="name"]');
-  // This is the message text input field
-  const textInput = document.querySelector('[name="text"]');
-
-  // Create a new message and then clear the input field
-  client.service('messages').create({
-    text: textInput.value,
-    name: nameInput.value
-  }).then(() => {
-    textInput.value = '';
-  });
-  ev.preventDefault();
-});
-```
+The returned token can then be used to authenticate the user it was created for by adding it to the `Authorization` header of new HTTP requests.
 
 ## Securing the messages service
 
 Now we have to restrict our messages service to authenticated users. If we run `feathers generate authentication` *before* generating other services it will ask if the service should be restricted to authenticated users. Because we created the messages service first, however we have to update `src/services/messages/messages.hooks.js` manually to look like this:
 
 ```js
-const { authenticate } = require('feathers-authentication').hooks;
+const { authenticate } = require('@feathersjs/authentication').hooks;
 
 module.exports = {
   before: {
@@ -194,12 +107,50 @@ module.exports = {
 };
 ```
 
-This will now only allow users with a valid JWT to access the service.
+This will now only allow users with a valid JWT to access the service and automatically set `params.user`.
+
+## Securing real-time events
+
+The `authenticate` hook that we used above will restrict _access_ to service methods to only authenticated users. No we also have to make sure that [real-time service events](../basics/real-time.md) are only sent to connections that are allowed to see them. Feathers uses channels to accomplish that which the generator already sets up for us in `src/channels.js` (have a look at the comments in the generated file and the [channel API documentation](../../api/channels.md) to get a better idea about channels).
+
+We could use channels to e.g. only send events to users in a specific room or with specific permissions. To make things easier for our basic chat however, let's just send all events to all authenticated users by updating `src/channels.js` to this:
+
+```js
+module.exports = function(app) {
+  if(typeof app.channel !== 'function') {
+    // If no real-time functionality has been configured just return
+    return;
+  }
+
+  app.on('connection', connection => {
+    // On a new real-time connection, add it to the anonymous channel
+    app.channel('anonymous').join(connection);
+  });
+
+  app.on('login', (authResult, { connection }) => {
+    // connection can be undefined if there is no
+    // real-time connection, e.g. when logging in via REST
+    if(connection) {
+      // Obtain the logged in user from the connection
+      // const user = connection.user;
+      
+      // The connection is no longer anonymous, remove it
+      app.channel('anonymous').leave(connection);
+
+      // Add it to the authenticated user channel
+      app.channel('authenticated').join(connection);
+    }
+  });
+
+  app.publish((data, hook) => { // eslint-disable-line no-unused-vars
+    // Publish all service events to all authenticated users
+    return app.channel('authenticated');
+  });
+};
+```
+
+This is almost the same as the original file except for the line `return app.channel('authenticated');` being commented in `app.publish()`. Now only authenticated users will receive real-time updates.
 
 ## What's next?
 
-In this chapter we initialized authentication and created a user and JWT. We can now use that user information to [process new message data](./processing.md).
-
-### Is anything wrong, unclear, missing?
-
-[Leave a comment.](https://github.com/feathersjs/feathers-docs/issues/new?title=Comment:Chat-Authentication)
+In this chapter we initialized authentication and created a user and JWT. We secured the messages service and made sure that only authenticated users get real-time updates. We can now use that user information to [process new message data](./processing.md).

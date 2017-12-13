@@ -1,10 +1,10 @@
 # Creating the application
 
-In this part we are going to create a new Feathers application using the generator.
+In this part we are going to create a new Feathers application using the generator. Head over to the [generator (CLI) guide](../generator/readme.md) to install it and get a basic understanding of how it works.
 
 ## Generating the application
 
-With everything [set up]() let's create a directory for our new app:
+With everything [set up](../generator/readme.md) let's create a directory for our new app:
 
 ```
 $ mkdir feathers-chat
@@ -19,13 +19,13 @@ $ feathers generate app
 
 When presented with the project name just hit enter, or enter a name (no spaces).
 
-Next, enter in a short description of your app.
+Next, enter in a short description of your application.
 
 The next prompt asking for the source folder can be answered by just hitting enter. This will put all source files into the `src/` folder.
 
 The next prompt will ask for the package manager you want to use. The default is the standard [npm](https://www.npmjs.com/).
 
-> **Note:** Choosing [Yarn](https://yarnpkg.com/en/) will make for faster installation times but requires Yarn installed globally via `npm install yarn -g` first.
+> **Note:** If you choose [Yarn](https://yarnpkg.com/en/) instead, make sure it has been installed via `npm install yarn -g` first.
 
 You're now presented with the option to choose which transport you want to support. Since we're setting up a real-time and REST API we'll go with the default REST and Socket.io options. So just hit enter.
 
@@ -33,7 +33,7 @@ Once you confirm the final prompt you will see something like this:
 
 ![Final Configuration](./assets/creating.png)
 
-The structure and purpose of all those files that have just been created are covered in the [generator chapter](../step-by-step/generators/readme.md).
+The structure and purpose of all those files that have just been created are covered in the [generator chapter](../generator/generate.md).
 
 ## Running the server and tests
 

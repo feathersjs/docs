@@ -6,6 +6,8 @@ This is exactly what Feathers client side services do. In order to connect to a 
 
 > __Note:__ The following examples show the use of the Feathers client through a `<script>` tag. For more information on using a module loader like Webpack or Browserify and loading individual modules see the [client API documentaiton](../../api/client.md).
 
-## REST client
-
 ## Real-time client
+
+
+
+## REST client
