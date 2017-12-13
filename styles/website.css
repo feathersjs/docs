@@ -180,3 +180,9 @@ section.markdown-section table {
 .book .book-summary ul.summary > li[data-level="1.2"] > ul > li > a {
   font-weight: bold;
 }
+
+/* make nav buttons smaller as to not accidentally trigger when you mean to click on white space. */
+.navigation {
+  max-height: 40px;
+  margin-top: 46%;
+}
