@@ -28,16 +28,23 @@ If you are using real-time (with Socket.io or Primus), add the following file as
 
 ```js
 module.exports = function(app) {
+  if(typeof app.channel !== 'function') {
+    // If no real-time functionality has been configured just return
+    return;
+  }
+
   app.on('connection', connection => {
-    // On a new real-time connection, add it to the
-    // anonymous channel
+    // On a new real-time connection, add it to the anonymous channel
     app.channel('anonymous').join(connection);
   });
 
-  app.on('login', (user, { connection }) => {
-    // Connection can be undefined if there is no
+  app.on('login', (authResult, { connection }) => {
+    // connection can be undefined if there is no
     // real-time connection, e.g. when logging in via REST
     if(connection) {
+      // Obtain the logged in user from the connection
+      // const user = connection.user;
+      
       // The connection is no longer anonymous, remove it
       app.channel('anonymous').leave(connection);
 
@@ -45,31 +52,38 @@ module.exports = function(app) {
       app.channel('authenticated').join(connection);
 
       // Channels can be named anything and joined on any condition 
+      
       // E.g. to send real-time events only to admins use
-
       // if(user.isAdmin) { app.channel('admins').join(connection); }
 
       // If the user has joined e.g. chat rooms
+      // if(Array.isArray(user.rooms)) user.rooms.forEach(room => app.channel(`rooms/${room.id}`).join(channel));
       
-      // user.rooms.forEach(room => app.channel(`rooms/${room.id}`).join(channel))
+      // Easily organize users by email and userid for things like messaging
+      // app.channel(`emails/${user.email}`).join(channel);
+      // app.channel(`userIds/$(user.id}`).join(channel);
     }
   });
 
-  app.publish((data, hook) => {
+  app.publish((data, hook) => { // eslint-disable-line no-unused-vars
     // Here you can add event publishers to channels set up in `channels.js`
     // To publish only for a specific event use `app.publish(eventname, () => {})`
 
-    // Publish all service events to all authenticated users
-    // return app.channel('authenticated');
+    // e.g. to publish all service events to all authenticated users use
+    return app.channel('authenticated');
   });
 
-  // You can also add service specific publishers via
-
-  // For a specific event
-  // app.service('name').publish(eventName, (data, hook) => {});
-
-  // For all events on that service
-  // app.service('name').publish((data, hook) => {});
+  // Here you can also add service specific event publishers
+  // e..g the publish the `users` service `created` event to the `admins` channel
+  // app.service('users').publish('created', () => app.channel('admins'));
+  
+  // With the userid and email organization from above you can easily select involved users
+  // app.service('messages').publish(() => {
+  //   return [
+  //     app.channel(`userIds/${data.createdBy}`),
+  //     app.channel(`emails/${data.recipientEmail}`)
+  //   ];
+  // });
 };
 ```
 
@@ -81,6 +95,8 @@ const channels = require('./channels');
 // After `app.configure(services)`
 app.configure(channels);
 ```
+
+> __Very important:__ The `channels.js` file shown above will publish all real-time events to all authenticated users. This is already safer than the previous default but you should carefully review the [channels](./api/channels.md) documentation and implement appropriate channels so that only the right users are going to receive real-time events.
 
 ## `@feathersjs` npm scope
 
@@ -115,7 +131,7 @@ All Feathers core modules have been moved to the `@feathersjs` npm scope. This m
 
 | Old name | Scoped name
 | -- | --
-| feathers/client | @feathersjs
+| feathers/client | @feathersjs/feathers
 | feathers-client | @feathersjs/client
 | feathers-rest/client | @feathersjs/rest-client
 | feathers-socketio/client | @feathersjs/socketio-client
@@ -240,7 +256,37 @@ Previously, filters were used to run for every event and every connection to det
 Event channels are a more secure and performant way to define which connections to send real-time events to. Instead of running for every event and every connection you define once which channels a connection belongs to when it is established or authenticated.
 
 ```js
-// TODO more details and examples for channesl
+// On login and if it is a real-time connectionn, add the connection to the `authenticated` channel
+app.on('login', (authResult, { connection }) => {
+  if(connection) {
+    const { user } = connection;
+
+    app.channel('authenticated').join(connection);
+  }
+});
+
+// Publish only `created` events from the `messages` service
+app.service('messages').publish('created', (data, context) => app.channel('authenticated'));
+
+// Publish all real-time events from all services to the authenticated channel
+app.publish((data, context) => app.channel('authenticated'));
+```
+
+To only publish to rooms a user is in:
+
+```js
+// On login and if it is a real-time connection, add the connection to the `authenticated` channel
+app.on('login', (authResult, { connection }) => {
+  if(connection) {
+    const { user } = connection;
+
+    // Join `authenticated` channel
+    app.channel('authenticated').join(connection);
+
+    // Join rooms channels for that user
+    rooms.forEach(roomId => app.channel(`rooms/${roomId}`).join(connection));
+  }
+});
 ```
 
 ## Better separation of client and server side modules
@@ -285,6 +331,12 @@ Since all repositories make extensive use of ES6 that also means that Node 4 is 
 
 Also see [/feathers/issues/608](https://github.com/feathersjs/feathers/issues/608).
 
+## A new Socket message format
+
+The websocket messaging format has been updated to support proper error messages when trying to call a non-existing service or method (instead of just timing out). Using the new `@feathersjs/socketio-client` and `@feathersjs/primus-client` will automatically use that format. You can find the details in the [Socket.io client](api/client/socketio.md) and [Primus client](./api/client/primus.md) documentation.
+
+> __Note:__ The old message format is still supported so the clients do not have to be updated at the same time.
+
 ## Deprecations and other API changes
 
 - Callbacks are no longer supported in Feathers service methods. All service methods always return a Promise. Custom services must return a Promise or use `async/await`.
@@ -293,7 +345,7 @@ Also see [/feathers/issues/608](https://github.com/feathersjs/feathers/issues/60
 - Route parameters which were previously added directly to `params` are now in `params.route`
 - Express middleware like `feathers.static` is now located in `const express = require('@feathersjs/express')` using `express.static`
 
-## Backwards compatibility
+## Backwards compatibility polyfills
 
 Besides the steps outlined above, existing hooks, database adapters, services and other plugins should be fully compatible with Feathers v3 without any additional modifications.
 
