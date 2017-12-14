@@ -29,4 +29,4 @@ This section describes all the APIs of Feathers and its individual modules.
 * __Database:__ Feathers common database adapter API and querying mechanism
   * [Adapters](api/databases/adapters.md) - A list of supported database adapters
   * [Common API](api/databases/common.md) - Database adapter common initialization and configuration API
-  * [Querying](api/databases/querying.md)) - The common querying mechanism
+  * [Querying](api/databases/querying.md) - The common querying mechanism
