@@ -1,10 +1,14 @@
 # Creating the application
 
-In this part we are going to create a new Feathers application using the generator. Head over to the [generator (CLI) guide](../generator/readme.md) to install it and get a basic understanding of how it works.
+In this part we are going to create a new Feathers application using the generator. We can install the generator via:
+
+```
+npm install @feathersjs/cli -g
+```
 
 ## Generating the application
 
-With everything [set up](../generator/readme.md) let's create a directory for our new app:
+With everything [set up](../basics/setup.md) let's create a directory for our new app:
 
 ```
 $ mkdir feathers-chat
@@ -42,14 +46,14 @@ Let's have a brief look at the files that have been generated:
 [npm](https://docs.npmjs.com/), or [yarn](https://yarnpkg.com/en/). The dependencies are also added in the  `package.json`.
 - `public/` - Contains static files to be served. A sample favicon and `index.html` (which will show up when going directly to the server URL) are already included.
 - `src/` - Contains the Feathers server code.   
-  - `hooks/` contains our custom hooks. A simple `logger` hook for logging debug information about our service calls is already included
+  - `hooks/` contains our custom [hooks](../basics/hooks.md). A simple `logger` hook for logging debug information about our service calls is already included
   - `middleware/` contains any [Express middleware](http://expressjs.com/en/guide/writing-middleware.html)
   - `services/` will contain our [services](../basics/services.md)
   - `index.js` is used to load and start the application
   - `app.js` configures our [Feathers application](../basics/starting.md)
   - `app.hooks.js` contains hooks which that run for all services.
   - `channels.js` sets up Feathers [event channels](../../api/channels.md)
-`test/` - Contains [Mocha](https://mochajs.org/) test files for the app, hooks and services
+  - `test/` - Contains [Mocha](https://mochajs.org/) test files for the app, hooks and services
   - `app.test.js` tests that the index page appears, as well as 404 errors for HTML pages and JSON
 - `.editorconfig` is an [EditorConfig](http://editorconfig.org/) setting which and helps developers define and maintain consistent coding styles among different editors and IDEs.
 - `.eslintrc.json` contains defaults for liniting your code with [ESLint](http://eslint.org/docs/user-guide/getting-started).

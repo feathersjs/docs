@@ -16,6 +16,8 @@ Next we have to define the service we would like to use to store user informatio
 
 ![Final Configuration](./assets/authentication.png)
 
+> __Note:__ For more information on Feathers authentication see the [authentication server API documentaion](../../api/authentication/server.md).
+
 ## Creating a user and logging in
 
 We just created a `users` service and enabled local authentication. When restarting the application we can now create a new user with `email` and `password` similar to what we did with messages and then use the login information to get a JWT (for more information see the [How JWT works guide](../auth/how-jwt-works.md)).

@@ -158,16 +158,20 @@ const addMessage = message => {
   // Find the user belonging to this message or use the anonymous user if not found
   const { user = {} } = message;
   const chat = document.querySelector('.chat');
+  // Escape HTML
+  const text = message.text
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;').replace(/>/g, '&gt;');
 
   if(chat) {
-    chat.insertAdjacentHTML('beforeend', `<div class="message flex flex-row">
+    chat.insertAdjacentHTML( 'beforeend', `<div class="message flex flex-row">
       <img src="${user.avatar}" alt="${user.email}" class="avatar">
       <div class="message-wrapper">
         <p class="message-header">
           <span class="username font-600">${user.email}</span>
           <span class="sent-date font-300">${moment(message.createdAt).format('MMM Do, hh:mm:ss')}</span>
         </p>
-        <p class="message-content font-300">${message.text}</p>
+        <p class="message-content font-300">${text}</p>
       </div>
     </div>`);
 
