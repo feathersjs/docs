@@ -6,11 +6,11 @@ Services are the heart of every Feathers application and JavaScript objects or i
 - Interacting with the file system
 - Call another API
 - Call other services like
-  - Send an email,
-  - Process a payment,
-  - Return the current weather for a location, etc.
+  - Sending an email
+  - Processing a payment
+  - Returning the current weather for a location, etc.
 
-Protocol independent means that to a Feathers service it does not matter if it has been called internally, through a REST API or websockets (both of which we will look at later).
+Protocol independent means that to a Feathers service it does not matter if it has been called internally, through a REST API or websockets (both of which we will look at later) or any other way.
 
 ## Service methods
 
@@ -67,7 +67,7 @@ The parameters for service methods are:
 
 ## A messages service
 
-Now that we know how service methods look like we can implement our own chat message service that allows us to find, create, remove and update messages in-memory. Here we will use a JavaScript class to work with our messages but as we've above it could als be a normal object.
+Now that we know how service methods look like we can implement our own chat message service that allows us to find, create, remove and update messages in-memory. Here we will use a JavaScript class to work with our messages but as we've seen above it could als be a normal object.
 
 Below is the complete updated `app.js` with comments:
 
@@ -238,4 +238,4 @@ Available messages [ { id: 0, text: 'First message' } ]
 
 ## What's next?
 
-In this chapter we learned about services as Feathers core concept for abstracting data manipulation and other operations. We also saw how a service sends events which we will use later to create real-time applications. First, we will look at [Feathers Hooks](./hooks.md) which is the other key part of how Feathers works.
+In this chapter we learned about services as Feathers core concept for abstracting data operations. We also saw how a service sends events which we will use later to create real-time applications. First, we will look at [Feathers Hooks](./hooks.md) which is the other key part of how Feathers works.

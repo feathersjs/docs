@@ -13,7 +13,7 @@ In this chapter we will use Socket.io and create a [database backed](./databases
 After installing
 
 ```
-npm install @feathersjs/socketio
+npm install @feathersjs/socketio --save
 ```
 
 The Socket.io transport can be configured and used with a standard configuration like this:
@@ -60,11 +60,11 @@ app.listen(3030);
 
 ## Channels
 
-Channels determine which real-time events should be sent to which client. For example, we want to only send messages to authenticated users and users in the same room. For this example we will just enable real-time functionality for all connections however:
+Channels determine which real-time events should be sent to which client. For example, we want to only send messages to authenticated users or users in the same room. For this example we will just enable real-time functionality for all connections however:
 
 ```js
 // On any real-time connection, add it to the `everybody` channel
-app.on('connection', connection => app.channel('everybody'));
+app.on('connection', connection => app.channel('everybody').join(connection));
 
 // Publish all events to the `everybody` channel
 app.publish(() => app.channel('everybody'));
@@ -80,6 +80,7 @@ Putting it all together, our REST and real-time API with a messages service `app
 const feathers = require('@feathersjs/feathers');
 const express = require('@feathersjs/express');
 const socketio = require('@feathersjs/socketio');
+const memory = require('feathers-memory');
 
 // This creates an app that is both, an Express and Feathers app
 const app = express(feathers());
@@ -90,22 +91,31 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }));
 // Set up REST transport using Express
 app.configure(express.rest());
-// Set up an error handler that gives us nicer errors
-app.use(express.errorHandler());
 
 // Configure the Socket.io transport
 app.configure(socketio());
 
 // On any real-time connection, add it to the `everybody` channel
-app.on('connection', connection => app.channel('everybody'));
+app.on('connection', connection => app.channel('everybody').join(connection));
 
 // Publish all events to the `everybody` channel
 app.publish(() => app.channel('everybody'));
 
+// Initialize the messages service
+app.use('messages', memory({
+  paginate: {
+    default: 10,
+    max: 25
+  }
+}));
+
+// Set up an error handler that gives us nicer errors
+app.use(express.errorHandler());
+
 // Start the server on port 3030
 const server = app.listen(3030);
 
-server.on('listening', () => console.log('Feathers REST API started at localhost:3030'));
+server.on('listening', () => console.log('Feathers API started at localhost:3030'));
 ```
 
 As always, we can start our server again by running
@@ -128,15 +138,15 @@ The real-time API can be used by establishing a websocket connection. For that w
 <body>
   <h1>Welcome to Feathers</h1>
   <p>Open up the console in your browser.</p>
-  <script type="text/javascript" src="http://localhost:3030/socket.io/socket.io.js"></script>
+  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
   <script type="text/javascript" src="//unpkg.com/@feathersjs/client@^3.0.0/dist/feathers.js"></script>
   <script type="text/javascript" src="//unpkg.com/feathers-memory@^2.0.0/dist/feathers-memory.js"></script>
-  <script src="app.js"></script>
+  <script src="client.js"></script>
 </body>
 </html>
 ```
 
-Then we can initialize and use the socket directly making some calls and listening to real-time events by updating `app.js` to this:
+Then we can initialize and use the socket directly making some calls and listening to real-time events by updating `public/client.js` to this:
 
 ```js
 // Create a websocket connecting to our Feathers server

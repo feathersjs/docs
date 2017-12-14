@@ -6,15 +6,15 @@ This what Feathers transports do. A transport is a plugin that turns a Feathers 
 
 Currently Feathers officially has three transports:
 
-- [HTTP REST](../../api/express.md) for exposing services through a JSON REST API
+- [HTTP REST via Express](../../api/express.md) for exposing services through a JSON REST API
 - [Socket.io](../../api/socketio.md) for connecting to services through websockets and also receiving real-time service events
-- [Primus](../../api/primus.md) an alternative to Socket.io supporting several websocket protocols which support real-time events
+- [Primus](../../api/primus.md) an alternative to Socket.io supporting several websocket protocols which also supports real-time events
 
 In this chapter we will look at the HTTP REST transport and Feathers Express framework integration.
 
 ## REST and services
 
-One of the goals of Feathers is make building REST APIs easier since it is by far the most common protocol for web APIs. For example, we want to make a request like `GET /messages/1` and get a JSON response like `{ "id": 1, "text": "The first message" }`. You may already have noticed that the Feathers service methods and the HTTP methods like `GET`, `POST`, `PATCH` and `DELETE` are fairly complementary to each other:
+One of the goals of Feathers is make building [REST APIs](https://en.wikipedia.org/wiki/Representational_state_transfer) easier since it is by far the most common protocol for web APIs. For example, we want to make a request like `GET /messages/1` and get a JSON response like `{ "id": 1, "text": "The first message" }`. You may already have noticed that the Feathers service methods and the HTTP methods like `GET`, `POST`, `PATCH` and `DELETE` are fairly complementary to each other:
 
 | Service method  | HTTP method | Path        |
 |-----------------|-------------|-------------|
@@ -52,6 +52,7 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }));
 // Set up REST transport using Express
 app.configure(express.rest());
+
 // Set up an error handler that gives us nicer errors
 app.use(express.errorHandler());
 
@@ -143,7 +144,7 @@ app.configure(express.rest());
 // a new instance of our class
 app.use('messages', new Messages());
 
-// Set up an error handler that gives us nicer errors (always has to be last)
+// Set up an error handler that gives us nicer errors
 app.use(express.errorHandler());
 
 // Start the server on port 3030
@@ -164,6 +165,10 @@ node app
 ```
 
 > __Note:__ The server will stay running until you stop it by pressing Control + C in the terminal. Remember to stop and start the server every time `app.js` changes.
+
+<!-- -->
+
+> __Important:__ In Express an error handler, here `app.use(express.errorHandler());`, always has to be the last line before starting the server.
 
 ## Using the API
 
@@ -195,4 +200,4 @@ curl -X "DELETE" http://localhost:3030/messages/1
 
 ## What's next?
 
-In this chapter we built a fully functional messages REST API. You can probably already imagine how our messages service could store its data in a database instead of the `messages` array. In the [next chapter](./databsaes.md), let's look at some services that implement different databases allowing us to create those APIs with even less code!
+In this chapter we built a fully functional messages REST API. You can probably already imagine how our messages service could store its data in a database instead of the `messages` array. In the [next chapter](./databases.md), let's look at some services that implement different databases allowing us to create those APIs with even less code!

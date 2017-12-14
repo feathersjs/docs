@@ -24,7 +24,7 @@ Once successful we should now have the `feathers` command available on the comma
 feathers --version
 ```
 
-Which should show a version of `3.2.0` or later.
+Which should show a version of `3.3.0` or later.
 
 ## Configure functions
 
@@ -142,3 +142,7 @@ app.service('messages').hooks({
 ```
 
 > __Note:__ We are using an options object here which allows us to more easily add new options than function parameters.
+
+## What's next?
+
+In this chapter we installed the Feathers CLI (and generator) and looked at patterns that are used in structuring the generated application. Now we can use the generator to [build a full chat application](../chat/readme.md) complete with authentication and a JavaScript frontend!

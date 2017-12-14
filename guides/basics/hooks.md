@@ -30,7 +30,9 @@ app.service('messages').hooks({
 
 ## Hook functions
 
-A hook function is a function that takes the [hook context](#hook-context) as the parameter and returns that context or nothing. A common pattern to make hooks more re-usable (e.g. making the `createdAt` property name from the example above configurable) is to create a wrapper function that takes those options and returns a hook function:
+A hook function is a function that takes the [hook context](#hook-context) as the parameter and returns that context or nothing. Hook functions run in the order they are registered and will only continue to the next once the current hook function completes. If a hook function throws an error, all remaining hooks (and possibly the service call) will be skipped and the error will be returned.
+
+A common pattern to make hooks more re-usable (e.g. making the `createdAt` property name from the example above configurable) is to create a wrapper function that takes those options and returns a hook function:
 
 ```js
 const setTimestamp = name => {
@@ -49,7 +51,7 @@ app.service('messages').hooks({
 });
 ```
 
-Now we have a re-usable hook that can set the timestamp on any property. Hook functions run in the order they are registered and will only continue to the next once the current hook function completes. If a hook function throws an error, all remaining hooks (and possibly the service call) will be skipped and the error will be returned.
+Now we have a re-usable hook that can set the timestamp on any property.
 
 ## Hook context
 
@@ -63,7 +65,9 @@ The hook `context` is an object which contains information about the service met
 
 Writeable properties are:
 
-- `context.params` - The service method call `params`
+- `context.params` - The service method call `params`. For external calls, `params` usually contians:
+  - `context.params.query` - The query (e.g. query string for REST) for the service call
+  - `context.params.provider` - The name of the transport (which we will look at in the next chapter) the call has been made through. Usually `rest`, `socketio`, `primus`. Will be `undefined` for internal calls.
 - `context.id` - The `id` for a `get`, `remove`, `update` and `patch` service method call
 - `context.data` - The `data` sent by the user in a `create`, `update` and `patch` service method call
 - `context.error` - The error that was thrown (in `error` hooks)

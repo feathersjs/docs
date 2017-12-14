@@ -7,7 +7,7 @@ mkdir feathers-basics
 cd feathers-basics
 ```
 
-Since any Feathers application is a Node application, we now create a default [package.json](https://docs.npmjs.com/files/package.json) using `npm`:
+Since any Feathers application is a Node application, we can create a default [package.json](https://docs.npmjs.com/files/package.json) using `npm`:
 
 ```
 npm init --yes
@@ -94,7 +94,7 @@ npm install http-server -g
 http-server public/
 ```
 
-> __Note:__ You may have to set the `-p` argument with a port number other than the default 8080 if that port is already taken on your machine (e.g. `http-server -p 3030 public/`).
+> __Note:__ You have to keep this server running for all browser examples in the basics guide tow work.
 
 In the `public/` folder we add two files, an `index.html` that will load Feathers:
 
@@ -109,12 +109,12 @@ In the `public/` folder we add two files, an `index.html` that will load Feather
   <h1>Welcome to Feathers</h1>
   <p>Open up the console in your browser.</p>
   <script type="text/javascript" src="//unpkg.com/@feathersjs/client@^3.0.0/dist/feathers.js"></script>
-  <script src="app.js"></script>
+  <script src="client.js"></script>
 </body>
 </html>
 ```
 
-And an `app.js` looking like this:
+And an `client.js` looking like this:
 
 ```js
 const app = feathers();

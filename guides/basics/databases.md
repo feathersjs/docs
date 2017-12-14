@@ -1,8 +1,8 @@
 # Databases
 
-In the [services chapter](./services.md) we created a custom in-memory messages service that can create, update and delete messages. We can implement the same functionality by talking to any database so there isn't really a database that Feathers doesn't support.
+In the [services chapter](./services.md) we created a custom in-memory messages service that can create, update and delete messages. You can probably imagine how we could implement the same thing talking to any database instad of storing it in memory so there isn't really a database that Feathers doesn't support.
 
-Writing all that code yourself is pretty repetitive and cumbersome though which is why Feathers has a collection of pre-built services for different databases. They support a common [usage API](../../api/databases/common.md), pagination and [querying syntax](../../api/databases/querying.md) for many popular databases and NodeJS ORMs:
+Writing all that code yourself is pretty repetitive and cumbersome though which is why Feathers has a collection of pre-built services for different databases. They offer most the basic functionality and can always be fully customized to your requirements using [hooks](./hooks.md). Feathers database adapters support a common [usage API](../../api/databases/common.md), pagination and [querying syntax](../../api/databases/querying.md) for many popular databases and NodeJS ORMs:
 
 | Database | Adapter |
 |---|---|
@@ -18,7 +18,7 @@ Writing all that code yourself is pretty repetitive and cumbersome though which 
 
 In this chapter we will look at the basic usage of the in-memory database adapter and create a persistent REST API using [NEDB](https://github.com/louischatriot/nedb).
 
-> __Important:__ You should be familiar with the database technology and ORM ([Sequelize](http://docs.sequelizejs.com/), [KnexJS](http://knexjs.org/) or [Mongoose](http://mongoosejs.com/)) you are choosing before using the Feathers database adapter.
+> __Important:__ You should be familiar with the database technology and ORM ([Sequelize](http://docs.sequelizejs.com/), [KnexJS](http://knexjs.org/) or [Mongoose](http://mongoosejs.com/)) before using a Feathers database adapter.
 
 ## An in-memory database
 
@@ -62,12 +62,12 @@ We can also include `feathers-memory` in the browser, most easily by loading its
   <p>Open up the console in your browser.</p>
   <script type="text/javascript" src="//unpkg.com/@feathersjs/client@^3.0.0/dist/feathers.js"></script>
   <script type="text/javascript" src="//unpkg.com/feathers-memory@^2.0.0/dist/feathers-memory.js"></script>
-  <script src="app.js"></script>
+  <script src="client.js"></script>
 </body>
 </html>
 ```
 
-And `public/app.js`:
+And `public/client.js`:
 
 ```js
 const app = feathers();
@@ -91,7 +91,7 @@ With pagination enabled, the `find` method will return an object with the follow
 - `skip` - The number of entries that were skipped
 - `total` - The total number of entries for this query
 
-The following example automatically creates a couple of messages and makes some queries. You can add it at the end of both, `app.js` and `public/app.js` to see it in Node and the browser:
+The following example automatically creates a couple of messages and makes some queries. You can add it at the end of both, `app.js` and `public/client.js` to see it in Node and the browser:
 
 ```js
 async function createAndFind() {
@@ -101,7 +101,7 @@ async function createAndFind() {
   for(let counter = 0; counter < 100; counter++) {
     await messages.create({
       counter,
-      message: `Message number ${i}`
+      message: `Message number ${counter}`
     });
   }
 
@@ -161,8 +161,7 @@ app.configure(express.rest());
 // Set up an error handler that gives us nicer errors
 app.use(express.errorHandler());
 
-// Initialize the messages service by creating
-// a new instance of our class
+// Initialize the messages service
 app.use('messages', memory({
   paginate: {
     default: 10,

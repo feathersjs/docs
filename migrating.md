@@ -23,6 +23,7 @@ In short (for more details see below) this will:
 - Add Express compatibility to any application that uses `feathers-rest` (other Feathers apps without `feathers-rest` have to be updated manually)
 - Remove all `.filter` imports and calls to `service.filter` which has been replaced by channel functionality
 
+### Initializing channels
 
 If you are using real-time (with Socket.io or Primus), add the following file as `src/channels.js`:
 
@@ -97,6 +98,50 @@ app.configure(channels);
 ```
 
 > __Very important:__ The `channels.js` file shown above will publish all real-time events to all authenticated users. This is already safer than the previous default but you should carefully review the [channels](./api/channels.md) documentation and implement appropriate channels so that only the right users are going to receive real-time events.
+
+### Protecting fields
+
+Feathers v3 has a new mechanism to ensure that sensitive information never gets published to any client. To protect always protect the user password, add the [protect hook](api/authentication/local.md#protect) in `src/services/users/users.hooks.js` instead of the `remove('password')` hook:
+
+```js
+const { hashPassword } = require('@feathersjs/authentication-local').hooks;
+
+module.exports = {
+  before: {
+    all: [],
+    find: [ authenticate('jwt') ],
+    get: [],
+    create: [],
+    update: [],
+    patch: [],
+    remove: []
+  },
+
+  after: {
+    all: [
+      // Make sure the password field is never sent to the client
+      // Always must be the last hook
+      protect('password')
+    ],
+    find: [],
+    get: [],
+    create: [],
+    update: [],
+    patch: [],
+    remove: []
+  },
+
+  error: {
+    all: [],
+    find: [],
+    get: [],
+    create: [],
+    update: [],
+    patch: [],
+    remove: []
+  }
+};
+```
 
 ## `@feathersjs` npm scope
 
