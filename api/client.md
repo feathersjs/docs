@@ -82,6 +82,18 @@ messageService.create({
 });
 ```
 
+As React Native for Android doesn't handle well timeouts longer than a minute, you might want to set lower values for `pingInterval` and `pingTimeout` of `feathers-socketio` on your server, which will stop warnings related to this [issue](https://github.com/facebook/react-native/issues/12981). For example:
+
+```js
+const app = feathers();
+const socketio = require('feathers-socketio');
+
+app.configure(socketio({
+  pingInterval: 10000,
+  pingTimeout: 50000
+}));
+```
+
 ## Module loaders
 
 All modules in the `@feathersjs` namespace are using ES6 and have to be transpiled for target browsers without full ES6 support. Most client side module loader exclude the `node_modules` folder from being transpiled and have to be configured to include modules in the `@feathersjs` namespace.
