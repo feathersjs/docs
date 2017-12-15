@@ -12,7 +12,7 @@ The `@feathersjs/express` module contains [Express](expressjs.com) framework int
 
 - The [Express framework bindings](#expressapp) to make a Feathers application Express compatible
 - An Express based transport to expose services throuhg a [REST API](#expressrest)
-- An [Express error handler](#expresserrors) for [Feathers errors](./errors.md)
+- An [Express error handler](#expresserrorhandler) for [Feathers errors](./errors.md)
 
 ```js
 const express = require('@feathersjs/express');
