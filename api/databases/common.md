@@ -171,10 +171,9 @@ PUT /messages/1
 `adapter.patch(id, data, params) -> Promise` merges a record identified by `id` with `data`. `id` can be `null` to allow replacing multiple records (all records that match `params.query` the same as in `.find`). `id` can not be changed.
 
 ```js
-app.service('messages').update(1, {
-    text: 'A patched message'
-  })
-  .then(message => console.log(message));
+app.service('messages').patch(1, {
+  text: 'A patched message'
+}).then(message => console.log(message));
 
 const params = {
   query: { read: false }
