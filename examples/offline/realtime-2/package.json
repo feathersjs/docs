@@ -1,7 +1,0 @@
-{
-  "scripts": {
-    "build": " EXAMPLE=realtime-2 ../node_modules/.bin/webpack --config ../webpack.config.js --colors",
-    "build:watch": "NODE_ENV=development EXAMPLE=realtime-2 ../node_modules/.bin/webpack --config ../webpack.config.js --colors --watch",
-    "start": "node src/"
-  }
-}

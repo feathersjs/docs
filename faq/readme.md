@@ -6,7 +6,7 @@ We've been collecting some commonly asked questions here. We'll either be updati
 
 One important thing to know about Feathers is that it only exposes the official [service methods](../api/services.md) to clients. While you can add and use any service method on the server, it is __not__ possible to expose those custom methods to clients.
 
-In the [Why Feathers](../guides/about/readme.md) chapter we discussed how the _uniform interface_ of services naturally translates into a REST API and also makes it easy to hook into the execution of known methods and emit events when they return. Adding support for custom methods would add a new level of complexity defining how to describe, expose and secure custom methods. This does not go well with Feathers approach of adding services as a small and well defined concept.
+In the [Feathers philosophy](../guides/about/philosophy.md) chapter we discussed how the _uniform interface_ of services naturally translates into a REST API and also makes it easy to hook into the execution of known methods and emit events when they return. Adding support for custom methods would add a new level of complexity defining how to describe, expose and secure custom methods. This does not go well with Feathers approach of adding services as a small and well defined concept.
 
 In general, almost anything that may require custom methods can also be done either by creating a [custom service](../api/services.md) or through [hooks](../api/hooks.md). For example, a `userService.resetPassword` method can also be implemented as a password service that resets the password in the `create` method:
 
@@ -45,17 +45,17 @@ app.use('/users', userService);
 app.use('/users/:userId/posts', app.service('posts'));
 
 // A hook that updates `data` with the route parameter
-function mapUserIdToData(hook) {
-  if(hook.data && hook.params.userId) {
-    hook.data.userId = hook.params.userId;
+function mapUserIdToData(context) {
+  if(context.data && context.params.route.userId) {
+    context.data.userId = context.params.route.userId;
   }
 }
 
 // For the new route, map the `:userId` route parameter to the query in a hook
 app.service('users/:userId/posts').hooks({
   before: {
-    find(hook) {
-      hook.params.query.userId = hook.params.userId;
+    find(context) {
+      context.params.query.userId = context.params.route.userId;
     },
     create: mapUserIdToData,
     update: mapUserIdToData,
@@ -75,14 +75,14 @@ For more information about URL routing and parameters, refer to [the Express cha
 This depends on the database adapter you are using. Many databases already support their own search syntax:
 
 - Regular expressions (converted in a hook) for Mongoose, MongoDB and NeDB, see [this comment](https://github.com/feathersjs/feathers/issues/334#issuecomment-234432108)
-- [$like for Sequelize](http://docs.sequelizejs.com/en/latest/docs/querying/) which can be set in [params.sequelize](../api/databases/sequelize.md#paramssequelize)
-- Some database adapters like [KnexJS](../api/databases/knexjs.md), [RethinkDB](../api/databases/rethinkdb.md) and [Elasticsearch](../api/databases/elasticsearch.md) also support non-standard query parameters which are described in their documentation pages.
+- [$like for Sequelize](http://docs.sequelizejs.com/en/latest/docs/querying/) which can be set in [params.sequelize](https://github.com/feathersjs-ecosystem/feathers-sequelize#paramssequelize)
+- Some database adapters like [KnexJS](https://github.com/feathersjs-ecosystem/feathers-knex), [RethinkDB](https://github.com/feathersjs-ecosystem/feathers-rethinkdb) and [Elasticsearch](https://github.com/feathersjs-ecosystem/feathers-elasticsearch) also support non-standard query parameters which are described in their documentation pages.
 
 For further discussions see [this issue](https://github.com/feathersjs/feathers/issues/334).
 
 ## Why am I not getting JSON errors?
 
-If you get a plain text error and a 500 status code for errors that should return different status codes, make sure you have the `feathers-errors/handler` configured as described in the [Express errors](../api/errors.md#rest-express-errors) chapter.
+If you get a plain text error and a 500 status code for errors that should return different status codes, make sure you have the `feathers-errors/handler` configured as described in the [Express errors](../api/express.md) chapter.
 
 ## Why am I not getting the correct HTTP error code
 
@@ -98,43 +98,7 @@ Feathers works just like Express so it's the exact same. We've created a [helpfu
 
 ## How do I create channels or rooms
 
-Although Socket.io has a [concept of rooms](http://socket.io/docs/rooms-and-namespaces/) that you can always fall back to, other websocket libraries that Feathers supports do not. The Feathers way of letting a user listen to e.g. messages on a room is through [event filtering](../api/events.md#event-filtering). There are two ways:
-
-1. Update the user object with the rooms they are subscribed to and filter based on those
-
-```
-// On the client
-function joinRoom(roomId) {
-  const user = app.get('user');
-  
-  return app.service('users').patch(user.id, { rooms: user.rooms.concat(roomId) });
-}
-
-// On the server
-app.service('messages').filter(function(message, connection) {
-  return connection.user.rooms.indexOf(message.room_id) !== -1;
-});
-```
-
-The advantage of this method is that you can show offline/online users that are subscribed to a room.
-
-2. Create a custom `join` event with a room id and then filter based on it
-
-```js
-app.use(socketio(function(io) {
-  io.on('connection', function(socket) {
-    socket.on('join', function(roomId) {
-      socket.feathers.rooms.push(roomId);
-    });
-  });
-}));
-
-app.service('messages').filter(function(message, connection) {
-  return connection.rooms.indexOf(message.room_id) !== -1;
-});
-```
-
-The room assignment will persist only for the duration of the socket connection.
+In Feathers [channels](../api/channels.md) are the way to send [real-time events](../api/events.md) to only certain clients.
 
 ## How do I do validation?
 
@@ -152,7 +116,7 @@ If you don't have a model or schema then validating with hooks is currently your
 
 With ORM adapters you can perform validation at the model level:
 
-- [Using Mongoose](../api/databases/mongoose.md#validation)
+- [Using Mongoose](https://github.com/feathersjs-ecosystem/feathers-mongoose#validation)
 - [Using Sequelize](http://docs.sequelizejs.com/en/latest/docs/models-definition/#validations)
 
 The nice thing about the model level validations is Feathers will return the validation errors to the client in a nice consistent format for you.
@@ -165,9 +129,7 @@ Similar to validation, it depends on if your database/ORM supports models or not
 
 For any of the feathers database/ORM adapters you can just use [hooks](../api/hooks.md) to fetch data from other services.
 
-This is a better approach because it keeps your application database agnostic and service oriented. By referencing the services (using `app.service().find()`, etc.) you can still decouple your app and have these services live on entirely separate machines or use entirely different databases without having to change any of your fetching code.
-
-This has been implemented in the [populate common hook](../api/hooks-common.md#populate).
+This is a better approach because it keeps your application database agnostic and service oriented. By referencing the services (using `app.service().find()`, etc.) you can still decouple your app and have these services live on entirely separate machines or use entirely different databases without having to change any of your fetching code. We show how to associate data in a hook in the [chat guide](../guides/chat/processing.md). An alternative is the [populate hook in feathers-hooks-common](https://feathers-plus.github.io/v1/feathers-hooks-common/#populate).
 
 #### The ORM way
 
@@ -198,7 +160,7 @@ app.service('user').find({
 });
 ```
 
-Or set it in a hook as [described here](../api/databases/sequelize.md#associations-and-relations).
+Or set it in a hook as [described here](https://github.com/feathersjs-ecosystem/feathers-sequelize#associations-and-relations).
 
 ## Sequelize models and associations
 
@@ -206,11 +168,7 @@ If you are using the [Sequelize](http://docs.sequelizejs.com/) adapter, understa
 
 ## What about Koa/Hapi/X?
 
-There are many other Node server frameworks out there like Koa, a *"next generation web framework for Node.JS"* using ES6 generator functions instead of Express middleware or HapiJS etc. Because Feathers 2 is already [universally usable](../api/client.html) we are planning the ability for it to hook into other frameworks on the server as well. More information can be found in [this issue](https://github.com/feathersjs/feathers/issues/258).
-
-## How do I filter emitted service events?
-
-See [this section](../api/events.md#event-filtering).
+There are many other Node server frameworks out there like Koa, a *"next generation web framework for Node.JS"* using ES6 generator functions instead of Express middleware or HapiJS etc. Currently, Feathers is framework independent but only provides an [Express](../api/express.md) integration for HTTP APIs. More frameworks may be supported in the future with direct [Node HTTP](https://nodejs.org/api/http.html) being the most likely.
 
 ## How do I access the request object in hooks or services?
 
@@ -227,26 +185,26 @@ It's pretty much exactly the same as Express. More information can be found [her
 The hooks workflow allows you to handle these situations quite gracefully.  It depends on the promise that you return in your hook. Here's an example of a hook that sends an email, but doesn't wait for a success message.
 
 ```js
-function (hook) {
+function (context) {
   
   // Send an email by calling to the email service.
-  hook.app.service('emails').create({
+  context.app.service('emails').create({
     to: 'user@email.com',
     body: 'You are so great!'
   });
   
   // Send a message to some logging service.
-  hook.app.service('logging').create(hook.data);
+  context.app.service('logging').create(context.data);
   
   // Return a resolved promise to immediately move to the next hook
   // and not wait for the two previous promises to resolve.
-  return Promise.resolve(hook);
+  return Promise.resolve(context);
 }
 ```
 
 ## How do I debug my app
 
-It's really no different than debugging any other NodeJS app but you can refer to the [Debugging](../guides/advanced/debugging.md) section of the guide for more Feathers specific tips and tricks.
+It's really no different than debugging any other NodeJS app but you can refer to [this blog post](https://blog.feathersjs.com/debugging-feathers-with-visual-studio-code-406e6adf2882) for more Feathers specific tips and tricks.
 
 ## `possible EventEmitter memory leak detected` warning
 
@@ -263,22 +221,22 @@ client.service('users').patch(1, { admin: true }, params).then(result => {
 });
 ```
 
-on the client the `hook.params` object will only be available in your client side hooks. It will not be provided to the server. The reason for this is because `hook.params` on the server usually contains information that should be server-side only. This can be database options, whether a request is authenticated, etc. If we passed those directly from the client to the server this would be a big security risk. Only the client side `hook.params.query` and `hook.params.headers` objects are provided to the server.
+on the client the `context.params` object will only be available in your client side hooks. It will not be provided to the server. The reason for this is because `context.params` on the server usually contains information that should be server-side only. This can be database options, whether a request is authenticated, etc. If we passed those directly from the client to the server this would be a big security risk. Only the client side `context.params.query` and `context.params.headers` objects are provided to the server.
 
-If you need to pass info from the client to the server that is not part of the query you need to add it to `hook.params.query` on the client side and explicitly pull it out of `hook.params.query` on the server side. This can be achieved like so:
+If you need to pass info from the client to the server that is not part of the query you need to add it to `context.params.query` on the client side and explicitly pull it out of `context.params.query` on the server side. This can be achieved like so:
 
 ```js
 // client side
 client.hooks({
   before: {
     all: [
-      hook => {
-        hook.params.query.$client = {
+      context => {
+        context.params.query.$client = {
           platform: 'ios',
           version: '1.0'
         };
         
-        return hook;
+        return context;
       }
     ]
   }
@@ -290,9 +248,9 @@ const hooks = require('feathers-hooks-common');
 module.exports = {
   before: {
     all: [
-      // remove values from hook.params.query.$client and move them to hook.params
-      // so hook.params.query.$client.version -> hook.params.version
-      // and hook.params.query.$client is removed.
+      // remove values from context.params.query.$client and move them to context.params
+      // so context.params.query.$client.version -> context.params.version
+      // and context.params.query.$client is removed.
       hooks.client('version', 'platform')
     ]
   }

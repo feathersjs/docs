@@ -32,7 +32,7 @@ app.get('/messages', function(req, res, next){
 
 Simple right? We've now rendered a list of messages. All your hooks will get triggered just like they would normally so you can use hooks to pre-filter your data and keep your template rendering routes super tight.
 
-> **ProTip:** If you call a Feathers service "internally" (ie. not over sockets or REST) you won't have a `hook.params.provider` attribute. This allows you to have hooks only execute when services are called externally vs. from your own code. See [bundled hooks](../../api/hooks-common.md) for an example.
+> **ProTip:** If you call a Feathers service "internally" (ie. not over sockets or REST) you won't have a `context.params.provider` attribute. This allows you to have hooks only execute when services are called externally vs. from your own code. See [bundled hooks](../../api/hooks-common.md) for an example.
 
 ## Feathers As A Sub-App
 
@@ -71,8 +71,8 @@ If your app starts to get a bit busier you might decide to move your API to a co
 app.set('view engine', 'jade');
 
 // Include the Feathers client modules
-const client = require('feathers/client');
-const socketio = require('feathers-socketio/client');
+const client = require('@feathersjs/client');
+const socketio = require('@feathersjs/socketio-client');
 const io = require('socket.io-client');
 ​
 // Set up a socket connection to our remote API

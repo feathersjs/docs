@@ -4,13 +4,13 @@ Now that we have our [Feathers application generated](./creating.md) we can crea
 
 ## Generating a service
 
-In Feathers any API endpoint is represented as a [service](../../api/services.md) which we already learned about in the [basics guide](../step-by-step/readme.md). To generate a new service we can run
+In Feathers any API endpoint is represented as a [service](../../api/services.md) which we already learned about in the [basics guide](../basics/services.md). To generate a new service we can run
 
 ```
 feathers generate service
 ```
 
-First we have to choose what kind of service we would like to create. You can choose between many databases and ORMs but for this guide we will just go with the default [NeDB](https://github.com/louischatriot/nedb). NeDB is a database that stores its data locally in a file and requires no additional configuration or a database server running.
+First we have to choose what kind of service we would like to create. You can choose between many databases and ORMs but for this guide we will go with the default [NeDB](https://github.com/louischatriot/nedb). NeDB is a database that stores its data locally in a file and requires no additional configuration or a database server running.
 
 Next we are asked for the name of the service which we can answer with `messages` and then can answer the next question for the path with the default (`/messages`) by pressing enter.
 
@@ -22,6 +22,14 @@ Confirming the last prompt will create a couple of files and wire our service up
 
 Et voilà! We have a fully functional REST and real-time API for our messages.
 
+## The generated files
+
+As we can see, several files were created:
+
+- `src/services/messages/messages.service.js` - The service setup file which registers the service in a [configure function](../basics/generator.md)
+- `src/services/messages/messages.hooks.js` - A file that returns an [object with all hooks](../basics/hooks.md) that should be registered on the service.
+- `src/models/messages.model.js` - The model for our messages. Since we are using NeDB this will just instantiate the filesystem database.
+- `test/services/messages.test.js` - A Mocha test for the service which by default just makes sure that it exists.
 
 ## Testing the API
 
@@ -47,9 +55,4 @@ If we now go to [localhost:3030/messages](http://localhost:3030/messages) again 
 
 ## What's next?
 
-With just one command, we created a fully functional REST and real-time API endpoint. Before we dive into authentication and processing data, [let's create a simple web application](./frontend.md) that uses our new chat message endpoint.
-
-### Is anything wrong, unclear, missing?
-
-[Leave a comment.](https://github.com/feathersjs/feathers-docs/issues/new?title=Comment:Chat-Service)
-
+With just one command, we created a fully functional REST and real-time API endpoint. Next, let's [add authentication](./authentication.md) and make sure messages only go to users that are allowed to see them.

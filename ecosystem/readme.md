@@ -82,7 +82,7 @@ Submit yours by creating a pull request.
 - [feathers-bookshelf](https://www.npmjs.com/package/feathers-bookshelf) - A bookshelf ORM service adapter.  (service)
 - [feathers-couchdb](https://github.com/lontongcorp/feathers-couchdb)
 - [feathers-dynamodb](https://github.com/jus101/feathers-dynamodb) - Work in progress - help wanted!
-- [feathers-elasticsearch](https://github.com/feathersjs/feathers-elasticsearch) ![Official Feathers Module](/img/tiny-feathers-logo.png)
+- [feathers-elasticsearch](https://github.com/feathersjs-ecosystem/feathers-elasticsearch) ![Official Feathers Module](/img/tiny-feathers-logo.png)
 - [feathers-filemaker](https://www.npmjs.com/package/feathers-filemaker) - Filemaker adapter for feathers.js
 - [feathers-knex](../api/databases/knexjs.md) ![Official Feathers Module](/img/tiny-feathers-logo.png)
 - [feathers-levelup](https://www.npmjs.com/package/feathers-levelup)
@@ -159,7 +159,7 @@ The Feathers client works with React Native but here is a collection of native l
 - [feathers-hooks-csvtoarray](https://www.npmjs.com/package/feathers-hooks-csvtoarray) - Feathers hook for converting a comma-delimited list to an Array of strings.
 - [feathers-hooks-jsonapify](https://www.npmjs.com/package/feathers-hooks-jsonapify) - Feathers hook for outputting data in a JSON-API-compliant way.
 - [feathers-populate-hook](https://www.npmjs.com/package/feathers-populate-hook) - Feathers hook to populate multiple fields with n:m, n:1 or 1:m relations. (hook)
-- [feathers-transform-hook](https://www.npmjs.com/package/feathers-transform-hook) - Feathers hook for transform hook.data parameters (hook)
+- [feathers-transform-hook](https://www.npmjs.com/package/feathers-transform-hook) - Feathers hook for transform context.data parameters (hook)
 - [feathers-virtual-attribute-hook](https://www.npmjs.com/package/feathers-virtual-attribute-hook) - Feathers hook for add virtual attributes to your service response (hook)
 
 ## Transports

@@ -9,13 +9,14 @@
     "edit-link",
     "ga",
     "feathers-versions",
-    "advanced-emoji"
+    "advanced-emoji",
+    "codetabs"
   ],
   "pluginsConfig": {
     "edit-link": {
-      "placement": "left",
-      "base": "https://github.com/feathersjs/feathers-docs/edit/master",
-      "label": "Edit This Page"
+      "base": "https://github.com/feathersjs/docs/edit/buzzard",
+      "label": "Edit This Page",
+      "placement": "left"
     },
     "ga": {
       "token": "UA-64904930-1"
@@ -23,16 +24,19 @@
     "lunr": {
       "maxIndexSize": 1000000000
     },
+    "menu": {
+      "deep": true
+    },
     "versions": {
       "gitbookConfigURL": "https://rawgit.com/feathersjs/feathers-docs/master/book.json",
       "options": [
         {
           "value": "https://docs.feathersjs.com",
-          "text": "Latest Stable - Auk"
+          "text": "Latest Stable - Buzzard"
         },
         {
-          "value": "https://buzzard.docs.feathersjs.com",
-          "text": "Next Release - Buzzard"
+          "value": "https://auk.docs.feathersjs.com",
+          "text": "Previous release - Buzzard"
         },
         {
           "value": "https://legacy.docs.feathersjs.com",

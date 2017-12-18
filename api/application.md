@@ -2,30 +2,23 @@
 
 [![GitHub stars](https://img.shields.io/github/stars/feathersjs/feathers.png?style=social&label=Star)](https://github.com/feathersjs/feathers/)
 [![npm version](https://img.shields.io/npm/v/feathers.png?style=flat-square)](https://www.npmjs.com/package/feathers)
-[![Changelog](https://img.shields.io/badge/changelog-.md-blue.png?style=flat-square)](https://github.com/feathersjs/feathers/blob/master/CHANGELOG.md)
+[![Changelog](https://img.shields.io/badge/changelog-.md-blue.png?style=flat-square)](https://github.com/feathersjs/feathers/blob/master/changelog.md)
 
 ```
-$ npm install feathers --save
+$ npm install @feathersjs/feathers --save
 ```
 
-The core `feathers` module provides the ability to initialize new Feathers application instances. Each instance allows for registration and retrieval of [services](./services.md), plugin configuration, and getting and setting global configuration options. An initialized Feathers application is referred to as the **app object**. The API documented on this page works both, on the server and [the client](./client.md).
+The core `@feathersjs/feathers` module provides the ability to initialize new Feathers application instances. It works in Node, React Native and the browser (see the [client](./client.md) chapter for more information). Each instance allows for registration and retrieval of [services](./services.md), [hooks](./hooks.md), plugin configuration, and getting and setting configuration options. An initialized Feathers application is referred to as the **app object**.
 
 ```js
-// To create a Feathers server application
-const feathers = require('feathers');
-
-// To create a client side application
-const feathers = require('feathers/client');
+const feathers = require('@feathersjs/feathers');
 
 const app = feathers();
 ```
 
-> **Important:** In addition to the API outlined below, a Feathers server application also provides the exact same functionality as an [Express 4](http://expressjs.com/en/4x/api.html) application. For more advanced use of Feathers, familiarity with Express is highly recommended. For the interaction between Express and Feathers, also see the [REST](./rest.md) and [Express](./express.md) chapters.
-
-
 ## .use(path, service)
 
-`app.use(path, service) -> app` allows registering a [service object](./services.md) on the `path`.
+`app.use(path, service) -> app` allows registering a [service object](./services.md) on a given `path`.
 
 ```js
 // Add a service.
@@ -33,20 +26,15 @@ app.use('/messages', {
   get(id) {
     return Promise.resolve({
       id,
-      text: `This is the ${name} message!`
+      text: `This is the ${id} message!`
     });
   }
 });
 ```
 
-On the server `.use` also provides the same functionality as [Express app.use](http://expressjs.com/en/4x/api.html#app.use) if passed something other than a service object (e.g. an Express middleware or other app object).
-
- > **Important:** [REST](./rest.md) services are registered in the same order as any other middleware. For additional information on how services and middleware interact see the [Express chapter](./express.md).
-
-
 ## .service(path)
 
-`app.service(path) -> service` returns the wrapped [service object](./services.md) for the given path. Feathers internally creates a new object from each registered service. This means that the object returned by `app.service(path)` will provide the same methods and functionality as your original service object but also functionality added by Feathers and its plugins like [service events](./events.md) and [additional methods](./services.md##feathers-functionality). `path` can be the service name with or without leading and trailing slashes.
+`app.service(path) -> service` returns the wrapped [service object](./services.md) for the given path. Feathers internally creates a new object from each registered service. This means that the object returned by `app.service(path)` will provide the same methods and functionality as your original service object but also functionality added by Feathers and its plugins like [service events](./events.md) and [additional methods](./services.md#feathers-functionality). `path` can be the service name with or without leading and trailing slashes.
 
 ```js
 const messageService = app.service('messages');
@@ -66,39 +54,67 @@ todoService.on('created', todo =>
 );
 ```
 
+## .mixins
+
+`app.mixins` contains a list of service mixins. A mixin is a callback (`(service, path) => {}`) that gets run for every service that is being registered. Adding your own mixins allows to add functionality to every registered service.
+
+```js
+const feathers = require('@feathersjs/feathers');
+const app = feathers();
+
+// Mixins have to be added before registering any services
+app.mixins.push((service, path) => {
+  service.sayHello = function() {
+    return `Hello from service at '${path}'`;
+  }
+});
+
+app.use('/todos', {
+  get(id) {
+    return Promise.resolve({ id });
+  }
+});
+
+app.service('todos').sayHello();
+// -> Hello from service at 'todos'
+```
+
+## .hooks(hooks)
+
+`app.hooks(hooks) -> app` allows registration of application-level hooks. For more information see the [application hooks section in the hooks chapter](./hooks.md#application-hooks).
+
+## .publish([event, ] publisher)
+
+`app.publish([event, ] publisher) -> app` registers a global event publisher. For more information see the [channels publishing](./channels.md#publishing) chapter.
 
 ## .configure(callback)
 
-`app.configure(callback) -> app` runs a `callback` function with the application as the context (`this`). It can be used to initialize plugins or services.
+`app.configure(callback) -> app` runs a `callback` function that gets passed the application object. It is used to initialize plugins or services.
 
 ```js
-function setupService() {
-  this.use('/todos', todoService);
+function setupService(app) {
+  app.use('/todos', todoService);
 }
 
 app.configure(setupService);
 ```
 
-
 ## .listen(port)
 
-`app.listen([port]) -> HTTPServer` starts the application on the given port. It will first call the original [Express app.listen([port])](http://expressjs.com/api.html#app.listen), then run `app.setup(server)` (see below) with the server object and then return the server object.
+`app.listen([port]) -> HTTPServer` starts the application on the given port. It will set up all configured transports (if any) and then run `app.setup(server)` (see below) with the server object and then return the server object.
 
-`listen` does nothing on the Feathers Client.
+`listen` will only be available if a server side transport (REST, Socket.io or Primus) has been configured.
 
+## .setup([server])
 
-## .setup(server)
-
-`app.setup(server) -> app` is used to initialize all services by calling each [services .setup(app, path)](services.md#setupapp-path) method (if available).
+`app.setup([server]) -> app` is used to initialize all services by calling each [services .setup(app, path)](services.md#setupapp-path) method (if available).
 It will also use the `server` instance passed (e.g. through `http.createServer`) to set up SocketIO (if enabled) and any other provider that might require the server instance.
 
-Normally `app.setup` will be called automatically when starting the application via `app.listen([port])` but there are cases when it needs to be called explicitly. For more information see the [Express chapter](./express.md).
-
+Normally `app.setup` will be called automatically when starting the application via `app.listen([port])` but there are cases when it needs to be called explicitly.
 
 ## .set(name, value)
 
 `app.set(name, value) -> app` assigns setting `name` to `value`. 
-
 
 ## .get(name)
 
@@ -110,12 +126,6 @@ app.set('port', 3030);
 app.listen(app.get('port'));
 ```
 
-
-## .hooks(hooks)
-
-`app.hooks(hooks) -> app` allows registration of application-level hooks. For more information see the [application hooks section](./hooks.md#application-hooks).
-
-
 ## .on(eventname, listener)
 
 Provided by the core [NodeJS EventEmitter .on](https://nodejs.org/api/events.html#events_emitter_on_eventname_listener). Registers a `listener` method (`function(data) {}`) for the given `eventname`.
@@ -123,7 +133,6 @@ Provided by the core [NodeJS EventEmitter .on](https://nodejs.org/api/events.htm
 ```js
 app.on('login', user => console.log('Logged in', user));
 ```
-
 
 ## .emit(eventname, data)
 
@@ -136,7 +145,6 @@ app.emit('myevent', {
 
 app.on('myevent', data => console.log('myevent happened', data));
 ```
-
 
 ## .removeListener(eventname, [ listener ])
 

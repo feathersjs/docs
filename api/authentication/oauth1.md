@@ -1,15 +1,15 @@
 # OAuth1 Authentication
 
-[![GitHub stars](https://img.shields.io/github/stars/feathersjs/feathers-authentication-oauth1.png?style=social&label=Star)](https://github.com/feathersjs/feathers-authentication-oauth1/)
-[![npm version](https://img.shields.io/npm/v/feathers-authentication-oauth1.png?style=flat-square)](https://www.npmjs.com/package/feathers-authentication-oauth1)
-[![Changelog](https://img.shields.io/badge/changelog-.md-blue.png?style=flat-square)](https://github.com/feathersjs/feathers-authentication-oauth1/blob/master/CHANGELOG.md)
+[![GitHub stars](https://img.shields.io/github/stars/feathersjs/authentication-oauth1.png?style=social&label=Star)](https://github.com/feathersjs/authentication-oauth1/)
+[![npm version](https://img.shields.io/npm/v/@feathersjs/authentication-oauth1.png?style=flat-square)](https://www.npmjs.com/package/@feathersjs/authentication-oauth1)
+[![Changelog](https://img.shields.io/badge/changelog-.md-blue.png?style=flat-square)](https://github.com/feathersjs/authentication-oauth1/blob/master/CHANGELOG.md)
 
 ```
-$ npm install feathers-authentication-oauth1 --save
+$ npm install @feathersjs/authentication-oauth1 --save
 ```
 
 
-[feathers-authentication-oauth1](https://github.com/feathersjs/feathers-authentication-oauth1) is a server side module that allows you to use any [Passport](http://passportjs.org/) OAuth1 authentication strategy within your Feathers application, most notably [Twitter](https://github.com/jaredhanson/passport-twitter).
+[@feathersjs/authentication-oauth1](https://github.com/feathersjs/authentication-oauth1) is a server side module that allows you to use any [Passport](http://passportjs.org/) OAuth1 authentication strategy within your Feathers application, most notably [Twitter](https://github.com/jaredhanson/passport-twitter).
 
 This module contains 2 core pieces:
 
@@ -21,10 +21,10 @@ This module contains 2 core pieces:
 In most cases initializing the module is as simple as doing this:
 
 ```js
-const feathers = require('feathers');
+const feathers = require('@feathersjs/feathers');
 const authentication = require('feathers-authentication');
 const jwt = require('feathers-authentication-jwt');
-const oauth1 = require('feathers-authentication-oauth1');
+const oauth1 = require('@feathersjs/authentication-oauth1');
 const session = require('express-session');
 const TwitterStrategy = require('passport-twitter').Strategy;
 const app = feathers();
@@ -61,7 +61,7 @@ This will pull from your global authentication object in your config file. It wi
 
 Registering the OAuth1 plugin will automatically set up routes to handle the OAuth redirects and authorization.
 
-### Default Options
+## Options
 
 ```js
 {
@@ -94,14 +94,12 @@ This is the verification class that handles the OAuth1 verification by looking u
 }
 ```
 
-### Customizing the Verifier
-
 The `Verifier` class can be extended so that you customize it's behavior without having to rewrite and test a totally custom local Passport implementation. Although that is always an option if you don't want use this plugin.
 
 An example of customizing the Verifier:
 
 ```js
-import oauth1, { Verifier } from 'feathers-authentication-oauth1';
+import oauth1, { Verifier } from '@feathersjs/authentication-oauth1';
 
 class CustomVerifier extends Verifier {
   // The verify function has the exact same inputs and 
@@ -142,25 +140,25 @@ app.configure(oauth1({
 }));
 
 function customizeTwitterProfile() {
-  return function(hook) {
+  return function(context) {
     console.log('Customizing Twitter Profile');
     // If there is a twitter field they signed up or
     // signed in with twitter so let's pull the email. If
-    if (hook.data.twitter) {
-      hook.data.email = hook.data.twitter.email; 
+    if (context.data.twitter) {
+      context.data.email = context.data.twitter.email; 
     }
 
     // If you want to do something whenever any OAuth
     // provider authentication occurs you can do this.
-    if (hook.params.oauth) {
+    if (context.params.oauth) {
       // do something for all OAuth providers
     }
 
-    if (hook.params.oauth.provider === 'twitter') {
+    if (context.params.oauth.provider === 'twitter') {
       // do something specific to the twitter provider
     }
 
-    return Promise.resolve(hook);
+    return Promise.resolve(context);
   };
 }
 
@@ -175,7 +173,7 @@ app.service('users').hooks({
 
 ## Client Usage
 
-When this module is registered server side, whether you are using `feathers-authentication-client` or not you simply get the user to navigate to the authentication strategy url. This could be by setting `window.location` or through a link in your app.
+When this module is registered server side, whether you are using `feathers-authentication-client` or not the user has to navigate to the authentication strategy url. This could be by setting `window.location` or through a link in your app.
 
 For example you might have a login button for Twitter:
 

@@ -4,9 +4,7 @@ All database adapters implement a common interface for initialization, paginatio
 
 > **Important:** Every database adapter is an implementation of the [Feathers service interface](../services.md). We recommend being familiar with services, service events and hooks before using a database adapter.
 
-## Initialization
-
-### `service([options])`
+## `service([options])`
 
 Returns a new service instance initialized with the given options.
 
@@ -78,9 +76,9 @@ app.service('todos').find({
 
 This section describes specifics on how the [service methods](../services.md) are implemented for all adapters.
 
-#### `adapter.find(params) -> Promise`
+### adapter.find(params)
 
-Returns a list of all records matching the query in `params.query` using the [common querying mechanism](./querying.md). Will either return an array with the results or a page object if [pagination is enabled](#pagination).
+`adapter.find(params) -> Promise` returns a list of all records matching the query in `params.query` using the [common querying mechanism](./querying.md). Will either return an array with the results or a page object if [pagination is enabled](#pagination).
 
 > **Important**: When used via REST URLs all query values are strings. Depending on the database the values in `params.query` might have to be converted to the right type in a [before hook](../hooks.md).
 
@@ -114,9 +112,9 @@ Find all messages belonging to room 1 or 3
 GET /messages?roomId[$in]=1&roomId[$in]=3
 ```
 
-#### `adapter.get(id, params) -> Promise`
+### adapter.get(id, params)
 
-Retrieve a single record by its unique identifier (the field set in the `id` option during initialization).
+`adapter.get(id, params) -> Promise` retrieves a single record by its unique identifier (the field set in the `id` option during initialization).
 
 ```js
 app.service('messages').get(1)
@@ -127,9 +125,9 @@ app.service('messages').get(1)
 GET /messages/1
 ```
 
-#### `adapter.create(data, params) -> Promise`
+### adapter.create(data, params)
 
-Create a new record with `data`. `data` can also be an array to create multiple records.
+`adapter.create(data, params) -> Promise` creates a new record with `data`. `data` can also be an array to create multiple records.
 
 ```js
 app.service('messages').create({
@@ -152,9 +150,9 @@ POST /messages
 }
 ```
 
-#### `adapter.update(id, data, params) -> Promise`
+### adapter.update(id, data, params)
 
-Completely replaces a single record identified by `id` with `data`. Does not allow replacing multiple records (`id` can't be `null`). `id` can not be changed.
+`adapter.update(id, data, params) -> Promise` completely replaces a single record identified by `id` with `data`. Does not allow replacing multiple records (`id` can't be `null`). `id` can not be changed.
 
 ```js
 app.service('messages').update(1, {
@@ -168,15 +166,14 @@ PUT /messages/1
 { "text": "Updated message" }
 ```
 
-#### `adapter.patch(id, data, params) -> Promise`
+### adapter.patch(id, data, params)
 
-Merges a record identified by `id` with `data`. `id` can be `null` to allow replacing multiple records (all records that match `params.query` the same as in `.find`). `id` can not be changed.
+`adapter.patch(id, data, params) -> Promise` merges a record identified by `id` with `data`. `id` can be `null` to allow replacing multiple records (all records that match `params.query` the same as in `.find`). `id` can not be changed.
 
 ```js
-app.service('messages').update(1, {
-    text: 'A patched message'
-  })
-  .then(message => console.log(message));
+app.service('messages').patch(1, {
+  text: 'A patched message'
+}).then(message => console.log(message));
 
 const params = {
   query: { read: false }
@@ -200,9 +197,9 @@ PATCH /messages?read=false
 { "read": true }
 ```
 
-#### `adapter.remove(id, params) -> Promise`
+### adapter.remove(id, params)
 
-Removes a record identified by `id`. `id` can be `null` to allow removing multiple records (all records that match `params.query` the same as in `.find`).
+`adapter.remove(id, params) -> Promise` removes a record identified by `id`. `id` can be `null` to allow removing multiple records (all records that match `params.query` the same as in `.find`).
 
 ```js
 app.service('messages').remove(1)
@@ -226,7 +223,6 @@ Remove all read messages
 DELETE /messages?read=true
 ```
 
-
 ## Extending Adapters
 
 There are two ways to extend existing database adapters. Either by extending the ES6 base class or by adding functionality through hooks.
@@ -238,7 +234,7 @@ There are two ways to extend existing database adapters. Either by extending the
 The most flexible option is weaving in functionality through [hooks](../hooks.md). For example, `createdAt` and `updatedAt` timestamps could be added like this:
 
 ```js
-const feathers = require('feathers');
+const feathers = require('@feathersjs/feathers');
 const hooks = require('feathers-hooks');
 
 // Import the database adapter of choice
@@ -256,11 +252,11 @@ const app = feathers()
 app.service('todos').hooks({
   before: {
     create: [
-      (hook) => hook.data.createdAt = new Date()
+      (context) => context.data.createdAt = new Date()
     ],
     
     update: [
-      (hook) => hook.data.updatedAt = new Date()
+      (context) => context.data.updatedAt = new Date()
     ]
   }
 });
@@ -275,7 +271,7 @@ All modules also export an [ES6 class](https://developer.mozilla.org/en/docs/Web
 ```js
 'use strict';
 
-const Service = require( 'feathers-<database>').Service;
+const { Service } = require( 'feathers-<database>');
 
 class MyService extends Service {
   create(data, params) {

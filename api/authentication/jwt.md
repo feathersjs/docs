@@ -1,15 +1,15 @@
 # JWT Authentication
 
-[![GitHub stars](https://img.shields.io/github/stars/feathersjs/feathers-authentication-jwt.png?style=social&label=Star)](https://github.com/feathersjs/feathers-authentication-jwt/)
-[![npm version](https://img.shields.io/npm/v/feathers-authentication-jwt.png?style=flat-square)](https://www.npmjs.com/package/feathers-authentication-jwt)
-[![Changelog](https://img.shields.io/badge/changelog-.md-blue.png?style=flat-square)](https://github.com/feathersjs/feathers-authentication-jwt/blob/master/CHANGELOG.md)
+[![GitHub stars](https://img.shields.io/github/stars/feathersjs/authentication-jwt.png?style=social&label=Star)](https://github.com/feathersjs/authentication-jwt/)
+[![npm version](https://img.shields.io/npm/v/@feathersjs/authentication-jwt.png?style=flat-square)](https://www.npmjs.com/package/@feathersjs/authentication-jwt)
+[![Changelog](https://img.shields.io/badge/changelog-.md-blue.png?style=flat-square)](https://github.com/feathersjs/authentication-jwt/blob/master/CHANGELOG.md)
 
 ```
-$ npm install feathers-authentication-jwt --save
+$ npm install @feathersjs/authentication-jwt --save
 ```
 
 
-[feathers-authentication-jwt](https://github.com/feathersjs/feathers-authentication-jwt) is a server side module that wraps the [passport-jwt](https://github.com/themikenicholson/passport-jwt) authentication strategy, which lets you authenticate with your Feathers application using a JSON Web Token ([JWT](https://jwt.io/)) access token.
+[@feathersjs/authentication-jwt](https://github.com/feathersjs/authentication-jwt) is a module for the [authentication server](./server.md) that wraps the [passport-jwt](https://github.com/themikenicholson/passport-jwt) authentication strategy, which lets you authenticate with your Feathers application using a [JSON Web Token](https://jwt.io/) access token.
 
 This module contains 3 core pieces:
 
@@ -22,9 +22,9 @@ This module contains 3 core pieces:
 In most cases initializing the module is as simple as doing this:
 
 ```js
-const feathers = require('feathers');
+const feathers = require('@feathersjs/feathers');
 const authentication = require('feathers-authentication');
-const jwt = require('feathers-authentication-jwt');
+const jwt = require('@feathersjs/authentication-jwt');
 const app = feathers();
 
 // Setup authentication
@@ -44,7 +44,7 @@ app.service('authentication').hooks({
 
 This will pull from your global authentication object in your config file. It will also mix in the following defaults, which can be customized.
 
-### Default Options
+### Options
 
 ```js
 {
@@ -83,7 +83,7 @@ The `Verifier` class can be extended so that you customize it's behavior without
 An example of customizing the Verifier:
 
 ```js
-import jwt, { Verifier } from 'feathers-authentication-jwt';
+import jwt, { Verifier } from '@feathersjs/authentication-jwt';
 
 class CustomVerifier extends Verifier {
   // The verify function has the exact same inputs and 
@@ -103,7 +103,9 @@ app.configure(jwt({ Verifier: CustomVerifier }));
 
 ## Client Usage
 
-When this module is registered server side, using the default config values this is how you can authenticate using `feathers-authentication-client`:
+### authentication-client
+
+When this module is registered server side, using the default config values this is how you can authenticate using [@feathersjs/authentication-client](./client.md):
 
 ```js
 app.authenticate({
@@ -114,11 +116,9 @@ app.authenticate({
 });
 ```
 
-## Direct Usage
+### HTTP
 
-### Using a HTTP Request
-
-If you are not using the `feathers-authentication-client` and you have registered this module server side then you can simply include the access token in an `Authorization` header.
+If you are not using `@feathersjs/authentication-client` and you have registered this module server side then you can include the access token in an `Authorization` header.
 
 Here is what that looks like with curl:
 
@@ -126,7 +126,7 @@ Here is what that looks like with curl:
 curl -H "Content-Type: application/json" -H "Authorization: <your access token>" -X POST http://localhost:3030/authentication
 ```
 
-### Using Sockets
+### Sockets
 
 Authenticating using an access token via sockets is done by emitting the following message:
 
@@ -143,4 +143,3 @@ socket.emit('authenticate', {
   // You can now send authenticated messages to the server
 });
 ```
-

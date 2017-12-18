@@ -1,14 +1,14 @@
 # OAuth2 Authentication
 
-[![GitHub stars](https://img.shields.io/github/stars/feathersjs/feathers-authentication-oauth2.png?style=social&label=Star)](https://github.com/feathersjs/feathers-authentication-oauth2/)
-[![npm version](https://img.shields.io/npm/v/feathers-authentication-oauth2.png?style=flat-square)](https://www.npmjs.com/package/feathers-authentication-oauth2)
-[![Changelog](https://img.shields.io/badge/changelog-.md-blue.png?style=flat-square)](https://github.com/feathersjs/feathers-authentication-oauth2/blob/master/CHANGELOG.md)
+[![GitHub stars](https://img.shields.io/github/stars/feathersjs/authentication-oauth2.png?style=social&label=Star)](https://github.com/feathersjs/authentication-oauth2/)
+[![npm version](https://img.shields.io/npm/v/@feathersjs/authentication-oauth2.png?style=flat-square)](https://www.npmjs.com/package/@feathersjs/authentication-oauth2)
+[![Changelog](https://img.shields.io/badge/changelog-.md-blue.png?style=flat-square)](https://github.com/feathersjs/authentication-oauth2/blob/master/CHANGELOG.md)
 
 ```
-$ npm install feathers-authentication-oauth2 --save
+$ npm install @feathersjs/authentication-oauth2 --save
 ```
 
-[feathers-authentication-oauth2](https://github.com/feathersjs/feathers-authentication-oauth2) is a server side module that allows you to use any [Passport](http://passportjs.org/) OAuth2 authentication strategy within your Feathers application. There are hundreds of them! Some commonly used ones are:
+[@feathersjs/authentication-oauth2](https://github.com/feathersjs/authentication-oauth2) is a server side module that allows you to use any [Passport](http://passportjs.org/) OAuth2 authentication strategy within your Feathers application. There are hundreds of them! Some commonly used ones are:
 
 - [Facebook](https://github.com/jaredhanson/passport-facebook)
 - [Instagram](https://github.com/jaredhanson/passport-instagram)
@@ -26,10 +26,10 @@ This module contains 2 core pieces:
 In most cases initializing the module is as simple as doing this:
 
 ```js
-const feathers = require('feathers');
+const feathers = require('@feathersjs/feathers');
 const authentication = require('feathers-authentication');
 const jwt = require('feathers-authentication-jwt');
-const oauth2 = require('feathers-authentication-oauth2');
+const oauth2 = require('@feathersjs/authentication-oauth2');
 const FacebookStrategy = require('passport-facebook').Strategy;
 const app = feathers();
 
@@ -59,7 +59,7 @@ This will pull from your global authentication object in your config file. It wi
 
 Registering the OAuth2 plugin will automatically set up routes to handle the OAuth redirects and authorization.
 
-### Default Options
+## Options
 
 ```js
 {
@@ -94,14 +94,12 @@ This is the verification class that handles the OAuth2 verification by looking u
 }
 ```
 
-### Customizing the Verifier
-
 The `Verifier` class can be extended so that you customize it's behavior without having to rewrite and test a totally custom local Passport implementation. Although that is always an option if you don't want use this plugin.
 
 An example of customizing the Verifier:
 
 ```js
-import oauth2, { Verifier } from 'feathers-authentication-oauth2';
+import oauth2, { Verifier } from '@feathersjs/authentication-oauth2';
 
 class CustomVerifier extends Verifier {
   // The verify function has the exact same inputs and 
@@ -143,25 +141,25 @@ app.configure(oauth2({
 }));
 
 function customizeGithubProfile() {
-  return function(hook) {
+  return function(context) {
     console.log('Customizing Github Profile');
     // If there is a github field they signed up or
     // signed in with github so let's pull the primary account email.
-    if (hook.data.github) {
-      hook.data.email = hook.data.github.profile.emails.find(email => email.primary).value;
+    if (context.data.github) {
+      context.data.email = context.data.github.profile.emails.find(email => email.primary).value;
     }
 
     // If you want to do something whenever any OAuth
     // provider authentication occurs you can do this.
-    if (hook.params.oauth) {
+    if (context.params.oauth) {
       // do something for all OAuth providers
     }
 
-    if (hook.params.oauth.provider === 'github') {
+    if (context.params.oauth.provider === 'github') {
       // do something specific to the github provider
     }
 
-    return Promise.resolve(hook);
+    return Promise.resolve(context);
   };
 }
 
@@ -176,7 +174,7 @@ app.service('users').hooks({
 
 ## Client Usage
 
-When this module is registered server side, whether you are using `feathers-authentication-client` or not you simply get the user to navigate to the authentication strategy url. This could be by setting `window.location` or through a link in your app.
+When this module is registered server side, whether you are using `feathers-authentication-client` or not the user has to navigate to the authentication strategy url. This could be by setting `window.location` or through a link in your app.
 
 For example you might have a login button for Facebook:
 

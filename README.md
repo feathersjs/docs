@@ -2,29 +2,14 @@
 
 > An open source REST and realtime API layer for modern applications.
 
-With Feathers it's easy to create scalable, real-time applications.  Make creating web and mobile apps fun with Feathers.
+Feathers is _a batteries included but entirely optional_ minimal web application framework.
+
+At it's core, it's a set of tools and an architecture pattern that make it easy to create scalable REST APIs and real-time applications. With Feathers, you can literally build prototypes in minutes and production-ready apps in days.
+
+Feathers achieves this by being the glue code between some amazing battle tested open source technologies - adding a few minimal abstractions and introducing an application architecture that is easier to understand, maintain, and scale than the traditional MVC architecture.
+
+If you're interested, you can read more about [how and why Feathers came to be](https://blog.feathersjs.com/why-we-built-the-best-web-framework-you-ve-probably-never-heard-of-until-now-176afc5c6aac) or you can read about Feathers [features](guides/about/features.md) and [philosophy](guides/about/philosophy.md).
+
+If you've decided that Feathers might be for you, feel free to dive right in and [learn about the basics](./guides/basics/readme.md).
 
 This documentation is also available as a [PDF](https://docs.feathersjs.com/feathersjs.pdf).
-
-[**Guides**](./guides/readme.md)<br/>
-Get familiar with Feathers by building your first apps. Learn topics from beginner to more advanced-levels.
-
-[**API**](./api/readme.md)<br/>
-Learn more about Feathers' Universal API, and plugins for Authentication and handling data.
-
-[**Security**](./SECURITY.md)<br/>
-Understand our commitment to security and how it affects your applications.
-
-[**Ecosystem**](./ecosystem/readme.md)<br/>
-See what amazing things the Feathers Core Team and Community have built.
-
-[**Help**](./help/readme.md)<br/>
-Learn how to plug in to the active and helpful FeathersJS Community.
-
-[**FAQ**](./faq/readme.md)<br/>
-A collection of Frequently Asked Questions.
-
-[**Contributing**](./contributing/readme.md)<br/>
-Learn how you can contribute to this documentation.
-
-[**License**](./license.md)

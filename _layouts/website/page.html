@@ -1,0 +1,12 @@
+{% extends template.self %}
+
+{% block page %}
+  {{ super() }}
+  <blockquote>
+    <p>
+        Is anything wrong, unclear, missing?
+        <a target="_blank" href="https://github.com/feathersjs/docs/issues/new?title=Comment: {{page.title}} ({{file.path}})">Leave a comment</a> or
+        <a target="_blank" href="https://github.com/feathersjs/docs/edit/master/{{file.path}}">edit this page</a>.
+    </p>
+  </blockquote>
+{% endblock %}
