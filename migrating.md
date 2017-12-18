@@ -23,7 +23,7 @@ In short (for more details see below) this will:
 - Add Express compatibility to any application that uses `feathers-rest` (other Feathers apps without `feathers-rest` have to be updated manually)
 - Remove all `.filter` imports and calls to `service.filter` which has been replaced by channel functionality
 
-### Initializing channels
+### Adding channels
 
 If you are using real-time (with Socket.io or Primus), add the following file as `src/channels.js`:
 
@@ -98,6 +98,8 @@ app.configure(channels);
 ```
 
 > __Very important:__ The `channels.js` file shown above will publish all real-time events to all authenticated users. This is already safer than the previous default but you should carefully review the [channels](./api/channels.md) documentation and implement appropriate channels so that only the right users are going to receive real-time events.
+
+Once you migrated your application to channels you can remove all `<servicename>.filter.js` files.
 
 ### Protecting fields
 
@@ -182,6 +184,16 @@ All Feathers core modules have been moved to the `@feathersjs` npm scope. This m
 | feathers-socketio/client | @feathersjs/socketio-client
 | feathers-primus/client | @feathersjs/primus-client
 | feathers-authentication/client | @feathersjs/authentication-client
+
+## Documentation changes
+
+With a better focus on Feathers core, the repositories, documentation and guides for non-core module have been moved to more appropriate locations:
+
+- Non-core modules have been moved to the [feathersjs-ecosystem](https://github.com/feathersjs-ecosystem/) and [feathers-plus](https://github.com/feathers-plus/) organizations
+- Database adapter specific documentation can now be found in the respective repositories readme. Links to the repositories can be found in the [database adapters chapter](./api/databases/adapters.md)
+- The `feathers-hooks-common` documentation can be found at [feathers-plus.github.io/v1/feathers-hooks-common/](https://feathers-plus.github.io/v1/feathers-hooks-common/)
+- Offline and authentication-management documentation can also be found at [feathers-plus.github.io](https://feathers-plus.github.io/)
+- The Ecosystem page now points to [awesome-feathersjs](https://github.com/feathersjs/awesome-feathersjs)
 
 ## Framework independent
 
