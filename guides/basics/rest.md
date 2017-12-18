@@ -161,7 +161,7 @@ server.on('listening', () => console.log('Feathers REST API started at localhost
 You can start the server by running
 
 ```
-node app
+node app.js
 ```
 
 > __Note:__ The server will stay running until you stop it by pressing Control + C in the terminal. Remember to stop and start the server every time `app.js` changes.

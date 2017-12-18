@@ -20,7 +20,7 @@ The `@feathersjs/socketio-client` module allows to connect to services exposed t
 
 Initialize the Socket.io client using a given socket and the default options.
 
-```js
+{% codetabs name="Modular", type="js" -%}
 const feathers = require('@feathersjs/feathers');
 const socketio = require('@feathersjs/socketio-client');
 const io = require('socket.io-client');
@@ -39,7 +39,32 @@ app.service('messages')
 app.service('messages').create({
   text: 'A message from a REST client'
 });
-```
+{%- language name="@feathersjs/client", type="html" -%}
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/core-js/2.1.4/core.min.js"></script>
+<script src="//unpkg.com/@feathersjs/client@^3.0.0/dist/feathers.js"></script>
+<script src="//unpkg.com/socket.io-client@1.7.3/dist/socket.io.js"></script>
+<script>
+  // Socket.io is exposed as the `io` global.
+  var socket = io('http://api.feathersjs.com');
+  // @feathersjs/client is exposed as the `feathers` global.
+  var app = feathers();
+
+  // Set up Socket.io client with the socket
+  app.configure(feathers.socketio(socket));
+
+  // Receive real-time events through Socket.io
+  app.service('messages')
+    .on('created', message => console.log('New message created', message));
+
+  // Call the `messages` service
+  app.service('messages').create({
+    text: 'A message from a REST client'
+  });
+
+  // feathers.errors is an object with all of the custom error types.
+</script>
+{%- endcodetabs %}
+
 
 ### socketio(socket, options)
 

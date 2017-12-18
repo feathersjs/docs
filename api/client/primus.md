@@ -46,7 +46,7 @@ The `@feathersjs/primus-client` module allows to connect to services exposed thr
 
 Initialize the Primus client using a given socket and the default options.
 
-```js
+{% codetabs name="Modular", type="js" -%}
 const feathers = require('@feathersjs/feathers');
 const primus = require('@feathersjs/primus-client');
 const socket = new Primus('http://api.my-feathers-server.com');
@@ -63,7 +63,28 @@ app.service('messages')
 app.service('messages').create({
   text: 'A message from a REST client'
 });
-```
+{%- language name="@feathersjs/client", type="html" -%}
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/core-js/2.1.4/core.min.js"></script>
+<script src="//unpkg.com/@feathersjs/client@^3.0.0/dist/feathers.js"></script>
+<script type="text/javascript" src="primus/primus.js"></script>
+<script>
+  // Socket.io is exposed as the `io` global.
+  var socket = new Primus('http://api.my-feathers-server.com');
+  // @feathersjs/client is exposed as the `feathers` global.
+  var app = feathers();
+
+  app.configure(feathers.primus(socket));
+
+  // Receive real-time events through Primus
+  app.service('messages')
+    .on('created', message => console.log('New message created', message));
+
+  // Call the `messages` service
+  app.service('messages').create({
+    text: 'A message from a REST client'
+  });
+</script>
+{%- endcodetabs %}
 
 ### `primus(socket, options)`
 

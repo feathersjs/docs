@@ -66,7 +66,7 @@ getTodo('dishes');
 We can run it with
 
 ```
-node app
+node app.js
 ```
 
 And should see

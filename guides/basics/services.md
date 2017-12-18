@@ -167,7 +167,7 @@ processMessages();
 And run it with
 
 ```
-node app
+node app.js
 ```
 
 We should see this:
@@ -224,7 +224,7 @@ processMessages();
 If we now run the file via
 
 ```
-node app
+node app.js
 ```
 
 We will see how the event handlers are logging the information of created and deleted message like this:

@@ -26,7 +26,7 @@ $ npm install @feathersjs/rest-client --save
 
 REST client services can be initialized by loading `@feathersjs/rest-client` and initializing a client object with a base URL:
 
-```js
+{% codetabs name="Modular", type="js" -%}
 const feathers = require('@feathersjs/feathers');
 const rest = require('@feathersjs/rest-client');
 
@@ -43,7 +43,21 @@ app.configure(restClient.fetch(window.fetch));
 
 // Connect to the `http://feathers-api.com/messages` service
 const messages = app.service('messages');
-```
+{%- language name="@feathersjs/client", type="html" -%}
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/core-js/2.1.4/core.min.js"></script>
+<script src="//unpkg.com/@feathersjs/client@^3.0.0/dist/feathers.js"></script>
+<script>
+  var app = feathers();
+  // Connect to a different URL
+  var restClient = feathers.rest('http://feathers-api.com')
+
+  // Configure an AJAX library (see below) with that client 
+  app.configure(restClient.fetch(window.fetch));
+
+  // Connect to the `http://feathers-api.com/messages` service
+  const messages = app.service('messages');
+</script>
+{%- endcodetabs %}
 
 <!-- -->
 

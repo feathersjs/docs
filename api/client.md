@@ -7,14 +7,16 @@ In order to connect to a Feathers server, a client creates [Services](./services
 Modules relevant for use on the client are
 
 - `@feathersjs/feathers` to initialize a new Feathers [application](./application.md)
-- `@feathersjs/rest-client` to connect to services through [REST HTTP](./express.md). See the [REST client chapter](./client/rest.md).
-- `@feathersjs/socketio-client` to connect to services through [Socket.io](./socketio.md). See the [Socket.io client chapter](./client/socketio.md).
-- `@feathersjs/primus-client` to connect to services through [Primus](./primus.md), See the [Primus client chapter](./client/primus.md)
-- `@feathersjs/authentication-client` to authenticate a client. See the [Authentication client chapter](./authentication/client.md)
+- [@feathersjs/rest-client](./client/rest.md to connect to services through [REST HTTP](./express.md).
+- [@feathersjs/socketio-client](./client/socketio.md) to connect to services through [Socket.io](./socketio.md).
+- [@feathersjs/primus-client](./client/primus.md) to connect to services through [Primus](./primus.md).
+- [@feathersjs/authentication-client](./authentication/client.md) to authenticate a client
 
 > __Important:__ You do not have to use Feathers on the client to connect to a Feathers server. The client chapters above also describe how to use a REST HTTP, Socket.io or Primus connection directly without Feathers on the client side. For more information regarding authentication see the [Authentication client chapter](./authentication/client.md).
 
 This chapter describes how to set up Feathers as the client in Node, React Native and in the browser with a module loader like Webpack or Browserify or through a `<script>` tag. The examples are using [the Socket.io client](./client/socketio.md). For other connection methods see the chapters linked above.
+
+> __Important:__ Feathers can be used on the client throught the individual modules or the [@feathersjs/client](#feathersjsclient) module which combines the modules mentioned above into a single, ES5 transpiled version.
 
 ## Node
 
@@ -145,15 +147,41 @@ $ npm install @feathersjs/client --save
 
 > __Important:__ The Feathers client libraries come transpiled to ES5 and require ES6 shims either through the [babel-polyfill](https://www.npmjs.com/package/babel-polyfill) module or by including [core.js](https://github.com/zloirock/core-js) in older browsers e.g. via `<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/core-js/2.1.4/core.min.js"></script>`
 
+<!-- -->
+
+> __Important:__ When you are loading @feathersjs/client you do __not__ have install or load any of the other modules listed in the table above.
+
 ### When to use
 
 `@feathersjs/client` can be used directly in the browser using a `<script>` tag without a module loader as well as with module loaders that do not support CommonJS (like RequireJS) or React applications created with a default `create-react-app`.
 
 If you are using the Feathers client with Node or React Native you should follow the steps described in the [Node](#node) and [React Native](#react-native) sections and __not__ use `@feathersjs/client`.
 
-You can use `@feathersjs/client` with other browser module loaders/bundlers but it may include packages you may not use and result in a slightly larger bundle size.
+> __Note:__ All Feathers client examples show direct usage and usage with `@feathersjs/client`.
 
-> __Note:__ Except for this section, all other Feathers client examples assume you are using Node or a module loader so if you are using `@feathersjs/client` you will have to adjust the examples accordinly.
+### Load with a module loader
+
+You can use `@feathersjs/client` with other browser module loaders/bundlers (instead of using the modules directly) but it may include packages you may not use and result in a slightly larger bundle size.
+
+```js
+import feathers from '@feathersjs/feathers';
+
+// Socket.io is exposed as the `io` global.
+const socket = io('http://localhost:3030', {
+  transports: ['websocket']
+});
+// @feathersjs/client is exposed as the `feathers` global.
+const app = feathers();
+
+app.configure(feathers.socketio(socket));
+app.configure(feathers.authentication());
+
+app.service('messages').create({
+  text: 'A new message'
+});
+
+// feathers.errors is an object with all of the custom error types.
+```
 
 ### Load from CDN with `<script>`
 
