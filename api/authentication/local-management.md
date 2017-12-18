@@ -1,319 +1,186 @@
 # Local Authentication Management
 
+[![GitHub stars](https://img.shields.io/github/stars/feathers-plus/feathers-authentication-management.png?style=social&label=Star)](https://github.com/feathers-plus/feathers-authentication-management/)
+[![npm version](https://img.shields.io/npm/v/feathers-authentication-management.png?style=flat-square)](https://www.npmjs.com/package/feathers-authentication-management)
+[![Changelog](https://img.shields.io/badge/changelog-.md-blue.png?style=flat-square)](https://github.com/feathers-plus/feathers-authentication-management/blob/master/CHANGELOG.md)
+
+
 ```
 $ npm install feathers-authentication-management --save
 ```
 
 Sign up verification, forgotten password reset, and other capabilities for local authentication.
 
-### Multiple communication channels:
+[feathers-authentication-management](https://github.com/feathers-plus/feathers-authentication-management) is both a server and client side module that adds the method `authManagement` to your app.
 
-Traditionally users have been authenticated using their `username` or `email`.
-However that landscape is changing.
+This module contains 2 core pieces:
 
-Teens are more involved with cellphone SMS, whatsapp, facebook, QQ and wechat than they are with email.
-Seniors may not know how to create an email account or check email, but they have smart phones
-and perhaps whatsapp or wechat accounts.
+1. The server initialization function
+2. The client initialization function
 
-A more flexible design would maintain multiple communication channels for a user
--- username, email address, phone number, handles for whatsapp, facebook, QQ, wechat --
-which each uniquely identify the user.
-The user could then sign in using any of their unique identifiers.
-The user could also indicate how they prefer to be contacted.
-Some may prefer to get password resets via long tokens sent by email;
-others may prefer short numeric tokens sent by SMS or wechat.
+## Configuration server side
 
-`feathers-authentication` and `feathers-authentication-management`
-provide much of the infrastructure necessary to implement such a scenario. 
+Initialize the module server side like this:
 
-### Capabilities:
+```js
+const feathers = require('feathers');
+const authentication = require('feathers-authentication');
+const local = require('feathers-authentication-local');
+const management = require('feathers-authentication-management');
 
-- Checking that values for fields like username, email, cellphone are unique within `users` items.
-- Hooks for adding a new user.
-- Send another sign up verification notification, routing through user's selected transport.
-- Process a sign up or identity change verification from a URL response.
-- Process a sign up or identity change verification using a short token.
-- Send a forgotten password reset notification, routing through user's preferred communication transport.
-- Process a forgotten password reset from a URL response.
-- Process a forgotten password reset using a short token.
-- Process password change.
-- Process an identity change such as a new email addr, or cellphone.
+const app = feathers();
 
-### User notifications may be sent for:
+app.configure(authentication(settings));
+app.configure(local());
+app.configure(management());
+// make sure you have a user service too
 
-- Sign up verification when a new user is created.
-- Resending a signup verification, e.g. previous verification was lost or is expired.
-- Successful user verification.
-- Resetting the password when the password is forgotten.
-- Successful password reset for a forgotten password.
-- Manual change of a password.
-- Change of identity.
-Notify both the current and new e.g. old email addr may be notified when the email addr changes.
 
-### May be used with
+// allow only signed in users to use passwordChange and identityChange
 
-- `feathers-client` service calls over websockets or HTTP.
-- Client side wrappers for `feathers-client` service calls. 
-- HTTP POST calls.
-- React's Redux.
-- Vue (docs to do)
+const isAction = (...args) => hook => args.includes(hook.data.action);
 
-Various-sized tokens can be used during the verify/reset processes:
-
-A 30-char token is generated suitable for URL responses.
-(Configurable length.)
-This may be embedded in URL links sent by email, SMS or social media
-so that clicking the link starts the sign up verification or the password reset.
-
-A 6-digit token is also generated suitable for notification by SMS or social media.
-(Configurable length, may be alpha-numeric instead.)
-This may be manually entered in a UI to start the sign up verification or the password reset.
-
-The email verification token has a 5-day expiry (configurable),
-while the password reset has a 2 hour expiry (configurable).
-
-Typically your notifier routine refers to a property like `user.preferredComm: 'email'`
-to determine which transport to use for user notification.
-However the API allows the UI to be set up to ask the user which transport they prefer for that time.
-
-The server does not handle any interactions with the user.
-Leaving it a pure API server, lets it be used with both native and browser clients.
-
-## Contents
-- [The Service](#service)
-- [Client](#client)
-    - [Using Feathers' method calls](#using-feathers-method-calls)
-    - [Provided service wrappers](#provided-service-wrappers)
-    - [React's redux](#react-redux)
-        - [Dispatching services](#dispatching-services)
-        - [Dispatching authentication](#dispatching-authentication)
-- [Hooks](#hooks)
-- [Multiple services](#multiple-services)
-- [Database](#database)
-- [Routing](#routing)
-- [Security](#security)
-- [Configurable](#configurable)
-
-## Service
-
-```javascript
-import authManagement from 'feathers-authentication-management';
-app.configure(authentication)
-  .configure(authManagement({ options }))
-  .configure(user);
+app.service('authManagement').before({
+  create: [
+    hooks.iff(isAction('passwordChange', 'identityChange'), auth.hooks.authenticate('jwt')),
+  ],
+});
 ```
 
-`options` are:
-- service: The path of the service for user items, e.g. `/users` (default) or `/organization`.
-- path: The path to associate with this service. Default `authManagement`.
- See [Multiple services](#multiple-services) for more information.
-- notifier: `function(type, user, notifierOptions)` returns a Promise.
-   - type: type of notification
-     - 'resendVerifySignup'    From resendVerifySignup API call
-     - 'verifySignup'          From verifySignupLong and verifySignupShort API calls
-     - 'sendResetPwd'          From sendResetPwd API call
-     - 'resetPwd'              From resetPwdLong and resetPwdShort API calls
-     - 'passwordChange'        From passwordChange API call
-     - 'identityChange'        From identityChange API call
-   - user: user's item, minus password.
-   - notifierOptions: notifierOptions option from resendVerifySignup and sendResetPwd API calls
-- longTokenLen: Half the length of the long token. Default is 15, giving 30-char tokens.
-- shortTokenLen: Length of short token. Default is 6.
-- shortTokenDigits: Short token is digits if true, else alphanumeric. Default is true.
-- delay: Duration for sign up email verification token in ms. Default is 5 days.
-- resetDelay: Duration for password reset token in ms. Default is 2 hours.
-- skipIsVerifiedCheck: Allow 'sendResetPwd' and 'resetPwd' for unverified users. Default is false. 
-- identifyUserProps: Prop names in `user` item which uniquely identify the user,
-e.g. `['username', 'email', 'cellphone']`.
-The default is `['email']`.
-The prop values must be strings.
-Only these props may be changed with verification by the service.
-At least one of these props must be provided whenever a short token is used,
-as the short token alone is too susceptible to brute force attack. 
+```
+
+This will add the service `authManagement` to your app. Default options are given below.
+
+### Default options server side
+
+```js
+{
+  service: '/users',  // path to user service
+  path: 'authManagement',  // path for auth management service, see multiple services below
+  notifier: (type, user, notifierOptions) => Promise.resolve(),  // function which sends notifications to user through email, SMS, etc
+  longTokenLen: 15, // URL-token's length will be twice this
+  shortTokenLen: 6,  // length of SMS tokens
+  shortTokenDigits: true,  // if SMS token should be digits only
+  resetDelay: 1000 * 60 * 60 * 2, // expiration for sign up email verification token in ms
+  delay: 1000 * 60 * 60 * 24 * 5, // expiration for password reset token in ms
+  skipIsVerifiedCheck: false, // allow sendResetPwd and resetPwd for unverified users
+  identifyUserProps: ['email'], // property in user-item which uniquely identifies the user,
+                                // at least one of these props must be provided whenever a short token is used
+  sanitizeUserForClient: sanitizeUserForClient
+}
+```
+
+`notifier` arguments:
+- `type`: type of notification, may be
+  - `'resendVerifySignup'`    From `resendVerifySignup` API call
+  - `'verifySignup'`          From `verifySignupLong` and `verifySignupShort` API calls
+  - `'sendResetPwd'`          From `sendResetPwd` API call
+  - `'resetPwd'`              From `resetPwdLong` and `resetPwdShort` API calls
+  - `'passwordChange'`        From `passwordChange` API call
+  - `'identityChange'`        From `identityChange` API call
+- `user`: user's item, minus password.
+- `notifierOptions`: `notifierOptions` from `resendVerifySignup` and `sendResetPwd` API calls
+
+## Configuration client side
+
+Initialize the module server side like this:
+
+```js
+import AuthManagement from 'feathers-authentication-management/lib/client'
+
+const app = feathers()
+const authManagement = new AuthManagement(app);
+```
+
+Here `authManagement` is a wrapper around the `authManagement` service. `authManagement` has several methods, and all of them returns a promise. The methods are:
+
+- `checkUnique(identifyUser, ownId, ifErrMsg)`: check props are unique in the users items
+  - `identifyUser`: `{ email, username }`. Props with null or undefined are ignored.
+  - `ownId` Excludes your current user from the search. Allows the "current" item to be ignored when checking if a field value is unique amoung users.
+  - `ifErrMsg` Determines if the returned error.message contains text. This may simplify your client side validation.
+
+- `resendVerifySignup(identifyUser, notifierOptions)`: resend sign up verification notification
+  - `identifyUser` `{ email }`, `{ token: verifyToken }`
+  - `notifierOptions` Options passed to options.notifier, e.g. `{ preferredComm: 'cellphone' }`.
+
+- `verifySignupLong(verifyToken)`: sign up or identityChange verification with long token
+  - `verifyToken` Compares to `verifyToken` FIXME: Unclear.
+
+- `verifySignupShort(verifyShortToken, identifyUser)`: sign up or identityChange verification with short token
+  - `verifyShortToken` Compares to .verifyShortToken FIXME: Unclear.
+  - `identifyUser` Identify user, e.g. `'a@a.com'`. See `options.identifyUserProps`.
+
+- `sendResetPwd(identifyUser, notifierOptions)`: send forgotten password notification
+  - `identifyUser` Identify user, e.g. `'a@a.com'`. See `options.identifyUserProps`.
+  - `notifierOptions` Options passed to options.notifier, e.g. `{ preferredComm: 'cellphone' }`.
+
+- `resetPwdLong(resetToken, password)`: forgotten password verification with long token
+  - `resetToken` Compares to .resetToken FIXME: Unclear.
+  - `password` New password.
+
+- `resetPwdShort(resetShortToken, identifyUser, password)`: forgotten password verification with short token
+  - `resetShortToken` Compares to .resetToken FIXME: Unclear.
+  - `identifyUser` Identify user, e.g. `'a@a.com'`. See `options.identifyUserProps`.
+  - `password` New password.
+
+- `passwordChange(oldPassword, password, identifyUser)`: change password
+  - `oldPassword` Old password for verification.
+  - `password` New password.
+  - `identifyUser` Identify user, e.g. `'a@a.com'`. See `options.identifyUserProps`.
+
+- `identityChange(password, changesIdentifyUser, identifyUser)`: change identity
+  - `password` Current password for verification.
+  - `changesIdentifyUser` New identity. E.g. `'a@a.com'` or `'+1-800-555-1212'`.
+  - `identifyUser` Identify user, e.g. `'a@a.com'`. See `options.identifyUserProps`.
+
+## Direct usage with HTTP requests
+
+We recomend to use the client side wrapper, but if you need access on a limited client, you may use HTTP requests. All methods above are available through
+
+```js
+app.service('authmanagement').create({
+  action: nameOfMethod,
+  value: someValue
+})
+```
+
+Which means you can access the methods [directly](/api/rest.md#direct-connection) if you have initialized the [REST inferface](/api/rest.md) server side.
+
+Here `nameOfMethod` should be `'checkUnique'`, `'resendVerifySignup'`, `'verifySignupLong'`, `'verifySignupShort'`, `'sendResetPwd'`, `'resetPwdLong'`, `'resetPwdShort'`, `'passwordChange'`, or `'identityChange'`.
+
+Example:
+```
+curl -D "{ TODO }" -X POST http://localhost:3030/authManagement/
+```
+
+## Added properties in the user item
 
 The service creates and maintains the following properties in the `user` item:
 
-- isVerified:       If the user's email addr has been verified (boolean)
-- verifyToken:      The 30-char token generated for email addr verification (string)
-- verifyShortToken: The 6-digit token generated for cellphone addr verification (string)
-- verifyExpires:    When the email addr token expire (Date)
-- verifyChanges     New values to apply on verification to some identifyUserProps (string array)
-- resetToken:       The 30-char token generated for forgotten password reset (string)
-- resetShortToken:  The 6-digit token generated for forgotten password reset (string)
-- resetExpires:     When the forgotten password token expire (Date)
+- `isVerified`:       If the user's email addr has been verified (boolean)
+- `verifyToken`:      The 30-char token generated for email addr verification (string)
+- `verifyShortToken`: The 6-digit token generated for cellphone addr verification (string)
+- `verifyExpires`:    When the email addr token expire (Date)
+- `verifyChanges`     New values to apply on verification to some identifyUserProps (string array)
+- `resetToken`:       The 30-char token generated for forgotten password reset (string)
+- `resetShortToken`:  The 6-digit token generated for forgotten password reset (string)
+- `resetExpires`:     When the forgotten password token expire (Date)
 
-The following `user` item might also contain the following props:
+The `user` item might also contain the following props:
 
-- preferredComm     The preferred way to notify the user. One of identifyUserProps.
+- `preferredComm`:    The preferred way to notify the user. One of `identifyUserProps`.
 
-The `users` service is expected to be already configured.
-Its `patch` method is used to update the password when needed,
-and this module hashes the password before it is passed to `patch`,
-therefore `patch` may *not* have a `auth.hashPassword()` hook.
+The user service `patch` method is used to update the password. This module hashes the
+password before it is passed to `patch`, therefore make sure `patch` *does not* use the
+`authentication.hashPassword()` hook.
 
-The user must be signed in before being allowed to change their password or communication values.
-The service, for feathers-authenticate v1.x, requires hooks similar to:
-```javascript
-    const isAction = (...args) => hook => args.includes(hook.data.action);
-    app.service('authManagement').before({
-      create: [
-        hooks.iff(isAction('passwordChange', 'identityChange'), auth.hooks.authenticate('jwt')),
-      ],
-    });
-```
+## React Redux
 
+You can use feathers redux to use authManagement through a reducer. For more information, see [feathers-redux documentation](https://github.com/feathers-plus/feathers-redux).
 
-## Client
+### Example with Redux
 
-The service may be called on the client using
-- [Using Feathers method calls](#using-feathers-method-calls)
-- [Provided service wrappers](#provided-service-wrappers)
-- [HTTP fetch](#http-fetch)
-- [React's Redux](#react-redux)
-- [Vue 2.0 (docs todo)](#vue)
-
-### Using Feathers method calls
-Method calls return a Promise.
-
-```javascript
-import authManagementService from 'feathers-authentication-management';
-app.configure(authManagementService(options))
-const authManagement = app.service('authManagement');
-
-// check props are unique in the users items
-authManagement.create({ action: 'checkUnique',
-  value: identifyUser, // e.g. {email, username}. Props with null or undefined are ignored.
-  ownId, // excludes your current user from the search
-  meta: { noErrMsg }, // if return an error.message if not unique
-})
-// ownId allows the "current" item to be ignored when checking if a field value is unique amoung users.
-// noErrMsg determines if the returned error.message contains text. This may simplify your client side validation.
-
-// resend sign up verification notification
-authManagement.create({ action: 'resendVerifySignup',
-  value: identifyUser, // {email}, {token: verifyToken}
-  notifierOptions: {}, // options passed to options.notifier, e.g. {preferredComm: 'cellphone'}
-})
-
-// sign up or identityChange verification with long token
-authManagement.create({ action: 'verifySignupLong',
-  value: verifyToken, // compares to .verifyToken
-})
-
-// sign up or identityChange verification with short token
-authManagement.create({ action: 'verifySignupShort',
-  value: {
-    user, // identify user, e.g. {email: 'a@a.com'}. See options.identifyUserProps.
-    token, // compares to .verifyShortToken
-  }
-})
-
-// send forgotten password notification
-authManagement.create({ action: 'sendResetPwd',
-  value: identifyUser, // {email}, {token: verifyToken}
-  notifierOptions, // options passed to options.notifier, e.g. {preferredComm: 'email'}
-})
-
-// forgotten password verification with long token
-authManagement.create({ action: 'resetPwdLong',
-  value: {
-    token, // compares to .resetToken
-    password, // new password
-  },
-})
-
-// forgotten password verification with short token
-authManagement.create({ action: 'resetPwdShort',
-  value: {
-    user: identifyUser, // identify user, e.g. {email: 'a@a.com'}. See options.identifyUserProps.
-    token, // compares to .resetShortToken
-    password, // new password
-  },
-})
-
-// change password
-authManagement.create({ action: 'passwordChange',
-  value: {
-    user: identifyUser, // identify user, e.g. {email: 'a@a.com'}. See options.identifyUserProps.
-    oldPassword, // old password for verification
-    password, // new password
-  },
-})
-
-// change communications
-authManagement.create({ action: 'identityChange',
-  value: {
-    user: identifyUser, // identify user, e.g. {email: 'a@a.com'}. See options.identifyUserProps.
-    password, // current password for verification
-    changes, // {email: 'a@a.com'} or {email: 'a@a.com', cellphone: '+1-800-555-1212'}
-  },
-})
-
-// Authenticate user and log on if user is verified.
-var cbCalled = false;
-app.authenticate({ type: 'local', email, password })
-  .then((result) => {
-    const user = result.data;
-    if (!user || !user.isVerified) {
-      app.logout();
-      cb(new Error(user ? 'User\'s email is not verified.' : 'No user returned.'));
-      return;
-    }
-    cbCalled = true;
-    cb(null, user);
-  })
-  .catch((err) => {
-    if (!cbCalled) { cb(err); } // ignore throws from .then( cb(null, user) )
-  });
-````
-
-### Provided service wrappers
-The wrappers return a Promise.
-
-```javascript
-<script src=".../feathers-authentication-management/lib/client.js"></script>
-  or
-import AuthManagement from 'feathers-authentication-management/lib/client';
-const app = feathers() ...
-const authManagement = new AuthManagement(app);
-
-// check props are unique in the users items
-authManagement.checkUnique(identifyUser, ownId, ifErrMsg)
-
-// resend sign up verification notification
-authManagement.resendVerifySignup(identifyUser, notifierOptions)
-
-// sign up or identityChange verification with long token
-authManagement.verifySignupLong(verifyToken)
-
-// sign up or identityChange verification with short token
-authManagement.verifySignupShort(verifyShortToken, identifyUser)
-
-// send forgotten password notification
-authManagement.sendResetPwd(identifyUser, notifierOptions)
-
-// forgotten password verification with long token
-authManagement.resetPwdLong(resetToken, password)
-
-// forgotten password verification with short token
-authManagement.resetPwdShort(resetShortToken, identifyUser, password)
-
-// change password
-authManagement.passwordChange(oldPassword, password, identifyUser)
-
-// change identity
-authManagement.identityChange(password, changesIdentifyUser, identifyUser)
-
-// Authenticate user and log on if user is verified. v0.x only.
-authManagement.authenticate(email, password)
-```
-
-### React Redux
-See `feathers-redux` for information about state, etc.
-
-#### Dispatching services
-
-```javascript
+```js
 import feathers from 'feathers-client';
 import reduxifyServices from 'feathers-reduxify-services';
 const app = feathers().configure(feathers.socketio(socket)).configure(feathers.hooks());
@@ -334,7 +201,9 @@ store.dispatch(services.authManagement.create({ action: 'verifySignupLong',
 );
 ```
 
-#### Dispatching authentication
+-------------- EDITED UNTIL HERE -----------------
+
+### Dispatching authentication
 
 User must be verified to sign in. v0.x only.
 
@@ -400,7 +269,7 @@ We have considered until now situations where authentication was based on a user
 credentials as well as user ones.
 
 You can easily configure `feathers-authentication-management` to handle such situations.
-Please refer to `test/multiInstances.test.js`. 
+Please refer to `test/multiInstances.test.js`.
 
 
 ## Database
@@ -499,7 +368,3 @@ before: {
   ],
 },
 ```
-
-## Configurable
-The length of the "30-char" token is configurable.
-The length of the "6-digit" token is configurable. It may also be configured as alphanumeric.
