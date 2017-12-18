@@ -13,7 +13,7 @@ We will use the popular Socket.io in this guide.
 - Client code: [common/public/socketio.html](https://github.com/feathersjs/feathers-docs/blob/master/examples/step/01/common/public/socketio.html)
 and
 [feathers-app.js](https://github.com/feathersjs/feathers-docs/blob/master/examples/step/01/common/public/feathers-app.js)
-- Start the server: `node ./examples/step/01/websocket/1`
+- Start the server: `node ./examples/step/01/websocket/1.js`
 - Point the browser at: `localhost:3030/socketio.html`
 - Compare with last page's server
 [examples/step/01/rest/2.js](https://github.com/feathersjs/feathers-docs/blob/master/examples/step/01/rest/2.js):

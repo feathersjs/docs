@@ -17,7 +17,7 @@ however its easy to do using the `softDelete` hook.
 - Client code: [common/public/rest-del.html](https://github.com/feathersjs/feathers-docs/blob/master/examples/step/01/common/public/rest.html)
 and
 [common/public/feathers-app-del.js](https://github.com/feathersjs/feathers-docs/blob/master/examples/step/01/common/public/feathers-app-del.js)
-- Start the server: `node ./examples/step/01/hooks/2`
+- Start the server: `node ./examples/step/01/hooks/2.js`
 - Point the browser at: `localhost:3030/rest-del.html`
 - Compare with last page's server
 [hooks/1.js.](https://github.com/feathersjs/feathers-docs/blob/master/examples/step/01/hooks/1.js):

@@ -16,7 +16,7 @@ Let's work with some of them.
 - Client code: [common/public/rest.html](https://github.com/feathersjs/feathers-docs/blob/master/examples/step/01/common/public/rest.html)
 and
 [feathers-app.js](https://github.com/feathersjs/feathers-docs/blob/master/examples/step/01/common/public/feathers-app.js)
-- Start the server: `node ./examples/step/01/hooks/1`
+- Start the server: `node ./examples/step/01/hooks/1.js`
 - Point the browser at: `localhost:3030/rest.html`
 - Compare with last page's server
 [examples/step/01/hooks/1.js](https://github.com/feathersjs/feathers-docs/blob/master/examples/step/01/hooks/1.js):
