@@ -66,7 +66,7 @@ const app = feathers();
 app.configure(configureMessages);
 ```
 
-No we can move that function into a separate file like `messages.service.js` and set it as the [default module export](https://nodejs.org/api/modules.html) for that file:
+Now we can move that function into a separate file like `messages.service.js` and set it as the [default module export](https://nodejs.org/api/modules.html) for that file:
 
 ```js
 module.exports = function(app) {
