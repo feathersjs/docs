@@ -3,7 +3,7 @@
 The Auk release of FeathersJS includes a powerful new [authentication suite](../../api/authentication/server.md) built on top of [PassportJS](http://www.passportjs.org/).  The new plugins are very flexible, allowing you to customize nearly everything.  One feature added in the latest release is the ability to customize the JWT payload using hooks.  Let's take a look at what this means, how to make it work, and learn about the potential pitfalls you may encounter by using it.
 
 ## The JWT Payload
-If you read the resources on [how JWT works](./how-jwt-works.md), you'll know that a JWT is an encoded string that can contain a payload.  For a quick example, check out the Debugger on [jwt.io](https://jwt.io/).  The purple section on [jwt.io](https://jwt.io/) is the payload.  You'll also notice that you can put arbitrary data in the payload.  The payload data gets encoded as the section section of the JWT string.
+If you read the resources on [how JWT works](./how-jwt-works.md), you'll know that a JWT is an encoded string that can contain a payload.  For a quick example, check out the Debugger on [jwt.io](https://jwt.io/).  The purple section on [jwt.io](https://jwt.io/) is the payload.  You'll also notice that you can put arbitrary data in the payload.  The payload data gets encoded as a section of the JWT string.
 
 The default JWT payload contains the following claims:
 
