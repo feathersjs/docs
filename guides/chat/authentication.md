@@ -113,7 +113,7 @@ This will now only allow users with a valid JWT to access the service and automa
 
 ## Securing real-time events
 
-The `authenticate` hook that we used above will restrict _access_ to service methods to only authenticated users. No we also have to make sure that [real-time service events](../basics/real-time.md) are only sent to connections that are allowed to see them. Feathers uses channels to accomplish that which the generator already sets up for us in `src/channels.js` (have a look at the comments in the generated file and the [channel API documentation](../../api/channels.md) to get a better idea about channels).
+The `authenticate` hook that we used above will restrict _access_ to service methods to only authenticated users. Now we also have to make sure that [real-time service events](../basics/real-time.md) are only sent to connections that are allowed to see them. Feathers uses channels to accomplish that which the generator already sets up for us in `src/channels.js` (have a look at the comments in the generated file and the [channel API documentation](../../api/channels.md) to get a better idea about channels).
 
 We could use channels to e.g. only send events to users in a specific room or with specific permissions. To make things easier for our basic chat however, let's just send all events to all authenticated users by updating `src/channels.js` to this:
 
