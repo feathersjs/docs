@@ -55,7 +55,7 @@ Let's have a brief look at the files that have been generated:
   - `channels.js` sets up Feathers [event channels](../../api/channels.md)
   - `test/` - Contains [Mocha](https://mochajs.org/) test files for the app, hooks and services
   - `app.test.js` tests that the index page appears, as well as 404 errors for HTML pages and JSON
-- `.editorconfig` is an [EditorConfig](http://editorconfig.org/) setting which and helps developers define and maintain consistent coding styles among different editors and IDEs.
+- `.editorconfig` is an [EditorConfig](http://editorconfig.org/) setting which helps developers define and maintain consistent coding styles among different editors and IDEs.
 - `.eslintrc.json` contains defaults for liniting your code with [ESLint](http://eslint.org/docs/user-guide/getting-started).
 - `.gitignore` - specifies [intentionally untracked files](https://git-scm.com/docs/gitignore) which [git](https://git-scm.com/), [GitHub](https://github.com/) and other similar projects ignore.
 - `.npmignore` specifies [files which are not to be published](https://docs.npmjs.com/misc/developers#keeping-files-out-of-your-package) for distribution.
