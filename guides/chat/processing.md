@@ -66,7 +66,7 @@ This will do several things:
 
 ## Adding a user avatar
 
-Let's create another more hook that adds a link to the [Gravatar](http://en.gravatar.com/) image of the users email address so we can show an avatar. After running
+Let's create another hook that adds a link to the [Gravatar](http://en.gravatar.com/) image of the users email address so we can show an avatar. After running
 
 ```
 feathers generate hook
