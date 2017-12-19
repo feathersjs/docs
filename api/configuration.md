@@ -18,8 +18,8 @@ By default this implementation will look in `config/*` for `default.json` which 
 The `@feathersjs/configuration` module is an app configuration function that takes a root directory (usually something like `__dirname` in your application) and the configuration folder (set to `config` by default):
 
 ```js
-import feathers from 'feathers';
-import configuration from '@feathersjs/configuration';
+const feathers = require('@feathersjs/feathers');
+const configuration = require('@feathersjs/configuration');
 
 // Use the application roo and `config/` as the configuration folder
 let app = feathers().configure(configuration())
@@ -65,8 +65,8 @@ In `config/production.js` we are going to use environment variables (e.g. set by
 Now it can be used in our `app.js` like this:
 
 ```js
-import feathers from 'feathers';
-import configuration from '@feathersjs/configuration';
+const feathers = require('@feathersjs/feathers');
+const configuration = require('@feathersjs/configuration');
 
 let conf = configuration();
 

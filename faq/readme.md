@@ -259,7 +259,7 @@ module.exports = {
 
 ## Why are queries with arrays failing?
 
-If you are using REST and queries with larger arrays (more than 21 items to be exact) are failing you are probably running into an issue with the [querystring](https://github.com/ljharb/qs) module which [limits the size of arrays to 21 items](https://github.com/ljharb/qs#parsing-arrays) by default. The recommended solution is to implement a custom query string parser function via `app.set('query parser', parserFunction)` with the `arrayLimit` option set to a higher value. For more information see the [Express application settings](http://expressjs.com/en/4x/api.html#app.set) [feathers-rest#88](https://github.com/feathersjs/feathers-rest/issues/88) and [feathers-mongoose#205](https://github.com/feathersjs/feathers-mongoose/issues/205).
+If you are using REST and queries with larger arrays (more than 21 items to be exact) are failing you are probably running into an issue with the [querystring](https://github.com/ljharb/qs) module which [limits the size of arrays to 21 items](https://github.com/ljharb/qs#parsing-arrays) by default. The recommended solution is to implement a custom query string parser function via `app.set('query parser', parserFunction)` with the `arrayLimit` option set to a higher value. For more information see the [Express application settings](http://expressjs.com/en/4x/api.html#app.set) [@feathersjs/rest#88](https://github.com/feathersjs/feathers-rest/issues/88) and [feathers-mongoose#205](https://github.com/feathersjs/feathers-mongoose/issues/205).
 
 ## I always get a 404 for my custom middleware
 

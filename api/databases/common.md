@@ -235,19 +235,16 @@ The most flexible option is weaving in functionality through [hooks](../hooks.md
 
 ```js
 const feathers = require('@feathersjs/feathers');
-const hooks = require('feathers-hooks');
 
 // Import the database adapter of choice
 const service = require('feathers-<adapter>');
 
-const app = feathers()
-  .configure(hooks())
-  .use('/todos', service({
-    paginate: {
-      default: 2,
-      max: 4
-    }
-  }));
+const app = feathers().use('/todos', service({
+  paginate: {
+    default: 2,
+    max: 4
+  }
+}));
 
 app.service('todos').hooks({
   before: {

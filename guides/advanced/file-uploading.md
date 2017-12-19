@@ -28,13 +28,9 @@ Lets look at the server code:
 ```javascript
 /* --- server.js --- */
 
-const feathers = require('feathers');
-const rest = require('feathers-rest');
+const feathers = require('@feathersjs/feathers');
+const express = require('@feathersjs/express');
 const socketio = require('feathers-socketio');
-const hooks = require('feathers-hooks');
-const bodyParser = require('body-parser');
-const handler = require('feathers-errors/handler');
-
 
 // feathers-blob service
 const blobService = require('feathers-blob');
@@ -46,16 +42,14 @@ const blobStorage = fs(__dirname + '/uploads');
 
 
 // Feathers app
-const app = feathers();
+const app = express(feathers());
 
 // Parse HTTP JSON bodies
-app.use(bodyParser.json());
+app.use(express.json());
 // Parse URL-encoded params
-app.use(bodyParser.urlencoded({ extended: true }));
-// Register hooks module
-app.configure(hooks());
+app.use(express.urlencoded({ extended: true }));
 // Add REST API support
-app.configure(rest());
+app.configure(express.rest());
 // Configure Socket.io real-time APIs
 app.configure(socketio());
 
@@ -65,7 +59,7 @@ app.use('/uploads', blobService({Model: blobStorage}));
 
 
 // Register a nicer error handler than the default Express one
-app.use(handler());
+app.use(express.errorHandler());
 
 // Start the server
 app.listen(3030, function(){
@@ -84,33 +78,33 @@ Let's look at this implmented in the `feathers-cli` generated server code:
 // use any other ORM database.
 const createService = require('feathers-nedb');
 
-const createModel = require("../../models/uploads.model");
-const hooks = require("./uploads.hooks");
-const filters = require("./uploads.filters");
+const createModel = require('../../models/uploads.model');
+const hooks = require('./uploads.hooks');
+const filters = require('./uploads.filters');
 
 
 // feathers-blob service
-const blobService = require("feathers-blob");
+const blobService = require('feathers-blob');
 // Here we initialize a FileSystem storage,
 // but you can use feathers-blob with any other
 // storage service like AWS or Google Drive.
-const fs = require("fs-blob-store");
+const fs = require('fs-blob-store');
 
 
 // File storage location. Folder must be created before upload.
-// Example: "./uploads" will be located under feathers app top level.
-const blobStorage = fs("./uploads");
+// Example: './uploads' will be located under feathers app top level.
+const blobStorage = fs('./uploads');
 
 module.exports = function() {
   const app = this;
   const Model = createModel(app);
-  const paginate = app.get("paginate");
+  const paginate = app.get('paginate');
 
   // Initialize our service with any options it requires
-  app.use("/uploads", blobService({ Model: blobStorage}));
+  app.use('/uploads', blobService({ Model: blobStorage}));
 
   // Get our initialized service so that we can register hooks and filters
-  const service = app.service("uploads");
+  const service = app.service('uploads');
 
   service.hooks(hooks);
 
@@ -126,7 +120,7 @@ Just like that we have our backend ready, go ahead and POST something to localho
 
 ```json
 {
-    "uri": "data:image/gif;base64,R0lGODlhEwATAPcAAP/+//7/////+////fvzYvryYvvzZ/fxg/zxWfvxW/zwXPrtW/vxXvfrXv3xYvrvYvntYvnvY/ruZPrwZPfsZPjsZfjtZvfsZvHmY/zxavftaPrvavjuafzxbfnua/jta/ftbP3yb/zzcPvwb/zzcfvxcfzxc/3zdf3zdv70efvwd/rwd/vwefftd/3yfPvxfP70f/zzfvnwffvzf/rxf/rxgPjvgPjvgfnwhPvzhvjvhv71jfz0kPrykvz0mv72nvblTPnnUPjoUPrpUvnnUfnpUvXlUfnpU/npVPnqVPfnU/3uVvvsWPfpVvnqWfrrXPLiW/nrX/vtYv7xavrta/Hlcvnuf/Pphvbsif3zk/zzlPzylfjuk/z0o/LqnvbhSPbhSfjiS/jlS/jjTPfhTfjlTubUU+/iiPPokfrvl/Dll/ftovLWPfHXPvHZP/PbQ/bcRuDJP/PaRvjgSffdSe3ddu7fge7fi+zkuO7NMvPTOt2/Nu7SO+3OO/PWQdnGbOneqeneqvDqyu3JMuvJMu7KNfHNON7GZdnEbejanObXnOW8JOa9KOvCLOnBK9+4Ku3FL9ayKuzEMcenK9e+XODOiePSkODOkOW3ItisI9yxL+a9NtGiHr+VH5h5JsSfNM2bGN6rMJt4JMOYL5h4JZl5Jph3Jpl4J5h5J5h3KJl4KZp5Ks+sUN7Gi96lLL+PKMmbMZt2Jpp3Jpt3KZl4K7qFFdyiKdufKsedRdm7feOpQN2QKMKENrpvJbFfIrNjJL1mLMBpLr9oLrFhK69bJFkpE1kpFYNeTqFEIlsoFbmlnlsmFFwpGFkoF/////7+/v///wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAEAANAALAAAAAATABMAAAj/AKEJHCgokKJKlhThGciQYSIva7r8SHPFzqGGAwPd4bKlh5YsPKy0qFLnT0NAaHTcsIHDho0aKkaAwGCGEkM1NmSkIjWLBosVJT6cOjUrzsBKPl54KmYsACoTMmk1WwaA1CRoeM7siJEqmTIAsjp40ICK2bEApfZcsoQlxwxRzgI8W8XhgoVYA+Kq6sMK0QEYKVCUkoVqQwQJFTwFEAAAFZ9PlFy4OEEiRIYJD55EodDA1ClTbPp0okRFxBQDBRgskAKhiRMlc+Sw4SNpFCIoBBwkUMBkCBIiY8qAgcPG0KBHrBTFQbCEV5EjQYQACfNFjp5CgxpxagVtUhIjwzaJYSHzhQ4cP3ryQHLEqJbASnu+6EIW6o2b2X0ISXK0CFSugazs0YYmwQhziyuE2PLLIv3h0hArkRhiCCzAENOLL7tgAoqDGLXSSSaPMLIIJpmAUst/GA3UCiuv1PIKLtw1FBAAOw=="
+    'uri': 'data:image/gif;base64,R0lGODlhEwATAPcAAP/+//7/////+////fvzYvryYvvzZ/fxg/zxWfvxW/zwXPrtW/vxXvfrXv3xYvrvYvntYvnvY/ruZPrwZPfsZPjsZfjtZvfsZvHmY/zxavftaPrvavjuafzxbfnua/jta/ftbP3yb/zzcPvwb/zzcfvxcfzxc/3zdf3zdv70efvwd/rwd/vwefftd/3yfPvxfP70f/zzfvnwffvzf/rxf/rxgPjvgPjvgfnwhPvzhvjvhv71jfz0kPrykvz0mv72nvblTPnnUPjoUPrpUvnnUfnpUvXlUfnpU/npVPnqVPfnU/3uVvvsWPfpVvnqWfrrXPLiW/nrX/vtYv7xavrta/Hlcvnuf/Pphvbsif3zk/zzlPzylfjuk/z0o/LqnvbhSPbhSfjiS/jlS/jjTPfhTfjlTubUU+/iiPPokfrvl/Dll/ftovLWPfHXPvHZP/PbQ/bcRuDJP/PaRvjgSffdSe3ddu7fge7fi+zkuO7NMvPTOt2/Nu7SO+3OO/PWQdnGbOneqeneqvDqyu3JMuvJMu7KNfHNON7GZdnEbejanObXnOW8JOa9KOvCLOnBK9+4Ku3FL9ayKuzEMcenK9e+XODOiePSkODOkOW3ItisI9yxL+a9NtGiHr+VH5h5JsSfNM2bGN6rMJt4JMOYL5h4JZl5Jph3Jpl4J5h5J5h3KJl4KZp5Ks+sUN7Gi96lLL+PKMmbMZt2Jpp3Jpt3KZl4K7qFFdyiKdufKsedRdm7feOpQN2QKMKENrpvJbFfIrNjJL1mLMBpLr9oLrFhK69bJFkpE1kpFYNeTqFEIlsoFbmlnlsmFFwpGFkoF/////7+/v///wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAEAANAALAAAAAATABMAAAj/AKEJHCgokKJKlhThGciQYSIva7r8SHPFzqGGAwPd4bKlh5YsPKy0qFLnT0NAaHTcsIHDho0aKkaAwGCGEkM1NmSkIjWLBosVJT6cOjUrzsBKPl54KmYsACoTMmk1WwaA1CRoeM7siJEqmTIAsjp40ICK2bEApfZcsoQlxwxRzgI8W8XhgoVYA+Kq6sMK0QEYKVCUkoVqQwQJFTwFEAAAFZ9PlFy4OEEiRIYJD55EodDA1ClTbPp0okRFxBQDBRgskAKhiRMlc+Sw4SNpFCIoBBwkUMBkCBIiY8qAgcPG0KBHrBTFQbCEV5EjQYQACfNFjp5CgxpxagVtUhIjwzaJYSHzhQ4cP3ryQHLEqJbASnu+6EIW6o2b2X0ISXK0CFSugazs0YYmwQhziyuE2PLLIv3h0hArkRhiCCzAENOLL7tgAoqDGLXSSSaPMLIIJpmAUst/GA3UCiuv1PIKLtw1FBAAOw=='
 }
 ```
 
@@ -134,9 +128,9 @@ The service will respond with something like this:
 
 ```json
 {
-  "id": "6454364d8facd7a88e627e4c4b11b032d2f83af8f7f9329ffc2b7a5c879dc838.gif",
-  "uri": "the-same-uri-we-uploaded",
-  "size": 1156
+  'id': '6454364d8facd7a88e627e4c4b11b032d2f83af8f7f9329ffc2b7a5c879dc838.gif',
+  'uri': 'the-same-uri-we-uploaded',
+  'size': 1156
 }
 ```
 
@@ -147,10 +141,10 @@ Or we can implement a very basic frontend with `feathers-client` and `jQuery`:
 <html>
     <head>
         <title>Feathersjs File Upload</title>
-        <script   src="https://code.jquery.com/jquery-2.2.3.min.js"   integrity="sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo="   crossorigin="anonymous"></script>
-        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/core-js/2.1.4/core.min.js"></script>
-        <script type="text/javascript" src="//unpkg.com/feathers-client@^2.0.0/dist/feathers.js"></script>
-        <script type="text/javascript">
+        <script   src='https://code.jquery.com/jquery-2.2.3.min.js'   integrity='sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo='   crossorigin='anonymous'></script>
+        <script type='text/javascript' src='//cdnjs.cloudflare.com/ajax/libs/core-js/2.1.4/core.min.js'></script>
+        <script type='text/javascript' src='//unpkg.com/feathers-client@^2.0.0/dist/feathers.js'></script>
+        <script type='text/javascript'>
             // feathers client initialization
             const rest = feathers.rest('http://localhost:3030');
             const app = feathers()
@@ -162,10 +156,10 @@ Or we can implement a very basic frontend with `feathers-client` and `jQuery`:
                 xhr: function () {
                     var xhr = new window.XMLHttpRequest();
                     // upload progress
-                    xhr.addEventListener("progress", function (evt) {
+                    xhr.addEventListener('progress', function (evt) {
                         if (evt.lengthComputable) {
                             var percentComplete = evt.loaded / evt.total;
-                            console.log('upload progress: ', Math.round(percentComplete * 100) + "%");
+                            console.log('upload progress: ', Math.round(percentComplete * 100) + '%');
                         }
                     }, false);
                     return xhr;
@@ -185,7 +179,7 @@ Or we can implement a very basic frontend with `feathers-client` and `jQuery`:
             });
 
             // when encoded, upload
-            reader.addEventListener("load", function () {
+            reader.addEventListener('load', function () {
                 console.log('encoded file: ', reader.result);
                 var upload = uploadService
                     .create({uri: reader.result})
@@ -199,7 +193,7 @@ Or we can implement a very basic frontend with `feathers-client` and `jQuery`:
     </head>
     <body>
         <h1>Let's upload some files!</h1>
-        <input type="file" id="file"/>
+        <input type='file' id='file'/>
     </body>
 </html>
 
@@ -249,8 +243,6 @@ app.use('/uploads',
     },
     blobService({Model: blobStorage})
 );
-
-
 ```
 
 Notice we kept the file field name as *uri* just to maintain uniformity, as the service will always work with that name anyways. But you can change it if you prefer.
@@ -301,13 +293,13 @@ Here is an example using dropzone:
     <head>
         <title>Feathersjs File Upload</title>
 
-        <link rel="stylesheet" href="assets/dropzone.css">
-        <script src="assets/dropzone.js"></script>
+        <link rel='stylesheet' href='assets/dropzone.css'>
+        <script src='assets/dropzone.js'></script>
 
-        <script type="text/javascript" src="socket.io/socket.io.js"></script>
-        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/core-js/2.1.4/core.min.js"></script>
-        <script type="text/javascript" src="//unpkg.com/feathers-client@^2.0.0/dist/feathers.js"></script>
-        <script type="text/javascript">
+        <script type='text/javascript' src='socket.io/socket.io.js'></script>
+        <script type='text/javascript' src='//cdnjs.cloudflare.com/ajax/libs/core-js/2.1.4/core.min.js'></script>
+        <script type='text/javascript' src='//unpkg.com/feathers-client@^2.0.0/dist/feathers.js'></script>
+        <script type='text/javascript'>
             // feathers client initialization
             var socket = io('http://localhost:3030');
             const app = feathers()
@@ -323,7 +315,7 @@ Here is an example using dropzone:
 
             // Let's use DropZone!
             Dropzone.options.myAwesomeDropzone = {
-                paramName: "uri",
+                paramName: 'uri',
                 uploadMultiple: false,
                 init: function(){
                     this.on('uploadprogress', function(file, progress){
@@ -335,9 +327,9 @@ Here is an example using dropzone:
     </head>
     <body>
         <h1>Let's upload some files!</h1>
-        <form action="/uploads"
-          class="dropzone"
-          id="my-awesome-dropzone"></form>
+        <form action='/uploads'
+          class='dropzone'
+          id='my-awesome-dropzone'></form>
     </body>
 </html>
 ```

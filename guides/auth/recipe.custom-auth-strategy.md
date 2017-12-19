@@ -3,23 +3,21 @@
 The Auk release of FeathersJS includes a powerful new [authentication suite](../../api/authentication/server.md) built on top of [PassportJS](http://www.passportjs.org/). The new plugins are very flexible, allowing you to customize nearly everything. We can leverage this to create completely custom authentication strategies using [Passport Custom](https://www.npmjs.com/package/passport-custom). Let's take a look at two such examples in this guide. 
 
 ## Setting up the basic app
+
 Let's first start by creating a basic server setup.
 
 ```js
-const feathers = require('feathers');
-const bodyParser = require('body-parser');
-const hooks = require('feathers-hooks');
-const rest = require('feathers-rest');
-const auth = require('feathers-authentication');
-const jwt = require('feathers-authentication-jwt');
+const feathers = require('@feathersjs/feathers');
+const express = require('@feathersjs/express');
+const auth = require('@feathersjs/authentication');
+const jwt = require('@featehrsjs/authentication-jwt');
 const memory = require('feathers-memory');
 
-const app = feathers();
+const app = express(feathers());
 
-app.configure(hooks());
-app.configure(rest());
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.configure(express.rest());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.configure(auth({ secret: 'secret' }));
 app.configure(jwt());
@@ -105,24 +103,22 @@ app.hooks({
 ```
 
 Finally our `server.js` looks like this:
-```js
-const feathers = require('feathers');
-const bodyParser = require('body-parser');
 
-const hooks = require('feathers-hooks');
-const rest = require('feathers-rest');
-const auth = require('feathers-authentication');
-const jwt = require('feathers-authentication-jwt');
+```js
+const feathers = require('@feathersjs/feathers');
+const express = require('@feathersjs/express');
+const auth = require('@feathersjs/authentication');
+const jwt = require('@featehrsjs/authentication-jwt');
 const memory = require('feathers-memory');
 const commonHooks = require('feathers-hooks-common');
 
 const apiKey = require('./apiKey');
 
-const app = feathers();
-app.configure(hooks());
-app.configure(rest());
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+const app = express(feathers());
+
+app.configure(express.rest());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.configure(auth({ secret: 'secret' }));
 app.configure(jwt());
@@ -156,6 +152,7 @@ app.listen(8080);
 Now any request with a header `x-api-key` and the value `opensesame` will be authenticated by the server.
 
 ## Creating an Anonymous User Strategy
+
 The second strategy we'll look at is for an anonymous user. For this specific flow we'll expect the client to call the `/authentication` endpoint letting us know that it wants to authenticate anonymously. The server will then create a new user and return a new JWT token that the client will have to use from that point onwards.
 
 First let's create the strategy using `passport-custom`
@@ -208,24 +205,21 @@ const authenticate = () =>
 
 Finally our `server.js` looks like this:
 ```js
-const feathers = require('feathers');
-const bodyParser = require('body-parser');
-
-const hooks = require('feathers-hooks');
-const rest = require('feathers-rest');
-const auth = require('feathers-authentication');
-const jwt = require('feathers-authentication-jwt');
+const feathers = require('@feathersjs/feathers');
+const express = require('@feathersjs/express');
+const auth = require('@feathersjs/authentication');
+const jwt = require('@featehrsjs/authentication-jwt');
 const memory = require('feathers-memory');
 const commonHooks = require('feathers-hooks-common');
 
 const apiKey = require('./apiKey');
 const anonymous = require('./anonymous');
 
-const app = feathers();
-app.configure(hooks());
-app.configure(rest());
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+const app = express(feathers());
+
+app.configure(express.rest());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.configure(auth({ secret: 'secret' }));
 app.configure(jwt());

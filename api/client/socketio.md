@@ -172,7 +172,7 @@ socket.emit('get', 'messages', 1, { fetch: 'all' }, (error, message) => {
 
 Will call `app.service('messages').get(1, { query: { fetch: 'all' } })` on the server.
 
-#### `create`
+### `create`
 
 Create a new resource with `data` which may also be an array.
 

@@ -62,7 +62,7 @@
     * [Querying](api/databases/querying.md)
 * [Migrating](migrating.md)
 * [Security](SECURITY.md)
-* [Ecosystem](https://github.com/feathersjs-ecosystem/awesome-feathersjs)
+* [Ecosystem](https://github.com/feathersjs/awesome-feathersjs)
 * [Help](help/readme.md)
 * [FAQ](faq/readme.md)
 * [Contributing](contributing/readme.md)

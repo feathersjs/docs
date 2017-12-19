@@ -73,7 +73,7 @@ app.authenticate().then(() => {
 
 ## app.authenticate(options)
 
-`app.authenticate(options) -> Promise` will try to authenticate with a Feathers server by passing a `strategy` and other properties as credentials. It will use whichever transport has been setup on the client (feathers-rest, feathers-socketio, or feathers-primus).
+`app.authenticate(options) -> Promise` will try to authenticate with a Feathers server by passing a `strategy` and other properties as credentials. It will use whichever transport has been setup on the client (@feathersjs/rest-client, @feathersjs/socketio-client, or @feathersjs/primus-client).
 
 ```js
 // Authenticate with the local email/password strategy 
@@ -155,17 +155,16 @@ There are 3 hooks. They are really meant for internal use and you shouldn't need
 Here's an example of a Feathers server that uses `@feathersjs/authentication-client`. 
 
 ```js
-const feathers = require('feathers/client');
-const rest = require('feathers-rest/client');
-const superagent = require('superagent');
-const hooks = require('feathers-hooks');
-const localStorage = require('localstorage-memory');
+const feathers = require('@feathersjs/feathers');
+const rest = require('@feathersjs/rest-client');
 const auth = require('@feathersjs/authentication-client');
+
+const superagent = require('superagent');
+const localStorage = require('localstorage-memory');
 
 const feathersClient = feathers();
 
-feathersClient.configure(hooks())
-  .configure(rest('http://localhost:3030').superagent(superagent))
+feathersClient.configure(rest('http://localhost:3030').superagent(superagent))
   .configure(auth({ storage: localStorage }));
 
 feathersClient.authenticate({

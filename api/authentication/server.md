@@ -148,7 +148,7 @@ These two events use a `callback` function with the same signature.
 
 - `result` {Object} - The final `context.result` from the `authentication` service. Unless you customize the `context.response` in an after hook, this will only contain the `accessToken`, which is the JWT.
 - `meta` {Object} - information about the request. *The `meta` data varies per transport / provider as follows.*
-- Using `feathers-rest`
+- Using `@feathersjs/express/rest`
   - `provider` {String} - will always be `"rest"`
   - `req` {Object} - the Express request object.
   - `res` {Object} - the Express response object.
