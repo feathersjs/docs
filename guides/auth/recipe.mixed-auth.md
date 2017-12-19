@@ -36,7 +36,7 @@ use the default prompts.
     "service": "users",
     "jwt": {
       "header": {
-        "type": "access"
+        "typ": "access"
       },
       "audience": "https://yourdomain.com",
       "subject": "anonymous",
