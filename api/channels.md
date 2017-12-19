@@ -80,7 +80,7 @@ app.on('connection', connection => {
 
 ### app.on('login')
 
-`app.on('login', (user, info) => {})` is sent by the [authentication module](./authentication/server.md) also contains the connection in the `meta` object that is passed as the second parameter. Note that it can also be `undefined` if the login happened through e.g. REST which does not support real-time connectivity. 
+`app.on('login', (user, info) => {})` is sent by the [authentication module](./authentication/server.md) and also contains the connection in the `info` object that is passed as the second parameter. Note that it can also be `undefined` if the login happened through e.g. REST which does not support real-time connectivity. 
 
 This is a good place to add the connection to channels related to the user (e.g. chat rooms, admin status etc.)
 
@@ -95,7 +95,7 @@ app.on('login', (user, { connection }) => {
     // Add it to the authenticated user channel
     app.channel('authenticated').join(connection);
 
-    // Channels can be named anything and joined on any condition 
+    // Channels can be named anything and joined on any condition `
     // E.g. to send real-time events only to admins use
     if(user.isAdmin) {
       app.channel('admins').join(connection);
@@ -103,7 +103,7 @@ app.on('login', (user, { connection }) => {
 
     // If the user has joined e.g. chat rooms
     user.rooms.forEach(room => {
-      app.channel(`rooms/${room.id}`).join(channel);
+      app.channel(`rooms/${room.id}`).join(connection);
     });
   }
 });

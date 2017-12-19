@@ -23,7 +23,7 @@ app.use('/my-service', myService);
 {%- language name="async/await", type="js" -%}
 const myService = {
   async find(params) {
-    return return [];
+    return [];
   },
   async get(id, params) {},
   async create(data, params) {},
@@ -237,7 +237,7 @@ Register an event publishing callback. For more information see the [channels ch
 
 ### .mixin(mixin)
 
-`service..mixin(mixin) -> service` allows to extend the functionality of a service. For more information see the [Uberproto](https://github.com/daffl/uberproto) project page.
+`service.mixin(mixin) -> service` allows to extend the functionality of a service. For more information see the [Uberproto](https://github.com/daffl/uberproto) project page.
 
 
 ### .on(eventname, listener)
