@@ -14,7 +14,7 @@ The [@feathersjs/authentication](https://github.com/feathersjs/authentication) m
 2. Provide a consistent authentication API for all of the Feathers transports
 3. Provide a framework for authentication plugins that use [Passport](http://passportjs.org/) strategies to protect endpoints.
 
-> __Note:__ If you are using a 0.x version of `feathers-authentication` please refer to [the migration guide](https://github.com/feathersjs/authentication/blob/4344c6f037f2660e4636c1c05ea22a0000649312/docs/migrating.md). The hooks that were once bundled with this module are now located at [feathers-authentication-hooks](https://github.com/feathersjsecosustem/authentication-hooks).
+> __Note:__ If you are using a 0.x version of `feathers-authentication` please refer to [the migration guide](https://github.com/feathersjs/authentication/blob/4344c6f037f2660e4636c1c05ea22a0000649312/docs/migrating.md). The hooks that were once bundled with this module are now located at [feathers-authentication-hooks](https://github.com/feathersjs-ecosystem/feathers-authentication-hooks).
 
 ## Complementary Plugins
 
@@ -74,7 +74,7 @@ The heart of this plugin is a service for creating JWT. It's a normal Feathers s
 
 ### service.create(data)
 
-The `create` method will be used in nearly every Feathers application. It creates a JWT based on the `jwt` options configured on the plugin. The API of this method utilizes the `context` object:
+The `create` method will be used in nearly every Feathers application. It creates a JWT based on the `jwt` options configured on the plugin. The API of this method utilizes the `context` object.
 
 ### service.remove(data)
 
@@ -148,14 +148,14 @@ These two events use a `callback` function with the same signature.
 
 - `result` {Object} - The final `context.result` from the `authentication` service. Unless you customize the `context.response` in an after hook, this will only contain the `accessToken`, which is the JWT.
 - `meta` {Object} - information about the request. *The `meta` data varies per transport / provider as follows.*
-- Using `@feathersjs/express/rest`
-  - `provider` {String} - will always be `"rest"`
-  - `req` {Object} - the Express request object.
-  - `res` {Object} - the Express response object.
-- Using `feathers-socketio` and `feathers-primus`:
-  - `provider` {String} - the transport name: `socketio` or `primus`
-  - `connection` {Object} - the same as `params` in the hook context
-  - `socket` {SocketObject} - the current user's WebSocket object. It also contains the `feathers` attribute, which is the same as `params` in the hook context.
+  - Using `@feathersjs/express/rest`
+    - `provider` {String} - will always be `"rest"`
+    - `req` {Object} - the Express request object.
+    - `res` {Object} - the Express response object.
+  - Using `feathers-socketio` and `feathers-primus`:
+    - `provider` {String} - the transport name: `socketio` or `primus`
+    - `connection` {Object} - the same as `params` in the hook context
+    - `socket` {SocketObject} - the current user's WebSocket object. It also contains the `feathers` attribute, which is the same as `params` in the hook context.
 
 ## Express Middleware
 

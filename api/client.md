@@ -2,12 +2,12 @@
 
 One of the most notable features of Feathers is that it can also be used as the client. The difference to many other frameworks is that it isn't a separate library, you instead get the exact same functionality as on the server. This means you can use [services](./services.md) and [hooks](./hooks.md) and configure plugins. By default a Feathers client automatically creates services that talk to a Feathers server.
 
-In order to connect to a Feathers server, a client creates [Services](./services.md) that use a REST or websocket connection to relay method calls and allow listening to [events](./events.md) on the server. This means the [Feathers application instance](./application) instance usable the exact same way as you would on the server.
+In order to connect to a Feathers server, a client creates [Services](./services.md) that use a REST or websocket connection to relay method calls and allow listening to [events](./events.md) on the server. This means the [Feathers application instance](./application) is usable the exact same way as you would on the server.
 
 Modules relevant for use on the client are
 
 - `@feathersjs/feathers` to initialize a new Feathers [application](./application.md)
-- [@feathersjs/rest-client](./client/rest.md to connect to services through [REST HTTP](./express.md).
+- [@feathersjs/rest-client](./client/rest.md) to connect to services through [REST HTTP](./express.md).
 - [@feathersjs/socketio-client](./client/socketio.md) to connect to services through [Socket.io](./socketio.md).
 - [@feathersjs/primus-client](./client/primus.md) to connect to services through [Primus](./primus.md).
 - [@feathersjs/authentication-client](./authentication/client.md) to authenticate a client
