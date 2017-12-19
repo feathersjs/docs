@@ -106,8 +106,6 @@ GET /messages?$select[]=text&$select[]=userId
 GET /messages/1?$select[]=text
 ```
 
-To exclude fields from a result the [remove hook](../hooks-common.md) can be used.
-
 ## `$in`, `$nin`
 
 Find all records where the property does (`$in`) or does not (`$nin`) match any of the given values. 

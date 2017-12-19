@@ -96,7 +96,7 @@ Now we need to setup an endpoint to handle both unauthenticated and authenticate
 }
 ```
 
-If a `user` record contains `public: true`, then **unauthenticated** users should be able to access it. Let’s see how to use the `iff` and `else` conditional hooks from [`feathers-hooks-common`](../../api/hooks-common.md) to make this happen. Be sure to read the [`iff hook API docs`](../../api/hooks-common.md#iff) and [`else hook API docs`](../../api/hooks-common.md#else) if you haven’t, yet.
+If a `user` record contains `public: true`, then **unauthenticated** users should be able to access it. Let’s see how to use the `iff` and `else` conditional hooks from [`feathers-hooks-common`](https://feathers-plus.github.io/v1/feathers-hooks-common/) to make this happen. Be sure to read the [`iff hook API docs`](https://feathers-plus.github.io/v1/feathers-hooks-common/#iff) and [`else hook API docs`](https://feathers-plus.github.io/v1/feathers-hooks-common/#else) if you haven’t, yet.
 
 We’re going to use the `iff` hook to authenticate users only if a token is in the request. The [`feathers-authentication-jwt` plugin](../../api/authentication/jwt.md), which we used in `src/authentication.js`, includes a token extractor. If a request includes a token, it will automatically be available inside the `context` object at `context.params.token`.
 
@@ -153,4 +153,4 @@ The `iff` hook is actually more capable than the simple demonstration, above. It
 The above statement simply adds `public: true` to the query parameters. This limits the query to only find `user` records that have the `public` property set to `true`.
 
 ## Wrapping Up
-With the above code, we’ve successfully setup a `/users` service that responds differently to unauthenticated and authenticated users. We used the `context.params.token` attribute to either authenticate a user or to limit the search query to only public users. If you become familiar with the [Common Hooks API](../../api/hooks-common.md), you’ll be able to solve almost any authentication puzzle.
+With the above code, we’ve successfully setup a `/users` service that responds differently to unauthenticated and authenticated users. We used the `context.params.token` attribute to either authenticate a user or to limit the search query to only public users. If you become familiar with the [Common Hooks API](https://feathers-plus.github.io/v1/feathers-hooks-common/), you’ll be able to solve almost any authentication puzzle.
