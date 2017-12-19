@@ -67,7 +67,7 @@ Once you have your app's `Client ID` and `Client Secret`, it's time to setup the
     "service": "users",
     "jwt": {
       "header": {
-        "type": "access"
+        "typ": "access"
       },
       "audience": "https://yourdomain.com",
       "subject": "anonymous",
