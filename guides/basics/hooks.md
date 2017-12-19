@@ -176,7 +176,7 @@ app.service('messages').hooks({
 ```
 
 
-> __Note:__ Throwing an appropriate [Feathers errors](../../api/errors.md) allows to add more information and return the correc
+> __Note:__ Throwing an appropriate [Feathers errors](../../api/errors.md) allows to add more information and return the correct HTTP status code.
 
 ## Application hooks
 
