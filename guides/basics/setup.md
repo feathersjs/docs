@@ -30,7 +30,7 @@ Feathers works standalone but also provides [an integration](../../api/express.m
 
 ## What we won't cover
 
-Although Feathers works with many database this guide will only use examples of standalone database adapters so there is no need to run a database server.
+Although Feathers works with many databases, this guide will only use examples of standalone database adapters so there is no need to run a database server.
 
 Authentication will be shown later in the [chat application guide](../chat/readme.md).
 
