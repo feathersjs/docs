@@ -67,7 +67,7 @@ The parameters for service methods are:
 
 ## A messages service
 
-Now that we know how service methods look like we can implement our own chat message service that allows us to find, create, remove and update messages in-memory. Here we will use a JavaScript class to work with our messages but as we've seen above it could als be a normal object.
+Now that we know how service methods look like we can implement our own chat message service that allows us to find, create, remove and update messages in-memory. Here we will use a JavaScript class to work with our messages but as we've seen above it could also be a normal object.
 
 Below is the complete updated `app.js` with comments:
 
