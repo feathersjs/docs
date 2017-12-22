@@ -144,7 +144,7 @@ async function logTodo(name) {
 logTodo('dishes');
 ```
 
-You may notice that it is pretty much the same as our `app.js` for Node except the missing `feathers` import (since it is alaready available as a global variable).
+You may notice that it is pretty much the same as our `app.js` for Node except the missing `feathers` import (since it is already available as a global variable).
 
 If you now go to [localhost:8080](http://localhost:8080) with the console open you will also see the result logged.
 
