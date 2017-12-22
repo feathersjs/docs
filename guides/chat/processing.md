@@ -66,7 +66,7 @@ This will do several things:
 
 ## Adding a user avatar
 
-Let's create another hook that adds a link to the [Gravatar](http://en.gravatar.com/) image of the users email address so we can show an avatar. After running
+Let's create another hook that adds a link to the [Gravatar](http://en.gravatar.com/) image of the user's email address so we can show an avatar. After running
 
 ```
 feathers generate hook
@@ -110,11 +110,11 @@ module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
 };
 ```
 
-Here we use [Node's crypto library](https://nodejs.org/api/crypto.html) to create an MD5 hash of the users email address. This is what Gravatar uses as the URL for the avatar of an email address. If we now create a new user it will add the link to the image in the `gravatar` property.
+Here we use [Node's crypto library](https://nodejs.org/api/crypto.html) to create an MD5 hash of the user's email address. This is what Gravatar uses as the URL for the avatar of an email address. If we now create a new user it will add the link to the image in the `gravatar` property.
 
 ## Populating the message sender
 
-In the `process-message` hook we are currently just adding the users `_id` as the `userId` property in the message. We want to show more than the `_id` in the UI, so we'll need to populate more data in the message response. In order to show the right user information we want to include that information in our messages.
+In the `process-message` hook we are currently just adding the user's `_id` as the `userId` property in the message. We want to show more than the `_id` in the UI, so we'll need to populate more data in the message response. In order to show the right user information we want to include that information in our messages.
 
 For that we create another hook:
 
