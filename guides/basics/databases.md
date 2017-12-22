@@ -1,6 +1,6 @@
 # Databases
 
-In the [services chapter](./services.md) we created a custom in-memory messages service that can create, update and delete messages. You can probably imagine how we could implement the same thing talking to any database instad of storing it in memory so there isn't really a database that Feathers doesn't support.
+In the [services chapter](./services.md) we created a custom in-memory messages service that can create, update and delete messages. You can probably imagine how we could implement the same thing using a database instead of storing the messages in memory so there isn't really a database that Feathers doesn't support.
 
 Writing all that code yourself is pretty repetitive and cumbersome though which is why Feathers has a collection of pre-built services for different databases. They offer most the basic functionality and can always be fully customized to your requirements using [hooks](./hooks.md). Feathers database adapters support a common [usage API](../../api/databases/common.md), pagination and [querying syntax](../../api/databases/querying.md) for many popular databases and NodeJS ORMs:
 
