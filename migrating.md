@@ -107,6 +107,7 @@ Feathers v3 has a new mechanism to ensure that sensitive information never gets 
 
 ```js
 const { hashPassword } = require('@feathersjs/authentication-local').hooks;
+const { hashPassword, protect } = require('@feathersjs/authentication-local').hooks;
 
 module.exports = {
   before: {
