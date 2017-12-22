@@ -147,13 +147,13 @@ app.configure(restClient.fetch(window.fetch));
 
 You can communicate with a Feathers REST API using any other HTTP REST client. The following section describes what HTTP method, body and query parameters belong to which service method call.
 
-All query parameters in a URL will be set as `params.query` on the server. Other service parameters can be set through [hooks](./hooks.md) and [Express middleware](./express.md). URL query parameter values will always be strings. Conversion (e.g. the string `'true'` to boolean `true`) can be done in a hook as well.
+All query parameters in a URL will be set as `params.query` on the server. Other service parameters can be set through [hooks](../hooks.md) and [Express middleware](../express.md). URL query parameter values will always be strings. Conversion (e.g. the string `'true'` to boolean `true`) can be done in a hook as well.
 
 The body type for `POST`, `PUT` and `PATCH` requests is determined by the Express [body-parser](http://expressjs.com/en/4x/api.html#express.json) middleware which has to be registered *before* any service. You should also make sure you are setting your `Accept` header to `application/json`.
 
 ### Authentication
 
-Authenticating HTTP (REST) requests is a two step process. Frist you have to obtain a JWT from the [authentication service](./server.md) by POSTing the strategy you want to use:
+Authenticating HTTP (REST) requests is a two step process. Frist you have to obtain a JWT from the [authentication service](../authentication/server.md) by POSTing the strategy you want to use:
 
 ```json
 // POST /authentication the Content-Type header set to application/json
@@ -176,7 +176,7 @@ Then to authenticate subsequent requests, add the returned `accessToken` to the 
 curl -H "Content-Type: application/json" -H "Authorization: <your access token>" -X POST http://localhost:3030/authentication
 ```
 
-Also see the [JWT](./jwt.md) and [local](./local.md) authentication chapter.
+Also see the [JWT](../authentication/jwt.md) and [local](../authentication/local.md) authentication chapter.
 
 ### find
 
@@ -200,7 +200,7 @@ For example, to find the records where field _status_ is not equal to **active**
 GET /messages?status[$ne]=active
 ```
 
-More information about the possible parameters for official database adapters can be found [in the database querying section](./databases/querying.md).
+More information about the possible parameters for official database adapters can be found [in the database querying section](../databases/querying.md).
 
 ### get
 
