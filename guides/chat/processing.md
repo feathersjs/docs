@@ -110,7 +110,7 @@ module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
 };
 ```
 
-Here we use [Node's crypto library](https://nodejs.org/api/crypto.html) to create an MD5 hash of the users email address. This is what Gravatar uses as the URL for the avatar of an email address. If we now create a new user it will add the link to the image in the `gravatar` property.
+Here we use [Node's crypto library](https://nodejs.org/api/crypto.html) to create an MD5 hash of the users email address. This is what Gravatar uses as the URL for the avatar of an email address. If we now create a new user it will add the link to the image in the `avatar` property.
 
 ## Populating the message sender
 
