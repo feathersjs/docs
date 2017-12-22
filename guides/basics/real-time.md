@@ -149,6 +149,8 @@ The real-time API can be used by establishing a websocket connection. For that w
 Then we can initialize and use the socket directly making some calls and listening to real-time events by updating `public/client.js` to this:
 
 ```js
+/* global io */
+
 // Create a websocket connecting to our Feathers server
 const socket = io('http://localhost:3030');
 
@@ -160,7 +162,9 @@ socket.on('messages created', message =>
 socket.emit('create', 'messages', {
   text: 'Hello from socket'
 }, (error, result) => {
+  if (error) throw error
   socket.emit('find', 'messages', (error, messageList) => {
+    if (error) throw error
     console.log('Current messages', messageList);
   });
 });
