@@ -8,7 +8,7 @@ This is exactly what Feathers client side services do. In order to connect to a 
 
 ## Real-time client
 
-In the [real-time chapter](./real-time.md) we saw an example of how to directly use a websocket connection to make service calls an listen to events. We can also use a browser Feathers application and client services that use those conneciton. Let's update `public/client.js` to:
+In the [real-time chapter](./real-time.md) we saw an example of how to directly use a websocket connection to make service calls and listen to events. We can also use a browser Feathers application and client services that use those connection. Let's update `public/client.js` to:
 
 ```js
 // Create a websocket connecting to our Feathers server
