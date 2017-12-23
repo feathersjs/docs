@@ -4,7 +4,7 @@ Now that we can [create and authenticate users](./authentication.md), we are goi
 
 ## Sanitizing new message
 
-When creating a new message, we automatically sanitized our input, add the user that sent it and include the date the message has been created before saving it in the database. This is where [hooks](../basics/hooks.md) come into play. In our case specifically a *before* hook. To create a new hook we can run:
+When creating a new message, we automatically sanitize our input, add the user that sent it and include the date the message has been created before saving it in the database. This is where [hooks](../basics/hooks.md) come into play. In our case specifically a *before* hook. To create a new hook we can run:
 
 ```
 feathers generate hook
