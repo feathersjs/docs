@@ -41,7 +41,7 @@ app.use('/my-service', myService);
 {%- language name="Class", type="js" -%}
 class myService {
   async find(params) {
-    return return [];
+    return [];
   }
   async get(id, params) {}
   async create(data, params) {}
