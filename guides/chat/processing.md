@@ -4,7 +4,7 @@ Now that we can [create and authenticate users](./authentication.md), we are goi
 
 ## Sanitizing new message
 
-When creating a new message, we automatically sanitized our input, add the user that sent it and include the date the message has been created before saving it in the database. This is where [hooks](../basics/hooks.md) come into play. In our case specifically a *before* hook. To create a new hook we can run:
+When creating a new message, we automatically sanitize our input, add the user that sent it and include the date the message has been created before saving it in the database. This is where [hooks](../basics/hooks.md) come into play. In our case specifically a *before* hook. To create a new hook we can run:
 
 ```
 feathers generate hook
@@ -58,7 +58,7 @@ module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
 This will do several things:
 
 1. Check if there is a `text` in the data and throw an error if not
-2. Truncate the messages `text` property to 400 characters
+2. Truncate the message's `text` property to 400 characters
 3. Update the data submitted to the database to contain
   - The new truncated text
   - The currently authenticated user (so we always know who sent it)
@@ -110,7 +110,7 @@ module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
 };
 ```
 
-Here we use [Node's crypto library](https://nodejs.org/api/crypto.html) to create an MD5 hash of the user's email address. This is what Gravatar uses as the URL for the avatar of an email address. If we now create a new user it will add the link to the image in the `gravatar` property.
+Here we use [Node's crypto library](https://nodejs.org/api/crypto.html) to create an MD5 hash of the user's email address. This is what Gravatar uses as the URL for the avatar of an email address. If we now create a new user it will add the link to the image in the `avatar` property.
 
 ## Populating the message sender
 
@@ -137,10 +137,10 @@ module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
     const { app, method, result, params } = context;
 
     // Make sure that we always have a list of messages either by wrapping
-    // a single message into an array or by getting the `data` from the `find` method result
+    // a single message into an array or by getting the `data` from the `find` method's result
     const messages = method === 'find' ? result.data : [ result ];
 
-    // Asynchronously get user object from each messages `userId`
+    // Asynchronously get user object from each message's `userId`
     // and add it to the message
     await Promise.all(messages.map(async message => {
       // We'll also pass the original `params` to the service call
