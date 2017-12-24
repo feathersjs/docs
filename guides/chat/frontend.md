@@ -205,7 +205,7 @@ const showLogin = (error = {}) => {
 const showChat = async () => {
   document.getElementById('app').innerHTML = chatHTML;
 
-  // Find the latest 10 messages. They will come with the newest first
+  // Find the latest 25 messages. They will come with the newest first
   // which is why we have to reverse before adding them
   const messages = await client.service('messages').find({
     query: {
