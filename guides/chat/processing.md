@@ -58,7 +58,7 @@ module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
 This will do several things:
 
 1. Check if there is a `text` in the data and throw an error if not
-2. Truncate the messages `text` property to 400 characters
+2. Truncate the message's `text` property to 400 characters
 3. Update the data submitted to the database to contain
   - The new truncated text
   - The currently authenticated user (so we always know who sent it)
@@ -137,10 +137,10 @@ module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
     const { app, method, result, params } = context;
 
     // Make sure that we always have a list of messages either by wrapping
-    // a single message into an array or by getting the `data` from the `find` method result
+    // a single message into an array or by getting the `data` from the `find` method's result
     const messages = method === 'find' ? result.data : [ result ];
 
-    // Asynchronously get user object from each messages `userId`
+    // Asynchronously get user object from each message's `userId`
     // and add it to the message
     await Promise.all(messages.map(async message => {
       // We'll also pass the original `params` to the service call
