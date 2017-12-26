@@ -190,7 +190,7 @@ When you register a service it will automatically become a [NodeJS EventEmitter]
 | `service.patch()`  | `service.on('patched')` |
 | `service.remove()` | `service.on('removed')` |
 
-We will see later that this is the key to how Feathers enables real-time functionality. For now, let's update the `processMessage` function in `app.js` as follows:
+We will see later that this is the key to how Feathers enables real-time functionality. For now, let's update the `processMessages` function in `app.js` as follows:
 
 ```js
 async function processMessages() {
