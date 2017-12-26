@@ -94,7 +94,7 @@ npm install http-server -g
 http-server public/
 ```
 
-> __Note:__ You have to keep this server running for all browser examples in the basics guide tow work.
+> __Note:__ You have to keep this server running for all browser examples in the basics guide to work.
 
 In the `public/` folder we add two files, an `index.html` that will load Feathers:
 
