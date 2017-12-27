@@ -141,7 +141,7 @@ app.service('messages').hooks(messagesHooks);
 
 If a hook throws an error, all following hooks will be skipped and the error will be returned to the user. This makes `before` hooks a great place to validate incoming data by throwing an error for invalid data. We can throw a normal [JavaScript error](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error) or [Feathers error](../../api/errors.md) which has some additional functionality (like returning the proper error code for REST calls). 
 
-Feathers error is a separate module, so you must add it to your project before requiring it:
+`@feathersjs/errors` is a separate module, so you must add it to your project before requiring it:
 
 ```bash
 npm install @feathersjs/errors --save

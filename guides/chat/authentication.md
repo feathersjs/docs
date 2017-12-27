@@ -113,45 +113,11 @@ This will now only allow users with a valid JWT to access the service and automa
 
 ## Securing real-time events
 
-The `authenticate` hook that we used above will restrict _access_ to service methods to only authenticated users. Now we also have to make sure that [real-time service events](../basics/real-time.md) are only sent to connections that are allowed to see them. Feathers uses channels to accomplish that which the generator already sets up for us in `src/channels.js` (have a look at the comments in the generated file and the [channel API documentation](../../api/channels.md) to get a better idea about channels).
+The `authenticate` hook that we used above will restrict _access_ to service methods to only authenticated users. We additionally have to make sure that [real-time service events](../basics/real-time.md) are only sent to connections that are allowed to see them - for example when users join a specific chat room or one-to-one messages.
 
-We could use channels to e.g. only send events to users in a specific room or with specific permissions. To make things easier for our basic chat however, let's just send all events to all authenticated users by updating `src/channels.js` to this:
+Feathers uses channels to accomplish that which the generator already sets up for us in `src/channels.js` (have a look at the comments in the generated file and the [channel API documentation](../../api/channels.md) to get a better idea about channels).
 
-```js
-module.exports = function(app) {
-  if(typeof app.channel !== 'function') {
-    // If no real-time functionality has been configured just return
-    return;
-  }
-
-  app.on('connection', connection => {
-    // On a new real-time connection, add it to the anonymous channel
-    app.channel('anonymous').join(connection);
-  });
-
-  app.on('login', (authResult, { connection }) => {
-    // connection can be undefined if there is no
-    // real-time connection, e.g. when logging in via REST
-    if(connection) {
-      // Obtain the logged in user from the connection
-      // const user = connection.user;
-      
-      // The connection is no longer anonymous, remove it
-      app.channel('anonymous').leave(connection);
-
-      // Add it to the authenticated user channel
-      app.channel('authenticated').join(connection);
-    }
-  });
-
-  app.publish((data, hook) => { // eslint-disable-line no-unused-vars
-    // Publish all service events to all authenticated users
-    return app.channel('authenticated');
-  });
-};
-```
-
-This is almost the same as the original file except for the line `return app.channel('authenticated');` being commented in `app.publish()`. Now only authenticated users will receive real-time updates.
+By default `src/channels.js` is set up to send _all_ events to all _authenticated_ users which is what we will use for our chat application.
 
 ## What's next?
 

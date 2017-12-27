@@ -69,6 +69,8 @@ app.configure(configureMessages);
 Now we can move that function into a separate file like `messages.service.js` and set it as the [default module export](https://nodejs.org/api/modules.html) for that file:
 
 ```js
+const memory = require('feathers-memory');
+
 module.exports = function(app) {
   app.use('messages', memory({
     paginate: {
