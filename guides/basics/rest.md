@@ -29,7 +29,7 @@ What the Feathers REST transport essentially does is to automatically map our ex
 
 ## Express integration
 
-[Express](http://expressjs.com/) is probably the most popular Node framework for creating web applications and APIs. The [Feathers Express integration](../../api/express.md) allows us to turn a Feathers application into an application that is both, a Feathers application and a fully compatible Express application. This means you can use Feathers functionality like services but also any existing Express middleware. As mentioned before, the Express framework integration only works on the server.
+[Express](http://expressjs.com/) is probably the most popular Node framework for creating web applications and APIs. The [Feathers Express integration](../../api/express.md) allows us to turn a Feathers application into an application that is both a Feathers application and a fully compatible Express application. This means you can use Feathers functionality like services but also any existing Express middleware. As mentioned before, the Express framework integration only works on the server.
 
 To add the integration we install `@feathersjs/express`:
 
