@@ -68,7 +68,7 @@ class MyService {
 app.use('/my-service', new MyService());
 {%- endcodetabs %}
 
-> **ProTip:** Methods are optional, and if a method is not implemented Feathers will automatically emit a `NotImplemented` error.
+> **ProTip:** Methods are optional, and if a method is not implemented Feathers will emit a `NotImplemented` error.
 
 Service methods have to return a [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) or be declared as `async` and have the following parameters:
 
@@ -87,7 +87,7 @@ myService.find().then(items => console.log('.find()', items));
 myService.get(1).then(item => console.log('.get(1)', items));
 ```
 
-Keep in mind that services don't have to use databases.  You could easily replace the database in the example with a package that uses some API, like pulling in GitHub stars or stock ticker data.
+Keep in mind that services don't have to use databases.  You could easily replace the database in the example with a package that uses some API, like pulling in GitHub stars, weather, or stock ticker data.
 
 > **Important:** This section describes the general use of service methods and how to implement them. They are already implemented by Feathers official database adapters. For specifics on how to use the database adapters see the [database adapters common API](./databases/common.md).
 
