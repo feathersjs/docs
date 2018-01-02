@@ -15,7 +15,7 @@ In this chapter we will look at installing the CLI and common patterns the gener
 The CLI should be installed globally via npm:
 
 ```
-npm install @feathersjs/cli -g
+sudo npm install @feathersjs/cli -g
 ```
 
 Once successful we should now have the `feathers` command available on the command line which we can check with:
