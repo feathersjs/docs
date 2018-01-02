@@ -14,7 +14,7 @@
   ],
   "pluginsConfig": {
     "edit-link": {
-      "base": "https://github.com/feathersjs/docs/edit/buzzard",
+      "base": "https://github.com/feathersjs/docs/edit/master",
       "label": "Edit This Page",
       "placement": "left"
     },
