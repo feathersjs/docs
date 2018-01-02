@@ -47,7 +47,7 @@ module.exports = function(app) {
 
       // If the user has joined e.g. chat rooms
       
-      // user.rooms.forEach(room => app.channel(`rooms/${room.id}`).join(channel))
+      // user.rooms.forEach(room => app.channel(`rooms/${room.id}`).join(connection))
     }
   });
 
