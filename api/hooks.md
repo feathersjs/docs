@@ -335,3 +335,27 @@ app.hooks({
   }
 });
 ```
+
+## Cancelling hook chain
+
+If you want certain hooks to be skipped you may set any custom property onto `context`, then wrap hooks you want to skip
+into [iff-hook](https://docs.feathersjs.com/api/hooks-common.html#iff) and check.
+> __Note:__ The aforementioned trick doesn't [prevent database call](#contextresult). In this case `context.result` should be set in before hook.
+
+```js
+const { iff } = require('feathers-hooks-common');
+
+app.service('servicename').hooks({
+  before: [
+    context => {
+      context.cancelled = true;
+      return context;
+    },
+    iff(
+      context => context.cancelled,
+      [hookA, hookB] // <- skipped
+    ),
+    hookC // not skipped
+  ]
+})
+```
