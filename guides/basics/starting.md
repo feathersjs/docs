@@ -15,7 +15,7 @@ npm init --yes
 
 ## Installing Feathers
 
-Feathers can be installed like any other Node module by installing the [@feathersjs/feathers]((https://www.npmjs.com/package/@feathersjs/feathers) package through [npm](https://www.npmjs.com). The same package can also be used with a module loader like Browserify or Webpack and React Native.
+Feathers can be installed like any other Node module by installing the [@feathersjs/feathers](https://www.npmjs.com/package/@feathersjs/feathers) package through [npm](https://www.npmjs.com). The same package can also be used with a module loader like Browserify or Webpack and React Native.
 
 ```
 npm install @feathersjs/feathers --save
