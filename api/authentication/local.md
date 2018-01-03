@@ -23,7 +23,7 @@ In most cases initializing the module is as simple as doing this:
 
 ```js
 const feathers = require('@feathersjs/feathers');
-const authentication = require('feathers-authentication');
+const authentication = require('@feathersjs/authentication');
 const local = require('@feathersjs/authentication-local');
 const app = feathers();
 
@@ -152,7 +152,7 @@ app.authenticate({
 
 ### HTTP Request
 
-If you are not using the `feathers-authentication-client` and you have registered this module server side, make a `POST` request to `/authentication` with the following payload:
+If you are not using the `@feathersjs/authentication-client` and you have registered this module server side, make a `POST` request to `/authentication` with the following payload:
 
 ```json
 // POST /authentication the Content-Type header set to application/json

@@ -22,9 +22,10 @@ In most cases initializing the module is as simple as doing this:
 
 ```js
 const feathers = require('@feathersjs/feathers');
-const authentication = require('feathers-authentication');
-const jwt = require('feathers-authentication-jwt');
+const authentication = require('@feathersjs/authentication');
+const jwt = require('@feathersjs/authentication-jwt');
 const oauth1 = require('@feathersjs/authentication-oauth1');
+
 const session = require('express-session');
 const TwitterStrategy = require('passport-twitter').Strategy;
 const app = feathers();
