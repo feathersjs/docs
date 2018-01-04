@@ -33,6 +33,7 @@ app.listen(8080);
 ```
 
 ## Creating a Custom API Key Auth Strategy
+
 The first custom strategy example we can look at is an API Key Strategy. Within it, we'll check if there is a specific header in the request containing a specific API key. If true, we'll successfully authorize the request.
 
 
@@ -58,6 +59,8 @@ module.exports = opts => {
 
     // register the strategy in the app.passport instance
     this.passport.use('apiKey', new Strategy(verifier));
+    // Add options for the strategy
+    this.passport.options('apiKey', {});
   };
 };
 ```
