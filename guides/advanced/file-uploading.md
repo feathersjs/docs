@@ -67,7 +67,8 @@ app.listen(3030, function(){
 });
 ```
 
-Let's look at this implmented in the `feathers-cli` generated server code:
+Let's look at this implemented in the `@feathersjs/cli` generated server code:
+
 ```javascript
 /* --- /src/services/uploads/uploads.service.js --- */
 
