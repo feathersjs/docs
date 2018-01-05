@@ -23,7 +23,7 @@ In most cases initializing the module is as simple as doing this:
 
 ```js
 const feathers = require('@feathersjs/feathers');
-const authentication = require('@feathers/authentication');
+const authentication = require('@feathersjs/authentication');
 const jwt = require('@feathersjs/authentication-jwt');
 const app = feathers();
 
