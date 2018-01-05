@@ -4,7 +4,7 @@ On a Feathers server with a real-time transport ([Socket.io](./socketio.md) or [
 
 This chapter describes:
 
-- [Real-time Connections](#connections) and how to acces them
+- [Real-time Connections](#connections) and how to access them
 - [Channel usage](#channels) and how to retrieve, join and leave channels
 - [Publishing events](#publishing) to channels
 
