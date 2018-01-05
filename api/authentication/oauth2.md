@@ -33,6 +33,8 @@ const oauth2 = require('@feathersjs/authentication-oauth2');
 const FacebookStrategy = require('passport-facebook').Strategy;
 const app = feathers();
 
+let settings = { secret: 'super secret' } ;
+
 // Setup authentication
 app.configure(authentication(settings));
 app.configure(jwt());
