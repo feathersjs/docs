@@ -30,10 +30,12 @@ module.exports = function(app) {
     app.channel('anonymous').join(connection);
   });
 
-  app.on('login', (user, { connection }) => {
+  app.on('login', (payload, { connection }) => {
     // connection can be undefined if there is no
     // real-time connection, e.g. when logging in via REST
     if(connection) {
+      const { user } = connection;
+
       // The connection is no longer anonymous, remove it
       app.channel('anonymous').leave(connection);
 
@@ -62,7 +64,7 @@ module.exports = function(app) {
 
 A connection is an object that represents a real-time connection. It is the same object as `socket.feathers` in a [Socket.io](./socketio.md) and `socket.request.feathers` in a [Primus](./primus.md) middleware. You can add any kind of information to it but most notably, when using [authentication](./authentication/server.md), it will contain the authenticated user. By default it is located in `connection.user` once the client has authenticated on the socket (usually by calling `app.authenticate()` on the [client](./client.md)).
 
-We can get access to the `connection` object by listening to `app.on('connection', connection => {})` or `app.on('login', (user, { connection }) => {})`.
+We can get access to the `connection` object by listening to `app.on('connection', connection => {})` or `app.on('login', (payload, { connection }) => {})`.
 
 > __Note:__ When a connection is terminated it will be automatically removed from all channels.
 
@@ -80,15 +82,18 @@ app.on('connection', connection => {
 
 ### app.on('login')
 
-`app.on('login', (user, info) => {})` is sent by the [authentication module](./authentication/server.md) and also contains the connection in the `info` object that is passed as the second parameter. Note that it can also be `undefined` if the login happened through e.g. REST which does not support real-time connectivity. 
+`app.on('login', (payload, info) => {})` is sent by the [authentication module](./authentication/server.md) and also contains the connection in the `info` object that is passed as the second parameter. Note that it can also be `undefined` if the login happened through e.g. REST which does not support real-time connectivity. 
 
 This is a good place to add the connection to channels related to the user (e.g. chat rooms, admin status etc.)
 
 ```js
-app.on('login', (user, { connection }) => {
+app.on('login', (payload, { connection }) => {
   // connection can be undefined if there is no
   // real-time connection, e.g. when logging in via REST
   if(connection) {
+    // The user attached to this connection
+    const { user } = connection;
+
     // The connection is no longer anonymous, remove it
     app.channel('anonymous').leave(connection);
 
@@ -171,8 +176,8 @@ app.service('users').on('removed', user => {
 `channel.join(connection) -> Channel` adds a connection to this channel. If the channel is a combined channel, add the connection to all its child channels. If the connection is already in the channel it does nothing. Returns the channel object.
 
 ```js
-app.on('login', (user, { connection }) => {
-  if(connection && user.isAdmin) {
+app.on('login', (payload, { connection }) => {
+  if(connection && connection.user.isAdmin) {
     // Join the admins channel
     app.channel('admins').join(connection);
 
@@ -248,10 +253,10 @@ Publishers are callback functions that return which channel(s) to send an event 
 `service.publish([event,] fn) -> service` registers a publishing function for a specific service for a specific event or all events if no event name was given.
 
 ```js
-app.on('login', (user, { connection }) => {
+app.on('login', (payload, { connection }) => {
   // connection can be undefined if there is no
   // real-time connection, e.g. when logging in via REST
-  if(connection && user.isAdmin) {
+  if(connection && connection.user.isAdmin) {
     app.channel('admins').join(connection);
   }
 });
@@ -272,7 +277,7 @@ app.service('users').publish('created', (data, context) => {
 `app.publish([event,] fn) -> app` registers a publishing function for all services for a specific event or all events if no event name was given.
 
 ```js
-app.on('login', (user, { connection }) => {
+app.on('login', (payload, { connection }) => {
   // connection can be undefined if there is no
   // real-time connection, e.g. when logging in via REST
   if(connection) {
@@ -290,3 +295,61 @@ app.publish('log', (data, context) => {
   return app.channel(app.channels);
 });
 ```
+
+## Keeping channels updated
+
+Since every application will be different, keeping the connections assigned to channels up to date (e.g. if a user joins/leaves a room) is up to you.
+
+In general, channels should reflect your persistent application data. This means that it normally isn't necessary for e.g. a user to request to directly join a channel. This is especially important when running multiple instances of an application since channels are only _local_ to the current instance.
+
+Instead, the relevant information (e.g. what rooms a user is currently in) should be stored in the database and then the active connections can be re-distributed into the appropriate channels listening to the proper [service events](./events.md).
+
+The following example updates all acitve connections for a given user when the user object (which is assumed to have a `rooms` array being a list of room ids the user has joined) is updated or removed:
+
+```js
+// Join a channel given a user and connection
+const joinChannels => (user, connection) => {
+  app.channel('authenticated').join(connection);
+  // Assuming that the chat room/user assignment is stored
+  // on an array of the user
+  user.rooms.forEach(room =>
+    app.channel(`rooms/${roomId}`).join(connection)
+  );
+}
+
+// Get a user to leave all channels
+const leaveChannels = user => {
+  app.channel(app.channels).leave(connection =>
+    connection.user._id === user._id
+  );
+};
+
+// Leave and re-join all channels with new user information
+const updateChannels = user => {
+  // Find all connections for this user
+  const { connections } = app.channel(app.channels).filter(connection =>
+    connection.user._id === user._id
+  );
+
+  // Leave all channels
+  leaveChannels(user);
+
+  // Re-join all channels with the updated user information
+  connections.forEach(connection => joinChannels(user, connection));
+}
+
+app.on('login', (payload, { connection }) => {
+  if(connection) {
+    // Join all channels on login
+    joinChannels(user, connection.user);
+  }
+});
+
+// On `updated` and `patched`, leave and re-join with new room assignments
+app.service('users').on('updated', updateChannels);
+app.service('users').on('patched', updateChannels);
+// On `removed`, remove the connection from all channels
+app.service('users').on('removed', leaveChannels);
+```
+
+> __Note:__ The number active connections is usually one (or none) but unless you prevent it explicitly Feathers is not preventing multiple logins of the same user (e.g. with two open browser windows or on a mobile device).
