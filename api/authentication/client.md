@@ -82,7 +82,7 @@ app.authenticate({
   email: 'my@email.com',
   password: 'my-password'
 }).then(() => {
-  // Loged in
+  // Logged in
 }).catch(e => {
   // Show login page (potentially with `e.message`)
   console.error('Authentication error', e);
