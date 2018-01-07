@@ -153,7 +153,7 @@ The body type for `POST`, `PUT` and `PATCH` requests is determined by the Expres
 
 ### Authentication
 
-Authenticating HTTP (REST) requests is a two step process. Frist you have to obtain a JWT from the [authentication service](../authentication/server.md) by POSTing the strategy you want to use:
+Authenticating HTTP (REST) requests is a two step process. First you have to obtain a JWT from the [authentication service](../authentication/server.md) by POSTing the strategy you want to use:
 
 ```json
 // POST /authentication the Content-Type header set to application/json
