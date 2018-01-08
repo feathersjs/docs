@@ -14,9 +14,9 @@ Which will currently fail since we implemented functionality in our hooks that i
 
 The best way to test individual hooks is to set up a dummy Feathers application with some services that return the data we expect and can test against, register the hooks and make actual service calls to verify that they return what we'd expect.
 
-The first hook we created was for processing new messages. For this one we can create a `messages` dummy custom [service](../basics/services.md) that just returns the same data in the `create` service method. To pretend that we are an authenticated user we have to pass `params.user`. In this case it can be an object with an `_id`.
+The first hook we created was for processing new messages. For this one we can create a `messages` dummy custom [service](../basics/services.md) that just returns the same data in the `create` service method. To pretend that we are an authenticated user we have to pass `params.user`. In our case this can be a simple JavaScript object with an `_id`.
 
-Update `test/hooks/process-messages.js` to the following:
+Update `test/hooks/process-messages.test.js` to the following:
 
 ```js
 const assert = require('assert');
@@ -55,7 +55,7 @@ describe('\'process-message\' hook', () => {
     // Create a new message with params that contains our user
     const message = await app.service('messages').create({
       text: 'Hi there',
-      additional: 'shoudl be removed'
+      additional: 'should be removed'
     }, params);
 
     assert.equal(message.text, 'Hi there');
@@ -114,7 +114,7 @@ In the tests above we created a dummy service but sometimes we need the full Fea
 npm install feathers-memory --save-dev
 ```
 
-Let's use it to test the populate user hook by updating `test/hooks/populate-user.test.js` to the following:
+Let's use it to test the `populateUser` hook by updating `test/hooks/populate-user.test.js` to the following:
 
 ```js
 const assert = require('assert');
@@ -176,7 +176,7 @@ All our tests should pass. Yay!
 
 ## Test database setup
 
-For testing database functionality we probably want to make sure that the tests use a different database, which we can do by creating a new environment configuration in `config/test.json` with the following content:
+For testing database functionality we want to make sure that the tests use a different database, which we can do by creating a new environment configuration in `config/test.json` with the following content:
 
 ```js
 {
@@ -184,13 +184,15 @@ For testing database functionality we probably want to make sure that the tests 
 }
 ```
 
-This will set up the NeDB database to use `test/data` as the base directory instead of `data/` when `NODE_ENV` is set to `test`. We also want to make sure that before every test run the database is cleaned up. To make that possible across platforms first run
+This will set up the NeDB database to use `test/data` as the base directory instead of `data/` when `NODE_ENV` is set to `test`. The same thing can be done with connection strings for other databases.
+
+We also want to make sure that before every test run the database is cleaned up. To make that possible across platforms first run
 
 ```
 npm install shx --save-dev
 ```
 
-And then update the `script` section of `package.json` to the following:
+Now we can update the `script` section of `package.json` to the following:
 
 ```js
   "scripts": {
@@ -206,7 +208,7 @@ This will make sure that the `test/data` folder is removed before every test run
 
 ## Testing services
 
-To test the actual responses of the `messages` and `users` services (with all hooks wired up) we could use any REST API testing tool, making requests and ensuring that it returned the correct response.
+To test the actual `messages` and `users` services (with all hooks wired up) we could use any REST API testing tool, making requests and ensuring that it returned the correct response.
 
 But because everything on top of our own hooks and services is already provided (and tested) by Feathers we can also take a more direct approach and require the [application](../../api/application.md) object using the [service methods](../../api/services.md) directly and "fake" authentication by setting `params.user` as in the hook tests above. This will be much faster and easier to use and still covers everything we want to test.
 
@@ -265,7 +267,7 @@ describe('\'users\' service', () => {
 });
 ```
 
-The tests in `test/services/messages.js` looks very similar. We create a test specific user from the `users` service and then pass it as `params.user` when creating a new message and make sure the message looks as expected:
+The tests in `test/services/messages.test.js` looks very similar. We create a test specific user from the `users` service and then pass it as `params.user` when creating a new message and make sure the message looks as expected:
 
 ```js
 const assert = require('assert');
