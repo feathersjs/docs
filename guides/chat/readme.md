@@ -27,3 +27,7 @@ Sanitize and process user data.
 [**Building a frontend**](./frontend.md)
 
 Learn how to use Feathers in the browser by creating a small real-time chat frontend.
+
+[**Writing tests**](./testing.md)
+
+Write automated unit tests and add code coverage to our chat application.

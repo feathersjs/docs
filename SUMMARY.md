@@ -18,6 +18,7 @@
     * [Adding authentication](guides/chat/authentication.md)
     * [Processing data](guides/chat/processing.md)
     * [Building a frontend](guides/chat/frontend.md)
+    * [Writing tests](guides/chat/testing.md)
   * [Frameworks](guides/frameworks/readme.md)
   * [Authentication](guides/auth/readme.md)
     * [How JWT works](guides/auth/how-jwt-works.md)
