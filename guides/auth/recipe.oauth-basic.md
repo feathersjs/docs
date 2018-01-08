@@ -78,7 +78,7 @@ Once you have your app's `Client ID` and `Client Secret`, it's time to setup the
     "github": {
       "clientID": "your github client id", // Replace this with your app's Client ID
       "clientSecret": "your github client secret", // Replace this with your app's Client Secret
-      "successRedirect": "/"
+      "callbackURL": "/"
     },
     "cookie": {
       "enabled": true,
