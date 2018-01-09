@@ -334,4 +334,4 @@ login();
 
 ## What's next?
 
-That’s it. We now have a plain JavaScript real-time chat frontend with login and signup. This example demonstrates many of the core principles of how you interact with a Feathers API and concludes this chat guide. Follow up in the [Feathers API documentation](../../api/readme.md) for all the details about using Feathers or start building your own first Feathers application.
+That’s it. We now have a plain JavaScript real-time chat frontend with login and signup. This example demonstrates many of the core principles of how you interact with a Feathers API. In the final chapter we will look at [how to write automated tests for our API](./testing.md).
