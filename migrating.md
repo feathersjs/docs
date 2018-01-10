@@ -402,6 +402,7 @@ The websocket messaging format has been updated to support proper error messages
 - `app.service(path)` only returns a service and cannot be used to register a new service anymore (via `app.service(path, service)`). Use `app.use(path, service)` instead.
 - Route parameters which were previously added directly to `params` are now in `params.route`
 - Express middleware like `feathers.static` is now located in `const express = require('@feathersjs/express')` using `express.static`
+- Experimental TypeScript definitions have been removed from all core repositories. Development of TypeScript definitions for this version can be follow at [feathersjs-ecosystem/feathers-typescript](https://github.com/feathersjs-ecosystem/feathers-typescript). Help welcome.
 
 ## Backwards compatibility polyfills
 
