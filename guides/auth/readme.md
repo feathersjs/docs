@@ -1,5 +1,11 @@
 # Authentication Guides & Recipes
 
+[**The Feathers Chat**](../chat/readme.md)<br/>
+The Feathers chat application guide shows how to set up basic username and password authentication and how to use it through direct requests and in a browser application.
+
+[**Authentication API**](../../api/authentication/server.md)<br/>
+The complete authentication API documentation.
+
 [**How JWT Works**](./how-jwt-works.md)<br/>
 Learn more about JWT and how it might differ from authentication methods you've used, previously. (This guide is a work in progress.)
 
