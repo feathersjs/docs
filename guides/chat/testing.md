@@ -227,7 +227,7 @@ describe('\'users\' service', () => {
 });
 ```
 
-Here we can now add similar tests using the service. The following updated `test/services/users.test.js` adds two tests, one that users can be created, the gravatar gets set and the password gets encrytped and one making sure that the password does not get sent to external requests:
+Here we can now add similar tests using the service. The following updated `test/services/users.test.js` adds two tests, one that users can be created, the gravatar gets set and the password gets encrypted and one making sure that the password does not get sent to external requests:
 
 ```js
 const assert = require('assert');
