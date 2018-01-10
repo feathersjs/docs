@@ -304,7 +304,7 @@ In general, channels should reflect your persistent application data. This means
 
 Instead, the relevant information (e.g. what rooms a user is currently in) should be stored in the database and then the active connections can be re-distributed into the appropriate channels listening to the proper [service events](./events.md).
 
-The following example updates all acitve connections for a given user when the user object (which is assumed to have a `rooms` array being a list of room ids the user has joined) is updated or removed:
+The following example updates all active connections for a given user when the user object (which is assumed to have a `rooms` array being a list of room ids the user has joined) is updated or removed:
 
 ```js
 // Join a channel given a user and connection
