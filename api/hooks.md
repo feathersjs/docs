@@ -331,7 +331,7 @@ Here is an example for a very useful application hook that logs every service me
 ```js
 app.hooks({
   error(context) {
-    console.error(`Error in '${context.path}' service method '${context.method}`, context.error.stack);
+    console.error(`Error in '${context.path}' service method '${context.method}'`, context.error.stack);
   }
 });
 ```

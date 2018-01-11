@@ -87,7 +87,7 @@ Let's put the browser files into a new folder
 mkdir public
 ```
 
-We will also need to host the folder with a webserver. This can be done with any webserver like Apache or with a [the http-server module](https://www.npmjs.com/package/http-server) that we can install and host the `public/` folder like this:
+We will also need to host the folder with a webserver. This can be done with any webserver like Apache or with the [http-server module](https://www.npmjs.com/package/http-server) that we can install and host the `public/` folder like this:
 
 ```
 npm install http-server -g

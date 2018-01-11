@@ -65,7 +65,7 @@ The hook `context` is an object which contains information about the service met
 
 Writeable properties are:
 
-- `context.params` - The service method call `params`. For external calls, `params` usually contians:
+- `context.params` - The service method call `params`. For external calls, `params` usually contains:
   - `context.params.query` - The query (e.g. query string for REST) for the service call
   - `context.params.provider` - The name of the transport (which we will look at in the next chapter) the call has been made through. Usually `rest`, `socketio`, `primus`. Will be `undefined` for internal calls.
 - `context.id` - The `id` for a `get`, `remove`, `update` and `patch` service method call
@@ -201,7 +201,7 @@ A good use for application hooks is to log any service method call error. The fo
 ```js
 app.hooks({
   error: async context => {
-    console.error(`Error in '${context.path}' service method '${context.method}`, context.error.stack);
+    console.error(`Error in '${context.path}' service method '${context.method}'`, context.error.stack);
   }
 });
 ```
