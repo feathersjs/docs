@@ -69,7 +69,7 @@ app.authenticate().then(() => {
 })
 ```
 
-> __Important:__ `app.authenticate()` __has__ to be called when you want to use the token from storage and __only once__ when the application initializes. Once successfull, all subsequent reuests will send their authentication information automatically.
+> __Important:__ `app.authenticate()` __has__ to be called when you want to use the token from storage and __only once__ when the application initializes. Once successfull, all subsequent requests will send their authentication information automatically.
 
 ## app.authenticate(options)
 
