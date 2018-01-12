@@ -194,7 +194,7 @@ All Feathers core modules have been moved to the `@feathersjs` npm scope. This m
 
 With a better focus on Feathers core, the repositories, documentation and guides for non-core module have been moved to more appropriate locations:
 
-- Non-core modules have been moved to the [feathersjs-ecosystem](https://github.com/feathersjs-ecosystem/) and [feathers-plus](https://github.com/feathers-plus/) organizations
+- Non-core modules have been moved to the [feathersjs-ecosystem](https://github.com/feathersjs-ecosystem/) and [feathers-plus](https://github.com/feathers-plus/) organizations. _Documentation for those modules can be found in the Readme file of their respective GitHub repositories._
 - Database adapter specific documentation can now be found in the respective repositories readme. Links to the repositories can be found in the [database adapters chapter](./api/databases/adapters.md)
 - The `feathers-hooks-common` documentation can be found at [feathers-plus.github.io/v1/feathers-hooks-common/](https://feathers-plus.github.io/v1/feathers-hooks-common/)
 - Offline and authentication-management documentation can also be found at [feathers-plus.github.io](https://feathers-plus.github.io/)
