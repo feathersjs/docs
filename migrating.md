@@ -1,5 +1,9 @@
 # Feathers v3 (Buzzard)
 
+Feathers v3 comes with some great improvements and new features and we highly recommend to upgrade as soon as possible. It might look a little daunting at first but in almost every case, the new CLI will get you almost all the way there automatically. This page contains information about the quick upgrade path and more information about all the changes to upgrade from Feathers v2 to v3.
+
+Read the release post at [Flying into 2018](https://blog.feathersjs.com/flying-into-2018-13bda623f089)
+
 ## Quick upgrade
 
 To quickly upgrade any Feathers plugin or application you can use the `upgrade` command from the new CLI. First, if you have it installed, uninstall the old `feathers-cli`:
