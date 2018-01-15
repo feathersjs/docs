@@ -70,7 +70,7 @@ app.use('/my-service', new MyService());
 
 > **ProTip:** Methods are optional, and if a method is not implemented Feathers will automatically emit a `NotImplemented` error.
 
-> __Important:__ Always use the service returned by `app.service(path)` not the service object (the `myService` object above) directly. See the [app.service API documentation](../../api/application.md#servicepath) for more information.
+> __Important:__ Always use the service returned by `app.service(path)` not the service object (the `myService` object above) directly. See the [app.service documentation](#servicepath) for more information.
 
 Service methods must return a [`Promise`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) or be declared as `async` and have the following parameters:
 
