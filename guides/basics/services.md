@@ -177,8 +177,6 @@ Available messages [ { id: 0, text: 'First message' },
   { id: 1, text: 'Second message' } ]
 ```
 
-> __Important:__ Always use the service returned by `app.service(path)` not the service object (what we called `messageService` above) directly. See the [app.service API documentation](../../api/application.md#servicepath) for more information.
-
 ## Service events
 
 When you register a service it will automatically become a [NodeJS EventEmitter](https://nodejs.org/api/events.html) that sends events with the new data when a service method that modifies data (`create`, `update`, `patch` and `remove`) returns. Events can be listened to with `app.service('messages').on('eventName', data => {})`. Here is a list of the service methods and their correspondingn events:
