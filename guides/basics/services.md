@@ -57,7 +57,7 @@ The parameters for service methods are:
 
 - `id` - The unique identifier for the data
 - `data` - The data sent by the user (for creating and updating)
-- `params` (*optional*) - Additional parameters, for example the authenticated user or the query.
+- `params` (*optional*) - Additional parameters, for example the authenticated user or the query
 
 > __Note:__ A service does not have to implement all those methods but must have at least one.
 
