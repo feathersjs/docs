@@ -122,7 +122,7 @@ In Browserify the [babelify](https://github.com/babel/babelify) transform has to
 
 ### Others
 
-As mentioned above, `node_modules/@feathersjs` and all its subfolders have to be included in the ES6+ transpilation step when using any module loader that is using a transpiler. For non-CommonJS formats (like AMD) and an ES5 compatible version of Feathers and its client modules you can use the [@feathersjs/client module]().
+As mentioned above, `node_modules/@feathersjs` and all its subfolders have to be included in the ES6+ transpilation step when using any module loader that is using a transpiler. For non-CommonJS formats (like AMD) and an ES5 compatible version of Feathers and its client modules you can use the [@feathersjs/client module](#feathersjsclient).
 
 ## @feathersjs/client
 
