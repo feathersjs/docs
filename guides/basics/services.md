@@ -179,7 +179,7 @@ Available messages [ { id: 0, text: 'First message' },
 
 ## Service events
 
-When you register a service it will automatically become a [NodeJS EventEmitter](https://nodejs.org/api/events.html) that sends events with the new data when a service method that modifies data (`create`, `update`, `patch` and `remove`) returns. Events can be listened to with `app.service('messages').on('eventName', data => {})`. Here is a list of the service methods and their correspondingn events:
+When you register a service it will automatically become a [NodeJS EventEmitter](https://nodejs.org/api/events.html) that sends events with the new data when a service method that modifies data (`create`, `update`, `patch` and `remove`) returns. Events can be listened to with `app.service('messages').on('eventName', data => {})`. Here is a list of the service methods and their corresponding events:
 
 | Service method     | Service event           |
 | ------------------ | ----------------------- |
