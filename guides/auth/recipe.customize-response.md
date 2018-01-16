@@ -28,6 +28,7 @@ The JWT also contains a payload which has a `userId` property.
 Based on the above, you can see that we still authenticate a `user` by default.  In this case, the `user` is what we call the `entity`.  It's the generic name of what is being authenticated.  It's customizable, but that's not covered in this guide.  Instead, let's focus on what it takes to add the user in the login response.
 
 ## Customizing the Login Response
+
 The `/authentication` endpoint is now a Feathers service.  It uses the `create` method for login and the `remove` method for logout.  Just like with all Feathers services, you can customize the response with the [`hook` API](../../api/hooks.md).  For what we want to do, the important part is the `context.result`, which becomes the response body.  We can use an `after` hook to customize the `context.result` to return anything that we want:
 
 ```js
