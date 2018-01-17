@@ -10,7 +10,7 @@ Let's first start by creating a basic server setup.
 const feathers = require('@feathersjs/feathers');
 const express = require('@feathersjs/express');
 const auth = require('@feathersjs/authentication');
-const jwt = require('@featehrsjs/authentication-jwt');
+const jwt = require('@feathersjs/authentication-jwt');
 const memory = require('feathers-memory');
 
 const app = express(feathers());
@@ -111,7 +111,7 @@ Finally our `server.js` looks like this:
 const feathers = require('@feathersjs/feathers');
 const express = require('@feathersjs/express');
 const auth = require('@feathersjs/authentication');
-const jwt = require('@featehrsjs/authentication-jwt');
+const jwt = require('@feathersjs/authentication-jwt');
 const memory = require('feathers-memory');
 const commonHooks = require('feathers-hooks-common');
 
@@ -211,7 +211,7 @@ Finally our `server.js` looks like this:
 const feathers = require('@feathersjs/feathers');
 const express = require('@feathersjs/express');
 const auth = require('@feathersjs/authentication');
-const jwt = require('@featehrsjs/authentication-jwt');
+const jwt = require('@feathersjs/authentication-jwt');
 const memory = require('feathers-memory');
 const commonHooks = require('feathers-hooks-common');
 
