@@ -150,6 +150,10 @@ module.exports = {
 };
 ```
 
+## Updating client side applications
+
+Client side Feathers applications can also be updated using the CLI but may need some manual intervention. Most importantly, since Feathers core now natively ships as ES6 code, the module bundler, like Webpack, has to be instructed to transpile it. More information can be found in the [client chapter](./api/client.md). For Webpack and `create-react-app` usage (which both will throw a minification error without changes), see [this section](./api/client.md#webpack).
+
 ## `@feathersjs` npm scope
 
 All Feathers core modules have been moved to the `@feathersjs` npm scope. This makes it more clear which modules are considered core and which modules are community supported and also allows us to more easily manage publishing permissions. The following modules have been renamed:
