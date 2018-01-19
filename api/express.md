@@ -341,7 +341,7 @@ See the [routing section](#routing).
 Set up the error handler with the default configuration.
 
 ```js
-const errorHandler = require('@feathersjs/express/errors');
+const { errorHandler } = require('@feathersjs/express');
 const app = feathers();
 
 // before starting the app
@@ -351,17 +351,24 @@ app.use(errorHandler())
 ### `app.use(express.errorHandler(options))`
 
 ```js
-const error = require('@feathersjs/errors');
+const { errorHandler } = require('@feathersjs/express');
 const app = feathers();
 
 // Just like Express your error middleware needs to be
 // set up last in your middleware chain.
-app.use(error({
+app.use(errorHandler({
     html: function(error, req, res, next) {
       // render your error view with the error object
       res.render('error', error);
     }
-}))
+}));
+
+app.use(errorHandler({
+    html: {
+      404: 'path/to/notFound.html',
+      500: 'there/will/be/robots.html'
+    }
+}));
 ```
 
 > **ProTip:** If you want to have the response in json format be sure to set the `Accept` header in your request to `application/json` otherwise the default error handler will return HTML.
