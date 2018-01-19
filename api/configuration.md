@@ -29,7 +29,7 @@ let app = feathers().configure(configuration())
 `@feathersjs/configuration` uses the following variable mechanisms:
 
 - Given a root and configuration path load a `default.json` in that path
-- When the `NODE_ENV` is not `development`, also try to load `<NODE_ENV>.json` in that path and merge both configurations
+- Also try to load `<NODE_ENV>.json` in that path, and if found, extend the default configuration
 - Go through each configuration value and sets it on the application (via `app.set(name, value)`).
   - If the value is a valid environment variable (e.v. `NODE_ENV`), use its value instead
   - If the value starts with `./` or `../` turn it into an absolute path relative to the configuration file path
