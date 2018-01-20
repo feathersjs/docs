@@ -11,7 +11,7 @@ $ npm install @feathersjs/express --save
 The `@feathersjs/express` module contains [Express](expressjs.com) framework integrations for Feathers:
 
 - The [Express framework bindings](#expressapp) to make a Feathers application Express compatible
-- An Express based transport to expose services throuhg a [REST API](#expressrest)
+- An Express based transport to expose services through a [REST API](#expressrest)
 - An [Express error handler](#expresserrorhandler) for [Feathers errors](./errors.md)
 
 ```js
