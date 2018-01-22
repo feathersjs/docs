@@ -162,8 +162,12 @@ These two events use a `callback` function with the same signature.
 There is an `authenticate` middleware. It is used the exact same way you would the regular Passport express middleware:
 
 ```js
-app.post('/login', auth.express.authenticate('local', { successRedirect: '/app', failureRedirect: '/login' }));
+const cookieParser = require('cookie-parser');
+
+app.post('/protected-route', cookieParser(), auth.express.authenticate('jwt'));
 ```
+
+For more information see the [Express middleware recipe](../../guides/auth/recipe.express-middleware.md).
 
 Additional middleware are included and exposed but typically you don't need to worry about them:
 

@@ -22,6 +22,7 @@
   * [Frameworks](guides/frameworks/readme.md)
   * [Authentication](guides/auth/readme.md)
     * [How JWT works](guides/auth/how-jwt-works.md)
+    * [Recipe: Express middleware (SSR)](guides/auth/recipe.express-middleware.md)
     * [Recipe: Custom Login Response](guides/auth/recipe.customize-response.md)
     * [Recipe: Custom JWT Payload](guides/auth/recipe.customize-jwt-payload.md)
     * [Recipe: Mixed Auth Endpoints](guides/auth/recipe.mixed-auth.md)
