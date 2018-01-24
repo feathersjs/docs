@@ -49,7 +49,7 @@ Note that `@feathersjs/express` (`express`) also exposes the standard [Express m
 // Register a service
 app.use('/todos', {
   get(id) {
-    return Promise.resovle({ id });
+    return Promise.resolve({ id });
   }
 });
 
