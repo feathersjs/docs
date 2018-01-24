@@ -50,7 +50,7 @@ class myService {
   async remove(id, params) {}
 }
 
-app.use('/my-service', myService);
+app.use('/my-service', new myService());
 {%- endcodetabs %}
 
 The parameters for service methods are:
