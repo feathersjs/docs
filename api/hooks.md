@@ -47,6 +47,7 @@ A hook function can be a normal or `async` function or arrow function that takes
   - resolves with a `context` object
   - resolves with `undefined`
   - rejects with an error
+- return `feathers.SKIP` to skip all further hooks
 
 ```js
 // normal hook function
@@ -78,7 +79,16 @@ context => {
 async context => {
   return context;
 }
+
+// skip further hooks
+const feathers = require('@feathersjs/feathers');
+
+async context => {
+  return feathers.SKIP;
+}
 ```
+
+When returning `feathers.SKIP` in a hook, all subsequent hooks will be skipped. This is useful to tell a hook to bypass all further hooks and immediatly send the response.
 
 When an error is thrown (or the promise is rejected), all subsequent hooks - and the service method call if it didn't run already - will be skipped and only the error hooks will run.
 
