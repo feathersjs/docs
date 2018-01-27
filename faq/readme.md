@@ -100,7 +100,11 @@ Custom functionality can almost always be mapped to an existing service method u
 
 ## How do I render templates?
 
-Feathers works just like Express so it's the exact same. We've created a [helpful little guide right here](../guides/advanced/using-a-view-engine.md).
+Feathers works just like Express so it's the exact same. We've created a [helpful little guide right here](../guides/advanced/using-a-view-engine.md). For protecting Express views with authentication, also see [this guide](../guides/auth/recipe.express-middleware.md).
+
+## OAuth is not setting the cookie
+
+If you are authenticating via oAuth but your API and frontend reside on different domains the cookie used by the authentication client can not be set. Instead, a query string redirect has to be used as shown in [this gist](https://gist.github.com/marshallswain/3c9e5b3b177b977468b5b711b6254f67).
 
 ## How do I create channels or rooms
 
