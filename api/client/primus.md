@@ -48,7 +48,7 @@ Initialize the Primus client using a given socket and the default options.
 
 {% codetabs name="Modular", type="js" -%}
 const feathers = require('@feathersjs/feathers');
-const primus = require('@feathersjs/primus-client');
+const Primus = require('@feathersjs/primus-client');
 const socket = new Primus('http://api.my-feathers-server.com');
 
 const app = feathers();
@@ -96,7 +96,7 @@ Options can be:
 
 ```js
 const feathers = require('@feathersjs/feathers');
-const primus = require('@feathersjs/primus-client');
+const Primus = require('@feathersjs/primus-client');
 const socket = new Primus('http://api.my-feathers-server.com');
 
 const app = feathers();
@@ -149,7 +149,7 @@ socket.send('authenticate', {
 Retrieves a list of all matching resources from the service
 
 ```js
-primus.send('find', 'messages', { status: 'read', user: 10 }, (error, data) => {
+socket.send('find', 'messages', { status: 'read', user: 10 }, (error, data) => {
   console.log('Found all messages', data);
 });
 ```
@@ -161,7 +161,7 @@ Will call `app.service('messages').find({ query: { status: 'read', user: 10 } })
 Retrieve a single resource from the service.
 
 ```js
-primus.send('get', 'messages', 1, (error, message) => {
+socket.send('get', 'messages', 1, (error, message) => {
   console.log('Found message', message);
 });
 ```
@@ -169,7 +169,7 @@ primus.send('get', 'messages', 1, (error, message) => {
 Will call `app.service('messages').get(1, {})` on the server.
 
 ```js
-primus.send('get', 'messages', 1, { fetch: 'all' }, (error, message) => {
+socket.send('get', 'messages', 1, { fetch: 'all' }, (error, message) => {
   console.log('Found message', message);
 });
 ```
@@ -181,7 +181,7 @@ Will call `app.service('messages').get(1, { query: { fetch: 'all' } })` on the s
 Create a new resource with `data` which may also be an array.
 
 ```js
-primus.send('create', 'messages', {
+socket.send('create', 'messages', {
   text: 'I really have to iron'
 }, (error, message) => {
   console.log('Message created', message);
@@ -191,7 +191,7 @@ primus.send('create', 'messages', {
 Will call `app.service('messages').create({ "text": "I really have to iron" }, {})` on the server.
 
 ```js
-primus.send('create', 'messages', [
+socket.send('create', 'messages', [
   { text: 'I really have to iron' },
   { text: 'Do laundry' }
 ]);
@@ -204,7 +204,7 @@ Will call `app.service('messages').create` on the server with the array.
 Completely replace a single or multiple resources.
 
 ```js
-primus.send('update', 'messages', 2, {
+socket.send('update', 'messages', 2, {
   text: 'I really have to do laundry'
 }, (error, message) => {
   console.log('Message updated', message);
@@ -214,7 +214,7 @@ primus.send('update', 'messages', 2, {
 Will call `app.service('messages').update(2, { "text": "I really have to do laundry" }, {})` on the server. The `id` can also be `null` to update multiple resources:
 
 ```js
-primus.send('update', 'messages', null, {
+socket.send('update', 'messages', null, {
   complete: true
 }, { complete: false });
 ```
@@ -228,7 +228,7 @@ Will call `app.service('messages').update(null, { complete: true }, { query: { c
 Merge the existing data of a single or multiple resources with the new `data`.
 
 ```js
-primus.send('patch', 'messages', 2, {
+socket.send('patch', 'messages', 2, {
   read: true
 }, (error, message) => {
   console.log('Patched message', message);
@@ -238,7 +238,7 @@ primus.send('patch', 'messages', 2, {
 Will call `app.service('messages').patch(2, { "read": true }, {})` on the server. The `id` can also be `null` to update multiple resources:
 
 ```js
-primus.send('patch', 'messages', null, {
+socket.send('patch', 'messages', null, {
   complete: true
 }, {
   complete: false
@@ -256,7 +256,7 @@ This is supported out of the box by the Feathers [database adapters](../database
 Remove a single or multiple resources:
 
 ```js
-primus.send('remove', 'messages', 2, { cascade: true }, (error, message) => {
+socket.send('remove', 'messages', 2, { cascade: true }, (error, message) => {
   console.log('Removed a message', message);
 });
 ```
@@ -264,7 +264,7 @@ primus.send('remove', 'messages', 2, { cascade: true }, (error, message) => {
 Will call `app.service('messages').remove(2, { query: { cascade: true } })` on the server. The `id` can also be `null` to remove multiple resources:
 
 ```js
-primus.send('remove', 'messages', null, { read: true });
+socket.send('remove', 'messages', null, { read: true });
 ```
 
 Will call `app.service('messages').remove(null, { query: { read: 'true' } })` on the server to delete all read app.service('messages').
@@ -279,7 +279,7 @@ Listening to service events allows real-time behaviour in an application. [Servi
 The `created` event will be published with the callback data when a service `create` returns successfully.
 
 ```js
-primus.on('messages created', function(message) {
+socket.on('messages created', function(message) {
   console.log('Got a new Message!', message);
 });
 ```
@@ -289,11 +289,11 @@ primus.on('messages created', function(message) {
 The `updated` and `patched` events will be published with the callback data when a service `update` or `patch` method calls back successfully.
 
 ```js
-primus.on('my/messages updated', function(message) {
+socket.on('my/messages updated', function(message) {
   console.log('Got an updated Message!', message);
 });
 
-primus.send('update', 'my/messages', 1, {
+socket.send('update', 'my/messages', 1, {
   text: 'Updated text'
 }, {}, function(error, callback) {
  // Do something here
@@ -305,7 +305,7 @@ primus.send('update', 'my/messages', 1, {
 The `removed` event will be published with the callback data when a service `remove` calls back successfully.
 
 ```js
-primus.on('messages removed', function(message) {
+socket.on('messages removed', function(message) {
   // Remove element showing the Message from the page
   $('#message-' + message.id).remove();
 });
