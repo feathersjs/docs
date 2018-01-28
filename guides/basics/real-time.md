@@ -152,7 +152,7 @@ Then we can initialize and use the socket directly making some calls and listeni
 /* global io */
 
 // Create a websocket connecting to our Feathers server
-const socket = io('http://localhost:3030');
+const socket = io(':3030') ;  //  or use io('http://localhost:3030');
 
 // Listen to new messages being created
 socket.on('messages created', message =>
