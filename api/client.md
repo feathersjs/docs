@@ -56,7 +56,7 @@ messageService.create({
 React Native usage is the same as for the [Node client](#node). Install the required packages into your [React Native](https://facebook.github.io/react-native/) project.
 
 ```bash
-$ npm install @feathers/feathers @feathers/socketio-client socket.io-client
+$ npm install @feathersjs/feathers @feathersjs/socketio-client socket.io-client
 ```
 
 Then in the main application file:
