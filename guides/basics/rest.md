@@ -2,7 +2,7 @@
 
 In the previous chapters we learned about Feathers [services](./services.md) and [hooks](./hooks.md) and created a messages service that works in NodeJS and the browser. We saw how Feathers automatically sends events but so far we didn't really create a web API that other people can use.
 
-This what Feathers transports do. A transport is a plugin that turns a Feathers application into a server that exposes our services through different protocols for other clients to use. Since a transport involves running a server it won't work in the browser but we wil learn later that there are complementary plugins for connecting to a Feathers server in a browser Feathers application.
+This what Feathers transports do. A transport is a plugin that turns a Feathers application into a server that exposes our services through different protocols for other clients to use. Since a transport involves running a server it won't work in the browser but we will learn later that there are complementary plugins for connecting to a Feathers server in a browser Feathers application.
 
 Currently Feathers officially has three transports:
 
