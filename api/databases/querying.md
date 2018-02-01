@@ -207,23 +207,15 @@ app.service('messages').find({
 GET /messages?$or[0][archived][$ne]=true&$or[1][roomId]=2
 ```
 
-## `$search`
-`$search` is not a public API, but may be added through hooks. For example, hooks exists for NeDB and MongoDB:
+## Search
 
-- [feathers-nedb-fuzzy-search](https://www.npmjs.com/package/feathers-nedb-fuzzy-search)
-- [feathers-mongodb-fuzzy-search](https://www.npmjs.com/package/feathers-mongodb-fuzzy-search)
-- [feathers-solr](https://www.npmjs.com/package/feathers-solr)
+Searching is not part of the common querying syntax since it is very specific to the database you are using. Many databases already support their own search syntax:
 
-Example usage:
-```js
-// Find all messages that contains the text 'hello'
-app.service('messages').find({
-  query: {
-    $search: 'hello'
-  }
-});
-```
+- Regular expressions (converted in a hook) for Mongoose, MongoDB and NeDB. See [this comment](https://github.com/feathersjs/feathers/issues/334#issuecomment-234432108)
+  - For MongoDB also see [feathers-mongodb-fuzzy-search](https://www.npmjs.com/package/feathers-mongodb-fuzzy-search)
+  - For NeDB also see [feathers-nedb-fuzzy-search](https://www.npmjs.com/package)
+- [$like for Sequelize](http://docs.sequelizejs.com/en/latest/docs/querying/) which can be set in [params.sequelize](https://github.com/feathersjs-ecosystem/feathers-sequelize#paramssequelize)
+- Some database adapters like [KnexJS](https://github.com/feathersjs-ecosystem/feathers-knex), [RethinkDB](https://github.com/feathersjs-ecosystem/feathers-rethinkdb) and [Elasticsearch](https://github.com/feathersjs-ecosystem/feathers-elasticsearch) also support non-standard query parameters which are described in their documentation pages.
+- For additional search functionality see [feathers-solr](https://www.npmjs.com/package/feathers-solr)
 
-```
-GET /messages?$search=hello
-```
+For further discussions see [this issue](https://github.com/feathersjs/feathers/issues/334).
