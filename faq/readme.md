@@ -78,13 +78,7 @@ For more information about URL routing and parameters, refer to [the Express cha
 
 ## How do I do search?
 
-This depends on the database adapter you are using. Many databases already support their own search syntax:
-
-- Regular expressions (converted in a hook) for Mongoose, MongoDB and NeDB, see [this comment](https://github.com/feathersjs/feathers/issues/334#issuecomment-234432108)
-- [$like for Sequelize](http://docs.sequelizejs.com/en/latest/docs/querying/) which can be set in [params.sequelize](https://github.com/feathersjs-ecosystem/feathers-sequelize#paramssequelize)
-- Some database adapters like [KnexJS](https://github.com/feathersjs-ecosystem/feathers-knex), [RethinkDB](https://github.com/feathersjs-ecosystem/feathers-rethinkdb) and [Elasticsearch](https://github.com/feathersjs-ecosystem/feathers-elasticsearch) also support non-standard query parameters which are described in their documentation pages.
-
-For further discussions see [this issue](https://github.com/feathersjs/feathers/issues/334).
+This depends on the database adapter you are using. See [the search querying chapter](../api/databases/querying.md#search) for more information.
 
 ## Why am I not getting JSON errors?
 
