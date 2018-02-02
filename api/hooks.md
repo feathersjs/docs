@@ -42,12 +42,14 @@ A hook function can be a normal or `async` function or arrow function that takes
 
 - return a `context` object
 - return nothing (`undefined`)
+- return `feathers.SKIP` to skip all further hooks
 - `throw` an error
 - for asynchronous operations return a [Promise](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Promise) that
   - resolves with a `context` object
   - resolves with `undefined`
   - rejects with an error
-- return `feathers.SKIP` to skip all further hooks
+
+For more information see the [hook flow](#hook-flow) and [asynchronous hooks](#asynchronous-hooks) section.
 
 ```js
 // normal hook function
@@ -86,26 +88,6 @@ const feathers = require('@feathersjs/feathers');
 async context => {
   return feathers.SKIP;
 }
-```
-
-When returning `feathers.SKIP` in a hook, all subsequent hooks will be skipped. This is useful to tell a hook to bypass all further hooks and immediatly send the response.
-
-When an error is thrown (or the promise is rejected), all subsequent hooks - and the service method call if it didn't run already - will be skipped and only the error hooks will run.
-
-The following example throws an error when the text for creating a new message is empty. You can also create very similar hooks to use your Node validation library of choice.
-
-```js
-app.service('messages').hooks({
-  before: {
-    create: [
-      function(context) {
-        if(context.data.text.trim() === '') {
-          throw new Error('Message text can not be empty');
-        }
-      }
-    ]
-  }
-});
 ```
 
 ## Hook context
@@ -175,6 +157,52 @@ Important properties that usually are available in `params`:
 `context.dispatch` is a __writeable, optional__ property and contains a "safe" version of the data that should be sent to any client. If `context.dispatch` has not been set `context.result` will be sent to the client instead.
 
 > __Note:__ `context.dispatch` only affects the data sent through a Feathers Transport like [REST](./express) or [Socket.io](./socketio.md). An internal method call will still get the data set in `context.result`.
+
+## Hook flow
+
+In general, hooks are executed in the order they are registered with the original service method being called after all `before` hooks. This flow can be affected as follows.
+
+### Throwing an error
+
+When an error is thrown (or the promise is rejected), all subsequent hooks - and the service method call if it didn't run already - will be skipped and only the error hooks will run.
+
+The following example throws an error when the text for creating a new message is empty. You can also create very similar hooks to use your Node validation library of choice.
+
+```js
+app.service('messages').hooks({
+  before: {
+    create: [
+      function(context) {
+        if(context.data.text.trim() === '') {
+          throw new Error('Message text can not be empty');
+        }
+      }
+    ]
+  }
+});
+```
+
+### Setting `context.result`
+
+When `context.result` is set in a `before` hook, the original [service method](./services.md) call will be skipped. All other hooks will still execute in their normal order. The following example always returns the currently [authenticated user](./authentication/server.md) instead of the actual user for all `get` method calls:
+
+```js
+app.service('users').hooks({
+  before: {
+    get: [
+      function(context) {
+        // Never call the actual users service
+        // just use the authenticated user
+        context.result = context.params.user;
+      }
+    ]
+  }
+});
+```
+
+### Returning `feathers.SKIP`
+
+`require('@feathersjs/feathers').SKIP` can be returned from a hook to indicate that all following hooks should be skipped. If it hasn't run yet, the service method will still be called unless `context.result` is set already.
 
 ## Asynchronous hooks
 
