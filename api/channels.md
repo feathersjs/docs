@@ -308,7 +308,7 @@ The following example updates all active connections for a given user when the u
 
 ```js
 // Join a channel given a user and connection
-const joinChannels => (user, connection) => {
+const joinChannels = (user, connection) => {
   app.channel('authenticated').join(connection);
   // Assuming that the chat room/user assignment is stored
   // on an array of the user
