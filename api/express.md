@@ -8,7 +8,7 @@
 $ npm install @feathersjs/express --save
 ```
 
-The `@feathersjs/express` module contains [Express](expressjs.com) framework integrations for Feathers:
+The `@feathersjs/express` module contains [Express](http://expressjs.com/) framework integrations for Feathers:
 
 - The [Express framework bindings](#expressapp) to make a Feathers application Express compatible
 - An Express based transport to expose services through a [REST API](#expressrest)
@@ -189,7 +189,7 @@ The default REST response formatter is a middleware that formats the data retrie
 const feathers = require('@feathersjs/feathers');
 const express = require('@feathersjs/express');
 
-const app = feathers();
+const app = express(feathers());
 
 // Turn on JSON parser for REST services
 app.use(express.json())
@@ -244,11 +244,13 @@ function updateData(req, res, next) {
 All middleware registered after the [REST transport](./rest.md) will have access to the `req.feathers` object to set properties on the service method `params`:
 
 ```js
-const app = require('@feathersjs/feathers')();
-const rest = require('@feathersjs/express/rest');
+const feathers = require('@feathersjs/feathers');
+const express = require('@feathersjs/express');
 const bodyParser = require('body-parser');
 
-app.configure(rest())
+const app = express(feathers());
+
+app.configure(express.rest())
   .use(bodyParser.json())
   .use(bodyParser.urlencoded({extended: true}))
   .use(function(req, res, next) {
@@ -341,22 +343,26 @@ See the [routing section](#routing).
 Set up the error handler with the default configuration.
 
 ```js
-const { errorHandler } = require('@feathersjs/express');
-const app = feathers();
+const feathers = require('@feathersjs/feathers');
+const express = require('@feathersjs/express');
+
+const app = express(feathers());
 
 // before starting the app
-app.use(errorHandler())
+app.use(express.errorHandler())
 ```
 
 ### `app.use(express.errorHandler(options))`
 
 ```js
-const { errorHandler } = require('@feathersjs/express');
-const app = feathers();
+const feathers = require('@feathersjs/feathers');
+const express = require('@feathersjs/express');
+
+const app = express(feathers());
 
 // Just like Express your error middleware needs to be
 // set up last in your middleware chain.
-app.use(errorHandler({
+app.use(express.errorHandler({
     html: function(error, req, res, next) {
       // render your error view with the error object
       res.render('error', error);
@@ -386,12 +392,12 @@ Express route placeholders in a service URL will be added to the services `param
 > __Important:__ See the [FAQ entry on nested routes](../faq/readme.md#how-do-i-do-nested-or-custom-routes) for more details on when and when not to use nested routes.
 
 ```js
-const feathers = require('feathers');
-const rest = require('feathers-rest');
+const feathers = require('@feathersjs/feathers');
+const express = require('@feathersjs/express');
 
-const app = feathers();
+const app = express(feathers());
 
-app.configure(rest())
+app.configure(express.rest())
   .use(function(req, res, next) {
     req.feathers.fromMiddleware = 'Hello world';
     next();
