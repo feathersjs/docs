@@ -155,7 +155,7 @@ app.service('messages').create({
   text: 'Hello from the server'
 });
 
-server.on('listening', () => console.log('Feathers REST API started at localhost:3030'));
+server.on('listening', () => console.log('Feathers REST API started at http://localhost:3030'));
 ```
 
 You can start the server by running
