@@ -34,7 +34,7 @@ Configure the authentication plugin with the given options. For options that are
 const auth = require('@feathersjs/authentication');
 
 // Available options are listed in the "Default Options" section
-app.configure(authentication(options))
+app.configure(auth(options))
 ```
 
 > __Important:__ The plugin has to be configured __before__ any other service.
