@@ -204,6 +204,12 @@ Now we can update the `script` section of `package.json` to the following:
   }
 ```
 
+On Windows the `mocha` should look like:
+
+```
+npm run clean & SET NODE_ENV=test& mocha test/ --recursive --exit
+```
+
 This will make sure that the `test/data` folder is removed before every test run and `NODE_ENV` is set properly.
 
 ## Testing services
@@ -326,6 +332,12 @@ Now we have to update update the `script` section of our `package.json` to:
     "clean": "shx rm -rf test/data/",
     "mocha": "npm run clean && NODE_ENV=test mocha test/ --recursive --exit"
   },
+```
+
+On Windows the `coverage` command, similar to the `mocha` change looks like this:
+
+```
+npm run clean & SET NODE_ENV=test& istanbul cover node_modules/mocha/bin/_mocha -- test/ --recursive --exit
 ```
 
 To get more coverage information we also have to add a `.istanbul.yml` in the main folder:
