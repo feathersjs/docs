@@ -89,7 +89,7 @@ const feathers = require('@feathersjs/feathers');
 const express = require('@feathersjs/express');
 
 const api = express(feathers())
-  .configure(feathersExpress.rest())
+  .configure(express.rest())
   .use('/service', myService);
 
 const mainApp = express().use('/api/v1', api);
