@@ -41,6 +41,10 @@ Note that `@feathersjs/express` (`express`) also exposes the standard [Express m
 - `express.static` - To statically host files in a folder
 - `express.Router` - Creates an Express router object
 
+## express()
+
+If no Feathers application is passed, `express() -> app` returns a plain Express application just like a normal call to Express would.
+
 ## app.use(path, service|mw)
 
 `app.use(path, service|mw) -> app` registers either a [service object](./services.md) or an [Express middleware](http://expressjs.com/en/guide/writing-middleware.html) on the given path. If [a service object](./services.md) is passed it will use Feathers registration mechanism, for a middleware function Express.
@@ -81,11 +85,10 @@ server.on('listening', () => console.log('Feathers application started'));
 When registering an application as a sub-app, `app.setup(server)` has to be called to initialize the sub-apps services.
 
 ```js
-const express = require('express');
 const feathers = require('@feathersjs/feathers');
-const feathersExpress = require('@feathersjs/express');
+const express = require('@feathersjs/express');
 
-const api = feathersExpress(feathers())
+const api = express(feathers())
   .configure(feathersExpress.rest())
   .use('/service', myService);
 
@@ -126,13 +129,12 @@ app.setup(server);
 The [vhost](https://github.com/expressjs/vhost) Express middleware can be used to run a Feathers application on a virtual host but again requires `app.setup(server)` to be called explicitly.
 
 ```js
-const express = require('express');
 const vhost = require('vhost');
 
 const feathers = require('@feathersjs/feathers');
-const feathersExpress = require('@feathersjs/express');
+const express = require('@feathersjs/express');
 
-const app = feathersExpress(feathers());
+const app = express(feathers());
 
 app.use('/todos', todoService);
 
