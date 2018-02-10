@@ -149,7 +149,7 @@ $ npm install @feathersjs/client --save
 
 <!-- -->
 
-> __Important:__ When you are loading @feathersjs/client you do __not__ have install or load any of the other modules listed in the table above.
+> __Important:__ When you are loading @feathersjs/client you do not have to install or load any of the other modules listed in the table above.
 
 ### When to use
 
