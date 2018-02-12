@@ -329,9 +329,17 @@ app.service('users').hooks({
 
 See the [routing section](#routing).
 
-## express.notFound()
+## express.notFound(options)
 
-`express.notFound()` returns middleware that returns a `NotFound` (404) [Feathers error](./errors.md). It should be used as the last middleware __before__ the error handler.
+`express.notFound()` returns middleware that returns a `NotFound` (404) [Feathers error](./errors.md). It should be used as the last middleware __before__ the error handler. The following options are available:
+
+- `verbose`: Set to `true` if the URL should be included in the error message (default: `false`)
+
+```js
+// Return errors that include the URL
+app.use(express.notFound({ verbose: true });
+app.use(errorHandler());
+```
 
 ## express.errorHandler()
 
