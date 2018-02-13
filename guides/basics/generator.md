@@ -28,7 +28,7 @@ Which should show a version of `3.3.0` or later.
 
 ## Configure functions
 
-The most common pattern used in the generated application is _configure functions_ which are functions that take the Feathers [app object](../../api/application.md) and then use it to e.g. register services. Those functions are then passed to [app.configure](../../api/application.md#configurecallback).
+The most common pattern used in the generated application is _configure functions_, functions that take the Feathers [app object](../../api/application.md) and then use it, e.g. to register services. Those functions are then passed to [app.configure](../../api/application.md#configurecallback).
 
 Let's look at our [basic database example](../basics/databases.md):
 
