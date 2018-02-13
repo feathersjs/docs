@@ -1,22 +1,22 @@
 # Creating a service
 
-Now that we have our [Feathers application generated](./creating.md) we can create a new API endpoint to store messages.
+Now that we have our [Feathers application generated](./creating.md), we can create a new API endpoint to store messages.
 
 ## Generating a service
 
-In Feathers any API endpoint is represented as a [service](../../api/services.md) which we already learned about in the [basics guide](../basics/services.md). To generate a new service we can run
+In Feathers any API endpoint is represented as a [service](../../api/services.md), which we already learned about in the [basics guide](../basics/services.md). To generate a new service, we can run:
 
 ```
 feathers generate service
 ```
 
-First we have to choose what kind of service we would like to create. You can choose between many databases and ORMs but for this guide we will go with the default [NeDB](https://github.com/louischatriot/nedb). NeDB is a database that stores its data locally in a file and requires no additional configuration or a database server running.
+First we have to choose what kind of service we'd like to create. You can choose amongst many databases and ORMs but for this guide we will go with the default [NeDB](https://github.com/louischatriot/nedb). NeDB is a database that stores its data locally in a file and requires no additional configuration or database server.
 
-Next we are asked for the name of the service which we can answer with `messages` and then can answer the next question for the path with the default (`/messages`) by pressing enter.
+Next, when asked for the name of the service, enter `messages`. Then keep the default path (`/messages`) by pressing enter.
 
-The database connection string (in the case of NeDB the name of the path where it should store its database files) can also be answered with the default.
+The *database connection string* can also be answered with the default. (In this case of NeDB, this is the path where it should store its database files.)
 
-Confirming the last prompt will create a couple of files and wire our service up:
+Confirming the last prompt will generate some files and wire our service up:
 
 ![Final Configuration](./assets/service.png)
 
@@ -28,8 +28,8 @@ As we can see, several files were created:
 
 - `src/services/messages/messages.service.js` - The service setup file which registers the service in a [configure function](../basics/generator.md)
 - `src/services/messages/messages.hooks.js` - A file that returns an [object with all hooks](../basics/hooks.md) that should be registered on the service.
-- `src/models/messages.model.js` - The model for our messages. Since we are using NeDB this will just instantiate the filesystem database.
-- `test/services/messages.test.js` - A Mocha test for the service which by default just makes sure that it exists.
+- `src/models/messages.model.js` - The model for our messages. Since we are using NeDB, this will simply instantiate the filesystem database.
+- `test/services/messages.test.js` - A Mocha test for the service. Initially, it only tests that the service exists.
 
 ## Testing the API
 
@@ -47,7 +47,7 @@ We can also `POST` new messages and `PUT`, `PATCH` and `DELETE` existing message
 curl 'http://localhost:3030/messages/' -H 'Content-Type: application/json' --data-binary '{ "name": "Curler", "text": "Hello from the command line!" }'
 ```
 
-Or with a REST client, e.g. [Postman](https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop?hl=en) using this button:
+Or with a REST client, e.g. [Postman](https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop?hl=en), using this button:
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/9668636a9596d1e4a496)
 
