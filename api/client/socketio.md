@@ -1,6 +1,6 @@
 # Socket.io Client
 
-> **Note:** We recommend using Feathers and the `@feathersjs/socketio-client` module on the client if possible. To use a direct Socket.io connection without using Feathers on the client however see the [Direct connection](#direct-connection) section.
+> **Note:** We recommend using Feathers and the `@feathersjs/socketio-client` module on the client if possible. If however, you want to use a direct Socket.io connection without using Feathers on the client, see the [Direct connection](#direct-connection) section.
 
 ## @feathersjs/socketio-client
 
@@ -14,7 +14,7 @@ $ npm install @feathersjs/socketio-client --save
 
 The `@feathersjs/socketio-client` module allows to connect to services exposed through the [Socket.io server](../socketio.md) via a Socket.io socket.
 
-> **Important:** Socket.io is also used to *call* service methods. Using sockets for both, calling methods and receiving real-time events is generally faster than using [REST](./express.md) and there is no need to use both, REST and Socket.io in the same client application at the same time.
+> **Important:** Socket.io is also used to *call* service methods. Using sockets for both calling methods and receiving real-time events is generally faster than using [REST](./express.md). There is therefore no need to use both REST and Socket.io in the same client application.
 
 ### socketio(socket)
 
@@ -68,7 +68,7 @@ app.service('messages').create({
 
 ### socketio(socket, options)
 
-Initialize the Socket.io client using a given socket and the given options. 
+Initialize the Socket.io client with the specified socket and options. 
 
 Options can be:
 
@@ -116,15 +116,15 @@ Feathers sets up a normal Socket.io server that you can connect to with any Sock
 </script>
 ```
 
-Service methods can be called by emitting a `<methodname>` event followed by the service path and method parameters. The service path is the name the service has been registered with (in `app.use`) without leading or trailing slashes. An optional callback following the `function(error, data)` Node convention will be called with the result of the method call or any errors that might have occurred.
+Service methods can be called by emitting a `<methodname>` event followed by the service path and method parameters. The service path is the name the service has been registered with (in `app.use`), without leading or trailing slashes. An optional callback following the `function(error, data)` Node convention will be called with the result of the method call or any errors that might have occurred.
 
 `params` will be set as `params.query` in the service method call. Other service parameters can be set through a [Socket.io middleware](../socketio.md).
 
-If the service path or method does not exist an appropriate Feathers error will be returned.
+If the service path or method does not exist, an appropriate Feathers error will be returned.
 
 ### Authentication
 
-Sockets can be authenticated by sending the `authenticate` event with the `strategy` and the payload. For specific examples see the "Direct Connection" section in the [local](./local.md) and [jwt](./jwt.md) authentication chapters.
+Sockets can be authenticated by sending the `authenticate` event with the `strategy` and the payload. For specific examples, see the "Direct Connection" section in the [local](./local.md) and [jwt](./jwt.md) authentication chapters.
 
 ```js
 const io = require('socket.io-client');
@@ -217,7 +217,7 @@ socket.emit('update', 'messages', null, {
 
 Will call `app.service('messages').update(null, { complete: true }, { query: { complete: 'false' } })` on the server.
 
-> **ProTip:** `update` is normally expected to replace an entire resource which is why the database adapters only support `patch` for multiple records.
+> **ProTip:** `update` is normally expected to replace an entire resource, which is why the database adapters only support `patch` for multiple records.
 
 ### patch
 
@@ -243,7 +243,7 @@ socket.emit('patch', 'messages', null, {
 });
 ```
 
-Will call `app.service('messages').patch(null, { complete: true }, { query: { complete: false } })` on the server to change the status for all read app.service('messages').
+Will call `app.service('messages').patch(null, { complete: true }, { query: { complete: false } })` on the server, to change the status for all read app.service('messages').
 
 This is supported out of the box by the Feathers [database adapters](../databases/readme.md) 
 
@@ -272,7 +272,7 @@ Listening to service events allows real-time behaviour in an application. [Servi
 
 #### created
 
-The `created` event will be published with the callback data when a service `create` returns successfully.
+The `created` event will be published with the callback data, when a service `create` returns successfully.
 
 ```js
 var socket = io('http://localhost:3030/');
@@ -284,7 +284,7 @@ socket.on('messages created', function(message) {
 
 #### updated, patched
 
-The `updated` and `patched` events will be published with the callback data when a service `update` or `patch` method calls back successfully.
+The `updated` and `patched` events will be published with the callback data, when a service `update` or `patch` method calls back successfully.
 
 ```js
 var socket = io('http://localhost:3030/');
@@ -302,7 +302,7 @@ socket.emit('update', 'my/messages', 1, {
 
 #### removed
 
-The `removed` event will be published with the callback data when a service `remove` calls back successfully.
+The `removed` event will be published with the callback data, when a service `remove` calls back successfully.
 
 ```js
 var socket = io('http://localhost:3030/');
