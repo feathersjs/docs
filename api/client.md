@@ -1,10 +1,10 @@
 # Feathers Client
 
-One of the most notable features of Feathers is that it can also be used as the client. The difference to many other frameworks is that it isn't a separate library, you instead get the exact same functionality as on the server. This means you can use [services](./services.md) and [hooks](./hooks.md) and configure plugins. By default a Feathers client automatically creates services that talk to a Feathers server.
+One of the most notable features of Feathers is that it can also be used as the client. In contrast with most other frameworks, it isn't a separate library; instead you get the exact same functionality with a client and on a server. This means you can use [services](./services.md) and [hooks](./hooks.md) and configure plugins. By default, a Feathers client automatically creates services that talk to a Feathers server.
 
-In order to connect to a Feathers server, a client creates [Services](./services.md) that use a REST or websocket connection to relay method calls and allow listening to [events](./events.md) on the server. This means the [Feathers application instance](./application) is usable the exact same way as you would on the server.
+In order to connect to a Feathers server, a client creates [Services](./services.md) that use a REST or websocket connection to relay method calls and allow listening to [events](./events.md) on the server. This means the [Feathers application instance](./application) is usable the exact same way as on the server.
 
-Modules relevant for use on the client are
+Modules most relevant on the client are:
 
 - `@feathersjs/feathers` to initialize a new Feathers [application](./application.md)
 - [@feathersjs/rest-client](./client/rest.md) to connect to services through [REST HTTP](./express.md).
@@ -12,15 +12,15 @@ Modules relevant for use on the client are
 - [@feathersjs/primus-client](./client/primus.md) to connect to services through [Primus](./primus.md).
 - [@feathersjs/authentication-client](./authentication/client.md) to authenticate a client
 
-> __Important:__ You do not have to use Feathers on the client to connect to a Feathers server. The client chapters above also describe how to use a REST HTTP, Socket.io or Primus connection directly without Feathers on the client side. For more information regarding authentication see the [Authentication client chapter](./authentication/client.md).
+> __Important:__ You do not have to use Feathers on the client to connect to a Feathers server. The client chapters above also describe how to use a REST HTTP, Socket.io or Primus connection directly without Feathers on the client side. For details on authentication, see the [Authentication client chapter](./authentication/client.md).
 
 This chapter describes how to set up Feathers as the client in Node, React Native and in the browser with a module loader like Webpack or Browserify or through a `<script>` tag. The examples are using [the Socket.io client](./client/socketio.md). For other connection methods see the chapters linked above.
 
-> __Important:__ Feathers can be used on the client throught the individual modules or the [@feathersjs/client](#feathersjsclient) module which combines the modules mentioned above into a single, ES5 transpiled version.
+> __Important:__ Feathers can be used on the client through the individual modules or the [@feathersjs/client](#feathersjsclient) module. The latter combines all modules mentioned above into a single, ES5 transpiled version.
 
 ## Node
 
-To connect to a Feathers server in NodeJS install the client connection library needed (here `socket.io-client`), Feathers core and appropriate client library:
+To connect to a Feathers server in NodeJS, install the desired client connection library (here, `socket.io-client`), alongside the Feathers core library, and the connection-specific library:
 
 ```
 npm install @feathersjs/feathers @feathersjs/socketio-client socket.io-client --save
@@ -84,7 +84,7 @@ messageService.create({
 });
 ```
 
-As React Native for Android doesn't handle well timeouts longer than a minute, you might want to set lower values for `pingInterval` and `pingTimeout` of `feathers-socketio` on your server, which will stop warnings related to this [issue](https://github.com/facebook/react-native/issues/12981). For example:
+Since React Native for Android doesn't handle timeouts exceeding one minute, consider setting lower values for `pingInterval` and `pingTimeout` of `feathers-socketio` on your server. This which will stop warnings related to this [issue](https://github.com/facebook/react-native/issues/12981). For example:
 
 ```js
 const app = feathers();
@@ -98,11 +98,11 @@ app.configure(socketio({
 
 ## Module loaders
 
-All modules in the `@feathersjs` namespace are using ES6 and have to be transpiled for target browsers without full ES6 support. Most client side module loader exclude the `node_modules` folder from being transpiled and have to be configured to include modules in the `@feathersjs` namespace.
+All modules in the `@feathersjs` namespace are using ES6. They must be transpiled to support browsers that don't completely support ES6. Most client-side module loaders exclude the `node_modules` folder from being transpiled and have to be configured to include modules in the `@feathersjs` namespace.
 
 ### Webpack
 
-For Webpack, the recommended `babel-loader` rule normally excludes everything in `node_modules`. It has to be adjusted to skip `node_modules/@feathersjs`. In the `module` `rules` in your `webpack.config.js` update the `babel-loader` section to this:
+For Webpack, the recommended `babel-loader` rule normally excludes everything in `node_modules`. It has to be adjusted to skip `node_modules/@feathersjs`. In the `module` `rules` in your `webpack.config.js`, update the `babel-loader` section to this:
 
 ```js
 {
@@ -118,11 +118,11 @@ For Webpack, the recommended `babel-loader` rule normally excludes everything in
 
 ### Browserify
 
-In Browserify the [babelify](https://github.com/babel/babelify) transform has to be used. All Feathers packages indicate that they need the transform and will be then transpiled automatically.
+In Browserify the [babelify](https://github.com/babel/babelify) transform must be used. All Feathers packages indicate that they need the transform and should be transpiled automatically.
 
 ### Others
 
-As mentioned above, `node_modules/@feathersjs` and all its subfolders have to be included in the ES6+ transpilation step when using any module loader that is using a transpiler. For non-CommonJS formats (like AMD) and an ES5 compatible version of Feathers and its client modules you can use the [@feathersjs/client module](#feathersjsclient).
+As mentioned above, `node_modules/@feathersjs` and all its subfolders must be included in the ES6+ transpilation step when using any module loader that is using a transpiler. For non-CommonJS formats (like AMD) and an ES5 compatible version of Feathers and its client modules you can use the [@feathersjs/client module](#feathersjsclient).
 
 ## @feathersjs/client
 
@@ -134,7 +134,7 @@ As mentioned above, `node_modules/@feathersjs` and all its subfolders have to be
 $ npm install @feathersjs/client --save
 ```
 
-`@feathersjs/client` is a module that bundles the separate Feathers client side modules into one providing the code as ES5 which is compatible with modern browsers (IE10+). It can also be used directly int the browser through a `<script>` tag. Here is a table of which Feathers client module is included:
+`@feathersjs/client` is a module that bundles the separate Feathers client-side modules into one providing the code as ES5 which is compatible with modern browsers (IE10+). It can also be used directly int the browser through a `<script>` tag. Here is a table of which Feathers client module is included:
 
 | Feathers module                   | @feathersjs/client      |
 |-----------------------------------|-------------------------|
@@ -212,7 +212,7 @@ Below is an example of the scripts you would use to load `@feathersjs/client` fr
 
 ### RequireJS
 
-Here is an example of loading feathers-client using RequireJS Syntax:
+Here's how to load feathers-client using RequireJS Syntax:
 
 ```js
 define(function (require) {
