@@ -48,12 +48,12 @@ Initialize the Primus client using a given socket and the default options.
 
 {% codetabs name="Modular", type="js" -%}
 const feathers = require('@feathersjs/feathers');
-const Primus = require('@feathersjs/primus-client');
+const primusClient = require('@feathersjs/primus-client');
 const socket = new Primus('http://api.my-feathers-server.com');
 
 const app = feathers();
 
-app.configure(primus(socket));
+app.configure(primusClient(socket));
 
 // Receive real-time events through Primus
 app.service('messages')
