@@ -6,9 +6,9 @@ In this chapter we will create a real-time chat frontend with signup and login u
 
 > __Note:__ We will not be using a frontend framework so we can focus on what Feathers is all about. Feathers is framework agnostic and can be used with any frontend framework like React, VueJS or Angular. For more information see the [frameworks section](../frameworks/readme.md).
 
-## Setting up the index page
+## Set up the index page
 
-We are already serving a the static files in the `public` folder and have a placeholder page in `public/index.html`. Let's update it to the following:
+We are already serving the static files in the `public` folder and have a placeholder page in `public/index.html`. Let's update it to the following:
 
 ```html
 <html>
@@ -39,11 +39,11 @@ This will load our chat CSS style, add a container div `#app` and load several l
 - [MomentJS](https://momentjs.com/) to format dates
 - An `app.js` for our code to live in
 
-Let’s create public/app.js where all the following code will live (with each code sample added to the end of that file).
+Let’s create `public/app.js` where all the following code will live (with each code sample added to the end of that file).
 
-## Connecting to the API
+## Connect to the API
 
-We’ll start with the most important thing first, the connection to our Feathers API. We already learned how Feathers can be used on the client in the [basics guide](../basics/readme.md). Here, we do pretty much the same thing: Establish a Socket connection and initialize a new Feathers application but we also set up the authentication client which we will use later:
+We’ll start with the most important thing first, the connection to our Feathers API. We already learned how Feathers can be used on the client in the [basics guide](../basics/readme.md). Here, we do pretty much the same thing: Establish a Socket connection and initialize a new Feathers application. We also set up the authentication client for later:
 
 ```js
 // Establish a Socket.io connection
@@ -59,7 +59,7 @@ client.configure(feathers.authentication({
 }));
 ```
 
-This allows us to talk to the chat API through websockets, which means we will also get real-time  updates.
+This allows us to talk to the chat API through websockets, for real-time updates.
 
 ## Base and user/message list HTML
 
@@ -189,7 +189,7 @@ This will add the following variables and functions:
 
 ## Displaying the login/signup or chat page
 
-Next we will add two functions that show the login and chat page where we will also add a list of the 25 newest chat messages and the registered users.
+Next, we'll add two functions to display the login and chat page, where we'll also add a list of the 25 newest chat messages and the registered users.
 
 ```js
 // Show the login page
@@ -225,7 +225,7 @@ const showChat = async () => {
 ```
 
 - `showLogin(error)` will either show the content of loginHTML or, if the login page is already showing, add an error message. This will happen when you try to log in with invalid credentials or sign up with a user that already exists.
-- `showChat()` does several things. First, we add the static chatHTML to the page. Then we get the latest 25 messages from the messages Feathers service (this is the same as the `/messages` endpoint of our chat API) using the Feathers query syntax. Since the list will come back with the newest message first we need to reverse the data. Then we add each message by calling our `addMessage` function so that it looks like a chat app should — with messages getting older as you scroll up. After that we get a list of all registered users to show them in the sidebar by calling addUser.
+- `showChat()` does several things. First, we add the static chatHTML to the page. Then we get the latest 25 messages from the messages Feathers service (this is the same as the `/messages` endpoint of our chat API) using the Feathers query syntax. Since the list will come back with the newest message first, we need to reverse the data. Then we add each message by calling our `addMessage` function so that it looks like a chat app should — with old messages getting older as you scroll up. After that we get a list of all registered users to show them in the sidebar by calling addUser.
 
 ## Login and signup
 
@@ -334,4 +334,8 @@ login();
 
 ## What's next?
 
-That’s it. We now have a plain JavaScript real-time chat frontend with login and signup. This example demonstrates many of the core principles of how you interact with a Feathers API. In the final chapter we will look at [how to write automated tests for our API](./testing.md).
+That’s it. We now have a plain JavaScript real-time chat frontend with login and signup. This example demonstrates many of the core principles of how you interact with a Feathers API. 
+
+If you run into an issue, remember you can find a complete working example [here](https://github.com/feathersjs/feathers-chat).
+
+In the final chapter, we'll look at [how to write automated tests for our API](./testing.md).
