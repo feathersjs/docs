@@ -1,14 +1,14 @@
 # Feathers basics
 
-This guide will go over the basics and core concepts of any Feathers application. 
+This guide covers the basics and core concepts of any Feathers application. 
 
 [**Setting up**](./setup.md)
 
-Learn about what is required to know and install to best learn and get started with Feathers.
+Learn how to install and get started with Feathers.
 
 [**Getting started**](./starting.md)
 
-Create your first Feathers application that works in NodeJS and the browser.
+Create your first Feathers application that works in NodeJS and in the browser.
 
 [**Services**](./services.md)
 
@@ -16,7 +16,7 @@ The heart of every Feathers application and the core concept for abstracting dat
 
 [**Hooks**](./hooks.md)
 
-Middleware for services to handle things like validation, authorization, logging, populating related entities, sending notifications and more.
+Middleware for services to handle validation, authorization, logging, populating related entities, sending notifications and more.
 
 [**REST APIs**](./rest.md)
 
@@ -24,11 +24,11 @@ Learn how to turn a service into a REST API.
 
 [**Databases**](./databases.md)
 
-Learn about the pre-built services for different databases.
+Learn how to easily connect to databases.
 
 [**Real-time APIs**](./real-time.md)
 
-Turn a database into a fully featured REST and real-time API.
+Expose your database-backed services through full-feature REST and real-time APIs.
 
 [**Clients**](./clients.md)
 
