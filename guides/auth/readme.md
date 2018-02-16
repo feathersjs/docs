@@ -22,4 +22,4 @@ Learn how to setup an endpoint so that it handles unauthenticated and authentica
 Learn how OAuth (Facebook, Google, GitHub) login works, and how you can use it in your application.
 
 [**Auth Recipe: Custom Auth Strategy**](./recipe.custom-auth-strategy.md)<br/>
-Learn how to setup a completely custom passport based auth stratgies
+Learn how to setup a completely custom passport-based auth strategy.
