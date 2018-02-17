@@ -11,7 +11,7 @@ $ npm install @feathersjs/authentication --save
 The [@feathersjs/authentication](https://github.com/feathersjs/authentication) module assists in using JWT for authentication. It has three primary purposes:
 
 1. Setup an `/authentication` endpoint to create JSON Web Tokens (JWT). JWT are used as access tokens. You can learn more about JWT at [jwt.io](https://jwt.io)
-2. Provide a consistent authentication API for all of the Feathers transports
+2. Provide a consistent authentication API for all Feathers transports
 3. Provide a framework for authentication plugins that use [Passport](http://passportjs.org/) strategies to protect endpoints.
 
 > __Note:__ If you are using a 0.x version of `feathers-authentication` please refer to [the migration guide](https://github.com/feathersjs/authentication/blob/4344c6f037f2660e4636c1c05ea22a0000649312/docs/migrating.md). The hooks that were once bundled with this module are now located at [feathers-authentication-hooks](https://github.com/feathersjs-ecosystem/feathers-authentication-hooks).
@@ -28,7 +28,7 @@ The following plugins are complementary, but entirely optional:
 
 ## app.configure(auth(options))
 
-Configure the authentication plugin with the given options. For options that are not provided the [default options](#default-options) will be used.
+Configure the authentication plugin with the given options. For options that are not provided, the [default options](#default-options) will be used.
 
 ```js
 const auth = require('@feathersjs/authentication');
@@ -41,7 +41,7 @@ app.configure(auth(options))
 
 ## Options
 
-The following default options will be mixed in with your global `auth` object from your config file. It will set the mixed options back on to the app so that they are available at any time by calling `app.get('authentication')`. They can all be overridden and are required by some of the authentication plugins.
+The following default options will be mixed in with your global `auth` object from your config file. It will set the mixed options back onto the app so that they are available at any time by calling `app.get('authentication')`. They can all be overridden and are required by some of the authentication plugins.
 
 ```js
 {
@@ -78,7 +78,7 @@ The `create` method will be used in nearly every Feathers application. It create
 
 ### service.remove(data)
 
-The `remove` method will be used less often. It mostly exists to allow for adding hooks the the "logout" process. For example, in services that require high control over security, a developer could register hooks on the `remove` method that perform token blacklisting.
+The `remove` method is used less often. Its main purpose is adding hooks to the "logout" process. For example, in services that require high control over security, a developer can register hooks on the `remove` method that perform token blacklisting.
 
 ### service.hooks({ before })
 
@@ -101,7 +101,7 @@ These properties can be modified to change the behavior of the `/authentication`
 - `payload {Object}` - becomes the JWT payload. Will also include an `exp` property denoting the expiry timestamp.
 - `options {Object}` - the options passed to [jsonwebtoken `sign()`](https://www.npmjs.com/package/jsonwebtoken#jwtsignpayload-secretorprivatekey-options-callback)
  - `secret {String | Buffer}` - either the secret for HMAC algorithms, or the PEM encoded private key for RSA and ECDSA.
- - `jwt` - See the [`jsonwebtoken`](https://www.npmjs.com/package/jsonwebtoken#jwtsignpayload-secretorprivatekey-options-callback) package docs for other available options. The authenticate method uses the [default `jwt` options](#default-options). When using this package, directly, they will have to be passed in manually.
+ - `jwt` - See the [`jsonwebtoken`](https://www.npmjs.com/package/jsonwebtoken#jwtsignpayload-secretorprivatekey-options-callback) package docs for other available options. The authenticate method uses the [default `jwt` options](#default-options). When using this package directly, they have to be passed in manually.
 
 The returned `promise` resolves with the JWT or fails with an error.
 
@@ -120,7 +120,7 @@ The returned `promise` resolves with the payload or fails with an error.
 
 `@feathersjs/authentication` only includes a single hook. This bundled `authenticate` hook is used to register an array of authentication strategies on a service method.
 
-> **Note:** This should usually be used on your `/authentication` service. Without it you can hit the `authentication` service and generate a JWT `accessToken` without authentication (ie. anonymous authentication).
+> **Note:** This should usually be used on your `/authentication` service. Without it, you can hit the `authentication` service and generate a JWT `accessToken` without authentication (ie. anonymous authentication).
 
 ```js
 app.service('authentication').hooks({
@@ -138,7 +138,7 @@ app.service('authentication').hooks({
 
 ## Authentication Events
 
-The `login` and `logout` events are emitted on the `app` object whenever a client successfully authenticates or "logs out". (With JWT, logging out doesn't invalidate the JWT. Read the section about how JWT work for more information.) These events are only emitted on the server.
+The `login` and `logout` events are emitted on the `app` object whenever a client successfully authenticates or "logs out". (With JWT, logging out doesn't invalidate the JWT. (Read the section on JWT for details.) These events are only emitted on the server.
 
 ### app.on('login', callback))
 
@@ -159,7 +159,7 @@ These two events use a `callback` function with the same signature.
 
 ## Express Middleware
 
-There is an `authenticate` middleware. It is used the exact same way you would the regular Passport express middleware:
+There is an `authenticate` middleware. It is used the exact same way as the regular Passport express middleware:
 
 ```js
 const cookieParser = require('cookie-parser');
@@ -167,9 +167,9 @@ const cookieParser = require('cookie-parser');
 app.post('/protected-route', cookieParser(), auth.express.authenticate('jwt'));
 ```
 
-For more information see the [Express middleware recipe](../../guides/auth/recipe.express-middleware.md).
+For details, see the [Express middleware recipe](../../guides/auth/recipe.express-middleware.md).
 
-Additional middleware are included and exposed but typically you don't need to worry about them:
+Additional middleware are included and exposed, but you typically don't need to worry about them:
 
 - `emitEvents` - emit `login` and `logout` events
 - `exposeCookies` - expose cookies to Feathers so they are available to hooks and services. **This is NOT used by default as its use exposes your API to CSRF vulnerabilities.** Only use it if you really know what you're doing.
@@ -221,7 +221,7 @@ app.service('authentication').hooks({
 });
 
 // Add a hook to the user service that automatically replaces
-// the password with a hash of the password before saving it.
+// the password with a hash of the password, before saving it.
 app.service('users').hooks({
  before: {
   find: [
