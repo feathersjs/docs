@@ -6,6 +6,8 @@ In this part we are going to create a new Feathers application using the generat
 npm install @feathersjs/cli -g
 ```
 
+> __Important:__ The prerequisites for this guide are the same as the [basics prerequisites](../basics/setup.md). This means that Node 8.0.0 (`node --version`) or later is required.
+
 ## Generating the application
 
 With everything [set up](../basics/setup.md), let's create a directory for our new app:
