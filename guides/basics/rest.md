@@ -100,7 +100,7 @@ class Messages {
     // Create a new object with the original data and an id
     // taken from the incrementing `currentId` counter
     const message = Object.assign({
-      id: ++this.currentId
+      id: this.currentId++
     }, data);
 
     this.messages.push(message);
