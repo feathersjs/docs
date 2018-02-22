@@ -1,28 +1,28 @@
-# Adding authentication
+# Add authentication
 
-In the previous chapters we [created our Feathers chat application](./creating.md) and [initialized a service](./service.md) for storing messages. For a proper chat application we need to be able to register and authenticate users.
+In the previous chapters we [created our Feathers chat application](./creating.md) and [initialized a service](./service.md) for storing messages. For a proper chat application we need to register and authenticate users.
 
-## Generating authentication
+## Generate authentication
 
-To add authentication to our application we can run
+To add authentication to our application, we can run
 
 ```
 feathers generate authentication
 ```
 
-This will first ask us which authentication providers we would like to use. In this guide we will only cover local authentication which is already selected so we can just confirm by pressing enter.
+This first asks which authentication providers we'd like to use. In this guide, we'll only cover local authentication. It should be selected by default. Press enter.
 
-Next we have to define the service we would like to use to store user information. Here we can just confirm the default `users` and the database with the default NeDB:
+Next we have to define the service we'll use to store user information. Simply confirm the default `users`, then the default NeDB database:
 
 ![Final Configuration](./assets/authentication.png)
 
-> __Note:__ For more information on Feathers authentication see the [authentication server API documentaion](../../api/authentication/server.md).
+> __Note:__ For details on Feathers authentication see the [authentication server API documentation](../../api/authentication/server.md).
 
-## Creating a user and logging in
+## Create a user and log in
 
-We just created a `users` service and enabled local authentication. When restarting the application we can now create a new user with `email` and `password` similar to what we did with messages and then use the login information to get a JWT (for more information see the [How JWT works guide](../auth/how-jwt-works.md)).
+We just created a `users` service and enabled local authentication. When restarting the application, we can now create a new user with `email` and `password`, similar to what we did with messages. The login information is then processed into a JWT (JSON Web Token). (For more information see the [How JWT works guide](../auth/how-jwt-works.md)).
 
-### Creating the user
+### Create the user
 
 We will create a new user with the following data:
 
@@ -33,7 +33,7 @@ We will create a new user with the following data:
 }
 ```
 
-The generated user service will automatically securely hash the password in the database for us and also exclude it from the response (passwords should never be transmitted). There are several ways to create a new user, for example via CURL like this:
+The generated user service automatically securely hashes the password in the database, and exclude it from the response. (Passwords should never be transmitted back to clients). There are several ways to create a new user, for example, via CURL:
 
 ```
 curl 'http://localhost:3030/users/' -H 'Content-Type: application/json' --data-binary '{ "email": "feathers@example.com", "password": "secret" }'
@@ -43,11 +43,11 @@ With a REST client, e.g. [Postman](https://chrome.google.com/webstore/detail/pos
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/9668636a9596d1e4a496)
 
-> **Note:** Creating a user with the same email address will only work once and fail when it already exists in the database. This is a restriction implemented for NeDB and might have to be implemented manually when using a different database.
+> **Note:** Creating a user with the same email address will only work once, then fail since it already exists in the database. This is a restriction implemented for NeDB; it might have to be implemented manually when using a different database.
 
-### Getting a token
+### Get a token
 
-To create a JWT we can now post the login information with the strategy we want to use (`local`) to the `authentication` service:
+To create a JWT, we can now post the login information to the `authentication` service, with the desired strategy (`local`):
 
 ```
 {
@@ -67,11 +67,11 @@ With a REST client, e.g. [Postman](https://chrome.google.com/webstore/detail/pos
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/9668636a9596d1e4a496)
 
-The returned token can then be used to authenticate the user it was created for by adding it to the `Authorization` header of new HTTP requests.
+The returned token can then be used to authenticate this specific user, by adding it to the `Authorization` header of new HTTP requests.
 
 ## Securing the messages service
 
-Now we have to restrict our messages service to authenticated users. If we run `feathers generate authentication` *before* generating other services,  the *feathers generate authentication* command will ask if the service should be restricted to authenticated users. Because we created the messages service first, however we have to update `src/services/messages/messages.hooks.js` manually to look like this:
+Let's restrict our messages service to authenticated users. If we had run `feathers generate authentication` *before* generating other services,  the *feathers generate authentication* command would have asked if the service should be restricted to authenticated users. However, since we created the messages service first, we now have to update `src/services/messages/messages.hooks.js` manually to look like this:
 
 ```js
 const { authenticate } = require('@feathersjs/authentication').hooks;
@@ -109,16 +109,16 @@ module.exports = {
 };
 ```
 
-This will now only allow users with a valid JWT to access the service and automatically set `params.user`.
+That way, only users with a valid JWT can access the service. This also automatically sets `params.user` only for authenticated users.
 
 ## Securing real-time events
 
-The `authenticate` hook that we used above will restrict _access_ to service methods to only authenticated users. We additionally have to make sure that [real-time service events](../basics/real-time.md) are only sent to connections that are allowed to see them - for example when users join a specific chat room or one-to-one messages.
+The `authenticate` hook introduced above restricts _access_ to service methods, to authenticated users. We also need to ensure that [real-time service events](../basics/real-time.md) are only sent to connections allowed to see them - for example when users join a specific chat room or one-to-one messages.
 
-Feathers uses channels to accomplish that which the generator already sets up for us in `src/channels.js` (have a look at the comments in the generated file and the [channel API documentation](../../api/channels.md) to get a better idea about channels).
+Feathers uses `channels` to accomplish that. The generator already sets them in `src/channels.js`. (Have a look at the comments in the generated file and the [channel API documentation](../../api/channels.md) to get a better idea about channels).
 
 By default `src/channels.js` is set up to send _all_ events to all _authenticated_ users which is what we will use for our chat application.
 
 ## What's next?
 
-In this chapter we initialized authentication and created a user and JWT. We secured the messages service and made sure that only authenticated users get real-time updates. We can now use that user information to [process new message data](./processing.md).
+In this chapter, we initialized authentication, created a user and JWT. We secured the messages service and made sure that only authenticated users get real-time updates. We can now use that user information to [process new message data](./processing.md).
