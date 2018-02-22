@@ -82,7 +82,7 @@ This depends on the database adapter you are using. See [the search querying cha
 
 ## Why am I not getting JSON errors?
 
-If you get a plain text error and a 500 status code for errors that should return different status codes, make sure you have the `feathers-errors/handler` configured as described in the [Express errors](../api/express.md) chapter.
+If you get a plain text error and a 500 status code for errors that should return different status codes, make sure you have the `express.errorHandler()` from the `@feathersjs/express` module configured as described in the [Express errors](../api/express.md#expresserrorhandler) chapter.
 
 ## Why am I not getting the correct HTTP error code
 
