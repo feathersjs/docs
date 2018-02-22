@@ -175,7 +175,7 @@ node app.js
 Once the server is running the first thing we can do is hit [localhost:3030/messages](http://localhost:3030/messages) in the browser. Since we already created a message on the server, the JSON repsonse will look like this:
 
 ```js
-[{"id":0,"text":"Hello from the server"}]
+[{"id":1,"text":"Hello from the server"}]
 ```
 
 We can also retrieve that specific message by going to [localhost:3030/messages/1](http://localhost:3030/messages/1).
