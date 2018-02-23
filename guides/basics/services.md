@@ -173,8 +173,8 @@ node app.js
 We should see this:
 
 ```
-Available messages [ { id: 0, text: 'First message' },
-  { id: 1, text: 'Second message' } ]
+Available messages [ { id: 1, text: 'First message' },
+  { id: 2, text: 'Second message' } ]
 ```
 
 ## Service events
