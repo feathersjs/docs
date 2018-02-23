@@ -173,8 +173,8 @@ node app.js
 We should see this:
 
 ```
-Available messages [ { id: 0, text: 'First message' },
-  { id: 1, text: 'Second message' } ]
+Available messages [ { id: 1, text: 'First message' },
+  { id: 2, text: 'Second message' } ]
 ```
 
 ## Service events
@@ -228,10 +228,10 @@ node app.js
 We will see how the event handlers are logging the information of created and deleted message like this:
 
 ```
-Created a new message { id: 0, text: 'First message' }
-Created a new message { id: 1, text: 'Second message' }
-Deleted message { id: 1, text: 'Second message' }
-Available messages [ { id: 0, text: 'First message' } ]
+Created a new message { id: 1, text: 'First message' }
+Created a new message { id: 2, text: 'Second message' }
+Deleted message { id: 2, text: 'Second message' }
+Available messages [ { id: 1, text: 'First message' } ]
 ```
 
 ## What's next?
