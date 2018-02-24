@@ -1,6 +1,7 @@
-![Feathers Logo](https://feathersjs.com/img/feathers-logo-wide.png)
-
-> An open source REST and realtime API layer for modern applications.
+<p style="text-align: center; margin-bottom: 60px;">
+  <img alt="Feathers logo" style="width: 66%;" src="https://feathersjs.com/img/feathers-logo-wide.png" />
+  <h4 style="color: #A0A0A0;">An open source REST and realtime API layer for modern applications.</h4>
+</p>
 
 Feathers is _a batteries included but entirely optional_ minimal web application framework.
 
