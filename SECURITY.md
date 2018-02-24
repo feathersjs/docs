@@ -22,7 +22,7 @@ Here are some things that you should be aware of when writing your app to make s
 ## Some of the technologies we employ
 
 - Password storage inside `@feathers/authentication-local` uses [bcrypt](https://github.com/dcodeIO/bcrypt.js). We don't store the salts separately since they are included in the bcrypt hashes.
-- [JWT](https://jwt.io/) is used instead of cookies to avoid CSRF attacks. We use the `HS512` algorithm by default (HMAC using SHA-512 hash algorithm).
+- [JWT](https://jwt.io/) is used instead of cookies to avoid CSRF attacks. We use the `HS256` algorithm by default (HMAC using SHA-256 hash algorithm).
 - We run [nsp](https://github.com/nodesecurity/nsp) as part of our CI. This notifies us if we are susceptible to any vulnerabilites that have been reported to the [Node Security Project](https://nodesecurity.io/).
 
 
