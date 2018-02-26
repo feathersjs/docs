@@ -12,9 +12,52 @@ The [Feathers guides](https://docs.feathersjs.com/) and applications generated b
 
 One important thing to know about Feathers is that it only exposes the official [service methods](../api/services.md) to clients. While you can add and use any service method on the server, it is __not__ possible to expose those custom methods to clients.
 
-In the [Feathers philosophy](../guides/about/philosophy.md) chapter we discussed how the _uniform interface_ of services naturally translates into a REST API and also makes it easy to hook into the execution of known methods and emit events when they return. Adding support for custom methods would add a new level of complexity defining how to describe, expose and secure custom methods. This does not go well with Feathers approach of adding services as a small and well defined concept.
+Feathers is built around the [REST architectural constraints](https://en.wikipedia.org/wiki/Representational_state_transfer#Architectural_constraints) and there are many good reasons for it. In general, almost anything that may require custom methods or RPC style actions can also be done either by creating a [custom service](../api/services.md) or through [hooks](../api/hooks.md).
 
-In general, almost anything that may require custom methods can also be done either by creating a [custom service](../api/services.md) or through [hooks](../api/hooks.md). For example, a `userService.resetPassword` method can also be implemented as a password service that resets the password in the `create` method:
+The benefits (like security, predictability, sending well defined real-time events) so far heavily outweighed the slight change in thinking required when conceptualizing your application logic.
+
+Examples:
+
+- Send email action that does not store mail message in database.
+
+Resources (services) don't have to be database records. It can be any kind of resource (like the current weather for a city or creating an email which will send it). Sending emails is usually done with either a separate email [service](../api/services.md):
+
+```js
+app.use('/email', {
+  create(data) {
+    return sendEmail(data);
+  }
+})
+```
+
+Or in a [hook](../api/hooks.md).
+
+- Place an order in e-commerce web site. Behind the scenes, there are many records will be inserted in one transaction: order_item, order_header, voucher_tracking etc.
+
+This is what [Feathers hooks](../api/hooks.md) are for. When creating a new order you also have a well defined hook chain:
+
+```js
+app.service('orders').hooks({
+  before: {
+    create: [
+      validateData(),
+      checkStock(),
+      checkVoucher()
+    ]
+  },
+  after: {
+    create: [
+      chargePayment(), // hook that calls `app.service('payment').create()`
+      sendEmail(), // hook that calls `app.service('email').create()`
+      updateStock() // Update product stock here
+    ]
+  }
+})
+```
+
+- A `userService.resetPassword` method
+
+This can also be implemented as a password service that resets the password in the `create` method:
 
 ```js
 const crypto = require('crypto');
@@ -34,8 +77,6 @@ class PasswordService {
   }
 }
 ```
-
-For more examples also see [this issue comment](https://github.com/feathersjs/feathers/issues/488#issuecomment-269687714).
 
 ## How do I do nested or custom routes?
 
