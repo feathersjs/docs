@@ -164,7 +164,7 @@ If you are using the Feathers client with Node or React Native you should follow
 You can use `@feathersjs/client` with other browser module loaders/bundlers (instead of using the modules directly) but it may include packages you may not use and result in a slightly larger bundle size.
 
 ```js
-import feathers from '@feathersjs/feathers';
+import feathers from '@feathersjs/client';
 
 // Socket.io is exposed as the `io` global.
 const socket = io('http://localhost:3030', {
