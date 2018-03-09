@@ -341,7 +341,7 @@ const updateChannels = user => {
 app.on('login', (payload, { connection }) => {
   if(connection) {
     // Join all channels on login
-    joinChannels(user, connection.user);
+    joinChannels(connection.user, connection);
   }
 });
 
