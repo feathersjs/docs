@@ -217,7 +217,7 @@ Or set it in a hook as [described here](https://github.com/feathersjs-ecosystem/
 
 ## Sequelize models and associations
 
-If you are using the [Sequelize](http://docs.sequelizejs.com/) adapter, understanding SQL and Sequelize first is very important. For further information see [this documentation chapter](https://docs.feathersjs.com/api/databases/sequelize.html#associations-and-relations) and [this answer on Stackoverflow](https://stackoverflow.com/questions/42841810/feathers-js-sequelize-service-with-relations-between-two-models/42846215#42846215).
+If you are using the [Sequelize](http://docs.sequelizejs.com/) adapter, understanding SQL and Sequelize first is very important. See the [associations section in the feathers-sequelize documentation](https://github.com/feathersjs-ecosystem/feathers-sequelize#associations) for more information on how to associate models using the Sequelize Feathers adapter.
 
 ## What about Koa/Hapi/X?
 
