@@ -21,7 +21,7 @@ The `@feathersjs/configuration` module is an app configuration function that tak
 const feathers = require('@feathersjs/feathers');
 const configuration = require('@feathersjs/configuration');
 
-// Use the application roo and `config/` as the configuration folder
+// Use the application root and `config/` as the configuration folder
 let app = feathers().configure(configuration())
 ```
 ## Variable types
