@@ -41,6 +41,31 @@ Feathers errors are pretty flexible. They contain the following fields:
 
 > **ProTip:** To convert a Feathers error back to an object call `error.toJSON()`. A normal `console.log` of a JavaScript Error object will not automatically show those additional properties described above (even though they can be accessed directly).
 
+## Custom errors
+
+You can create custom errors by extending from the `FeathersError` class and calling its constructor with `(msg, name, code, className, data)`:
+
+- `message` - The error message
+- `name` - The error name (e.g. `my-errror`)
+- `code` - An [HTTP error code](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html)
+- `className` - The full name of the error class
+- `data` - Additional data to inclue in the error
+
+
+```js
+const { FeathersError } = require('@feathersjs/errors');
+
+class UnsupportedMediaType extends FeathersError {
+  constructor(message, data) {
+    super(message, 'unsupported-media-type', 415, 'UnsupportedMediaType', data);
+  }
+}
+
+const error = new UnsupportedMediaType('Not supported');
+
+console.log(error.toJSON());
+```
+
 ## Examples
 
 Here are a few ways that you can use them:
