@@ -165,6 +165,9 @@ There is an `authenticate` middleware. It is used the exact same way as the regu
 const cookieParser = require('cookie-parser');
 
 app.post('/protected-route', cookieParser(), auth.express.authenticate('jwt'));
+app.post('/protected-route-that-redirects', cookieParser(), auth.express.authenticate('jwt', {
+  failureRedirect: '/login'
+}));
 ```
 
 For details, see the [Express middleware recipe](../../guides/auth/recipe.express-middleware.md).
