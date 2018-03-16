@@ -24,6 +24,21 @@ const configuration = require('@feathersjs/configuration');
 // Use the application root and `config/` as the configuration folder
 let app = feathers().configure(configuration())
 ```
+
+## Changing the location of the configuration directory
+
+By default, Feathers will use the `config/` directory in the root of your project’s source directory. To change this, e.g., if you have Feathers installed under the `server/` directory and you want your configuration at `server/config/`, you have to set the `NODE_CONFIG_DIR` environment variable in `app.js` _before_ importing `@feathersjs/configuration`:
+
+e.g., In `server/app.js`:
+```javascript
+process.env['NODE_CONFIG_DIR'] = path.join(__dirname, 'config/')
+const configuration = require('@feathersjs/configuration')
+```
+
+The above code is portable, so you can keep your `config/` directory with the rest of your Feathers files. It will work, for example, even if you change the directory from `server/` to `amazing-server`, etc.
+
+(The NODE_CONFIG_DIR environment variable isn’t used directly by @feathersjs/configuration but by the [node-config](https://github.com/lorenwest/node-config) module that it uses. For more information on configuring node-config settings, see the [Configuration Files Wiki page](https://github.com/lorenwest/node-config/wiki/Configuration-Files).
+
 ## Variable types
 
 `@feathersjs/configuration` uses the following variable mechanisms:
