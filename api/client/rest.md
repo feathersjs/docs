@@ -275,7 +275,7 @@ PATCH /messages?complete=false
 
 Will call `messages.patch(null, { complete: true }, { query: { complete: 'false' } })` on the server to change the status for all read messages.
 
-This is supported out of the box by the Feathers [database adapters](../databases/readme.md) 
+This is supported out of the box by the Feathers [database adapters](../databases/adapters.md) 
 
 ### remove
 
