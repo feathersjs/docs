@@ -48,6 +48,8 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }));
 // Set up REST transport using Express
 app.configure(express.rest());
+// serve static files to access them in browser
+app.use(express.static('public'))
 // Set up an error handler that gives us nicer errors
 app.use(express.errorHandler());
 
