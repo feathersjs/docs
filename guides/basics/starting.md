@@ -87,15 +87,6 @@ Let's put the browser files into a new folder
 mkdir public
 ```
 
-We will also need to host the folder with a webserver. This can be done with any webserver like Apache or with the [http-server module](https://www.npmjs.com/package/http-server) that we can install and host the `public/` folder like this:
-
-```
-npm install http-server -g
-http-server public/
-```
-
-> __Note:__ You have to keep this server running for all browser examples in the basics guide to work.
-
 In the `public/` folder we add two files, an `index.html` that will load Feathers:
 
 ```html
@@ -146,7 +137,63 @@ logTodo('dishes');
 
 You may notice that it is pretty much the same as our `app.js` for Node except the missing `feathers` import (since it is already available as a global variable).
 
-If you now go to [localhost:8080](http://localhost:8080) with the console open you will also see the result logged.
+We will also need to host the folder with a webserver. This can be done with any webserver like Apache or with the [http-server module](https://www.npmjs.com/package/http-server).
+But we will use [Express](http://expressjs.com/) that we can install like this:
+
+```
+npm install @feathersjs/express --save
+```
+Then we can modify app.js to add initialization of Feathers and Express application that exposes our public/ folder on port `3030` like this:
+
+```js
+const feathers = require('@feathersjs/feathers');
+const express = require('@feathersjs/express');
+const app = express(feathers());
+
+// Register a simple todo service that return the name and a text
+app.use('todos', {
+  async get(name) {
+    // Return an object in the form of { name, text }
+    return {
+      name,
+      text: `You have to do ${name}`
+    };
+  }
+});
+
+// A function that gets and logs a todo from the service
+async function getTodo(name) {
+  // Get the service we registered above
+  const service = app.service('todos');
+  // Call the `get` method with a name
+  const todo = await service.get(name);
+
+  // Log the todo we got back
+  console.log(todo);
+}
+
+getTodo('dishes');
+
+// serve static files
+app.use(express.static('public'))
+
+// Set up an error handler that gives us nicer errors
+app.use(express.errorHandler());
+
+// Start the server on port 3030
+const server = app.listen(3030);
+
+server.on('listening', () => console.log('Feathers API started at localhost:3030'));
+```
+You can start the server by running
+
+```
+node app.js
+```
+
+> __Note:__ The server will stay running until you stop it by pressing `Control + C` in the terminal. Remember to stop and start the server every time `app.js` changes. Now we need Express just to serve static files. We will discuss Express integration later, in the [REST API chapter](./rest.md)
+
+If you now go to [localhost:3030](http://localhost:3030) with the console open you will also see the result logged.
 
 > __Note:__ You can also load Feathers with a module loader like Webpack or Browserify. For more information see the [client API chapter](../../api/client.md).
 
