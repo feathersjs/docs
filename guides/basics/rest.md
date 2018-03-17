@@ -53,6 +53,9 @@ app.use(express.urlencoded({ extended: true }));
 // Set up REST transport using Express
 app.configure(express.rest());
 
+// serve static files
+app.use(express.static('public'))
+
 // Set up an error handler that gives us nicer errors
 app.use(express.errorHandler());
 
@@ -143,6 +146,9 @@ app.configure(express.rest());
 // Initialize the messages service by creating
 // a new instance of our class
 app.use('messages', new Messages());
+
+// serve static files
+app.use(express.static('public'))
 
 // Set up an error handler that gives us nicer errors
 app.use(express.errorHandler());
