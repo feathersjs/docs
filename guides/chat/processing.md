@@ -162,7 +162,7 @@ module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
 
 In this section, we added three hooks to pre- and post-process our message and user data. We now have a complete API to send and retrieve messages, including authentication.
 
-Now we are ready to build a frontend [using modern plain JavaScript](./frontend.md)
+Now we are ready to build a frontend [using modern plain JavaScript](./frontend.md).
 
 See the [frameworks section](../frameworks/readme.md) for more resources on specific frameworks like React, React Native, Angular or VueJS.  You'll find guides for creating a complete chat front-end with signup, logging, user listing and messages.  There are also links to complete chat applications built with some popular front-end frameworks.
 
