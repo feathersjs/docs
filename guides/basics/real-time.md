@@ -109,6 +109,9 @@ app.use('messages', memory({
   }
 }));
 
+// serve static files to access them in browser
+app.use(express.static('public'))
+
 // Set up an error handler that gives us nicer errors
 app.use(express.errorHandler());
 
@@ -169,3 +172,4 @@ socket.emit('create', 'messages', {
   });
 });
 ```
+Now open [our index page](http://localhost:3030/index.html) and check browser console.
