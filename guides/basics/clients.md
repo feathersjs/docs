@@ -41,7 +41,7 @@ We can also create services that communicate via REST using many different Ajax 
 
 > __Important:__ REST services can only emit real-time events locally, to themselves. REST does not support real-time updates from the server.
 
-Since we are making a cross-domain request, we first have to enable [Cross-Origin Resource sharing (CORS)](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) on the server. Update `app.js` to:
+Update `app.js` to:
 
 ```js
 const feathers = require('@feathersjs/feathers');
@@ -51,13 +51,6 @@ const memory = require('feathers-memory');
 
 // This creates an app that's both an Express and Feathers app
 const app = express(feathers());
-
-// Enable CORS
-app.use(function(req, res, next) {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-  next();
-});
 
 // Turn on JSON body parsing for REST services
 app.use(express.json())
@@ -83,6 +76,9 @@ app.use('messages', memory({
   }
 }));
 
+// serve static files
+app.use(express.static('public'))
+
 // Set up an error handler that gives us nicer errors
 app.use(express.errorHandler());
 
@@ -91,9 +87,6 @@ const server = app.listen(3030);
 
 server.on('listening', () => console.log('Feathers API started at localhost:3030'));
 ```
-
-> __Note:__ This is just a basic middleware setting the headers. In production (and applications created by the Feathers generator) we will use the [cors](https://github.com/expressjs/cors) module.
-
 Then we can update `public/client.js` to:
 
 ```js
