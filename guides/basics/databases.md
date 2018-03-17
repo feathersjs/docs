@@ -32,9 +32,10 @@ We can use the adapter by requiring it and initializing it with the options we w
 
 ```js
 const feathers = require('@feathersjs/feathers');
+const express = require('@feathersjs/express');
 const memory = require('feathers-memory');
 
-const app = feathers();
+const app = express(feathers());
 
 app.use('messages', memory({
   paginate: {
@@ -42,6 +43,17 @@ app.use('messages', memory({
     max: 25
   }
 }));
+
+// serve static files
+app.use(express.static('public'))
+
+// Set up an error handler that gives us nicer errors
+app.use(express.errorHandler());
+
+// Start the server on port 3030
+const server = app.listen(3030);
+
+server.on('listening', () => console.log('Feathers API started at localhost:3030'));
 ```
 
 That's it. We have a complete CRUD service for our messages with querying functionality.
@@ -91,7 +103,7 @@ With pagination enabled, the `find` method will return an object with the follow
 - `skip` - The number of entries that were skipped
 - `total` - The total number of entries for this query
 
-The following example automatically creates a couple of messages and makes some queries. You can add it at the end of both `app.js` and `public/client.js` to see it in Node and the browser:
+The following example automatically creates a couple of messages and makes some queries. You can add it at the end of both `app.js` and `public/client.js` to see it in Node and the [browser](http://localhost:3030/index.html):
 
 ```js
 async function createAndFind() {
@@ -158,6 +170,8 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }));
 // Set up REST transport using Express
 app.configure(express.rest());
+// serve static files
+app.use(express.static('public'))
 // Set up an error handler that gives us nicer errors
 app.use(express.errorHandler());
 
