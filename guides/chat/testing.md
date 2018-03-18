@@ -367,6 +367,26 @@ npm test
 
 This will print out some additional coverage information and put a complete HTML report into the `coverage` folder.
 
+## Changing the default test directory
+
+To change the default test directory, specify the directory you want in your project’s `package.json` file:
+
+```json
+{
+  "directories": {
+    "test": "server/test/"
+  }
+}
+```
+
+Also, don’t forget to update your mocha script in your `package.json` file:
+
+```json
+  "scripts": {
+    "mocha": "mocha server/test/ --recursive --exit"  
+  }
+```
+
 ## What's next?
 
 That’s it - our chat guide is completed! We now have a fully-tested REST and real-time API, with a plain JavaScript frontend including login and signup. Follow up in the [Feathers API documentation](../../api/readme.md) for complete details about using Feathers, or start building your own first Feathers application!
