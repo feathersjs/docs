@@ -59,7 +59,7 @@ To enable storing the JWT make sure to provide a `storage` when configuring the 
 
 ## app.authenticate()
 
-`app.authenticate() -> Promise` with no arguments will authenticate using the JWT from the `storage`. This is normally called to either show your application (when successfull) or showing a login page or redirecting to the appropriate oAuth link.
+`app.authenticate() -> Promise` with no arguments will try to authenticate using the JWT from the `storage`. This is normally called to either show your application (when successfull) or showing a login page or redirecting to the appropriate oAuth link.
 
 ```js
 app.authenticate().then(() => {
