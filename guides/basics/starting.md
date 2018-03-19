@@ -38,7 +38,7 @@ This application object has several methods, most importantly it allows us to re
 const feathers = require('@feathersjs/feathers');
 const app = feathers();
 
-// Register a simple todo service that return the name and a text
+// Register a simple todo service that returns the name and some text
 app.use('todos', {
   async get(name) {
     // Return an object in the form of { name, text }
