@@ -54,31 +54,6 @@ todoService.on('created', todo =>
 );
 ```
 
-## .mixins
-
-`app.mixins` contains a list of service mixins. A mixin is a callback (`(service, path) => {}`) that gets run for every service that is being registered. Adding your own mixins allows to add functionality to every registered service.
-
-```js
-const feathers = require('@feathersjs/feathers');
-const app = feathers();
-
-// Mixins have to be added before registering any services
-app.mixins.push((service, path) => {
-  service.sayHello = function() {
-    return `Hello from service at '${path}'`;
-  }
-});
-
-app.use('/todos', {
-  get(id) {
-    return Promise.resolve({ id });
-  }
-});
-
-app.service('todos').sayHello();
-// -> Hello from service at 'todos'
-```
-
 ## .hooks(hooks)
 
 `app.hooks(hooks) -> app` allows registration of application-level hooks. For more information see the [application hooks section in the hooks chapter](./hooks.md#application-hooks).
@@ -149,3 +124,56 @@ app.on('myevent', data => console.log('myevent happened', data));
 ## .removeListener(eventname, [ listener ])
 
 Provided by the core [NodeJS EventEmitter .removeListener](https://nodejs.org/api/events.html#events_emitter_removelistener_eventname_listener). Removes all or the given listener for `eventname`.
+
+## .mixins
+
+`app.mixins` contains a list of service mixins. A mixin is a callback (`(service, path) => {}`) that gets run for every service that is being registered. Adding your own mixins allows to add functionality to every registered service.
+
+```js
+const feathers = require('@feathersjs/feathers');
+const app = feathers();
+
+// Mixins have to be added before registering any services
+app.mixins.push((service, path) => {
+  service.sayHello = function() {
+    return `Hello from service at '${path}'`;
+  }
+});
+
+app.use('/todos', {
+  get(id) {
+    return Promise.resolve({ id });
+  }
+});
+
+app.service('todos').sayHello();
+// -> Hello from service at 'todos'
+```
+
+## .services
+
+`app.services` contains an object of all [services](./services.md) keyed by the path they have been registered via `app.use(path, service)`. This allows to return a list of all available service names:
+
+```js
+const servicePaths = Object.keys(app.services);
+
+servicePaths.forEach(path => {
+  const service = app.service(path);
+
+  console.log(name, service);
+});
+```
+
+> __Note:__ To retrieve services, the [app.service(path)](#servicepath) method should should be used (not `app.services.path` directly).
+
+A Feathers [client](client.md) does not know anything about the server it is connected to. This means that `app.services` will _not_ automatically contain all services available on the server. Instead, the server has to provide the list of its services, e.g. through a [custom service](./services.md):
+
+```js
+app.use('/info', {
+  async find() {
+    return {
+      services: Object.keys(app.services)
+    }
+  }
+});
+```
