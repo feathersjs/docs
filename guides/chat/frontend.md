@@ -25,7 +25,6 @@ We are already serving the static files in the `public` folder and have a placeh
     <div id="app" class="flex flex-column"></div>
     <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.12.0/moment.js"></script>
     <script src="//unpkg.com/@feathersjs/client@^3.0.0/dist/feathers.js"></script>
-    </script>
     <script src="/socket.io/socket.io.js"></script>
     <script src="app.js"></script>
   </body>
