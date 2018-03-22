@@ -16,21 +16,24 @@ The following error types, all of which are instances of `FeathersError` are ava
 
 > **ProTip:** All of the Feathers plugins will automatically emit the appropriate Feathers errors for you. For example, most of the database adapters will already send `Conflict` or `Unprocessable` errors with the validation errors from the ORM.
 
-- `BadRequest`: 400
-- `NotAuthenticated`: 401
-- `PaymentError`: 402
-- `Forbidden`: 403
-- `NotFound`: 404
-- `MethodNotAllowed`: 405
-- `NotAcceptable`: 406
-- `Timeout`: 408
-- `Conflict`: 409
-- `Unprocessable`: 422
-- `GeneralError`: 500
-- `NotImplemented`: 501
-- `Unavailable`: 503
+- 400: `BadRequest`
+- 401: `NotAuthenticated`
+- 402: `PaymentError`
+- 403: `Forbidden`
+- 404: `NotFound`
+- 405: `MethodNotAllowed`
+- 406: `NotAcceptable`
+- 408: `Timeout`
+- 409: `Conflict`
+- 411: `LengthRequired`
+- 422: `Unprocessable`
+- 429: `TooManyRequests`
+- 500: `GeneralError`
+- 501: `NotImplemented`
+- 502: `BadGateway`
+- 503: `Unavailable`
 
-Feathers errors are pretty flexible. They contain the following fields:
+Feathers errors contain the following fields:
 
 - `name` - The error name (ie. "BadRequest", "ValidationError", etc.)
 - `message` - The error message string
