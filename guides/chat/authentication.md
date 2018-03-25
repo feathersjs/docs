@@ -67,7 +67,7 @@ With a REST client, e.g. [Postman](https://chrome.google.com/webstore/detail/pos
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/9668636a9596d1e4a496)
 
-The returned token can then be used to authenticate this specific user, by adding it to the `Authorization` header of new HTTP requests.
+The returned token can then be used to authenticate this specific user, by adding it to the `Authorization` header of new HTTP requests. Since we will also use Feathers on the client when creating a frontend, we don't have to worry about manually creating and using the token for this guide. For more information for authenticating REST API calls see the [REST client API documentation](../../api/client/rest.md#authentication).
 
 ## Securing the messages service
 
