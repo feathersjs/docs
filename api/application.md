@@ -160,11 +160,11 @@ const servicePaths = Object.keys(app.services);
 servicePaths.forEach(path => {
   const service = app.service(path);
 
-  console.log(name, service);
+  console.log(path, service);
 });
 ```
 
-> __Note:__ To retrieve services, the [app.service(path)](#servicepath) method should should be used (not `app.services.path` directly).
+> __Note:__ To retrieve services, the [app.service(path)](#servicepath) method should be used (not `app.services.path` directly).
 
 A Feathers [client](client.md) does not know anything about the server it is connected to. This means that `app.services` will _not_ automatically contain all services available on the server. Instead, the server has to provide the list of its services, e.g. through a [custom service](./services.md):
 
