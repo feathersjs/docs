@@ -146,7 +146,11 @@ context => {
 The `iff` hook is actually more capable than the simple demonstration, above. It can handle an async predicate expression. This would be equivalent to being able to pass a `promise` inside the `if` statement's parentheses. It also allows us to chain an `.else()` statement, which will run if the predicate evaluates to false.
 
 ```js
-.else( context => Object.assign(context.params.query, { public: true }) )
+.else(
+  context => {
+    Object.assign(context.params.query, { public: true })
+    return context
+  )
 ```
 
 The above statement simply adds `public: true` to the query parameters. This limits the query to only find `user` records that have the `public` property set to `true`.
