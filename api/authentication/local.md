@@ -76,7 +76,7 @@ const local = require('@feathersjs/authentication-local');
 app.service('users').hooks({
   before: {
     create: [
-      local.hooks.hashPassword()
+      local.hooks.hashPassword() // Feathers authentication won’t let you store clear text passwords!
     ]
   }
 });
