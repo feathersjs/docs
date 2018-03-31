@@ -65,6 +65,8 @@ This will pull from your global authentication object in your config file. It wi
 
 This hook is used to hash plain text passwords before they are saved to the database. It uses the bcrypt algorithm by default but can be customized by passing your own `options.hash` function.
 
+> __Important:__ `@feathersjs/authentication-local` does not allow to store clear text passwords. This means the `hashPassword` hook __must__ be used when using the [standard verifier](#verifier).
+
 Available options are
 
 - `passwordField` (default: `'password'`) - key name of password field to look on context.data
