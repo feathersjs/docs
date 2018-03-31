@@ -80,6 +80,8 @@ Registering the OAuth2 plugin will automatically set up routes to handle the OAu
 
 Additional passport strategy options can be provided based on the OAuth1 strategy you are configuring.
 
+> __Note:__ If your api and frontend live on separate domains, you will need to manually setup a handler to pass the access token back to the frontend application. [See this FAQ](https://docs.feathersjs.com/faq/readme.html#oauth-is-not-setting-the-cookie).
+
 ## Verifier
 
 This is the verification class that handles the OAuth2 verification by looking up the entity (normally a `user`) on a given service and either creates or updates the entity and returns them. It has the following methods that can all be overridden. All methods return a promise except `verify`, which has the exact same signature as [passport-oauth2](https://github.com/jaredhanson/passport-oauth2).
