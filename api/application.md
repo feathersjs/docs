@@ -177,3 +177,18 @@ app.use('/info', {
   }
 });
 ```
+
+## .defaultService
+
+`app.defaultService` can be a function that returns an instance of a new standard service for `app.service(path)` if there isn't one registered yet.
+
+```js
+const memory = require('feathers-memory');
+
+// For every `path` that doesn't have a service automatically return a new in-memory service
+app.defaultService = function(path) {
+  return memory();
+}
+```
+
+This is used by the [client transport adapters](./client.md) to automatically register client side services that talk to a Feathers server.
