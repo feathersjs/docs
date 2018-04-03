@@ -107,11 +107,7 @@ This makes it easy to see at one glance in which order hooks are executed and fo
 
 > __Note:__ `all` is a special keyword which means those hooks will run before the method specific hooks in this chain.
 
-A flow how different hooks will be executed like this:
-
-![Hook flow](./assets/hook-flow.jpg)
-
-Can be registered like this:
+For example, if hooks are registered like so:
 
 ```js
 const messagesHooks = {
@@ -133,6 +129,10 @@ const messagesHooks = {
     remove: [ hook65() ],
   }
 };
+
+This diagram illustrates when each hook will be executed:
+
+![Hook flow](./assets/hook-flow.jpg)
 
 app.service('messages').hooks(messagesHooks);
 ```
