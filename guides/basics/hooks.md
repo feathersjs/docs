@@ -130,12 +130,12 @@ const messagesHooks = {
   }
 };
 
+app.service('messages').hooks(messagesHooks);
+```
+
 This diagram illustrates when each hook will be executed:
 
 ![Hook flow](./assets/hook-flow.jpg)
-
-app.service('messages').hooks(messagesHooks);
-```
 
 ## Validating data
 
