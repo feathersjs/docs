@@ -16,7 +16,7 @@ Writing all that code yourself is pretty repetitive and cumbersome though which 
 
 > __Pro tip:__ Each one of the the linked adapters has a complete REST API example in their readme.
 
-In this chapter we will look at the basic usage of the in-memory database adapter and create a persistent REST API using [NEDB](https://github.com/louischatriot/nedb).
+In this chapter we will look at the basic usage of the in-memory database adapter.
 
 > __Important:__ You should be familiar with the database technology and ORM ([Sequelize](http://docs.sequelizejs.com/), [KnexJS](http://knexjs.org/) or [Mongoose](http://mongoosejs.com/)) before using a Feathers database adapter.
 
