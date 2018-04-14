@@ -45,9 +45,9 @@ Note that `@feathersjs/express` (`express`) also exposes the standard [Express m
 
 If no Feathers application is passed, `express() -> app` returns a plain Express application just like a normal call to Express would.
 
-## app.use(path, service|mw)
+## app.use(path, service|mw|\[mw\])
 
-`app.use(path, service|mw) -> app` registers either a [service object](./services.md) or an [Express middleware](http://expressjs.com/en/guide/writing-middleware.html) on the given path. If [a service object](./services.md) is passed it will use Feathers registration mechanism, for a middleware function Express.
+`app.use(path, service|mw|[mw]) -> app` registers either a [service object](./services.md), an [Express middleware](http://expressjs.com/en/guide/writing-middleware.html) or an array of [Express middleware](http://expressjs.com/en/guide/writing-middleware.html) on the given path. If [a service object](./services.md) is passed it will use Feathers registration mechanism, for a middleware function Express.
 
 ```js
 // Register a service
@@ -61,6 +61,16 @@ app.use('/todos', {
 app.use('/test', (req, res) => {
   res.json({
     message: 'Hello world from Express middleware'
+  });
+});
+
+// Register multiple Express middleware functions
+app.use('/test', (req, res, next) => {
+  res.data = 'Step 1 worked';
+  next();
+}, (req, res) => {
+  res.json({
+    message: 'Hello world from Express middleware ' + res.data
   });
 });
 ```
