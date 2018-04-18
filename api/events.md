@@ -129,7 +129,7 @@ messages.remove(1);
 
 ## Custom events
 
-By default, real-time clients will only receive the [standard events](#service-events). However, it is possible to define a list of custom events on a service as `service.events` that should also be passed. The `context` for custom events won't be a full hook context but just an object containing `{ app, service, path, result }`.
+By default, real-time clients will only receive the [standard events](#service-events). However, it is possible to define a list of custom events on a service as `service.events` that should also be passed when `service.emit('customevent', data)` is called on the server. The `context` for custom events won't be a full hook context but just an object containing `{ app, service, path, result }`.
 
 > **Important:** The [database adapters](./databases/common.md) also take a list of custom events as an initialization option.
 
@@ -156,4 +156,21 @@ class PaymentService {
 }
 ```
 
-Now clients can listen to the `<servicepath> status` event. Custom events can be [published](./channels.md#publishing) just like standard events.
+Using `service.emit` custom events can also be sent in a hook:
+
+```js
+app.service('payments').hooks({
+  after(context) {
+    context.service.emit('status', { status: 'completed' });
+  }
+});
+```
+
+Custom events can be [published through channels](./channels.md#publishing) just like standard events and listened to it in a [Feathers client](./client.md) or [directly on the socket connection](./client/socketio.md#listening-to-events):
+
+
+```js
+client.service('payments').on('status', data => {});
+
+socket.on('payments status', data => {});
+```
