@@ -131,7 +131,7 @@ messages.remove(1);
 
 By default, real-time clients will only receive the [standard events](#service-events). However, it is possible to define a list of custom events on a service as `service.events` that should also be passed when `service.emit('customevent', data)` is called on the server. The `context` for custom events won't be a full hook context but just an object containing `{ app, service, path, result }`.
 
-> **Important:** The [database adapters](./databases/common.md) also take a list of custom events as an initialization option.
+> **Important:** The [database adapters](./databases/common.md) also take a list of custom events as an [initialization option](./databases/common.md#serviceoptions).
 
 <!-- -->
 
@@ -160,8 +160,10 @@ Using `service.emit` custom events can also be sent in a hook:
 
 ```js
 app.service('payments').hooks({
-  after(context) {
-    context.service.emit('status', { status: 'completed' });
+  after: {
+    create(context) {
+      context.service.emit('status', { status: 'completed' });
+    }
   }
 });
 ```
