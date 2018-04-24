@@ -49,7 +49,7 @@ const api = require('./api');
 
 // Register your API sub app
 app.use('/api', api);
-​
+
 app.get('/messages', function(req, res, next){
   api.service('messages')
     .find({ query: {$sort: { updatedAt: -1 } } })
@@ -74,11 +74,11 @@ app.set('view engine', 'jade');
 const client = require('@feathersjs/client');
 const socketio = require('@feathersjs/socketio-client');
 const io = require('socket.io-client');
-​
+
 // Set up a socket connection to our remote API
 const socket = io('http://api.feathersjs.com');
 const api = client().configure(socketio(socket));
-​
+
 app.get('/messages', function(req, res, next){
   api.service('messages')
     .find({ query: {$sort: { updatedAt: -1 } } })
@@ -87,6 +87,6 @@ app.get('/messages', function(req, res, next){
 });
 ```
 
-> **ProTip:** In the above example we set up sockets. Alternatively you could use a Feathers client [REST provider](../../api/rest.md).
+> **ProTip:** In the above example we set up sockets. Alternatively you could use a Feathers client [REST provider](../../api/express.md).
 
-And with that, we've shown 3 different ways that you use a template engine with Feathers to render service data. If you see any issues in this guide feel free to [submit a pull request](https://github.com/feathersjs/feathers-docs/edit/master/guides/advanced/using-a-view-engine.md).
+And with that, we've shown 3 different ways that you use a template engine with Feathers to render service data.
