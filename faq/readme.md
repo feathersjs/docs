@@ -334,6 +334,10 @@ Just like in Express itself, the order of middleware matters. If you registered 
 
 The standard Feathers oAuth setup sets the JWT in a cookie which can only be passed between the same domain. If your frontend is running on a different domain you will have to use query string redirects as outlined in [this Gist](https://gist.github.com/marshallswain/3c9e5b3b177b977468b5b711b6254f67).
 
+## My configuration isn't loaded
+
+If you are running or requiring the Feathers app from a different folder [Feathers configuration](../api/configuration.md) needs to be instructed where the configuration files for the app are located. Since it uses [node-config](https://github.com/lorenwest/node-config) this can be done by setting the [NODE_CONFIG_DIR envorinment variable](https://github.com/lorenwest/node-config/wiki/Environment-Variables#node_config_dir).
+
 ## How do I set up HTTPS?
 
 Check out the Feathers [Express HTTPS docs](../api/express.md#https).
