@@ -76,9 +76,7 @@ Service methods must return a [`Promise`](https://developer.mozilla.org/en-US/do
 
 - `id` — The identifier for the resource. A resource is the data identified by a unique id.
 - `data` — The resource data.
-- `params` - Any extra parameters, for example the authenticated user.
-
-> **Important:** `params.query` contains the query parameters from the client, either passed as URL query parameters (see the [REST](./express.md) chapter) or through websockets (see [Socket.io](./socketio.md) or [Primus](./primus.md)).
+- `params` - Additional parameters for the method call, see [params](#params)
 
 Once registered, the service can be retrieved and used via [app.service()](./application.md#servicepath):
 
@@ -92,6 +90,17 @@ myService.get(1).then(item => console.log('.get(1)', item));
 Keep in mind that services don't have to use databases. You could easily replace the database in the example with a package that uses some API to, for example, pull in GitHub stars or stock ticker data.
 
 > **Important:** This section describes the general usage of service methods and how to implement them. They are already implemented by the official Feathers database adapters. For specifics on how to use the database adapters, see the [database adapters common API](./databases/common.md).
+
+### params
+
+`params` contain additional information for the service method call. Some properties in `params` can be set by Feathers already. Commonly used are:
+
+- `params.query` - the query parameters from the client, either passed as URL query parameters (see the [REST](./express.md) chapter) or through websockets (see [Socket.io](./socketio.md) or [Primus](./primus.md)).
+- `params.provider` - The transport (`rest`, `socketio` or `primus`) used for this service call. Will be `undefined` for internal calls from the server (unless passed explicitly).
+- `params.user` - The authenticated user, either set by [Feathers authentication](./authentication/server.md) or passed explicitly.
+
+
+> __Important:__ For external calls only `params.query` will be sent between the client and server. If not passed, `params.query` will be `undefined` for internal calls.
 
 
 ### .find(params)
