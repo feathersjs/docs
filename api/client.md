@@ -121,9 +121,9 @@ npm i --save @feathersjs/client
 ```
 
 You can then import the transpiled libraries from this package:
+
 ```js
 import feathers from "@feathersjs/client";
-import rest from "@feathersjs/client/rest"
 ```
 
 ### Browserify
