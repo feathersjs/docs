@@ -114,7 +114,17 @@ For Webpack, the recommended `babel-loader` rule normally excludes everything in
 
 ### create-react-app
 
-[create-react-app](https://github.com/facebookincubator/create-react-app) uses [Webpack](#webpack) but does not allow to modify the configuration unless you eject. If you do not want to eject, use the [@feathersjs/client]() module instead.
+[create-react-app](https://github.com/facebookincubator/create-react-app) uses [Webpack](#webpack) but does not allow to modify the configuration unless you eject. If you do not want to eject, use the [@feathersjs/client](https://github.com/feathersjs/client) module instead.
+
+```
+npm i --save @feathersjs/client
+```
+
+You can then import the transpiled libraries from this package:
+
+```js
+import feathers from "@feathersjs/client";
+```
 
 ### Browserify
 
