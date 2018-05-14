@@ -182,7 +182,7 @@ Similar to validation, it depends on if your database/ORM supports models or not
 
 For any of the feathers database/ORM adapters you can just use [hooks](../api/hooks.md) to fetch data from other services.
 
-This is a better approach because it keeps your application database agnostic and service oriented. By referencing the services (using `app.service().find()`, etc.) you can still decouple your app and have these services live on entirely separate machines or use entirely different databases without having to change any of your fetching code. We show how to associate data in a hook in the [chat guide](../guides/chat/processing.md). An alternative is the [populate hook in feathers-hooks-common](https://feathers-plus.github.io/v1/feathers-hooks-common/#populate).
+This is a better approach because it keeps your application database agnostic and service oriented. By referencing the services (using `app.service().find()`, etc.) you can still decouple your app and have these services live on entirely separate machines or use entirely different databases without having to change any of your fetching code. We show how to associate data in a hook in the [chat guide](../guides/chat/processing.md). An alternative are the [fastJoin](https://feathers-plus.github.io/v1/feathers-hooks-common/#fastjoin) or [populate](https://feathers-plus.github.io/v1/feathers-hooks-common/#populate) in [feathers-hooks-common](https://feathers-plus.github.io/v1/feathers-hooks-common/).
 
 #### The ORM way
 
