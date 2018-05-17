@@ -75,6 +75,37 @@ app.service('messages').create({
 });
 ```
 
+### params.connection
+
+Allows to pass additional options specific to the AJAX library. `params.connection.headers` will be merged with `params.headers`:
+
+```js
+app.configure(restClient.request(request));
+
+app.service('messages').get(1, {
+  connection: {
+    followRedirect: false
+  }
+});
+```
+
+With the `fetch` fork [yetch](https://github.com/Netflix/yetch) it can also be used to abort requests:
+
+```js
+const yetch = require('yetch');
+const controller = new AbortController();
+
+app.configure(restClient.fetch(yetch));
+
+const promise = app.service('messages').get(1, {
+  connection: {
+    signal: controller.signal
+  }
+});
+
+promise.abort();
+```
+
 ### jQuery
 
 Pass the instance of jQuery (`$`) to `restClient.jquery`:
