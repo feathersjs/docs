@@ -98,6 +98,7 @@ Keep in mind that services don't have to use databases. You could easily replace
 - `params.query` - the query parameters from the client, either passed as URL query parameters (see the [REST](./express.md) chapter) or through websockets (see [Socket.io](./socketio.md) or [Primus](./primus.md)).
 - `params.provider` - The transport (`rest`, `socketio` or `primus`) used for this service call. Will be `undefined` for internal calls from the server (unless passed explicitly).
 - `params.user` - The authenticated user, either set by [Feathers authentication](./authentication/server.md) or passed explicitly.
+- `params.connection` - If the service call has been made by a real-time transport (e.g. through websockets), `params.connection` is the connection object that can be used with [channels](./channels.md).
 
 
 > __Important:__ For external calls only `params.query` will be sent between the client and server. If not passed, `params.query` will be `undefined` for internal calls.
