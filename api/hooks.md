@@ -153,6 +153,10 @@ The hook `context` is passed to a hook function and contains information about t
 
 > __Note:__ `context.dispatch` only affects the data sent through a Feathers Transport like [REST](./express) or [Socket.io](./socketio.md). An internal method call will still get the data set in `context.result`.
 
+### context.statusCode
+
+`context.statusCode` is a __writeable, optional__ property that allows to override the standard [HTTP status code](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html) that should be returned.
+
 ## Hook flow
 
 In general, hooks are executed in the order they are registered with the original service method being called after all `before` hooks. This flow can be affected as follows.
