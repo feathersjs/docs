@@ -212,4 +212,4 @@ The [chat application guide](../chat/readme.md) will show several more examples 
 
 ## What's next?
 
-In this chapter we learned how Feathers hooks can be used middleware for service method calls to validate and manipulate incoming and outgoing data without having to change our service. In the next chapter we will turn our messages service into a [fully functional REST API](./rest.md).
+In this chapter we learned how Feathers hooks can be used as middleware for service method calls to validate and manipulate incoming and outgoing data without having to change our service. In the next chapter we will turn our messages service into a [fully functional REST API](./rest.md).
