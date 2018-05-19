@@ -14,7 +14,7 @@ In this chapter we will look at the HTTP REST transport and Feathers Express fra
 
 ## REST and services
 
-One of the goals of Feathers is make building [REST APIs](https://en.wikipedia.org/wiki/Representational_state_transfer) easier since it is by far the most common protocol for web APIs. For example, we want to make a request like `GET /messages/1` and get a JSON response like `{ "id": 1, "text": "The first message" }`. You may already have noticed that the Feathers service methods and the HTTP methods like `GET`, `POST`, `PATCH` and `DELETE` are fairly complementary to each other:
+One of the goals of Feathers is to make building [REST APIs](https://en.wikipedia.org/wiki/Representational_state_transfer) easier since it is by far the most common protocol for web APIs. For example, we want to make a request like `GET /messages/1` and get a JSON response like `{ "id": 1, "text": "The first message" }`. You may already have noticed that the Feathers service methods and the HTTP methods like `GET`, `POST`, `PATCH` and `DELETE` are fairly complementary to each other:
 
 | Service method  | HTTP method | Path        |
 |-----------------|-------------|-------------|
