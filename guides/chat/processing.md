@@ -1,6 +1,6 @@
 # Processing data
 
-Now that we can [create and authenticate users](./authentication.md), we are going to process data, sanitize the input we get from the client and add extra information.
+Now that we can [create and authenticate users](./authentication.md), we are going to process data, sanitize the input we get from the client and add extra information. For this chapter we require an empty database which can be done by removing the `data/` folder (`rm -rf data/`).
 
 ## Sanitize new message
 
