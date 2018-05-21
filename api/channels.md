@@ -246,7 +246,7 @@ app.service('users').publish('created', data => {
 
 ## Publishing
 
-Publishers are callback functions that return which channel(s) to send an event to. They can be registered at the application and the service level and for all or specific events. A publishing function gets the event data and context object (`(data, context) => {}`) and returns a named or combined channel or an array of channels. Multiple publishers can be registered. Besides the standard [service event names](./events.md#service-events) an event name can also be a [custom event](./events.md#custom-events). `context` is the [context object](./hooks.md) from the service call or an object containing `{ path, service, app, result }` for custom events.
+Publishers are callback functions that return which channel(s) to send an event to. They can be registered at the application and the service level and for all or specific events. A publishing function gets the event data and context object (`(data, context) => {}`) and returns a named or combined channel or an array of channels. Only one publisher can be registered for one type. Besides the standard [service event names](./events.md#service-events) an event name can also be a [custom event](./events.md#custom-events). `context` is the [context object](./hooks.md) from the service call or an object containing `{ path, service, app, result }` for custom events.
 
 ### service.publish([event,] fn)
 
@@ -295,6 +295,15 @@ app.publish('log', (data, context) => {
   return app.channel(app.channels);
 });
 ```
+
+### Publisher precedence
+
+The first publisher callback found in the following order will be used:
+
+1. Service publisher for a specific event
+2. Service publisher for all events
+3. App publishers for a specific event
+4. App publishers for all events
 
 ## Keeping channels updated
 
