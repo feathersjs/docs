@@ -60,7 +60,7 @@ app.listen(3030);
 
 ## Channels
 
-Channels determine which real-time events should be sent to which client. For example, we want to only send messages to authenticated users or users in the same room. For this example we will just enable real-time functionality for all connections however:
+Channels determine which real-time events should be sent to which client. For example, we might want to only send messages to authenticated users or users in the same room. For this example however, we will just enable real-time functionality for all connections:
 
 ```js
 // On any real-time connection, add it to the `everybody` channel
