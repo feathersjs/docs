@@ -27,11 +27,14 @@ const auth = require('@feathersjs/authentication-client');
 
 const app = feathers();
 
+// Setup the transport (Rest, Socket, etc.) here BEFORE setting up the auth
+// ...
+
 // Available options are listed in the "Options" section
 app.configure(auth(options))
 ```
 
-> The [transports plugins](../client.md) must have been initialized previously to the authentication plugin on the client side
+**> The [transports plugins](../client.md) (Rest, Socket, Primus...) must have been initialized previously to the authentication plugin on the client side.** This allow automatic population of the relevant authorization headers and is mandatory for the authentication plugin to work as expected out-of-the-box.
 
 ## Options
 
