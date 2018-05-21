@@ -171,4 +171,4 @@ socket.emit('create', 'messages', {
 ```
 ## What's next?
 
-In this chapter we added Socket.io transport and saw how to use channels to send events from server to client. In the [next chapter](./clients.md) we will look how to use browser Feathers application and client services to handle this events easily.
+In this chapter we added the Socket.io transport and saw how to use channels to send events from server to client. In the [next chapter](./clients.md) we will look at how to use the browser Feathers application and client services to handle these events easily.
