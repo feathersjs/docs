@@ -23,15 +23,21 @@ Setup is done the same as all Feathers plugins, using the `configure` method:
 
 ```js
 const feathers = require('@feathersjs/feathers');
+const socketio = require('@feathersjs/socketio-client');
+const io = require('socket.io-client');
 const auth = require('@feathersjs/authentication-client');
 
+const socket = io('http://api.feathersjs.com');
 const app = feathers();
+
+// Setup the transport (Rest, Socket, etc.) here
+app.configure(socketio(socket));
 
 // Available options are listed in the "Options" section
 app.configure(auth(options))
 ```
 
-> The [transports plugins](../client.md) must have been initialized previously to the authentication plugin on the client side
+**> The [transports plugins](../client.md) (Rest, Socket, Primus...) must have been initialized previously to the authentication plugin.**
 
 ## Options
 
