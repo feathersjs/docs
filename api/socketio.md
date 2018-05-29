@@ -143,6 +143,10 @@ app.service('users').hooks({
 
 > **Important:** Only `params.query` is passed between the server and the client, other parts of `params` are not. This is for security reasons so that a client can't set things like `params.user` or the database options. You can always map from `params.query` to `params` in a before [hook](./hooks.md).
 
+### params.connection
+
+`params.connection` is the connection object that can be used with [channels](./channels.md). It is the same object as `socket.feathers` in a Socket.io middleware as [shown in the `params` section](#params).
+
 ## uWebSocket
 
 The options can also be used to initialize [uWebSocket](https://github.com/uwebsockets/uwebsockets) which is a WebSocket server implementation that provides better performace and reduced latency.
