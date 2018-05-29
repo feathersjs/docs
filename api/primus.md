@@ -103,3 +103,7 @@ app.service('users').hooks({
 `params.query` will contain the query parameters sent from the client.
 
 > **Important:** Only `params.query` is passed between the server and the client, other parts of `params` are not. This is for security reasons so that a client can't set things like `params.user` or the database options. You can always map from `params.query` to `params` in a before [hook](./hooks.md).
+
+### params.connection
+
+`params.connection` is the connection object that can be used with [channels](./channels.md). It is the same object as `req.feathers` in a Primus middleware as [shown in the `params` section](#params).
