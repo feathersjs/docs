@@ -33,10 +33,7 @@ const io = require('socket.io-client');
 const feathers = require('@feathersjs/feathers');
 const socketio = require('@feathersjs/socketio-client');
 
-const socket = io('http://api.my-feathers-server.com', {
-  transports: ['websocket'],
-  forceNew: true
-});
+const socket = io('http://api.my-feathers-server.com');
 const client = feathers();
 
 client.configure(socketio(socket));
@@ -178,9 +175,7 @@ import io from 'socket.io-client';
 import feathers from '@feathersjs/client';
 
 // Socket.io is exposed as the `io` global.
-const socket = io('http://localhost:3030', {
-  transports: ['websocket']
-});
+const socket = io('http://localhost:3030');
 // @feathersjs/client is exposed as the `feathers` global.
 const app = feathers();
 
@@ -204,9 +199,7 @@ Below is an example of the scripts you would use to load `@feathersjs/client` fr
 <script src="//unpkg.com/socket.io-client@1.7.3/dist/socket.io.js"></script>
 <script>
   // Socket.io is exposed as the `io` global.
-  var socket = io('http://localhost:3030', {
-    transports: ['websocket']
-  });
+  var socket = io('http://localhost:3030');
   // @feathersjs/client is exposed as the `feathers` global.
   var app = feathers();
 
@@ -231,9 +224,7 @@ define(function (require) {
   const { socketio, authentication } = feathers;
   const io = require('socket.io-client');
 
-  const socket = io('http://localhost:3030', {
-    transports: ['websocket']
-  });
+  const socket = io('http://localhost:3030');
   // @feathersjs/client is exposed as the `feathers` global.
   const app = feathers();
 
