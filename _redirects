@@ -3,19 +3,19 @@ https://buzzard.docs.feathersjs.com/* https://docs.feathersjs.com/:splat 301!
 # Legacy docs Redirects
 
 /authentication/*   /api/authentication/server.html
-/authorization/*    https://github.com/feathersjs-ecosystem/feathers-authentication-hooks
 /clients/*          /api/client.html
 /configuration/*    /api/configuration.html
-/databases/*        /databases/common.html
-/frameworks/*       /guides/frameworks/readme.html
-/getting-started/*  /guides/readme.html
+/databases/*        /api/databases/common.html
 /hooks/*            /api/hooks.html
 /middleware/*       /api/express.html
 /providers/*        /api/express.html
 /rest/*             /api/express.html
 /real-time/*        /api/events.html
 /services/*         /api/services.html
-/why/*              /
+/frameworks/*       /guides/frameworks/readme.html
+/getting-started/*  /guides/readme.html
+/authorization/*    https://github.com/feathersjs-ecosystem/feathers-authentication-hooks
+/why/*              https://blog.feathersjs.com/why-we-built-the-best-web-framework-you-ve-probably-never-heard-of-until-now-176afc5c6aac
 
 # v2 Redirects
 
