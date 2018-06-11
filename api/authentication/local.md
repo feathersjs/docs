@@ -61,6 +61,8 @@ This will pull from your global authentication object in your config file. It wi
 }
 ```
 
+> __Important:__ When setting the `usernameField` to `username` in the [configuration](../configuration.md) the value _must_ be escaped as `\\username` otherwise it will use the value of the `username` environment variable on Windows systems.
+
 ## hooks
 
 ### hashPassword
