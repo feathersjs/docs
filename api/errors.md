@@ -116,7 +116,7 @@ process.on('unhandledRejection', (reason, p) => {
 ```
 ## Error Handling
 
-It is important to make sure that errors get cleaned up before they go back to the client. Express error handing middlware works only for REST calls. If you want to make sure that ws errors are handled as well, you need to use app.hooks.
+It is important to make sure that errors get cleaned up before they go back to the client. [Express error handling middlware](https://docs.feathersjs.com/api/express.html#expresserrorhandler) works only for REST calls. If you want to make sure that ws errors are handled as well, you need to use [App Hooks](https://docs.feathersjs.com/guides/basics/hooks.html#application-hooks). App Error Hooks get called on an error to every service call regardless of transport.
 
 Here is an example error handler you can add to app.hooks errors.
 
