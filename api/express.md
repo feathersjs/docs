@@ -402,6 +402,7 @@ app.use(errorHandler({
 The following options can be passed when creating a new localstorage service:
 
 - `html` (Function|Object) [optional] - A custom formatter function or an object that contains the path to your custom html error pages.
+- `logger` (Function|false) (default: `console`) - Set a logger object to log the error (it will be logger with `logger.error(error)`
 
 > **ProTip:** `html` can also be set to `false` to disable html error pages altogether so that only JSON is returned.
 
