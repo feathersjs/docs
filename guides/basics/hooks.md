@@ -21,6 +21,8 @@ app.service('messages').hooks({
   before: {
     create (context) {
       context.data.createdAt = new Date();
+      
+      return context;
     }
   }
 })
