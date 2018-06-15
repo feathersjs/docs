@@ -19,10 +19,8 @@ Here is a quick example for a hook that adds a `createdAt` property to the data 
 ```js
 app.service('messages').hooks({
   before: {
-    create: async context => {
+    create (context) {
       context.data.createdAt = new Date();
-
-      return context;
     }
   }
 })
