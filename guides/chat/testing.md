@@ -311,7 +311,7 @@ describe('\'messages\' service', () => {
 });
 ```
 
-Run `npm test` on more time, to verify that the tests for all our hooks, and the new service tests pass.
+Run `npm test` one more time, to verify that the tests for all our hooks, and the new service tests pass.
 
 ## Code coverage
 
