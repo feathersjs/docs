@@ -145,9 +145,7 @@ module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
     await Promise.all(messages.map(async message => {
       // Also pass the original `params` to the service call
       // so that it has the same information available (e.g. who is requesting it)
-      const user = await app.service('users').get(message.userId, params);
-
-      message.user = user;
+      message.user = await app.service('users').get(message.userId, params);
     }));
 
     // Best practice: hooks should always return the context
