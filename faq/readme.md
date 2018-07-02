@@ -310,6 +310,32 @@ module.exports = {
 }
 ```
 
+## My queries with null values aren't working
+
+When making a request using REST (HTTP) query _string_ values don't have any type information and will always be strings. Some database adapters that have a schema (like `feathers-mongoose` or `feathers-sequelize`) will try to convert values to the correct type but others (like `feathers-mongodb`) can't. Additionally, `null` will always be a string and always has to be converted if you want to query for `null`. This can be done in a `before` [hook](../api/hooks.md):
+
+```js
+app.service('myservice').hooks({
+  before: {
+    find(context) {
+      const { params: { query = {} } } = context;
+
+      if(query.phone === 'null') {
+        query.phone = null;
+      }
+
+      context.params.query = query;
+
+      return context;
+    }
+  }
+});
+```
+
+Also see [this issue](https://github.com/feathersjs/feathers/issues/894).
+
+> __Note:__ This issue does not happen when using websockets since it retains all type information.
+
 ## Why are queries with arrays failing?
 
 If you are using REST and queries with larger arrays (more than 21 items to be exact) are failing you are probably running into an issue with the [querystring](https://github.com/ljharb/qs) module which [limits the size of arrays to 21 items](https://github.com/ljharb/qs#parsing-arrays) by default. The recommended solution is to implement a custom query string parser function via `app.set('query parser', parserFunction)` with the `arrayLimit` option set to a higher value:
