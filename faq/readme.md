@@ -123,7 +123,7 @@ Feathers [database adapters](../api/databases/adapters.md) implement 90% of the 
 
 > __Important:__ To use Feathers properly it is very important to understand how services work and that all existing database adapters are just services that talk to the database themselves.
 
-The why and how to write your own services is covered [in the basics guide](../guide/basics/readme.md). In the generator a custom service can be created by running `feathers generate service`, choosing "A custom service" and then editing the `<servicename>/<servicename>.class.js` file to make the appropriate database calls.
+The why and how to write your own services is covered [in the basics guide](../guides/basics/readme.md). In the generator a custom service can be created by running `feathers generate service`, choosing "A custom service" and then editing the `<servicename>/<servicename>.class.js` file to make the appropriate database calls.
 
 If you would like to publish your own database adapter, first make sure there isn't already a [community maintained adapter](https://github.com/feathersjs/awesome-feathersjs#database) for that database (many maintainers are happy to get some help, too). If not, you can run `feathers generate plugin` to create a new plugin. A reference implementation for a database adapter can be found in the [feathers-memory repository](https://github.com/feathersjs-ecosystem/feathers-memory). It is always possible for community maintained adapters to graduate into an _official_ Feathers adapter, at the moment there are however no plans to add support for any new databases from the Feathers team directly.
 
