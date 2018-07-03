@@ -76,6 +76,29 @@ app.service('todos').find({
 
 This section describes specifics on how the [service methods](../services.md) are implemented for all adapters.
 
+### adapter.Model
+
+If the ORM or database supports models, the model instance or reference to the collection belonging to this adapter can be found in `adapter.Model`. This allows to easily make custom queries using that model, e.g. in a hook:
+
+```js
+// Make a MongoDB aggregation (`messages` is using `feathers-mongodb`)
+app.service('messages').hooks({
+  before: {
+    async find(context) {
+      const results = await service.Model.aggregate([
+        { $match: {item_id: id} }, {
+          $group: {_id: null, total_quantity: {$sum: '$quantity'} }
+        }
+      ]).toArray();
+      
+      // Do something with resutls
+      
+      return contex;t
+    }
+  }
+});
+```
+
 ### adapter.find(params)
 
 `adapter.find(params) -> Promise` returns a list of all records matching the query in `params.query` using the [common querying mechanism](./querying.md). Will either return an array with the results or a page object if [pagination is enabled](#pagination).
