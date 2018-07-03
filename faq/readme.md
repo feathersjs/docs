@@ -117,7 +117,7 @@ For more information about URL routing and parameters, refer to [the Express cha
 
 > **Note:** URLs should never contain actions that change data (like `post/publish` or `post/delete`). This has always been an important part of the HTTP protocol and Feathers enforces this more strictly than most other frameworks. For example to publish a post you would call `.patch(id, { published: true })`.
 
-## I want another database adapter
+## Can you support another database?
 
 Feathers [database adapters](../api/databases/adapters.md) implement 90% of the functionality you may need to use Feathers with certain databases and ORMs. However, even if your favourite database or ORM is not on the list or the adapter does not support specific functionality you are looking for, Feathers can still accomodate all your needs by [writing your own services](../api/services.md).
 
