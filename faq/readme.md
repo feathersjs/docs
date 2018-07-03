@@ -117,6 +117,16 @@ For more information about URL routing and parameters, refer to [the Express cha
 
 > **Note:** URLs should never contain actions that change data (like `post/publish` or `post/delete`). This has always been an important part of the HTTP protocol and Feathers enforces this more strictly than most other frameworks. For example to publish a post you would call `.patch(id, { published: true })`.
 
+## I want another database adapter
+
+Feathers [database adapters](../api/databases/adapters.md) implement 90% of the functionality you may need to use Feathers with certain databases and ORMs. However, even if your favourite database or ORM is not on the list or the adapter does not support specific functionality you are looking for, Feathers can still accomodate all your needs by [writing your own services](../api/services.md).
+
+> __Important:__ To use Feathers properly it is very important to understand how services work and that all existing database adapters are just services that talk to the database themselves.
+
+The why and how to write your own services is covered [in the basics guide](../guide/basics/readme.md). In the generator a custom service can be created by running `feathers generate service`, choosing "A custom service" and then editing the `<servicename>/<servicename>.class.js` file to make the appropriate database calls.
+
+If you would like to publish your own database adapter, first make sure there isn't already a [community maintained adapter](https://github.com/feathersjs/awesome-feathersjs#database) for that database (many maintainers are happy to get some help, too). If not, you can run `feathers generate plugin` to create a new plugin. A reference implementation for a database adapter can be found in the [feathers-memory repository](https://github.com/feathersjs-ecosystem/feathers-memory). It is always possible for community maintained adapters to graduate into an _official_ Feathers adapter, at the moment there are however no plans to add support for any new databases from the Feathers team directly.
+
 ## I am not getting real-time events
 
 Feathers Buzzard (`@feathersjs/feathers@v3.0.0`) introduced a new, more secure event system that does __not__ send real-time events by default. If you are not getting real-time events on the client, it is usually a problem with the [event channel](../api/channels.md) setup.
