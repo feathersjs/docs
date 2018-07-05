@@ -14,7 +14,7 @@ Writing all that code yourself is pretty repetitive and cumbersome though which 
 | Elasticsearch | [feathers-elasticsearch](https://github.com/feathersjs-ecosystem/feathers-elasticsearch) |
 | RethinkDB | [feathers-rethinkdb](https://github.com/feathersjs-ecosystem/feathers-rethinkdb) |
 
-> __Pro tip:__ Each one of the the linked adapters has a complete REST API example in their readme.
+> __Pro tip:__ Each one of the linked adapters has a complete REST API example in their readme.
 
 In this chapter we will look at the basic usage of the in-memory database adapter.
 
