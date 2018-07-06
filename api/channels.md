@@ -266,9 +266,14 @@ app.service('messages').publish((data, context) => {
   return app.channel(`rooms/${data.roomId}`);
 });
 
-// Publish the `created` event only to admins
+// Publish the `created` event to admins and the user that sent it
 app.service('users').publish('created', (data, context) => {
-  return app.channel('admins');
+  return [
+    app.channel('admins'),
+    app.channel(app.channels).filter(connection =>
+      connection.user._id === context.params.user._id
+    )
+  ];
 });
 ```
 
