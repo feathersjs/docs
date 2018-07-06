@@ -29,7 +29,7 @@ What the Feathers REST transport essentially does is to automatically map our ex
 
 ## Express integration
 
-[Express](http://expressjs.com/) is probably the most popular Node framework for creating web applications and APIs. The [Feathers Express integration](../../api/express.md) allows us to turn a Feathers application into an application that is both a Feathers application and a fully compatible Express application. This means you can use Feathers functionality like services but also any existing Express middleware. As mentioned before, the Express framework integration only works on the server.
+[Express](http://expressjs.com/) is probably the most popular Node framework for creating web applications and APIs. The [Feathers Express integration](../../api/express.md) allows us to turn a Feathers application into an application that is both a Feathers application and a fully compatible Express application. This means you can use Feathers functionality like services and also any existing Express middleware. As mentioned before, the Express framework integration only works on the server.
 
 To add the integration we install `@feathersjs/express`:
 
@@ -60,7 +60,7 @@ app.use(express.errorHandler());
 app.listen(3030);
 ```
 
-`express.json`, `express.urlencoded` and `express.errorHandler` is a normal Express middleware. We can still also use `app.use` to register a Feathers service though.
+`express.json`, `express.urlencoded` and `express.errorHandler` are normal Express middlewares. We can still use `app.use` to register a Feathers service though.
 
 > __Pro tip:__ You can find more information about the Express framework integration in the [Express API chapter](../../api/express.md).
 
@@ -182,7 +182,7 @@ We can also retrieve that specific message by going to [localhost:3030/messages/
 
 > __Pro Tip:__ A browser plugin like [JSON viewer for Chrome](https://chrome.google.com/webstore/detail/json-viewer/gbmdgpbipfallnflgajpaliibnhdgobh) makes it much nicer to view JSON responses.
 
-New messages can now be created by sending a POST request with JSON data to the same URL. Using CURL on the command line like this:
+New messages can now be created by sending a POST request with JSON data to the same URL by using cURL on the command line like this:
 
 ```
 curl 'http://localhost:3030/messages/' -H 'Content-Type: application/json' --data-binary '{ "text": "Hello from the command line!" }'
