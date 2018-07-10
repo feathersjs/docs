@@ -48,11 +48,11 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }));
 // Set up REST transport using Express
 app.configure(express.rest());
+// Configure the Socket.io transport
+app.configure(socketio());
 // Set up an error handler that gives us nicer errors
 app.use(express.errorHandler());
 
-// Configure the Socket.io transport
-app.configure(socketio());
 
 // Start the server on port 3030
 app.listen(3030);
