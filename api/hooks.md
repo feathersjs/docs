@@ -201,7 +201,7 @@ app.service('users').hooks({
 
 ### Returning `feathers.SKIP`
 
-`require('@feathersjs/feathers').SKIP` can be returned from a hook to indicate that all following hooks should be skipped. If it hasn't run yet, the service method will still be called unless `context.result` is set already.
+`require('@feathersjs/feathers').SKIP` can be returned from a hook to indicate that all following hooks should be skipped. If returned by a __before__ hook, the remaining __before__ hooks are skipped; any __after__ hooks will still be run. If it hasn't run yet, the service method will still be called unless `context.result` is set already.
 
 ## Asynchronous hooks
 
