@@ -24,7 +24,7 @@ Once successful we should now have the `feathers` command available on the comma
 feathers --version
 ```
 
-Which should show a version of `3.3.0` or later.
+Which should show a version of `3.7.5` or later.
 
 ## Configure functions
 
