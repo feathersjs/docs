@@ -4,7 +4,7 @@ In this section we will go over the required tools and preliminary knowledge for
 
 ## Prerequisites
 
-Feathers and most plug-ins work on [NodeJS](https://nodejs.org/en/) v6.0.0 and up. For the guides we will use syntax that only works with Node v8.0.0 and later. On MacOS and other Unix systems the [Node Version Manager](https://github.com/creationix/nvm) is a good way to quickly install the latest version of NodeJS and keep up it up to date.
+Feathers and most plug-ins work on [NodeJS](https://nodejs.org/en/) v6.0.0 and up. For the guides we will use syntax that only works with Node v8.0.0 and later. On MacOS and other Unix systems the [Node Version Manager](https://github.com/creationix/nvm) is a good way to quickly install the latest version of NodeJS and keep it up to date.
 
 After successful installation, the `node` and `npm` commands should be available on the terminal and show something similar when running the following commands:
 
