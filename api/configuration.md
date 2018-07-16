@@ -66,7 +66,7 @@ In `config/default.json` we want to use the local development environment and de
 }
 ```
 
-In `config/production.js` we are going to use environment variables (e.g. set by Heroku) and use `public/dist` to load the frontend production build:
+In `config/production.json` we are going to use environment variables (e.g. set by Heroku) and use `public/dist` to load the frontend production build:
 
 ```js
 {
