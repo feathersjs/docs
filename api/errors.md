@@ -114,3 +114,43 @@ process.on('unhandledRejection', (reason, p) => {
   console.log('Unhandled Rejection at: Promise ', p, ' reason: ', reason);
 });
 ```
+## Error Handling
+
+It is important to make sure that errors get cleaned up before they go back to the client. [Express error handling middlware](https://docs.feathersjs.com/api/express.html#expresserrorhandler) works only for REST calls. If you want to make sure that ws errors are handled as well, you need to use [App Hooks](https://docs.feathersjs.com/guides/basics/hooks.html#application-hooks). App Error Hooks get called on an error to every service call regardless of transport.
+
+Here is an example error handler you can add to app.hooks errors.
+
+```
+const errors = require("@feathersjs/errors");
+const errorHandler = ctx => {
+  if (ctx.error) {
+    const error = ctx.error;
+    if (!error.code) {
+      const newError = new errors.GeneralError("server error");
+      ctx.error = newError;
+      return ctx;
+    }
+    if (error.code === 404 || process.env.NODE_ENV === "production") {
+      error.stack = null;
+    }
+    return ctx;
+  }
+};
+
+```
+then add it to the error.all hook
+```
+
+module.exports = {
+  //...
+  error: {
+    all: [errorHandler],
+    find: [],
+    get: [],
+    create: [],
+    update: [],
+    patch: [],
+    remove: []
+  }
+};
+```
