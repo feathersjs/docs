@@ -91,9 +91,9 @@ app.service('messages').hooks({
         }
       ]).toArray();
       
-      // Do something with resutls
+      // Do something with results
       
-      return contex;t
+      return context;
     }
   }
 });
