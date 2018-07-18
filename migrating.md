@@ -20,6 +20,8 @@ cd path/to/project
 feathers upgrade
 ```
 
+> The CLI will use the `directories.lib` in your `package.json` to know where your source files are located, defaulting to `src` if none provided. If you have a transpiled app/module, e.g. with babel, including a `lib` AND a `src` folder, then the most simple is to change the `directories.lib` in your `package.json` to `src`instead of `lib` so that the CLI will correctly upgrade the original source files and not the transpiled ones.
+
 In short (for more details see below) this will:
 
 - Upgrade all core packages to the new scoped package names and their latest versions
