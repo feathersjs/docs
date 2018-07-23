@@ -72,9 +72,9 @@ Registering the OAuth2 plugin will automatically set up routes to handle the OAu
     service: 'users', // the service to look up the entity
     passReqToCallback: true, // whether the request object should be passed to `verify`
     session: false, // whether to use sessions,
-    handler: function, // Express middleware for handling the oauth callback. Defaults to the built in middleware.
-    errorHandler: function, // Express middleware for handling errors. Defaults to the built in middleware.
-    formatter: function, // The response formatter. Defaults the the built in feathers-rest formatter, which returns JSON.
+    handler: middleware, // Express middleware for handling the oauth callback. Defaults to the built in middleware.
+    errorHandler: middleware, // Express middleware for handling errors. Defaults to the built in middleware.
+    formatter: middleware, // The response formatter middleware. Defaults to the the built in feathers-rest formatter, handling only JSON.
     Verifier: Verifier // A Verifier class. Defaults to the built-in one but can be a custom one. See below for details.
 }
 ```
