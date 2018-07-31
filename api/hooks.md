@@ -273,8 +273,8 @@ The following example reads a JSON file converting [fs.readFile](https://nodejs.
 
 ```js
 const fs = require('fs');
-const utils = require('utils');
-const readFile = utils.promisify(fs.readFile);
+const util = require('util');
+const readFile = util.promisify(fs.readFile);
 
 app.service('messages').hooks({
   after: {
