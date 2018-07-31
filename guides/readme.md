@@ -18,6 +18,6 @@ Guides for more advanced Feathers topics like debugging, file uploads and more.
 
 [**The FeathersJS Youtube playlist**](https://www.youtube.com/playlist?list=PLwSdIiqnDlf_lb5y1liQK2OW5daXYgKOe)
 
-[![IMAGE ALT TEXT](http://img.youtube.com/vi/CuM4vLkBaik/0.jpg)](https://www.youtube.com/playlist?list=PLwSdIiqnDlf_lb5y1liQK2OW5daXYgKOe "The FeathersJS Youtube playlist")
+[![IMAGE ALT TEXT](https://img.youtube.com/vi/CuM4vLkBaik/0.jpg)](https://www.youtube.com/playlist?list=PLwSdIiqnDlf_lb5y1liQK2OW5daXYgKOe "The FeathersJS Youtube playlist")
 
 A growing collection of Feathers related talks, tutorials and discussions.
