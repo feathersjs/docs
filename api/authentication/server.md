@@ -58,7 +58,7 @@ The following default options will be mixed in with your global `auth` object fr
   secure: true // whether cookies should only be available over HTTPS
  },
  jwt: {
-  header: { typ: 'access' }, // by default is an access token but can be any type
+  header: { typ: 'access' }, // by default is an access token but can be any type. This is not a typo!
   audience: 'https://yourdomain.com', // The resource server where the token is processed
   subject: 'anonymous', // Typically the entity id associated with the JWT
   issuer: 'feathers', // The issuing server, application or resource
@@ -67,6 +67,8 @@ The following default options will be mixed in with your global `auth` object fr
  }
 }
 ```
+
+> __Note:__ The `typ` in the JWT header options is not a typo. It is the [typ parameter defined in the JWT specification](https://tools.ietf.org/html/rfc7519#section-5.1).
 
 ## app.service('authentication')
 
