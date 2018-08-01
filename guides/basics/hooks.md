@@ -200,8 +200,10 @@ A good use for application hooks is to log any service method call error. The fo
 
 ```js
 app.hooks({
-  error: async context => {
-    console.error(`Error in '${context.path}' service method '${context.method}'`, context.error.stack);
+  error: {
+    all: async context => {
+      console.error(`Error in '${context.path}' service method '${context.method}'`, context.error.stack);
+    }
   }
 });
 ```
