@@ -151,6 +151,23 @@ See the above answer.
 
 Custom functionality can almost always be mapped to an existing service method using hooks.  For example, `findOrCreate` can be implemented as a before-hook on the service's `get` method.  [See this gist](https://gist.github.com/marshallswain/9fa3b1e855633af00998) for an example of how to implement this in a before-hook.
 
+## Why are you using JWT for sessions
+
+Feathers is using [JSON web tokens (JWT)](https://jwt.io/) for its standard authentication mechanism. Some articles like [Stop using JWT for sessions](http://cryto.net/~joepie91/blog/2016/06/13/stop-using-jwt-for-sessions/) promotes using standard cookies and HTTP sessions. While it brings up some valid points, not all of them apply to Feathers and there are other good reasons why Feathers relies on JWT:
+
+- Feathers is designed to support many different transport mechanisms, most of which do not rely on HTTP but do work well with JWT as the authentication mechanism. This is even already the case for websockets where an established connection normally is not secured by a traditional HTTP session.
+- By default the only thing that Feathers stored in the JWT payload is the user id. It is a stateful token. You can change this and make the token stateless by putting more data into the JWT payload but this is at your discretion. Currently the user is looked up on every request after the JWT is verified to not be expired or tampered with.
+- You need to make sure that you revoke JWT tokens or set a low expiration date or add custom logic to verify that a user’s account is still valid/active. Currently the default expiration is 1 day. We chose a reasonable default for most apps but depending on your application this might be too long or too short.
+
+Additionally, it is still possible to use Feathers with existing *traditional* Express session mechanism by using [custom Express middleware](../api/express.md). For example, `params.user` for all service calls from a traditional Express session can be passed like this:
+
+```js
+app.use(function(req,res, next) {
+  // Set service call `param.user` from `session.user`
+  req.feathers.user = req.session.user;
+});
+```
+
 ## How do I render templates?
 
 Feathers works just like Express so it's the exact same. We've created a [helpful little guide right here](../guides/advanced/using-a-view-engine.md). For protecting Express views with authentication, also see [this guide](../guides/auth/recipe.express-middleware.md).
