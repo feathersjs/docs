@@ -32,6 +32,10 @@
       "gitbookConfigURL": "https://rawgit.com/feathersjs/feathers-docs/master/book.json",
       "options": [
         {
+          "value": "https://crow.docs.feathersjs.com",
+          "text": "Next version - Crow"
+        },
+        {
           "value": "https://docs.feathersjs.com",
           "text": "Latest Stable - Buzzard"
         },
