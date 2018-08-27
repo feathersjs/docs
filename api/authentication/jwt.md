@@ -58,7 +58,7 @@ This will pull from your global authentication object in your config file. It wi
       ExtractJwt.fromBodyField('body') // from request body
     ],
     secretOrKey: auth.secret, // Your main secret provided to passport-jwt
-    session: false // whether to use sessions,
+    session: false, // whether to use sessions
     Verifier: Verifier // A Verifier class. Defaults to the built-in one but can be a custom one. See below for details.
 }
 ```
