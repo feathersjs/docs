@@ -160,6 +160,8 @@ app.use(express.urlencoded({ extended: true }));
 app.configure(express.rest());
 // Set up an error handler that gives us nicer errors
 app.use(express.errorHandler());
+// Establish the ./public/ directory as a source for static files
+app.use(express.static('public'));
 
 // Initialize the messages service
 app.use('messages', memory({
