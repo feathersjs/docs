@@ -74,11 +74,11 @@ The returned token can then be used to authenticate this specific user, by addin
 Let's restrict our messages service to authenticated users. If we had run `feathers generate authentication` *before* generating other services, `feathers generate service` would have asked if the service should be restricted to authenticated users. However, since we created the messages service first, we now have to update `src/services/messages/messages.hooks.js` manually to look like this:
 
 ```js
-const { authenticate } = require('@feathersjs/authentication').hooks;
+const { hooks } = require('@feathersjs/authentication').hooks;
 
 module.exports = {
   before: {
-    all: [ authenticate('jwt') ],
+    all: [ hooks.authenticate('jwt') ],
     find: [],
     get: [],
     create: [],
