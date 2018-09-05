@@ -1,8 +1,7 @@
 # Errors
 
-[![GitHub stars](https://img.shields.io/github/stars/feathersjs/errors.png?style=social&label=Star)](https://github.com/feathersjs/errors/)
 [![npm version](https://img.shields.io/npm/v/@feathersjs/errors.png?style=flat-square)](https://www.npmjs.com/package/@feathersjs/errors)
-[![Changelog](https://img.shields.io/badge/changelog-.md-blue.png?style=flat-square)](https://github.com/feathersjs/errors/blob/master/CHANGELOG.md)
+[![Changelog](https://img.shields.io/badge/changelog-.md-blue.png?style=flat-square)](https://github.com/feathersjs/feathers/blob/master/packages/errors/CHANGELOG.md)
 
 ```
 $ npm install @feathersjs/errors --save

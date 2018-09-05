@@ -1,8 +1,7 @@
 # Authentication
 
-[![GitHub stars](https://img.shields.io/github/stars/feathersjs/authentication.png?style=social&label=Star)](https://github.com/feathersjs/authentication/)
 [![npm version](https://img.shields.io/npm/v/@feathersjs/authentication.png?style=flat-square)](https://www.npmjs.com/package/@feathersjs/authentication)
-[![Changelog](https://img.shields.io/badge/changelog-.md-blue.png?style=flat-square)](https://github.com/feathersjs/authentication/blob/master/CHANGELOG.md)
+[![Changelog](https://img.shields.io/badge/changelog-.md-blue.png?style=flat-square)](https://github.com/feathersjs/feathers/blob/master/packages/authentication/CHANGELOG.md)
 
 ```
 $ npm install @feathersjs/authentication --save

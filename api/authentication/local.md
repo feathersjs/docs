@@ -1,8 +1,7 @@
 # Local Authentication
 
-[![GitHub stars](https://img.shields.io/github/stars/feathersjs/authentication-local.png?style=social&label=Star)](https://github.com/feathersjs/authentication-local/)
 [![npm version](https://img.shields.io/npm/v/@feathersjs/authentication-local.png?style=flat-square)](https://www.npmjs.com/package/@feathersjs/authentication-local)
-[![Changelog](https://img.shields.io/badge/changelog-.md-blue.png?style=flat-square)](https://github.com/feathersjs/authentication-local/blob/master/CHANGELOG.md)
+[![Changelog](https://img.shields.io/badge/changelog-.md-blue.png?style=flat-square)](https://github.com/feathersjs/feathers/blob/master/packages/authentication-local/CHANGELOG.md)
 
 ```
 $ npm install @feathersjs/authentication-local --save

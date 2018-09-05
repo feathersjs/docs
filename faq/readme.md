@@ -377,7 +377,7 @@ app.set('query parser', function (str) {
 });
 ```
 
-For more information see the [Express application settings](http://expressjs.com/en/4x/api.html#app.set) [@feathersjs/rest#88](https://github.com/feathersjs/feathers-rest/issues/88) and [feathers-mongoose#205](https://github.com/feathersjs/feathers-mongoose/issues/205).
+For more information see the [Express application settings](http://expressjs.com/en/4x/api.html#app.set) [@feathersjs/rest#88](https://github.com/feathersjs/feathers-rest/issues/88) and [feathers-mongoose#205](https://github.com/feathersjs-ecosystem/feathers-mongoose/issues/205).
 
 ## I always get a 404 for my custom middleware
 
