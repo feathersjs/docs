@@ -1,8 +1,7 @@
 # OAuth1 Authentication
 
-[![GitHub stars](https://img.shields.io/github/stars/feathersjs/authentication-oauth1.png?style=social&label=Star)](https://github.com/feathersjs/authentication-oauth1/)
 [![npm version](https://img.shields.io/npm/v/@feathersjs/authentication-oauth1.png?style=flat-square)](https://www.npmjs.com/package/@feathersjs/authentication-oauth1)
-[![Changelog](https://img.shields.io/badge/changelog-.md-blue.png?style=flat-square)](https://github.com/feathersjs/authentication-oauth1/blob/master/CHANGELOG.md)
+[![Changelog](https://img.shields.io/badge/changelog-.md-blue.png?style=flat-square)](https://github.com/feathersjs/feathers/blob/master/packages/authentication-oauth1/CHANGELOG.md)
 
 ```
 $ npm install @feathersjs/authentication-oauth1 --save

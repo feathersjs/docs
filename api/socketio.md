@@ -1,8 +1,7 @@
 # Socket.io
 
-[![GitHub stars](https://img.shields.io/github/stars/feathersjs/socketio.png?style=social&label=Star)](https://github.com/feathersjs/socketio/)
 [![npm version](https://img.shields.io/npm/v/@feathersjs/socketio.png?style=flat-square)](https://www.npmjs.com/package/@feathersjs/socketio)
-[![Changelog](https://img.shields.io/badge/changelog-.md-blue.png?style=flat-square)](https://github.com/feathersjs/socketio/blob/master/CHANGELOG.md)
+[![Changelog](https://img.shields.io/badge/changelog-.md-blue.png?style=flat-square)](https://github.com/feathersjs/feathers/blob/master/packages/socketio/CHANGELOG.md)
 
 ```
 $ npm install @feathersjs/socketio --save

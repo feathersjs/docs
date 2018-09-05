@@ -133,7 +133,6 @@ As mentioned above, `node_modules/@feathersjs` and all its subfolders must be in
 
 ## @feathersjs/client
 
-[![GitHub stars](https://img.shields.io/github/stars/feathersjs/client.png?style=social&label=Star)](https://github.com/feathersjs/client/)
 [![npm version](https://img.shields.io/npm/v/@feathers/client.png?style=flat-square)](https://www.npmjs.com/package/@feathersjs/client)
 [![Changelog](https://img.shields.io/badge/changelog-.md-blue.png?style=flat-square)](https://github.com/feathersjs/client/blob/master/CHANGELOG.md)
 
