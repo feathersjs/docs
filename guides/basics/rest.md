@@ -172,7 +172,7 @@ node app.js
 
 ## Using the API
 
-Once the server is running the first thing we can do is hit [localhost:3030/messages](http://localhost:3030/messages) in the browser. Since we already created a message on the server, the JSON repsonse will look like this:
+Once the server is running the first thing we can do is hit [localhost:3030/messages](http://localhost:3030/messages) in the browser. Since we already created a message on the server, the JSON response will look like this:
 
 ```js
 [{"id":1,"text":"Hello from the server"}]
