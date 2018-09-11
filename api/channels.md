@@ -246,7 +246,7 @@ app.service('users').publish('created', data => {
 
 ## Publishing
 
-Publishers are callback functions that return which channel(s) to send an event to. They can be registered at the application and the service level and for all or specific events. A publishing function gets the event data and context object (`(data, context) => {}`) and returns a named or combined channel or an array of channels. Only one publisher can be registered for one type. Besides the standard [service event names](./events.md#service-events) an event name can also be a [custom event](./events.md#custom-events). `context` is the [context object](./hooks.md) from the service call or an object containing `{ path, service, app, result }` for custom events.
+Publishers are callback functions that return which channel(s) to send an event to. They can be registered at the application and the service level and for all or specific events. A publishing function gets the event data and context object (`(data, context) => {}`) and returns a named or combined channel, an array of channels or `null`. Only one publisher can be registered for one type. Besides the standard [service event names](./events.md#service-events) an event name can also be a [custom event](./events.md#custom-events). `context` is the [context object](./hooks.md) from the service call or an object containing `{ path, service, app, result }` for custom events.
 
 ### service.publish([event,] fn)
 
@@ -275,6 +275,9 @@ app.service('users').publish('created', (data, context) => {
     )
   ];
 });
+
+// Prevent all events in the `password-reset` service from being published
+app.service('password-reset').publish(() => null);
 ```
 
 ### app.publish([event,] fn)
