@@ -9,7 +9,7 @@ This section describes all the APIs of Feathers and its individual modules.
   * [Events](events.md) - Events sent by Feathers service methods
   * [Channels](channels.md) - Decide what events to send to connected real-time clients
   * [Errors](errors.md) - A collection of error classes used throughout Feathers
-  * [Configuration](configuration.md) - A node-config wrapper to initialize configuraiton of a server side application.
+  * [Configuration](configuration.md) - A node-config wrapper to initialize configuration of a server side application.
 * __Transports:__ Expose a Feathers application as an API server
   * [Express](express.md) - Feathers Express framework bindings, REST API provider and error middleware.
   * [Socket.io](socketio.md) - The Socket.io real-time transport provider
