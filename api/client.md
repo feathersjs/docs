@@ -95,16 +95,16 @@ app.configure(socketio({
 
 ## Module loaders
 
-All modules in the `@feathersjs` namespace are using ES6. They must be transpiled to support browsers that don't completely support ES6. Most client-side module loaders exclude the `node_modules` folder from being transpiled and have to be configured to include modules in the `@feathersjs` namespace.
+All modules in the `@feathersjs` namespace are using ES6. They must be transpiled to support browsers that don't completely support ES6. Most client-side module loaders exclude the `node_modules` folder from being transpiled and have to be configured to include modules in the `@feathersjs` namespace and the `debug` module.
 
 ### Webpack
 
-For Webpack, the recommended `babel-loader` rule normally excludes everything in `node_modules`. It has to be adjusted to skip `node_modules/@feathersjs`. In the `module` `rules` in your `webpack.config.js`, update the `babel-loader` section to this:
+For Webpack, the recommended `babel-loader` rule normally excludes everything in `node_modules`. It has to be adjusted to skip `node_modules/@feathersjs` and `node_modules/debug`. In the `module` `rules` in your `webpack.config.js`, update the `babel-loader` section to this:
 
 ```js
 {
   test: /\.jsx?$/,
-  exclude: /node_modules(\/|\\)(?!(@feathersjs))/,
+  exclude: /node_modules(\/|\\)(?!(@feathersjs|debug))/,
   loader: 'babel-loader'
 }
 ```
@@ -133,7 +133,7 @@ As mentioned above, `node_modules/@feathersjs` and all its subfolders must be in
 
 ## @feathersjs/client
 
-[![npm version](https://img.shields.io/npm/v/@feathers/client.png?style=flat-square)](https://www.npmjs.com/package/@feathersjs/client)
+[![npm version](https://img.shields.io/npm/v/@feathersjs/client.png?style=flat-square)](https://www.npmjs.com/package/@feathersjs/client)
 [![Changelog](https://img.shields.io/badge/changelog-.md-blue.png?style=flat-square)](https://github.com/feathersjs/client/blob/master/CHANGELOG.md)
 
 ```
@@ -144,8 +144,8 @@ $ npm install @feathersjs/client --save
 
 | Feathers module                   | @feathersjs/client      |
 |-----------------------------------|-------------------------|
-| @feathers/feathers                | feathers (default)      |
-| @feathers/errors                  | feathers.errors         |
+| @feathersjs/feathers              | feathers (default)      |
+| @feathersjs/errors                | feathers.errors         |
 | @feathersjs/rest-client           | feathers.rest           |
 | @feathersjs/socketio-client       | feathers.socketio       |
 | @feathersjs/primus-client         | feathers.primus         |
@@ -220,15 +220,14 @@ Here's how to load feathers-client using RequireJS Syntax:
 ```js
 define(function (require) {
   const feathers = require('@feathersjs/client');
-  const { socketio, authentication } = feathers;
   const io = require('socket.io-client');
 
   const socket = io('http://localhost:3030');
   // @feathersjs/client is exposed as the `feathers` global.
   const app = feathers();
 
-  app.configure(socketio(socket));
-  app.configure(authentication());
+  app.configure(feathers.socketio(socket));
+  app.configure(feathers.authentication());
 
   app.service('messages').create({
     text: 'A new message'
