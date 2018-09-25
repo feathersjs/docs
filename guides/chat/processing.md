@@ -143,9 +143,9 @@ module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
     // Asynchronously get user object from each message's `userId`
     // and add it to the message
     await Promise.all(messages.map(async message => {
-      // Also pass the original `params` to the service call
+      // Also pass the original `params` to the service call, minus the query
       // so that it has the same information available (e.g. who is requesting it)
-      message.user = await app.service('users').get(message.userId, params);
+      message.user = await app.service('users').get(message.userId, Object.assign(params, {query: ""}));
     }));
 
     // Best practice: hooks should always return the context
