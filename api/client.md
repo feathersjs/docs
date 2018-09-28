@@ -140,7 +140,7 @@ As mentioned above, `node_modules/@feathersjs` and all its subfolders must be in
 $ npm install @feathersjs/client --save
 ```
 
-`@feathersjs/client` is a module that bundles the separate Feathers client-side modules into one providing the code as ES5 which is compatible with modern browsers (IE10+). It can also be used directly int the browser through a `<script>` tag. Here is a table of which Feathers client module is included:
+`@feathersjs/client` is a module that bundles the separate Feathers client-side modules into one providing the code as ES5 which is compatible with modern browsers (IE10+). It can also be used directly in the browser through a `<script>` tag. Here is a table of which Feathers client module is included:
 
 | Feathers module                   | @feathersjs/client      |
 |-----------------------------------|-------------------------|
