@@ -158,8 +158,6 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }));
 // Set up REST transport using Express
 app.configure(express.rest());
-// Set up an error handler that gives us nicer errors
-app.use(express.errorHandler());
 
 // Initialize the messages service
 app.use('messages', memory({
@@ -168,6 +166,9 @@ app.use('messages', memory({
     max: 25
   }
 }));
+
+// Set up an error handler that gives us nicer errors
+app.use(express.errorHandler());
 
 // Start the server on port 3030
 const server = app.listen(3030);
