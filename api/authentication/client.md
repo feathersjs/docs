@@ -70,9 +70,16 @@ To enable storing the JWT make sure to provide a `storage` when configuring the 
 ```js
 app.authenticate().then(() => {
   // show application page
-}).catch(() => {
-  // show login page
-})
+.catch (e => {
+  if (e.code === 401) {
+    // show login page if not authenticated or jwt from storage is expired or invalid
+  } else {
+    // show error. Usually, This happens if client doesn't have internet or server is down
+    console.log(
+      'Something went wrong. You may face some connection problems.'
+    );
+  }
+});
 ```
 
 > __Important:__ `app.authenticate()` __has__ to be called when you want to use the token from storage and __only once__ when the application initializes. Once successful, all subsequent requests will send their authentication information automatically.
