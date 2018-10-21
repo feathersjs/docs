@@ -315,7 +315,11 @@ Run `npm test` one more time, to verify that the tests for all our hooks, and th
 
 ## Client/server testing
 
-You can write tests which start up both a server for your app, and a Feathers client which your test can use to call the server. Such tests can expose faults in the interaction between the client and the server. They are also useful in testing the authentication of requests from the client.
+You can write tests which start up both a server for your app, and a Feathers client which your test can use to call the server. Such tests can expose faults in the interaction between the client and the server. They are also useful in testing the authentication of requests from the client. Install it as a development dependency:
+
+```
+npm install @feathersjs/client --save-dev
+```
 
 Test `test/services/users.test.js` from above runs on the server. We convert it, in the following `tests/services/client-users.test.js`, so the tests are run on the client instead of on the server. This also causes client authentication to be tested.
 
