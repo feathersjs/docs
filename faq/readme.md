@@ -80,7 +80,7 @@ class PasswordService {
 
 ## How do I do nested or custom routes?
 
-Normally we find that they actually aren't needed and that it is much better to keep your routes as flat as possible. For example something like `users/:userId/posts` is - although nice to read for humans - actually not as easy to parse and process as the equivalent `/posts?userId=<userid>` that is already [supported by Feathers out of the box](../api/databases/querying.md). Additionaly, this will also work much better when using Feathers through websocket connections which do not have a concept of routes at all.
+Normally we find that they actually aren't needed and that it is much better to keep your routes as flat as possible. For example something like `users/:userId/posts` is - although nice to read for humans - actually not as easy to parse and process as the equivalent `/posts?userId=<userid>` that is already [supported by Feathers out of the box](../api/databases/querying.md). Additionally, this will also work much better when using Feathers through websocket connections which do not have a concept of routes at all.
 
 However, nested routes for services can still be created by registering an existing service on the nested route and mapping the route parameter to a query parameter like this:
 
