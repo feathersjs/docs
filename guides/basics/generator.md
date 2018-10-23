@@ -85,7 +85,6 @@ And then import it into `app.js` and use it:
 
 ```js
 const feathers = require('@feathersjs/feathers');
-const memory = require('feathers-memory');
 const configureMessages = require('./messages.service.js');
 
 const app = feathers();
