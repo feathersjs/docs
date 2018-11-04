@@ -126,7 +126,7 @@ node app.js
 
 ## Using the API
 
-The real-time API can be used by establishing a websocket connection. For that we need the Socket.io client which we can included by updating `public/index.html` to:
+The real-time API can be used by establishing a websocket connection. For that we need the Socket.io client which we can include by updating `public/index.html` to:
 
 ```html
 <!DOCTYPE html>
