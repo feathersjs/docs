@@ -91,7 +91,7 @@ With pagination enabled, the `find` method will return an object with the follow
 - `skip` - The number of entries that were skipped
 - `total` - The total number of entries for this query
 
-The following example automatically creates a couple of messages and makes some queries. You can add it at the end of both `app.js` and `public/client.js` to see it in Node and the browser:
+The following example automatically creates 100 messages and makes some queries. You can add it at the end of both `app.js` and `public/client.js` to see it in Node and the browser:
 
 ```js
 async function createAndFind() {
