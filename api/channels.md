@@ -116,6 +116,22 @@ app.on('login', (payload, { connection }) => {
 
 > __Note:__ `(user, { connection })` is an ES6 shorthand for `(user, meta) => { const connection = meta.connection; }`, see [Destructuring assignment](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment).
 
+## app.on('logout')
+
+`app.on('logout', (payload, info) => {})` is sent by the [authentication module](./authentication/server.md) and also contains the connection in the `info` object that is passed as the second parameter when a logout happens.
+
+If the socket does not also disconnect at logout this is where users should be removed from their channels:
+
+```js
+app.on('logout', (payload, { connection }) => {
+  if(connection) {
+    //When logging out, leave all channels before joining anonymous channel
+    app.channel(app.channels).leave(connection);
+    app.channel('anonymous').join(connection);
+  }
+});
+```
+
 ## Channels
 
 A channel is an object that contains a number of connections. It can be created via `app.channel` and allows a connection to join or leave it.
