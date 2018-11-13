@@ -78,6 +78,14 @@ The heart of this plugin is a service for creating JWT. It's a normal Feathers s
 
 The `create` method will be used in nearly every Feathers application. It creates a JWT based on the `jwt` options configured on the plugin. The API of this method utilizes the `context` object.
 
+If you are manually generating JWT's, and for example, wanted to create a JWT with the [payload](https://jwt.io) `{userId: "abc123"}`:
+
+```
+const data = {payload: {userId: "abc123"}};
+service.create(data);
+```
+Anything included in the `data.payload` object will be in the JWT's payload. If you include a `payload` object in [params](https://docs.feathersjs.com/api/services.html#createdata-params), it's properties will take precedence over `data`.
+
 ### service.remove(data)
 
 The `remove` method is used less often. Its main purpose is adding hooks to the "logout" process. For example, in services that require high control over security, a developer can register hooks on the `remove` method that perform token blacklisting.
