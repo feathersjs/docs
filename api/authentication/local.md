@@ -95,11 +95,7 @@ The protect hook makes sure that protected fields don't get sent to a client.
 const local = require('@feathersjs/authentication-local');
 
 app.service('users').hooks({
-  after: {
-    create: [
-      local.hooks.protect('password')
-    ]
-  }
+  after: local.hooks.protect('password')
 });
 ```
 
