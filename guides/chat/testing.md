@@ -437,7 +437,7 @@ The `describe('Run tests using client and server',` statement stops a new server
 Code coverage is a great way to get some insights into how much of our code is actually executed during the tests. Using [Istanbul](https://github.com/gotwarlost/istanbul) we can add it easily:
 
 ```
-npm install istanbul@1.1.0-alpha.1 --save-dev
+npm install nyc --save-dev
 ```
 
 Now we have to update the `script` section of our `package.json` to:
@@ -445,7 +445,7 @@ Now we have to update the `script` section of our `package.json` to:
 ```js
   "scripts": {
     "test": "npm run eslint && npm run coverage",
-    "coverage": "npm run clean && NODE_ENV=test istanbul cover node_modules/mocha/bin/_mocha -- test/ --recursive --exit",
+    "coverage": "npm run clean && NODE_ENV=test nyc mocha",
     "eslint": "eslint src/. test/. --config .eslintrc.json --fix",
     "start": "node src/",
     "clean": "shx rm -rf test/data/",
@@ -456,26 +456,7 @@ Now we have to update the `script` section of our `package.json` to:
 On Windows, the `coverage` command looks like this:
 
 ```
-npm run clean & SET NODE_ENV=test& istanbul cover node_modules/mocha/bin/_mocha -- test/ --recursive --exit
-```
-
-To get more coverage information, add a `.istanbul.yml` in the main folder:
-
-```yml
-verbose: false
-instrumentation:
-  root: ./src/
-reporting:
-  print: summary
-  reports:
-    - html
-    - text
-    - lcov
-  watermarks:
-    statements: [70, 90]
-    lines: [70, 90]
-    functions: [70, 90]
-    branches: [70, 90]
+npm run clean & SET NODE_ENV=test& nyc mocha
 ```
 
 Now run:
@@ -484,7 +465,7 @@ Now run:
 npm test
 ```
 
-This will print out some additional coverage information and put a complete HTML report into the `coverage` folder.
+This will print out some additional coverage information.
 
 ## Changing the default test directory
 
