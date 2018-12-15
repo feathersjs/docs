@@ -131,7 +131,7 @@ If you would like to publish your own database adapter, first make sure there is
 
 Feathers Buzzard (`@feathersjs/feathers@v3.0.0`) introduced a new, more secure event system that does __not__ send real-time events by default. If you are not getting real-time events on the client, it is usually a problem with the [event channel](../api/channels.md) setup.
 
-Have a look a the example at [feathersjs.com](https://feathersjs.com/), the [real-time basics guide](../guides/basics/real-time.md) and the [channels documentation](../api/channels.md). If you are migrating from a previous version, also see the [channels section int the migration guide](../migrating.md#adding-channels).
+Have a look a the example at [feathersjs.com](https://feathersjs.com/), the [real-time basics guide](../guides/basics/real-time.md) and the [channels documentation](../api/channels.md). If you are migrating from a previous version, also see the [channels section in the migration guide](../migrating.md#adding-channels).
 
 The generated application already sets up a `channels.js` file that sends events to only authenticated users by default but can be modified to your needs according the the [channels documentation](../api/channels.md).
 
