@@ -32,6 +32,8 @@ app.use('/messages', {
 });
 ```
 
+> __Note:__ `path` can be `/` to register a service at the root level.
+
 ## .service(path)
 
 `app.service(path) -> service` returns the wrapped [service object](./services.md) for the given path. Feathers internally creates a new object from each registered service. This means that the object returned by `app.service(path)` will provide the same methods and functionality as your original service object but also functionality added by Feathers and its plugins like [service events](./events.md) and [additional methods](./services.md#feathers-functionality). `path` can be the service name with or without leading and trailing slashes.
