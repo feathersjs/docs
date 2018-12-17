@@ -1,8 +1,26 @@
-# Feathers v4 (Crow)
+# Migrating
+
+This guide explains the new featuers and changes to migrate to the Feathers Crow release. Information will be added as new releases of individual modules are made.
+
+## Feathers core
+
+### Services at the root level
+
+Any Feathers application now allows to register a service at the root level with a name of `/`:
+
+```js
+app.use('/', myService);
+```
+
+It will be available via `app.service('/')` through the client and directly at `http://feathers-server.com/` via REST.
+
+### Typescript definitions included
+
+> _Important:_ Still TBD. Use the definitions from [DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped) for now.
 
 ## Database adapters
 
-The latest versions of the Feathers database adapters include some important security and usability updates by requiring to explicitly enable certain functionality that was available previously  by default.
+The latest versions of the Feathers database adapters include some important security and usability updates by requiring to explicitly enable certain functionality that was previously available by default.
 
 ### Querying by id
 
@@ -20,7 +38,7 @@ app.service('/messages').get('<message id>', {
 
 Creating, updating or removing multiple records at once has always been part of the Feathers adapter specification but it turned out to be quite easy to miss. 
 
-This means applications could be open to queries that a developer did not anticipate (like deleting or creating multiple records at once). Additionally, it could also lead to unexpected data in a hook that need special cases (like `context.data` or `context.result` being an array).
+This means applications could be open to queries that a developer did not anticipate (like deleting or creating multiple records at once). Additionally, it could also lead to unexpected data in a hook that require special cases (like `context.data` or `context.result` being an array).
 
 Now, multiple `create`, `patch` and `remove` calls (with the `id` value set to `null`) are disabled by default and have to be enabled explicitly by setting the `multi` option:
 
