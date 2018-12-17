@@ -34,6 +34,15 @@ app.service('/messages').get('<message id>', {
 });
 ```
 
+### Hook-less service methods
+
+The database adapters now support calling their service methods without any hooks by adding a `_` in front of the method name as `_find`, `_get`, `_create`, `_patch`, `_update` and `_remove`. This can be useful if you need the raw data from the service and don't want to trigger any of its hooks.
+
+```js
+// Call `get` without running any hooks
+const message = await app.service('/messages')._get('<message id>');
+```
+
 ### Multi updates
 
 Creating, updating or removing multiple records at once has always been part of the Feathers adapter specification but it turned out to be quite easy to miss. 
