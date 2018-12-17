@@ -83,7 +83,8 @@ module.exports = {
       '/': [
         '/guides/',
         '/api/',
-        '/faq/'
+        '/faq/',
+        'migrating.md'
       ]
     },
     nav: [

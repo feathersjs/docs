@@ -41,4 +41,4 @@ _book/
 
 .idea/
 exapp/
-.vuepress/
+.vuepress/dist
