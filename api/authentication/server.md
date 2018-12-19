@@ -19,7 +19,7 @@ The [@feathersjs/authentication](https://github.com/feathersjs/authentication) m
 
 The following plugins are complementary, but entirely optional:
 
-- Using the authencation server on the client: [@feathersjs/authentication-client](./client.md)
+- Using the authentication server on the client: [@feathersjs/authentication-client](./client.md)
 - Local (username/password) authentication: [@feathersjs/authentication-local](./local.md)
 - JWT authentication: [@feathersjs/authentication-jwt](./jwt.md)
 - OAuth1 authentication: [@feathersjs/authentication-oauth1](./oauth1.md)
