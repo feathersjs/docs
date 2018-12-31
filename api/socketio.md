@@ -119,6 +119,8 @@ app.use('messages', {
 });
 ```
 
+> _Note:_ `socket.feathers` is the same object as the `connection` in a [channel](./channels.md).
+
 ### params.provider
 
 For any [service method call](./services.md) made through Socket.io `params.provider` will be set to `socketio`. In a [hook](./hooks.md) this can for example be used to prevent external users from making a service method call:
