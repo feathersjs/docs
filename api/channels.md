@@ -151,6 +151,9 @@ app.channel('authenticated') // the authenticated channel
 // Combine the anonymous and authenticated channel
 const combinedChannel = app.channel('anonymous', 'authenticated')
 
+// Join the `anonymous` and `authenticated` channel
+combinedChannel.join(connection);
+
 // Join the `admins` and `chat` channel
 app.channel('admins', 'chat').join(connection);
 
