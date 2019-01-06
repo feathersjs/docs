@@ -74,7 +74,8 @@ Registering the OAuth1 plugin will automatically set up routes to handle the OAu
     session: true, // whether to use sessions,
     handler: function, // Express middleware for handling the oauth callback. Defaults to the built in middleware.
     formatter: function, // The response formatter. Defaults the the built in feathers-rest formatter, which returns JSON.
-    Verifier: Verifier // A Verifier class. Defaults to the built-in one but can be a custom one. See below for details.
+    Verifier: Verifier, // A Verifier class. Defaults to the built-in one but can be a custom one. See below for details.
+    makeQuery: function // Makes query for finding an existing user. Defaults to (profile, options) => ({ [options.idField]: profile.id })
 }
 ```
 
