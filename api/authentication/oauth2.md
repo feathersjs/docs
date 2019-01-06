@@ -74,7 +74,8 @@ Registering the OAuth2 plugin will automatically set up routes to handle the OAu
     handler: middleware, // Express middleware for handling the oauth callback. Defaults to the built in middleware.
     errorHandler: middleware, // Express middleware for handling errors. Defaults to the built in middleware.
     formatter: middleware, // The response formatter middleware. Defaults to the the built in feathers-rest formatter, handling only JSON.
-    Verifier: Verifier // A Verifier class. Defaults to the built-in one but can be a custom one. See below for details.
+    Verifier: Verifier, // A Verifier class. Defaults to the built-in one but can be a custom one. See below for details.
+    makeQuery: function // Makes query for finding an existing user. Defaults to (profile, options) => ({ [options.idField]: profile.id })
 }
 ```
 
