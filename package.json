@@ -28,7 +28,7 @@
   },
   "scripts": {
     "build": "vuepress build",
-    "dev": "vuepress dev",
+    "start": "vuepress dev",
     "netlify": "npm run build"
   },
   "directories": {},

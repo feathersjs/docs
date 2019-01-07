@@ -80,6 +80,12 @@ module.exports = {
           'databases/querying.md'
         ],
       }],
+      '/cookbook/': [{
+        title: 'Express',
+        children: [
+          'express/file-uploading.md'
+        ]
+      }],
       '/': [
         '/guides/',
         '/api/',
@@ -90,6 +96,7 @@ module.exports = {
     nav: [
       { text: 'Guides', link: '/guides/' },
       { text: 'API', link: '/api/' },
+      { text: 'Cookbook', link: '/cookbook/' },
       { text: 'FAQ', link: '/faq/' },
       {
         text: 'Ecosystem',
@@ -102,8 +109,13 @@ module.exports = {
           },
           {
             text: 'Databases', items: [
+              { text: 'Memory', link: 'https://github.com/feathersjs-ecosystem/feathers-memory' },
+              { text: 'LocalStorage', link: 'https://github.com/feathersjs-ecosystem/feathers-localstorage' },
+              { text: 'NeDB', link: 'https://github.com/feathersjs-ecosystem/feathers-nedb' },
               { text: 'MongoDB', link: 'https://github.com/feathersjs-ecosystem/feathers-mongodb' },
-              { text: 'Mongoose', link: 'https://github.com/feathersjs-ecosystem/feathers-mongoose' }
+              { text: 'Mongoose', link: 'https://github.com/feathersjs-ecosystem/feathers-mongoose' },
+              { text: 'Knex', link: 'https://github.com/feathersjs-ecosystem/feathers-knex' },
+              { text: 'Sequelize', link: 'https://github.com/feathersjs-ecosystem/feathers-sequelize' }
             ]
           }
         ]
