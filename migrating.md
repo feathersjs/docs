@@ -16,7 +16,7 @@ It will be available via `app.service('/')` through the client and directly at `
 
 ### Typescript definitions included
 
-> _Important:_ Still TBD. Use the definitions from [DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped) for now.
+> _TBD:_ Use the definitions from [DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped) for now.
 
 ## Database adapters
 
@@ -42,6 +42,8 @@ The database adapters now support calling their service methods without any hook
 // Call `get` without running any hooks
 const message = await app.service('/messages')._get('<message id>');
 ```
+
+> _Note:_ These methods are only available internally on the server, not on the client side.
 
 ### Multi updates
 
