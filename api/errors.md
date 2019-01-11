@@ -11,7 +11,7 @@ The `@feathersjs/errors` module contains a set of standard error classes used by
 
 ## Feathers errors
 
-The following error types, all of which are instances of `FeathersError` are available:
+The following error types, all of which are instances of `FeathersError`, are available:
 
 > **ProTip:** All of the Feathers plugins will automatically emit the appropriate Feathers errors for you. For example, most of the database adapters will already send `Conflict` or `Unprocessable` errors with the validation errors from the ORM.
 
@@ -34,10 +34,10 @@ The following error types, all of which are instances of `FeathersError` are ava
 
 Feathers errors contain the following fields:
 
-- `name` - The error name (ie. "BadRequest", "ValidationError", etc.)
+- `name` - The error name (e.g. "BadRequest", "ValidationError", etc.)
 - `message` - The error message string
 - `code` - The HTTP status code
-- `className` - A CSS class name that can be handy for styling errors based on the error type. (ie. "bad-request" , etc.)
+- `className` - A CSS class name that can be handy for styling errors based on the error type. (e.g. "bad-request" , etc.)
 - `data` - An object containing anything you passed to a Feathers error except for the `errors` object.
 - `errors` - An object containing whatever was passed to a Feathers error inside `errors`. This is typically validation errors or if you want to group multiple errors together.
 
@@ -51,7 +51,7 @@ You can create custom errors by extending from the `FeathersError` class and cal
 - `name` - The error name (e.g. `my-errror`)
 - `code` - An [HTTP error code](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html)
 - `className` - The full name of the error class
-- `data` - Additional data to inclue in the error
+- `data` - Additional data to include in the error
 
 
 ```js
