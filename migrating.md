@@ -43,7 +43,7 @@ The database adapters now support calling their service methods without any hook
 const message = await app.service('/messages')._get('<message id>');
 ```
 
-> _Note:_ These methods are only available internally on the server, not on the client side.
+> _Note:_ These methods are only available internally on the server, not on the client side and only for the Feathers database adapters. They do *not* send any events.
 
 ### Multi updates
 
