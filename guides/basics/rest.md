@@ -184,8 +184,11 @@ We can also retrieve that specific message by going to [localhost:3030/messages/
 
 New messages can now be created by sending a POST request with JSON data to the same URL by using cURL on the command line like this:
 
-```
-curl 'http://localhost:3030/messages/' -H 'Content-Type: application/json' --data-binary '{ "text": "Hello from the command line!" }'
+```console
+curl -X POST \
+  http://localhost:3030/messages/ \
+  -H 'Content-Type: application/json' \
+  -d '{ "text": "Hello from the command line!" }'
 ```
 
 > __Note:__ You can also use tools like [Postman](https://www.getpostman.com/) to make HTTP requests.
@@ -194,8 +197,9 @@ If you now refresh [localhost:3030/messages](http://localhost:3030/messages) you
 
 We can also remove a message by sending a `DELETE` to its URL:
 
-```
-curl -X "DELETE" http://localhost:3030/messages/1
+```console
+curl -X DELETE \
+  http://localhost:3030/messages/1
 ```
 
 ## What's next?
