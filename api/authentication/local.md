@@ -170,6 +170,8 @@ Here is what that looks like with curl:
 curl -H "Content-Type: application/json" -X POST -d '{"strategy":"local","email":"your email","password":"your password"}' http://localhost:3030/authentication
 ```
 
+> Important: You have to create the user first, then call `/authentication` to exchange for an token. The `email` and `password` in the above request is for existing user record rather than a non-exist user.
+
 ### Sockets
 
 Authenticating using a local strategy via sockets is done by emitting the following message:
