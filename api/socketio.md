@@ -119,7 +119,7 @@ app.use('messages', {
 });
 ```
 
-> _Note:_ `socket.feathers` is the same object as the `connection` in a [channel](./channels.md).
+> _Note:_ `socket.feathers` is the same object as the `connection` in a [channel](./channels.md). `socket.request` and `socket.handshake` contains information the HTTP request that initiated the connection (see the [Socket.io documentation](https://socket.io/docs/server-api/#socket-request)).
 
 ### params.provider
 
