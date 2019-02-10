@@ -69,8 +69,8 @@ module.exports = {
           'authentication/client.md',
           'authentication/local.md',
           'authentication/jwt.md',
-          'authentication/oauth1.md',
-          'authentication/oauth2.md'
+          'authentication/oauth.md',
+          'authentication/api-key.md'
         ]
       }, {
         title: 'Database',
