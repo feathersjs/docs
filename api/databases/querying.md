@@ -16,6 +16,14 @@ app.service('messages').find({
     roomId: 2
   }
 });
+
+// Find all unread messages in room #2 using verbose $eq
+app.service('messages').find({
+  query: {
+    read: { $eq: false},
+    roomId: { $eq: 2 }
+  }
+});
 ```
 
 ```
@@ -99,6 +107,9 @@ app.service('messages').get(1, {
     $select: [ 'text' ]
   }
 });
+
+
+
 ```
 
 ```
@@ -167,6 +178,25 @@ app.service('messages').find({
 GET /messages?createdAt[$gt]=1479664146607
 ```
 
+## `$eq`
+
+Find all records that equal the given property value.  Useful in conjunction with $and.
+
+```js
+// Find all messages that are marked as archived, verbose using $eq
+app.service('messages').find({
+  query: {
+    archived: {
+      $eq: true
+    }
+  }
+});
+```
+
+```
+GET /messages?archived[$eq]=true
+```
+
 ## `$ne`
 
 Find all records that do not equal the given property value.
@@ -184,6 +214,26 @@ app.service('messages').find({
 
 ```
 GET /messages?archived[$ne]=true
+```
+
+## `$and`
+
+Find all records with two or more search criteria.
+
+```js
+// Find all rows where firstName equal to 'David' and lastName equal to "Lueche"
+app.service('messages').find({
+  query: {
+    $and:  [
+      { archived: { $eq: true } },
+      { roomId:  2 }
+    ]
+  }
+});
+```
+
+```
+GET /messages?$and[0][archived][$eq]=true&$and[1][roomId]=2
 ```
 
 ## `$or`
