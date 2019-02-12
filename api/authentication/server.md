@@ -1,4 +1,4 @@
-# Authentication
+# Server
 
 [![npm version](https://img.shields.io/npm/v/@feathersjs/authentication.png?style=flat-square)](https://www.npmjs.com/package/@feathersjs/authentication)
 [![Changelog](https://img.shields.io/badge/changelog-.md-blue.png?style=flat-square)](https://github.com/feathersjs/feathers/blob/master/packages/authentication/CHANGELOG.md)
@@ -7,13 +7,13 @@
 $ npm install @feathersjs/authentication --save
 ```
 
-The [@feathersjs/authentication](https://github.com/feathersjs/authentication) module assists in using JWT for authentication. It has three primary purposes:
+The [@feathersjs/authentication](https://github.com/feathersjs/authentication) module provides tools to support different authentication strategies and to use [JSON web token (JWT)](https://jwt.io/). The key concepts are:
 
-1. Setup an `/authentication` endpoint to create JSON Web Tokens (JWT). JWT are used as access tokens. You can learn more about JWT at [jwt.io](https://jwt.io)
-2. Provide a consistent authentication API for all Feathers transports
-3. Provide a framework for authentication plugins that use [Passport](http://passportjs.org/) strategies to protect endpoints.
+- Authentication strategies that verify authentication information
+- An authentication service that allows to register strategies and use them to authenticate and manage JWTs
+- The `authenticate` hook which uses `params.authentication` and the authentication service to verify authentication information
 
-> __Note:__ If you are using a 0.x version of `feathers-authentication` please refer to [the migration guide](https://github.com/feathersjs/authentication/blob/4344c6f037f2660e4636c1c05ea22a0000649312/docs/migrating.md). The hooks that were once bundled with this module are now located at [feathers-authentication-hooks](https://github.com/feathersjs-ecosystem/feathers-authentication-hooks).
+> *Important:* `@feathersjs/authentication` is an abstraction for different authentication mechanisms. It does not handle things like user verification or password reset functionality etc. This can be implemented manually, with the help of libraries like [feathers-authentication-management](https://github.com/feathers-plus/feathers-authentication-management) or a platform like [Auth0](https://auth0.com/).
 
 ## Complementary Plugins
 
@@ -21,234 +21,176 @@ The following plugins are complementary, but entirely optional:
 
 - Using the authentication server on the client: [@feathersjs/authentication-client](./client.md)
 - Local (username/password) authentication: [@feathersjs/authentication-local](./local.md)
-- JWT authentication: [@feathersjs/authentication-jwt](./jwt.md)
-- OAuth1 authentication: [@feathersjs/authentication-oauth1](./oauth1.md)
-- OAuth2 authentication: [@feathersjs/authentication-oauth2](./oauth2.md)
+- OAuth authentication: [@feathersjs/authentication-oauth](./oauth.md)
+- API Key authentication: [@feathersjs/authentication-api-key](./api-key.md)
 
-## app.configure(auth(options))
+## Authentication service
 
-Configure the authentication plugin with the given options. For options that are not provided, the [default options](#default-options) will be used.
+### constructor(app, configKey)
 
-```js
-const auth = require('@feathersjs/authentication');
+`new AuthenticationService(app, configKey = 'authentication')` initializes a new authentication service with the [Feathers application]() instance and a `configKey` which is the name of the configuration property to use via `app.get(configKey)` (default: `app.get('authentication')`). Will also update the configuration with the [default settings](#configuration).
 
-// Available options are listed in the "Default Options" section
-app.configure(auth(options))
-```
+### configuration
 
-> __Important:__ The plugin has to be configured __before__ any other service.
-
-## Options
-
-The following default options will be mixed in with your global `auth` object from your config file. It will set the mixed options back onto the app so that they are available at any time by calling `app.get('authentication')`. They can all be overridden and are required by some of the authentication plugins.
+`service.configuration` returns a copy of current value of `app.get(configKey)` (default: `app.get('authentication')`) which must at least contain a `secret` property. The default configuration is:
 
 ```js
 {
- path: '/authentication', // the authentication service path
- header: 'Authorization', // the header to use when using JWT auth
- entity: 'user', // the entity that will be added to the request, socket, and context.params. (ie. req.user, socket.user, context.params.user)
- secret: 'supersecret', // either the secret for HMAC algorithms or the PEM encoded private key for RSA and ECDSA.
- service: 'users', // the service to look up the entity
- passReqToCallback: true, // whether the request object should be passed to the strategies `verify` function
- session: false, // whether to use sessions
- cookie: {
-  enabled: false, // whether cookie creation is enabled
-  name: 'feathers-jwt', // the cookie name
-  httpOnly: false, // when enabled, prevents the client from reading the cookie.
-  secure: true // whether cookies should only be available over HTTPS
- },
- jwt: {
-  header: { typ: 'access' }, // by default is an access token but can be any type. This is not a typo!
-  audience: 'https://yourdomain.com', // The resource server where the token is processed
-  subject: 'anonymous', // Typically the entity id associated with the JWT
-  issuer: 'feathers', // The issuing server, application or resource
-  algorithm: 'HS256', // the algorithm to use
-  expiresIn: '1d' // the access token expiry
- }
+  entity: 'user', // The name of the entity. Can be `null` when not used
+  service: 'users', // The service to retrieve the entity from
+  jwtOptions: {
+    header: { typ: 'access' }, // by default is an access token but can be any type
+    audience: 'https://yourdomain.com', // The resource server where the token is processed
+    issuer: 'feathers', // The issuing server, application or resource
+    algorithm: 'HS256',
+    expiresIn: '1d'
+  },
+  jwt: {
+    header: 'Authorization', // The HTTP header value
+    schemes: [ 'Bearer', 'JWT' ] // The header schemes to use (e.g. `Bearer <token>`)
+  }
 }
 ```
 
-> __Note:__ The `typ` in the JWT header options is not a typo. It is the [typ parameter defined in the JWT specification](https://tools.ietf.org/html/rfc7519#section-5.1).
+`jwtOption` can take all options available for the [node-jsonwebtoken package](https://github.com/auth0/node-jsonwebtoken).
 
-## app.service('authentication')
+> *Note:* `typ` in the `header` options is not a typo, it is part of the [JWT JOSE header specification](https://tools.ietf.org/html/rfc7519#section-5).
 
-The heart of this plugin is a service for creating JWT. It's a normal Feathers service that implements only the `create` and `remove` methods. The `/authentication` service provides all of the functionality that the `/auth/local` and `/auth/token` endpoints did. To choose a strategy, the client must pass the `strategy` name in the request body. This will be different based on the plugin used. See the documentation for the plugins listed at the top of this page for more information.
+### register(name, strategy)
 
-### service.create(data)
+`service.register(name, strategy)` registers an [authentication strategy]() under `name` and calls the strategy setters `setName`, `setAuthentication` and `setApplication` if implemented.
 
-The `create` method will be used in nearly every Feathers application. It creates a JWT based on the `jwt` options configured on the plugin. The API of this method utilizes the `context` object.
+### getStrategies(...names)
 
-If you are manually generating JWT's, and for example, wanted to create a JWT with the [payload](https://jwt.io) `{userId: "abc123"}`:
+`service.getStrategies(...names)` returns the authentication strategies that exist for a list of names.
 
-```
-const data = {payload: {userId: "abc123"}};
-service.create(data);
-```
-Anything included in the `data.payload` object will be in the JWT's payload. If you include a `payload` object in [params](https://docs.feathersjs.com/api/services.html#createdata-params), it's properties will take precedence over `data`.
+### authenticate(data, params, ...strategies)
 
-### service.remove(data)
+Run [.authenticate()]() for the given `strategies` with `data` and `params`. Will return the value of the first strategy that didn't throw an error or the first error if all strategies failed. If `data.strategy` is set and it is not included in `strategies`, an error will be thrown.
 
-The `remove` method is used less often. Its main purpose is adding hooks to the "logout" process. For example, in services that require high control over security, a developer can register hooks on the `remove` method that perform token blacklisting.
+### parse(req, res, ...strategies)
 
-### service.hooks({ before })
+Parse a [NodeJS HTTP request](https://nodejs.org/api/http.html#http_class_http_incomingmessage) and [response](https://nodejs.org/api/http.html#http_class_http_serverresponse) for authentication information using `strategies` calling [each strategies `.parse()` method](). Will return the value of the first strategy that didn't return `null`.
 
-These properties can be modified to change the behavior of the `/authentication` service:
+### createJWT(payload, [options, secret])
 
-- `context.data.payload {Object}` - determines the payload of the JWT
-- `context.params.payload {Object}` - also determines the payload of the JWT. Any matching attributes in the `context.data.payload` will be overwritten by these. Persists into after hooks.
-- `context.params.authenticated {Boolean}` - After successful authentication, will be set to `true`, unless it's set to `false` in a before hook. If you set it to `false` in a before hook, it will prevent the websocket from being flagged as authenticated. Persists into after hooks.
+Create a new JWT with `payload` using [configuration.jwtOptions](#configuration) merged with `options` (optional). Will either use `configuration.secret` or the optional `secret` to sign the JWT.
 
-### service.hooks({ after })
+### verifyJWT(accessToken, [options, secret])
 
-- `context.params[entity] {Object}` - After successful authentication, the `entity` looked up from the database will be populated here. (The default option is `user`.)
+Verify the JWT `accessToken` using `configuration.jwtOptions` merged with `options` (optional). Will either use `configuration.secret` or the optional `secret` to verify the JWT.
 
-## app.passport
+### getJwtOptions(authResult, params)
 
-### app.passport.createJWT(payload, options)
+Return the options for creating a new JWT based on the return value from an authentication strategy. Called internally on [.create](). Will try to set the JWT subject to the entity (user) id if it is available which in turn is used by the [JWT strategy]() to populate `params[entity]` (usually `params.user`).
 
-`app.passport.createJWT(payload, options) -> Promise` is used by the [authentication service](#appserviceauthentication) to generate JSON Web Tokens.
+### getPayload(authResult, params)
 
-- `payload {Object}` - becomes the JWT payload. Will also include an `exp` property denoting the expiry timestamp.
-- `options {Object}` - the options passed to [jsonwebtoken `sign()`](https://www.npmjs.com/package/jsonwebtoken#jwtsignpayload-secretorprivatekey-options-callback)
- - `secret {String | Buffer}` - either the secret for HMAC algorithms, or the PEM encoded private key for RSA and ECDSA.
- - `jwt` - See the [`jsonwebtoken`](https://www.npmjs.com/package/jsonwebtoken#jwtsignpayload-secretorprivatekey-options-callback) package docs for other available options. The authenticate method uses the [default `jwt` options](#default-options). When using this package directly, they have to be passed in manually.
+Returns the payload for an authentication result and parameters. Called internally on [.create](). Will either return `params.payload` or an empty object (`{}`).
 
-The returned `promise` resolves with the JWT or fails with an error.
+### create(data, params)
 
-### app.passport.verifyJWT(token, options)
+### remove(id, params)
 
-Verifies the signature and payload of the passed in JWT `token` using the `options`.
+Should be called with `id` set to `null` or to the authenticated JWT. Will verify `params.authentication` and emit the [`logout` event]() if successful.
 
-- `token {JWT}` - the JWT to be verified.
-- `options {Object}` the options passed to [jsonwebtoken `verify()`](https://www.npmjs.com/package/jsonwebtoken#jwtverifytoken-secretorpublickey-options-callback)
- - `secret {String | Buffer}` - - either the secret for HMAC algorithms, or the PEM encoded private key for RSA and ECDSA.
- - See the [`jsonwebtoken`](https://www.npmjs.com/package/jsonwebtoken#jwtsignpayload-secretorprivatekey-options-callback) package docs for other available options.
+### setup(path, app)
 
-The returned `promise` resolves with the payload or fails with an error.
+Will verify the [configuration](#configuration) and make sure that
 
-## auth.hooks.authenticate(strategies)
+- A `secret` has been set
+- If `entity` is not `null`, check if the entity service is available and make sure that either the `entityId` configuration or the `entityService.id` property is set.
+- Register internal hooks to send events and keep real-time connections up to date. All custom hooks should be registered at this time.
 
-`@feathersjs/authentication` only includes a single hook. This bundled `authenticate` hook is used to register an array of authentication strategies on a service method.
+### Customization
 
-> **Note:** This should usually be used on your `/authentication` service. Without it, you can hit the `authentication` service and generate a JWT `accessToken` without authentication (ie. anonymous authentication).
+The `AuthenticationService` can be customized like any other ES6 class:
 
 ```js
-app.service('authentication').hooks({
- before: {
-  create: [
-   // You can chain multiple strategies
-   auth.hooks.authenticate(['jwt', 'local']),
-  ],
-  remove: [
-   auth.hooks.authenticate('jwt')
-  ]
- }
-});
+const { AuthenticationService } = require('@feathersjs/authentication');
+
+class MyAuthService extends AuthenticationService {
+  async getPayload(authResult, params) {
+    // Call original `getPayload` first
+    const payload = await super.getPayload(authResult, params);
+    const { user } = authResult;
+
+    if (user && user.permissions) {
+      payload.permissions = user.permissions;
+    }
+
+    return payload;
+  }
+}
+
+app.use('/authentication', new MyAuthService(app));
 ```
 
-## Authentication Events
+Things to be aware of when extending the authentication service:
 
-The `login` and `logout` events are emitted on the `app` object whenever a client successfully authenticates or "logs out". (With JWT, logging out doesn't invalidate the JWT. (Read the section on JWT for details.) These events are only emitted on the server.
+- When implementing your own `constructor`, always call `super(app, configKey)`
+- When overriding a method, calling `super.method` and working with its return value is recommended unless you are certain your custom method behaves exactly the same way, otherwise things may no longer work as expected.
+- When extending `setup`, `super.setup(path, app)` should always be called, otherwise events and real-time connection authentication will no longer work.
 
-### app.on('login', callback))
+## Authentication strategies
 
-### app.on('logout', callback))
+### setName(name)
 
-These two events use a `callback` function with the same signature.
+Will be called with the `name` under which the strategy has been registered.
 
-- `result` {Object} - The final `context.result` from the `authentication` service. Unless you customize the `context.response` in an after hook, this will only contain the `accessToken`, which is the JWT.
-- `meta` {Object} - information about the request. *The `meta` data varies per transport / provider as follows.*
-  - Using `@feathersjs/express/rest`
-    - `provider` {String} - will always be `"rest"`
-    - `req` {Object} - the Express request object.
-    - `res` {Object} - the Express response object.
-  - Using `feathers-socketio` and `feathers-primus`:
-    - `provider` {String} - the transport name: `socketio` or `primus`
-    - `connection` {Object} - the same as `params` in the hook context
-    - `socket` {SocketObject} - the current user's WebSocket object. It also contains the `feathers` attribute, which is the same as `params` in the hook context.
+### setApplication(app)
 
-## Express Middleware
+Will be called with the [application]() instance.
 
-There is an `authenticate` middleware. It is used the exact same way as the regular Passport express middleware:
+### setAuthentication(service)
+
+Will be called with the [Authentication service]() this strategy has been registered on.
+
+### authenticate(data, params)
+
+Authenticate `data` with additional `params`. A strategy may check for `data.strategy` being set to its `name` and throw an error if it does not match. `authenticate` will be called for all strategies. `authenticate` should throw a `NotAuthenticated` if it failed or return an authentication result object.
+
+### parse(req, res)
+
+Parse a given plain Node HTTP request and response and return `null` or the authentication information it provides. `parse` does not have to implemented.
+
+## `authenticate` hook
+
+The `authenticate` hook will use `params.authentication` of the service method call and run [authenticationService.authenticate()]().
+
+It should be used as a `before` hook and either takes a list of strategy names (using `app.service('authentication')` as the authentication service) or an object with `service` set to the authentication service name and `strategies` set to a list of strategy names to authenticate with:
 
 ```js
-const cookieParser = require('cookie-parser');
+const { authenticate } = require('@feathersjs/authentication');
 
-app.post('/protected-route', cookieParser(), auth.express.authenticate('jwt'));
-app.post('/protected-route-that-redirects', cookieParser(), auth.express.authenticate('jwt', {
-  failureRedirect: '/login'
-}));
+// Authenticate with `jwt` and `api-key` strategy
+// using app.service('authentication') as the authentication service
+app.service('messages').hooks({
+  before: authenticate('jwt', 'api-key')
+});
+
+// Authenticate with `jwt` and `api-key` strategy
+// using app.service('v1/authentication') as the authentication service
+app.service('messages').hooks({
+  before: authenticate({
+    service: 'v1/authentication',
+    strategies: [ 'jwt', 'api-key' ]
+  })
+});
 ```
 
-For details, see the [Express middleware recipe](../../guides/auth/recipe.express-middleware.md).
-
-Additional middleware are included and exposed, but you typically don't need to worry about them:
-
-- `emitEvents` - emit `login` and `logout` events
-- `exposeCookies` - expose cookies to Feathers so they are available to hooks and services. **This is NOT used by default as its use exposes your API to CSRF vulnerabilities.** Only use it if you really know what you're doing.
-- `exposeHeaders` - expose headers to Feathers so they are available to hooks and services. **This is NOT used by default as its use exposes your API to CSRF vulnerabilities.** Only use it if you really know what you're doing.
-- `failureRedirect` - support redirecting on auth failure. Only triggered if `hook.redirect` is set.
-- `successRedirect` - support redirecting on auth success. Only triggered if `hook.redirect` is set.
-- `setCookie` - support setting the JWT access token in a cookie. Only enabled if cookies are enabled. **Note: Feathers will NOT read an access token from a cookie. This would expose the API to CSRF attacks.** This `setCookie` feature is available primarily for helping with Server Side Rendering.
-
-## Complete Example
-
-Here's an example of a Feathers server that uses `@feathersjs/authentication` for local authentication.
+It will either throw an error if all strategies failed or merge `params` with the result from the first successful authentication strategy. For example, a successful [JWT strategy]() authentication will set:
 
 ```js
-const feathers = require('@feathersjs/feathers');
-const express = require('@feathersjs/express');
-const socketio = require('@feathersjs/socketio');
-const auth = require('@feathersjs/authentication');
-const local = require('@feathersjs/authentication-local');
-const jwt = require('@feathersjs/authentication-jwt');
-const memory = require('feathers-memory');
-
-const app = express(feathers());
-app.configure(express.rest())
- .configure(socketio())
- .use(express.json())
- .use(express.urlencoded({ extended: true }))
- .configure(auth({ secret: 'supersecret' }))
- .configure(local())
- .configure(jwt())
- .use('/users', memory())
- .use('/', express.static(__dirname + '/public'))
- .use(express.errorHandler());
-
-app.service('users').hooks({
-  // Make sure `password` never gets sent to the client
-  after: local.hooks.protect('password')
-});
-
-app.service('authentication').hooks({
- before: {
-  create: [
-   // You can chain multiple strategies
-   auth.hooks.authenticate(['jwt', 'local'])
-  ],
-  remove: [
-   auth.hooks.authenticate('jwt')
-  ]
- }
-});
-
-// Add a hook to the user service that automatically replaces
-// the password with a hash of the password, before saving it.
-app.service('users').hooks({
- before: {
-  find: [
-   auth.hooks.authenticate('jwt')
-  ],
-  create: [
-   local.hooks.hashPassword({ passwordField: 'password' })
-  ]
- }
-});
-
-const port = 3030;
-let server = app.listen(port);
-server.on('listening', function() {
- console.log(`Feathers application started on localhost:${port}`);
-});
+params.authentication.payload // The decoded payload
+params.authentication.strategy === 'jwt' // The strategy name
+params.user // or params[entity] if entity is not `null`
 ```
+
+In the following hooks and for the service method call.
+
+## Events
+
+### app.on('login')
+
+### app.on('logout')

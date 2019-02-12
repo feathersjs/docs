@@ -46,3 +46,8 @@ https://buzzard.docs.feathersjs.com/* https://docs.feathersjs.com/:splat 301!
 /guides/about/vs.html                       https://feathersjs.com/comparison
 
 /ecosystem/readme.html                      https://github.com/feathersjs/awesome-feathersjs
+
+# Crow Redirects
+
+/api/authentication/oauth1.html             api/authentication/oauth.html
+/api/authentication/oauth2.html             api/authentication/oauth.html
