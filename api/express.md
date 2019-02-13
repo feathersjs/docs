@@ -118,16 +118,22 @@ HTTPS requires creating a separate server in which case `app.setup(server)` also
 ```js
 const fs = require('fs');
 const https  = require('https');
+const port = app.get('port');
 
 const feathers = require('@feathersjs/feathers');
 const express = require('@feathersjs/express');
 
-const app = express(feathers());
+const privkey_pem = app.get('privkey_pem');  // referenced in ./config/default.json
+const cert_pem = app.get('cert_pem');        // referenced in ./config/default.json
+const chain_pem = app.get('chain_pem');      // referenced in ./config/default.json
+
+    //const app = express(feathers());
 
 const server = https.createServer({
-  key: fs.readFileSync('privatekey.pem'),
-  cert: fs.readFileSync('certificate.pem')
-}, app).listen(443);
+  key: fs.readFileSync(privkey_pem),
+  cert: fs.readFileSync(cert_pem),
+  ca: fs.readFileSync(chain_pem),
+}, app).listen(port);
 
 // Call app.setup to initialize all services and SocketIO
 app.setup(server);
