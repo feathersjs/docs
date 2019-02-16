@@ -26,6 +26,7 @@ The following databases are supported:
 
 - [feathers-knex](https://github.com/feathersjs-ecosystem/feathers-knex) - An adapter for [KnexJS](http://knexjs.org/), an SQL query builder for NodeJS supporting PostgreSQL, MySQL, SQLite and MSSQL
 - [feathers-sequelize](https://github.com/feathersjs-ecosystem/feathers-sequelize) - An adapter for [Sequelize](http://docs.sequelizejs.com/) an ORM for NodeJS supporting PostgreSQL, MySQL, SQLite and MSSQL
+- [feathers-objection](https://github.com/feathersjs-ecosystem/feathers-objection) - A service adapter for [Objection.js](https://vincit.github.io/objection.js) - A minimal SQL ORM built on top of Knex.
 
 ## NoSQL
 
