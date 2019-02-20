@@ -131,10 +131,6 @@ messages.remove(1);
 
 By default, real-time clients will only receive the [standard events](#service-events). However, it is possible to define a list of custom events on a service as `service.events` that should also be passed when `service.emit('customevent', data)` is called on the server. The `context` for custom events won't be a full hook context but just an object containing `{ app, service, path, result }`.
 
-> **Important:** The [database adapters](./databases/common.md) also take a list of custom events as an [initialization option](./databases/common.md#serviceoptions).
-
-<!-- -->
-
 > **Important:** Custom events can only be sent from the server to the client, not the other way (client to server). [Learn more](../faq/readme.md#how-do-i-create-custom-methods)
 
 For example, a payment service that sends status events to the client while processing a payment could look like this:
@@ -156,6 +152,17 @@ class PaymentService {
 }
 ```
 
+The [database adapters](./databases/common.md) also take a list of custom events as an [initialization option](./databases/common.md#serviceoptions):
+
+```js
+const service = require('feathers-<adaptername>'); // e.g. `feathers-mongodb`
+
+app.use('/payments', service({
+  events: [ 'status' ],
+  Model
+});
+```
+
 Using `service.emit` custom events can also be sent in a hook:
 
 ```js
@@ -167,6 +174,7 @@ app.service('payments').hooks({
   }
 });
 ```
+
 
 Custom events can be [published through channels](./channels.md#publishing) just like standard events and listened to it in a [Feathers client](./client.md) or [directly on the socket connection](./client/socketio.md#listening-to-events):
 
