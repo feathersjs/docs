@@ -147,24 +147,3 @@ app.service('users').hooks({
 ### params.connection
 
 `params.connection` is the connection object that can be used with [channels](./channels.md). It is the same object as `socket.feathers` in a Socket.io middleware as [shown in the `params` section](#params).
-
-## uWebSocket
-
-The options can also be used to initialize [uWebSocket](https://github.com/uwebsockets/uwebsockets) which is a WebSocket server implementation that provides better performace and reduced latency.
-
-```
-$ npm install uws --save
-```
-
-```js
-const feathers = require('@feathersjs/feathers');
-const socketio = require('@feathersjs/socketio');
-
-const app = feathers();
-
-app.configure(socketio({
-  wsEngine: 'uws'
-}));
-
-app.listen(3030);
-```
