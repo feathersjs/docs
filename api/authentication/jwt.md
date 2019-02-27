@@ -83,7 +83,7 @@ The `Verifier` class can be extended so that you customize it's behavior without
 An example of customizing the Verifier:
 
 ```js
-import jwt, { Verifier } from '@feathersjs/authentication-jwt';
+const { Verifier } = require('@feathersjs/authentication-jwt');
 
 class CustomVerifier extends Verifier {
   // The verify function has the exact same inputs and 
