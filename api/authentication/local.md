@@ -117,7 +117,7 @@ The `Verifier` class can be extended so that you customize it's behavior without
 An example of customizing the Verifier:
 
 ```js
-import local, { Verifier } from '@feathersjs/authentication-local';
+const { Verifier } = require('@feathersjs/authentication-local');
 
 class CustomVerifier extends Verifier {
   // The verify function has the exact same inputs and 
