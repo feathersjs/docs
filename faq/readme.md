@@ -254,7 +254,7 @@ There are many other Node server frameworks out there like Koa, a *"next generat
 
 In short, you shouldn't need to. If you look at the [hooks chapter](../api/hooks.md) you'll see all the params that are available on a hook.
 
-If you still need something from the request object (for example, the requesting IP address) you can simply tack it on to the `req.feathers` object [as described here](../api/express.md#params).
+If you still need something from the request object (for example, the requesting IP address) you can simply tack it on to the `req.feathers` object [as described here](../api/express.md#params) or `socket.feathers` when using web sockets as [described here](../api/socketio.md#appconfiguresocketiocallback).
 
 ## How do I mount sub apps?
 
