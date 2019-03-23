@@ -16,7 +16,7 @@ We want to implement an upload service to accomplish a few important things:
 
 The plan is to upload the files to a feathers service so we can take advantage of hooks for authentication, authorization and validation, and for service events.
 
-Fortunately, there exists a file storage service: [feathers-blob](https://github.com/feathersjs/feathers-blob). With it we can meet our goals, but (spoiler alert) it isn't an ideal solution.  We discuss some of its problems below.
+Fortunately, there exists a file storage service: [feathers-blob](https://github.com/feathersjs/feathers-blob). With it we can meet our goals, but (spoiler alert) it comes with its own problems which we'll discuss below.
 
 
 ## Basic upload with feathers-blob and feathers-client
