@@ -25,7 +25,7 @@ Service methods are [CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_an
 
 Below is an example of Feathers service interface as a normal object and a JavaScript class:
 
-{% codetabs name="Object", type="js" -%}
+```js
 const myService = {
   async find(params) {
     return [];
@@ -51,7 +51,7 @@ class myService {
 }
 
 app.use('/my-service', new myService());
-{%- endcodetabs %}
+```
 
 The parameters for service methods are:
 
