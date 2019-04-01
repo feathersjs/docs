@@ -12,11 +12,16 @@ The [@feathersjs/authentication-client](https://github.com/feathersjs/authentica
 This module contains:
 
 - [The main entry function](#configuration)
-- [Additional feathersClient methods](#additional-feathersclient-methods)
+- Authentication Methods
+    - [`app.authenticate()`](#appauthenticate)
+    - [`app.authenticate(options)`](#appauthenticateoptions)
+    - [`app.logout()`](#applogout)
+- [Authentication Events](#authentication-events)
 - [Some helpful hooks](#hooks)
+- [Complete example](#hooks)
 
-
-## app.configure(auth(options))
+## Configuration
+### app.configure(auth(options))
 
 Setup is done the same as all Feathers plugins, using the `configure` method:
 
@@ -38,7 +43,7 @@ app.configure(auth(options))
 
 **> The [transports plugins](../client.md) (Rest, Socket, Primus...) must have been initialized previously to the authentication plugin.**
 
-## Options
+### Options
 
 The following default options will be mixed in with the settings you pass in when configuring authentication. It will set the mixed options back to to the app so that they are available at any time by `app.get('auth')`. They can all be overridden.
 
@@ -133,9 +138,9 @@ Synchronously verify that a token has not expired. Returns a Boolean.
 On the client authentication events are emitted on the app object whenever a client successfully authenticates or "logs out".
 These events are emitted on the client.
 
-## app.on('authenticated', callback)
-## app.on('logout', callback)
-## app.on('reauthentication-error', errorHandler)
+### app.on('authenticated', callback)
+### app.on('logout', callback)
+### app.on('reauthentication-error', errorHandler)
 
 In the event that your server goes down or the client loses connectivity, it will automatically handle attempting to re-authenticate the socket when the client regains connectivity with the server. In order to handle an authentication failure during automatic re-authentication you need to implement the following event listener:
 

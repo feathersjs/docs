@@ -151,7 +151,7 @@ The hook `context` is passed to a hook function and contains information about t
 
 `context.dispatch` is a __writeable, optional__ property and contains a "safe" version of the data that should be sent to any client. If `context.dispatch` has not been set `context.result` will be sent to the client instead.
 
-> __Note:__ `context.dispatch` only affects the data sent through a Feathers Transport like [REST](./express) or [Socket.io](./socketio.md). An internal method call will still get the data set in `context.result`.
+> __Note:__ `context.dispatch` only affects the data sent through a Feathers Transport like [REST](./express.md) or [Socket.io](./socketio.md). An internal method call will still get the data set in `context.result`.
 
 ### context.statusCode
 

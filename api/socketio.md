@@ -17,7 +17,7 @@ The [@feathersjs/socketio](https://github.com/feathersjs/socketio) module allows
 
 ### app.configure(socketio())
 
-Sets up the Socket.io transport with the default configuration using either the server provided by [app.listen](./application.md#listen) or passed in [app.setup(server)](./application.md#setup).
+Sets up the Socket.io transport with the default configuration using either the server provided by [app.listen](./application.md#listenport) or passed in [app.setup(server)](./application.md#setupserver).
 
 ```js
 const feathers = require('@feathersjs/feathers');

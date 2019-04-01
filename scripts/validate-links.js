@@ -74,6 +74,9 @@ function validateRedirects(vfiles) {
       return file;
     }
 
+    // All link errors will be listed in the "messages" property.
+    // For any "missing-file" errors, check to see if a redirect
+    // has been defined for that file. If so, ignore the message.
     file.messages = file.messages
       .filter(message => {
         if(message.ruleId === 'missing-file') {

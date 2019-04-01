@@ -4,7 +4,7 @@ Feathers works the same on the server and on the client and is front-end framewo
 
 ## Client Side Docs
 
-If you want to learn how to use Feathers as a client in Node.js, React Native, or in the browser with a module loader like Webpack refer to the [client API docs](/api/client.md).
+If you want to learn how to use Feathers as a client in Node.js, React Native, or in the browser with a module loader like Webpack refer to the [client API docs](../../api/client.md).
 
 ## Examples
 

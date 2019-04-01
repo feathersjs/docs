@@ -29,7 +29,8 @@
   "scripts": {
     "build": "vuepress build",
     "start": "vuepress dev",
-    "netlify": "npm run build"
+    "netlify": "npm run build",
+    "validate-links": "node scripts/validate-links"
   },
   "directories": {},
   "dependencies": {},
