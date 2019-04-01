@@ -14,7 +14,7 @@ $ npm install @feathersjs/socketio-client --save
 
 The `@feathersjs/socketio-client` module allows to connect to services exposed through the [Socket.io server](../socketio.md) via a Socket.io socket.
 
-> **Important:** Socket.io is also used to *call* service methods. Using sockets for both calling methods and receiving real-time events is generally faster than using [REST](./express.md). There is therefore no need to use both REST and Socket.io in the same client application.
+> **Important:** Socket.io is also used to *call* service methods. Using sockets for both calling methods and receiving real-time events is generally faster than using [REST](../express.md). There is therefore no need to use both REST and Socket.io in the same client application.
 
 ### socketio(socket)
 
@@ -124,7 +124,7 @@ If the service path or method does not exist, an appropriate Feathers error will
 
 ### Authentication
 
-Sockets can be authenticated by sending the `authenticate` event with the `strategy` and the payload. For specific examples, see the "Direct Connection" section in the [local](./local.md) and [jwt](./jwt.md) authentication chapters.
+Sockets can be authenticated by sending the `authenticate` event with the `strategy` and the payload. For specific examples, see the "Direct Connection" section in the [local](../authentication/local.md) and [jwt](../authentication/jwt.md) authentication chapters.
 
 ```js
 const io = require('socket.io-client');
@@ -244,8 +244,6 @@ socket.emit('patch', 'messages', null, {
 ```
 
 Will call `app.service('messages').patch(null, { complete: true }, { query: { complete: false } })` on the server, to change the status for all read app.service('messages').
-
-This is supported out of the box by the Feathers [database adapters](../databases/readme.md) 
 
 ### remove
 

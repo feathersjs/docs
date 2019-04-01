@@ -49,7 +49,7 @@ Any service automaticaly emits `created`, `updated`, `patched` and `removed` eve
 
 > **Important:** For information on how those events are published for real-time updates to connected clients, see the [channel chapter](./channels.md).
 
-Additionally to the event `data`, all events also get the [hook context](./hooks) from their method call passed as the second parameter.
+Additionally to the event `data`, all events also get the [hook context](./hooks.md) from their method call passed as the second parameter.
 
 ### created
 

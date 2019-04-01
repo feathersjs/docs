@@ -40,7 +40,7 @@ $ npm install @feathersjs/primus-client --save
 
 The `@feathersjs/primus-client` module allows to connect to services exposed through the [Primus server](../primus.md) via the configured websocket library.
 
-> **Important:** Primus sockets are also used to *call* service methods. Using sockets for both, calling methods and receiving real-time events is generally faster than using [REST](./express.md) and there is no need to use both, REST and websockets in the same client application at the same time.
+> **Important:** Primus sockets are also used to *call* service methods. Using sockets for both, calling methods and receiving real-time events is generally faster than using [REST](../express.md) and there is no need to use both, REST and websockets in the same client application at the same time.
 
 ### `primus(socket)`
 
@@ -127,11 +127,11 @@ See the [Primus docs](https://github.com/primus/primus#connecting-from-the-brows
 
 Service methods can be called by emitting a `<servicepath>::<methodname>` event with the method parameters. `servicepath` is the name the service has been registered with (in `app.use`) without leading or trailing slashes. An optional callback following the `function(error, data)` Node convention will be called with the result of the method call or any errors that might have occurred.
 
-`params` will be set as `params.query` in the service method call. Other service parameters can be set through a [Primus middleware](../real-time/primus.md).
+`params` will be set as `params.query` in the service method call. Other service parameters can be set through a [Primus middleware](../primus.md).
 
 ### Authentication
 
-Sockets can be authenticated by sending the `authenticate` event with the `strategy` and the payload. For specific examples see the "Direct Connection" section in the [local](./local.md) and [jwt](./jwt.md) authentication chapters.
+Sockets can be authenticated by sending the `authenticate` event with the `strategy` and the payload. For specific examples see the "Direct Connection" section in the [local](../authentication/local.md) and [jwt](../authentication/jwt.md) authentication chapters.
 
 ```js
 socket.send('authenticate', {
@@ -248,8 +248,6 @@ socket.send('patch', 'messages', null, {
 ```
 
 Will call `app.service('messages').patch(null, { complete: true }, { query: { complete: false } })` on the server to change the status for all read app.service('messages').
-
-This is supported out of the box by the Feathers [database adapters](../databases/readme.md) 
 
 ### remove
 

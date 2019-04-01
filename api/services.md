@@ -164,7 +164,7 @@ app.use('/messages', {
 
 `service.update(id, data, params) -> Promise` - Replaces the resource identified by `id` with `data`. The method should return a `Promise` with the complete, updated resource data. `id` can also be `null` when updating multiple records, with `params.query` containing the query criteria.
 
-> **Important:** A successful `update` method call emits the [`updated` service event](./events.md#updated).
+> **Important:** A successful `update` method call emits the [`updated` service event](./events.md#updated-patched).
 
 ### .patch(id, data, params)
 
@@ -172,14 +172,14 @@ app.use('/messages', {
 
 The method should return with the complete, updated resource data. Implement `patch` additionally (or instead of) `update` if you want to distinguish between partial and full updates and support the `PATCH` HTTP method.
 
-> **Important:** A successful `patch` method call emits the [`patched` service event](./events.md#patched).
+> **Important:** A successful `patch` method call emits the [`patched` service event](./events.md#updated-patched).
 
 
 ### .remove(id, params)
 
 `service.remove(id, params) -> Promise` - Removes the resource with `id`. The method should return a `Promise` with the removed resource. `id` can also be `null`, which indicates the deletion of multiple resources, with `params.query` containing the query criteria.
 
-> **Important:** A successful `remove` method call emits the [`removed` service event](./events.md#remove).
+> **Important:** A successful `remove` method call emits the [`removed` service event](./events.md#removed).
 
 
 ### .setup(app, path)
