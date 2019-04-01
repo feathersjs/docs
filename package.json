@@ -34,6 +34,10 @@
   "directories": {},
   "dependencies": {},
   "devDependencies": {
+    "remark": "^10.0.1",
+    "remark-validate-links": "^8.0.2",
+    "unified-engine": "^6.0.1",
+    "vfile-reporter": "^5.1.1",
     "vuepress": "^1.0.0-alpha.23"
   }
 }
