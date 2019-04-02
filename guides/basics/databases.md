@@ -187,4 +187,4 @@ After starting the server with `node app.js` we can pass a query e.g. by going t
 
 ## What's next?
 
-Feathers database adapters are a quick way to get an API and up and running. The great thing is that [hooks](./hooks.md) still give us all the flexibility we need to customize how they work. We already saw how we can easily create a database backed REST API, in the [next chapter](./real-time.md) we will make our API real-time.
+Feathers database adapters are a quick way to get an API up and running. The great thing is that [hooks](./hooks.md) still give us all the flexibility we need to customize how they work. We already saw how we can easily create a database backed REST API, in the [next chapter](./real-time.md) we will make our API real-time.
