@@ -1,6 +1,76 @@
 # Migrating
 
-This guide explains the new featuers and changes to migrate to the Feathers Crow release. Information will be added as new releases of individual modules are made.
+This guide explains the new features and changes to migrate to the Feathers v4 (Crow) release.
+
+## Versioning
+
+Instead of separate versioning for each module, all modules in the `@feathersjs` namespace have been updated to use the same version number. This means that the current release (Crow) will be **Feathers v4**. You can use e.g. a tool like [npm-check-update](https://www.npmjs.com/package/npm-check-updates) to upgrade all dependencies to the latest version:
+
+```
+npm install npm-check-updates -g
+ncu -u -t # -t includes latest prereleases as well
+```
+
+## Authentication
+
+The `@feathersjs/authentication-*` modules have been completely rewritten to include more secure defaults, be easier to customize, framework independent and no longer rely on PassportJS. It comes with:
+
+- Protocol independent, fully customizable authentication strategies
+- An extensible authentication service that can register strategies and create authentication tokens (JWT by default but pluggable for anything else)
+- Better oAuth authentication with 180+ providers supported out of the box without any additional configuration (other than adding the application key and secret)
+- Built-in oAuth account linking and cross-domain oAuth authentication
+
+To upgrade, replace the existing authentication configuration (usually `src/authentication.js`) with the following:
+
+```js
+const { AuthenticationService, JWTStrategy } = require('@feathersjs/authentication');
+const { LocalStrategy } = require('@feathersjs/authentication-local');
+const { express: oauth } = require('@feathersjs/authentication-oauth');
+
+module.exports = function (app) {
+  const authentication = new AuthenticationService(app);
+
+  authentication.register('jwt', new JWTStrategy());
+  authentication.register('local', new LocalStrategy());
+
+  app.use('/authentication', authentication);
+  app.configure(oauth());
+};
+```
+
+> __Important:__ The `@feathersjs/authentication-jwt` is now deprecated since the JWT strategy is now directly included in `@feathersjs/authentication`.
+
+This will register `local`, `jwt` and oAuth authentication strategies using the standard authentication service on the `/authentication` path. oAuth will only be active if provider information is added to the configuration. The authentication configuration (usually in `config/default.json`) should be updated as follows:
+
+```json
+"authentication": {
+  "entity": "user",
+  "service": "users",
+  "secret": "<your secret>",
+  "jwtStrategies": [ "jwt", "local" ],
+  "httpStrategies": [ "jwt" ],
+  "jwtOptions": {
+    "header": { "typ": "access" },
+    "audience": "https://yourdomain.com",
+    "issuer": "feathers",
+    "algorithm": "HS256",
+    "expiresIn": "1d"
+  },
+  "local": {
+    "usernameField": "email",
+    "passwordField": "password"
+  }
+}
+```
+
+Important things to note:
+
+- Because of extensive changes and security improvements, you should change your JWT secret so that all users will be prompted to log in again.
+- The `jwt` options have been moved to `jwtOptions`. It takes all [jsonwebtoken options](https://github.com/auth0/node-jsonwebtoken#jwtsignpayload-secretorprivatekey-options-callback). The `subject` option __should be removed__ when using the standard setup.
+- `jwtStrategies` is a list of strategies to allow on the `/authentication` endpoint to create a JWT
+- `httpStrategies` are the strategies that should be used to parse authentication information from HTTP (REST) requests
+
+> __Important:__ The `hashPassword` hook now explicitly requires the name of the field to hash instead of using a default (change any `hashPassword()` to e.g. `hashPassword('password')`).
 
 ## Feathers core
 
@@ -14,9 +84,32 @@ app.use('/', myService);
 
 It will be available via `app.service('/')` through the client and directly at `http://feathers-server.com/` via REST.
 
+### Skip event emitting
+
+Service events can no be skipped by setting `context.event` to `null`.
+
+```js
+context => {
+  // Skip sending event
+  context.event = null;
+}
+```
+
 ### Typescript definitions included
 
-> _TBD:_ Use the definitions from [DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped) for now.
+All `@feathersjs` modules now come with up-to-date TypeScript definitions. Any definitions using `@types/feathersjs__*` _should be removed_ from your project.
+
+### Deprecated `(context, next)` and SKIP functionality
+
+In preparation to support Koa style hooks (see [feathersjs/feathers#932](https://github.com/feathersjs/feathers/issues/932)) returning `SKIP` and calling the deprecated `next` function in hooks has been removed. Returning `SKIP` in hooks was causing issues because
+- It is not easily possible to see if a hook makes its following hooks skip. This made hook chains very hard to debug.
+- Returning SKIP also causes problems with Feathers internals like the event system
+
+The use-cases for `feathers.SKIP` can now be explicitly handled by
+
+- [Running hooks conditionally](https://feathers-plus.github.io/v1/feathers-hooks-common/#iff) through a flag
+- [Calling the hook-less service methods](#hook-less-service-methods) of the database adapters
+- Setting `context.event = null` to skip event emitting
 
 ## Database adapters
 
