@@ -43,7 +43,6 @@ module.exports = {
           'services.md',
           'hooks.md',
           'events.md',
-          'channels.md',
           'errors.md',
           'configuration.md'
         ]
@@ -52,7 +51,8 @@ module.exports = {
         children: [
           'express.md',
           'socketio.md',
-          'primus.md'
+          'primus.md',
+          'channels.md'
         ]
       }, {
         title: 'Client',
@@ -65,12 +65,14 @@ module.exports = {
       }, {
         title: 'Authentication',
         children: [
-          'authentication/server.md',
-          'authentication/client.md',
-          'authentication/local.md',
+          'authentication/',
+          'authentication/service.md',
+          'authentication/strategy.md',
+          'authentication/hook.md',
           'authentication/jwt.md',
+          'authentication/local.md',
           'authentication/oauth.md',
-          'authentication/api-key.md'
+          'authentication/client.md'
         ]
       }, {
         title: 'Database',

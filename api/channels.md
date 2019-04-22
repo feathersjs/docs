@@ -1,4 +1,4 @@
-# Event channels
+# Channels
 
 On a Feathers server with a real-time transport ([Socket.io](./socketio.md) or [Primus](./primus.md)) set up, event channels determine which connected clients to send [real-time events](./events.md) to and how the sent data should look like.
 
