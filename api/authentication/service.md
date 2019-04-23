@@ -21,7 +21,11 @@ module.exports = app => {
 }
 ```
 
-This will allow to create new JWT 
+## Configuration
+
+## app.get('defaultAuthentication')
+
+After registering an authentication service, it will set the `defaultAuthentication` property on the application to its configuration name (see `configKey` below) if it does not exist. `app.get('defaultAuthentication')` will be used by other parts of Feathers authentication to access the authentication service if it is not otherwise specified.
 
 ## constructor(app)
 
@@ -55,11 +59,35 @@ This will allow to create new JWT
 
 ## register(name, strategy)
 
-`service.register(name, strategy)` registers an [authentication strategy](#authentication-strategies) under `name` and calls the strategy setters (if implemented).
+`service.register(name, strategy)` registers an [authentication strategy](./strategy.md) under `name` and calls the strategy methods that are implement.
 
 ## getStrategies(...names)
 
-`service.getStrategies(...names)` returns the [authentication strategies](#authentication-strategies) that exist for a list of names.
+`service.getStrategies(...names)` returns the [authentication strategies](#authentication-strategies) that exist for a list of names. The returned array may include `undefined` values if the strategy does not exist.
+
+## createAccessToken(payload)
+
+`authService.createAccessToken(payload, [options, secret])` creates a new JWT access token with `payload` using [configuration.jwtOptions](#configuration) merged with `options` (optional). It will either use `configuration.secret` or the optional `secret` to sign the JWT. Returns a promise that resolves with the accessToken or throw an error.
+
+> __Note:__ Normally, it is not necessary to call this method directly. Calling [authService.create(data, params)](#create-data-params) will take care of creating the correct access token.
+
+```js
+const token = await app.service('authentication').createAccessToken({
+  permission: 'admin'
+});
+```
+
+## verifyAccessToken(accessToken)
+
+`authService.verifyAccessToken(accessToken, [options, secret])` verifies the JWT `accessToken` using `configuration.jwtOptions` merged with `options` (optional). Will either use `configuration.secret` or the optional `secret` to verify the JWT. Returns a promise that resolves with the encoded payload or throw an error.
+
+## getTokenOptions(authResult, params)
+
+Return the options for creating a new access token based on the return value from calling [authService.authenticate()](#authenticate-data-params-strategies). Called internally on [authService.create()](#create-data-params). Will try to set the JWT `subject` to the entity (user) id if it is available. This will be used by the [JWT strategy](./jwt.md) to populate `params[entity]` (usually `params.user`). Returns a promise that resolves with the token options.
+
+## getPayload(authResult, params)
+
+Returns the payload for an authentication result and parameters. Called internally on [.create](#create-data-params). Returns a promise that either contains `params.payload` or an empty object (`{}`).
 
 ## authenticate(data, params, ...strategies)
 
@@ -69,35 +97,19 @@ Run [.authenticate()](#authenticate-data-params) for the given `strategies` with
 
 Parse a [NodeJS HTTP request](https://nodejs.org/api/http.html#http_class_http_incomingmessage) and [response](https://nodejs.org/api/http.html#http_class_http_serverresponse) for authentication information using `strategies` calling [each strategies `.parse()` method](#parse-req-res). Will return the value of the first strategy that didn't return `null`.
 
-## createJWT(payload)
+## setup(path, app)
 
-`authService.createJWT(payload, [options, secret])` creates a new JWT with `payload` using [configuration.jwtOptions](#configuration) merged with `options` (optional). Will either use `configuration.secret` or the optional `secret` to sign the JWT.
+Verifies the [configuration](#configuration) and makes sure that
 
-## verifyJWT(accessToken)
-
-`authService.verifyJWT(accessToken, [options, secret])` verifies the JWT `accessToken` using `configuration.jwtOptions` merged with `options` (optional). Will either use `configuration.secret` or the optional `secret` to verify the JWT.
-
-## getJwtOptions(authResult, params)
-
-Return the options for creating a new JWT based on the return value from an [authentication strategy](#authentication-strategies). Called internally on [.create](). Will try to set the JWT subject to the entity (user) id if it is available which in turn is used by the [JWT strategy]() to populate `params[entity]` (usually `params.user`).
-
-## getPayload(authResult, params)
-
-Returns the payload for an authentication result and parameters. Called internally on [.create](). Will either return `params.payload` or an empty object (`{}`).
+- A `secret` has been set
+- If `entity` is not `null`, check if the entity service is available and make sure that either the `entityId` configuration or the `entityService.id` property is set.
+- Register internal hooks to send events and keep real-time connections up to date. All custom hooks should be registered at this time.
 
 ## create(data, params)
 
 ## remove(id, params)
 
 Should be called with `id` set to `null` or to the authenticated JWT. Will verify `params.authentication` and emit the [`logout` event]() if successful.
-
-## setup(path, app)
-
-Will verify the [configuration](#configuration) and make sure that
-
-- A `secret` has been set
-- If `entity` is not `null`, check if the entity service is available and make sure that either the `entityId` configuration or the `entityService.id` property is set.
-- Register internal hooks to send events and keep real-time connections up to date. All custom hooks should be registered at this time.
 
 ## Customization
 

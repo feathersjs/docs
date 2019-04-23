@@ -83,6 +83,11 @@ module.exports = {
         ],
       }],
       '/cookbook/': [{
+        title: 'Authentication',
+        children: [
+          'authentication/anonymous.md'
+        ]
+      }, {
         title: 'Express',
         children: [
           'express/file-uploading.md'
@@ -102,25 +107,7 @@ module.exports = {
       { text: 'FAQ', link: '/faq/' },
       {
         text: 'Ecosystem',
-        items: [
-          {
-            text: 'Core', items: [
-              { text: 'CLI', link: 'https://cli.feathersjs.com' },
-              { text: 'Common hooks', link: 'https://hooks.feathersjs.com' }
-            ]
-          },
-          {
-            text: 'Databases', items: [
-              { text: 'Memory', link: 'https://github.com/feathersjs-ecosystem/feathers-memory' },
-              { text: 'LocalStorage', link: 'https://github.com/feathersjs-ecosystem/feathers-localstorage' },
-              { text: 'NeDB', link: 'https://github.com/feathersjs-ecosystem/feathers-nedb' },
-              { text: 'MongoDB', link: 'https://github.com/feathersjs-ecosystem/feathers-mongodb' },
-              { text: 'Mongoose', link: 'https://github.com/feathersjs-ecosystem/feathers-mongoose' },
-              { text: 'Knex', link: 'https://github.com/feathersjs-ecosystem/feathers-knex' },
-              { text: 'Sequelize', link: 'https://github.com/feathersjs-ecosystem/feathers-sequelize' }
-            ]
-          }
-        ]
+        link: 'https://github.com/feathersjs/awesome-feathersjs'
       }
     ]
   },

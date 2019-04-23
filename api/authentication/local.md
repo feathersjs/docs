@@ -37,10 +37,14 @@ Standard local authentication can be configured with those options in `config/de
 
 ### getEntityQuery(query, params)
 
+Returns the query for finding the entity. `query` includes the `usernameField` or `entityUsernameField` as `{ [entityUsernameField]: username }` and returns a promise that resolves with `{ $limit: 1, ...query }`.
+
 ### findEntity(username, params)
 
-### comparePassword(entity, password)
+Returns a promise that resolves with the entity.
 
 ### hashPassword(password)
+
+### comparePassword(entity, password)
 
 ### authenticate(authentication, params)

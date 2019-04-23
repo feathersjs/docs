@@ -1,6 +1,10 @@
-# authenticate hook
+# Authenticate Hook
 
 The `authenticate` hook will use `params.authentication` of the service method call and run [authenticationService.authenticate()]().
+
+## authenticate(... strategies)
+
+## authenticate(options)
 
 It should be used as a `before` hook and either takes a list of strategy names (using `app.service('authentication')` as the authentication service) or an object with `service` set to the authentication service name and `strategies` set to a list of strategy names to authenticate with:
 
