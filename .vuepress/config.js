@@ -43,7 +43,6 @@ module.exports = {
           'services.md',
           'hooks.md',
           'events.md',
-          'channels.md',
           'errors.md',
           'configuration.md'
         ]
@@ -52,7 +51,8 @@ module.exports = {
         children: [
           'express.md',
           'socketio.md',
-          'primus.md'
+          'primus.md',
+          'channels.md'
         ]
       }, {
         title: 'Client',
@@ -65,12 +65,14 @@ module.exports = {
       }, {
         title: 'Authentication',
         children: [
-          'authentication/server.md',
-          'authentication/client.md',
-          'authentication/local.md',
+          'authentication/',
+          'authentication/service.md',
+          'authentication/strategy.md',
+          'authentication/hook.md',
           'authentication/jwt.md',
+          'authentication/local.md',
           'authentication/oauth.md',
-          'authentication/api-key.md'
+          'authentication/client.md'
         ]
       }, {
         title: 'Database',
@@ -81,6 +83,11 @@ module.exports = {
         ],
       }],
       '/cookbook/': [{
+        title: 'Authentication',
+        children: [
+          'authentication/anonymous.md'
+        ]
+      }, {
         title: 'Express',
         children: [
           'express/file-uploading.md'
@@ -100,25 +107,7 @@ module.exports = {
       { text: 'FAQ', link: '/faq/' },
       {
         text: 'Ecosystem',
-        items: [
-          {
-            text: 'Core', items: [
-              { text: 'CLI', link: 'https://cli.feathersjs.com' },
-              { text: 'Common hooks', link: 'https://hooks.feathersjs.com' }
-            ]
-          },
-          {
-            text: 'Databases', items: [
-              { text: 'Memory', link: 'https://github.com/feathersjs-ecosystem/feathers-memory' },
-              { text: 'LocalStorage', link: 'https://github.com/feathersjs-ecosystem/feathers-localstorage' },
-              { text: 'NeDB', link: 'https://github.com/feathersjs-ecosystem/feathers-nedb' },
-              { text: 'MongoDB', link: 'https://github.com/feathersjs-ecosystem/feathers-mongodb' },
-              { text: 'Mongoose', link: 'https://github.com/feathersjs-ecosystem/feathers-mongoose' },
-              { text: 'Knex', link: 'https://github.com/feathersjs-ecosystem/feathers-knex' },
-              { text: 'Sequelize', link: 'https://github.com/feathersjs-ecosystem/feathers-sequelize' }
-            ]
-          }
-        ]
+        link: 'https://github.com/feathersjs/awesome-feathersjs'
       }
     ]
   },
