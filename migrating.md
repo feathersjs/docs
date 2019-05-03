@@ -47,8 +47,7 @@ This will register `local`, `jwt` and oAuth authentication strategies using the 
   "entity": "user",
   "service": "users",
   "secret": "<your secret>",
-  "jwtStrategies": [ "jwt", "local" ],
-  "httpStrategies": [ "jwt" ],
+  "authStrategies": [ "jwt", "local" ],
   "jwtOptions": {
     "header": { "typ": "access" },
     "audience": "https://yourdomain.com",
@@ -67,8 +66,7 @@ Important things to note:
 
 - Because of extensive changes and security improvements, you should change your JWT secret so that all users will be prompted to log in again.
 - The `jwt` options have been moved to `jwtOptions`. It takes all [jsonwebtoken options](https://github.com/auth0/node-jsonwebtoken#jwtsignpayload-secretorprivatekey-options-callback). The `subject` option __should be removed__ when using the standard setup.
-- `jwtStrategies` is a list of strategies to allow on the `/authentication` endpoint to create a JWT
-- `httpStrategies` are the strategies that should be used to parse authentication information from HTTP (REST) requests
+- `authStrategies` are the strategies that are allowed on this authentication endpoint
 
 > __Important:__ The `hashPassword` hook now explicitly requires the name of the field to hash instead of using a default (change any `hashPassword()` to e.g. `hashPassword('password')`).
 
