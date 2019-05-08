@@ -39,6 +39,8 @@
     "remark-validate-links": "^8.0.2",
     "unified-engine": "^6.0.1",
     "vfile-reporter": "^5.1.1",
-    "vuepress": "^1.0.0-alpha.23"
+    "vue-tabs-component": "^1.5.0",
+    "vuepress": "^1.0.0-alpha.23",
+    "vuepress-plugin-tabs": "^0.2.2"
   }
 }

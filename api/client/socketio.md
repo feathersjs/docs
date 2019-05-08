@@ -20,7 +20,10 @@ The `@feathersjs/socketio-client` module allows to connect to services exposed t
 
 Initialize the Socket.io client using a given socket and the default options.
 
-{% codetabs name="Modular", type="js" -%}
+:::: tabs :options="{ useUrlFragment: false }"
+
+::: tab "Modular"
+``` javascript
 const feathers = require('@feathersjs/feathers');
 const socketio = require('@feathersjs/socketio-client');
 const io = require('socket.io-client');
@@ -39,7 +42,11 @@ app.service('messages')
 app.service('messages').create({
   text: 'A message from a REST client'
 });
-{%- language name="@feathersjs/client", type="html" -%}
+```
+:::
+
+::: tab "@feathersjs/client"
+``` html
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/core-js/2.1.4/core.min.js"></script>
 <script src="//unpkg.com/@feathersjs/client@^3.0.0/dist/feathers.js"></script>
 <script src="//unpkg.com/socket.io-client@1.7.3/dist/socket.io.js"></script>
@@ -63,7 +70,10 @@ app.service('messages').create({
 
   // feathers.errors is an object with all of the custom error types.
 </script>
-{%- endcodetabs %}
+```
+:::
+
+::::
 
 
 ### socketio(socket, options)
