@@ -6,7 +6,10 @@
 
 Service methods are pre-defined [CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete) methods that your service object can implement (or that have already been implemented by one of the [database adapters](./databases/common.md)). Below is a complete example of the Feathers *service interface* as a normal JavaScript object either returning a [`Promise`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) or using [async/await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function):
 
-{% codetabs name="Promise", type="js" -%}
+:::: tabs :options="{ useUrlFragment: false }"
+
+::: tab "Promise"
+``` javascript
 const myService = {
   find(params) {
     return Promise.resolve([]);
@@ -20,7 +23,11 @@ const myService = {
 }
 
 app.use('/my-service', myService);
-{%- language name="async/await", type="js" -%}
+```
+:::
+
+::: tab "async/await"
+``` javascript
 const myService = {
   async find(params) {
     return [];
@@ -34,11 +41,17 @@ const myService = {
 }
 
 app.use('/my-service', myService);
-{%- endcodetabs %}
+```
+:::
+
+::::
 
 Services can also be an instance of an [ES6 class](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Classes):
 
-{%- codetabs name="Promise", type="js" -%}
+:::: tabs :options="{ useUrlFragment: false }"
+
+::: tab "Promise"
+``` javascript
 class MyService {
   find(params) {
     return Promise.resolve([]);
@@ -52,7 +65,11 @@ class MyService {
 }
 
 app.use('/my-service', new MyService());
-{%- language name="async/await", type="js" -%}
+```
+:::
+
+::: tab "async/await"
+``` javascript
 class MyService {
   async find(params) {
     return [];
@@ -66,7 +83,10 @@ class MyService {
 }
 
 app.use('/my-service', new MyService());
-{%- endcodetabs %}
+```
+:::
+
+::::
 
 > **ProTip:** Methods are optional, and if a method is not implemented Feathers will automatically emit a `NotImplemented` error.
 
