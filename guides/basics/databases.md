@@ -10,7 +10,7 @@ Writing all that code yourself is pretty repetitive and cumbersome though which 
 | Localstorage, AsyncStorage | [feathers-localstorage](https://github.com/feathersjs-ecosystem/feathers-localstorage) |
 | Filesystem | [feathers-nedb](https://github.com/feathersjs-ecosystem/feathers-nedb) |
 | MongoDB | [feathers-mongodb](https://github.com/feathersjs-ecosystem/feathers-mongodb), [feathers-mongoose](https://github.com/feathersjs-ecosystem/feathers-mongoose) |
-| MySQL, PostgreSQL, MariaDB, SQLite, MSSQL | [feathers-knex](https://github.com/feathersjs-ecosystem/feathers-knex), [feathers-sequelize](https://github.com/feathersjs-ecosystem/feathers-sequelize) |
+| MySQL, PostgreSQL, MariaDB, SQLite, MSSQL | [feathers-knex](https://github.com/feathersjs-ecosystem/feathers-knex), [feathers-sequelize](https://github.com/feathersjs-ecosystem/feathers-sequelize), [feathers-objection](https://github.com/feathersjs-ecosystem/feathers-objection) |
 | Elasticsearch | [feathers-elasticsearch](https://github.com/feathersjs-ecosystem/feathers-elasticsearch) |
 | RethinkDB | [feathers-rethinkdb](https://github.com/feathersjs-ecosystem/feathers-rethinkdb) |
 
