@@ -7,7 +7,15 @@
 $ npm install @feathersjs/authentication-local --save
 ```
 
-`@feathersjs/authentication-local` provides a `LocalStrategy` for authentication with a username/email and password combination.
+`@feathersjs/authentication-local` provides a `LocalStrategy` for authenticating with a username/email and password combination, e.g.
+
+```json
+{
+  "strategy": "local",
+  "email": "hello@feathersjs.com",
+  "password": "supersecret"
+}
+```
 
 ## Configuration
 
@@ -15,10 +23,10 @@ The following settings are available:
 
 - `usernameField`: Name of the username field in the (e.g. `'email'`)
 - `passwordField`: Name of the password field (e.g. `'password'`)
-- `entityUsernameField`: Name of the username field on the entity if authentication data and entity field names are different (default: `usernameField`)
-- `entityPasswordField`: Name of the password field on the entity if authentication data and entity field names are different (default: `passwordField`)
-- `hashSize`: The BCrypt hash size (default: `10`)
-- `errorMessage`: The error message (default: `'Invalid login'`)
+- `hashSize` (default: `10`): The BCrypt hash size
+- `errorMessage` (default: `'Invalid login'`): The error message to return on errors
+- `entityUsernameField` (default: `usernameField`): Name of the username field on the entity if authentication request data and entity field names are different
+- `entityPasswordField` (default: `passwordField`): Name of the password field on the entity if authentication request data and entity field names are different
 
 Standard local authentication can be configured with those options in `config/default.json` like this:
 
@@ -35,16 +43,100 @@ Standard local authentication can be configured with those options in `config/de
 
 ## LocalStrategy
 
+> __Note:__ The methods described in this section are intended for [customization](#customization) purposes and internal calls. They usually do not need to be called directly.
+
 ### getEntityQuery(query, params)
 
-Returns the query for finding the entity. `query` includes the `usernameField` or `entityUsernameField` as `{ [entityUsernameField]: username }` and returns a promise that resolves with `{ $limit: 1, ...query }`.
+`localStrategy.getEntityQuery(query, params) -> Promise` returns the query for finding the entity. `query` includes the `usernameField` or `entityUsernameField` as `{ [field]: username }` and by default returns a promise that resolves with `{ $limit: 1 }` combined with `query`.
 
 ### findEntity(username, params)
 
-Returns a promise that resolves with the entity.
+`localStrategy.findEntity(username, params) -> Promise` return the entity for a given username and serice call parameters. It will use the query returned by `getEntityQuery` and call `.find` on the entity (usually `/users`) service. It will return a promise that resolves with the first result of the `.find` call or throw an error if nothing was found.
 
 ### hashPassword(password)
 
+`localStrategy.hashPassword(password) -> Promise` creates a safe one-way hash of the given plain `password` string. By default [bCryptJS]() is used.
+
 ### comparePassword(entity, password)
 
+`localStrategy.comparePassword(entity, password) -> Promise` compares a plain text `password` with the hashed password of the `entity` returned by `findEntity`. Returns the `entity` or throws an error if the passwords don't match.
+
 ### authenticate(authentication, params)
+
+## Customization
+
+The `LocalStrategy` can be customized like any ES6 class and then registered on the [AuthenticationService](./service.md):
+
+:::: tabs :options="{ useUrlFragment: false }"
+
+::: tab "JavaScript"
+```js
+const { AuthenticationService, JWTStrategy } = require('@feathersjs/authentication');
+const { LocalStrategy } = require('@feathersjs/authentication-local');
+
+class MyLocalStrategy extends LocalStrategy {
+  getEntityQuery(query, params) {
+    // Query for user but only include users marked as `active`
+    return {
+      ...query,
+      active: true,
+      $limit: 1
+    }
+  }
+}
+
+module.exports = app => {
+  const authService = new AuthenticationService(app);
+
+  service.register('local', new LocalStrategy());
+
+  // ...
+  app.use('/authentication', authService);
+}
+```
+:::
+
+::: tab "TypeScript"
+```typescript
+import { Application, Params, Query } from '@feathersjs/feathers';
+import { AuthenticationService, JWTStrategy } from '@feathersjs/authentication';
+import { LocalStrategy } from '@feathersjs/authentication-local';
+
+class MyLocalStrategy extends LocalStrategy {
+  getEntityQuery(query: Query, params: Params) {
+    // Query for use but only include `active` users
+    return {
+      ...query,
+      active: true,
+      $limit: 1
+    }
+  }
+}
+
+export default (app: Application) => {
+  const authService = new AuthenticationService(app);
+
+  service.register('local', new LocalStrategy());
+
+  // ...
+  app.use('/authentication', authService);
+}
+```
+:::
+
+::::
+
+## Hooks
+
+### hashPassword(field)
+
+The `hashPassword(field [, options])` hook should be used as a `before` hook for `create`, `patch` or `update`. It will replace the plain text `field` on `data` with a hashed password using [LocalStrategy.hashPassword]() before storing it in the database. 
+
+`options` is optional and may contain the following settings:
+
+- `authentication` (default: `app.get('defaultAuthentication')`): The name of the [AuthenticationService](./service.md) the hook should use.
+- `strategy` (default: `'local'`): The name of the LocalStrategy to use on the authentication service.
+
+### protect(...fields)
+
+The `protect(...fields)` hook removes fields from the data that is sent to the user by setting [hook.dispatch]().
