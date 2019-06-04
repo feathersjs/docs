@@ -25,12 +25,12 @@ The standard setup of [the generator]() initializes an [AuthenticationService](#
 ```js
 const { AuthenticationService, JWTStrategy } = require('@feathersjs/authentication');
 const { LocalStrategy } = require('@feathersjs/authentication-local');
-const { express: expressOauth } = require('@feathersjs/authentication-oauth');
+const { expressOauth } = require('@feathersjs/authentication-oauth');
 
 module.exports = app => {
   const authService = new AuthenticationService(app);
 
-  service.register('jwt', new JwtStrategy());
+  service.register('jwt', new JWTStrategy());
   service.register('local', new LocalStrategy());
 
   app.use('/authentication', authService);
@@ -44,12 +44,12 @@ module.exports = app => {
 import { Application } from '@feathersjs/feathers';
 import { AuthenticationService, JWTStrategy } from '@feathersjs/authentication';
 import { LocalStrategy } from '@feathersjs/authentication-local';
-import { express as expressOauth } from '@feathersjs/authentication-oauth';
+import { expressOauth } from '@feathersjs/authentication-oauth';
 
 export default (app: Application) => {
   const authService = new AuthenticationService(app);
 
-  service.register('jwt', new JwtStrategy());
+  service.register('jwt', new JWTStrategy());
   service.register('local', new LocalStrategy());
 
   app.use('/authentication', authService);

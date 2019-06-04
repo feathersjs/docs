@@ -7,7 +7,7 @@
 npm install @feathersjs/authentication-client --save
 ```
 
-The [@feathersjs/authentication-client](https://github.com/feathersjs/authentication-client) module allows you to easily authenticate against a Feathers server. It is not required, but makes it easier to implement authentication in your client by automatically storing and sending the JWT access token and handling re-authenticating when a websocket disconnects.
+The [@feathersjs/authentication-client](https://github.com/feathersjs/authentication-client) module allows you to easily authenticate against a Feathers server. It is not required, but makes it easier to implement authentication in your client by automatically storing and sending the access token and handling re-authenticating when a websocket disconnects.
 
 ## Configuration
 
@@ -21,9 +21,64 @@ The [@feathersjs/authentication-client](https://github.com/feathersjs/authentica
 - `scheme` (default: `'Bearer'`) - The HTTP header scheme
 - Authentication (default: `AuthenticationClient`) - Allows to provide a [customized authentication client class](#customization)
 
+## Setup
+
+```js
+const feathers = require('@feathersjs/feathers');
+const socketio = require('@feathersjs/socketio-client');
+const io = require('socket.io-client');
+const auth = require('@feathersjs/authentication-client');
+
+const socket = io('http://api.feathersjs.com');
+const app = feathers();
+
+// Setup the transport (Rest, Socket, etc.) here
+app.configure(socketio(socket));
+
+// Available options are listed in the "Options" section
+app.configure(auth(options))
+```
+
 ## app.authenticate()
 
+`app.authenticate() -> Promise` with no arguments will try to authenticate using the access token from the storage or the window location (e.g. after a successful [oAuth](./oauth.md) login). This is normally called to either show your application (when successful) or showing a login page or redirecting to the appropriate oAuth link.
+
+```js
+app.authenticate().then(() => {
+  // show application page
+}).catch(() => {
+  // show login page
+});
+```
+
+> __Important:__ `app.authenticate()` has to be called when you want to use the token from storage and __only once__ when the application initializes. Once successful, all subsequent requests will send their authentication information automatically.
+
+
+## app.authenticate(data)
+
+`app.authenticate(data) -> Promise` will try to authenticate with a Feathers server by passing a `strategy` and other properties as credentials.
+
+```js
+// Authenticate with the local email/password strategy 
+app.authenticate({
+  strategy: 'local',
+  email: 'my@email.com',
+  password: 'my-password'
+}).then(() => {
+  // Logged in
+}).catch(e => {
+  // Show login page (potentially with `e.message`)
+  console.error('Authentication error', e);
+});
+```
+
+- `data {Object}` - of the format `{strategy [, ...otherProps]}`
+  - `strategy {String}` - the name of the strategy to be used to authenticate.  Required.
+  - `...otherProps {Properties} ` vary depending on the chosen strategy. Above is an example of using the `jwt` strategy.
+
 ## app.logout()
+
+Removes the access token from storage on the client. It also calls the `remove` method of the [authentication service](./sergvice.md).
 
 ## app.get('authentication')
 
@@ -34,6 +89,8 @@ const { user } = await app.get('authentication');
 ```
 
 ## app.authentication
+
+Returns the instance of the [AuthenticationClient](#authenticationclient).
 
 ## AuthenticationClient
 
@@ -73,15 +130,46 @@ const { user } = await app.get('authentication');
 
 `app.authentication.reAuthenticate(force = false) -> Promise` will re-authenticate with the current access token from [app.authentication.getAccessToken()](). If `force` is set to `true` it will always reauthenticate, with the default `false` only when not already authenticated.
 
-### authenticate(data)
+### authenticate()
+
+The internal method called when using [app.authenticate()](#app-authenticate).
 
 ### logout()
 
+The internal method called when using [app.logout()](#app-logout).
+
 ## Customization
+
+The [AuthenticationClient]() can be extended to provide custom functionality and then passed during initialization:
+
+```js
+const feathers = require('@feathersjs/feathers');
+const socketio = require('@feathersjs/socketio-client');
+const io = require('socket.io-client');
+const auth = require('@feathersjs/authentication-client');
+
+const socket = io('http://api.feathersjs.com');
+const app = feathers();
+
+class MyAuthenticationClient extends auth.AuthenticationClient {
+  getFromLocation(location) {
+    // Do custom location things here
+    return super.getFromLocation(location);
+  } 
+}
+
+// Setup the transport (Rest, Socket, etc.) here
+app.configure(socketio(socket));
+
+// Pass the custom authentication client class as the `Authenticaiton` option
+app.configure(auth({
+  Authentication: MyAuthenticationClient
+}))
+```
 
 ## Hooks
 
-The following hooks are added to your application by default.
+The following hooks are added to the client side application by default.
 
 ### authentication
 

@@ -41,13 +41,15 @@ Standard JWT authentication can be configured with those options in `config/defa
 
 > __Note:__ Since the default options are what most clients expect for JWT authentication they usually don't need to be customized.
 
-## getEntity(id, params)
+## JwtStrategy
+
+### getEntity(id, params)
 
 `jwtStrategy.getEntity(id, params)` returns the entity instance for `id`, usually `entityService.get(id, params)`. It will _not_ be called if `entity` in the [authentication configuration](./service.md#configuration) is set to `null`.
 
-## authenticate(data, params)
+### authenticate(data, params)
 
-`jwtStrategy.authenticate(data, params)` will try to verify `data.accessToken` by calling the strategies [authenticationService.verifyAccessToken]().
+`jwtStrategy.authenticate(data, params)` will try to verify `data.accessToken` by calling the strategies [authenticationService.verifyAccessToken](./service.md).
 
 Returns a promise that resolves with the following format:
 
@@ -62,9 +64,9 @@ Returns a promise that resolves with the following format:
 }
 ```
 
-> __Note:__ Since the JWT strategy returns an `accessToken` property (the same as the token sent to this strategy), that access token will also be returned by [authenticationService.create]() instead of creating a new one.
+> __Note:__ Since the JWT strategy returns an `accessToken` property (the same as the token sent to this strategy), that access token will also be returned by [authenticationService.create](./service.md#create-data-params) instead of creating a new one.
 
-## parse(req, res)
+### parse(req, res)
 
 Parse the HTTP request headers for JWT authentication information. Returns a promise that resolves with either `null` or data in the form of:
 
@@ -76,3 +78,45 @@ Parse the HTTP request headers for JWT authentication information. Returns a pro
 ```
 
 ## Customization
+
+:::: tabs :options="{ useUrlFragment: false }"
+
+::: tab "JavaScript"
+```js
+const { AuthenticationService, JWTStrategy } = require('@feathersjs/authentication');
+
+class MyJwtStrategy extends JWTStrategy {
+}
+
+module.exports = app => {
+  const authService = new AuthenticationService(app);
+
+  service.register('jwt', new MyJwtStrategy());
+
+  // ...
+  app.use('/authentication', authService);
+}
+```
+:::
+
+::: tab "TypeScript"
+```typescript
+import { Application } from '@feathersjs/feathers';
+import { AuthenticationService, JWTStrategy } from '@feathersjs/authentication';
+import { LocalStrategy } from '@feathersjs/authentication-local';
+
+class MyJwtStrategy extends JWTStrategy {
+}
+
+export default (app: Application) => {
+  const authService = new AuthenticationService(app);
+
+  service.register('jwt', new MyJwtStrategy());
+
+  // ...
+  app.use('/authentication', authService);
+}
+```
+:::
+
+::::

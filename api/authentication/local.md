@@ -63,6 +63,8 @@ Standard local authentication can be configured with those options in `config/de
 
 ### authenticate(authentication, params)
 
+`localStrategy.authenticate(authentication, params)` is the main endpoint implemented by any [authentication strategy](./strategy.md). It is usually called for authentication requests for this strategy by the [AuthenticationService](./service.md).
+
 ## Customization
 
 The `LocalStrategy` can be customized like any ES6 class and then registered on the [AuthenticationService](./service.md):
