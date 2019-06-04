@@ -1,75 +1,158 @@
-# AuthenticationService
+# Authentication Service
 
-[![npm version](https://img.shields.io/npm/v/@feathersjs/authentication.png?style=flat-square)](https://www.npmjs.com/package/@feathersjs/authentication)
-[![Changelog](https://img.shields.io/badge/changelog-.md-blue.png?style=flat-square)](https://github.com/feathersjs/feathers/blob/master/packages/authentication/CHANGELOG.md)
+[![npm version](https://img.shields.io/npm/v/@feathersjs/authentication.svg?style=flat-square)](https://www.npmjs.com/package/@feathersjs/authentication)
+[![Changelog](https://img.shields.io/badge/changelog-.md-blue.svg?style=flat-square)](https://github.com/feathersjs/feathers/blob/master/packages/authentication/CHANGELOG.md)
 
 ```
 $ npm install @feathersjs/authentication --save
 ```
 
-The `AuthenticationService` is a [Feathers service](../services.md) that allows to register different authentication strategies and manage [JSON web tokens (JWT)](https://jwt.io/).
+The `AuthenticationService` is a [Feathers service](../services.md) that allows to register different [authentication strategies](./strategy.md) and manage access tokens (using [JSON web tokens (JWT)](https://jwt.io/) by default). This section describes
 
+- The [standard setup](#setup) used by the generator
+- How to [configure](#configuration) authentication and where the configuration should go
+- The methods available on the authentication service
+- How to [customize](#customization) the authentication service
+- The [Events](#events) sent by the authentication service
+
+## Setup
+
+The standard setup of [the generator]() initializes an [AuthenticationService](#authenticationservice) at the `/authentication` path with a [JWT strategy](./jwt.md), [Local strategy](./local.md) and [oAuth authentication](./oauth.md).
+
+:::: tabs :options="{ useUrlFragment: false }"
+
+::: tab "JavaScript"
 ```js
-const { AuthenticationService, JwtStrategy } = require('@feathersjs/authentication');
+const { AuthenticationService, JWTStrategy } = require('@feathersjs/authentication');
+const { LocalStrategy } = require('@feathersjs/authentication-local');
+const { expressOauth } = require('@feathersjs/authentication-oauth');
 
 module.exports = app => {
   const authService = new AuthenticationService(app);
 
-  service.register('jwt', new JwtStrategy());
+  service.register('jwt', new JWTStrategy());
+  service.register('local', new LocalStrategy());
 
   app.use('/authentication', authService);
+  app.configure(expressOauth());
 }
 ```
+:::
+
+::: tab "TypeScript"
+```typescript
+import { Application } from '@feathersjs/feathers';
+import { AuthenticationService, JWTStrategy } from '@feathersjs/authentication';
+import { LocalStrategy } from '@feathersjs/authentication-local';
+import { expressOauth } from '@feathersjs/authentication-oauth';
+
+export default (app: Application) => {
+  const authService = new AuthenticationService(app);
+
+  service.register('jwt', new JWTStrategy());
+  service.register('local', new LocalStrategy());
+
+  app.use('/authentication', authService);
+  app.configure(expressOauth());
+}
+```
+:::
+
+::::
 
 ## Configuration
 
-## app.get('defaultAuthentication')
+The standard authentication service configuration is normally located in the `authentication` section of a [configuration file](../configuration.md) (default: `config/default.json`).
 
-After registering an authentication service, it will set the `defaultAuthentication` property on the application to its configuration name (see `configKey` below) if it does not exist. `app.get('defaultAuthentication')` will be used by other parts of Feathers authentication to access the authentication service if it is not otherwise specified.
+> __Note:__ The authentication service can also be configured dynamically or without Feathers configuration by using [app.set](../application.md#set-name-value), e.g. `app.set('authentication', config)`.
 
-## constructor(app)
+The following options are available:
 
-`new AuthenticationService(app, configKey = 'authentication')` initializes a new authentication service with the [Feathers application]() instance and a `configKey` which is the name of the configuration property to use via [app.get()](../application.md#get-name) (default: `app.get('authentication')`). Upon initialization it will also update the configuration with the [default settings](#configuration).
+- `secret`: The JWT signing secret.
+- `service`: The path of the entity service
+- `authStrategies`: A list of authentication strategy names to allow on this authentication service to create access tokens.
+- `entity`: The name of the entity. Can be `null` if no entity is used (see [stateless tokens]()).
+- `entityId`: The id property of an entity object. Only necessary if the entity service does not have an `id` property (e.g. when using a custom entity service).
+- `jwtOptions`: All options available for the [node-jsonwebtoken package](https://github.com/auth0/node-jsonwebtoken).
 
-## configuration
+An authentication service configuration in `config/default.json` can look like this:
 
-`service.configuration` returns a copy of current value of `app.get(configKey)` (default: `app.get('authentication')`). It is usually initialized through an `authentication` property in a [configuration file](../configuration.md) (default: `config/default.json`) which must at least contain a `secret` property. The default configuration is:
-
-```js
+```json
 {
-  entity: 'user', // The name of the entity. Can be `null` when not used
-  service: 'users', // The service to retrieve the entity from
-  jwtOptions: {
-    header: { typ: 'access' }, // by default is an access token but can be any type
-    audience: 'https://yourdomain.com', // The resource server where the token is processed
-    issuer: 'feathers', // The issuing server, application or resource
-    algorithm: 'HS256',
-    expiresIn: '1d'
-  },
-  jwt: {
-    header: 'Authorization', // The HTTP header value
-    schemes: [ 'Bearer', 'JWT' ] // The header schemes to use (e.g. `Bearer <token>`)
+  "authentication": {
+    "secret": "CHANGE_ME",
+    "entity": "user",
+    "service": "users",
+    "authStrategies": [ "jwt", "local" ],
+    "jwtOptions": {
+      "header": { "typ": "access" },
+      "audience": "https://yourdomain.com",
+      "issuer": "feathers",
+      "algorithm": "HS256",
+      "expiresIn": "1d"
+    }
   }
 }
 ```
 
-`jwt` contains the configuration for the [JWT authentication strategy](./jwt.md). `jwtOptions` can take all options available for the [node-jsonwebtoken package](https://github.com/auth0/node-jsonwebtoken).
-
 > *Note:* `typ` in the `header` options is not a typo, it is part of the [JWT JOSE header specification](https://tools.ietf.org/html/rfc7519#section-5).
 
-## register(name, strategy)
+Additionally to the above configuration, most [strategies](./strategy.md) will look for their own configuration under the name it was registered. An example can be found in the [local strategy configuration](./local.md#configuration).
 
-`service.register(name, strategy)` registers an [authentication strategy](./strategy.md) under `name` and calls the strategy methods that are implement.
+## AuthenticationService
 
-## getStrategies(...names)
+### constructor(app [, configKey])
 
-`service.getStrategies(...names)` returns the [authentication strategies](#authentication-strategies) that exist for a list of names. The returned array may include `undefined` values if the strategy does not exist.
+`const authService = new AuthenticationService(app, configKey = 'authentication')` initializes a new authentication service with the [Feathers application](../application.md) instance and a `configKey` which is the name of the configuration property to use via [app.get()](../application.md#get-name) (default: `app.get('authentication')`). Upon initialization it will also update the configuration with the [default settings](#configuration).
 
-## createAccessToken(payload)
+> __Important:__ Unless otherwise [customized](#customization) `configKey` 
 
-`authService.createAccessToken(payload, [options, secret])` creates a new JWT access token with `payload` using [configuration.jwtOptions](#configuration) merged with `options` (optional). It will either use `configuration.secret` or the optional `secret` to sign the JWT. Returns a promise that resolves with the accessToken or throw an error.
+### authenticate(data, params, ...strategies)
 
-> __Note:__ Normally, it is not necessary to call this method directly. Calling [authService.create(data, params)](#create-data-params) will take care of creating the correct access token.
+`authService.authenticate(data, params, ...strategies) -> Promise` is the main authentication method and authenticates `data` and `params` against a list of strategies in `strategies`.
+
+`data` _must_ always contain a `strategy` property indicating the name of the strategy. If `data.strategy` is not available or not allowed (included in the `strategies` list) a `NotAuthenticated` error will be thrown. Otherwise the result of [strategy.authenticate()](./strategy.md#authenticate-authentication-params) will be returned.
+
+### create(data, params)
+
+`authService.create(data, params) -> Promise` runs `authService.authenticate` with `data`, `params` and the list of `strategies` from `authStrategies` in the [configuration](#configuration). As with any other [Feathers service](../services.md), this method will be available to clients, e.g. running a `POST /authentication`.
+
+If successful it will create a JWT with the payload taken from [authService.getPayload](#getpayload-authresult-params) and the options from [authService.getTokenOptions](#gettokenoptions-authresult-params). `data` _must_ always contain a valid and allowed `strategy` name. Will emit the [`login` event](#app-on-login).
+
+### remove(id, params)
+
+`authService.remove(id, params) -> Promise` should be called with `id` set to `null` or to the authenticated access token. Will verify `params.authentication` and emit the [`logout` event](#app-on-logout) if successful.
+
+### configuration
+
+`authService.configuration` returns a copy of current value of `app.get(configKey)` (default: `app.get('authentication')`). This is a deep copy of the configuration and is not intended to be modified. In order to change the configuration, [app.set(configKey)](../application.md#set-name-value) should be used:
+
+```js
+const config = app.get('authentication');
+
+// Update configuration with a new entity
+app.set('authentication', {
+  ...config,
+  entity: 'some other entity name'
+});
+```
+
+### register(name, strategy)
+
+`authService.register(name, strategy)` registers an [authentication strategy](./strategy.md) under `name` and calls the strategy methods `setName`, `setApplication`, `setAuthentication` and `verifyConfiguration` if they are implemented.
+
+### getStrategies(...names)
+
+`service.getStrategies(...names) -> AuthenticationStrategy[]` returns the [authentication strategies](./strategy.md) that exist for a list of names. The returned array may include `undefined` values if the strategy does not exist. Usually authentication strategies do not need to be used directly.
+
+
+```js
+const [ localStrategy ] = authService.getStrategies('local');
+```
+
+### createAccessToken(payload)
+
+`authService.createAccessToken(payload, [options, secret]) -> Promise` creates a new access token. By default it is a [JWT](https://jwt.io/) with `payload`, using [configuration.jwtOptions](#configuration) merged with `options` (optional). It will either use `authService.configuration.secret` or the optional `secret` to sign the JWT. Throws an error if the access token can not be created.
 
 ```js
 const token = await app.service('authentication').createAccessToken({
@@ -77,39 +160,35 @@ const token = await app.service('authentication').createAccessToken({
 });
 ```
 
-## verifyAccessToken(accessToken)
+> __Note:__ Normally, it is not necessary to call this method directly. Calling [authService.create(data, params)](#create-data-params) using an authentication strategy will take care of creating the correct access token.
 
-`authService.verifyAccessToken(accessToken, [options, secret])` verifies the JWT `accessToken` using `configuration.jwtOptions` merged with `options` (optional). Will either use `configuration.secret` or the optional `secret` to verify the JWT. Returns a promise that resolves with the encoded payload or throw an error.
+### verifyAccessToken(accessToken)
 
-## getTokenOptions(authResult, params)
+`authService.verifyAccessToken(accessToken, [options, secret]) -> Promise` verifies the access token. By default it will try to verify a JWT using `configuration.jwtOptions` merged with `options` (optional). Will either use `configuration.secret` or the optional `secret` to verify the JWT. Returns the encoded payload or throws an error.
 
-Return the options for creating a new access token based on the return value from calling [authService.authenticate()](#authenticate-data-params-strategies). Called internally on [authService.create()](#create-data-params). Will try to set the JWT `subject` to the entity (user) id if it is available. This will be used by the [JWT strategy](./jwt.md) to populate `params[entity]` (usually `params.user`). Returns a promise that resolves with the token options.
+### getTokenOptions(authResult, params)
 
-## getPayload(authResult, params)
+`authService.getTokenOptions(authResult, params) -> Promise` returns the options for creating a new access token based on the return value from calling [authService.authenticate()](#authenticate-data-params-strategies). Called internally on [authService.create()](#create-data-params). It will try to set the JWT `subject` to the entity (user) id if it is available which will then be used by the [JWT strategy](./jwt.md) to populate `params[entity]` (usually `params.user`).
 
-Returns the payload for an authentication result and parameters. Called internally on [.create](#create-data-params). Returns a promise that either contains `params.payload` or an empty object (`{}`).
+### getPayload(authResult, params)
 
-## authenticate(data, params, ...strategies)
+`authService.getPayload(authResult, params) -> Promise` returns the access token payload for an authentication result (the return value of [authService.create()](#create-data-params)) and [service call parameters](../services.md#params). Called internally on [.create](#create-data-params). Returns either `params.payload` or an empty object (`{}`).
 
-Run [.authenticate()](#authenticate-data-params) for the given `strategies` with `data` and `params`. Will return the value of the first strategy that didn't throw an error or the first error that ocurred. If `data.strategy` is set to a strategy name and it is not included in `strategies`, an error will be thrown.
+### parse(req, res, ...strategies)
 
-## parse(req, res, ...strategies)
+`authService.parse(req, res, ...strategies) -> Promise` parses a [NodeJS HTTP request](https://nodejs.org/api/http.html#http_class_http_incomingmessage) and [HTTP response](https://nodejs.org/api/http.html#http_class_http_serverresponse) for authentication information using `strategies` calling [each strategies `.parse()` method](./strategy.md#parse-req-res) if it is implemented. Will return the value of the first strategy that didn't return `null`. This does _not_ authenticate the request, it will only return authentication information that can be used by `authService.authenticate` or `authService.create`.
 
-Parse a [NodeJS HTTP request](https://nodejs.org/api/http.html#http_class_http_incomingmessage) and [response](https://nodejs.org/api/http.html#http_class_http_serverresponse) for authentication information using `strategies` calling [each strategies `.parse()` method](#parse-req-res). Will return the value of the first strategy that didn't return `null`.
+### setup(path, app)
 
-## setup(path, app)
-
-Verifies the [configuration](#configuration) and makes sure that
+`authService.setup(path, app)` verifies the [configuration](#configuration) and makes sure that
 
 - A `secret` has been set
 - If `entity` is not `null`, check if the entity service is available and make sure that either the `entityId` configuration or the `entityService.id` property is set.
 - Register internal hooks to send events and keep real-time connections up to date. All custom hooks should be registered at this time.
 
-## create(data, params)
+## app.get('defaultAuthentication')
 
-## remove(id, params)
-
-Should be called with `id` set to `null` or to the authenticated JWT. Will verify `params.authentication` and emit the [`logout` event]() if successful.
+After registering an authentication service, it will set the `defaultAuthentication` property on the application to its configuration name (`configKey` set in the constructor) if it does not exist. `app.get('defaultAuthentication')` will be used by other parts of Feathers authentication to access the authentication service if it is not otherwise specified. Usually this will be `'authentication'`.
 
 ## Customization
 
@@ -143,6 +222,18 @@ Things to be aware of when extending the authentication service:
 
 ## Events
 
+For both, `login` and `logout` the event data is `(authResult, params, context) => {}` as follows:
+
+- `authResult` is the return value of the `authService.create` or `authService.remove` call. It usually contains the user and access token.
+- `params` is the service call parameters
+- `context` is the service methods [hook context](../hooks.md#hook-context)
+
 ### app.on('login')
 
+`app.on('login', (authResult, params, context) => {})` will be sent after a user logs in. This means, after any successful external call to [authService.create](#create-data-params).
+
+> __Important:__ The `login` event is also sent for e.g. reconnections of websockets and may not always have a corresponding `logout` event. Use the [`disconnect` event](../channels.md#app-on-disconnect) for handling disconnection.
+
 ### app.on('logout')
+
+`app.on('logout', (authResult, params, context) => {})` will be sent after a user explicitly logs out. This means after any successful external call to [authService.remove](#remove-id-params).

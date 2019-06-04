@@ -80,9 +80,13 @@ app.on('connection', connection => {
 });
 ```
 
+### app.on('disconnect')
+
+`app.on('disconnect', connection => {})` is fired every time real-time connection is disconnected. This is a good place to to handle disconnections outside of a logout. A connection that is disconnected will always leave all its channels automatically.
+
 ### app.on('login')
 
-`app.on('login', (payload, info) => {})` is sent by the [authentication module](./authentication/server.md) and also contains the connection in the `info` object that is passed as the second parameter. Note that it can also be `undefined` if the login happened through e.g. REST which does not support real-time connectivity. 
+`app.on('login', (authResult, params, context) => {})` is sent by the [AuthenticationService](./authentication/service.md#app-on-login) on successful login.
 
 This is a good place to add the connection to channels related to the user (e.g. chat rooms, admin status etc.)
 
@@ -114,13 +118,11 @@ app.on('login', (payload, { connection }) => {
 });
 ```
 
-> __Note:__ `(user, { connection })` is an ES6 shorthand for `(user, meta) => { const connection = meta.connection; }`, see [Destructuring assignment](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment).
+### app.on('logout')
 
-## app.on('logout')
+`app.on('logout', (authResult, params, context) => {})` is sent by the [AuthenticationService](./authentication/server.md) on successful logout.
 
-`app.on('logout', (payload, info) => {})` is sent by the [authentication module](./authentication/server.md) and also contains the connection in the `info` object that is passed as the second parameter when a logout happens.
-
-If the socket does not also disconnect at logout this is where users should be removed from their channels:
+If the socket does not also disconnect at logout this is where the connection should be removed from its channels:
 
 ```js
 app.on('logout', (payload, { connection }) => {

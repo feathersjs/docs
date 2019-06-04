@@ -20,23 +20,48 @@ The `@feathersjs/authentication-*` modules have been completely rewritten to inc
 - Better oAuth authentication with 180+ providers supported out of the box without any additional configuration (other than adding the application key and secret)
 - Built-in oAuth account linking and cross-domain oAuth authentication
 
-To upgrade, replace the existing authentication configuration (usually `src/authentication.js`) with the following:
+To upgrade, replace the existing authentication configuration (usually `src/authentication.js` or `src/authentication.ts`) with the following:
 
+:::: tabs :options="{ useUrlFragment: false }"
+
+::: tab "JavaScript"
 ```js
-const { AuthenticationService, JWTStrategy } = require('@feathersjs/authentication');
+const { AuthenticationService, JwtStrategy } = require('@feathersjs/authentication');
 const { LocalStrategy } = require('@feathersjs/authentication-local');
-const { express: oauth } = require('@feathersjs/authentication-oauth');
+const { express: expressOauth } = require('@feathersjs/authentication-oauth');
 
-module.exports = function (app) {
-  const authentication = new AuthenticationService(app);
+module.exports = app => {
+  const authService = new AuthenticationService(app);
 
-  authentication.register('jwt', new JWTStrategy());
-  authentication.register('local', new LocalStrategy());
+  service.register('jwt', new JwtStrategy());
+  service.register('local', new LocalStrategy());
 
-  app.use('/authentication', authentication);
-  app.configure(oauth());
-};
+  app.use('/authentication', authService);
+  app.configure(expressOauth());
+}
 ```
+:::
+
+::: tab "TypeScript"
+```typescript
+import { Application } from '@feathersjs/feathers';
+import { AuthenticationService, JwtStrategy } from '@feathersjs/authentication';
+import { LocalStrategy } from '@feathersjs/authentication-local';
+import { express as expressOauth } from '@feathersjs/authentication-oauth';
+
+export default (app: Application) => {
+  const authService = new AuthenticationService(app);
+
+  service.register('jwt', new JwtStrategy());
+  service.register('local', new LocalStrategy());
+
+  app.use('/authentication', authService);
+  app.configure(expressOauth());
+}
+```
+:::
+
+::::
 
 > __Important:__ The `@feathersjs/authentication-jwt` is now deprecated since the JWT strategy is now directly included in `@feathersjs/authentication`.
 
@@ -66,11 +91,15 @@ Important things to note:
 
 - Because of extensive changes and security improvements, you should change your JWT secret so that all users will be prompted to log in again.
 - The `jwt` options have been moved to `jwtOptions`. It takes all [jsonwebtoken options](https://github.com/auth0/node-jsonwebtoken#jwtsignpayload-secretorprivatekey-options-callback). The `subject` option __should be removed__ when using the standard setup.
-- `authStrategies` are the strategies that are allowed on this authentication endpoint
+- `authStrategies` are the strategies that are allowed on the `/authentication` endpoint
 
 > __Important:__ The `hashPassword` hook now explicitly requires the name of the field to hash instead of using a default (change any `hashPassword()` to e.g. `hashPassword('password')`).
 
 ## Feathers core
+
+### Typescript definitions included
+
+All `@feathersjs` modules now come with up-to-date TypeScript definitions. Any definitions using `@types/feathersjs__*` _should be removed_ from your project.
 
 ### Services at the root level
 
@@ -93,13 +122,22 @@ context => {
 }
 ```
 
-### Typescript definitions included
+### `disconnect` event
 
-All `@feathersjs` modules now come with up-to-date TypeScript definitions. Any definitions using `@types/feathersjs__*` _should be removed_ from your project.
+There is now an application level `disconnect` event when a connection gets disconnect:
+
+```js
+app.on('disconnect', connection => {
+  // Do something on disconnect here
+});
+```
+
+> __Note:__ Disconnected connections will be removed from all channels already automatically.
 
 ### Deprecated `(context, next)` and SKIP functionality
 
 In preparation to support Koa style hooks (see [feathersjs/feathers#932](https://github.com/feathersjs/feathers/issues/932)) returning `SKIP` and calling the deprecated `next` function in hooks has been removed. Returning `SKIP` in hooks was causing issues because
+
 - It is not easily possible to see if a hook makes its following hooks skip. This made hook chains very hard to debug.
 - Returning SKIP also causes problems with Feathers internals like the event system
 
