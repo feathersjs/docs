@@ -1,61 +1,79 @@
 # Migrating
 
-This guide explains the new features and changes to migrate to the Feathers v4 (Crow) release.
+This guide explains the new features and changes to migrate to the Feathers v4 (Crow) release. It expects applications to be using the previous Feathers v3 (Buzzard).
 
 ## Versioning
 
-Instead of separate versioning for each module, all modules in the `@feathersjs` namespace have been updated to use the same version number. This means that the current release (Crow) will be **Feathers v4**. You can use e.g. a tool like [npm-check-update](https://www.npmjs.com/package/npm-check-updates) to upgrade all dependencies to the latest version:
+Instead of separate versioning, all modules in the `@feathersjs` namespace have been updated to use the same version number. This means that the current release (Crow) will be **Feathers v4** and using this release means all `@feathersjs/` module dependencies show a version of `4.x.x` (`4.0.0-pre.x` for prereleases).
+
+The [database adapters](./api/databases/adapters.md) will continue to be individually versioned, since they can be used with most Feathers versions from v2 and up.
+
+## Auto upgrade
+
+The `@feathersjs/cli` comes with a command to automatically upgrade applications generated through `@feathersjs/cli` (v3.x) with most of the changes necessary for v4. For beta testing the v4 prerelease run:
 
 ```
-npm install npm-check-updates -g
-ncu -u -t # -t includes latest prereleases as well
+npm i -g @feathersjs/cli@pre -g
+cd myapp
+feathers upgrade
 ```
+
+This will update the dependencies in `package.json`, update the `src/authentication.js` and `config/default.json` with the new authentication setup. The old contents will be kept in `src/authentication.backup.js` and `config/default.backup.json` but can be removed once upgrade is completed.
+
+Manual steps are necessary for
+
+- The `hashPassword()` hook in `service/users/users.hooks.js` which now requires the password field name (usually `hashPassword('password')`)
+- Configuring oAuth providers - see [oAuth API](./api/authentication/oauth.md)
+- Any other authentication specific customization - see [authentication service API](./api/authentication/service.md)
+- Feathers client authentication - see [authentication client API](./api/authentication/client.md)
 
 ## Authentication
 
 The `@feathersjs/authentication-*` modules have been completely rewritten to include more secure defaults, be easier to customize, framework independent and no longer rely on PassportJS. It comes with:
 
+- An extensible [authentication service](./api/authentication/service.md) that can register strategies and create authentication tokens (JWT by default but pluggable for anything else)
 - Protocol independent, fully customizable authentication strategies
-- An extensible authentication service that can register strategies and create authentication tokens (JWT by default but pluggable for anything else)
-- Better oAuth authentication with 180+ providers supported out of the box without any additional configuration (other than adding the application key and secret)
-- Built-in oAuth account linking and cross-domain oAuth authentication
+- Better [oAuth authentication](./api/authentication/oauth.md) with 180+ providers supported out of the box without any additional configuration (other than adding the application key and secret)
+- Built-in oAuth account linking and cross-domain oAuth redirects
 
-To upgrade, replace the existing authentication configuration (usually `src/authentication.js` or `src/authentication.ts`) with the following:
+### Manual upgrade
+
+To upgrade manually, replace the existing authentication configuration (usually `src/authentication.js` or `src/authentication.ts`) with the following:
 
 :::: tabs :options="{ useUrlFragment: false }"
 
 ::: tab "JavaScript"
 ```js
-const { AuthenticationService, JwtStrategy } = require('@feathersjs/authentication');
+const { AuthenticationService, JWTStrategy } = require('@feathersjs/authentication');
 const { LocalStrategy } = require('@feathersjs/authentication-local');
-const { express: expressOauth } = require('@feathersjs/authentication-oauth');
+const { expressOauth } = require('@feathersjs/authentication-oauth');
 
 module.exports = app => {
-  const authService = new AuthenticationService(app);
+  const authentication = new AuthenticationService(app);
 
-  service.register('jwt', new JwtStrategy());
-  service.register('local', new LocalStrategy());
+  authentication.register('jwt', new JWTStrategy());
+  authentication.register('local', new LocalStrategy());
 
-  app.use('/authentication', authService);
+  app.use('/authentication', authentication);
   app.configure(expressOauth());
-}
+};
 ```
 :::
 
 ::: tab "TypeScript"
 ```typescript
 import { Application } from '@feathersjs/feathers';
-import { AuthenticationService, JwtStrategy } from '@feathersjs/authentication';
+import { AuthenticationService, JWTStrategy } from '@feathersjs/authentication';
 import { LocalStrategy } from '@feathersjs/authentication-local';
-import { express as expressOauth } from '@feathersjs/authentication-oauth';
+import { expressOauth } from '@feathersjs/authentication-oauth';
 
 export default (app: Application) => {
-  const authService = new AuthenticationService(app);
+  const authentication = new AuthenticationService(app);
 
-  service.register('jwt', new JwtStrategy());
-  service.register('local', new LocalStrategy());
+  authentication.register('jwt', new JWTStrategy());
+  authentication.register('local', new LocalStrategy());
 
-  app.use('/authentication', authService);
+  app.use('/authentication', authentication);
   app.configure(expressOauth());
 }
 ```
@@ -87,15 +105,62 @@ This will register `local`, `jwt` and oAuth authentication strategies using the 
 }
 ```
 
+### Upgrade Notes
+
 Important things to note:
 
 - Because of extensive changes and security improvements, you should change your JWT secret so that all users will be prompted to log in again.
 - The `jwt` options have been moved to `jwtOptions`. It takes all [jsonwebtoken options](https://github.com/auth0/node-jsonwebtoken#jwtsignpayload-secretorprivatekey-options-callback). The `subject` option __should be removed__ when using the standard setup.
 - `authStrategies` are the strategies that are allowed on the `/authentication` endpoint
+- The `hashPassword` hook now explicitly requires the name of the field to hash instead of using a default (change any `hashPassword()` to e.g. `hashPassword('password')`).
 
-> __Important:__ The `hashPassword` hook now explicitly requires the name of the field to hash instead of using a default (change any `hashPassword()` to e.g. `hashPassword('password')`).
+### Backwards compatibility
+
+The REST authentication flow is still the same and the previous socket authentication mechanism is also still supported. New websocket authentication works the same as authentication via REST.
+
+For security reasons, the authentication secret should be changed so that all current JWTs will become invalid and prompt the users to log in again and issue new valid access tokens. The authentication Feathers clients should be updated since it includes many bug fixes on reconnection issues and usability improvements around getting the current user.
+
+To support oAuth for the old authentication client that was using a cookie instead of the redirect to transmit the access token the following middleware can be used:
+
+```js
+const authService = new AuthenticationService(app);
+
+authService.register('jwt', new JWTStrategy());
+authService.register('local', new LocalStrategy());
+authService.register('github', new GitHubStrategy());
+
+app.use('/authentication', authService);
+app.get('/oauth/cookie', (req, res) => {
+  const { access_token } = req.query;
+
+  if (access_token) {
+    res.cookie('feathers-jwt', access_token, {
+      httpOnly: false
+      // other cookie options here
+    });
+  }
+
+  res.redirect('/redirect-url');
+});
+
+app.configure(expressOauth());
+```
+
+Also update `config/default.json` `redirect` with `/oauth/cookie?`:
+
+```json
+{
+  "authentication": {
+    "oauth": {
+      "redirect": "/oauth/cookie?"
+    }
+  }
+}
+```
 
 ## Feathers core
+
+The following new features and deprecations are included in Feathers v4 core.
 
 ### Typescript definitions included
 
