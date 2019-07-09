@@ -81,7 +81,7 @@ export default (app: Application) => {
 
 ::::
 
-> __Important:__ The `@feathersjs/authentication-jwt` is now deprecated since the JWT strategy is now directly included in `@feathersjs/authentication`.
+> __Important:__ The `@feathersjs/authentication-jwt` is deprecated since the JWT strategy is now directly included in `@feathersjs/authentication`.
 
 This will register `local`, `jwt` and oAuth authentication strategies using the standard authentication service on the `/authentication` path. oAuth will only be active if provider information is added to the configuration. The authentication configuration (usually in `config/default.json`) should be updated as follows:
 
@@ -114,13 +114,21 @@ Important things to note:
 - `authStrategies` are the strategies that are allowed on the `/authentication` endpoint
 - The `hashPassword` hook now explicitly requires the name of the field to hash instead of using a default (change any `hashPassword()` to e.g. `hashPassword('password')`).
 
-### Backwards compatibility
+## Backwards compatibility
 
 The REST authentication flow is still the same and the previous socket authentication mechanism is also still supported. New websocket authentication works the same as authentication via REST.
 
-For security reasons, the authentication secret should be changed so that all current JWTs will become invalid and prompt the users to log in again and issue new valid access tokens. The authentication Feathers clients should be updated since it includes many bug fixes on reconnection issues and usability improvements around getting the current user.
+For security reasons, the authentication secret should be changed so that all current JWTs will become invalid and prompt the users to log in again and issue new valid access tokens. The authentication Feathers clients should be updated since it includes many bug fixes on reconnection issues and usability improvements.
+
+### PassportJS
+
+PassportJS is the quasi-standard authentication mechanism for Express applications. Unfortunately it doesn't play very well with other frameworks (which Feathers can easily support otherwise) or real time connections.
+
+### oAuth cookies
 
 To support oAuth for the old authentication client that was using a cookie instead of the redirect to transmit the access token the following middleware can be used:
+
+> __Note:__ This is only necessary if the Feathers authentication client is not updated at the same time.
 
 ```js
 const authService = new AuthenticationService(app);
