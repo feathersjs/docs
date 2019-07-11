@@ -71,6 +71,8 @@ There are two ways to initiate oAuth authentication:
         - Finds or creates the entity for that profile
     - Returns the authentication result
 
+> __Note:__ If you are attempting to authenticate using an obtained access token, ensure that you have added the strategy (e.g. 'facebook') to your [authStrategies](./service.md#configuration).
+
 ### oAuth URLs
 
 There are several URLs and redirects that are important for oAuth authentication:
