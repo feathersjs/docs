@@ -208,7 +208,7 @@ class MyGithubStrategy extends OAuthStrategy {
 module.exports = app => {
   const authService = new AuthenticationService(app);
 
-  service.register('github', new MyGithubStrategy());
+  authService.register('github', new MyGithubStrategy());
 
   // ...
   app.use('/authentication', authService);
@@ -238,7 +238,7 @@ class MyGithubStrategy extends OAuthStrategy {
 export default (app: Application) => {
   const authService = new AuthenticationService(app);
 
-  service.register('github', new MyGithubStrategy());
+  authService.register('github', new MyGithubStrategy());
 
   // ...
   app.use('/authentication', authService);
