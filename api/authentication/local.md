@@ -94,7 +94,7 @@ class MyLocalStrategy extends LocalStrategy {
 module.exports = app => {
   const authService = new AuthenticationService(app);
 
-  service.register('local', new LocalStrategy());
+  service.register('local', new MyLocalStrategy());
 
   // ...
   app.use('/authentication', authService);
@@ -122,7 +122,7 @@ class MyLocalStrategy extends LocalStrategy {
 export default (app: Application) => {
   const authService = new AuthenticationService(app);
 
-  service.register('local', new LocalStrategy());
+  service.register('local', new MyLocalStrategy());
 
   // ...
   app.use('/authentication', authService);
