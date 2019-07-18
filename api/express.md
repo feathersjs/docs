@@ -1,7 +1,7 @@
 # Express
 
-[![npm version](https://img.shields.io/npm/v/@feathersjs/express.png?style=flat-square)](https://www.npmjs.com/package/@feathersjs/express)
-[![Changelog](https://img.shields.io/badge/changelog-.md-blue.png?style=flat-square)](https://github.com/feathersjs/feathers/blob/master/packages/express/CHANGELOG.md)
+[![npm version](https://img.shields.io/npm/v/@feathersjs/express.svg?style=flat-square)](https://www.npmjs.com/package/@feathersjs/express)
+[![Changelog](https://img.shields.io/badge/changelog-.md-blue.svg?style=flat-square)](https://github.com/feathersjs/feathers/blob/master/packages/express/CHANGELOG.md)
 
 ```
 $ npm install @feathersjs/express --save
@@ -17,9 +17,7 @@ The `@feathersjs/express` module contains [Express](http://expressjs.com/) frame
 const express = require('@feathersjs/express');
 ```
 
-> **Very Important:** This page describes how to set up an Express server and REST API. See the [REST client chapter](./client/rest.md) how to use this server on the client.
-
-> **Important:** This chapter assumes that you are familiar with [Express](http://expressjs.com/en/guide/routing.html).
+> **Very Important:** This chapter assumes that you are familiar with [Express](http://expressjs.com/en/guide/routing.html) and describes how to set up an Express server and REST API. See the [REST client chapter](./client/rest.md) how to use this server on the client.
 
 ## express(app)
 
@@ -51,8 +49,8 @@ If no Feathers application is passed, `express() -> app` returns a plain Express
 ```js
 // Register a service
 app.use('/todos', {
-  get(id) {
-    return Promise.resolve({ id });
+  async get(id) {
+    return { id };
   }
 });
 
@@ -171,7 +169,7 @@ app.setup(server);
 
 To expose services through a RESTful API we will have to configure `express.rest` and provide our own body parser middleware (usually the standard [Express 4 body-parser](https://github.com/expressjs/body-parser)) to make REST `.create`, `.update` and `.patch` calls parse the data in the HTTP body. If you would like to add other middleware _before_ the REST handler, call `app.use(middleware)` before registering any services. 
 
-> **ProTip:** The body-parser middleware has to be registered _before_ any service. Otherwise the service method will throw a `No data provided` or `First parameter for 'create' must be an object` error.
+> **Important:** The body-parser middleware has to be registered _before_ any service. Otherwise the service method will throw a `No data provided` or `First parameter for 'create' must be an object` error.
 
 ### app.configure(express.rest())
 
@@ -223,11 +221,11 @@ Custom Express middleware that only should run before or after a specific servic
 
 ```js
 const todoService = {
-  get(id) {
-    return Promise.resolve({
+  async get(id) {
+    return {
       id,
       description: `You have to do ${id}!`
-    });
+    };
   }
 };
 
@@ -270,14 +268,14 @@ app.configure(express.rest())
   });
 
 app.use('/todos', {
-  get(id, params) {
+  asy c get(id, params) {
     console.log(params.provider); // -> 'rest'
     console.log(params.fromMiddleware); // -> 'Hello world'
 
-    return Promise.resolve({
+    return {
       id, params,
       description: `You have to do ${id}!`
-    });
+    };
   }
 });
 
@@ -424,19 +422,19 @@ app.configure(express.rest())
   });
 
 app.use('/users/:userId/messages', {
-  get(id, params) {
+  async get(id, params) {
     console.log(params.query); // -> ?query
     console.log(params.provider); // -> 'rest'
     console.log(params.fromMiddleware); // -> 'Hello world'
     console.log(params.route.userId); // will be `1` for GET /users/1/messages
 
-    return Promise.resolve({
+    return {
       id,
       params,
       read: false,
       text: `Feathers is great!`,
       createdAt: new Date().getTime()
-    });
+    };
   }
 });
 

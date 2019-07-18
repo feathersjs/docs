@@ -1,13 +1,89 @@
 # Errors
 
-[![npm version](https://img.shields.io/npm/v/@feathersjs/errors.png?style=flat-square)](https://www.npmjs.com/package/@feathersjs/errors)
-[![Changelog](https://img.shields.io/badge/changelog-.md-blue.png?style=flat-square)](https://github.com/feathersjs/feathers/blob/master/packages/errors/CHANGELOG.md)
+[![npm version](https://img.shields.io/npm/v/@feathersjs/errors.svg?style=flat-square)](https://www.npmjs.com/package/@feathersjs/errors)
+[![Changelog](https://img.shields.io/badge/changelog-.md-blue.svg?style=flat-square)](https://github.com/feathersjs/feathers/blob/master/packages/errors/CHANGELOG.md)
 
 ```
 $ npm install @feathersjs/errors --save
 ```
 
-The `@feathersjs/errors` module contains a set of standard error classes used by all other Feathers modules as well as an [Express error handler](https://expressjs.com/en/guide/error-handling.html) to format those - and other - errors and setting the correct HTTP status codes for REST calls.
+The `@feathersjs/errors` module contains a set of standard error classes used by all other Feathers modules.
+
+## Examples
+
+Here are a few ways that you can use them:
+
+:::: tabs :options="{ useUrlFragment: false }"
+
+::: tab "JavaScript"
+```js
+const { NotFound, GeneralError, BadRequest } = require('@feathersjs/errors');
+
+// If you were to create an error yourself.
+const notFound = new NotFound('User does not exist');
+
+// You can wrap existing errors
+const existing = new GeneralError(new Error('I exist'));
+
+// You can also pass additional data
+const data = new BadRequest('Invalid email', {
+  email: 'sergey@google.com'
+});
+
+// You can also pass additional data without a message
+const dataWithoutMessage = new BadRequest({
+  email: 'sergey@google.com'
+});
+
+// If you need to pass multiple errors
+const validationErrors = new BadRequest('Invalid Parameters', {
+  errors: { email: 'Email already taken' }
+});
+
+// You can also omit the error message and we'll put in a default one for you
+const validationErrors = new BadRequest({
+  errors: {
+    email: 'Invalid Email'
+  }
+});
+```
+:::
+
+::: tab "TypeScript"
+```ts
+import { NotFound, GeneralError, BadRequest } from '@feathersjs/errors';
+
+// If you were to create an error yourself.
+const notFound = new NotFound('User does not exist');
+
+// You can wrap existing errors
+const existing = new GeneralError(new Error('I exist'));
+
+// You can also pass additional data
+const data = new BadRequest('Invalid email', {
+  email: 'sergey@google.com'
+});
+
+// You can also pass additional data without a message
+const dataWithoutMessage = new BadRequest({
+  email: 'sergey@google.com'
+});
+
+// If you need to pass multiple errors
+const validationErrors = new BadRequest('Invalid Parameters', {
+  errors: { email: 'Email already taken' }
+});
+
+// You can also omit the error message and we'll put in a default one for you
+const validationErrors = new BadRequest({
+  errors: {
+    email: 'Invalid Email'
+  }
+});
+```
+:::
+
+::::
 
 ## Feathers errors
 
@@ -66,42 +142,6 @@ class UnsupportedMediaType extends FeathersError {
 const error = new UnsupportedMediaType('Not supported');
 
 console.log(error.toJSON());
-```
-
-## Examples
-
-Here are a few ways that you can use them:
-
-```js
-const errors = require('@feathersjs/errors');
-
-// If you were to create an error yourself.
-const notFound = new errors.NotFound('User does not exist');
-
-// You can wrap existing errors
-const existing = new errors.GeneralError(new Error('I exist'));
-
-// You can also pass additional data
-const data = new errors.BadRequest('Invalid email', {
-  email: 'sergey@google.com'
-});
-
-// You can also pass additional data without a message
-const dataWithoutMessage = new errors.BadRequest({
-  email: 'sergey@google.com'
-});
-
-// If you need to pass multiple errors
-const validationErrors = new errors.BadRequest('Invalid Parameters', {
-  errors: { email: 'Email already taken' }
-});
-
-// You can also omit the error message and we'll put in a default one for you
-const validationErrors = new errors.BadRequest({
-  errors: {
-    email: 'Invalid Email'
-  }
-});
 ```
 
 ## Server Side Errors

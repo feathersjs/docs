@@ -4,30 +4,12 @@
 
 ## Service methods
 
-Service methods are pre-defined [CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete) methods that your service object can implement (or that have already been implemented by one of the [database adapters](./databases/common.md)). Below is a complete example of the Feathers *service interface* as a normal JavaScript object either returning a [`Promise`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) or using [async/await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function):
+Service methods are pre-defined [CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete) methods that your service object can implement (or that have already been implemented by one of the [database adapters](./databases/common.md)). Below is an example of a Feathers service using [async/await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function) as a JavaScript object and a [JavaScript or Typescript class](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Classes):
 
 :::: tabs :options="{ useUrlFragment: false }"
 
-::: tab "Promise"
-``` javascript
-const myService = {
-  find(params) {
-    return Promise.resolve([]);
-  },
-  get(id, params) {},
-  create(data, params) {},
-  update(id, data, params) {},
-  patch(id, data, params) {},
-  remove(id, params) {},
-  setup(app, path) {}
-}
-
-app.use('/my-service', myService);
-```
-:::
-
-::: tab "async/await"
-``` javascript
+::: tab "Object"
+```js
 const myService = {
   async find(params) {
     return [];
@@ -44,32 +26,8 @@ app.use('/my-service', myService);
 ```
 :::
 
-::::
-
-Services can also be an instance of an [ES6 class](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Classes):
-
-:::: tabs :options="{ useUrlFragment: false }"
-
-::: tab "Promise"
-``` javascript
-class MyService {
-  find(params) {
-    return Promise.resolve([]);
-  }
-  get(id, params) {}
-  create(data, params) {}
-  update(id, data, params) {}
-  patch(id, data, params) {}
-  remove(id, params) {}
-  setup(app, path) {}
-}
-
-app.use('/my-service', new MyService());
-```
-:::
-
-::: tab "async/await"
-``` javascript
+::: tab "Class(JS)"
+```js
 class MyService {
   async find(params) {
     return [];
@@ -86,28 +44,51 @@ app.use('/my-service', new MyService());
 ```
 :::
 
+::: tab "Class(TS)"
+```typescript
+import { Service, Params, Id, NullableId Application } from '@feathersjs/feathers';
+
+class MyService implements Service<any> {
+  async find(params: Params) {
+    return [];
+  }
+  async get(id: Id, params: Params) {}
+  async create(data: any, params: Params) {}
+  async update(id: NullableId, data: any, params: Params) {}
+  async patch(id: NullableId, data: any, params: Params) {}
+  async remove(id: NullableId, params: Params) {}
+  setup(app: Application, path: string) {}
+}
+
+app.use('/my-service', new MyService());
+```
+:::
+
 ::::
 
 > **ProTip:** Methods are optional, and if a method is not implemented Feathers will automatically emit a `NotImplemented` error.
 
 > __Important:__ Always use the service returned by `app.service(path)` not the service object (the `myService` object above) directly. See the [app.service documentation](./application.md#servicepath) for more information.
 
-Service methods must return a [`Promise`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) or be declared as `async` and have the following parameters:
+Service methods must use [async/await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function) or return a [`Promise`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) and have the following parameters:
 
 - `id` — The identifier for the resource. A resource is the data identified by a unique id.
 - `data` — The resource data.
-- `params` - Additional parameters for the method call, see [params](#params)
+- `params` - Additional parameters for the method call (see [params](#params))
 
 Once registered, the service can be retrieved and used via [app.service()](./application.md#servicepath):
 
 ```js
 const myService = app.service('my-service');
 
-myService.find().then(items => console.log('.find()', items));
-myService.get(1).then(item => console.log('.get(1)', item));
+const items = await myService.find();
+
+const item = await app.service('my-service').get(1);
+
+console.log('.get(1)', item);
 ```
 
-Keep in mind that services don't have to use databases. You could easily replace the database in the example with a package that uses some API to, for example, pull in GitHub stars or stock ticker data.
+> **Note:** Although probably the most common use case, a service does not necessarily have to connect to a database. A custom service can implement any functionality like talking to another API or send an email etc.
 
 > **Important:** This section describes the general usage of service methods and how to implement them. They are already implemented by the official Feathers database adapters. For specifics on how to use the database adapters, see the [database adapters common API](./databases/common.md).
 
@@ -117,29 +98,26 @@ Keep in mind that services don't have to use databases. You could easily replace
 
 - `params.query` - the query parameters from the client, either passed as URL query parameters (see the [REST](./express.md) chapter) or through websockets (see [Socket.io](./socketio.md) or [Primus](./primus.md)).
 - `params.provider` - The transport (`rest`, `socketio` or `primus`) used for this service call. Will be `undefined` for internal calls from the server (unless passed explicitly).
-- `params.user` - The authenticated user, either set by [Feathers authentication](./authentication/server.md) or passed explicitly.
+- `params.user` - The authenticated user, either set by [Feathers authentication](./authentication/readme.md) or passed explicitly.
 - `params.connection` - If the service call has been made by a real-time transport (e.g. through websockets), `params.connection` is the connection object that can be used with [channels](./channels.md).
 
 
 > __Important:__ For external calls only `params.query` will be sent between the client and server. If not passed, `params.query` will be `undefined` for internal calls.
 
-
 ### .find(params)
 
-`service.find(params) -> Promise` - Retrieves a list of all resources from the service. Provider parameters will be passed as `params.query`.
+`service.find(params) -> Promise` - Retrieves a list of all resources from the service. `params.query` can be used to filter and limit the returned data.
 
 ```js
 app.use('/messages', {
-  find(params) {
-    return Promise.resolve([
-      {
-        id: 1,
-        text: 'Message 1'
-      }, {
-        id: 2,
-        text: 'Message 2'
-      }
-    ]);
+  async find(params) {
+    return [{
+      id: 1,
+      text: 'Message 1'
+    }, {
+      id: 2,
+      text: 'Message 2'
+    }];
   }
 });
 ```
@@ -152,27 +130,27 @@ app.use('/messages', {
 
 ```js
 app.use('/messages', {
-  get(id, params) {
-    return Promise.resolve({
+  async get(id, params) {
+    return {
       id,
       text: `You have to do ${id}!`
-    });
+    };
   }
 });
 ```
 
 ### .create(data, params)
 
-`service.create(data, params) -> Promise` - Creates a new resource with `data`. The method should return a `Promise` with the newly created data. `data` may also be an array.
+`service.create(data, params) -> Promise` - Creates a new resource with `data`. The method should return with the newly created data. `data` may also be an array.
 
 ```js
 app.use('/messages', {
   messages: [],
 
-  create(data, params) {
+  async create(data, params) {
     this.messages.push(data);
 
-    return Promise.resolve(data);
+    return data;
   }
 });
 ```
@@ -182,7 +160,7 @@ app.use('/messages', {
 
 ### .update(id, data, params)
 
-`service.update(id, data, params) -> Promise` - Replaces the resource identified by `id` with `data`. The method should return a `Promise` with the complete, updated resource data. `id` can also be `null` when updating multiple records, with `params.query` containing the query criteria.
+`service.update(id, data, params) -> Promise` - Replaces the resource identified by `id` with `data`. The method should return with the complete, updated resource data. `id` can also be `null` when updating multiple records, with `params.query` containing the query criteria.
 
 > **Important:** A successful `update` method call emits the [`updated` service event](./events.md#updated-patched).
 
@@ -197,7 +175,7 @@ The method should return with the complete, updated resource data. Implement `pa
 
 ### .remove(id, params)
 
-`service.remove(id, params) -> Promise` - Removes the resource with `id`. The method should return a `Promise` with the removed resource. `id` can also be `null`, which indicates the deletion of multiple resources, with `params.query` containing the query criteria.
+`service.remove(id, params) -> Promise` - Removes the resource with `id`. The method should return with the removed data. `id` can also be `null`, which indicates the deletion of multiple resources, with `params.query` containing the query criteria.
 
 > **Important:** A successful `remove` method call emits the [`removed` service event](./events.md#removed).
 
@@ -211,20 +189,17 @@ For services registered before `app.listen` is invoked, the `setup` function of 
 `setup` is a great place to initialize your service with any special configuration or if connecting services that are very tightly coupled (see below), as opposed to using [hooks](../hooks/readme.md).
 
 ```js
-// app.js
-'use strict';
-
 const feathers = require('@feathersjs/feathers');
-const rest = require('@feathersjs/express/rest');
+const { rest } = require('@feathersjs/express');
 
 class MessageService {
-  get(id, params) {
-    return Promise.resolve({
+  async get(id, params) {
+    return {
       id,
       read: false,
       text: `Feathers is great!`,
       createdAt: new Date.getTime()
-    });
+    };
   }
 }
 
@@ -233,13 +208,11 @@ class MyService {
     this.app = app;
   }
 
-  get(name, params) {
+  async get(name, params) {
     const messages = this.app.service('messages');
+    const message = await messages.get(1, params);
     
-    return messages.get(1)
-      .then(message => {
-        return { name, message };
-      });
+    return { name, message };
   }
 }
 
@@ -286,8 +259,8 @@ Provided by the core [NodeJS EventEmitter .emit](https://nodejs.org/api/events.h
 > **Important:** For more information about service events, see the [Events chapter](./events.md).
 
 
-### .removeListener(eventname, [ listener ])
+### .removeListener(eventname)
 
 Provided by the core [NodeJS EventEmitter .removeListener](https://nodejs.org/api/events.html#events_emitter_removelistener_eventname_listener). Removes all listeners, or the given listener, for `eventname`.
 
-> **Important:** For more information about service events, see the [Events chapter](./events.md).
+> **Note:** For more information about service events, see the [Events chapter](./events.md).

@@ -1,7 +1,7 @@
 # Configuration
 
-[![npm version](https://img.shields.io/npm/v/@feathersjs/configuration.png?style=flat-square)](https://www.npmjs.com/package/@feathersjs/configuration)
-[![Changelog](https://img.shields.io/badge/changelog-.md-blue.png?style=flat-square)](https://github.com/feathersjs/feathers/blob/master/packages/configuration/CHANGELOG.md)
+[![npm version](https://img.shields.io/npm/v/@feathersjs/configuration.svg?style=flat-square)](https://www.npmjs.com/package/@feathersjs/configuration)
+[![Changelog](https://img.shields.io/badge/changelog-.md-blue.svg?style=flat-square)](https://github.com/feathersjs/feathers/blob/master/packages/configuration/CHANGELOG.md)
 
 ```
 $ npm install @feathersjs/configuration --save
@@ -10,7 +10,9 @@ $ npm install @feathersjs/configuration --save
 `@feathersjs/configuration` is a wrapper for [node-config](https://github.com/lorenwest/node-config) which allows to configure a server side Feathers application.
 
 
-By default this implementation will look in `config/*` for `default.json` which retains convention. As per the [config docs](https://github.com/lorenwest/node-config/wiki/Configuration-Files) you can organize *"hierarchical configurations for your app deployments"*. See the usage section below for better information how to implement this.
+By default this implementation will look in `config/*` for `default.json` which retains convention. It will be merged with other configuration files in the `config/` folder using the `NODE_ENV` environment variable. So setting `NODE_ENV=production` will merge `config/default.json` with `config/production.json`.
+
+As per the [config docs](https://github.com/lorenwest/node-config/wiki/Configuration-Files) you can organize *"hierarchical configurations for your app deployments"*.
 
 ## Usage
 
@@ -21,8 +23,21 @@ const feathers = require('@feathersjs/feathers');
 const configuration = require('@feathersjs/configuration');
 
 // Use the application root and `config/` as the configuration folder
-let app = feathers().configure(configuration())
+const app = feathers().configure(configuration())
 ```
+
+## Variable types
+
+`@feathersjs/configuration` uses the following variable mechanisms:
+
+- Given a root and configuration path load a `default.json` in that path
+- Also try to load `<NODE_ENV>.json` in that path, and if found, extend the default configuration
+- Go through each configuration value and sets it on the application (via `app.set(name, value)`).
+  - If the value is a valid environment variable (e.v. `NODE_ENV`), use its value instead
+  - If the value starts with `./` or `../` turn it into an absolute path relative to the configuration file path
+  - If the value is escaped (starting with a `\`) always use that value (e.g. `\\NODE_ENV` will become `NODE_ENV`)
+- Both `default` and `<env>` configurations can be modules which provide their computed settings with `module.exports = {...}` and a `.js` file suffix. See `test/config/testing.js` for an example.  
+All rules listed above apply for `.js` modules.
 
 ## Changing the location of the configuration directory
 
@@ -37,19 +52,6 @@ const configuration = require('@feathersjs/configuration')
 The above code is portable, so you can keep your `config/` directory with the rest of your Feathers files. It will work, for example, even if you change the directory from `server/` to `amazing-server`, etc.
 
 (The NODE_CONFIG_DIR environment variable isn’t used directly by @feathersjs/configuration but by the [node-config](https://github.com/lorenwest/node-config) module that it uses. For more information on configuring node-config settings, see the [Configuration Files Wiki page](https://github.com/lorenwest/node-config/wiki/Configuration-Files).
-
-## Variable types
-
-`@feathersjs/configuration` uses the following variable mechanisms:
-
-- Given a root and configuration path load a `default.json` in that path
-- Also try to load `<NODE_ENV>.json` in that path, and if found, extend the default configuration
-- Go through each configuration value and sets it on the application (via `app.set(name, value)`).
-  - If the value is a valid environment variable (e.v. `NODE_ENV`), use its value instead
-  - If the value starts with `./` or `../` turn it into an absolute path relative to the configuration file path
-  - If the value is escaped (starting with a `\`) always use that value (e.g. `\\NODE_ENV` will become `NODE_ENV`)
-- Both `default` and `<env>` configurations can be modules which provide their computed settings with `module.exports = {...}` and a `.js` file suffix. See `test/config/testing.js` for an example.  
-All rules listed above apply for `.js` modules.
 
 ## Example
 
@@ -82,10 +84,7 @@ Now it can be used in our `app.js` like this:
 const feathers = require('@feathersjs/feathers');
 const configuration = require('@feathersjs/configuration');
 
-let conf = configuration();
-
-let app = feathers()
-  .configure(conf);
+const app = feathers().configure(configuration());
 
 console.log(app.get('frontend'));
 console.log(app.get('host'));
