@@ -1,18 +1,17 @@
 # REST Client
 
-> **Note:** For directly using a Feathers REST API (via HTTP) without using Feathers on the client see the [HTTP API](#http-api) section.
-
 ## @feathersjs/rest-client
 
-[![GitHub stars](https://img.shields.io/github/stars/feathersjs/rest-client.png?style=social&label=Star)](https://github.com/feathersjs/rest-client/)
-[![npm version](https://img.shields.io/npm/v/@feathersjs/rest-client.png?style=flat-square)](https://www.npmjs.com/package/@feathersjs/rest-client)
-[![Changelog](https://img.shields.io/badge/changelog-.md-blue.png?style=flat-square)](https://github.com/feathersjs/rest-client/blob/master/CHANGELOG.md)
+[![npm version](https://img.shields.io/npm/v/@feathersjs/client.svg?style=flat-square)](https://www.npmjs.com/package/@feathersjs/rest-client)
+[![Changelog](https://img.shields.io/badge/changelog-.md-blue.svg?style=flat-square)](https://github.com/feathersjs/feathers/blob/master/packages/rest-client/CHANGELOG.md)
 
 ```
 $ npm install @feathersjs/rest-client --save
 ```
 
 `@feathersjs/rest-client` allows to connect to a service exposed through the [Express REST API](../express.md#expressrest) using [jQuery](https://jquery.com/), [request](https://github.com/request/request), [Superagent](http://visionmedia.github.io/superagent/), [Axios](https://github.com/mzabriskie/axios) or [Fetch](https://facebook.github.io/react-native/docs/network.html) as the AJAX library.
+
+> **Note:** For directly using a Feathers REST API (via HTTP) without using Feathers on the client see the [HTTP API](#http-api) section.
 
 <!-- -->
 
@@ -211,13 +210,13 @@ Here is what that looks like with curl:
 curl -H "Content-Type: application/json" -X POST -d '{"strategy":"local","email":"your email","password":"your password"}' http://localhost:3030/authentication
 ```
 
-Then to authenticate subsequent requests, add the returned `accessToken` to the `Authorization` header:
+Then to authenticate subsequent requests, add the returned `accessToken` to the `Authorization` header as `Bearer <your access token>`:
 
 ```bash
-curl -H "Content-Type: application/json" -H "Authorization: <your access token>" -X POST http://localhost:3030/authentication
+curl -H "Content-Type: application/json" -H "Authorization: Bearer <your access token>" -X POST http://localhost:3030/authentication
 ```
 
-Also see the [JWT](../authentication/jwt.md) and [local](../authentication/local.md) authentication chapter.
+For more information see the [authentication API documentation](../readme.md).
 
 ### find
 

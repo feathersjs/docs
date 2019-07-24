@@ -1,18 +1,19 @@
 # Socket.io Client
 
-> **Note:** We recommend using Feathers and the `@feathersjs/socketio-client` module on the client if possible. If however, you want to use a direct Socket.io connection without using Feathers on the client, see the [Direct connection](#direct-connection) section.
-
 ## @feathersjs/socketio-client
 
-[![GitHub stars](https://img.shields.io/github/stars/feathersjs/socketio-client.png?style=social&label=Star)](https://github.com/feathersjs/socketio-client/)
-[![npm version](https://img.shields.io/npm/v/@feathersjs/socketio-client.png?style=flat-square)](https://www.npmjs.com/package/@feathersjs/socketio-client)
-[![Changelog](https://img.shields.io/badge/changelog-.md-blue.png?style=flat-square)](https://github.com/feathersjs/socketio-client/blob/master/CHANGELOG.md)
+[![npm version](https://img.shields.io/npm/v/@feathersjs/client.svg?style=flat-square)](https://www.npmjs.com/package/@feathersjs/socketio-client)
+[![Changelog](https://img.shields.io/badge/changelog-.md-blue.svg?style=flat-square)](https://github.com/feathersjs/feathers/blob/master/packages/socketio-client/CHANGELOG.md)
 
 ```
 $ npm install @feathersjs/socketio-client --save
 ```
 
-The `@feathersjs/socketio-client` module allows to connect to services exposed through the [Socket.io server](../socketio.md) via a Socket.io socket.
+The `@feathersjs/socketio-client` module allows to connect to services exposed through the [Socket.io transport](../socketio.md) via a Socket.io socket.
+
+> **Note:** We recommend using Feathers and the `@feathersjs/socketio-client` module on the client if possible. If however, you want to use a direct Socket.io connection without using Feathers on the client, see the [Direct connection](#direct-connection) section.
+
+<!-- -->
 
 > **Important:** Socket.io is also used to *call* service methods. Using sockets for both calling methods and receiving real-time events is generally faster than using [REST](../express.md). There is therefore no need to use both REST and Socket.io in the same client application.
 
@@ -107,7 +108,7 @@ app.service('messages').timeout = 3000;
 
 ## Direct connection
 
-Feathers sets up a normal Socket.io server that you can connect to with any Socket.io compatible client, usually the [Socket.io client](http://socket.io/docs/client-api/) either by loading the `socket.io-client` module or `/socket.io/socket.io.js` from the server. Unlike HTTP calls, websockets do not have an inherent cross-origin restriction in the browser so it is possible to connect to any Feathers server.
+Feathers sets up a normal Socket.io server that you can connect to with any Socket.io compatible client, usually the [Socket.io client](http://socket.io/docs/client-api/) either by loading the `socket.io-client` module or `/socket.io/socket.io.js` from the server. Unlike HTTP calls, websockets do not have an inherent cross-origin restriction in the browser so it is possible to connect to any Feathers server and query parameter types do not have to be converted from strings.
 
 > **ProTip**: The socket connection URL has to point to the server root which is where Feathers will set up Socket.io.
 
@@ -134,19 +135,33 @@ If the service path or method does not exist, an appropriate Feathers error will
 
 ### Authentication
 
-Sockets can be authenticated by sending the `authenticate` event with the `strategy` and the payload. For specific examples, see the "Direct Connection" section in the [local](../authentication/local.md) and [jwt](../authentication/jwt.md) authentication chapters.
+Sockets will be authenticated automatically by calling [.create](#create) on the [authentication service](../authentication/service.md):
 
 ```js
 const io = require('socket.io-client');
 const socket = io('http://localhost:3030');
 
-socket.emit('authenticate', {
-  strategy: 'strategyname',
-  ... otherData
-}, function(message, data) {
-  console.log(message); // message will be null
-  console.log(data); // data will be {"accessToken": "your token"}
+socket.emit('create', 'authentication', {
+  strategy: 'local',
+  email: 'hello@feathersjs.com',
+  password: 'supersecret'
+}, function(error, authResult) {
+  console.log(authResult); 
+  // authResult will be {"accessToken": "your token", "user": user }
   // You can now send authenticated messages to the server
+});
+```
+
+> __Important:__ When a socket disconnects and then reconnects, it has to be authenticated again before making any other request that requires authentication. This is usually done with the [jwt strategy](../authentication/jwt.md) using the `accessToken` from the `authResult`. The [authentication client](../authentication/client.md) handles this already automatically.
+
+```js
+socket.on('connect', () => {
+  socket.emit('create', 'authentication', {
+    strategy: 'jwt',
+    accessToken: authResult.accessToken
+  }, function(error, newAuthResult) {
+    console.log(newAuthResult); 
+  });
 });
 ```
 

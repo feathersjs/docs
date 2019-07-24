@@ -39,7 +39,7 @@ const app = feathers().configure(configuration())
 - Both `default` and `<env>` configurations can be modules which provide their computed settings with `module.exports = {...}` and a `.js` file suffix. See `test/config/testing.js` for an example.  
 All rules listed above apply for `.js` modules.
 
-## Changing the location of the configuration directory
+## Configuration directory
 
 By default, Feathers will use the `config/` directory in the root of your project’s source directory. To change this, e.g., if you have Feathers installed under the `server/` directory and you want your configuration at `server/config/`, you have to set the `NODE_CONFIG_DIR` environment variable in `app.js` _before_ importing `@feathersjs/configuration`:
 

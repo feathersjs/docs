@@ -20,19 +20,19 @@ const app = feathers();
 
 app.service('messages').hooks({
   before: {
-    create: [context => {
+    create: [async context => {
       context.data.createdAt = new Date();
 
       return context;
     }],
 
-    update: [context => {
+    update: [async context => {
       context.data.updatedAt = new Date();
 
       return context;
     }],
 
-    patch: [context => {
+    patch: [async context => {
       context.data.updatedAt = new Date();
 
       return context;
@@ -40,7 +40,7 @@ app.service('messages').hooks({
   },
 
   error: {
-    all: [context => {
+    all: [async context => {
       console.error(`Error in ${context.path} calling ${context.method}  method`, context.error);
 
       return context;
@@ -57,19 +57,19 @@ const app = feathers();
 
 app.service('messages').hooks({
   before: {
-    create: [(context: HookContext) => {
+    create: [async (context: HookContext) => {
       context.data.createdAt = new Date();
 
       return context;
     }],
 
-    update: [(context: HookContext) => {
+    update: [async (context: HookContext) => {
       context.data.updatedAt = new Date();
 
       return context;
     }],
 
-    patch: [(context: HookContext) => {
+    patch: [async (context: HookContext) => {
       context.data.updatedAt = new Date();
       
       return context;
@@ -77,7 +77,7 @@ app.service('messages').hooks({
   },
 
   error: {
-    all: [(context: HookContext) => {
+    all: [async (context: HookContext) => {
       console.error(`Error in ${context.path} calling ${context.method}  method`, context.error);
 
       return context;

@@ -39,7 +39,6 @@ https://buzzard.docs.feathersjs.com/* https://docs.feathersjs.com/:splat 301!
 /api/databases/elasticsearch.html           https://github.com/feathersjs-ecosystem/feathers-elasticsearch
 /api/databases/rethinkdb.html               https://github.com/feathersjs-ecosystem/feathers-rethinkdb
 
-/guides/offline-first/readme.html           https://auk.docs.feathersjs.com/guides/offline-first/readme.html
 /guides/advanced/debugging.html             https://blog.feathersjs.com/debugging-feathers-with-visual-studio-code-406e6adf2882
 /guides/about/philosophy.html               https://blog.feathersjs.com/why-we-built-the-best-web-framework-you-ve-probably-never-heard-of-until-now-176afc5c6aac
 /guides/about/features.html                 https://feathersjs.com/features

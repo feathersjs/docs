@@ -30,9 +30,8 @@ const socket = new Socket('http://api.feathersjs.com');
 
 ## @feathersjs/primus-client
 
-[![GitHub stars](https://img.shields.io/github/stars/feathersjs/primus-client.png?style=social&label=Star)](https://github.com/feathersjs/primus-client/)
-[![npm version](https://img.shields.io/npm/v/@feathersjs/primus-client.png?style=flat-square)](https://www.npmjs.com/package/@feathersjs/primus-client)
-[![Changelog](https://img.shields.io/badge/changelog-.md-blue.png?style=flat-square)](https://github.com/feathersjs/primus-client/blob/master/CHANGELOG.md)
+[![npm version](https://img.shields.io/npm/v/@feathersjs/client.svg?style=flat-square)](https://www.npmjs.com/package/@feathersjs/primus-client)
+[![Changelog](https://img.shields.io/badge/changelog-.md-blue.svg?style=flat-square)](https://github.com/feathersjs/feathers/blob/master/packages/primus-client/CHANGELOG.md)
 
 ```
 $ npm install @feathersjs/primus-client --save
@@ -141,18 +140,21 @@ Service methods can be called by emitting a `<servicepath>::<methodname>` event 
 
 ### Authentication
 
-Sockets can be authenticated by sending the `authenticate` event with the `strategy` and the payload. For specific examples see the "Direct Connection" section in the [local](../authentication/local.md) and [jwt](../authentication/jwt.md) authentication chapters.
+Sockets will be authenticated automatically by calling [.create](#create) on the [authentication service](../authentication/service.md):
 
 ```js
-socket.send('authenticate', {
-  strategy: 'strategyname',
-  ... otherData
-}, function(message, data) {
-  console.log(message); // message will be null
-  console.log(data); // data will be {"accessToken": "your token"}
+socket.send('create', 'authentication', {
+  strategy: 'local',
+  email: 'hello@feathersjs.com',
+  password: 'supersecret'
+}, function(error, authResult) {
+  console.log(authResult); 
+  // authResult will be {"accessToken": "your token", "user": user }
   // You can now send authenticated messages to the server
 });
 ```
+
+> __Important:__ When a socket disconnects and then reconnects, it has to be authenticated again before making any other request that requires authentication. This is usually done with the [jwt strategy](../authentication/jwt.md) using the `accessToken` from the `authResult`. The [authentication client](../authentication/client.md) handles this already automatically.
 
 ### `find`
 

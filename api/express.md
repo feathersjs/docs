@@ -232,6 +232,8 @@ const todoService = {
 app.use('/todos', ensureAuthenticated, logRequest, todoService, updateData);
 ```
 
+> __Important:__ Custom middleware will only run for REST requests and not when used with other transports like Socket.io or Primus.
+
 Middleware that runs after the service has the service call information available as
 
 - `res.data` - The data that will be sent
@@ -246,7 +248,21 @@ function updateData(req, res, next) {
 }
 ```
 
-> __ProTip:__ If you run `res.send` in a custom middleware after the service and don't call `next`, other middleware (like the REST formatter) will be skipped. This can be used to e.g. render different views for certain service method calls.
+If you run `res.send` in a custom middleware after the service and don't call `next`, other middleware (like the REST formatter) will be skipped. This can be used to e.g. render different views for certain service method calls, for example to export a file as CSV:
+
+```js
+const json2csv = require('json2csv');
+const fields = [ 'done', 'description' ];
+
+app.use('/todos', todoService, function(req, res) {
+  const result = res.data;
+  const data = result.data; // will be either `result` as an array or `data` if it is paginated
+  const csv = json2csv({ data, fields });
+
+  res.type('csv');
+  res.end(csv);
+});
+```
 
 ### params
 

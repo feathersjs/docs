@@ -4,9 +4,37 @@ All database adapters implement a common interface for initialization, paginatio
 
 > **Important:** Every database adapter is an implementation of the [Feathers service interface](../services.md). We recommend being familiar with services, service events and hooks before using a database adapter.
 
-## `service([options])`
+## Initialization
 
-Returns a new service instance initialized with the given options.
+### `new Service(options)`
+
+Each adapter exports a `Service` class that can be exported and extended.
+
+:::: tabs :options="{ useUrlFragment: false }"
+
+::: tab "JavaScript"
+```js
+const { Service } = require('feathers-<adaptername>');
+
+app.use('/messages', new Service());
+app.use('/messages', new Service({ id, events, paginate }));
+```
+:::
+
+::: tab "TypeScript"
+```js
+import { Service } from 'feathers-<adaptername>';
+
+app.use('/messages', new Service());
+app.use('/messages', new Service({ id, events, paginate }));
+```
+:::
+
+::::
+
+### `service([options])`
+
+The default export is a function that returns a new service instance initialized with the given options. Internally just calls `new Service(options)` from above.
 
 ```js
 const service = require('feathers-<adaptername>');
@@ -15,7 +43,7 @@ app.use('/messages', service());
 app.use('/messages', service({ id, events, paginate }));
 ```
 
-__Options:__
+### Options
 
 - `id` (*optional*) - The name of the id field property (usually set by default to `id` or `_id`).
 - `events` (*optional*) - A list of [custom service events](../events.md#custom-events) sent by this service
@@ -74,9 +102,82 @@ app.service('todos').find({
 > **Pro tip:** To just get the number of available records set `$limit` to `0`. This will only run a (fast) counting query against the database.
 
 
+## Extending Adapters
+
+There are two ways to extend existing database adapters. Either by extending the ES6 base class or by adding functionality through hooks.
+
+> **ProTip:** Keep in mind that calling the original service methods will return a Promise that resolves with the value.
+
+### Classes (ES6)
+
+All modules also export an [ES6 class](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Classes) as `Service` that can be directly extended like this:
+
+```js
+'use strict';
+
+const { Service } = require( 'feathers-<database>');
+
+class MyService extends Service {
+  create(data, params) {
+    data.created_at = new Date();
+
+    return super.create(data, params);
+  }
+
+  update(id, data, params) {
+    data.updated_at = new Date();
+
+    return super.update(id, data, params);
+  }
+}
+
+app.use('/todos', new MyService({
+  paginate: {
+    default: 2,
+    max: 4
+  }
+}));
+```
+
+### Hooks
+
+Another option is weaving in functionality through [hooks](../hooks.md). For example, `createdAt` and `updatedAt` timestamps could be added like this:
+
+```js
+const feathers = require('@feathersjs/feathers');
+
+// Import the database adapter of choice
+const service = require('feathers-<adapter>');
+
+const app = feathers().use('/todos', service({
+  paginate: {
+    default: 2,
+    max: 4
+  }
+}));
+
+app.service('todos').hooks({
+  before: {
+    create: [
+      (context) => context.data.createdAt = new Date()
+    ],
+    
+    update: [
+      (context) => context.data.updatedAt = new Date()
+    ]
+  }
+});
+
+app.listen(3030);
+```
+
 ## Service methods
 
 This section describes specifics on how the [service methods](../services.md) are implemented for all adapters.
+
+### constructor(options)
+
+Initializes a new service. Should call `super(options)` when overwritten.
 
 ### adapter.Model
 
@@ -246,73 +347,4 @@ Remove all read messages
 
 ```
 DELETE /messages?read=true
-```
-
-## Extending Adapters
-
-There are two ways to extend existing database adapters. Either by extending the ES6 base class or by adding functionality through hooks.
-
-> **ProTip:** Keep in mind that calling the original service methods will return a Promise that resolves with the value.
-
-### Hooks
-
-The most flexible option is weaving in functionality through [hooks](../hooks.md). For example, `createdAt` and `updatedAt` timestamps could be added like this:
-
-```js
-const feathers = require('@feathersjs/feathers');
-
-// Import the database adapter of choice
-const service = require('feathers-<adapter>');
-
-const app = feathers().use('/todos', service({
-  paginate: {
-    default: 2,
-    max: 4
-  }
-}));
-
-app.service('todos').hooks({
-  before: {
-    create: [
-      (context) => context.data.createdAt = new Date()
-    ],
-    
-    update: [
-      (context) => context.data.updatedAt = new Date()
-    ]
-  }
-});
-
-app.listen(3030);
-```
-
-### Classes (ES6)
-
-All modules also export an [ES6 class](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Classes) as `Service` that can be directly extended like this:
-
-```js
-'use strict';
-
-const { Service } = require( 'feathers-<database>');
-
-class MyService extends Service {
-  create(data, params) {
-    data.created_at = new Date();
-
-    return super.create(data, params);
-  }
-
-  update(id, data, params) {
-    data.updated_at = new Date();
-
-    return super.update(id, data, params);
-  }
-}
-
-app.use('/todos', new MyService({
-  paginate: {
-    default: 2,
-    max: 4
-  }
-}));
 ```

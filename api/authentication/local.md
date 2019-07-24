@@ -1,4 +1,4 @@
-# Local Authentication
+# Local
 
 [![npm version](https://img.shields.io/npm/v/@feathersjs/authentication-local.png?style=flat-square)](https://www.npmjs.com/package/@feathersjs/authentication-local)
 [![Changelog](https://img.shields.io/badge/changelog-.md-blue.png?style=flat-square)](https://github.com/feathersjs/feathers/blob/master/packages/authentication-local/CHANGELOG.md)

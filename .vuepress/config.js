@@ -38,6 +38,7 @@ module.exports = {
       }],
       '/api/': [{
         title: 'Core',
+        collapsable: false,
         children: [
           'application.md',
           'services.md',
@@ -48,6 +49,7 @@ module.exports = {
         ]
       }, {
         title: 'Transports',
+        collapsable: false,
         children: [
           'express.md',
           'socketio.md',
@@ -56,6 +58,7 @@ module.exports = {
         ]
       }, {
         title: 'Client',
+        collapsable: false,
         children: [
           'client.md',
           'client/rest.md',
@@ -64,6 +67,7 @@ module.exports = {
         ]
       }, {
         title: 'Authentication',
+        collapsable: false,
         children: [
           'authentication/',
           'authentication/service.md',
@@ -76,6 +80,7 @@ module.exports = {
         ]
       }, {
         title: 'Database',
+        collapsable: false,
         children: [
           'databases/adapters.md',
           'databases/common.md',
