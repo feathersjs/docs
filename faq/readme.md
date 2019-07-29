@@ -365,7 +365,7 @@ Also see [this issue](https://github.com/feathersjs/feathers/issues/894).
 
 ## Why are queries with arrays failing?
 
-If you are using REST and queries with larger arrays (more than 21 items to be exact) are failing you are probably running into an issue with the [querystring](https://github.com/ljharb/qs) module which [limits the size of arrays to 21 items](https://github.com/ljharb/qs#parsing-arrays) by default. The recommended solution is to implement a custom query string parser function via `app.set('query parser', parserFunction)` with the `arrayLimit` option set to a higher value:
+If you are using REST and queries with larger arrays (more than 21 items to be exact) are failing, you are probably running into an issue with the [querystring](https://github.com/ljharb/qs) module which [limits the size of arrays to 21 items](https://github.com/ljharb/qs#parsing-arrays) by default. The recommended solution is to implement a custom query string parser function via `app.set('query parser', parserFunction)` with the `arrayLimit` option set to a higher value:
 
 ```js
 var qs = require('qs');
