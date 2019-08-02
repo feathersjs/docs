@@ -120,15 +120,52 @@ The REST authentication flow is still the same and the previous socket authentic
 
 For security reasons, the authentication secret should be changed so that all current JWTs will become invalid and prompt the users to log in again and issue new valid access tokens. The authentication Feathers clients should be updated since it includes many bug fixes on reconnection issues and usability improvements.
 
-### PassportJS
+### Old client JWT compatibility
 
-PassportJS is the quasi-standard authentication mechanism for Express applications. Unfortunately it doesn't play very well with other frameworks (which Feathers can easily support otherwise) or real time connections.
+Although upgrading the clients and issuing new tokens is highly recommended, the following setup can be used to provide backwards compatible authentication:
+
+```js
+const { AuthenticationService, JWTStrategy } = require('@feathersjs/authentication');
+const { LocalStrategy } = require('@feathersjs/authentication-local');
+const { expressOauth } = require('@feathersjs/authentication-oauth');
+
+class MyAuthenticationService extends AuthenticationService {
+  async getPayload(authResult, params) {
+    // Call original `getPayload` first
+    const payload = await super.getPayload(authResult, params);
+    const { user } = authResult;
+
+    return {
+      ...payload,
+      userId: user.id
+    };
+  }
+}
+
+class LegacyJWTStrategy extends JWTStrategy {
+  getEntityId(authResult) {
+    const { authentication: { payload } } = authResult;
+
+    return payload.userId || payload.sub;
+  }
+}
+
+module.exports = app => {
+  const authentication = new MyAuthenticationService(app);
+
+  authentication.register('jwt', new LegacyJWTStrategy());
+  authentication.register('local', new LocalStrategy());
+
+  app.use('/authentication', authentication);
+  app.configure(expressOauth());
+};
+```
 
 ### oAuth cookies
 
 To support oAuth for the old authentication client that was using a cookie instead of the redirect to transmit the access token the following middleware can be used:
 
-> __Note:__ This is only necessary if the Feathers authentication client is not updated at the same time.
+> __Note:__ This is only necessary if the Feathers authentication client is not updated at the same time and if oAuth is being used.
 
 ```js
 const authService = new AuthenticationService(app);
@@ -165,6 +202,10 @@ Also update `config/default.json` `redirect` with `/oauth/cookie?`:
   }
 }
 ```
+
+### PassportJS
+
+PassportJS is the quasi-standard authentication mechanism for Express applications. Unfortunately it doesn't play very well with other frameworks (which Feathers can easily support otherwise) or real time connections. PassportJS can still be used through its direct Express middleware usage and then passing the authentication information [as service `params`](./api/express.md#params).
 
 ## Feathers core
 
