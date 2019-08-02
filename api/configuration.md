@@ -82,17 +82,14 @@ Now it can be used in our `app.js` like this:
 const feathers = require('@feathersjs/feathers');
 const configuration = require('@feathersjs/configuration');
 
-let conf = configuration();
-
-let app = feathers()
-  .configure(conf);
+const app = feathers()
+  .configure(configuration());
 
 console.log(app.get('frontend'));
 console.log(app.get('host'));
 console.log(app.get('port'));
 console.log(app.get('mongodb'));
 console.log(app.get('templates'));
-console.log(conf());
 
 ```
 
