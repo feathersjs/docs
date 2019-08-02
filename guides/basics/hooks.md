@@ -2,7 +2,7 @@
 
 As we have seen in the [previous chapter](./services.md), Feathers services are a great way to implement data storage and modification. Technically, we could implement all our application logic within services but very often an application requires similar functionality across multiple services. For example, we might want to check for all services if a user is allowed to even call the service method or add the current date to all data that we are saving. With just using services we would have to implement this again every time.
 
-This is where Feathers hooks come in. Hooks are pluggable middleware functions that can be registered __before__, __after__ or on __error__s of a service method. You can register a single hook function or create a chain of them to create complex work-flows. 
+This is where Feathers hooks come in. Hooks are pluggable middleware functions that can be registered __before__, __after__ or on __errors__ of a service method. You can register a single hook function or create a chain of them to create complex work-flows. 
 
 Just like services themselves, hooks are *transport independent*. They are usually also service agnostic, meaning they can be used with ​*any*​ service. This pattern keeps your application logic flexible, composable, and much easier to trace through and debug.
 
