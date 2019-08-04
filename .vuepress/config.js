@@ -2,6 +2,7 @@ module.exports = {
   title: 'FeathersJS',
   description: 'A REST and real-time API layer for modern applications',
   themeConfig: {
+    logo: '/img/feathers-logo-wide.png',
     repo: 'feathersjs/feathers',
     docsRepo: 'feathersjs/docs',
     docsBranch: 'master',
