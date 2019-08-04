@@ -91,7 +91,6 @@ console.log(app.get('host'));
 console.log(app.get('port'));
 console.log(app.get('mongodb'));
 console.log(app.get('templates'));
-console.log(conf());
 
 ```
 
