@@ -84,12 +84,7 @@ Now it can be used in our `app.js` like this:
 const feathers = require('@feathersjs/feathers');
 const configuration = require('@feathersjs/configuration');
 
-<<<<<<< HEAD
 const app = feathers().configure(configuration());
-=======
-const app = feathers()
-  .configure(configuration());
->>>>>>> 0aac397f0e186337d11e1e6155f18c6b87f891cc
 
 console.log(app.get('frontend'));
 console.log(app.get('host'));
