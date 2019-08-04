@@ -51,3 +51,5 @@ https://buzzard.docs.feathersjs.com/* https://docs.feathersjs.com/:splat 301!
 /api/authentication/oauth1.html             api/authentication/oauth.html
 /api/authentication/oauth2.html             api/authentication/oauth.html
 /api/authentication/server.html             api/authentication/
+/migrating.html                             guides/migrating.html
+/*/readme.html                              /:splat 301!

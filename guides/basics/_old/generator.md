@@ -1,4 +1,4 @@
-# Generating an app
+# The Feathers generator (CLI)
 
 Until now we wrote code by hand in a single file to get a better understanding how Feathers itself works. The Feathers CLI allows us to initialize a new Feathers application with a recommended structure. It also helps with
 
@@ -6,6 +6,7 @@ Until now we wrote code by hand in a single file to get a better understanding h
 - Generating database backed services
 - Setting up database connections
 - Generating hooks (with tests)
+- Adding Express middleware
 
 In this chapter we will look at installing the CLI and common patterns the generator uses to structure our server application. Further use of the CLI will be discussed in the [chat application guide](../chat/readme.md).
 

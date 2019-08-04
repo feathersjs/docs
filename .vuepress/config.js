@@ -10,19 +10,14 @@ module.exports = {
     sidebarDepth: 2,
     sidebar: {
       '/guides/': [{
-        title: 'The basics',
+        title: 'The Feathers guide',
         collapsable: false,
         children: [
-          'basics/',
           'basics/setup.md',
           'basics/starting.md',
+          'basics/generator.md',
           'basics/services.md',
-          'basics/hooks.md',
-          'basics/rest.md',
-          'basics/databases.md',
-          'basics/real-time.md',
-          'basics/clients.md',
-          'basics/generator.md'
+          'basics/hooks.md'
         ]
       }, {
         title: 'A chat application',
@@ -36,7 +31,7 @@ module.exports = {
           'chat/frontend.md',
           'chat/testing.md'
         ]
-      }],
+      }, 'migrating.md'],
       '/api/': [{
         title: 'Core',
         collapsable: false,
@@ -80,7 +75,7 @@ module.exports = {
           'authentication/client.md'
         ]
       }, {
-        title: 'Database',
+        title: 'Databases',
         collapsable: false,
         children: [
           'databases/adapters.md',
@@ -113,7 +108,22 @@ module.exports = {
       { text: 'FAQ', link: '/faq/' },
       {
         text: 'Ecosystem',
-        link: 'https://github.com/feathersjs/awesome-feathersjs'
+        items: [{
+          text: 'Awesome Feathersjs',
+          link: 'https://github.com/feathersjs/awesome-feathersjs'
+        }, {
+          text: 'Previous versions',
+          items: [{
+            text: 'Buzzard (v3)',
+            link: 'https://buzzard.docs.feathersjs.com/'
+          }, {
+            text: 'Auk (v2)',
+            link: 'https://auk.docs.feathersjs.com/'
+          }, {
+            text: 'Legacy (v1)',
+            link: 'https://legacy.docs.feathersjs.com/'
+          }]
+        }]
       }
     ]
   },

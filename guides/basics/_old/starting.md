@@ -1,6 +1,6 @@
-# Quick start 🚀
+# Our first Feathers application
 
-Now that we are [set up](./setup.md) we can create our first Feathers application. We'll briefly look at a very basic app and then create a fully featured REST and real-time API with an in-memory database. Then we will use that API in the browser. Let's create a new folder for the app:
+Now that we are [set up](./setup.md) we can create our first Feathers application. We'll briefly look at a very basic app and then create a fully featured REST and real-time API with an in-memory datastore and all that in less than 10 minutes!
 
 ```
 mkdir feathers-basics
@@ -85,65 +85,6 @@ And should see
 
 > __Pro tip:__ For more information about the Feathers application object see the [Application API documentation](../../api/application.md).
 
-## An API server
-
-Ok, so we created a Feathers application, a service and a hook but it's only a simple NodeJS program that runs, prints some output and then exits. What we really want is hosting an API as a webserver. This is where Feathers transports come in. A transport takes a service like the one we created above and exposes it as a server that other clients (like a web-browser or mobile application) can talk to.
-
-In the following example we will use
-
-- `@feathersjs/express` which uses Express to automatically turn our services into a REST API
-- `@feathersjs/socketio` which uses Socket.io to do the same as a websocket real-time API
-- `feathers-memory` an in-memory service that implements basic CRUD functionality for us already (instead of having to write our own custom `get` or `find` or `create` like we did in the example above)
-
-
-```
-$ npm install @feathersjs/socketio @feathersjs/express feathers-memory
-```
-
-```js
-const feathers = require('@feathersjs/feathers');
-const express = require('@feathersjs/express');
-const socketio = require('@feathersjs/socketio');
-
-const memory = require('feathers-memory');
-
-// Creates an Express compatible Feathers application
-const app = express(feathers());
-
-// Parse HTTP JSON bodies
-app.use(express.json());
-// Parse URL-encoded params
-app.use(express.urlencoded({ extended: true }));
-// Add REST API support
-app.configure(express.rest());
-// Configure Socket.io real-time APIs
-app.configure(socketio());
-// Register an in-memory messages service
-app.use('/messages', memory());
-// Register a nicer error handler than the default Express one
-app.use(express.errorHandler());
-
-// Add any new real-time connection to the `everybody` channel
-app.on('connection', connection =>
-  app.channel('everybody').join(connection)
-);
-// Publish all events to the `everybody` channel
-app.publish(data => app.channel('everybody'));
-
-// Start the server
-app.listen(3030).on('listening', () =>
-  console.log('Feathers server listening on localhost:3030')
-);
-```
-
-Now you can run the server via
-
-```
-node app
-```
-
-And visit `http://localhost:3030/messages` to see an empty array of messages.
-
 ## In the browser
 
 The Feathers application we created above can also run just the same in the browser. The easiest way to load Feathers here is through a `<script>` tag pointing to the CDN version of Feathers. Loading it will make a `feathers` global variable available.
@@ -220,5 +161,3 @@ If you now go to [localhost:8080](http://localhost:8080) with the console open y
 ## What's next?
 
 In this chapter we created our first Feathers application with a simple service that works in Node and the browser. Next, let's learn more about [Services and Service events](./services.md).
-
-
