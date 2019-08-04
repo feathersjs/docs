@@ -373,3 +373,4 @@ app.hooks({
 });
 ```
 
+> __Note:__ generated applications come with `src/app.hooks.js` containing hooks that run for every service.
