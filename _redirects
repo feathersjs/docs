@@ -1,4 +1,4 @@
-https://buzzard.docs.feathersjs.com/* https://docs.feathersjs.com/:splat 301!
+https://crow.docs.feathersjs.com/* https://docs.feathersjs.com/:splat 301!
 
 # Legacy docs Redirects
 
@@ -48,8 +48,9 @@ https://buzzard.docs.feathersjs.com/* https://docs.feathersjs.com/:splat 301!
 
 # Crow Redirects
 
-/api/authentication/oauth1.html             api/authentication/oauth.html
-/api/authentication/oauth2.html             api/authentication/oauth.html
-/api/authentication/server.html             api/authentication/
-/migrating.html                             guides/migrating.html
+/api/authentication/oauth1.html             /api/authentication/oauth.html
+/api/authentication/oauth2.html             /api/authentication/oauth.html
+/api/authentication/server.html             /api/authentication/
+/migrating.html                             /guides/migrating.html
+/help/*                                     /guides/
 /*/readme.html                              /:splat 301!

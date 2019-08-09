@@ -1,4 +1,4 @@
-# Setting up
+# Getting ready
 
 Allright then! Let's learn what Feathers is all about and get building on our chat application. First, let's have a look what you should already know and what needs to be installed to use Feathers.
 
@@ -16,14 +16,6 @@ v12.0.0
 ```
 $ npm --version
 6.9.0
-```
-
-It you want to use TypeScript (you can but don't have to), it also makes sense to install `ts-node` to easily run TypeScript files:
-
-```
-$ npm i ts-node -g
-$ ts-node --version
-v8.3.0
 ```
 
 Feathers does work in the browser and supports IE 10 and up. The browser examples used in the guides will however only work in the most recent versions of Chrome, Firefox, Safari and Edge.

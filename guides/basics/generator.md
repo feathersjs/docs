@@ -1,148 +1,125 @@
 # Generating an app
 
-Until now we wrote code by hand in a single file to get a better understanding how Feathers itself works. The Feathers CLI allows us to initialize a new Feathers application with a recommended structure. It also helps with
+In the [getting started chapter](./starting.md) we created a Feathers application in a single file to get a better understanding how Feathers itself works. The Feathers CLI allows us to initialize a new Feathers server with a recommended structure and helps with generating things we commonly need like authentication, a database connection, new services or hooks (more about hooks in a little bit). It can be installed via:
 
-- Configuring authentication
-- Generating database backed services
-- Setting up database connections
-- Generating hooks (with tests)
-
-In this chapter we will look at installing the CLI and common patterns the generator uses to structure our server application. Further use of the CLI will be discussed in the [chat application guide](../chat/readme.md).
-
-## Installing the CLI
-
-The CLI should be installed globally via npm:
-
-```
+```sh
 npm install @feathersjs/cli -g
 ```
 
-Once successful we should now have the `feathers` command available on the command line which we can check with:
+> __Important:__ As mentioned when [getting ready](stating.md),  `@feathersjs/cli` also requires Node version 10 or later. If you already have it installed, `feathers --version` should show `4.0.0` or later.
 
-```
-feathers --version
-```
+## Generating the application
 
-Which should show a version of `3.8.2` or later.
+Let's create a new directory for our app and in it, generate a new application:
 
-## Configure functions
-
-The most common pattern used in the generated application is _configure functions_, functions that take the Feathers [app object](../../api/application.md) and then use it, e.g. to register services. Those functions are then passed to [app.configure](../../api/application.md#configurecallback).
-
-Let's look at our [basic database example](../basics/databases.md):
-
-```js
-const feathers = require('@feathersjs/feathers');
-const memory = require('feathers-memory');
-
-const app = feathers();
-
-app.use('messages', memory({
-  paginate: {
-    default: 10,
-    max: 25
-  }
-}));
+```sh
+$ mkdir feathers-chat
+$ cd feathers-chat/
+$ feathers generate app
 ```
 
-Which could be split up using a configure function like this:
+First, choose if you want to use JavaScript or TypeScript. When presented with the project name, just hit enter, or enter a name (no spaces). Next, write a short description of your application. All other questions should be confirmed with the default selection by hitting Enter.
 
-```js
-const feathers = require('@feathersjs/feathers');
-const memory = require('feathers-memory');
+Once you confirm the final prompt, you will see something like this:
 
-const configureMessages = function(app) {
-  app.use('messages', memory({
-    paginate: {
-      default: 10,
-      max: 25
-    }
-  }));
-};
+> __Important:__ To follow this guide properly we recommend to not change any of the settings (other than the TypeScript/JavaScript selection). Otherwise you might run into into things that are not covered in the guide.
 
-const app = feathers();
+## The generated files
 
-app.configure(configureMessages);
+Let's have a brief look at the files that have been generated:
+
+:::: tabs :options="{ useUrlFragment: false }"
+::: tab "JavaScript"
+* `config/` contains the configuration files for the app
+  * `default.json` contains the basic application configuration
+  * `production.json` files override `default.json` when in production mode by setting `NODE_ENV=production`. For details, see the [configuration API documentation](../../api/configuration.md)
+* `node_modules/` our installed dependencies which are also added in the `package.json`
+* `public/` contains static files to be served. A sample favicon and `index.html` (which will show up when going directly to the server URL) are already included.
+* `src/` contains the Feathers server code.
+  * `hooks/` contains our custom [hooks](../basics/hooks.md)
+  * `services/` contains our [services](../basics/services.md)
+    * `users/` is a service that has been generated automatically to allow registering and authenticating users
+      * `users.class.js` is the service class
+      * `users.hooks.js` initializes Feathers hooks for this service
+      * `users.service.js` registers this service on our Feathers application
+  * `middleware/` contains any [Express middleware](http://expressjs.com/en/guide/writing-middleware.html)
+  * `models/` contains database model files
+    * `users.model.ts` sets up our user collection for NeDB
+  * `app.js` configures our Feathers application like we did in the [getting started chapter](../basics/starting.md)
+  * `app.hooks.js` registers hooks that apply to every service
+  * `authentication.js` sets up Feathers authentication system
+  * `channels.js` sets up Feathers [event channels](../../api/channels.md)
+  * `index.js` loads and starts the application
+* `test/` contains test files for the app, hooks and services
+  * `services/` has our service tests
+    * `users.test.js` contains some basic tests for the `users` service
+  * `app.test.js` tests that the index page appears, as well as 404 errors for HTML pages and JSON
+  * `authentication.test.js` includes some tests that basic authentication works
+* `.editorconfig` is an [EditorConfig](http://editorconfig.org/) setting to help developers define and maintain consistent coding styles among different editors and IDEs.
+* `.eslintrc.json` contains defaults for linting your code with [ESLint](http://eslint.org/docs/user-guide/getting-started).
+* `.gitignore` specifies [intentionally untracked files](https://git-scm.com/docs/gitignore) which [git](https://git-scm.com/), [GitHub](https://github.com/) and other similar projects ignore.
+* `package.json` contains [information](https://docs.npmjs.com/files/package.json) about our NodeJS project like its name or dependencies.
+* `README.md` has installation and usage instructions
+:::
+::: tab "TypeScript"
+* `config/` contains the configuration files for the app
+  * `default.json` contains the basic application configuration
+  * `production.json` files override `default.json` when in production mode by setting `NODE_ENV=production`. For details, see the [configuration API documentation](../../api/configuration.md)
+* `node_modules/` our installed dependencies which are also added in the `package.json`
+* `public/` contains static files to be served. A sample favicon and `index.html` (which will show up when going directly to the server URL) are already included.
+* `src/` contains the Feathers server code.
+  * `hooks/` contains our custom [hooks](../basics/hooks.md)
+  * `services/` contains our [services](../basics/services.md)
+    * `users/` is a service that has been generated automatically to allow registering and authenticating users
+      * `users.class.ts` is the service class
+      * `users.hooks.ts` initializes Feathers hooks for this service
+      * `users.service.ts` registers this service on our Feathers application
+  * `middleware/` contains any [Express middleware](http://expressjs.com/en/guide/writing-middleware.html)
+  * `models/` contains database model files
+    * `users.model.ts` sets up our user collection for NeDB
+  * `app.ts` configures our Feathers application like we did in the [getting started chapter](../basics/starting.md)
+  * `app.hooks.ts` registers hooks that apply to every service
+  * `authentication.ts` sets up Feathers authentication system
+  * `channels.ts` sets up Feathers [event channels](../../api/channels.md)
+  * `declarations.ts` contains TypeScript declarations for our app
+  * `index.ts` loads and starts the application
+* `test/` contains test files for the app, hooks and services
+  * `services/` has our service tests
+    * `users.test.ts` contains some basic tests for the `users` service
+  * `app.test.ts` tests that the index page appears, as well as 404 errors for HTML pages and JSON
+  * `authentication.test.ts` includes some tests that basic authentication works
+* `.editorconfig` is an [EditorConfig](http://editorconfig.org/) setting to help developers define and maintain consistent coding styles among different editors and IDEs.
+* `.gitignore` specifies [intentionally untracked files](https://git-scm.com/docs/gitignore) which [git](https://git-scm.com/), [GitHub](https://github.com/) and other similar projects ignore.
+* `tsconfig.json` the TypeScript [compiler configuration](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html)
+* `package.json` contains [information](https://docs.npmjs.com/files/package.json) about our NodeJS project like its name or dependencies.
+* `README.md` has installation and usage instructions
+:::
+::::
+
+## Running the server and tests
+
+The server can now be started by running
+
+```sh
+npm start
 ```
 
-Now we can move that function into a separate file like `messages.service.js` and set it as the [default module export](https://nodejs.org/api/modules.html) for that file:
+After that, you can see a welcome page at [localhost:3030](http://localhost:3030). 
 
-```js
-const memory = require('feathers-memory');
+The app also comes with a set of basic tests which can be run with
 
-module.exports = function(app) {
-  app.use('messages', memory({
-    paginate: {
-      default: 10,
-      max: 25
-    }
-  }));
-};
+```sh
+npm test
 ```
 
-And then import it into `app.js` and use it:
+There is also a handy development command that restarts the server automatically whenever we make a code change:
 
-```js
-const feathers = require('@feathersjs/feathers');
-const configureMessages = require('./messages.service.js');
-
-const app = feathers();
-
-app.configure(configureMessages);
+```sh
+npm run dev
 ```
 
-This is the most common pattern how the generators split things up into separate files and any documentation example that uses the `app` object can be used in a configure function. You can create your own files that export a configure function and `require` and `app.configure` them in `app.js`
-
-> __Note:__ Keep in mind that the order in which configure functions are called might matter, e.g. if it is using a service, that service has to be registered first.
-
-## Hook functions
-
-We already saw in the [hooks guide](./hooks.md) how we can create a wrapper function that allows to customize the options of a hook with the `setTimestamp` example:
-
-```js
-const setTimestamp = name => {
-  return async context => {
-    context.data[name] = new Date();
-
-    return context;
-  }
-} 
-
-app.service('messages').hooks({
-  before: {
-    create: setTimestamp('createdAt'),
-    update: setTimestamp('updatedAt')
-  }
-});
-```
-
-This is also the pattern the hook generator uses but in its own file like `hooks/set-timestamp.js` which could look like this:
-
-```js
-module.exports = ({ name }) => {
-  return async context => {
-    context.data[name] = new Date();
-
-    return context;
-  }
-}
-```
-
-Now we can use that hook like this:
-
-```js
-const setTimestamp = require('./hooks/set-timestamp.js');
-
-app.service('messages').hooks({
-  before: {
-    create: setTimestamp({ name: 'createdAt' }),
-    update: setTimestamp({ name: 'updatedAt' })
-  }
-});
-```
-
-> __Note:__ We are using an options object here which allows us to more easily add new options than function parameters.
+You can keep this command running throughout the rest of this guide.
 
 ## What's next?
 
-In this chapter we installed the Feathers CLI (and generator) and looked at patterns that are used in structuring the generated application. Now we can use the generator to [build a full chat application](../chat/readme.md) complete with authentication and a JavaScript frontend!
+In this chapter we installed the Feathers CLI and scaffolded a new Feathers application. In [the next chapter](./services.md) we will learn more about Feathers services and databases.

@@ -1,4 +1,4 @@
-# Help!
+# Finding Help
 
 There are many ways that you can get help but before you explore them please check the other parts of these docs, the [FAQ](../faq/readme.md), [Stackoverflow](http://stackoverflow.com/questions/tagged/feathersjs), [Github Issues](https://github.com/issues?utf8=%E2%9C%93&q=is%3Aopen+is%3Aissue+user%3Afeathersjs+) and our [Medium publication](https://blog.feathersjs.com/).
 

@@ -17,21 +17,12 @@ module.exports = {
           'basics/starting.md',
           'basics/generator.md',
           'basics/services.md',
-          'basics/hooks.md'
+          'basics/hooks.md',
+          'basics/authentication.md',
+          'basics/frontend.md',
+          'basics/testing.md'
         ]
-      }, {
-        title: 'A chat application',
-        collapsable: false,
-        children: [
-          'chat/',
-          'chat/creating.md',
-          'chat/service.md',
-          'chat/authentication.md',
-          'chat/processing.md',
-          'chat/frontend.md',
-          'chat/testing.md'
-        ]
-      }, 'migrating.md'],
+      }, 'help.md', 'migrating.md'],
       '/api/': [{
         title: 'Core',
         collapsable: false,
@@ -93,13 +84,7 @@ module.exports = {
         children: [
           'express/file-uploading.md'
         ]
-      }],
-      '/': [
-        '/guides/',
-        '/api/',
-        '/faq/',
-        'migrating.md'
-      ]
+      }]
     },
     nav: [
       { text: 'Guides', link: '/guides/' },
@@ -127,5 +112,9 @@ module.exports = {
       }
     ]
   },
-  plugins: ['@vuepress/last-updated', 'tabs']
+  plugins: [
+    '@vuepress/last-updated',
+    [ '@dovyp/vuepress-plugin-clipboard-copy', true ],
+    'tabs'
+  ]
 };
