@@ -113,7 +113,7 @@ import feathers from '@feathersjs/feathers';
 
 // This is the interface for the message data
 interface Message {
-  id?: number;
+  id: number;
   text: string;
 }
 
@@ -127,7 +127,7 @@ class MessageService {
     return this.messages;
   }
 
-  async create (data: Message) {
+  async create (data: Partial<Message>) {
     // The new message is the data text with a unique identifier added
     // using the messages length since it changes whenever we add one
     const message: Message = {
@@ -291,7 +291,7 @@ import socketio from '@feathersjs/socketio';
 
 // This is the interface for the message data
 interface Message {
-  id?: number;
+  id: number;
   text: string;
 }
 
@@ -305,7 +305,7 @@ class MessageService {
     return this.messages;
   }
 
-  async create (data: Message) {
+  async create (data: Partial<Message>) {
     // The new message is the data text with a unique identifier added
     // using the messages length since it changes whenever we add one
     const message: Message = {

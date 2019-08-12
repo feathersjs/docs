@@ -96,6 +96,164 @@ Let's have a brief look at the files that have been generated:
 :::
 ::::
 
+## Configure functions
+
+The most common pattern used in the generated application to split things up into individual files are _configure functions_ which are functions that take the Feathers [app object](../../api/application.md) and then use it, e.g. to register services. Those functions are then passed to [app.configure](../../api/application.md#configurecallback).
+
+Our [getting started example](./starting.md) could be split into individual files using a configure function like this:
+
+:::: tabs :options="{ useUrlFragment: false }"
+::: tab "JavaScript"
+In `messages.js`:
+
+```js
+// A messages service that allows to create new
+// and return all existing messages
+class MessageService {
+  constructor() {
+    this.messages = [];
+  }
+
+  async find () {
+    // Just return all our messages
+    return this.messages;
+  }
+
+  async create (data) {
+    // The new message is the data merged with a unique identifier
+    // using the messages length since it changes whenever we add one
+    const message = {
+      id: this.messages.length,
+      text: data.text
+    }
+
+    // Add new message to the list
+    this.messages.push(message);
+
+    return message;
+  }
+}
+
+module.exports = app => {
+  app.use('messages', new MessageService());
+}
+```
+
+Then in `app.js`:
+
+```js
+const feathers = require('@feathersjs/feathers');
+const app = feathers();
+const setupMessages = require('./messages');
+
+app.configure(setupMessages);
+
+// Log every time a new message has been created
+app.service('messages').on('created', message => {
+  console.log('A new message has been created', message);
+});
+
+// A function that creates a new message and the logs
+// all existing messages on the service
+(async () => {
+  // Create a new message on our message service
+  await app.service('messages').create({
+    text: 'Hello Feathers'
+  });
+
+  await app.service('messages').create({
+    text: 'Hello again'
+  });
+
+  // Find all existing messages
+  const messages = await app.service('messages').find();
+
+  console.log('All messages', messages);
+})();
+```
+:::
+::: tab "TypeScript"
+In `messages.ts`:
+
+```ts
+// This is the interface for the message data
+export interface Message {
+  id: number;
+  text: string;
+}
+
+// A messages service that allows to create new
+// and return all existing messages
+export class MessageService {
+  messages: Message[] = [];
+
+  async find () {
+    // Just return all our messages
+    return this.messages;
+  }
+
+  async create (data: Partial<Message>) {
+    // The new message is the data text with a unique identifier added
+    // using the messages length since it changes whenever we add one
+    const message: Message = {
+      id: this.messages.length,
+      text: data.text
+    }
+
+    // Add new message to the list
+    this.messages.push(message);
+
+    return message;
+  }
+}
+
+export default app => {
+  app.use('messages', new MessageService());
+}
+```
+
+Then in `app.ts`:
+
+```ts
+import feathers from '@feathersjs/feathers';
+import setupMessages from './messages';
+
+const app = feathers();
+
+app.configure(setupMessages);
+
+// Log every time a new message has been created
+app.service('messages').on('created', (message: Message) => {
+  console.log('A new message has been created', message);
+});
+
+// A function that creates a new message and the logs
+// all existing messages on the service
+(async () => {
+  // Create a new message on our message service
+  await app.service('messages').create({
+    text: 'Hello Feathers'
+  });
+
+  // And another one
+  await app.service('messages').create({
+    text: 'Hello again'
+  });
+  
+  // Find all existing messages
+  const messages = await app.service('messages').find();
+
+  console.log('All messages', messages);
+})();
+```
+:::
+::::
+
+
+This is the most common pattern how the generators split things up into separate files and any documentation example that uses the `app` object can be used in a configure function. You can create your own files that export a configure function and `require`/`import` and `app.configure` them in `app.js`.
+
+> __Note:__ Keep in mind that the order in which configure functions are called might matter, e.g. if it is using a service, that service has to be registered first.
+
 ## Running the server and tests
 
 The server can now be started by running

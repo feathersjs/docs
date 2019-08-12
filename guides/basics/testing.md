@@ -1,5 +1,7 @@
 # Writing tests
 
+The best way to test an application is to by writing tests that make sure it behaves to clients as we would expect. Feathers makes testing this a lot easier because the services we create can be tested against directly instead of having to fake HTTP requests and responses.
+
 Every time we generate a hook or service, the generator will also set up a basic [Mocha](https://mochajs.org/) test that we can use to implement unit tests for it. In this chapter, we will implement unit tests for our [hooks](./processing.md) and integration tests for the `users` and `messages` [services](./service.md).
 
 We can run the [code Linter](https://eslint.org/) and Mocha tests with

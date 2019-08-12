@@ -22,7 +22,15 @@ module.exports = {
           'basics/frontend.md',
           'basics/testing.md'
         ]
-      }, 'help.md', 'migrating.md'],
+      }, 'migrating.md'],
+      '/faq/': [{
+        title: 'FAQ',
+        collapsable: false,
+        children: [
+          'help.md',
+          '/faq/'
+        ]
+      }],
       '/api/': [{
         title: 'Core',
         collapsable: false,

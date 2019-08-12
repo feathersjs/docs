@@ -1,4 +1,4 @@
-# FAQ
+# Questions
 
 We've been collecting some commonly asked questions here. We'll either be updating the guide directly, providing answers here, or both.
 
