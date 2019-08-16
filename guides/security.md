@@ -1,6 +1,6 @@
-# Feathers Security
+# Security
 
-We take security very seriously at Feathers. We welcome any peer review of our 100% open source code to ensure nobody's Feathers app is ever compromised or hacked. As a web application developer you are responsible for any security breaches. We do our very best to make sure Feathers is as secure as possible.
+We take security very seriously at Feathers. We welcome any peer review of our 100% open source code to ensure nobody's Feathers app is ever compromised or hacked, however, as a web application developer you are responsible for the security of your application. We do our very best to make sure Feathers is as secure as possible.
 
 ## Where should I report security issues?
 
@@ -12,10 +12,10 @@ Issuing releases is typically very quick. Once an issue is resolved it is usuall
 
 Here are some things that you should be aware of when writing your app to make sure it is secure.
 
-- Make sure to set up proper [event channels](api/channels.md) so that only clients that are allowed to see them can see real-time updates
+- Make sure to set up proper [event channels](../api/channels.md) so that only clients that are allowed to see them can see real-time updates
 - Use hooks to check security roles to make sure users can only access data they should be permitted to. You can find useful hook utilities in [feathers-hooks-common](https://feathers-plus.github.io/v1/feathers-hooks-common/) and [feathers-authentication-hooks](https://github.com/feathersjs-ecosystem/feathers-authentication-hooks/).
-- Restrict the [allowed database queries](api/databases/querying.md) to only the use cases your application requires by sanitizing `params.query` in a hook.
-- Disable multiple element changes by throwing an error if `context.id === null`.
+- Restrict the [allowed database queries](../api/databases/querying.md) to only the use cases your application requires by sanitizing `params.query` in a hook.
+- When you explicitly allowed multiple element changes, make sure queries are secured properly to limit the items that can be changed.
 
 - Escape any HTML and JavaScript to avoid XSS attacks.
 - Escape any SQL (typically done by the SQL library) to avoid SQL injection.
@@ -25,9 +25,7 @@ Here are some things that you should be aware of when writing your app to make s
 ## Some of the technologies we employ
 
 - Password storage inside `@feathers/authentication-local` uses [bcrypt](https://github.com/dcodeIO/bcrypt.js). We don't store the salts separately since they are included in the bcrypt hashes.
-- By default, [JWT](https://jwt.io/)'s are stored in Local Storage (instead of cookies) to avoid CSRF attacks. For JWT, we use the `HS256` algorithm by default (HMAC using SHA-256 hash algorithm). If you choose to store JWT's in cookies, your app will have CSRF vulnerabilities.
-- We run [nsp](https://github.com/nodesecurity/nsp) as part of our CI. This notifies us if we are susceptible to any vulnerabilites that have been reported to the [Node Security Project](https://nodesecurity.io/).
-
+- By default, [JWT](https://jwt.io/)'s are stored in Local Storage (instead of cookies) to avoid CSRF attacks. For JWT, we use the `HS256` algorithm by default (HMAC using SHA-256 hash algorithm). If you choose to store JWT's in cookies, your app may have CSRF vulnerabilities.
 
 ## XSS Attacks
 
