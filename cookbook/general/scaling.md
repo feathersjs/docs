@@ -19,8 +19,6 @@ To achieve high availability, varying combinations of both strategies may be use
 
 Below is an example of adding clustering to feathers with the `feathers-socketio` provider. By default, websocket connections begin via a handshake of multiple HTTP requests and are upgraded to the websocket protocol. However, when clustering is enabled, the same worker will not process all HTTP requests for a handshake, leading to HTTP 400 errors. To ensure a successful handshake, force a single worker to process the handshake by disabling the http transport and exclusively using the `websocket` transport.
 
-There are notable side effects to be aware of when disabling the HTTP transport for websockets. While all modern browsers support websocket connections, there is no websocket support for [IE <=9 and Android Browser <=4.3](http://caniuse.com/#feat=websockets). If you must support these browsers, use alternative scaling strategies.
-
 ```js
 import cluster from 'cluster';
 import feathers from '@feathersjs/feathers';

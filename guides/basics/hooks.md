@@ -360,7 +360,7 @@ module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
 
 > __Note:__ `Promise.all` makes sure that all asynchronous operations complete before returning all the data.
 
-> __Pro tip:__ This is one way to associate data in Feathers. For more information about associations see [this FAQ](../../faq/readme.md#how-do-i-do-associations).
+> __Pro tip:__ This is one way to associate data in Feathers. For more information about associations see [this FAQ](../../help/faq.md#how-do-i-do-associations).
 
 ## Hooks vs. extending services
 

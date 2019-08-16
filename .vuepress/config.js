@@ -23,12 +23,12 @@ module.exports = {
           'basics/testing.md'
         ]
       }, 'frameworks.md', 'security.md', 'migrating.md'],
-      '/faq/': [{
-        title: 'FAQ',
+      '/help/': [{
+        title: 'Help',
         collapsable: false,
         children: [
-          'help.md',
-          '/faq/'
+          '/help/',
+          '/help/faq.md'
         ]
       }],
       '/api/': [{
@@ -83,14 +83,23 @@ module.exports = {
         ],
       }],
       '/cookbook/': [{
+        title: 'General',
+        collapsable: false,
+        children: [
+          'general/scaling.md'
+        ]
+      }, {
         title: 'Authentication',
+        collapsable: false,
         children: [
           'authentication/anonymous.md'
         ]
       }, {
         title: 'Express',
+        collapsable: false,
         children: [
-          'express/file-uploading.md'
+          'express/file-uploading.md',
+          'express/view-engine.md'
         ]
       }]
     },
@@ -98,7 +107,7 @@ module.exports = {
       { text: 'Guides', link: '/guides/' },
       { text: 'API', link: '/api/' },
       { text: 'Cookbook', link: '/cookbook/' },
-      { text: 'FAQ', link: '/faq/' },
+      { text: 'Help', link: '/help/' },
       {
         text: 'Ecosystem',
         items: [{

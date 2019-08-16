@@ -17,6 +17,6 @@ At its core, Feathers is a set of tools and an architecture pattern that make it
 
 [__Check out the cookbook for common tasks and patterns >__](./cookbook/readme.md)
 
-[__Have a look at frequently asked questions and other ways to get help >__](./faq/readme.md)
+[__Have a look at frequently asked questions and other ways to get help >__](./help/readme.md)
 
 [__Migrate to the latest version >__](./guides/migrating.md)
