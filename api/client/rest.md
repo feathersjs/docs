@@ -189,7 +189,16 @@ You can communicate with a Feathers REST API using any other HTTP REST client. T
 
 All query parameters in a URL will be set as `params.query` on the server. Other service parameters can be set through [hooks](../hooks.md) and [Express middleware](../express.md). URL query parameter values will always be strings. Conversion (e.g. the string `'true'` to boolean `true`) can be done in a hook as well.
 
-The body type for `POST`, `PUT` and `PATCH` requests is determined by the Express [body-parser](http://expressjs.com/en/4x/api.html#express.json) middleware which has to be registered *before* any service. You should also make sure you are setting your `Accept` header to `application/json`.
+The body type for `POST`, `PUT` and `PATCH` requests is determined by the Express [body-parser](http://expressjs.com/en/4x/api.html#express.json) middleware which has to be registered *before* any service. You should also make sure you are setting your `Accept` header to `application/json`. Here is the mapping of service methods to REST API calls:
+
+| Service method  | HTTP method | Path        |
+|-----------------|-------------|-------------|
+| .find()         | GET         | /messages   |
+| .get()          | GET         | /messages/1 |
+| .create()       | POST        | /messages   |
+| .update()       | PUT         | /messages/1 |
+| .patch()        | PATCH       | /messages/1 |
+| .remove()       | DELETE      | /messages/1 |
 
 ### Authentication
 

@@ -20,9 +20,11 @@ $ feathers generate app
 
 First, choose if you want to use JavaScript or TypeScript. When presented with the project name, just hit enter, or enter a name (no spaces). Next, write a short description of your application. All other questions should be confirmed with the default selection by hitting Enter.
 
-Once you confirm the final prompt, you will see something like this:
+Once you confirm the last prompt, the final selection should look like this:
 
-> __Important:__ To follow this guide properly we recommend to not change any of the settings (other than the TypeScript/JavaScript selection). Otherwise you might run into into things that are not covered in the guide.
+![feathers generate app prompts](./assets/generate-app.png)
+
+> __Important:__ If you are following this guide for the first time we recommend to not change any of those settings other than the TypeScript/JavaScript selection. Otherwise you might run into things that are not covered here which are easier to figure out when you've done it once before.
 
 ## The generated files
 
@@ -98,159 +100,43 @@ Let's have a brief look at the files that have been generated:
 
 ## Configure functions
 
-The most common pattern used in the generated application to split things up into individual files are _configure functions_ which are functions that take the Feathers [app object](../../api/application.md) and then use it, e.g. to register services. Those functions are then passed to [app.configure](../../api/application.md#configurecallback).
+The most important pattern used in the generated application to split things up into individual files are _configure functions_ which are functions that are exported from a file and take the Feathers [app object](../../api/application.md) and then use it to e.g. register services. Those functions are then passed to [app.configure](../../api/application.md#configurecallback).
 
-Our [getting started example](./starting.md) could be split into individual files using a configure function like this:
+For example, have a look at the following files:
 
 :::: tabs :options="{ useUrlFragment: false }"
 ::: tab "JavaScript"
-In `messages.js`:
+`src/services/index.js` looks like this:
 
 ```js
-// A messages service that allows to create new
-// and return all existing messages
-class MessageService {
-  constructor() {
-    this.messages = [];
-  }
-
-  async find () {
-    // Just return all our messages
-    return this.messages;
-  }
-
-  async create (data) {
-    // The new message is the data merged with a unique identifier
-    // using the messages length since it changes whenever we add one
-    const message = {
-      id: this.messages.length,
-      text: data.text
-    }
-
-    // Add new message to the list
-    this.messages.push(message);
-
-    return message;
-  }
-}
-
-module.exports = app => {
-  app.use('messages', new MessageService());
-}
+const users = require('./users/users.service.js');
+// eslint-disable-next-line no-unused-vars
+module.exports = function (app) {
+  app.configure(users);
+};
 ```
 
-Then in `app.js`:
+It uses another configure function exported from `src/services/users/users.service.js`. The export from `src/services/index.js` is in turn used in `src/app.js` as:
 
 ```js
-const feathers = require('@feathersjs/feathers');
-const app = feathers();
-const setupMessages = require('./messages');
+// ...
+const services = require('./services');
 
-app.configure(setupMessages);
-
-// Log every time a new message has been created
-app.service('messages').on('created', message => {
-  console.log('A new message has been created', message);
-});
-
-// A function that creates a new message and the logs
-// all existing messages on the service
-(async () => {
-  // Create a new message on our message service
-  await app.service('messages').create({
-    text: 'Hello Feathers'
-  });
-
-  await app.service('messages').create({
-    text: 'Hello again'
-  });
-
-  // Find all existing messages
-  const messages = await app.service('messages').find();
-
-  console.log('All messages', messages);
-})();
+// ...
+app.configure(authentication);
+// Set up our services (see `services/index.js`)
+app.configure(services);
+// ...
 ```
 :::
 ::: tab "TypeScript"
-In `messages.ts`:
-
 ```ts
-// This is the interface for the message data
-export interface Message {
-  id: number;
-  text: string;
-}
 
-// A messages service that allows to create new
-// and return all existing messages
-export class MessageService {
-  messages: Message[] = [];
-
-  async find () {
-    // Just return all our messages
-    return this.messages;
-  }
-
-  async create (data: Partial<Message>) {
-    // The new message is the data text with a unique identifier added
-    // using the messages length since it changes whenever we add one
-    const message: Message = {
-      id: this.messages.length,
-      text: data.text
-    }
-
-    // Add new message to the list
-    this.messages.push(message);
-
-    return message;
-  }
-}
-
-export default app => {
-  app.use('messages', new MessageService());
-}
-```
-
-Then in `app.ts`:
-
-```ts
-import feathers from '@feathersjs/feathers';
-import setupMessages from './messages';
-
-const app = feathers();
-
-app.configure(setupMessages);
-
-// Log every time a new message has been created
-app.service('messages').on('created', (message: Message) => {
-  console.log('A new message has been created', message);
-});
-
-// A function that creates a new message and the logs
-// all existing messages on the service
-(async () => {
-  // Create a new message on our message service
-  await app.service('messages').create({
-    text: 'Hello Feathers'
-  });
-
-  // And another one
-  await app.service('messages').create({
-    text: 'Hello again'
-  });
-  
-  // Find all existing messages
-  const messages = await app.service('messages').find();
-
-  console.log('All messages', messages);
-})();
 ```
 :::
 ::::
 
-
-This is the most common pattern how the generators split things up into separate files and any documentation example that uses the `app` object can be used in a configure function. You can create your own files that export a configure function and `require`/`import` and `app.configure` them in `app.js`.
+This is how the generators split things up into separate files and any documentation example that uses the `app` object can be used in a configure function. You can create your own files that export a configure function and `require`/`import` and `app.configure` them in `app.js`.
 
 > __Note:__ Keep in mind that the order in which configure functions are called might matter, e.g. if it is using a service, that service has to be registered first.
 
@@ -280,4 +166,4 @@ You can keep this command running throughout the rest of this guide.
 
 ## What's next?
 
-In this chapter we installed the Feathers CLI and scaffolded a new Feathers application. In [the next chapter](./services.md) we will learn more about Feathers services and databases.
+In this chapter we installed the Feathers CLI, scaffolded a new Feathers application and learned how it splits things up into separate files. In [the next chapter](./services.md) we will learn more about Feathers services and databases.

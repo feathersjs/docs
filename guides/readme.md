@@ -6,9 +6,11 @@ Welcome to the Feathers guides! This is the
 
 ## Follow up with
 
-- [Read the API documentation >]()
-- [Dive into the Awesome FeathersJS Ecosystem >]()
-- [Watch Feathers videos in our YouTube playlist >]()
+[__Read the API documentation >__](../api/readme.md)
+
+[__Dive into the Awesome FeathersJS Ecosystem >__]()
+
+[__Watch Feathers videos in our YouTube playlist >__]()
 
 ## More about Feathers how and why
 

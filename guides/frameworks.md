@@ -1,6 +1,6 @@
-# Integrating with Frontend Frameworks
+# Frontend Frameworks
 
-Feathers works the same on the server and on the client and is front-end framework agnostic! You can use it with Vue, React, React Native, Angular, or whatever other front-end tech stack you choose.
+Feathers works the same on the server and on the client and is front-end framework agnostic. You can use it with Vue, React, React Native, Angular, or whatever other front-end tech stack you choose.
 
 ## Client Side Docs
 

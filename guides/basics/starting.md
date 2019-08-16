@@ -1,8 +1,8 @@
 # Getting started
 
-Now that we are [ready to roll](./setup.md) we can create our first Feathers application. We'll briefly look at a very basic app and service and then turn it into complete REST and real-time API server. After that, we will use that API in the browser.
+Now that we are [ready to roll](./setup.md) we can create our first Feathers application. In this quick start guide we'll create our first Feathers REST and real-time API server and a simple website to use it from scratch. It will show how easy it is to get started with Feathers even without a generator or boilerplate.
 
-To get started, let's create a new folder for our application:
+Let's create a new folder for our application:
 
 ```sh
 mkdir feathers-basics
@@ -22,6 +22,7 @@ npm init --yes
 ```sh
 # Install TypeScript and its NodeJS wrapper globally
 npm i typescript ts-node -g
+
 npm init --yes
 # Also initialize a TS configuration file that uses modern JavaScript
 tsc --init --target es2018
@@ -37,11 +38,11 @@ Feathers can be installed like any other Node module by installing the [@feather
 npm install @feathersjs/feathers --save
 ```
 
-> __Note:__ All Feathers core modules are in the `@feathersjs` npm namespace.
+> __Note:__ All Feathers core modules are in the `@feathersjs` namespace.
 
 ## Our first app
 
-Let's create Feathers application with a simple messages service that allows to create new messages and find all existing ones.
+Now we can create a Feathers application with a simple messages service that allows to create new messages and find all existing ones.
 
 :::: tabs :options="{ useUrlFragment: false }"
 ::: tab "JavaScript"
@@ -86,8 +87,8 @@ app.service('messages').on('created', message => {
   console.log('A new message has been created', message);
 });
 
-// A function that creates a new message and the logs
-// all existing messages on the service
+// A function that creates new messages and then logs
+// all existing messages
 (async () => {
   // Create a new message on our message service
   await app.service('messages').create({
@@ -152,7 +153,7 @@ app.service('messages').on('created', (message: Message) => {
   console.log('A new message has been created', message);
 });
 
-// A function that creates a new message and the logs
+// A function that creates messages and then logs
 // all existing messages on the service
 (async () => {
   // Create a new message on our message service
@@ -202,7 +203,7 @@ Here we implemented only `find` and `create` but a service can also have a few o
 
 ## An API server
 
-Ok, so we created a Feathers application and a service and we are listening to events but it is only a simple NodeJS program that prints some output and then exits. What we really want is hosting it as an API webserver. This is where Feathers transports come in. A transport takes a service like the one we created above and turns it into a server that other clients (like a web- or mobile application) can talk to.
+Ok, so we created a Feathers application and a service and we are listening to events but it is only a simple NodeJS script that prints some output and then exits. What we really want is hosting it as an API webserver. This is where Feathers transports come in. A transport takes a service like the one we created above and turns it into a server that other clients (like a web- or mobile application) can talk to.
 
 In the following example we will take our existing service and use
 
@@ -277,7 +278,8 @@ app.listen(3030).on('listening', () =>
   console.log('Feathers server listening on localhost:3030')
 );
 
-// For good measure let's create a message so it doesn't look empty
+// For good measure let's create a message
+// So our API doesn't look so empty
 app.service('messages').create({
   text: 'Hello world from the server'
 });
@@ -350,7 +352,8 @@ app.listen(3030).on('listening', () =>
   console.log('Feathers server listening on localhost:3030')
 );
 
-// For good measure let's create a message so it doesn't look empty
+// For good measure let's create a message
+// So our API doesn't look so empty
 app.service('messages').create({
   text: 'Hello world from the server'
 });
@@ -373,11 +376,13 @@ ts-node app.ts
 :::
 ::::
 
+> __Note:__ The server will stay running until you stop it by pressing Control + C in the terminal.
+
 And visit [localhost:3030/messages](http://localhost:3030/messages) to see an array with the one message we created on the server.
 
-> __Pro Tip:__ A browser plugin like [JSON viewer for Chrome](https://chrome.google.com/webstore/detail/json-viewer/gbmdgpbipfallnflgajpaliibnhdgobh) makes it much nicer to view JSON responses in the browser.
+> __Pro Tip:__ A browser plugin like [JSON viewer for Chrome](https://chrome.google.com/webstore/detail/json-viewer/gbmdgpbipfallnflgajpaliibnhdgobh) makes it nicer to view JSON responses in the browser.
 
-This is the basic setup of a Feathers API server. The `app.use` calls probably look familiar if you have used Express before. The `app.configure` calls set up the Feathers transport to host the API. `app.on('connection')` and `app.publish` are used to set up event channels which send real-time events to the proper clients (everybody that is connected to our server in this case).
+This is the basic setup of a Feathers API server. The `app.use` calls probably look familiar if you have used Express before. The `app.configure` calls set up the Feathers transport to host the API. `app.on('connection')` and `app.publish` are used to set up event channels which send real-time events to the proper clients (everybody that is connected to our server in this case). You can learn more about channels after finishing this guide in the [channels API](../../api/channels.md).
 
 ## In the browser
 
@@ -450,6 +455,6 @@ If you now go to [localhost:3030](http://localhost:3030) you will see a simple w
 
 ## What's next?
 
-In this chapter we created our first Feathers application and a service that allows to create new messages, store them in-memory and return all messages. We then hosted that service as a REST and real-time API server and used Feathers in the browser to connect to that server and create a website that can send new messages, show all existing messages and update in real-time.
+In this chapter we created our first Feathers application and a service that allows to create new messages, store them in-memory and return all messages. We then hosted that service as a REST and real-time API server and used Feathers in the browser to connect to that server and create a website that can send new messages, show all existing messages and update with new messages in real-time.
 
-Even though we are using Feathers from scratch, it was not a lot of code for what we were getting but it any larger application usually needs things like authentication, database connection setup and a better structure in separate files. In the [next chapter we will look at the Feathers CLI]() which can generate all of that for us automatically.
+Even though we are using just NodeJS and Feathers from scratch without any additional tools, it was not a lot of code for what we are getting. In the [next chapter](./generator.md) we will look at the Feathers CLI which can create a similar Feathers application with a recommended file structure and things like authentication and database connections set up for us automatically.

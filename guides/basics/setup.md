@@ -1,6 +1,12 @@
 # Getting ready
 
-Allright then! Let's learn what Feathers is all about and get building on our chat application. First, let's have a look what you should already know and what needs to be installed to use Feathers.
+Alright then! Let's learn what Feathers is all about! First, let's have a look at what we will do in this guide and what you should already know and what needs to be installed to use Feathers.
+
+## What we will do
+
+In this guide we will learn about Feathers core concepts of services, hooks and authentication by building a chat application that has a REST API and a website that allows users to sign up, log in (including with GitHub) and send and receive messages in real-time.
+
+
 
 ## Prerequisites
 
@@ -24,11 +30,11 @@ Feathers does work in the browser and supports IE 10 and up. The browser example
 
 In order to get the most out of this guide you should have reasonable JavaScript experience using [ES6](http://es6-features.org/) and later as well as [async/await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function) and some experience with NodeJS and the JavaScript features it supports like the [module system](https://nodejs.org/api/modules.html). You can read more about `async/await` in [this blog post](https://blog.risingstack.com/mastering-async-await-in-nodejs/). Some familiarity with HTTP and [REST APIs](https://en.wikipedia.org/wiki/Representational_state_transfer) as well as websockets is also helpful but not necessary.
 
-Feathers works standalone but also provides [an integration](../../api/express.md) with [Express](http://expressjs.com/). This guide does not require any in-depth knowledge of Express but some experience with Express will be helpful in the future (see the [guide on the Express website](http://expressjs.com/en/guide/routing.html) to get started).
+Feathers works standalone but also provides [an integration](../../api/express.md) with [Express](http://expressjs.com/). This guide does not require any in-depth knowledge of Express but some experience with Express can be helpful in the future.
 
 ## What we won't cover
 
-Although Feathers works with many databases, this guide will only use examples of standalone database adapters so there is no need to run a database server. More information about specific databases can be found in the [databases API](../../api/databases.md).
+Although Feathers works with many databases, this guide will only use [NeDB](https://github.com/louischatriot/nedb/) which is a file-system based database so there is no need to run a database server. More information about specific databases can be found in the [databases API](../../api/databases.md).
 
 This guide will also only focus on Feathers core functionality. Once you are finished with the guide, have a look at the [ecosystem page](https://github.com/feathersjs/awesome-feathersjs) for more advanced plugins.
 

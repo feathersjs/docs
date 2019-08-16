@@ -48,9 +48,20 @@ https://crow.docs.feathersjs.com/* https://docs.feathersjs.com/:splat 301!
 
 # Crow Redirects
 
+/*/readme.html                              /:splat 301!
 /api/authentication/oauth1.html             /api/authentication/oauth.html
 /api/authentication/oauth2.html             /api/authentication/oauth.html
 /api/authentication/server.html             /api/authentication/
 /migrating.html                             /guides/migrating.html
-/help/*                                     /guides/
-/*/readme.html                              /:splat 301!
+/guides/frameworks/readme.html              /guides/frameworks.html
+/guides/basics/clients.html                 /guides/basics/starting.html
+/guides/basics/databases.html               /guides/basics/services.html
+/guides/basics/real-time.html               /guides/basics/services.html
+# Chat guide redirects
+/guides/chat/authentication.html            /guides/basics/authentication.html
+/guides/chat/creating.html                  /guides/basics/generator.html
+/guides/chat/frontend.html                  /guides/basics/frontend.html
+/guides/chat/readme.html                    /guides/
+/guides/chat/processing.html                /guides/basics/hooks.html
+/guides/chat/service.html                   /guides/basics/services.html
+/guides/chat/testing.html                   /guides/basics/testing.html

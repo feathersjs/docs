@@ -2,9 +2,9 @@
 
 As we have seen in the [basics guide](../basics/readme.md), Feathers works great in the browser and comes with [client services](../basics/clients.md) that allow to easily connect to a Feathers server.
 
-In this chapter we will create a real-time chat frontend with signup and login using modern plain JavaScript. As with the [basics guide](../basics/readme.md), it will only work in the latest versions of Chrome, Firefox, Safari and Edge since we won't be using a transpiler like [Babel](http://babeljs.io/). The final version can be found [here](https://github.com/feathersjs/feathers-chat/tree/master/public/vanilla).
+In this chapter we will create a real-time chat frontend with signup and login using modern plain JavaScript. As with the [basics guide](../basics/readme.md), it will only work in the latest versions of Chrome, Firefox, Safari and Edge since we won't be using a transpiler like Webpack or Babel which is also why there won't be a TypeScript option in this chapter. The final version can be found [here](https://github.com/feathersjs/feathers-chat/tree/master/public/vanilla).
 
-> __Note:__ We will not be using a frontend framework so we can focus on what Feathers is all about. Feathers is framework agnostic and can be used with any frontend framework like React, VueJS or Angular. For more information see the [frameworks section](../frameworks/readme.md).
+> __Note:__ We will not be using a frontend framework so we can focus on what Feathers is all about. Feathers is framework agnostic and can be used with any frontend framework like React, VueJS or Angular. For more information see the [frameworks section](../frameworks.html).
 
 ## Set up the index page
 

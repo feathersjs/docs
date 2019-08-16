@@ -22,7 +22,7 @@ module.exports = {
           'basics/frontend.md',
           'basics/testing.md'
         ]
-      }, 'migrating.md'],
+      }, 'frameworks.md', 'migrating.md'],
       '/faq/': [{
         title: 'FAQ',
         collapsable: false,
