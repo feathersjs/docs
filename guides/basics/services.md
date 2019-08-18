@@ -174,7 +174,7 @@ This is it, we now have a database backed messages service with authentication e
 
 ## Customizing a service
 
-Feathers has two ways for customizing existing database adapter services. Either by using hooks, which we will look at [in the next chapter](./hooks.md) or by extending the adapter service class. Let's extend our existing `users` service to add a link to the [Gravatar](http://en.gravatar.com/) image associated with the user's email address so we can display a user avatar and then add that data to the database by calling the original (`super.create`) method.
+Feathers has two ways for customizing existing database adapter services. Either by using hooks, which we will look at [in the next chapter](./hooks.md) or by extending the adapter service class. Let's extend our existing `users` service to add a link to the [Gravatar](http://en.gravatar.com/) image associated with the user's email address so we can display a user avatar. We will then then add that data to the database by calling the original (`super.create`) method.
 
 :::: tabs :options="{ useUrlFragment: false }"
 ::: tab "JavaScript"

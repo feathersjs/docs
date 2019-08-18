@@ -313,6 +313,10 @@ In the `process-message` hook we are currently just adding the user's `_id` as t
 
 We can do this by creating another hook called `populate-user` which is an `after` hook on the `messages` service for `all` methods:
 
+```sh
+feathers generate hook
+```
+
 ![feathers generate hook prompts](./assets/populate-user-prompts.png)
 
 :::: tabs :options="{ useUrlFragment: false }"
@@ -320,6 +324,7 @@ We can do this by creating another hook called `populate-user` which is an `afte
 Once created, update `src/hooks/populate-user.js` to:
 
 ```js
+/* eslint-disable require-atomic-updates */
 module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
   return async context => {
     // Get `app`, `method`, `params` and `result` from the hook context
@@ -334,8 +339,8 @@ module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
       return {
         ...message,
         user
-      }
-    }
+      };
+    };
 
     // In a find method we need to process the entire page
     if (method === 'find') {
@@ -351,11 +356,6 @@ module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
 };
 ```
 :::
-::: tab "TypeScript"
-```ts
-
-```
-:::
 ::::
 
 > __Note:__ `Promise.all` makes sure that all asynchronous operations complete before returning all the data.
@@ -364,7 +364,22 @@ module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
 
 ## Hooks vs. extending services
 
-In the [previous chapter](./services.md) we extended our user service to add a user avatar. We could do the same thing for the [process-message hook](#sanitize-new-message) we created in this chapter or vice versa create a hook that adds the user avatar.
+In the [previous chapter](./services.md) we extended our user service to add a user avatar. This could also be put in a hook instead but made a good example to illustrate how to extend an existing service. There are no explicit rules when to use a hook or when to extend a service but here are some guidelines.
+
+Use a hook when
+
+- The functionality can be used in more than one place (e.g. validation, permissions etc.)
+- It is not a core responsibility of the service and the service can work without it (e.g. sending an email after a user has been created)
+
+Extend a database service when
+
+- The functionality is only needed in this one place
+- The service could not function without it
+
+Create your own (custom) service when
+
+- Multiple services are combined together (e.g. reports)
+- The service does something other than talk to a database (e.g. another API, sensors etc.)
 
 ## What's next?
 

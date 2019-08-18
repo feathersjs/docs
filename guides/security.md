@@ -2,7 +2,7 @@
 
 We take security very seriously at Feathers. We welcome any peer review of our 100% open source code to ensure nobody's Feathers app is ever compromised or hacked, however, as a web application developer you are responsible for the security of your application. We do our very best to make sure Feathers is as secure as possible.
 
-## Where should I report security issues?
+## Reporting security issues
 
 In order to give the community time to respond and upgrade we strongly urge you report all security issues to us. Send us a PM in [Slack](http://slack.feathersjs.com) or email us at [hello@feathersjs.com](mailto:hello@feathersjs.com) with details and we will respond ASAP. Security issues always take precedence over bug fixes and feature work so we'll work with you to come up with a resolution and plan and document the issue on Github in the appropriate repo.
 
@@ -22,7 +22,7 @@ Here are some things that you should be aware of when writing your app to make s
 - JSON Web Tokens (JWT's) are only signed, they are **not** encrypted. Therefore, the payload can be examined on the client. This is by design. **DO NOT** put anything that should be private in the JWT `payload` unless you encrypt it first.
 - Don't use a weak `secret` for you token service. The generator creates a strong one for you automatically. No need to change it.
 
-## Some of the technologies we employ
+## Technologies used
 
 - Password storage inside `@feathers/authentication-local` uses [bcrypt](https://github.com/dcodeIO/bcrypt.js). We don't store the salts separately since they are included in the bcrypt hashes.
 - By default, [JWT](https://jwt.io/)'s are stored in Local Storage (instead of cookies) to avoid CSRF attacks. For JWT, we use the `HS256` algorithm by default (HMAC using SHA-256 hash algorithm). If you choose to store JWT's in cookies, your app may have CSRF vulnerabilities.

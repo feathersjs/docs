@@ -24,7 +24,7 @@ Once you confirm the last prompt, the final selection should look like this:
 
 ![feathers generate app prompts](./assets/generate-app.png)
 
-> __Important:__ If you are following this guide for the first time we recommend to not change any of those settings other than the TypeScript/JavaScript selection. Otherwise you might run into things that are not covered here which are easier to figure out when you've done it once before.
+> __Important:__ If you are following this guide for the first time we recommend to not change any of those settings other than the TypeScript/JavaScript selection. Otherwise you might run into things that are not covered here.
 
 ## The generated files
 
