@@ -1,5 +1,3 @@
-https://buzzard.docs.feathersjs.com/* https://docs.feathersjs.com/:splat 301!
-
 # Legacy docs Redirects
 
 /authentication/*   /api/authentication/server.html
