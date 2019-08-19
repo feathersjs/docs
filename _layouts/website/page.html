@@ -1,6 +1,29 @@
 {% extends template.self %}
 
+{% block head %}
+  {{ super() }}
+  <style>
+    .legacy-warning {
+      border: none !important;
+      background-color: #ff7d7d;
+    }
+    .legacy-warning strong {
+      color: #ccc !important;
+    }
+    .legacy-warning a {
+      color: #fff !important;
+    }
+  </style>
+{% endblock %}
+
 {% block page %}
+  <blockquote class="legacy-warning">
+    <p>
+      <strong>Important:</strong>
+      This is the documentation for a previous version of Feathers.<br>
+      For the latest documentation please visit <a href="https://docs.feathersjs.com">docs.feathersjs.com</a>.
+    </p>
+  </blockquote>
   {{ super() }}
   <blockquote>
     <p>
