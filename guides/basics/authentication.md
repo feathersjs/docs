@@ -234,8 +234,8 @@ module.exports = app => {
 
 > __Pro tip:__ For more information about the oAuth flow and strategy see the [oAuth API documentation](../../api/authentication/oauth.md).
 
-When we set up the [authentication client in the browser](#browser-authentication) it can also already handle oAuth logins. To log in with GitHub, visit [localhost:3030/oauth/github](http://localhost:3030/oauth/github). If everything went well, you will see a user with your GitHub email address being logged in the console.
+When we set up the [authentication client in the browser](#browser-authentication) it can also already handle oAuth logins. To log in with GitHub, visit [localhost:3030/oauth/github](http://localhost:3030/oauth/github). It will redirect to GitHub and ask to authorize our application. If everything went well, you will see a user with your GitHub email address being logged in the console.
 
 ## What's next?
 
-Sweet! We now have an API that can register new users with email/password or allow a log in via GitHub. We now have everything we need to [create a frontend](./frontend.md) for our chat application.
+Sweet! We now have an API that can register new users with email/password or allow a log in via GitHub. This means we have everything we need to [create a frontend](./frontend.md) for our chat application.
