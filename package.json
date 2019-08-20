@@ -35,6 +35,7 @@
   "directories": {},
   "dependencies": {},
   "devDependencies": {
+    "@dovyp/vuepress-plugin-clipboard-copy": "^1.0.0-alpha.7",
     "remark": "^10.0.1",
     "remark-validate-links": "^8.0.2",
     "unified-engine": "^6.0.1",

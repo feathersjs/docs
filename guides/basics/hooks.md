@@ -1,8 +1,8 @@
 # Hooks
 
-As we have seen in the [previous chapter](./services.md), Feathers services are a great way to implement data storage and modification. Technically, we could implement all our application logic within services but very often an application requires similar functionality across multiple services. For example, we might want to check for all services if a user is allowed to even call the service method or add the current date to all data that we are saving. With just using services we would have to implement this again every time.
+As we have seen in the [services chapter](./services.md), Feathers services are a great way to implement data storage and modification. Technically, we could implement our entire app with services but very often we need similar functionality across multiple services. For example, we might want to check for all services if a user is allowed to even use it or add the current date to all data that we are saving. With just using services we would have to implement this again every time.
 
-This is where Feathers hooks come in. Hooks are pluggable middleware functions that can be registered __before__, __after__ or on __errors__ of a service method. You can register a single hook function or create a chain of them to create complex work-flows. 
+This is where Feathers hooks come in. Hooks are pluggable middleware functions that can be registered __before__, __after__ or on __errors__ of a service method. You can register a single hook function or create a chain of them to create complex work-flows. In this chapter we will learn more about hooks and create workflows to process new chat messages. 
 
 Just like services themselves, hooks are *transport independent*. They are usually also service agnostic, meaning they can be used with ​*any*​ service. This pattern keeps your application logic flexible, composable, and much easier to trace through and debug.
 
@@ -10,30 +10,55 @@ Just like services themselves, hooks are *transport independent*. They are usual
 
 Hooks are commonly used to handle things like validation, authorization, logging, populating related entities, sending notifications and more. 
 
-> __Pro tip:__ For more information about the design patterns behind hooks see [this blog post](https://blog.feathersjs.com/api-service-composition-with-hooks-47af13aa6c01).
+> __Pro tip:__ For the general design pattern behind hooks see [this blog post](https://blog.feathersjs.com/design-patterns-for-modern-web-apis-1f046635215). A more Feathers specific overview can be found [here](https://blog.feathersjs.com/api-service-composition-with-hooks-47af13aa6c01).
 
 ## Quick example
 
 Here is a quick example for a hook that adds a `createdAt` property to the data before calling the actual `create` service method:
 
+:::: tabs :options="{ useUrlFragment: false }"
+::: tab "JavaScript"
 ```js
+const createdAt = async context => {
+  context.data.createdAt = new Date();
+  
+  return context;
+};
+
 app.service('messages').hooks({
   before: {
-    create (context) {
-      context.data.createdAt = new Date();
-      
-      return context;
-    }
+    create: [ createdAt ]
   }
-})
+});
 ```
+:::
+::: tab "TypeScript"
+```ts
+import { HookContext } from '@feathersjs/feathers';
+
+const createdAt = async (context: HookContext) => {
+  context.data.createdAt = new Date();
+  
+  return context;
+};
+
+app.service('messages').hooks({
+  before: {
+    create: [ createdAt ]
+  }
+});
+```
+:::
+::::
 
 ## Hook functions
 
-A hook function is a function that takes the [hook context](#hook-context) as the parameter and returns that context or nothing. Hook functions run in the order they are registered and will only continue to the next once the current hook function completes. If a hook function throws an error, all remaining hooks (and possibly the service call) will be skipped and the error will be returned.
+A hook function is a function that takes the [hook context](#hook-context) as the parameter and returns that context or nothing. Hook functions run in the order they are registered and will only continue to the next once the current hook function completes. If a hook function throws an error, all remaining hooks (and the service call if it didn't run yet) will be skipped and the error will be returned.
 
-A common pattern to make hooks more re-usable (e.g. making the `createdAt` property name from the example above configurable) is to create a wrapper function that takes those options and returns a hook function:
+A common pattern the generator to make hooks more re-usable (e.g. making the `createdAt` property name from the example above configurable) is to create a wrapper function that takes those options and returns a hook function:
 
+:::: tabs :options="{ useUrlFragment: false }"
+::: tab "JavaScript"
 ```js
 const setTimestamp = name => {
   return async context => {
@@ -45,22 +70,46 @@ const setTimestamp = name => {
 
 app.service('messages').hooks({
   before: {
-    create: setTimestamp('createdAt'),
-    update: setTimestamp('updatedAt')
+    create: [ setTimestamp('createdAt') ],
+    update: [ setTimestamp('updatedAt') ]
   }
 });
 ```
+:::
+::: tab "TypeScript"
+```ts
+import { HookContext } from '@feathersjs/feathers';
+
+const setTimestamp = (name: string) => {
+  return async (context: HookContext) => {
+    context.data[name] = new Date();
+
+    return context;
+  }
+} 
+
+app.service('messages').hooks({
+  before: {
+    create: [ setTimestamp('createdAt') ],
+    update: [ setTimestamp('updatedAt') ]
+  }
+});
+```
+:::
+::::
 
 Now we have a re-usable hook that can set the timestamp on any property.
 
 ## Hook context
 
-The hook `context` is an object which contains information about the service method call. It has read-only and writable properties. Read-only properties are:
+The hook `context` is an object which contains information about the service method call. It has read-only and writable properties.
 
-- `context.app` - The Feathers application object
+Read-only properties are:
+
+- `context.app` - The Feathers application object. This can be used to e.g. call other services
 - `context.service` - The service this hook is currently running on
-- `context.path` - The path of the service
-- `context.method` - The service method
+- `context.path` - The path (name) of the service
+- `context.method` - The service method name
 - `context.type` - The hook type (`before`, `after` or `error`)
 
 Writeable properties are:
@@ -77,10 +126,12 @@ Writeable properties are:
 
 ## Registering hooks
 
-The most common way to register hooks is in an object like this:
+In a Feathers application generated by the CLI, hooks are being registered in a `.hooks` file in an object in the following format:
 
+:::: tabs :options="{ useUrlFragment: false }"
+::: tab "JavaScript"
 ```js
-const messagesHooks = {
+module.exports = {
   before: {
     all: [],
     find: [],
@@ -88,128 +139,293 @@ const messagesHooks = {
     create: [],
     update: [],
     patch: [],
-    remove: [],
+    remove: []
   },
+
   after: {
     all: [],
     find: [],
+    get: [],
     create: [],
     update: [],
     patch: [],
-    remove: [],
+    remove: []
+  },
+
+  error: {
+    all: [],
+    find: [],
+    get: [],
+    create: [],
+    update: [],
+    patch: [],
+    remove: []
   }
 };
-
-app.service('messages').hooks(messagesHooks);
 ```
+:::
+::: tab "TypeScript"
+```ts
+export default {
+  before: {
+    all: [],
+    find: [],
+    get: [],
+    create: [],
+    update: [],
+    patch: [],
+    remove: []
+  },
+
+  after: {
+    all: [],
+    find: [],
+    get: [],
+    create: [],
+    update: [],
+    patch: [],
+    remove: []
+  },
+
+  error: {
+    all: [],
+    find: [],
+    get: [],
+    create: [],
+    update: [],
+    patch: [],
+    remove: []
+  }
+};
+```
+:::
+::::
 
 This makes it easy to see at one glance in which order hooks are executed and for which method.
 
 > __Note:__ `all` is a special keyword which means those hooks will run before the method specific hooks in this chain.
 
-For example, if hooks are registered like so:
+## Processing messages
+
+Cool. Now that we learned about hooks we can add two hooks to our messages service that help sanitize new messages and add information about the user that sent it.
+
+### Sanitize new message
+
+When creating a new message, we automatically sanitize our input, add the user that sent it and include the date the message has been created before saving it in the database. In this specific case it is a *before* hook. To create a new hook we can run:
+
+```sh
+feathers generate hook
+```
+
+Let's call this hook `process-message`. We want to pre-process client-provided data. Therefore, in the next prompt asking for what kind of hook, choose `before` and press Enter.
+
+Next a list of all our services is displayed. For this hook, only choose the `messages` service. Navigate to the entry with the arrow keys and select it with the space key, then confirm with enter.
+
+A hook can run before any number of [service methods](./services.md). For this specific hook, only select `create`. After confirming the last prompt you should see something like this:
+
+![feathers generate hook prompts](./assets/process-message-prompts.png)
+
+A hook was generated and wired up to the selected service. Now it's time to add some code. 
+
+:::: tabs :options="{ useUrlFragment: false }"
+::: tab "JavaScript"
+Update `src/hooks/process-message.js` to look like this:
 
 ```js
-const messagesHooks = {
-  before: {
-    all: [ hook01() ],
-    find: [ hook11() ],
-    get: [ hook21() ],
-    create: [ hook31(), hook32() ],
-    update: [ hook41() ],
-    patch: [ hook51() ],
-    remove: [ hook61() ],
-  },
-  after: {
-    all: [ hook05() ],
-    find: [ hook15(), hook16() ],
-    create: [ hook35() ],
-    update: [ hook45() ],
-    patch: [ hook55() ],
-    remove: [ hook65() ],
-  }
+module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
+  return async context => {
+    const { data } = context;
+
+    // Throw an error if we didn't get a text
+    if(!data.text) {
+      throw new Error('A message must have a text');
+    }
+
+    // The logged in user
+    const { user } = context.params;
+    // The actual message text
+    // Make sure that messages are no longer than 400 characters
+    const text = context.data.text.substring(0, 400);
+
+    // Update the original data (so that people can't submit additional stuff)
+    context.data = {
+      text,
+      // Set the user id
+      userId: user._id,
+      // Add the current date
+      createdAt: new Date().getTime()
+    };
+
+    return context;
+  };
 };
-
-app.service('messages').hooks(messagesHooks);
 ```
-
-This diagram illustrates when each hook will be executed:
-
-![Hook flow](./assets/hook-flow.jpg)
-
-## Validating data
-
-If a hook throws an error, all following hooks will be skipped and the error will be returned to the user. This makes `before` hooks a great place to validate incoming data by throwing an error for invalid data. We can throw a normal [JavaScript error](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error) or [Feathers error](../../api/errors.md) which has some additional functionality (like returning the proper error code for REST calls). 
-
-`@feathersjs/errors` is a separate module, so you must add it to your project before requiring it:
-
-```bash
-npm install @feathersjs/errors --save
-```
-
-We will only need the hook for `create`, `update` and `patch` since those are the only service methods that allow user submitted data:
+:::
+::: tab "TypeScript"
+Update `src/hooks/process-message.ts` to look like this:
 
 ```js
-const { BadRequest } = require('@feathersjs/errors');
+// Use this hook to manipulate incoming or outgoing data.
+// For more information on hooks see: http://docs.feathersjs.com/api/hooks.html
+import { Hook, HookContext } from '@feathersjs/feathers';
 
-const validate = async context => {
-  const { data } = context;
+export default () : Hook => {
+  return async (context: HookContext) => {
+    const { data } = context;
 
-  // Check if there is `text` property
-  if(!data.text) {
-    throw new BadRequest('Message text must exist');
-  }
+    // Throw an error if we didn't get a text
+    if(!data.text) {
+      throw new Error('A message must have a text');
+    }
 
-  // Check if it is a string and not just whitespace
-  if(typeof data.text !== 'string' || data.text.trim() === '') {
-    throw new BadRequest('Message text is invalid');
-  }
+    // The authenticated user
+    const user = context.params.user;
+    // The actual message text
+    const text = context.data.text
+      // Messages can't be longer than 400 characters
+      .substring(0, 400);
 
-  // Change the data to be only the text
-  // This prevents people from adding other properties to our database
-  context.data = {
-    text: data.text.toString()
-  }
+    // Override the original data (so that people can't submit additional stuff)
+    context.data = {
+      text,
+      // Set the user id
+      userId: user._id,
+      // Add the current date
+      createdAt: new Date().getTime()
+    };
 
-  return context;
+    // Best practice: hooks should always return the context
+    return context;
+  };
+}
+```
+:::
+::::
+
+This validation code includes:
+
+1. A check if there is a `text` in the data and throws an error if not
+2. Truncate the message's `text` property to 400 characters
+3. Update the data submitted to the database to contain:
+    - The new truncated text
+    - The currently authenticated user id (so we always know who sent it)
+    - The current (creation) date
+
+### Populate the message sender
+
+In the `process-message` hook we are currently just adding the user's `_id` as the `userId` property in the message. We want to show more information about the user that sent it in the UI, so we'll need to populate more data in the message response.
+
+We can do this by creating another hook called `populate-user` which is an `after` hook on the `messages` service for `all` methods:
+
+```sh
+feathers generate hook
+```
+
+![feathers generate hook prompts](./assets/populate-user-prompts.png)
+
+:::: tabs :options="{ useUrlFragment: false }"
+::: tab "JavaScript"
+Update `src/hooks/populate-user.js` to:
+
+```js
+/* eslint-disable require-atomic-updates */
+module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
+  return async context => {
+    // Get `app`, `method`, `params` and `result` from the hook context
+    const { app, method, result, params } = context;
+    // Function that adds the user to a single message object
+    const addUser = async message => {
+      // Get the user based on their id, pass the `params` along so
+      // that we get a safe version of the user data
+      const user = await app.service('users').get(message.userId, params);
+
+      // Merge the message content to include the `user` object
+      return {
+        ...message,
+        user
+      };
+    };
+
+    // In a find method we need to process the entire page
+    if (method === 'find') {
+      // Map all data to include the `user` information
+      context.result.data = await Promise.all(result.data.map(addUser));
+    } else {
+      // Otherwise just update the single result
+      context.result = await addUser(result);
+    }
+
+    return context;
+  };
 };
-
-app.service('messages').hooks({
-  before: {
-    create: validate,
-    update: validate,
-    patch: validate
-  }
-});
 ```
+:::
 
+::: tab "TypeScript"
+Update `src/hooks/populate-user.ts` to:
 
-> __Note:__ Throwing an appropriate [Feathers errors](../../api/errors.md) allows to add more information and return the correct HTTP status code.
+```ts
+// Use this hook to manipulate incoming or outgoing data.
+// For more information on hooks see: http://docs.feathersjs.com/api/hooks.html
+import { Hook, HookContext } from '@feathersjs/feathers';
 
-## Application hooks
+export default (): Hook => {
+  return async (context: HookContext) => {
+    // Get `app`, `method`, `params` and `result` from the hook context
+    const { app, method, result, params } = context;
+    // Function that adds the user to a single message object
+    const addUser = async (message: any) => {
+      // Get the user based on their id, pass the `params` along so
+      // that we get a safe version of the user data
+      const user = await app.service('users').get(message.userId, params);
 
-Sometimes we want to automatically add a hook to every service in our Feathers application. This is what application hooks can be used for. They work the same as service specific hooks but run in a more specific order:
+      // Merge the message content to include the `user` object
+      return {
+        ...message,
+        user
+      };
+    };
 
-- `before` application hooks will always run _before_ all service `before` hooks
-- `after` application hooks will always run _after_ all service `after` hooks
-- `error` application hooks will always run _after_ all service `error` hooks
+    // In a find method we need to process the entire page
+    if (method === 'find') {
+      // Map all data to include the `user` information
+      context.result.data = await Promise.all(result.data.map(addUser));
+    } else {
+      // Otherwise just update the single result
+      context.result = await addUser(result);
+    }
 
-## Error logging
-
-A good use for application hooks is to log any service method call error. The following example logs every service method error with the path and method name as well as the error stack:
-
-```js
-app.hooks({
-  error: async context => {
-    console.error(`Error in '${context.path}' service method '${context.method}'`, context.error.stack);
-  }
-});
+    return context;
+  };
+}
 ```
+:::
 
-## More examples
+::::
 
-The [chat application guide](../chat/readme.md) will show several more examples like how to associate data and adding user information for hooks created by [the generator](./generator.md).
+> __Note:__ `Promise.all` makes sure that all asynchronous operations complete before returning all the data.
+
+> __Pro tip:__ This is one way to associate data in Feathers. For more information about associations see [this FAQ](../../help/faq.md#how-do-i-do-associations).
+
+## Hooks vs. extending services
+
+In the [previous chapter](./services.md) we extended our user service to add a user avatar. This could also be put in a hook instead but made a good example to illustrate how to extend an existing service. There are no explicit rules when to use a hook or when to extend a service but here are some guidelines.
+
+Use a hook when
+
+- The functionality can be used in more than one place (e.g. validation, permissions etc.)
+- It is not a core responsibility of the service and the service can work without it (e.g. sending an email after a user has been created)
+
+Extend a database service when
+
+- The functionality is only needed in this one place
+- The service could not function without it
+
+Create your own (custom) service when
+
+- Multiple services are combined together (e.g. reports)
+- The service does something other than talk to a database (e.g. another API, sensors etc.)
 
 ## What's next?
 
-In this chapter we learned how Feathers hooks can be used as middleware for service method calls to validate and manipulate incoming and outgoing data without having to change our service. In the next chapter we will turn our messages service into a [fully functional REST API](./rest.md).
+In this chapter we learned how Feathers hooks can be used as middleware for service method calls to validate and manipulate incoming and outgoing data without having to change our service. We now have a fully working chat application. Before we [create a frontend for it](./frontend.md) though, let's first look at how [authentication works with Feathers](./authentication.md).

@@ -1,21 +1,4 @@
-https://buzzard.docs.feathersjs.com/* https://docs.feathersjs.com/:splat 301!
-
-# Legacy docs Redirects
-
-/authentication/*   /api/authentication/server.html
-/clients/*          /api/client.html
-/configuration/*    /api/configuration.html
-/databases/*        /api/databases/common.html
-/hooks/*            /api/hooks.html
-/middleware/*       /api/express.html
-/providers/*        /api/express.html
-/rest/*             /api/express.html
-/real-time/*        /api/events.html
-/services/*         /api/services.html
-/frameworks/*       /guides/frameworks/readme.html
-/getting-started/*  /guides/readme.html
-/authorization/*    https://github.com/feathersjs-ecosystem/feathers-authentication-hooks
-/why/*              https://blog.feathersjs.com/why-we-built-the-best-web-framework-you-ve-probably-never-heard-of-until-now-176afc5c6aac
+https://crow.docs.feathersjs.com/* https://docs.feathersjs.com/:splat 301!
 
 # v2 Redirects
 
@@ -48,6 +31,38 @@ https://buzzard.docs.feathersjs.com/* https://docs.feathersjs.com/:splat 301!
 
 # Crow Redirects
 
-/api/authentication/oauth1.html             api/authentication/oauth.html
-/api/authentication/oauth2.html             api/authentication/oauth.html
-/api/authentication/server.html             api/authentication/
+/*/readme.html                              /:splat 301!
+/migrating.html                             /guides/migrating.html
+/security.html                              /guides/security.html
+/help/readme.html                           /help/
+/faq/readme.html                            /help/faq.html
+
+/api/authentication/oauth1.html             /api/authentication/oauth.html
+/api/authentication/oauth2.html             /api/authentication/oauth.html
+/api/authentication/server.html             /api/authentication/
+
+/guides/frameworks/readme.html              /guides/frameworks.html
+/guides/basics/clients.html                 /guides/basics/starting.html
+/guides/basics/databases.html               /guides/basics/services.html
+/guides/basics/real-time.html               /guides/basics/services.html
+
+/guides/chat/authentication.html            /guides/basics/authentication.html
+/guides/chat/creating.html                  /guides/basics/generator.html
+/guides/chat/frontend.html                  /guides/basics/frontend.html
+/guides/chat/readme.html                    /guides/
+/guides/chat/processing.html                /guides/basics/hooks.html
+/guides/chat/service.html                   /guides/basics/services.html
+/guides/chat/testing.html                   /guides/basics/testing.html
+
+/guides/advanced/readme.html                /cookbook/
+/guides/advanced/file-uploading.html        /cookbook/express/file-uploading.html
+/guides/advanced/using-a-view-engin.html    /cookbook/express/view-engin.html
+/guides/advanced/scaling.html               /cookbook/general/scaling.html
+
+/guides/auth/readme.html                    /cookbook/
+/guides/auth/recipe.oauth-basic.html        /guides/basics/authentication.html
+/guides/auth/how-jwt-works.html             /guides/basics/authentication.html
+/guides/auth/recipe.express-middleware.html /cookbook/express/middleware-authentication.html
+/guides/auth/recipe.mixed-auth.html         /cookbook/authentication/anonymous.html
+/guides/auth/recipe.customize-jwt-payload.html  /api/authentication/service.html
+/guides/auth/recipe.customize-response.html /api/authentication/strategy.html

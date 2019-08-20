@@ -10,31 +10,25 @@ module.exports = {
     sidebarDepth: 2,
     sidebar: {
       '/guides/': [{
-        title: 'The basics',
+        title: 'The Feathers guide',
         collapsable: false,
         children: [
-          'basics/',
           'basics/setup.md',
           'basics/starting.md',
+          'basics/generator.md',
           'basics/services.md',
           'basics/hooks.md',
-          'basics/rest.md',
-          'basics/databases.md',
-          'basics/real-time.md',
-          'basics/clients.md',
-          'basics/generator.md'
+          'basics/authentication.md',
+          'basics/frontend.md',
+          'basics/testing.md'
         ]
-      }, {
-        title: 'A chat application',
+      }, 'frameworks.md', 'security.md', 'migrating.md'],
+      '/help/': [{
+        title: 'Help',
         collapsable: false,
         children: [
-          'chat/',
-          'chat/creating.md',
-          'chat/service.md',
-          'chat/authentication.md',
-          'chat/processing.md',
-          'chat/frontend.md',
-          'chat/testing.md'
+          '/help/',
+          '/help/faq.md'
         ]
       }],
       '/api/': [{
@@ -80,7 +74,7 @@ module.exports = {
           'authentication/client.md'
         ]
       }, {
-        title: 'Database',
+        title: 'Databases',
         collapsable: false,
         children: [
           'databases/adapters.md',
@@ -89,33 +83,55 @@ module.exports = {
         ],
       }],
       '/cookbook/': [{
+        title: 'General',
+        collapsable: false,
+        children: [
+          'general/scaling.md'
+        ]
+      }, {
         title: 'Authentication',
+        collapsable: false,
         children: [
           'authentication/anonymous.md'
         ]
       }, {
         title: 'Express',
+        collapsable: false,
         children: [
-          'express/file-uploading.md'
+          'express/file-uploading.md',
+          'express/view-engine.md'
         ]
-      }],
-      '/': [
-        '/guides/',
-        '/api/',
-        '/faq/',
-        'migrating.md'
-      ]
+      }]
     },
     nav: [
       { text: 'Guides', link: '/guides/' },
       { text: 'API', link: '/api/' },
       { text: 'Cookbook', link: '/cookbook/' },
-      { text: 'FAQ', link: '/faq/' },
+      { text: 'Help', link: '/help/' },
       {
         text: 'Ecosystem',
-        link: 'https://github.com/feathersjs/awesome-feathersjs'
+        items: [{
+          text: 'Awesome Feathersjs',
+          link: 'https://github.com/feathersjs/awesome-feathersjs'
+        }, {
+          text: 'Previous versions',
+          items: [{
+            text: 'Buzzard (v3)',
+            link: 'https://buzzard.docs.feathersjs.com/'
+          }, {
+            text: 'Auk (v2)',
+            link: 'https://auk.docs.feathersjs.com/'
+          }, {
+            text: 'Legacy (v1)',
+            link: 'https://legacy.docs.feathersjs.com/'
+          }]
+        }]
       }
     ]
   },
-  plugins: ['@vuepress/last-updated', 'tabs']
+  plugins: [
+    '@vuepress/last-updated',
+    [ '@dovyp/vuepress-plugin-clipboard-copy', true ],
+    'tabs'
+  ]
 };

@@ -423,7 +423,7 @@ The following options can be passed when creating a new localstorage service:
 
 Express route placeholders in a service URL will be added to the services `params.route`.
 
-> __Important:__ See the [FAQ entry on nested routes](../faq/readme.md#how-do-i-do-nested-or-custom-routes) for more details on when and when not to use nested routes.
+> __Important:__ See the [FAQ entry on nested routes](../help/faq.md#how-do-i-do-nested-or-custom-routes) for more details on when and when not to use nested routes.
 
 ```js
 const feathers = require('@feathersjs/feathers');

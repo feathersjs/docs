@@ -39,12 +39,12 @@ app.configure(socketio(socket));
 app.configure(auth(options))
 ```
 
-## app.authenticate()
+## app.reAuthenticate()
 
-`app.authenticate() -> Promise` with no arguments will try to authenticate using the access token from the storage or the window location (e.g. after a successful [oAuth](./oauth.md) login). This is normally called to either show your application (when successful) or showing a login page or redirecting to the appropriate oAuth link.
+`app.reAuthenticate() -> Promise` will try to authenticate using the access token from the storage or the window location (e.g. after a successful [oAuth](./oauth.md) login). This is normally called to either show your application (when successful) or showing a login page or redirecting to the appropriate oAuth link.
 
 ```js
-app.authenticate().then(() => {
+app.reAuthenticate().then(() => {
   // show application page
 }).catch(() => {
   // show login page

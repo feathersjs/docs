@@ -120,6 +120,7 @@ h1, h2, h3, h4, h5, h6
 
 h1
   font-size 2.2rem
+  color: $secondaryColor
 
 h2
   font-size 1.65rem
@@ -175,6 +176,13 @@ th, td
     .sidebar
       top 0
 
+pre
+  background-color $codeBgColor
+  color lighten($textColor, 40%)
+
+code
+  background-color $codeBgColor
+  color lighten($textColor, 40%)
 
 @media (min-width: ($MQMobile + 1px))
   .theme-container.no-sidebar
@@ -184,3 +192,16 @@ th, td
       padding-left 0
 
 @require 'mobile.styl'
+
+footer.page-edit blockquote
+  border-left: 0.5rem solid $secondaryColor
+  background-color: lighten($secondaryColor, 85%)
+  padding: 1em
+  
+  p
+    color: $textColor
+  
+  small
+    padding-top: 1em
+    display: block
+    text-align: right

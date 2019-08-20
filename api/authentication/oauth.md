@@ -113,7 +113,9 @@ The `redirect` configuration option is used to redirect back to the frontend app
 }
 ```
 
-Will redirect to `https://app.mydomain.com/#access_token=<user jwt>` or `https://app.mydomain.com/#error=<some error message>`. The [authentication client](./client.md) handles those redirect automatically. It can be customized with the [getRedirect()]() method of `OAuthStrategy`.
+Will redirect to `https://app.mydomain.com/#access_token=<user jwt>` or `https://app.mydomain.com/#error=<some error message>`. The [authentication client](./client.md) handles those redirect automatically. It can be customized with the [getRedirect()](#getredirect) method of the oAuth strategy.
+
+> __Note:__ The redirect is using a hash instead of a query string by default because it is not logged server side and can be easily manipulated on the client.
 
 If `redirect` option is not set, the authentication result data will be sent as JSON instead.
 

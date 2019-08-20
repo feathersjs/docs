@@ -5,25 +5,24 @@
     <Content/>
 
     <footer class="page-edit">
-      <div
-        class="edit-link"
-        v-if="editLink"
-      >
-        <a
-          :href="editLink"
-          target="_blank"
-          rel="noopener noreferrer"
-        >{{ editLinkText }}</a>
-        <OutboundLink/>
-      </div>
-
-      <div
-        class="last-updated"
-        v-if="lastUpdated"
-      >
-        <span class="prefix">{{ lastUpdatedText }}: </span>
-        <span class="time">{{ lastUpdated }}</span>
-      </div>
+      <blockquote>
+        <p>
+          Anything unclear or missing?
+          <a :href="commentLink" target="_blank" rel="noopener noreferrer">
+            Leave a comment
+          </a>
+          <OutboundLink/> or <a
+            :href="editLink"
+            target="_blank"
+            rel="noopener noreferrer"
+          >{{ editLinkText }}</a>
+          <OutboundLink/>
+        </p>
+        <small>
+          <span class="prefix">{{ lastUpdatedText }}: </span>
+          <span class="time">{{ lastUpdated }}</span>
+        </small>
+      </blockquote>
     </footer>
 
     <div class="page-nav" v-if="prev || next">
@@ -121,6 +120,18 @@ export default {
       }
     },
 
+    commentLink () {
+      const {
+        repo,
+        docsRepo = repo
+      } = this.$site.themeConfig
+
+      return (outboundRE.test(docsRepo)
+        ? docsRepo
+        : `https://github.com/${docsRepo}`) +
+        `/issues/new?title=Comment: ${this.$page.title} (${this.$page.relativePath})`
+    },
+
     editLinkText () {
       return (
         this.$themeLocaleConfig.editLinkText
@@ -201,7 +212,7 @@ function flatten (items, res) {
 
 .page-edit
   @extend $wrapper
-  padding-top 1rem
+  padding-top 0
   padding-bottom 1rem
   overflow auto
   .edit-link

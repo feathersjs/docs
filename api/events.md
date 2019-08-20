@@ -131,7 +131,7 @@ messages.remove(1);
 
 By default, real-time clients will only receive the [standard events](#service-events). However, it is possible to define a list of custom events on a service as `service.events` that should also be passed when `service.emit('customevent', data)` is called on the server. The `context` for custom events won't be a full hook context but just an object containing `{ app, service, path, result }`.
 
-> **Important:** Custom events can only be sent from the server to the client, not the other way (client to server). [Learn more](../faq/readme.md#how-do-i-create-custom-methods)
+> **Important:** Custom events can only be sent from the server to the client, not the other way (client to server). [Learn more](../help/faq.md#how-do-i-create-custom-methods)
 
 For example, a payment service that sends status events to the client while processing a payment could look like this:
 
