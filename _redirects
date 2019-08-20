@@ -35,7 +35,7 @@ https://crow.docs.feathersjs.com/* https://docs.feathersjs.com/:splat 301!
 /migrating.html                             /guides/migrating.html
 /security.html                              /guides/security.html
 /help/readme.html                           /help/
-
+/faq/readme.html                            /help/faq.html
 
 /api/authentication/oauth1.html             /api/authentication/oauth.html
 /api/authentication/oauth2.html             /api/authentication/oauth.html

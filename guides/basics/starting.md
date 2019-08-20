@@ -1,4 +1,4 @@
-# Getting started
+# Quick start
 
 Now that we are [ready to roll](./setup.md) we can create our first Feathers application. In this quick start guide we'll create our first Feathers REST and real-time API server and a simple website to use it from scratch. It will show how easy it is to get started with Feathers even without a generator or boilerplate.
 
