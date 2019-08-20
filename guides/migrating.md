@@ -233,7 +233,7 @@ Non-standard query parameters (any query property starting with a `$`) will now 
 ```js
 const service = require('feathers-<database>');
 
-// Allow multi create, patch and remove
+// Allow to use $regex in query parameters
 service({
   whitelist: [ '$regex' ]
 });
