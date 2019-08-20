@@ -1,12 +1,24 @@
 # Getting ready
 
-Alright then! Let's learn what Feathers is all about! First, let's have a look at what we will do in this guide and what you should already know and what needs to be installed to use Feathers.
+Alright then! Let's learn what Feathers is all about! First, let's have a look at what we will do in this guide, what you should already know and what needs to be installed to use Feathers.
 
 ## What we will do
 
-In this guide we will learn about Feathers core concepts of services, hooks and authentication by building a chat application that has a REST API and a website that allows users to sign up, log in (including with GitHub) and send and receive messages in real-time.
+In this guide we will get a [quick start](./starting.md) by creating our first simple Feathers REST and real-time API and a website to use it from scratch. Then we will learn about the [Feathers CLI](./generator.md) and the core concepts of [services](./services.md), [hooks](./hooks.md) and [authentication](./authentication.md) by building a chat application that allows users to sign up, log in (including with GitHub) and send and receive messages in real-time. It will look like this:
 
+![The Feathers chat application](./assets/feathers-chat.png)
 
+You can find the final version at 
+
+:::: tabs :options="{ useUrlFragment: false }"
+::: tab "JavaScript"
+The [feathersjs/feathers-chat](https://github.com/feathersjs/feathers-chat) repository
+:::
+::: tab "TypeScript"
+The [feathersjs/feathers-chat-ts](https://github.com/feathersjs/feathers-chat) repository
+:::
+::::
+the 
 
 ## Prerequisites
 

@@ -130,13 +130,34 @@ app.configure(services);
 ```
 :::
 ::: tab "TypeScript"
-```ts
+`src/services/index.ts` looks like this:
 
+```ts
+import { Application } from '../declarations';
+import users from './users/users.service';
+// Don't remove this comment. It's needed to format import lines nicely.
+
+export default function (app: Application) {
+  app.configure(users);
+}
+```
+
+It uses another configure function exported from `src/services/users/users.service.ts`. The export from `src/services/index.js` is in turn used in `src/app.ts` as:
+
+```ts
+// ...
+import services from './services';
+
+// ...
+app.configure(authentication);
+// Set up our services (see `services/index.js`)
+app.configure(services);
+// ...
 ```
 :::
 ::::
 
-This is how the generators split things up into separate files and any documentation example that uses the `app` object can be used in a configure function. You can create your own files that export a configure function and `require`/`import` and `app.configure` them in `app.js`.
+This is how the generator splits things up into separate files and any documentation example that uses the `app` object can be used in a configure function. You can create your own files that export a configure function and `require`/`import` and `app.configure` them in `app.js`.
 
 > __Note:__ Keep in mind that the order in which configure functions are called might matter, e.g. if it is using a service, that service has to be registered first.
 
@@ -162,7 +183,7 @@ There is also a handy development command that restarts the server automatically
 npm run dev
 ```
 
-You can keep this command running throughout the rest of this guide.
+You can keep this command running throughout the rest of this guide, it will reload all our changes automatically.
 
 ## What's next?
 

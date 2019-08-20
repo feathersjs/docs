@@ -1,30 +1,30 @@
 # Building a frontend
 
-As we have seen in the [basics guide](../basics/readme.md), Feathers works great in the browser and comes with [client services](../basics/clients.md) that allow to easily connect to a Feathers server.
+As we have seen [when getting started](./starting.md), Feathers works great in the browser and comes with client services that allow to easily connect to a Feathers server.
 
-In this chapter we will create a real-time chat frontend with signup and login using modern plain JavaScript. As with the [basics guide](../basics/readme.md), it will only work in the latest versions of Chrome, Firefox, Safari and Edge since we won't be using a transpiler like Webpack or Babel which is also why there won't be a TypeScript option in this chapter. The final version can be found [here](https://github.com/feathersjs/feathers-chat/tree/master/public/vanilla).
+In this chapter we will create a real-time chat frontend with signup and login using modern plain JavaScript. It will only work in the latest versions of Chrome, Firefox, Safari and Edge since we won't be using a transpiler like Webpack or Babel (which is also why there won't be a TypeScript option). The final version can be found [here](https://github.com/feathersjs/feathers-chat/).
 
 > __Note:__ We will not be using a frontend framework so we can focus on what Feathers is all about. Feathers is framework agnostic and can be used with any frontend framework like React, VueJS or Angular. For more information see the [frameworks section](../frameworks.html).
 
-## Set up the index page
+## Set up the page
 
-We are already serving the static files in the `public` folder and have a placeholder page in `public/index.html`. Let's update it to the following:
+We already updated `public/index.html` in the [authentication chapter](./authentication.md) but here it is again in case you skipped that step:
 
 ```html
-<html>
+<html lang="en">
   <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <meta name="viewport"
       content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=0" />
-    <title>Vanilla JavaScript Feathers Chat</title>
+    <title>FeathersJS chat</title>
     <link rel="shortcut icon" href="favicon.ico">
-    <link rel="stylesheet" href="//cdn.rawgit.com/feathersjs/feathers-chat/v0.2.0/public/base.css">
-    <link rel="stylesheet" href="//cdn.rawgit.com/feathersjs/feathers-chat/v0.2.0/public/chat.css">
+    <link rel="stylesheet" href="//cdn.rawgit.com/feathersjs/feathers-chat/v4.0.0/public/base.css">
+    <link rel="stylesheet" href="//cdn.rawgit.com/feathersjs/feathers-chat/v4.0.0/public/chat.css">
   </head>
   <body>
     <div id="app" class="flex flex-column"></div>
     <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.12.0/moment.js"></script>
-    <script src="//unpkg.com/@feathersjs/client@^3.0.0/dist/feathers.js"></script>
+    <script src="//unpkg.com/@feathersjs/client@^4.3.0/dist/feathers.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script src="app.js"></script>
   </body>
@@ -33,16 +33,16 @@ We are already serving the static files in the `public` folder and have a placeh
 
 This will load our chat CSS style, add a container div `#app` and load several libraries:
 
-- The [browser version of Feathers](../basics/clients.md) (since we are not using a module loader like Webpack or Browserify)
+- The browser version of Feathers (since we are not using a module loader like Webpack or Browserify)
 - Socket.io provided by the chat API
 - [MomentJS](https://momentjs.com/) to format dates
 - An `app.js` for our code to live in
 
-Let’s create `public/app.js` where all the following code will live (with each code sample added to the end of that file).
+Let’s create `public/app.js` where all the following code will live. Each of the following code samples should be added to the end of that file..
 
 ## Connect to the API
 
-We’ll start with the most important thing first, the connection to our Feathers API. We already learned how Feathers can be used on the client in the [basics guide](../basics/readme.md). Here, we do pretty much the same thing: Establish a Socket connection and initialize a new Feathers application. We also set up the authentication client for later:
+We’ll start with the most important thing first, the connection to our Feathers API that connects to our server using websockets and initializes the [authentication client](./authentication.md):
 
 ```js
 // Establish a Socket.io connection
@@ -53,14 +53,10 @@ const client = feathers();
 
 client.configure(feathers.socketio(socket));
 // Use localStorage to store our login token
-client.configure(feathers.authentication({
-  storage: window.localStorage
-}));
+client.configure(feathers.authentication());
 ```
 
-This allows us to talk to the chat API through websockets, for real-time updates.
-
-## Base and user/message list HTML
+## Base HTML
 
 Next, we have to define some static and dynamic HTML that we can insert into the page when we want to show the login page (which also doubles as the signup page) and the actual chat interface:
 
@@ -90,6 +86,10 @@ const loginHTML = `<main class="login container">
         <button type="button" id="signup" class="button button-primary block signup">
           Sign up and log in
         </button>
+
+        <a class="button button-primary block" href="/oauth/github">
+          Login with GitHub
+        </a>
       </form>
     </div>
   </div>
@@ -138,12 +138,12 @@ const addUser = user => {
 
   if(userList) {
     // Add the user to the list
-    userList.insertAdjacentHTML('beforeend', `<li>
+    userList.innerHTML += `<li>
       <a class="block relative" href="#">
         <img src="${user.avatar}" alt="" class="avatar">
         <span class="absolute username">${user.email}</span>
       </a>
-    </li>`);
+    </li>`;
 
     // Update the number of users
     const userCount = document.querySelectorAll('.user-list li').length;
@@ -152,18 +152,18 @@ const addUser = user => {
   }
 };
 
-// Renders a new message and finds the user that belongs to the message
+// Renders a message to the page
 const addMessage = message => {
-  // Find the user belonging to this message or use the anonymous user if not found
+  // The user that sent this message (added by the populate-user hook)
   const { user = {} } = message;
   const chat = document.querySelector('.chat');
-  // Escape HTML
+  // Escape HTML to prevent XSS attacks
   const text = message.text
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;').replace(/>/g, '&gt;');
 
   if(chat) {
-    chat.insertAdjacentHTML( 'beforeend', `<div class="message flex flex-row">
+    chat.innerHTML += `<div class="message flex flex-row">
       <img src="${user.avatar}" alt="${user.email}" class="avatar">
       <div class="message-wrapper">
         <p class="message-header">
@@ -172,8 +172,9 @@ const addMessage = message => {
         </p>
         <p class="message-content font-300">${text}</p>
       </div>
-    </div>`);
+    </div>`;
 
+    // Always scroll to the bottom of our message list
     chat.scrollTop = chat.scrollHeight - chat.clientHeight;
   }
 };
@@ -186,14 +187,14 @@ This will add the following variables and functions:
 - `addUser(user)` is a function to add a new user to the user list on the left
 - `addMessage(message)` is a function to add a new message to the list. It will also make sure that we always scroll to the bottom of the message list as messages get added
 
-## Displaying the login/signup or chat page
+## Displaying pages
 
 Next, we'll add two functions to display the login and chat page, where we'll also add a list of the 25 newest chat messages and the registered users.
 
 ```js
 // Show the login page
-const showLogin = (error = {}) => {
-  if(document.querySelectorAll('.login').length) {
+const showLogin = (error) => {
+  if(document.querySelectorAll('.login').length && error) {
     document.querySelector('.heading').insertAdjacentHTML('beforeend', `<p>There was an error: ${error.message}</p>`);
   } else {
     document.getElementById('app').innerHTML = loginHTML;
@@ -205,7 +206,6 @@ const showChat = async () => {
   document.getElementById('app').innerHTML = chatHTML;
 
   // Find the latest 25 messages. They will come with the newest first
-  // which is why we have to reverse before adding them
   const messages = await client.service('messages').find({
     query: {
       $sort: { createdAt: -1 },
@@ -219,6 +219,7 @@ const showChat = async () => {
   // Find all users
   const users = await client.service('users').find();
 
+  // Add each user to the list
   users.data.forEach(addUser);
 };
 ```
@@ -245,13 +246,14 @@ const getCredentials = () => {
 const login = async credentials => {
   try {
     if(!credentials) {
-      // Try to authenticate using the JWT from localStorage
-      await client.authenticate();
+      // Try to authenticate using an existing token
+      await client.reAuthenticate();
     } else {
-      // If we get login information, add the strategy we want to use for login
-      const payload = Object.assign({ strategy: 'local' }, credentials);
-
-      await client.authenticate(payload);
+      // Otherwise log in with the `local` strategy using the credentials we got
+      await client.authenticate({
+        strategy: 'local',
+        ...credentials
+      });
     }
 
     // If successful, show the chat page
@@ -261,61 +263,62 @@ const login = async credentials => {
     showLogin(error);
   }
 };
-
-document.addEventListener('click', async ev => {
-  switch(ev.target.id) {
-  case 'signup': {
-    // For signup, create a new user and then log them in
-    const credentials = getCredentials();
-    
-    // First create the user
-    await client.service('users').create(credentials);
-    // If successful log them in
-    await login(credentials);
-
-    break;
-  }
-  case 'login': {
-    const user = getCredentials();
-
-    await login(user);
-
-    break;
-  }
-  case 'logout': {
-    await client.logout();
-    
-    document.getElementById('app').innerHTML = loginHTML;
-    
-    break;
-  }
-  }
-});
 ```
 
 - `getCredentials()` gets us the values of the username (email) and password fields from the login/signup page to be used directly with Feathers authentication.
 - `login(credentials)` will either authenticate the credentials returned by getCredentials against our Feathers API using the local authentication strategy (e.g. username and password) or, if no credentials are given, try and use the JWT stored in localStorage. This will try and get the JWT from localStorage first where it is put automatically once you log in successfully so that we don’t have to log in every time we visit the chat. Only if that doesn’t work it will show the login page. Finally, if the login was successful it will show the chat page.
-- We also added click event listeners for three buttons. `#login` will get the credentials and just log in with those. Clicking `#signup` will signup and log in at the same time. It will first create a new user on our API and then log in with that same user information. Finally, `#logout` will forget the JWT and then show the login page again.
 
-## Real-time and sending messages
+## Event listeners and real-time
 
-In the last step we will add functionality to send new message and make the user and message list update in real-time.
+In the last step we will add event listeners for all buttons and functionality to send new message and make the user and message list update in real-time.
 
 ```js
-document.addEventListener('submit', async ev => {
-  if(ev.target.id === 'send-message') {
-    // This is the message text input field
-    const input = document.querySelector('[name="text"]');
+const addEventListener = (selector, event, handler) => {
+  document.addEventListener(event, async ev => {
+    if (ev.target.closest(selector)) {
+      handler(ev);
+    }
+  });
+};
 
-    ev.preventDefault();
+// "Signup and login" button click handler
+addEventListener('#signup', 'click', async () => {
+  // For signup, create a new user and then log them in
+  const credentials = getCredentials();
+    
+  // First create the user
+  await client.service('users').create(credentials);
+  // If successful log them in
+  await login(credentials);
+});
 
-    // Create a new message and then clear the input field
-    await client.service('messages').create({
-      text: input.value
-    });
+// "Login" button click handler
+addEventListener('#login', 'click', async () => {
+  const user = getCredentials();
 
-    input.value = '';
-  }
+  await login(user);
+});
+
+// "Logout" button click handler
+addEventListener('#logout', 'click', async () => {
+  await client.logout();
+    
+  document.getElementById('app').innerHTML = loginHTML;
+});
+
+// "Send" message form submission handler
+addEventListener('#send-message', 'submit', async ev => {
+  // This is the message text input field
+  const input = document.querySelector('[name="text"]');
+
+  ev.preventDefault();
+
+  // Create a new message and then clear the input field
+  await client.service('messages').create({
+    text: input.value
+  });
+
+  input.value = '';
 });
 
 // Listen to created events and add the new message in real-time
@@ -324,17 +327,23 @@ client.service('messages').on('created', addMessage);
 // We will also see when new users get created in real-time
 client.service('users').on('created', addUser);
 
+// Call login right away so we can show the chat window
+// If the user can already be authenticated
 login();
 ```
 
+- `addEventListener` is a helper function that lets us add listeners to elements that get added or removed dynamically
+- We also added click event listeners for three buttons. `#login` will get the credentials and just log in with those. Clicking `#signup` will signup and log in at the same time. It will first create a new user on our API and then log in with that same user information. Finally, `#logout` will forget the JWT and then show the login page again.
 - The `#submit` button event listener gets the message text from the input field, creates a new message on the messages service and then clears out the field.
 - Next, we added two `created` event listeners. One for `messages` which calls the `addMessage` function to add the new message to the list and one for `users` which adds the user to the list via `addUser`. This is how Feathers does real-time and everything we need to do in order to get everything to update automatically.
 - To kick our application off, we call `login()` which as mentioned above will either show the chat application right away (if we signed in before and the token isn’t expired) or the login page.
 
-## What's next?
+## Using the chat application
 
-That’s it. We now have a plain JavaScript real-time chat frontend with login and signup. This example demonstrates many of the core principles of how you interact with a Feathers API. 
+That’s it. We now have a plain JavaScript real-time chat frontend with login and signup. This example demonstrates many of the core principles of how you interact with a Feathers API. You can log in with your GitHub account by following the "Login with GitHub" button, with the email (`hello@feathersjs.com`) and password (`supersecret`) from the user we registered in the [authentication chapter](./authentication.md) or sign up and log in with a different email address.
 
 If you run into an issue, remember you can find a complete working example [here](https://github.com/feathersjs/feathers-chat).
+
+## What's next?
 
 In the final chapter, we'll look at [how to write automated tests for our API](./testing.md).

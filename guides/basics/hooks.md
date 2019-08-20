@@ -245,7 +245,7 @@ module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
     const { user } = context.params;
     // The actual message text
     // Make sure that messages are no longer than 400 characters
-    const { text } = context.data.substring(0, 400);
+    const text = context.data.text.substring(0, 400);
 
     // Update the original data (so that people can't submit additional stuff)
     context.data = {
@@ -265,8 +265,12 @@ module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
 Update `src/hooks/process-message.ts` to look like this:
 
 ```js
-module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
-  return async context => {
+// Use this hook to manipulate incoming or outgoing data.
+// For more information on hooks see: http://docs.feathersjs.com/api/hooks.html
+import { Hook, HookContext } from '@feathersjs/feathers';
+
+export default () : Hook => {
+  return async (context: HookContext) => {
     const { data } = context;
 
     // Throw an error if we didn't get a text
@@ -293,7 +297,7 @@ module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
     // Best practice: hooks should always return the context
     return context;
   };
-};
+}
 ```
 :::
 ::::
@@ -321,7 +325,7 @@ feathers generate hook
 
 :::: tabs :options="{ useUrlFragment: false }"
 ::: tab "JavaScript"
-Once created, update `src/hooks/populate-user.js` to:
+Update `src/hooks/populate-user.js` to:
 
 ```js
 /* eslint-disable require-atomic-updates */
@@ -356,6 +360,47 @@ module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
 };
 ```
 :::
+
+::: tab "TypeScript"
+Update `src/hooks/populate-user.ts` to:
+
+```ts
+// Use this hook to manipulate incoming or outgoing data.
+// For more information on hooks see: http://docs.feathersjs.com/api/hooks.html
+import { Hook, HookContext } from '@feathersjs/feathers';
+
+export default (): Hook => {
+  return async (context: HookContext) => {
+    // Get `app`, `method`, `params` and `result` from the hook context
+    const { app, method, result, params } = context;
+    // Function that adds the user to a single message object
+    const addUser = async (message: any) => {
+      // Get the user based on their id, pass the `params` along so
+      // that we get a safe version of the user data
+      const user = await app.service('users').get(message.userId, params);
+
+      // Merge the message content to include the `user` object
+      return {
+        ...message,
+        user
+      };
+    };
+
+    // In a find method we need to process the entire page
+    if (method === 'find') {
+      // Map all data to include the `user` information
+      context.result.data = await Promise.all(result.data.map(addUser));
+    } else {
+      // Otherwise just update the single result
+      context.result = await addUser(result);
+    }
+
+    return context;
+  };
+}
+```
+:::
+
 ::::
 
 > __Note:__ `Promise.all` makes sure that all asynchronous operations complete before returning all the data.

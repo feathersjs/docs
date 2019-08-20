@@ -394,8 +394,8 @@ Now we can look at one of the really cool features of Feathers. It works the sam
 <head>
   <meta charset="UTF-8">
   <title>Feathers Example</title>
-  <link rel="stylesheet" href="//cdn.rawgit.com/feathersjs/feathers-chat/v0.2.0/public/base.css">
-  <link rel="stylesheet" href="//cdn.rawgit.com/feathersjs/feathers-chat/v0.2.0/public/chat.css">
+<link rel="stylesheet" href="//cdn.rawgit.com/feathersjs/feathers-chat/v4.0.0/public/base.css">
+    <link rel="stylesheet" href="//cdn.rawgit.com/feathersjs/feathers-chat/v4.0.0/public/chat.css">
 </head>
 <body>
   <main id="main" class="container">
@@ -408,7 +408,7 @@ Now we can look at one of the really cool features of Feathers. It works the sam
     <h2>Here are the current messages:</h2>
   </main>
 
-  <script src="//unpkg.com/@feathersjs/client@^4.3.0-pre.2/dist/feathers.js"></script>
+  <script src="//unpkg.com/@feathersjs/client@^4.3.0/dist/feathers.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
   <script type="text/javascript">
     // Set up socket.io

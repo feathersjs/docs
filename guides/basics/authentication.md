@@ -92,20 +92,20 @@ The `accessToken` can now be used for other REST requests that require authentic
 When using Feathers on the client, the authentication client does all those authentication steps for us automatically. It stores the access token as long as it is valid so that a user does not have to log in every time they visit our site and sends it with every request. It also takes care of making sure that the user is always authenticated again, for example after they went offline for a bit. Since we will need it in the [building a frontend chapter](./frontend.md) anyway, let's update the existing `public/index.html` file like this:
 
 ```html
-<html>
+<html lang="en">
   <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <meta name="viewport"
       content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=0" />
-    <title>Vanilla JavaScript Feathers Chat</title>
+    <title>FeathersJS chat</title>
     <link rel="shortcut icon" href="favicon.ico">
-    <link rel="stylesheet" href="//cdn.rawgit.com/feathersjs/feathers-chat/v0.2.0/public/base.css">
-    <link rel="stylesheet" href="//cdn.rawgit.com/feathersjs/feathers-chat/v0.2.0/public/chat.css">
+    <link rel="stylesheet" href="//cdn.rawgit.com/feathersjs/feathers-chat/v4.0.0/public/base.css">
+    <link rel="stylesheet" href="//cdn.rawgit.com/feathersjs/feathers-chat/v4.0.0/public/chat.css">
   </head>
   <body>
     <div id="app" class="flex flex-column"></div>
     <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.12.0/moment.js"></script>
-    <script src="//unpkg.com/@feathersjs/client@^4.3.0-pre.2/dist/feathers.js"></script>
+    <script src="//unpkg.com/@feathersjs/client@^4.3.0/dist/feathers.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script src="app.js"></script>
   </body>
