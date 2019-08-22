@@ -98,7 +98,8 @@ console.log('.get(1)', item);
 
 - `params.query` - the query parameters from the client, either passed as URL query parameters (see the [REST](./express.md) chapter) or through websockets (see [Socket.io](./socketio.md) or [Primus](./primus.md)).
 - `params.provider` - The transport (`rest`, `socketio` or `primus`) used for this service call. Will be `undefined` for internal calls from the server (unless passed explicitly).
-- `params.user` - The authenticated user, either set by [Feathers authentication](./authentication/readme.md) or passed explicitly.
+- `params.authentication` - The authentication information to use for the [authentication service](./authentication/service.md)
+- `params.user` - The authenticated user, either set by [Feathers authentication](./authentication/) or passed explicitly.
 - `params.connection` - If the service call has been made by a real-time transport (e.g. through websockets), `params.connection` is the connection object that can be used with [channels](./channels.md).
 
 
@@ -186,7 +187,7 @@ The method should return with the complete, updated resource data. Implement `pa
 
 For services registered before `app.listen` is invoked, the `setup` function of each registered service is called on invoking `app.listen`. For services registered after `app.listen` is invoked, `setup` is called automatically by Feathers when a service is registered.
 
-`setup` is a great place to initialize your service with any special configuration or if connecting services that are very tightly coupled (see below), as opposed to using [hooks](../hooks/readme.md).
+`setup` is a great place to initialize your service with any special configuration or if connecting services that are very tightly coupled (see below).
 
 ```js
 const feathers = require('@feathersjs/feathers');

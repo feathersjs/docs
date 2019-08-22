@@ -7,7 +7,7 @@ It consists of the following core modules:
 - `@feathersjs/authentication` which includes
   - The [AuthenticationService](./service.md) that allows to register [authentication strategies](./strategy.md) and create and manage access tokens
   - The [JWTStrategy](./jwt.md) to use JWTs to make authenticated requests
-  - The [authenticate hook](./hook) to limit service calls to an authentication strategy.
+  - The [authenticate hook](./hook.md) to limit service calls to an authentication strategy.
 - [Local authentication](./local.md) for local username/password authentication
 - [oAuth authentication](./oauth.md) for GitHub, Facebook etc. authentication
 - [The authentication client](./client.md) to use Feathers authentication on the client.

@@ -266,7 +266,7 @@ export class Users extends Service<UserData> {
 
 Now we can sign up users with email and password and it will automatically set an avatar image for them. If they have no gravatar, it will return a placeholder image.
 
-> __Note:__ We are keeping `githubId` from the original data so that we can add a "Login with GitHub" button in the [authentication](./authentication) chapter.
+> __Note:__ We are keeping `githubId` from the original data so that we can add a "Login with GitHub" button in the [authentication](./authentication.md) chapter.
 
 ## What's next?
 

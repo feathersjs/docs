@@ -6,7 +6,7 @@ In the [getting started chapter](./starting.md) we created a Feathers applicatio
 npm install @feathersjs/cli -g
 ```
 
-> __Important:__ As mentioned when [getting ready](stating.md),  `@feathersjs/cli` also requires Node version 10 or later. If you already have it installed, `feathers --version` should show `4.0.0` or later.
+> __Important:__ As mentioned when [getting ready](./starting.md),  `@feathersjs/cli` also requires Node version 10 or later. If you already have it installed, `feathers --version` should show `4.0.0` or later.
 
 ## Generating the application
 

@@ -8,7 +8,7 @@ Welcome to the Feathers guides! This is the place to find all the resources to g
 
 The Feathers guide will walk you through all the important parts of Feathers. The [quick start](./basics/starting.md) gets you up and running with a Feathers REST API and real-time website from scratch in less than 15 minutes to give you an idea what Feathers is about.
 
-The next part starts with [generating an application](./basics/generator.md) and then walks through Feathers core concepts like services, hooks and authentication by building a complete real-time chat application with a REST API and a website that can register users (including with GitHub) and send and receive messages in real-time.
+In the next part we will [generate an application](./basics/generator.md) and then walk through Feathers core concepts like services, hooks and authentication by building a complete real-time chat application with a REST API and a website that can register users and send and receive messages in real-time. We will also add a login with GitHub and write unit tests for our API.
 
 [__Get started with the Feathers guide >__](./basics/setup.md)
 

@@ -6,7 +6,7 @@ This guide explains the new features and changes to migrate to the Feathers v4 (
 
 Instead of separate versioning, all modules in the `@feathersjs` namespace have been updated to use the same version number. This means that the current release (Crow) will be **Feathers v4** and using this release means all `@feathersjs/` module dependencies show a version of `4.x.x` (`4.0.0-pre.x` for prereleases).
 
-The [database adapters](./api/databases/adapters.md) will continue to be individually versioned, since they can be used with most Feathers versions from v2 and up.
+The [database adapters](../api/databases/adapters.md) will continue to be individually versioned, since they can be used with most Feathers versions from v2 and up.
 
 ## Auto upgrade
 
@@ -23,17 +23,17 @@ This will update the dependencies in `package.json`, update the `src/authenticat
 Manual steps are necessary for
 
 - The `hashPassword()` hook in `service/users/users.hooks.js` which now requires the password field name (usually `hashPassword('password')`)
-- Configuring oAuth providers - see [oAuth API](./api/authentication/oauth.md)
-- Any other authentication specific customization - see [authentication service API](./api/authentication/service.md)
-- Feathers client authentication - see [authentication client API](./api/authentication/client.md)
+- Configuring oAuth providers - see [oAuth API](../api/authentication/oauth.md)
+- Any other authentication specific customization - see [authentication service API](../api/authentication/service.md)
+- Feathers client authentication - see [authentication client API](../api/authentication/client.md)
 
 ## Authentication
 
 The `@feathersjs/authentication-*` modules have been completely rewritten to include more secure defaults, be easier to customize, framework independent and no longer rely on PassportJS. It comes with:
 
-- An extensible [authentication service](./api/authentication/service.md) that can register strategies and create authentication tokens (JWT by default but pluggable for anything else)
+- An extensible [authentication service](../api/authentication/service.md) that can register strategies and create authentication tokens (JWT by default but pluggable for anything else)
 - Protocol independent, fully customizable authentication strategies
-- Better [oAuth authentication](./api/authentication/oauth.md) with 180+ providers supported out of the box without any additional configuration (other than adding the application key and secret)
+- Better [oAuth authentication](../api/authentication/oauth.md) with 180+ providers supported out of the box without any additional configuration (other than adding the application key and secret)
 - Built-in oAuth account linking and cross-domain oAuth redirects
 
 ### Manual upgrade
@@ -332,4 +332,4 @@ Also update `config/default.json` `redirect` with `/oauth/cookie?`:
 
 ### PassportJS
 
-PassportJS is the quasi-standard authentication mechanism for Express applications. Unfortunately it doesn't play very well with other frameworks (which Feathers can easily support otherwise) or real time connections. PassportJS can still be used through its direct Express middleware usage and then passing the authentication information [as service `params`](./api/express.md#params).
+PassportJS is the quasi-standard authentication mechanism for Express applications. Unfortunately it doesn't play very well with other frameworks (which Feathers can easily support otherwise) or real time connections. PassportJS can still be used through its direct Express middleware usage and then passing the authentication information [as service `params`](../api/express.md#params).

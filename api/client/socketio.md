@@ -108,7 +108,7 @@ app.service('messages').timeout = 3000;
 
 ## Direct connection
 
-Feathers sets up a normal Socket.io server that you can connect to with any Socket.io compatible client, usually the [Socket.io client](http://socket.io/docs/client-api/) either by loading the `socket.io-client` module or `/socket.io/socket.io.js` from the server. Unlike HTTP calls, websockets do not have an inherent cross-origin restriction in the browser so it is possible to connect to any Feathers server and query parameter types do not have to be converted from strings.
+Feathers sets up a normal Socket.io server that you can connect to with any Socket.io compatible client, usually the [Socket.io client](http://socket.io/docs/client-api/) either by loading the `socket.io-client` module or `/socket.io/socket.io.js` from the server. Unlike HTTP calls, websockets do not have an inherent cross-origin restriction in the browser so it is possible to connect to any Feathers server. Additionally query parameter types do not have to be converted from strings as they do for REST requests.
 
 > **ProTip**: The socket connection URL has to point to the server root which is where Feathers will set up Socket.io.
 
@@ -134,6 +134,10 @@ Service methods can be called by emitting a `<methodname>` event followed by the
 If the service path or method does not exist, an appropriate Feathers error will be returned.
 
 ### Authentication
+
+There are two ways to establish an authenticated Socket.io connection. Either by calling the authentication service or by sending authentication headers.
+
+#### Via authentication service
 
 Sockets will be authenticated automatically by calling [.create](#create) on the [authentication service](../authentication/service.md):
 
@@ -164,6 +168,21 @@ socket.on('connect', () => {
   });
 });
 ```
+
+#### Via handshake headers
+
+If the authentication strategy (e.g. JWT or API key) supports parsing headers, an authenticated websocket connection can be established by adding the information in the [extraHeaders option](https://socket.io/docs/client-api/#With-extraHeaders):
+
+```js
+const io = require('socket.io-client');
+const socket = io('http://localhost:3030', {
+  extraHeaders: {
+    Authorization: `Bearer <accessToken here>`
+  }
+});
+```
+
+> __Note:__ The authentication strategy needs to be included in the [`authStrategies` option](../authentication/service.md#configuration).
 
 ### find
 

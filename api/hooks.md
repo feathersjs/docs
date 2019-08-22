@@ -238,8 +238,6 @@ app.service('messages').hooks({
 });
 ```
 
-### Returning promises
-
 The following example shows an asynchronous hook that uses another service to retrieve and populate the messages `user` when getting a single message.
 
 ```js
@@ -249,23 +247,22 @@ app.service('messages').hooks({
       context => {
         const userId = context.result.userId;
 
-        // context.app.service('users').get returns a Promise already
-        return context.app.service('users').get(userId).then(user => {
-          // Update the result (the message)
-          context.result.user = user;
+        // Also pass the `params` so we get a secure version of the user
+        const user = await context.app.service('users').get(userId, context.params);
 
-          // Returning will resolve the promise with the `context` object
-          return context;
-        });
+        context.result.user = user;
+
+        // Returning will resolve the promise with the `context` object
+        return context;
       }
     ]
   }
 });
 ```
 
-> __Note:__ A common issue when hooks are not running in the expected order is a missing `return` statement of a promise at the top level of the hook function.
+> __Note:__ A common issue when hooks are not running in the expected order is a missing `await` statement.
 
-> **Important:** Most Feathers service calls and newer Node packages already return Promises. They can be returned and chained directly. There is no need to instantiate your own `new Promise` instance in those cases.
+> **Important:** Most Feathers service calls and newer Node packages already return Promises. They can be returned and chained directly. There usually is no need to instantiate your own `new Promise` instance.
 
 ### Converting callbacks
 

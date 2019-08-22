@@ -185,7 +185,7 @@ app.configure(expressOauth({
 
 ## Customization
 
-Normally, any oAuth provider set up in the [configuration](#configuration) will be initialized with the default [OAuthStrategy](./oauthstrategy). The flow for a specific provider can be customized by extending `OAuthStrategy` class and registering it under that name on the [AuthenticationService](./service.md):
+Normally, any oAuth provider set up in the [configuration](#configuration) will be initialized with the default [OAuthStrategy](#oauthstrategy). The flow for a specific provider can be customized by extending `OAuthStrategy` class and registering it under that name on the [AuthenticationService](./service.md):
 
 :::: tabs :options="{ useUrlFragment: false }"
 

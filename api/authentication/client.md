@@ -1,7 +1,7 @@
 # Client
 
-[![npm version](https://img.shields.io/npm/v/@feathersjs/authentication-app.authentication.png?style=flat-square)](https://www.npmjs.com/package/@feathersjs/authentication-client)
-[![Changelog](https://img.shields.io/badge/changelog-.md-blue.png?style=flat-square)](https://github.com/feathersjs/feathers/blob/master/packages/authentication-client/CHANGELOG.md)
+[![npm version](https://img.shields.io/npm/v/@feathersjs/authentication-client.svg?style=flat-square)](https://www.npmjs.com/package/@feathersjs/authentication-client)
+[![Changelog](https://img.shields.io/badge/changelog-.md-blue.svg?style=flat-square)](https://github.com/feathersjs/feathers/blob/master/packages/authentication-client/CHANGELOG.md)
 
 ```
 npm install @feathersjs/authentication-client --save
@@ -51,7 +51,7 @@ app.reAuthenticate().then(() => {
 });
 ```
 
-> __Important:__ `app.authenticate()` has to be called when you want to use the token from storage and __only once__ when the application initializes. Once successful, all subsequent requests will send their authentication information automatically.
+> __Important:__ `app.reAuthenticate()` has to be called when you want to use the token from storage and __only once__ when the application initializes. Once successful, all subsequent requests will send their authentication information automatically.
 
 
 ## app.authenticate(data)
@@ -74,15 +74,15 @@ app.authenticate({
 
 - `data {Object}` - of the format `{strategy [, ...otherProps]}`
   - `strategy {String}` - the name of the strategy to be used to authenticate.  Required.
-  - `...otherProps {Properties} ` vary depending on the chosen strategy. Above is an example of using the `jwt` strategy.
+  - `...otherProps {Properties} ` vary depending on the chosen strategy. Above is an example of using the `local` strategy.
 
 ## app.logout()
 
-Removes the access token from storage on the client. It also calls the `remove` method of the [authentication service](./sergvice.md).
+Removes the access token from storage on the client. It also calls the `remove` method of the [authentication service](./service.md).
 
 ## app.get('authentication')
 
-`app.get('authentication') -> Promise` is a Promise that resolves with the current authentication result. For the most strategies this is the best place to get the currently authenticated user:
+`app.get('authentication') -> Promise` is a Promise that resolves with the current authentication information. For most strategies this is the best place to get the currently authenticated user:
 
 ```js
 const { user } = await app.get('authentication');

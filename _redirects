@@ -46,10 +46,10 @@ https://crow.docs.feathersjs.com/* https://docs.feathersjs.com/:splat 301!
 /guides/basics/databases.html               /guides/basics/services.html
 /guides/basics/real-time.html               /guides/basics/services.html
 
+/guides/chat/readme.html                    /guides/
 /guides/chat/authentication.html            /guides/basics/authentication.html
 /guides/chat/creating.html                  /guides/basics/generator.html
 /guides/chat/frontend.html                  /guides/basics/frontend.html
-/guides/chat/readme.html                    /guides/
 /guides/chat/processing.html                /guides/basics/hooks.html
 /guides/chat/service.html                   /guides/basics/services.html
 /guides/chat/testing.html                   /guides/basics/testing.html
