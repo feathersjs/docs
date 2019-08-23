@@ -31,7 +31,6 @@
 
 # Crow Redirects
 
-/*/readme.html                              /:splat 301!
 /migrating.html                             /guides/migrating.html
 /security.html                              /guides/security.html
 /help/readme.html                           /help/
@@ -66,3 +65,5 @@
 /guides/auth/recipe.mixed-auth.html         /cookbook/authentication/anonymous.html
 /guides/auth/recipe.customize-jwt-payload.html  /api/authentication/service.html
 /guides/auth/recipe.customize-response.html /api/authentication/strategy.html
+
+/*/readme.html                              /:splat 301!
