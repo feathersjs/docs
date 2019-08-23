@@ -44,8 +44,8 @@ In your feathers client code, limit the socket.io-client to the `websocket` tran
 
 ```js
 import feathers from '@feathersjs/client';
+import socketio from '@feathersjs/socketio-client';
 import io from 'socket.io-client';
-import socketio from 'feathers-socketio/client';
 
 const app = feathers()
   .configure(socketio(
