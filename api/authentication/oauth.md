@@ -97,7 +97,11 @@ To _link an existing user_ the current access token can be added the oAuth flow 
 </a>
 ```
 
-This will use the user (entity) of that access token to link the oAuth account to.
+This will use the user (entity) of that access token to link the oAuth account to. Using the [authentication client](./client.md) you can get the current access token via `app.get('authentication')`:
+
+```js
+const { accessToken } = await app.get('authentication');
+```
 
 ### Redirects
 
@@ -113,11 +117,11 @@ The `redirect` configuration option is used to redirect back to the frontend app
 }
 ```
 
-Will redirect to `https://app.mydomain.com/#access_token=<user jwt>` or `https://app.mydomain.com/#error=<some error message>`. The [authentication client](./client.md) handles those redirect automatically. It can be customized with the [getRedirect()](#getredirect) method of the oAuth strategy.
+Will redirect to `https://app.mydomain.com/#access_token=<user jwt>` or `https://app.mydomain.com/#error=<some error message>`. Redirects can be customized with the [getRedirect()](#getredirect) method of the oAuth strategy. The [authentication client](./client.md) handles the default redirects automatically already.
 
-> __Note:__ The redirect is using a hash instead of a query string by default because it is not logged server side and can be easily manipulated on the client.
+> __Note:__ The redirect is using a hash instead of a query string by default because it is not logged server side and can be easily read on the client.
 
-If `redirect` option is not set, the authentication result data will be sent as JSON instead.
+If the `redirect` option is not set, the authentication result data will be sent as JSON instead.
 
 ## Setup (Express)
 

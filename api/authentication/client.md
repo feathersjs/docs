@@ -126,6 +126,10 @@ Returns the instance of the [AuthenticationClient](#authenticationclient).
 
 `app.authentication.reset()` resets the authentication state without explicitly logging out. Should not be called directly.
 
+### handleError()
+
+`app.authentication.handleError(error, type: 'authenticate'|'logout') -> Promise` handles any error happening in the `authenticate` or `logout` method. By default it removes the access token if the error is a `NotAuthenticate` error. Otherwise it does nothing.
+
 ### reAuthenticate(force)
 
 `app.authentication.reAuthenticate(force = false) -> Promise` will re-authenticate with the current access token from [app.authentication.getAccessToken()](). If `force` is set to `true` it will always reauthenticate, with the default `false` only when not already authenticated.

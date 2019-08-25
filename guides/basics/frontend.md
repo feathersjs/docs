@@ -4,11 +4,13 @@ As we have seen [when getting started](./starting.md), Feathers works great in t
 
 In this chapter we will create a real-time chat frontend with signup and login using modern plain JavaScript. It will only work in the latest versions of Chrome, Firefox, Safari and Edge since we won't be using a transpiler like Webpack or Babel (which is also why there won't be a TypeScript option). The final version can be found [here](https://github.com/feathersjs/feathers-chat/).
 
+![The Feathers chat application](./assets/feathers-chat.png)
+
 > __Note:__ We will not be using a frontend framework so we can focus on what Feathers is all about. Feathers is framework agnostic and can be used with any frontend framework like React, VueJS or Angular. For more information see the [frameworks section](../frameworks.md).
 
 ## Set up the page
 
-We already updated `public/index.html` in the [authentication chapter](./authentication.md) but here it is again in case you skipped that step:
+First, let's update `public/index.html` to initialize everything we need for the chat frontend:
 
 ```html
 <html lang="en">
@@ -340,9 +342,9 @@ login();
 
 ## Using the chat application
 
-That’s it. We now have a plain JavaScript real-time chat frontend with login and signup. This example demonstrates many of the core principles of how you interact with a Feathers API. You can log in with your GitHub account by following the "Login with GitHub" button, with the email (`hello@feathersjs.com`) and password (`supersecret`) from the user we registered in the [authentication chapter](./authentication.md) or sign up and log in with a different email address.
+That’s it. We now have a plain JavaScript real-time chat frontend with login and signup. This example demonstrates many of the basic principles of how you interact with a Feathers API. You can log in with your GitHub account by following the "Login with GitHub" button, with the email (`hello@feathersjs.com`) and password (`supersecret`) from the user we registered in the [authentication chapter](./authentication.md) or sign up and log in with a different email address.
 
-If you run into an issue, remember you can find a complete working example [here](https://github.com/feathersjs/feathers-chat).
+If you run into an issue, remember you can find the complete working example [here](https://github.com/feathersjs/feathers-chat).
 
 ## What's next?
 

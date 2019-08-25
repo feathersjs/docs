@@ -89,7 +89,7 @@ app.service('messages').on('created', message => {
 
 // A function that creates new messages and then logs
 // all existing messages
-(async () => {
+const main = async () => {
   // Create a new message on our message service
   await app.service('messages').create({
     text: 'Hello Feathers'
@@ -103,7 +103,9 @@ app.service('messages').on('created', message => {
   const messages = await app.service('messages').find();
 
   console.log('All messages', messages);
-})();
+};
+
+main();
 ```
 :::
 ::: tab "TypeScript"
@@ -155,7 +157,7 @@ app.service('messages').on('created', (message: Message) => {
 
 // A function that creates messages and then logs
 // all existing messages on the service
-(async () => {
+const main = async () => {
   // Create a new message on our message service
   await app.service('messages').create({
     text: 'Hello Feathers'
@@ -170,7 +172,9 @@ app.service('messages').on('created', (message: Message) => {
   const messages = await app.service('messages').find();
 
   console.log('All messages', messages);
-})();
+};
+
+main();
 ```
 :::
 ::::
@@ -436,7 +440,7 @@ Now we can look at one of the really cool features of Feathers. It works the sam
       document.getElementById('main').innerHTML += `<p>${message.text}</p>`;
     }
     
-    (async function main () {
+    const main = async () => {
       // Find all existing messages
       const messages = await app.service('messages').find();
 
@@ -445,7 +449,9 @@ Now we can look at one of the really cool features of Feathers. It works the sam
 
       // Add any newly created message to the list in real-time
       app.service('messages').on('created', addMessage);
-    })();
+    };
+
+    main();
   </script>
 </body>
 </html>

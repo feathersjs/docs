@@ -6,7 +6,7 @@ Welcome to the Feathers guides! This is the place to find all the resources to g
 
 ## The Feathers guide
 
-The Feathers guide will walk you through all the important parts of Feathers. The [quick start](./basics/starting.md) gets you up and running with a Feathers REST API and real-time website from scratch in less than 15 minutes to give you an idea what Feathers is about.
+The Feathers guide will walk you through all the important parts of Feathers. After [setting up](./bascis/setup.md), the [quick start](./basics/starting.md) gets you up and running with a Feathers REST API and real-time website in less than 15 minutes from scratch to give you an idea what Feathers is about.
 
 In the next part we will [generate an application](./basics/generator.md) and then walk through Feathers core concepts like services, hooks and authentication by building a complete real-time chat application with a REST API and a website that can register users and send and receive messages in real-time. We will also add a login with GitHub and write unit tests for our API.
 
@@ -15,6 +15,8 @@ In the next part we will [generate an application](./basics/generator.md) and th
 ## Follow up with
 
 [__The API documentation >__](../api/readme.md)
+
+[__Check out the cookbook for common tasks and patterns >__](./cookbook/readme.md)
 
 [__Diving into the Awesome FeathersJS Ecosystem >__](https://github.com/feathersjs/awesome-feathersjs)
 
