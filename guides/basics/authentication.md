@@ -143,14 +143,16 @@ const login = async () => {
   }
 };
 
-(async () => {
+const main = async () => {
   const auth = await login();
 
   console.log('User is authenticated', auth);
 
   // Log us out again
   await client.logout();
-})();
+};
+
+main();
 ```
 
 If you now open the console and visit [localhost:3030](http://localhost:3030) you will see that our user has been authenticated.

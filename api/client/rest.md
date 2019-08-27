@@ -286,6 +286,8 @@ POST /messages
 ]
 ```
 
+> **Note:** With a [database adapters](../databases/adapters.md) the [`multi` option](./databases/common.md) has to be set explicitly to support creating multiple entries.
+
 ### update
 
 Completely replace a single or multiple resources.
@@ -324,6 +326,8 @@ PATCH /messages?complete=false
 
 Will call `messages.patch(null, { complete: true }, { query: { complete: 'false' } })` on the server to change the status for all read messages.
 
+> **Note:** With a [database adapters](../databases/adapters.md) the [`multi` option](./databases/common.md) has to be set to support patching multiple entries.
+
 This is supported out of the box by the Feathers [database adapters](../databases/adapters.md) 
 
 ### remove
@@ -343,3 +347,5 @@ DELETE /messages?read=true
 ```
 
 Will call `messages.remove(null, { query: { read: 'true' } })` to delete all read messages.
+
+> **Note:** With a [database adapters](../databases/adapters.md) the [`multi` option](./databases/common.md) has to be set to support patching multiple entries.

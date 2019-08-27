@@ -114,6 +114,9 @@ module.exports = {
           text: 'Awesome Feathersjs',
           link: 'https://github.com/feathersjs/awesome-feathersjs'
         }, {
+          text: 'YouTube Playlist',
+          link: 'https://www.youtube.com/playlist?list=PLwSdIiqnDlf_lb5y1liQK2OW5daXYgKOe'
+        }, {
           text: 'Previous versions',
           items: [{
             text: 'Buzzard (v3)',

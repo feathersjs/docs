@@ -1,6 +1,6 @@
 # Getting ready
 
-Alright then! Let's learn what Feathers is all about! First, let's have a look at what we will do in this guide, what you should already know and what needs to be installed to use Feathers.
+Alright then! Let's learn what Feathers is all about. First we'll have a look at what we are going to do in this guide, what you should already know and what needs to be installed to use Feathers.
 
 ## What we will do
 
@@ -34,6 +34,8 @@ v12.0.0
 $ npm --version
 6.9.0
 ```
+
+> __Note:__ Running NodeJS and npm should not require admin or root privileges.
 
 Feathers does work in the browser and supports IE 10 and up. The browser examples used in the guides will however only work in the most recent versions of Chrome, Firefox, Safari and Edge.
 
