@@ -38,7 +38,7 @@ This will return something like this:
 
 Which means our user has been created successfully.
 
-> __Note:__ The password is stored securely in the database but for will never be included in a client response.
+> __Note:__ The password is stored securely in the database but will never be included in a response to an external client.
 
 ## Get a token
 
@@ -237,6 +237,8 @@ module.exports = app => {
 > __Pro tip:__ For more information about the oAuth flow and strategy see the [oAuth API documentation](../../api/authentication/oauth.md).
 
 When we set up the [authentication client in the browser](#browser-authentication) it can also already handle oAuth logins. To log in with GitHub, visit [localhost:3030/oauth/github](http://localhost:3030/oauth/github). It will redirect to GitHub and ask to authorize our application. If everything went well, you will see a user with your GitHub email address being logged in the console.
+
+> __Note:__ The authentication client will not use the token from the oAuth login if there is already another token logged in. See the [oAuth API](../../api/authentication/oauth.md) for how to link to an existing account.
 
 ## What's next?
 

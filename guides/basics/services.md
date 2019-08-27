@@ -14,7 +14,7 @@ In general, a service is an object or instance of [a class](https://developer.mo
   - Processing a payment
   - Returning the current weather for a location, etc.
 
-Protocol independent means that to a Feathers service it does not matter if it has been called internally, through a REST API, websockets, internally in our application or any other way.
+Protocol independent means that to a Feathers service it does not matter if it has been called through a REST API, websockets, internally in our application or any other way.
 
 ### Service methods
 
@@ -139,7 +139,7 @@ This is how Feathers does real-time and how we updated the messages automaticall
 
 ## Database adapters
 
-Now that we have all those service methods we could go ahead and implement any kind of custom logic. Very often, that means creating, reading, updating and removing data from a database and this is how Feathers can work with any database or backend.
+Now that we have all those service methods we could go ahead and implement any kind of custom logic using any backend. Very often, that means creating, reading, updating and removing data from a database.
 
 Writing all that code yourself for every service is pretty repetitive and cumbersome though which is why Feathers has a collection of pre-built services for different databases. They offer most of the basic functionality and can always be fully customized (as we will see in a bit). Feathers database adapters support a common [usage API](../../api/databases/common.md), pagination and [querying syntax](../../api/databases/querying.md) for many popular databases and NodeJS ORMs:
 
@@ -154,7 +154,7 @@ Writing all that code yourself for every service is pretty repetitive and cumber
 
 > __Pro tip:__ Each one of the linked adapters has a complete standalone REST API example in their readme.
 
-In this guide we will use  [NeDB](https://github.com/feathersjs-ecosystem/feathers-nedb/) which is a database that writes to the filesystem and does not require any additional setup. The users service that was created when we [generated our application](./generator.md) is already using it. In larger applications you probably want to choose something like PostgreSQL or MongoDB but NeDB is great for this guide because it gets us started quickly without having to learn and install a new database system.
+In this guide we will use  [NeDB](https://github.com/feathersjs-ecosystem/feathers-nedb/) which is a database that writes to the filesystem and does not require any additional setup. The users service that was created when we [generated our application](./generator.md) is already using it. In larger applications you probably want to choose something like PostgreSQL or MongoDB but NeDB is great for this guide because it gets us started quickly without having to learn and install a database system.
 
 > __Note:__ NeDB stores its data in our application directory under a `data/` folder. It uses a JSON append-only file format. This means that if you look at the database files directly you might see the same entry multiple times but it will always return the correct data.
 
