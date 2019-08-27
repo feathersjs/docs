@@ -4,23 +4,23 @@ This guide explains the new features and changes to migrate to the Feathers v4 (
 
 ## Versioning
 
-Instead of separate versioning, all modules in the `@feathersjs` namespace have been updated to use the same version number. This means that the current release (Crow) will be **Feathers v4** and using this release means all `@feathersjs/` module dependencies show a version of `4.x.x` (`4.0.0-pre.x` for prereleases).
+Instead of separate versioning, all modules in the `@feathersjs` namespace have been updated to use the same version number. This means that the current release (Crow) will be **Feathers v4** and using this release means all `@feathersjs/` module dependencies show a version of `4.x.x` (`4.0.0-pre.x` for prereleases). For historical reasons the first official version will be `4.3.0`.
 
 The [database adapters](../api/databases/adapters.md) will continue to be individually versioned, since they can be used with most Feathers versions from v2 and up.
 
 ## Auto upgrade
 
-The `@feathersjs/cli` comes with a command to automatically upgrade applications generated through `@feathersjs/cli` (v3.x) with most of the changes necessary for v4. For beta testing the v4 prerelease run:
+The `@feathersjs/cli` comes with a command to automatically upgrade applications generated through `@feathersjs/cli` (v3.x) with most of the changes necessary for v4. To update the CLI and upgrade your application run:
 
 ```
-npm i -g @feathersjs/cli@pre -g
+npm i -g @feathersjs/cli -g
 cd myapp
 feathers upgrade
 ```
 
 This will update the dependencies in `package.json`, update the `src/authentication.js` and `config/default.json` with the new authentication setup. The old contents will be kept in `src/authentication.backup.js` and `config/default.backup.json` but can be removed once upgrade is completed.
 
-Manual steps are necessary for
+__Manual steps are necessary for__
 
 - The `hashPassword()` hook in `service/users/users.hooks.js` which now requires the password field name (usually `hashPassword('password')`)
 - Configuring oAuth providers - see [oAuth API](../api/authentication/oauth.md)
