@@ -116,7 +116,7 @@ import feathers from '@feathersjs/feathers';
 
 // This is the interface for the message data
 interface Message {
-  id: number;
+  id?: number;
   text: string;
 }
 
@@ -130,7 +130,7 @@ class MessageService {
     return this.messages;
   }
 
-  async create (data: Partial<Message>) {
+  async create (data: Pick<Message, 'text'>) {
     // The new message is the data text with a unique identifier added
     // using the messages length since it changes whenever we add one
     const message: Message = {
@@ -215,7 +215,7 @@ In the following example we will take our existing service and use
 - `@feathersjs/socketio` which uses Socket.io to do the same as a websocket real-time API (as we will see in a bit this is where the `created` event we saw above comes in handy)
 
 ```sh
-$ npm install @feathersjs/socketio @feathersjs/express --save
+npm install @feathersjs/socketio @feathersjs/express --save
 ```
 
 :::: tabs :options="{ useUrlFragment: false }"
@@ -292,6 +292,7 @@ app.service('messages').create({
 ::: tab "TypeScript"
 ```js
 import feathers from '@feathersjs/feathers';
+import '@feathersjs/transport-commons';
 import express from '@feathersjs/express';
 import socketio from '@feathersjs/socketio';
 
@@ -311,7 +312,7 @@ class MessageService {
     return this.messages;
   }
 
-  async create (data: Partial<Message>) {
+  async create (data: Pick<Message, 'text'>) {
     // The new message is the data text with a unique identifier added
     // using the messages length since it changes whenever we add one
     const message: Message = {
