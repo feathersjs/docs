@@ -407,7 +407,7 @@ Now we can look at one of the really cool features of Feathers. It works the sam
     <h1>Welcome to Feathers</h1>
     <form class="form" onsubmit="sendMessage(event.preventDefault())">
       <input type="text" id="message-text" placeholder="Enter message here">
-      <button type="button" class="button button-primary">Send message</button>
+      <button type="submit" class="button button-primary">Send message</button>
     </form>
 
     <h2>Here are the current messages:</h2>
