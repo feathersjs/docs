@@ -158,6 +158,8 @@ app.use('/messages', {
 
 > **Important:** A successful `create` method call emits the [`created` service event](./events.md#created).
 
+> **Note:** With a [database adapters](./databases/adapters.md) `data` can be an array but the [`multi` option](./databases/common.md) has to be set.
+
 
 ### .update(id, data, params)
 
@@ -165,9 +167,13 @@ app.use('/messages', {
 
 > **Important:** A successful `update` method call emits the [`updated` service event](./events.md#updated-patched).
 
+> **Note:** The [database adapters](./databases/adapters.md) do not support completely replacing multiple entries. 
+
 ### .patch(id, data, params)
 
 `patch(id, data, params) -> Promise` - Merges the existing data of the resource identified by `id` with the new `data`. `id` can also be `null` indicating that multiple resources should be patched with `params.query` containing the query criteria.
+
+> **Note:** With a [database adapters](./databases/adapters.md) the [`multi` option](./databases/common.md) has to be set explicitly to support patching multiple entries.
 
 The method should return with the complete, updated resource data. Implement `patch` additionally (or instead of) `update` if you want to distinguish between partial and full updates and support the `PATCH` HTTP method.
 
@@ -179,6 +185,8 @@ The method should return with the complete, updated resource data. Implement `pa
 `service.remove(id, params) -> Promise` - Removes the resource with `id`. The method should return with the removed data. `id` can also be `null`, which indicates the deletion of multiple resources, with `params.query` containing the query criteria.
 
 > **Important:** A successful `remove` method call emits the [`removed` service event](./events.md#removed).
+
+> **Note:** With a [database adapters](./databases/adapters.md) the [`multi` option](./databases/common.md) has to be set explicitly to support removing multiple entries.
 
 
 ### .setup(app, path)
