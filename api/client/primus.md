@@ -30,9 +30,8 @@ const socket = new Socket('http://api.feathersjs.com');
 
 ## @feathersjs/primus-client
 
-[![GitHub stars](https://img.shields.io/github/stars/feathersjs/primus-client.png?style=social&label=Star)](https://github.com/feathersjs/primus-client/)
-[![npm version](https://img.shields.io/npm/v/@feathersjs/primus-client.png?style=flat-square)](https://www.npmjs.com/package/@feathersjs/primus-client)
-[![Changelog](https://img.shields.io/badge/changelog-.md-blue.png?style=flat-square)](https://github.com/feathersjs/primus-client/blob/master/CHANGELOG.md)
+[![npm version](https://img.shields.io/npm/v/@feathersjs/client.svg?style=flat-square)](https://www.npmjs.com/package/@feathersjs/primus-client)
+[![Changelog](https://img.shields.io/badge/changelog-.md-blue.svg?style=flat-square)](https://github.com/feathersjs/feathers/blob/master/packages/primus-client/CHANGELOG.md)
 
 ```
 $ npm install @feathersjs/primus-client --save
@@ -40,13 +39,16 @@ $ npm install @feathersjs/primus-client --save
 
 The `@feathersjs/primus-client` module allows to connect to services exposed through the [Primus server](../primus.md) via the configured websocket library.
 
-> **Important:** Primus sockets are also used to *call* service methods. Using sockets for both, calling methods and receiving real-time events is generally faster than using [REST](./express.md) and there is no need to use both, REST and websockets in the same client application at the same time.
+> **Important:** Primus sockets are also used to *call* service methods. Using sockets for both, calling methods and receiving real-time events is generally faster than using [REST](../express.md) and there is no need to use both, REST and websockets in the same client application at the same time.
 
 ### `primus(socket)`
 
 Initialize the Primus client using a given socket and the default options.
 
-{% codetabs name="Modular", type="js" -%}
+:::: tabs :options="{ useUrlFragment: false }"
+
+::: tab "Modular"
+``` javascript
 const feathers = require('@feathersjs/feathers');
 const primusClient = require('@feathersjs/primus-client');
 const socket = new Primus('http://api.my-feathers-server.com');
@@ -63,7 +65,11 @@ app.service('messages')
 app.service('messages').create({
   text: 'A message from a REST client'
 });
-{%- language name="@feathersjs/client", type="html" -%}
+```
+:::
+
+::: tab "@feathersjs/client"
+``` html
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/core-js/2.1.4/core.min.js"></script>
 <script src="//unpkg.com/@feathersjs/client@^3.0.0/dist/feathers.js"></script>
 <script type="text/javascript" src="primus/primus.js"></script>
@@ -84,7 +90,10 @@ app.service('messages').create({
     text: 'A message from a REST client'
   });
 </script>
-{%- endcodetabs %}
+```
+:::
+
+::::
 
 ### `primus(socket, options)`
 
@@ -127,22 +136,25 @@ See the [Primus docs](https://github.com/primus/primus#connecting-from-the-brows
 
 Service methods can be called by emitting a `<servicepath>::<methodname>` event with the method parameters. `servicepath` is the name the service has been registered with (in `app.use`) without leading or trailing slashes. An optional callback following the `function(error, data)` Node convention will be called with the result of the method call or any errors that might have occurred.
 
-`params` will be set as `params.query` in the service method call. Other service parameters can be set through a [Primus middleware](../real-time/primus.md).
+`params` will be set as `params.query` in the service method call. Other service parameters can be set through a [Primus middleware](../primus.md).
 
 ### Authentication
 
-Sockets can be authenticated by sending the `authenticate` event with the `strategy` and the payload. For specific examples see the "Direct Connection" section in the [local](./local.md) and [jwt](./jwt.md) authentication chapters.
+Sockets will be authenticated automatically by calling [.create](#create) on the [authentication service](../authentication/service.md):
 
 ```js
-socket.send('authenticate', {
-  strategy: 'strategyname',
-  ... otherData
-}, function(message, data) {
-  console.log(message); // message will be null
-  console.log(data); // data will be {"accessToken": "your token"}
+socket.send('create', 'authentication', {
+  strategy: 'local',
+  email: 'hello@feathersjs.com',
+  password: 'supersecret'
+}, function(error, authResult) {
+  console.log(authResult); 
+  // authResult will be {"accessToken": "your token", "user": user }
   // You can now send authenticated messages to the server
 });
 ```
+
+> __Important:__ When a socket disconnects and then reconnects, it has to be authenticated again before making any other request that requires authentication. This is usually done with the [jwt strategy](../authentication/jwt.md) using the `accessToken` from the `authResult`. The [authentication client](../authentication/client.md) handles this already automatically.
 
 ### `find`
 
@@ -248,8 +260,6 @@ socket.send('patch', 'messages', null, {
 ```
 
 Will call `app.service('messages').patch(null, { complete: true }, { query: { complete: false } })` on the server to change the status for all read app.service('messages').
-
-This is supported out of the box by the Feathers [database adapters](../databases/readme.md) 
 
 ### remove
 

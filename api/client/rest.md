@@ -1,18 +1,17 @@
 # REST Client
 
-> **Note:** For directly using a Feathers REST API (via HTTP) without using Feathers on the client see the [HTTP API](#http-api) section.
-
 ## @feathersjs/rest-client
 
-[![GitHub stars](https://img.shields.io/github/stars/feathersjs/rest-client.png?style=social&label=Star)](https://github.com/feathersjs/rest-client/)
-[![npm version](https://img.shields.io/npm/v/@feathersjs/rest-client.png?style=flat-square)](https://www.npmjs.com/package/@feathersjs/rest-client)
-[![Changelog](https://img.shields.io/badge/changelog-.md-blue.png?style=flat-square)](https://github.com/feathersjs/rest-client/blob/master/CHANGELOG.md)
+[![npm version](https://img.shields.io/npm/v/@feathersjs/client.svg?style=flat-square)](https://www.npmjs.com/package/@feathersjs/rest-client)
+[![Changelog](https://img.shields.io/badge/changelog-.md-blue.svg?style=flat-square)](https://github.com/feathersjs/feathers/blob/master/packages/rest-client/CHANGELOG.md)
 
 ```
 $ npm install @feathersjs/rest-client --save
 ```
 
 `@feathersjs/rest-client` allows to connect to a service exposed through the [Express REST API](../express.md#expressrest) using [jQuery](https://jquery.com/), [request](https://github.com/request/request), [Superagent](http://visionmedia.github.io/superagent/), [Axios](https://github.com/mzabriskie/axios) or [Fetch](https://facebook.github.io/react-native/docs/network.html) as the AJAX library.
+
+> **Note:** For directly using a Feathers REST API (via HTTP) without using Feathers on the client see the [HTTP API](#http-api) section.
 
 <!-- -->
 
@@ -26,7 +25,10 @@ $ npm install @feathersjs/rest-client --save
 
 REST client services can be initialized by loading `@feathersjs/rest-client` and initializing a client object with a base URL:
 
-{% codetabs name="Modular", type="js" -%}
+:::: tabs :options="{ useUrlFragment: false }"
+
+::: tab "Modular"
+``` javascript
 const feathers = require('@feathersjs/feathers');
 const rest = require('@feathersjs/rest-client');
 
@@ -43,7 +45,11 @@ app.configure(restClient.fetch(window.fetch));
 
 // Connect to the `http://feathers-api.com/messages` service
 const messages = app.service('messages');
-{%- language name="@feathersjs/client", type="html" -%}
+```
+:::
+
+::: tab "@feathersjs/client"
+``` html
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/core-js/2.1.4/core.min.js"></script>
 <script src="//unpkg.com/@feathersjs/client@^3.0.0/dist/feathers.js"></script>
 <script>
@@ -57,7 +63,10 @@ const messages = app.service('messages');
   // Connect to the `http://feathers-api.com/messages` service
   const messages = app.service('messages');
 </script>
-{%- endcodetabs %}
+```
+:::
+
+::::
 
 <!-- -->
 
@@ -180,7 +189,16 @@ You can communicate with a Feathers REST API using any other HTTP REST client. T
 
 All query parameters in a URL will be set as `params.query` on the server. Other service parameters can be set through [hooks](../hooks.md) and [Express middleware](../express.md). URL query parameter values will always be strings. Conversion (e.g. the string `'true'` to boolean `true`) can be done in a hook as well.
 
-The body type for `POST`, `PUT` and `PATCH` requests is determined by the Express [body-parser](http://expressjs.com/en/4x/api.html#express.json) middleware which has to be registered *before* any service. You should also make sure you are setting your `Accept` header to `application/json`.
+The body type for `POST`, `PUT` and `PATCH` requests is determined by the Express [body-parser](http://expressjs.com/en/4x/api.html#express.json) middleware which has to be registered *before* any service. You should also make sure you are setting your `Accept` header to `application/json`. Here is the mapping of service methods to REST API calls:
+
+| Service method  | HTTP method | Path        |
+|-----------------|-------------|-------------|
+| .find()         | GET         | /messages   |
+| .get()          | GET         | /messages/1 |
+| .create()       | POST        | /messages   |
+| .update()       | PUT         | /messages/1 |
+| .patch()        | PATCH       | /messages/1 |
+| .remove()       | DELETE      | /messages/1 |
 
 ### Authentication
 
@@ -201,13 +219,13 @@ Here is what that looks like with curl:
 curl -H "Content-Type: application/json" -X POST -d '{"strategy":"local","email":"your email","password":"your password"}' http://localhost:3030/authentication
 ```
 
-Then to authenticate subsequent requests, add the returned `accessToken` to the `Authorization` header:
+Then to authenticate subsequent requests, add the returned `accessToken` to the `Authorization` header as `Bearer <your access token>`:
 
 ```bash
-curl -H "Content-Type: application/json" -H "Authorization: <your access token>" -X POST http://localhost:3030/authentication
+curl -H "Content-Type: application/json" -H "Authorization: Bearer <your access token>" -X POST http://localhost:3030/authentication
 ```
 
-Also see the [JWT](../authentication/jwt.md) and [local](../authentication/local.md) authentication chapter.
+For more information see the [authentication API documentation](../readme.md).
 
 ### find
 
@@ -268,6 +286,8 @@ POST /messages
 ]
 ```
 
+> **Note:** With a [database adapters](../databases/adapters.md) the [`multi` option](./databases/common.md) has to be set explicitly to support creating multiple entries.
+
 ### update
 
 Completely replace a single or multiple resources.
@@ -306,6 +326,8 @@ PATCH /messages?complete=false
 
 Will call `messages.patch(null, { complete: true }, { query: { complete: 'false' } })` on the server to change the status for all read messages.
 
+> **Note:** With a [database adapters](../databases/adapters.md) the [`multi` option](./databases/common.md) has to be set to support patching multiple entries.
+
 This is supported out of the box by the Feathers [database adapters](../databases/adapters.md) 
 
 ### remove
@@ -325,3 +347,5 @@ DELETE /messages?read=true
 ```
 
 Will call `messages.remove(null, { query: { read: 'true' } })` to delete all read messages.
+
+> **Note:** With a [database adapters](../databases/adapters.md) the [`multi` option](./databases/common.md) has to be set to support patching multiple entries.

@@ -1,7 +1,7 @@
 # Socket.io
 
-[![npm version](https://img.shields.io/npm/v/@feathersjs/socketio.png?style=flat-square)](https://www.npmjs.com/package/@feathersjs/socketio)
-[![Changelog](https://img.shields.io/badge/changelog-.md-blue.png?style=flat-square)](https://github.com/feathersjs/feathers/blob/master/packages/socketio/CHANGELOG.md)
+[![npm version](https://img.shields.io/npm/v/@feathersjs/socketio.svg?style=flat-square)](https://www.npmjs.com/package/@feathersjs/socketio)
+[![Changelog](https://img.shields.io/badge/changelog-.md-blue.svg?style=flat-square)](https://github.com/feathersjs/feathers/blob/master/packages/socketio/CHANGELOG.md)
 
 ```
 $ npm install @feathersjs/socketio --save
@@ -17,7 +17,7 @@ The [@feathersjs/socketio](https://github.com/feathersjs/socketio) module allows
 
 ### app.configure(socketio())
 
-Sets up the Socket.io transport with the default configuration using either the server provided by [app.listen](./application.md#listen) or passed in [app.setup(server)](./application.md#setup).
+Sets up the Socket.io transport with the default configuration using either the server provided by [app.listen](./application.md#listenport) or passed in [app.setup(server)](./application.md#setupserver).
 
 ```js
 const feathers = require('@feathersjs/feathers');
@@ -119,7 +119,7 @@ app.use('messages', {
 });
 ```
 
-> _Note:_ `socket.feathers` is the same object as the `connection` in a [channel](./channels.md). `socket.request` and `socket.handshake` contains information the HTTP request that initiated the connection (see the [Socket.io documentation](https://socket.io/docs/server-api/#socket-request)).
+> __Note:__ `socket.feathers` is the same object as the `connection` in a [channel](./channels.md). `socket.request` and `socket.handshake` contains information the HTTP request that initiated the connection (see the [Socket.io documentation](https://socket.io/docs/server-api/#socket-request)).
 
 ### params.provider
 

@@ -1,24 +1,27 @@
-# Authentication Client
+# Client
 
-[![npm version](https://img.shields.io/npm/v/@feathersjs/authentication-client.png?style=flat-square)](https://www.npmjs.com/package/@feathersjs/authentication-client)
-[![Changelog](https://img.shields.io/badge/changelog-.md-blue.png?style=flat-square)](https://github.com/feathersjs/feathers/blob/master/packages/authentication-client/CHANGELOG.md)
+[![npm version](https://img.shields.io/npm/v/@feathersjs/authentication-client.svg?style=flat-square)](https://www.npmjs.com/package/@feathersjs/authentication-client)
+[![Changelog](https://img.shields.io/badge/changelog-.md-blue.svg?style=flat-square)](https://github.com/feathersjs/feathers/blob/master/packages/authentication-client/CHANGELOG.md)
 
 ```
 npm install @feathersjs/authentication-client --save
 ```
 
-The [@feathersjs/authentication-client](https://github.com/feathersjs/authentication-client) module allows you to easily authenticate against a Feathers server. It is not required, but makes it easier to implement authentication in your client by automatically storing and sending the JWT access token and handling re-authenticating when a websocket disconnects.
+The [@feathersjs/authentication-client](https://github.com/feathersjs/authentication-client) module allows you to easily authenticate against a Feathers server. It is not required, but makes it easier to implement authentication in your client by automatically storing and sending the access token and handling re-authenticating when a websocket disconnects.
 
-This module contains:
+## Configuration
 
-- [The main entry function](#configuration)
-- [Additional feathersClient methods](#additional-feathersclient-methods)
-- [Some helpful hooks](#hooks)
+- `storage` (default: `localStorage` if available, `MemoryStorage` otherwise) - The storage to store the access token
+- `path` (default: '/authentication') - The path of the authentication service
+- `locationKey` (default: `'access_token'`) - The name of the window hash parameter to parse for an access token from the `window.location`. Usually used by the oAuth flow.
+- `locationErrorKey` (default: `'error') - The name of the window hash parameter to parse for authentication errors. Usually used by the oAuth flow.
+- `jwtStrategy` (default: `'jwt'`) - The access token authentication strategy
+- `storageKey` (default: `'feathers-jwt'`) - Key for storing the token in e.g. localStorage
+- `header` (default: `'Authorization'`) - Name of the accessToken header
+- `scheme` (default: `'Bearer'`) - The HTTP header scheme
+- Authentication (default: `AuthenticationClient`) - Allows to provide a [customized authentication client class](#customization)
 
-
-## app.configure(auth(options))
-
-Setup is done the same as all Feathers plugins, using the `configure` method:
+## Setup
 
 ```js
 const feathers = require('@feathersjs/feathers');
@@ -36,50 +39,24 @@ app.configure(socketio(socket));
 app.configure(auth(options))
 ```
 
-**> The [transports plugins](../client.md) (Rest, Socket, Primus...) must have been initialized previously to the authentication plugin.**
+## app.reAuthenticate()
 
-## Options
-
-The following default options will be mixed in with the settings you pass in when configuring authentication. It will set the mixed options back to to the app so that they are available at any time by `app.get('auth')`. They can all be overridden.
+`app.reAuthenticate() -> Promise` will try to authenticate using the access token from the storage or the window location (e.g. after a successful [oAuth](./oauth.md) login). This is normally called to either show your application (when successful) or showing a login page or redirecting to the appropriate oAuth link.
 
 ```js
-{
-  header: 'Authorization', // the default authorization header for REST
-  prefix: '', // if set will add a prefix to the header value. for example if prefix was 'JWT' then the header would be 'Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOi...'
-  path: '/authentication', // the server-side authentication service path
-  jwtStrategy: 'jwt', // the name of the JWT authentication strategy 
-  entity: 'user', // the entity you are authenticating (ie. a users)
-  service: 'users', // the service to look up the entity
-  cookie: 'feathers-jwt', // the name of the cookie to parse the JWT from when cookies are enabled server side
-  storageKey: 'feathers-jwt', // the key to store the accessToken in localstorage or AsyncStorage on React Native
-  storage: undefined // Passing a WebStorage-compatible object to enable automatic storage on the client.
-}
-```
-
-To enable storing the JWT make sure to provide a `storage` when configuring the plugin. The following storage options are available:
-
-- `window.localStorage` in the browser to use the browsers [localStorage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage)
-- [AsyncStorage](https://facebook.github.io/react-native/docs/asyncstorage.html) for _React Native_
-- [localForage](https://www.npmjs.com/package/localforage) which helps deal with older browsers and browsers in Incognito / Private Browsing mode.
-- [cookie-storage](https://www.npmjs.com/package/cookie-storage) uses cookies. It can be useful on devices that don't support `localStorage`.
-
-## app.authenticate()
-
-`app.authenticate() -> Promise` with no arguments will try to authenticate using the JWT from the `storage`. This is normally called to either show your application (when successful) or showing a login page or redirecting to the appropriate oAuth link.
-
-```js
-app.authenticate().then(() => {
+app.reAuthenticate().then(() => {
   // show application page
 }).catch(() => {
   // show login page
-})
+});
 ```
 
-> __Important:__ `app.authenticate()` __has__ to be called when you want to use the token from storage and __only once__ when the application initializes. Once successful, all subsequent requests will send their authentication information automatically.
+> __Important:__ `app.reAuthenticate()` has to be called when you want to use the token from storage and __only once__ when the application initializes. Once successful, all subsequent requests will send their authentication information automatically.
 
-## app.authenticate(options)
 
-`app.authenticate(options) -> Promise` will try to authenticate with a Feathers server by passing a `strategy` and other properties as credentials. It will use whichever transport has been setup on the client (@feathersjs/rest-client, @feathersjs/socketio-client, or @feathersjs/primus-client).
+## app.authenticate(data)
+
+`app.authenticate(data) -> Promise` will try to authenticate with a Feathers server by passing a `strategy` and other properties as credentials.
 
 ```js
 // Authenticate with the local email/password strategy 
@@ -93,110 +70,115 @@ app.authenticate({
   // Show login page (potentially with `e.message`)
   console.error('Authentication error', e);
 });
-
-app.authenticate({
-  strategy: 'jwt', 
-  accessToken: '<the.jwt.token.string>'
-}).then(() => {
-  // JWT authentication successful
-}).catch(e => {
-  console.error('Authentication error', e);
-  // Show login page
-});
 ```
 
 - `data {Object}` - of the format `{strategy [, ...otherProps]}`
   - `strategy {String}` - the name of the strategy to be used to authenticate.  Required.
-  - `...otherProps {Properties} ` vary depending on the chosen strategy. Above is an example of using the `jwt` strategy.  Below is one for the `local` strategy.
+  - `...otherProps {Properties} ` vary depending on the chosen strategy. Above is an example of using the `local` strategy.
 
 ## app.logout()
 
-Removes the JWT accessToken from storage on the client.  It also calls the `remove` method of the [/authentication service](./server.md) on the Feathers server.
+Removes the access token from storage on the client. It also calls the `remove` method of the [authentication service](./service.md).
 
-## app.passport
+## app.get('authentication')
 
-`app.passport` contains helper functions to work with the JWT.
-
-### app.passport.getJWT()
-  
-Pull the JWT from `storage` or the cookie. Returns a Promise.
-
-### app.passport.verifyJWT(token)
-
-Verify that a JWT is not expired and decode it to get the payload. Returns a Promise.
-
-### app.passport.payloadIsValid(token)
-
-Synchronously verify that a token has not expired. Returns a Boolean.
-
-## Authentication Events
-On the client authentication events are emitted on the app object whenever a client successfully authenticates or "logs out".
-These events are emitted on the client.
-
-## app.on('authenticated', callback)
-## app.on('logout', callback)
-## app.on('reauthentication-error', errorHandler)
-
-In the event that your server goes down or the client loses connectivity, it will automatically handle attempting to re-authenticate the socket when the client regains connectivity with the server. In order to handle an authentication failure during automatic re-authentication you need to implement the following event listener:
+`app.get('authentication') -> Promise` is a Promise that resolves with the current authentication information. For most strategies this is the best place to get the currently authenticated user:
 
 ```js
-const errorHandler = error => {
-  app.authenticate({
-    strategy: 'local',
-    email: 'admin@feathersjs.com',
-    password: 'admin'
-  }).then(response => {
-    // You are now authenticated again
-  });
-};
+const { user } = await app.get('authentication');
+```
 
-// Handle when auth fails during a reconnect or a transport upgrade
-app.on('reauthentication-error', errorHandler)
+## app.authentication
+
+Returns the instance of the [AuthenticationClient](#authenticationclient).
+
+## AuthenticationClient
+
+### service
+
+`app.authentication.service` returns an instance of the authentication client service, normally `app.service('authentication')`.
+
+### storage
+
+`app.authentication.storage` returns the authentication client storage instance.
+
+### handleSocket(socket)
+
+`app.authentication.handleSocket(socket) -> void` makes sure that a websocket real-time connection is always reauthenticated before making any other request.
+
+### getFromLocation(location)
+
+`app.authentication.getFromLocation(location) -> Promise` tries to retrieve an access token from `window.location`. This usually means the `access_token` in the hash set by the [oAuth authentication strategy](./oauth.md).
+
+### setAccessToken(token)
+
+`app.authentication.setAccessToken(token) -> Promise` sets the access token in the storage (normally `feathers-jwt` in `window.localStorage`).
+
+### getAccessToken()
+
+`app.authentication.getAccessToken() -> Promise` returns the access token from `storage`. If not found it will try to get the access token via [getFromLocation()]() or return `null` if neither was successful.
+
+### removeAccessToken()
+
+`app.authentication.removeAccessToken() -> Promise` removes the access token from the storage.
+
+### reset()
+
+`app.authentication.reset()` resets the authentication state without explicitly logging out. Should not be called directly.
+
+### handleError()
+
+`app.authentication.handleError(error, type: 'authenticate'|'logout') -> Promise` handles any error happening in the `authenticate` or `logout` method. By default it removes the access token if the error is a `NotAuthenticate` error. Otherwise it does nothing.
+
+### reAuthenticate(force)
+
+`app.authentication.reAuthenticate(force = false) -> Promise` will re-authenticate with the current access token from [app.authentication.getAccessToken()](). If `force` is set to `true` it will always reauthenticate, with the default `false` only when not already authenticated.
+
+### authenticate()
+
+The internal method called when using [app.authenticate()](#app-authenticate).
+
+### logout()
+
+The internal method called when using [app.logout()](#app-logout).
+
+## Customization
+
+The [AuthenticationClient]() can be extended to provide custom functionality and then passed during initialization:
+
+```js
+const feathers = require('@feathersjs/feathers');
+const socketio = require('@feathersjs/socketio-client');
+const io = require('socket.io-client');
+const auth = require('@feathersjs/authentication-client');
+
+const socket = io('http://api.feathersjs.com');
+const app = feathers();
+
+class MyAuthenticationClient extends auth.AuthenticationClient {
+  getFromLocation(location) {
+    // Do custom location things here
+    return super.getFromLocation(location);
+  } 
+}
+
+// Setup the transport (Rest, Socket, etc.) here
+app.configure(socketio(socket));
+
+// Pass the custom authentication client class as the `Authenticaiton` option
+app.configure(auth({
+  Authentication: MyAuthenticationClient
+}))
 ```
 
 ## Hooks
 
-There are 3 hooks. They are really meant for internal use and you shouldn't need to worry about them very often.
+The following hooks are added to the client side application by default.
 
-- `populateAccessToken` - Takes the token and puts in on `hooks.params.accessToken` in case you need it in one of your client side services or hooks
-- `populateHeader` - Add the accessToken to the authorization header
-- `populateEntity` - Experimental. Populate an entity based on the JWT payload.
+### authentication
 
-## Complete Example
+Hook that ensures for every request that authentication is completed and successful. It also makes the authentication information available in the client side `params` (e.g. `params.user`).
 
-Here's an example of a Feathers client that uses `@feathersjs/authentication-client`. 
+### populateHeader
 
-```js
-const feathers = require('@feathersjs/feathers');
-const rest = require('@feathersjs/rest-client');
-const auth = require('@feathersjs/authentication-client');
-
-const superagent = require('superagent');
-const localStorage = require('localstorage-memory');
-
-const feathersClient = feathers();
-
-feathersClient.configure(rest('http://localhost:3030').superagent(superagent))
-  .configure(auth({ storage: localStorage }));
-
-feathersClient.authenticate({
-  strategy: 'local',
-  email: 'admin@feathersjs.com',
-  password: 'admin'
-})
-.then(response => {
-  console.log('Authenticated!', response);
-  return feathersClient.passport.verifyJWT(response.accessToken);
-})
-.then(payload => {
-  console.log('JWT Payload', payload);
-  return feathersClient.service('users').get(payload.userId);
-})
-.then(user => {
-  feathersClient.set('user', user);
-  console.log('User', feathersClient.get('user'));
-})
-.catch(function(error){
-  console.error('Error authenticating!', error);
-});
-```
+Adds the appropriate `Authorization` header for any REST request.

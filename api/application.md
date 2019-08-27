@@ -1,14 +1,13 @@
 # Application
 
-[![GitHub stars](https://img.shields.io/github/stars/feathersjs/feathers.png?style=social&label=Star)](https://github.com/feathersjs/feathers/)
-[![npm version](https://img.shields.io/npm/v/feathers.png?style=flat-square)](https://www.npmjs.com/package/feathers)
-[![Changelog](https://img.shields.io/badge/changelog-.md-blue.png?style=flat-square)](https://github.com/feathersjs/feathers/blob/master/packages/feathers/CHANGELOG.md)
+[![npm version](https://img.shields.io/npm/v/feathers.svg?style=flat-square)](https://www.npmjs.com/package/feathers)
+[![Changelog](https://img.shields.io/badge/changelog-.md-blue.svg?style=flat-square)](https://github.com/feathersjs/feathers/blob/master/packages/feathers/CHANGELOG.md)
 
 ```
 $ npm install @feathersjs/feathers --save
 ```
 
-The core `@feathersjs/feathers` module provides the ability to initialize new Feathers application instances. It works in Node, React Native and the browser (see the [client](./client.md) chapter for more information). Each instance allows for registration and retrieval of [services](./services.md), [hooks](./hooks.md), plugin configuration, and getting and setting configuration options. An initialized Feathers application is referred to as the **app object**.
+The core `@feathersjs/feathers` module provides the ability to initialize a new Feathers application instance. It works in Node, React Native and the browser (see the [client](./client.md) chapter for more information). Each instance allows for registration and retrieval of [services](./services.md), [hooks](./hooks.md), plugin configuration, and getting and setting configuration options. An initialized Feathers application is referred to as the **app object**.
 
 ```js
 const feathers = require('@feathersjs/feathers');
@@ -23,11 +22,11 @@ const app = feathers();
 ```js
 // Add a service.
 app.use('/messages', {
-  get(id) {
-    return Promise.resolve({
+  async get(id) {
+    return {
       id,
       text: `This is the ${id} message!`
-    });
+    };
   }
 });
 ```
@@ -41,11 +40,13 @@ app.use('/messages', {
 ```js
 const messageService = app.service('messages');
 
-messageService.get('test').then(message => console.log(message));
+const message = await messageService.get('test');
+
+console.log(message);
 
 app.use('/my/todos', {
-  create(data) {
-    return Promise.resolve(data);
+  async create(data) {
+    return data;
   }
 });
 
@@ -78,7 +79,7 @@ app.configure(setupService);
 
 ## .listen(port)
 
-`app.listen([port]) -> HTTPServer` starts the application on the given port. It will set up all configured transports (if any) and then run `app.setup(server)` (see below) with the server object and then return the server object.
+`app.listen([port]) -> HTTPServer` starts the application on the given port. It will set up all configured transports (if any) and then run [app.setup(server)](#setup-server) with the server object and then return the server object.
 
 `listen` will only be available if a server side transport (REST, Socket.io or Primus) has been configured.
 
@@ -123,7 +124,7 @@ app.emit('myevent', {
 app.on('myevent', data => console.log('myevent happened', data));
 ```
 
-## .removeListener(eventname, [ listener ])
+## .removeListener(eventname)
 
 Provided by the core [NodeJS EventEmitter .removeListener](https://nodejs.org/api/events.html#events_emitter_removelistener_eventname_listener). Removes all or the given listener for `eventname`.
 
@@ -143,8 +144,8 @@ app.mixins.push((service, path) => {
 });
 
 app.use('/todos', {
-  get(id) {
-    return Promise.resolve({ id });
+  async get(id) {
+    return { id };
   }
 });
 

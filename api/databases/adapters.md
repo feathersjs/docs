@@ -1,4 +1,4 @@
-# Database adapters
+# Overview
 
 Feathers database adapters are modules that provide [services](../services.md) that implement standard [CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete) functionality for a specific database using a [common API](./common.md) for initialization and settings and providing a [common query syntax](./querying.md).
 
@@ -14,7 +14,7 @@ The following databases are supported:
 | MongoDB | [feathers-mongodb](https://github.com/feathersjs-ecosystem/feathers-mongodb), [feathers-mongoose](https://github.com/feathersjs-ecosystem/feathers-mongoose) |
 | MySQL, PostgreSQL, MariaDB, SQLite, MSSQL | [feathers-knex](https://github.com/feathersjs-ecosystem/feathers-knex), [feathers-sequelize](https://github.com/feathersjs-ecosystem/feathers-sequelize) |
 | Elasticsearch | [feathers-elasticsearch](https://github.com/feathersjs-ecosystem/feathers-elasticsearch) |
-| RethinkDB | [feathers-rethinkdb](https://github.com/feathersjs-ecosystem/feathers-rethinkdb) |
+| Objection | [feathers-objection](https://github.com/feathersjs-ecosystem/feathers-objection) |
 
 ## Memory/Filesystem
 
@@ -33,4 +33,3 @@ The following databases are supported:
 - [feathers-mongoose](https://github.com/feathersjs-ecosystem/feathers-mongoose) - A database adapter for [Mongoose](http://mongoosejs.com/) an Object Modelling library for NodeJS and MongoDB
 - [feathers-mongodb](https://github.com/feathersjs-ecosystem/feathers-mongodb) - A database adapter for [MongoDB](https://www.mongodb.com/) using the official NodeJS database driver
 - [feathers-elasticsearch](https://github.com/feathersjs-ecosystem/feathers-elasticsearch) - A database adapter for [Elasticsearch](https://github.com/elastic/elasticsearch)
-- [feathers-rethinkdb](https://github.com/feathersjs-ecosystem/feathers-rethinkdb) - A database adapter for [RethinkDB](https://www.rethinkdb.com/) a real-time database.

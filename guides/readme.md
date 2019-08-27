@@ -1,23 +1,31 @@
-# Guides
+# Getting started with Feathers
 
-[**The basics**](./basics/readme.md)
+Welcome to the Feathers guides! This is the place to find all the resources to get started with Feathers.
 
-Learn about Feathers core concepts and how they fit together by going from your first Feathers application to a database backed REST and real-time API.
+<img style="margin: 2em 0;" src="/img/key-image-horizontal.png" alt="Feathers key image">
 
-[**A Chat Application**](./chat/readme.md)
+## The Feathers guide
 
-Learn how to create a chat REST and real-time API complete with authentication and data processing and how to use Feathers on the client in a simple browser chat application.
+The Feathers guide will walk you through all the important parts of Feathers. After [setting up](./bascis/setup.md), the [quick start](./basics/starting.md) gets you up and running with a Feathers REST API and real-time website in less than 15 minutes from scratch to give you an idea what Feathers is about.
 
-[**Authentication**](./auth/readme.md)
+In the next parts we will [generate an application](./basics/generator.md) and then walk through Feathers core concepts like services, hooks and authentication by building a complete real-time chat application with a REST API and a website that can register users and send and receive messages in real-time. We will also add a login with GitHub and write unit tests for our API.
 
-Learn how to add local (username & password), OAuth1, and OAuth2 authentication to your Feathers Applications and some recipes.
+[Get started with the Feathers guide >](./basics/setup.md)
 
-[**Advanced topics**](./advanced/readme.md)
+## Follow up with
 
-Guides for more advanced Feathers topics like debugging, file uploads and more.
+[The API documentation >](../api/readme.md)
 
-[**The FeathersJS Youtube playlist**](https://www.youtube.com/playlist?list=PLwSdIiqnDlf_lb5y1liQK2OW5daXYgKOe)
+[The cookbook for common tasks and patterns >](./cookbook/readme.md)
 
-[![IMAGE ALT TEXT](https://img.youtube.com/vi/CuM4vLkBaik/0.jpg)](https://www.youtube.com/playlist?list=PLwSdIiqnDlf_lb5y1liQK2OW5daXYgKOe "The FeathersJS Youtube playlist")
+[The Awesome FeathersJS Ecosystem >](https://github.com/feathersjs/awesome-feathersjs)
 
-A growing collection of Feathers related talks, tutorials and discussions.
+[Feathers on YouTube >](https://www.youtube.com/playlist?list=PLwSdIiqnDlf_lb5y1liQK2OW5daXYgKOe)
+
+## More about Feathers how and why
+
+[Read about the philosophy behind Feathers and where it came from >](https://blog.feathersjs.com/why-we-built-the-best-web-framework-you-ve-probably-never-heard-of-until-now-176afc5c6aac)
+
+[Learn about the high level design patterns behind Feathers >](https://blog.feathersjs.com/design-patterns-for-modern-web-apis-1f046635215)
+
+[See how Feathers compares to others >](https://feathersjs.com/comparison)

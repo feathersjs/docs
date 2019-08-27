@@ -1,191 +1,148 @@
-# Local Authentication
+# Local
 
-[![npm version](https://img.shields.io/npm/v/@feathersjs/authentication-local.png?style=flat-square)](https://www.npmjs.com/package/@feathersjs/authentication-local)
-[![Changelog](https://img.shields.io/badge/changelog-.md-blue.png?style=flat-square)](https://github.com/feathersjs/feathers/blob/master/packages/authentication-local/CHANGELOG.md)
+[![npm version](https://img.shields.io/npm/v/@feathersjs/authentication-local.svg?style=flat-square)](https://www.npmjs.com/package/@feathersjs/authentication-local)
+[![Changelog](https://img.shields.io/badge/changelog-.md-blue.svg?style=flat-square)](https://github.com/feathersjs/feathers/blob/master/packages/authentication-local/CHANGELOG.md)
 
 ```
 $ npm install @feathersjs/authentication-local --save
 ```
 
+`@feathersjs/authentication-local` provides a `LocalStrategy` for authenticating with a username/email and password combination, e.g.
 
-[@feathersjs/authentication-local](https://github.com/feathersjs/authentication-local) is a server side module that wraps the [passport-local](https://github.com/jaredhanson/passport-local) authentication strategy, which lets you authenticate with your Feathers application using a username and password.
-
-This module contains 3 core pieces:
-
-1. The main initialization function
-2. The `hashPassword` hook 
-3. The `Verifier` class
+```json
+{
+  "strategy": "local",
+  "email": "hello@feathersjs.com",
+  "password": "supersecret"
+}
+```
 
 ## Configuration
 
-In most cases initializing the module is as simple as doing this:
+The following settings are available:
 
-```js
-const feathers = require('@feathersjs/feathers');
-const authentication = require('@feathersjs/authentication');
-const local = require('@feathersjs/authentication-local');
-const app = feathers();
+- `usernameField`: Name of the username field in the (e.g. `'email'`)
+- `passwordField`: Name of the password field (e.g. `'password'`)
+- `hashSize` (default: `10`): The BCrypt hash size
+- `errorMessage` (default: `'Invalid login'`): The error message to return on errors
+- `entityUsernameField` (default: `usernameField`): Name of the username field on the entity if authentication request data and entity field names are different
+- `entityPasswordField` (default: `passwordField`): Name of the password field on the entity if authentication request data and entity field names are different
 
-// Setup authentication
-app.configure(authentication(settings));
-app.configure(local());
-
-// Setup a hook to only allow valid JWTs or successful 
-// local auth to authenticate and get new JWT access tokens
-app.service('authentication').hooks({
-  before: {
-    create: [
-      authentication.hooks.authenticate(['local', 'jwt'])
-    ]
-  }
-});
-```
-
-This will pull from your global authentication object in your config file. It will also mix in the following defaults, which can be customized.
-
-## Options
-
-```js
-{
-    name: 'local', // the name to use when invoking the authentication Strategy
-    entity: 'user', // the entity that you're comparing username/password against
-    service: 'users', // the service to look up the entity
-    usernameField: 'email', // key name of username field
-    passwordField: 'password', // key name of password field
-    entityUsernameField: 'email', // key name of the username field on the entity (defaults to `usernameField`) 
-    entityPasswordField: 'password', // key name of the password on the entity (defaults to `passwordField`) 
-    passReqToCallback: true, // whether the request object should be passed to `verify`
-    session: false // whether to use sessions,
-    Verifier: Verifier // A Verifier class. Defaults to the built-in one but can be a custom one. See below for details.
-}
-```
-
-> __Important:__ When setting the `usernameField` to `username` in the [configuration](../configuration.md) the value _must_ be escaped as `\\username` otherwise it will use the value of the `username` environment variable on Windows systems.
-
-## hooks
-
-### hashPassword
-
-This hook is used to hash plain text passwords before they are saved to the database. It uses the bcrypt algorithm by default but can be customized by passing your own `options.hash` function.
-
-> __Important:__ `@feathersjs/authentication-local` does not allow to store clear text passwords. This means the `hashPassword` hook __must__ be used when using the [standard verifier](#verifier).
-
-Available options are
-
-- `passwordField` (default: `'password'`) - key name of password field to look on context.data
-- `hash` (default: bcrypt hash function) - Takes in a password and returns a hash.
-
-```js
-const local = require('@feathersjs/authentication-local');
-
-app.service('users').hooks({
-  before: {
-    create: [
-      local.hooks.hashPassword()
-    ]
-  }
-});
-```
-
-### protect
-
-The protect hook makes sure that protected fields don't get sent to a client.
-
-```js
-const local = require('@feathersjs/authentication-local');
-
-app.service('users').hooks({
-  after: local.hooks.protect('password')
-});
-```
-
-## Verifier
-
-This is the verification class that does the actual username and password verification by looking up the entity (normally a `user`) on a given service by the `usernameField` and compares the hashed password using bcrypt. It has the following methods that can all be overridden. All methods return a promise except `verify`, which has the exact same signature as [passport-local](https://github.com/jaredhanson/passport-local).
-
-```js
-{
-    constructor(app, options) // the class constructor
-    _comparePassword(entity, password) // compares password using bcrypt
-    _normalizeResult(result) // normalizes result from service to account for pagination
-    verify(req, username, password, done) // queries the service and calls the other internal functions.
-}
-```
-
-The `Verifier` class can be extended so that you customize it's behavior without having to rewrite and test a totally custom local Passport implementation. Although that is always an option if you don't want use this plugin.
-
-An example of customizing the Verifier:
-
-```js
-const { Verifier } = require('@feathersjs/authentication-local');
-
-class CustomVerifier extends Verifier {
-  // The verify function has the exact same inputs and 
-  // return values as a vanilla passport strategy
-  verify(req, username, password, done) {
-    // do your custom stuff. You can call internal Verifier methods
-    // and reference this.app and this.options. This method must be implemented.
-
-    // the 'user' variable can be any truthy value
-    // the 'payload' is the payload for the JWT access token that is generated after successful authentication
-    done(null, user, payload);
-  }
-}
-
-app.configure(local({ Verifier: CustomVerifier }));
-```
-
-## Client Usage
-
-### authentication-client
-
-When this module is registered server side, using the default config values this is how you can authenticate using [@feathersjs/authentication-client](./client.md):
-
-```js
-app.authenticate({
-  strategy: 'local',
-  email: 'your email',
-  password: 'your password'
-}).then(response => {
-  // You are now authenticated
-});
-```
-
-### HTTP Request
-
-If you are not using the `@feathersjs/authentication-client` and you have registered this module server side, make a `POST` request to `/authentication` with the following payload:
+Standard local authentication can be configured with those options in `config/default.json` like this:
 
 ```json
-// POST /authentication the Content-Type header set to application/json
 {
-  "strategy": "local",
-  "email": "your email",
-  "password": "your password"
+  "authentication": {
+    "local": {
+      "usernameField": "email",
+      "passwordField": "password"
+    }
+  }
 }
 ```
 
-Here is what that looks like with curl:
+## LocalStrategy
 
-```bash
-curl -H "Content-Type: application/json" -X POST -d '{"strategy":"local","email":"your email","password":"your password"}' http://localhost:3030/authentication
-```
+> __Note:__ The methods described in this section are intended for [customization](#customization) purposes and internal calls. They usually do not need to be called directly.
 
-### Sockets
+### getEntityQuery(query, params)
 
-Authenticating using a local strategy via sockets is done by emitting the following message:
+`localStrategy.getEntityQuery(query, params) -> Promise` returns the query for finding the entity. `query` includes the `usernameField` or `entityUsernameField` as `{ [field]: username }` and by default returns a promise that resolves with `{ $limit: 1 }` combined with `query`.
 
+### findEntity(username, params)
+
+`localStrategy.findEntity(username, params) -> Promise` return the entity for a given username and serice call parameters. It will use the query returned by `getEntityQuery` and call `.find` on the entity (usually `/users`) service. It will return a promise that resolves with the first result of the `.find` call or throw an error if nothing was found.
+
+### getEntity(entity, params)
+
+`localStrategy.getEntity(authResult, params) -> Promise` returns the external representation for `entity` that will be sent back to the client.
+
+### hashPassword(password)
+
+`localStrategy.hashPassword(password) -> Promise` creates a safe one-way hash of the given plain `password` string. By default [bCryptJS]() is used.
+
+### comparePassword(entity, password)
+
+`localStrategy.comparePassword(entity, password) -> Promise` compares a plain text `password` with the hashed password of the `entity` returned by `findEntity`. Returns the `entity` or throws an error if the passwords don't match.
+
+### authenticate(authentication, params)
+
+`localStrategy.authenticate(authentication, params)` is the main endpoint implemented by any [authentication strategy](./strategy.md). It is usually called for authentication requests for this strategy by the [AuthenticationService](./service.md).
+
+## Customization
+
+The `LocalStrategy` can be customized like any ES6 class and then registered on the [AuthenticationService](./service.md):
+
+:::: tabs :options="{ useUrlFragment: false }"
+
+::: tab "JavaScript"
 ```js
-const io = require('socket.io-client');
-const socket = io('http://localhost:3030');
+const { AuthenticationService, JWTStrategy } = require('@feathersjs/authentication');
+const { LocalStrategy } = require('@feathersjs/authentication-local');
 
-socket.emit('authenticate', {
-  strategy: 'local',
-  email: 'your email',
-  password: 'your password'
-}, function(message, data) {
-  console.log(message); // message will be null
-  console.log(data); // data will be {"accessToken": "your token"}
-  // You can now send authenticated messages to the server
-});
+class MyLocalStrategy extends LocalStrategy {
+  getEntityQuery(query, params) {
+    // Query for user but only include users marked as `active`
+    return {
+      ...query,
+      active: true,
+      $limit: 1
+    }
+  }
+}
+
+module.exports = app => {
+  const authService = new AuthenticationService(app);
+
+  service.register('local', new LocalStrategy());
+
+  // ...
+  app.use('/authentication', authService);
+}
 ```
+:::
 
+::: tab "TypeScript"
+```typescript
+import { Application, Params, Query } from '@feathersjs/feathers';
+import { AuthenticationService, JWTStrategy } from '@feathersjs/authentication';
+import { LocalStrategy } from '@feathersjs/authentication-local';
+
+class MyLocalStrategy extends LocalStrategy {
+  getEntityQuery(query: Query, params: Params) {
+    // Query for use but only include `active` users
+    return {
+      ...query,
+      active: true,
+      $limit: 1
+    }
+  }
+}
+
+export default (app: Application) => {
+  const authService = new AuthenticationService(app);
+
+  service.register('local', new LocalStrategy());
+
+  // ...
+  app.use('/authentication', authService);
+}
+```
+:::
+
+::::
+
+## Hooks
+
+### hashPassword(field)
+
+The `hashPassword(field [, options])` hook should be used as a `before` hook for `create`, `patch` or `update`. It will replace the plain text `field` on `data` with a hashed password using [LocalStrategy.hashPassword]() before storing it in the database. 
+
+`options` is optional and may contain the following settings:
+
+- `authentication` (default: `app.get('defaultAuthentication')`): The name of the [AuthenticationService](./service.md) the hook should use.
+- `strategy` (default: `'local'`): The name of the LocalStrategy to use on the authentication service.
+
+### protect(...fields)
+
+The `protect(...fields)` hook removes fields from the data that is sent to the user by setting [hook.dispatch]().

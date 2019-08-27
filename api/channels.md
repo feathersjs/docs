@@ -1,4 +1,4 @@
-# Event channels
+# Channels
 
 On a Feathers server with a real-time transport ([Socket.io](./socketio.md) or [Primus](./primus.md)) set up, event channels determine which connected clients to send [real-time events](./events.md) to and how the sent data should look like.
 
@@ -22,20 +22,28 @@ Some examples where channels are used:
 
 The example below shows the generated `channels.js` file illustrating how the different parts fit together:
 
+:::: tabs :options="{ useUrlFragment: false }"
+
+::: tab "JavaScript"
 ```js
 module.exports = function(app) {
+  if(typeof app.channel !== 'function') {
+    // If no real-time functionality has been configured just return
+    return;
+  }
+
   app.on('connection', connection => {
-    // On a new real-time connection, add it to the
-    // anonymous channel
+    // On a new real-time connection, add it to the anonymous channel
     app.channel('anonymous').join(connection);
   });
 
-  app.on('login', (payload, { connection }) => {
+  app.on('login', (authResult, { connection }) => {
     // connection can be undefined if there is no
     // real-time connection, e.g. when logging in via REST
     if(connection) {
-      const { user } = connection;
-
+      // Obtain the logged in user from the connection
+      // const user = connection.user;
+      
       // The connection is no longer anonymous, remove it
       app.channel('anonymous').leave(connection);
 
@@ -43,26 +51,116 @@ module.exports = function(app) {
       app.channel('authenticated').join(connection);
 
       // Channels can be named anything and joined on any condition 
+      
       // E.g. to send real-time events only to admins use
-
       // if(user.isAdmin) { app.channel('admins').join(connection); }
 
       // If the user has joined e.g. chat rooms
+      // if(Array.isArray(user.rooms)) user.rooms.forEach(room => app.channel(`rooms/${room.id}`).join(channel));
       
-      // user.rooms.forEach(room => app.channel(`rooms/${room.id}`).join(connection))
+      // Easily organize users by email and userid for things like messaging
+      // app.channel(`emails/${user.email}`).join(channel);
+      // app.channel(`userIds/$(user.id}`).join(channel);
     }
   });
 
-  // A global publisher that sends all events to all authenticated clients
-  app.publish((data, context) => {
+  // eslint-disable-next-line no-unused-vars
+  app.publish((data, hook) => {
+    // Here you can add event publishers to channels set up in `channels.js`
+    // To publish only for a specific event use `app.publish(eventname, () => {})`
+
+    console.log('Publishing all events to all authenticated users. See `channels.js` and https://docs.feathersjs.com/api/channels.html for more information.'); // eslint-disable-line
+
+    // e.g. to publish all service events to all authenticated users use
     return app.channel('authenticated');
   });
+
+  // Here you can also add service specific event publishers
+  // e.g. the publish the `users` service `created` event to the `admins` channel
+  // app.service('users').publish('created', () => app.channel('admins'));
+  
+  // With the userid and email organization from above you can easily select involved users
+  // app.service('messages').publish(() => {
+  //   return [
+  //     app.channel(`userIds/${data.createdBy}`),
+  //     app.channel(`emails/${data.recipientEmail}`)
+  //   ];
+  // });
 };
 ```
+:::
+
+::: tab "TypeScript"
+```ts
+export default function(app: any) {
+  if(typeof app.channel !== 'function') {
+    // If no real-time functionality has been configured just return
+    return;
+  }
+
+  app.on('connection', (connection: any) => {
+    // On a new real-time connection, add it to the anonymous channel
+    app.channel('anonymous').join(connection);
+  });
+
+  app.on('login', (authResult: any, { connection }: any) => {
+    // connection can be undefined if there is no
+    // real-time connection, e.g. when logging in via REST
+    if(connection) {
+      // Obtain the logged in user from the connection
+      // const user = connection.user;
+      
+      // The connection is no longer anonymous, remove it
+      app.channel('anonymous').leave(connection);
+
+      // Add it to the authenticated user channel
+      app.channel('authenticated').join(connection);
+
+      // Channels can be named anything and joined on any condition 
+      
+      // E.g. to send real-time events only to admins use
+      // if(user.isAdmin) { app.channel('admins').join(connection); }
+
+      // If the user has joined e.g. chat rooms
+      // if(Array.isArray(user.rooms)) user.rooms.forEach(room => app.channel(`rooms/${room.id}`).join(channel));
+      
+      // Easily organize users by email and userid for things like messaging
+      // app.channel(`emails/${user.email}`).join(channel);
+      // app.channel(`userIds/$(user.id}`).join(channel);
+    }
+  });
+
+  // eslint-disable-next-line no-unused-vars
+  app.publish((data: any, hook: any) => {
+    // Here you can add event publishers to channels set up in `channels.js`
+    // To publish only for a specific event use `app.publish(eventname, () => {})`
+
+    console.log('Publishing all events to all authenticated users. See `channels.js` and https://docs.feathersjs.com/api/channels.html for more information.'); // eslint-disable-line
+
+    // e.g. to publish all service events to all authenticated users use
+    return app.channel('authenticated');
+  });
+
+  // Here you can also add service specific event publishers
+  // e.g. the publish the `users` service `created` event to the `admins` channel
+  // app.service('users').publish('created', () => app.channel('admins'));
+  
+  // With the userid and email organization from above you can easily select involved users
+  // app.service('messages').publish(() => {
+  //   return [
+  //     app.channel(`userIds/${data.createdBy}`),
+  //     app.channel(`emails/${data.recipientEmail}`)
+  //   ];
+  // });
+};
+```
+:::
+
+::::
 
 ## Connections
 
-A connection is an object that represents a real-time connection. It is the same object as `socket.feathers` in a [Socket.io](./socketio.md) and `socket.request.feathers` in a [Primus](./primus.md) middleware. You can add any kind of information to it but most notably, when using [authentication](./authentication/server.md), it will contain the authenticated user. By default it is located in `connection.user` once the client has authenticated on the socket (usually by calling `app.authenticate()` on the [client](./client.md)).
+A connection is an object that represents a real-time connection. It is the same object as `socket.feathers` in a [Socket.io](./socketio.md) and `socket.request.feathers` in a [Primus](./primus.md) middleware. You can add any kind of information to it but most notably, when using [authentication](./authentication/service.md), it will contain the authenticated user. By default it is located in `connection.user` once the client has authenticated on the socket (usually by calling `app.authenticate()` on the [client](./client.md)).
 
 We can get access to the `connection` object by listening to `app.on('connection', connection => {})` or `app.on('login', (payload, { connection }) => {})`.
 
@@ -80,9 +178,13 @@ app.on('connection', connection => {
 });
 ```
 
+### app.on('disconnect')
+
+`app.on('disconnect', connection => {})` is fired every time real-time connection is disconnected. This is a good place to to handle disconnections outside of a logout. A connection that is disconnected will always leave all its channels automatically.
+
 ### app.on('login')
 
-`app.on('login', (payload, info) => {})` is sent by the [authentication module](./authentication/server.md) and also contains the connection in the `info` object that is passed as the second parameter. Note that it can also be `undefined` if the login happened through e.g. REST which does not support real-time connectivity. 
+`app.on('login', (authResult, params, context) => {})` is sent by the [AuthenticationService](./authentication/service.md#app-on-login) on successful login.
 
 This is a good place to add the connection to channels related to the user (e.g. chat rooms, admin status etc.)
 
@@ -114,13 +216,11 @@ app.on('login', (payload, { connection }) => {
 });
 ```
 
-> __Note:__ `(user, { connection })` is an ES6 shorthand for `(user, meta) => { const connection = meta.connection; }`, see [Destructuring assignment](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment).
+### app.on('logout')
 
-## app.on('logout')
+`app.on('logout', (authResult, params, context) => {})` is sent by the [AuthenticationService](./authentication/server.md) on successful logout.
 
-`app.on('logout', (payload, info) => {})` is sent by the [authentication module](./authentication/server.md) and also contains the connection in the `info` object that is passed as the second parameter when a logout happens.
-
-If the socket does not also disconnect at logout this is where users should be removed from their channels:
+If the socket does not also disconnect at logout this is where the connection should be removed from its channels:
 
 ```js
 app.on('logout', (payload, { connection }) => {

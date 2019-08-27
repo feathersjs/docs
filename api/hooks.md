@@ -10,6 +10,9 @@ Hooks are commonly used to handle things like validation, logging, populating re
 
 The following example adds a `createdAt` and `updatedAt` property before saving the data to the database and logs any errors on the service:
 
+:::: tabs :options="{ useUrlFragment: false }"
+
+::: tab "JavaScript"
 ```js
 const feathers = require('@feathersjs/feathers');
 
@@ -17,78 +20,79 @@ const app = feathers();
 
 app.service('messages').hooks({
   before: {
-    create(context) {
+    create: [async context => {
       context.data.createdAt = new Date();
-    },
 
-    update(context) {
-      context.data.updatedAt = new Date();
-    },
+      return context;
+    }],
 
-    patch(context) {
+    update: [async context => {
       context.data.updatedAt = new Date();
-    }
+
+      return context;
+    }],
+
+    patch: [async context => {
+      context.data.updatedAt = new Date();
+
+      return context;
+    }]
   },
 
-  error(context) {
-    console.error(`Error in ${context.path} calling ${context.method} method`, context.error);
-  }
+  error: {
+    all: [async context => {
+      console.error(`Error in ${context.path} calling ${context.method}  method`, context.error);
+
+      return context;
+    }]
 });
 ```
+:::
+
+::: tab "TypeScript"
+```js
+import { default as feathers, HookContext } from '@feathersjs/feathers';
+
+const app = feathers();
+
+app.service('messages').hooks({
+  before: {
+    create: [async (context: HookContext) => {
+      context.data.createdAt = new Date();
+
+      return context;
+    }],
+
+    update: [async (context: HookContext) => {
+      context.data.updatedAt = new Date();
+
+      return context;
+    }],
+
+    patch: [async (context: HookContext) => {
+      context.data.updatedAt = new Date();
+      
+      return context;
+    }]
+  },
+
+  error: {
+    all: [async (context: HookContext) => {
+      console.error(`Error in ${context.path} calling ${context.method}  method`, context.error);
+
+      return context;
+    }]
+});
+```
+:::
+
+::::
 
 ## Hook functions
 
-A hook function can be a normal or `async` function or arrow function that takes the [hook context](#hook-context) as the parameter and can
-
-- return a `context` object
-- return nothing (`undefined`)
-- return `feathers.SKIP` to skip all further hooks
-- `throw` an error
-- for asynchronous operations return a [Promise](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Promise) that
-  - resolves with a `context` object
-  - resolves with `undefined`
-  - rejects with an error
+A hook function can be a normal or `async` function that takes the [hook context](#hook-context) as the parameter and returns the `context` object, `undefined` or throws an error.
 
 For more information see the [hook flow](#hook-flow) and [asynchronous hooks](#asynchronous-hooks) section.
-
-```js
-// normal hook function
-function(context) {
-  return context;
-}
-
-// asynchronous hook function with promise
-function(context) {
-  return Promise.resolve(context);
-}
-
-// async hook function
-async function(context) {
-  return context;
-}
-
-// normal arrow function
-context => {
-  return context;
-}
-
-// asynchronous arrow function with promise
-context => {
-  return Promise.resolve(context);
-}
-
-// async arrow function
-async context => {
-  return context;
-}
-
-// skip further hooks
-const feathers = require('@feathersjs/feathers');
-
-async context => {
-  return feathers.SKIP;
-}
-```
 
 ## Hook context
 
@@ -110,7 +114,7 @@ The hook `context` is passed to a hook function and contains information about t
 
 ### context.method
 
-`context.method` is a _read only_ property with the name of the [service method](./services.md) (one of `find`, `get`, `create`, `update`, `patch`, `remove`).
+`context.method` is a _read only_ property with the name of the [service method](./services.md) (`find`, `get`, `create`, `update`, `patch`, `remove`).
 
 ### context.type
 
@@ -151,7 +155,7 @@ The hook `context` is passed to a hook function and contains information about t
 
 `context.dispatch` is a __writeable, optional__ property and contains a "safe" version of the data that should be sent to any client. If `context.dispatch` has not been set `context.result` will be sent to the client instead.
 
-> __Note:__ `context.dispatch` only affects the data sent through a Feathers Transport like [REST](./express) or [Socket.io](./socketio.md). An internal method call will still get the data set in `context.result`.
+> __Note:__ `context.dispatch` only affects the data sent through a Feathers Transport like [REST](./express.md) or [Socket.io](./socketio.md). An internal method call will still get the data set in `context.result`.
 
 ### context.statusCode
 
@@ -171,7 +175,7 @@ The following example throws an error when the text for creating a new message i
 app.service('messages').hooks({
   before: {
     create: [
-      function(context) {
+      context => {
         if(context.data.text.trim() === '') {
           throw new Error('Message text can not be empty');
         }
@@ -189,19 +193,17 @@ When `context.result` is set in a `before` hook, the original [service method](.
 app.service('users').hooks({
   before: {
     get: [
-      function(context) {
+      context => {
         // Never call the actual users service
         // just use the authenticated user
         context.result = context.params.user;
+
+        return context;
       }
     ]
   }
 });
 ```
-
-### Returning `feathers.SKIP`
-
-`require('@feathersjs/feathers').SKIP` can be returned from a hook to indicate that all following hooks should be skipped. If returned by a __before__ hook, the remaining __before__ hooks are skipped; any __after__ hooks will still be run. If it hasn't run yet, the service method will still be called unless `context.result` is set already.
 
 ## Asynchronous hooks
 
@@ -211,7 +213,7 @@ When the hook function is `async` or a Promise is returned it will wait until al
 
 ### async/await
 
-When using Node v8.0.0 or later the use of [async/await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function) is highly recommended. This will avoid many common issues when using Promises and asynchronous hook flows. Any hook function can be `async` in which case it will wait until all `await` operations are completed. Just like a normal hook it should return the `context` object or `undefined`.
+The use of [async/await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function) is highly recommended. This will avoid many common issues when using Promises and asynchronous hook flows. Any hook function can be `async` in which case it will wait until all `await` operations are completed. Just like a normal hook it should return the `context` object or `undefined`.
 
 The following example shows an async/await hook that uses another service to retrieve and populate the messages `user` when getting a single message:
 
@@ -219,7 +221,7 @@ The following example shows an async/await hook that uses another service to ret
 app.service('messages').hooks({
   after: {
     get: [
-      async function(context) {
+      async context => {
         const userId = context.result.userId;
 
         // Since context.app.service('users').get returns a promise we can `await` it
@@ -236,34 +238,31 @@ app.service('messages').hooks({
 });
 ```
 
-### Returning promises
-
 The following example shows an asynchronous hook that uses another service to retrieve and populate the messages `user` when getting a single message.
 
 ```js
 app.service('messages').hooks({
   after: {
     get: [
-      function(context) {
+      context => {
         const userId = context.result.userId;
 
-        // context.app.service('users').get returns a Promise already
-        return context.app.service('users').get(userId).then(user => {
-          // Update the result (the message)
-          context.result.user = user;
+        // Also pass the `params` so we get a secure version of the user
+        const user = await context.app.service('users').get(userId, context.params);
 
-          // Returning will resolve the promise with the `context` object
-          return context;
-        });
+        context.result.user = user;
+
+        // Returning will resolve the promise with the `context` object
+        return context;
       }
     ]
   }
 });
 ```
 
-> __Note:__ A common issue when hooks are not running in the expected order is a missing `return` statement of a promise at the top level of the hook function.
+> __Note:__ A common issue when hooks are not running in the expected order is a missing `await` statement.
 
-> **Important:** Most Feathers service calls and newer Node packages already return Promises. They can be returned and chained directly. There is no need to instantiate your own `new` Promise instance in those cases.
+> **Important:** Most Feathers service calls and newer Node packages already return Promises. They can be returned and chained directly. There usually is no need to instantiate your own `new Promise` instance.
 
 ### Converting callbacks
 
@@ -279,19 +278,17 @@ const readFile = util.promisify(fs.readFile);
 app.service('messages').hooks({
   after: {
     get: [
-      function(context) {
-        return readFile('./myfile.json').then(data => {
-          context.result.myFile = data.toString();
+      async context => {
+        const data = await readFile('./myfile.json');
 
-          return context;
-        });
+        context.result.myFile = data.toString();
+
+        return context;
       }
     ]
   }
 });
 ```
-
-> **Pro Tip:** Other tools like [Bluebird](https://github.com/petkaantonov/bluebird) also help converting between callbacks and promises.
 
 ## Registering hooks
 

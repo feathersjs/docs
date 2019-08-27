@@ -1,145 +1,122 @@
-# JWT Authentication
+# JWT
 
-[![npm version](https://img.shields.io/npm/v/@feathersjs/authentication-jwt.png?style=flat-square)](https://www.npmjs.com/package/@feathersjs/authentication-jwt)
-[![Changelog](https://img.shields.io/badge/changelog-.md-blue.png?style=flat-square)](https://github.com/feathersjs/feathers/blob/master/packages/authentication-jwt/CHANGELOG.md)
+[![npm version](https://img.shields.io/npm/v/@feathersjs/authentication.svg?style=flat-square)](https://www.npmjs.com/package/@feathersjs/authentication)
+[![Changelog](https://img.shields.io/badge/changelog-.md-blue.svg?style=flat-square)](https://github.com/feathersjs/feathers/blob/master/packages/authentication/CHANGELOG.md)
 
 ```
-$ npm install @feathersjs/authentication-jwt --save
+$ npm install @feathersjs/authentication --save
 ```
 
+The `JWTStrategy` is an [authentication strategy](./strategy.md) included in `@feathersjs/authentication` for authenticating JSON web token service methods calls and HTTP requests, e.g.
 
-[@feathersjs/authentication-jwt](https://github.com/feathersjs/authentication-jwt) is a module for the [authentication server](./server.md) that wraps the [passport-jwt](https://github.com/themikenicholson/passport-jwt) authentication strategy, which lets you authenticate with your Feathers application using a [JSON Web Token](https://jwt.io/) access token.
+```json
+{
+  "strategy": "jwt",
+  "accessToken": "<your JWT>"
+}
+```
 
-This module contains 3 core pieces:
+## Options
 
-1. The main initialization function
-2. The `Verifier` class
-3. The [`ExtractJwt`](https://github.com/themikenicholson/passport-jwt#extracting-the-jwt-from-the-request) object from passport-jwt.
+- `header` (default: `'Authorization'`): The HTTP header containing the JWT
+- `schemes` (default: `[ 'Bearer', 'JWT' ]`): An array of schemes to support
 
-## Configuration
+The default settings support passing the JWT through the following HTTP headers:
 
-In most cases initializing the module is as simple as doing this:
+```
+Authorization: <your JWT>
+Authorization: Bearer <your JWT>
+Authorization: JWT <your JWT>
+```
 
-```js
-const feathers = require('@feathersjs/feathers');
-const authentication = require('@feathersjs/authentication');
-const jwt = require('@feathersjs/authentication-jwt');
-const app = feathers();
+Standard JWT authentication can be configured with those options in `config/default.json` like this:
 
-// Setup authentication
-app.configure(authentication(settings));
-app.configure(jwt());
-
-// Setup a hook to only allow valid JWTs to authenticate
-// and get new JWT access tokens
-app.service('authentication').hooks({
-  before: {
-    create: [
-      authentication.hooks.authenticate(['jwt'])
-    ]
+```json
+{
+  "authentication": {
+    "jwt": {}
   }
-});
+}
 ```
 
-This will pull from your global authentication object in your config file. It will also mix in the following defaults, which can be customized.
+> __Note:__ Since the default options are what most clients expect for JWT authentication they usually don't need to be customized.
 
-### Options
+## JwtStrategy
+
+### getEntity(id, params)
+
+`jwtStrategy.getEntity(id, params)` returns the entity instance for `id`, usually `entityService.get(id, params)`. It will _not_ be called if `entity` in the [authentication configuration](./service.md#configuration) is set to `null`.
+
+### authenticate(data, params)
+
+`jwtStrategy.authenticate(data, params)` will try to verify `data.accessToken` by calling the strategies [authenticationService.verifyAccessToken](./service.md).
+
+Returns a promise that resolves with the following format:
 
 ```js
 {
-    name: 'jwt', // the name to use when invoking the authentication Strategy
-    entity: 'user', // the entity that you pull from if an 'id' is present in the payload
-    service: 'users', // the service to look up the entity
-    passReqToCallback: true, // whether the request object should be passed to `verify`
-    jwtFromRequest: [ // a passport-jwt option determining where to parse the JWT
-      ExtractJwt.fromHeader, // From "Authorization" header
-      ExtractJwt.fromAuthHeaderWithScheme('Bearer'), // Allowing "Bearer" prefix
-      ExtractJwt.fromBodyField('body') // from request body
-    ],
-    secretOrKey: auth.secret, // Your main secret (string or buffer) provided to passport-jwt 
-    secretOrKeyProvider: auth.secret, // Your main secret provider (function) provided to passport-jwt
-    session: false, // whether to use sessions
-    Verifier: Verifier // A Verifier class. Defaults to the built-in one but can be a custom one. See below for details.
+  [entity],
+  accessToken,
+  authentication: {
+    strategy: 'jwt',
+    payload
+  }
 }
 ```
 
-Additional [passport-jwt](https://github.com/themikenicholson/passport-jwt) options can be provided.
+> __Note:__ Since the JWT strategy returns an `accessToken` property (the same as the token sent to this strategy), that access token will also be returned by [authenticationService.create](./service.md#create-data-params) instead of creating a new one.
 
-## Verifier
+### parse(req, res)
 
-This is the verification class that receives the JWT payload (if verification is successful) and either returns the payload or, if an `id` is present in the payload, populates the entity (normally a `user`) and returns both the entity and the payload. It has the following methods that can all be overridden. The `verify` function has the exact same signature as [passport-jwt](https://github.com/themikenicholson/passport-jwt).
+Parse the HTTP request headers for JWT authentication information. Returns a promise that resolves with either `null` or data in the form of:
 
 ```js
 {
-    constructor(app, options) // the class constructor
-    verify(req, payload, done) // queries the configured service
+  strategy: '<strategy name>',
+  accessToken: '<access token from HTTP header>'
 }
 ```
 
-#### Customizing the Verifier
+## Customization
 
-The `Verifier` class can be extended so that you customize it's behavior without having to rewrite and test a totally custom local Passport implementation. Although that is always an option if you don't want use this plugin.
+:::: tabs :options="{ useUrlFragment: false }"
 
-An example of customizing the Verifier:
-
+::: tab "JavaScript"
 ```js
-const { Verifier } = require('@feathersjs/authentication-jwt');
+const { AuthenticationService, JWTStrategy } = require('@feathersjs/authentication');
 
-class CustomVerifier extends Verifier {
-  // The verify function has the exact same inputs and 
-  // return values as a vanilla passport strategy
-  verify(req, payload, done) {
-    // do your custom stuff. You can call internal Verifier methods
-    // and reference this.app and this.options. This method must be implemented.
-    
-    // the 'user' variable can be any truthy value
-    // the 'payload' is the payload for the JWT access token that is generated after successful authentication
-    done(null, user, payload);
-  }
+class MyJwtStrategy extends JWTStrategy {
 }
 
-app.configure(jwt({ Verifier: CustomVerifier }));
+module.exports = app => {
+  const authService = new AuthenticationService(app);
+
+  service.register('jwt', new MyJwtStrategy());
+
+  // ...
+  app.use('/authentication', authService);
+}
 ```
+:::
 
-## Client Usage
+::: tab "TypeScript"
+```typescript
+import { Application } from '@feathersjs/feathers';
+import { AuthenticationService, JWTStrategy } from '@feathersjs/authentication';
+import { LocalStrategy } from '@feathersjs/authentication-local';
 
-### authentication-client
+class MyJwtStrategy extends JWTStrategy {
+}
 
-When this module is registered server side, using the default config values this is how you can authenticate using [@feathersjs/authentication-client](./client.md):
+export default (app: Application) => {
+  const authService = new AuthenticationService(app);
 
-```js
-app.authenticate({
-  strategy: 'jwt',
-  accessToken: 'your access token'
-}).then(response => {
-  // You are now authenticated
-});
+  service.register('jwt', new MyJwtStrategy());
+
+  // ...
+  app.use('/authentication', authService);
+}
 ```
+:::
 
-### HTTP
-
-If you are not using `@feathersjs/authentication-client` and you have registered this module server side then you can include the access token in an `Authorization` header.
-
-Here is what that looks like with curl:
-
-```bash
-curl -H "Content-Type: application/json" -H "Authorization: <your access token>" -X POST http://localhost:3030/authentication
-```
-
-### Sockets
-
-Authenticating using an access token via sockets is done by emitting the following message:
-
-```js
-const io = require('socket.io-client');
-const socket = io('http://localhost:3030');
-
-socket.emit('authenticate', {
-  strategy: 'jwt',
-  accessToken: 'your token'
-}, function(message, data) {
-  console.log(message); // message will be null
-  console.log(data); // data will be {"accessToken": "your token"}
-  // You can now send authenticated messages to the server
-});
-```
+::::
