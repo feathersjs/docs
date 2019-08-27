@@ -134,7 +134,7 @@ It will be available via `app.service('/')` through the client and directly at `
 
 ### Skip event emitting
 
-Service events can no be skipped by setting `context.event` to `null`.
+Service events can now be skipped by setting `context.event` to `null`.
 
 ```js
 context => {
