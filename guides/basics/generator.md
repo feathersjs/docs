@@ -46,7 +46,7 @@ Let's have a brief look at the files that have been generated:
       * `users.service.js` registers this service on our Feathers application
   * `middleware/` contains any [Express middleware](http://expressjs.com/en/guide/writing-middleware.html)
   * `models/` contains database model files
-    * `users.model.ts` sets up our user collection for NeDB
+    * `users.model.js` sets up our user collection for NeDB
   * `app.js` configures our Feathers application like we did in the [getting started chapter](../basics/starting.md)
   * `app.hooks.js` registers hooks that apply to every service
   * `authentication.js` sets up Feathers authentication system
