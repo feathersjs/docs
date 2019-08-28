@@ -16,7 +16,7 @@ $ touch Dockerfile
 
 ### Dockerfile
 ```
-FROM node:11-alpine
+FROM node:lts-alpine
 
 WORKDIR /usr/src/app
 
