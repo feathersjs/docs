@@ -101,6 +101,12 @@ module.exports = {
           'express/file-uploading.md',
           'express/view-engine.md'
         ]
+      }, {
+        title: 'Deployment',
+        collapsable: false,
+        children: [
+          'deploy/docker.md'
+        ]
       }]
     },
     nav: [
