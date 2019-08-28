@@ -102,7 +102,7 @@ module.exports = {
           'express/view-engine.md'
         ]
       }, {
-        title: 'Docker',
+        title: 'Deployment',
         collapsable: false,
         children: [
           'docker/example.md'
