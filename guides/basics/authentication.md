@@ -1,6 +1,6 @@
 # Authentication
 
-By now we created some [services](./services.md) and [hooks](./hooks.md) that make for a fully functional chat application. When we generated the services however, they came with authentication enabled. So in order to use them, we first need to create a new user and get a little bit of an idea how Feathers authentication works. We will look at using and authenticating our REST API as well as Feathers authentication in the browser. Lastly we will also discuss how to add a "Login with GitHub" (oAuth) functionality.
+We now have a fully functional chat application consisting of [services](./services.md) and [hooks](./hooks.md). The services come with authentication enabled by default, so before we can use it we need to create a new user and learn how Feathers authentication works. We will look at authenticating our REST API, and then how to authenticate with Feathers in the browser. Finally, we will discuss how to add "Login with GitHub" functionality using oAuth 2.0.
 
 ## Registering a user
 
@@ -14,15 +14,15 @@ Although the frontend we will create [in the next chapter](./frontend.md) will a
 }
 ```
 
-You can run the request with the [Postman API development tools](https://www.getpostman.com/) with this link:
-
-[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/6bcea48aac6c7494c2ad)
-
-Using a CURL command it would look like this:
+Try it:
 
 ```sh
-curl 'http://localhost:3030/users/' -H 'Content-Type: application/json' --data-binary '{ "email": "hello@feathersjs.com", "password": "supersecret" }'
+curl 'http://localhost:3030/users/' \
+  -H 'Content-Type: application/json' \
+  --data-binary '{ "email": "hello@feathersjs.com", "password": "supersecret" }'
 ```
+
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/6bcea48aac6c7494c2ad)
 
 > __Note:__ Creating a user with the same email address will only work once, then fail since it already exists in the database.
 
@@ -57,15 +57,15 @@ Tokens can be created by sending a POST request to the `/authentication` endpoin
 }
 ```
 
-To run in Postman, follow the link to the collection:
-
-[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/6bcea48aac6c7494c2ad)
-
-As a CURL command:
+Try it:
 
 ```sh
-curl 'http://localhost:3030/authentication/' -H 'Content-Type: application/json' --data-binary '{ "strategy": "local", "email": "hello@feathersjs.com", "password": "supersecret" }'
+curl 'http://localhost:3030/authentication/' \
+  -H 'Content-Type: application/json' \
+  --data-binary '{ "strategy": "local", "email": "hello@feathersjs.com", "password": "supersecret" }'
 ```
+
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/6bcea48aac6c7494c2ad)
 
 This will return something like this:
 
@@ -117,11 +117,12 @@ In `public/app.js` we can now set up the Feathers client similar to the [getting
 ```js
 // Establish a Socket.io connection
 const socket = io();
+
 // Initialize our Feathers client application through Socket.io
 // with hooks and authentication.
 const client = feathers();
-
 client.configure(feathers.socketio(socket));
+
 // Use localStorage to store our login token
 client.configure(feathers.authentication({
   storage: window.localStorage
