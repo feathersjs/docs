@@ -187,7 +187,7 @@ app.service('messages').hooks({
 
 ### Setting `context.result`
 
-When `context.result` is set in a `before` hook, the original [service method](./services.md) call will be skipped. All other hooks will still execute in their normal order. The following example always returns the currently [authenticated user](./authentication/server.md) instead of the actual user for all `get` method calls:
+When `context.result` is set in a `before` hook, the original [service method](./services.md) call will be skipped. All other hooks will still execute in their normal order. The following example always returns the currently [authenticated user](./authentication/service.md) instead of the actual user for all `get` method calls:
 
 ```js
 app.service('users').hooks({

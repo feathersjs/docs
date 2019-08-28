@@ -136,7 +136,7 @@ Returns the instance of the [AuthenticationClient](#authenticationclient).
 
 ### authenticate()
 
-The internal method called when using [app.authenticate()](#app-authenticate).
+The internal method called when using [app.authenticate()](#app-authenticate-data).
 
 ### logout()
 

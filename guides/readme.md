@@ -16,7 +16,7 @@ In the next parts we will [generate an application](./basics/generator.md) and t
 
 [The API documentation >](../api/readme.md)
 
-[The cookbook for common tasks and patterns >](./cookbook/readme.md)
+[The cookbook for common tasks and patterns >](../cookbook/readme.md)
 
 [The Awesome FeathersJS Ecosystem >](https://github.com/feathersjs/awesome-feathersjs)
 

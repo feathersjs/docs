@@ -266,7 +266,7 @@ app.use('/todos', todoService, function(req, res) {
 
 ### params
 
-All middleware registered after the [REST transport](./rest.md) will have access to the `req.feathers` object to set properties on the service method `params`:
+All middleware registered after the [REST transport](#express-rest) will have access to the `req.feathers` object to set properties on the service method `params`:
 
 ```js
 const feathers = require('@feathersjs/feathers');

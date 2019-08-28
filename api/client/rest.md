@@ -202,7 +202,7 @@ The body type for `POST`, `PUT` and `PATCH` requests is determined by the Expres
 
 ### Authentication
 
-Authenticating HTTP (REST) requests is a two step process. First you have to obtain a JWT from the [authentication service](../authentication/server.md) by POSTing the strategy you want to use:
+Authenticating HTTP (REST) requests is a two step process. First you have to obtain a JWT from the [authentication service](../authentication/service.md) by POSTing the strategy you want to use:
 
 ```json
 // POST /authentication the Content-Type header set to application/json
@@ -286,7 +286,7 @@ POST /messages
 ]
 ```
 
-> **Note:** With a [database adapters](../databases/adapters.md) the [`multi` option](./databases/common.md) has to be set explicitly to support creating multiple entries.
+> **Note:** With a [database adapters](../databases/adapters.md) the [`multi` option](../databases/common.md) has to be set explicitly to support creating multiple entries.
 
 ### update
 
@@ -326,7 +326,7 @@ PATCH /messages?complete=false
 
 Will call `messages.patch(null, { complete: true }, { query: { complete: 'false' } })` on the server to change the status for all read messages.
 
-> **Note:** With a [database adapters](../databases/adapters.md) the [`multi` option](./databases/common.md) has to be set to support patching multiple entries.
+> **Note:** With a [database adapters](../databases/adapters.md) the [`multi` option](../databases/common.md) has to be set to support patching multiple entries.
 
 This is supported out of the box by the Feathers [database adapters](../databases/adapters.md) 
 
@@ -348,4 +348,4 @@ DELETE /messages?read=true
 
 Will call `messages.remove(null, { query: { read: 'true' } })` to delete all read messages.
 
-> **Note:** With a [database adapters](../databases/adapters.md) the [`multi` option](./databases/common.md) has to be set to support patching multiple entries.
+> **Note:** With a [database adapters](../databases/adapters.md) the [`multi` option](../databases/common.md) has to be set to support patching multiple entries.
