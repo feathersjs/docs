@@ -15,14 +15,15 @@ const EXTENSION_REPLACEMENT = '.';
 
 // Converts _redirects to a mapping of oldUrl -> newUrl
 // This is the only sync operation in here...
-const redirects = fs
-  .readFileSync(path.resolve(__dirname, '../_redirects'), 'utf8')
-  .split(/\n/)
-  .filter(line => !REG_BLANK_OR_COMMENT.test(line))
-  .reduce((obj, line) => {
-    line = line.trim().split(/\s+/);
-    return Object.assign(obj, { [line[0]]: line[1] });
-  }, {});
+const redirectsPath = path.resolve(__dirname, '../_redirects');
+const redirects = fs.existsSync(redirectsPath) ? fs
+    .readFileSync(redirectsPath, 'utf8')
+    .split(/\n/)
+    .filter(line => !REG_BLANK_OR_COMMENT.test(line))
+    .reduce((obj, line) => {
+      line = line.trim().split(/\s+/);
+      return Object.assign(obj, { [line[0]]: line[1] });
+    }, {}) : {};
 
 // Mapping of file redirects
 // Extensions are removed so that we can match URLs below

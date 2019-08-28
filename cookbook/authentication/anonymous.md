@@ -93,7 +93,7 @@ export default (): Hook => {
 :::
 ::::
 
-This hook should be added __before__ the [authenticate hook](../api/authentication/hook.md) wherever anonymous authentication should be allowed:
+This hook should be added __before__ the [authenticate hook](../../api/authentication/hook.md) wherever anonymous authentication should be allowed:
 
 ```js
 all: [ allowAnonymous(), authenticate('jwt', 'anonymous') ],

@@ -218,7 +218,7 @@ app.on('login', (payload, { connection }) => {
 
 ### app.on('logout')
 
-`app.on('logout', (authResult, params, context) => {})` is sent by the [AuthenticationService](./authentication/server.md) on successful logout.
+`app.on('logout', (authResult, params, context) => {})` is sent by the [AuthenticationService](./authentication/service.md) on successful logout.
 
 If the socket does not also disconnect at logout this is where the connection should be removed from its channels:
 
