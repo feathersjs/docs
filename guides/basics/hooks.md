@@ -55,7 +55,7 @@ app.service('messages').hooks({
 
 A hook function is a function that takes the [hook context](#hook-context) as the parameter and returns that context or nothing. Hook functions run in the order they are registered and will only continue to the next once the current hook function completes. If a hook function throws an error, all remaining hooks (and the service call if it didn't run yet) will be skipped and the error will be returned.
 
-A common pattern the generator to make hooks more re-usable (e.g. making the `createdAt` property name from the example above configurable) is to create a wrapper function that takes those options and returns a hook function:
+A common pattern the generator uses to make hooks more re-usable (e.g. making the `createdAt` property name from the example above configurable) is to create a wrapper function that takes those options and returns a hook function:
 
 :::: tabs :options="{ useUrlFragment: false }"
 ::: tab "JavaScript"
