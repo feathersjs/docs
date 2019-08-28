@@ -30,8 +30,8 @@ const { expressOauth } = require('@feathersjs/authentication-oauth');
 module.exports = app => {
   const authService = new AuthenticationService(app);
 
-  service.register('jwt', new JWTStrategy());
-  service.register('local', new LocalStrategy());
+  authService.register('jwt', new JWTStrategy());
+  authService.register('local', new LocalStrategy());
 
   app.use('/authentication', authService);
   app.configure(expressOauth());
@@ -49,8 +49,8 @@ import { expressOauth } from '@feathersjs/authentication-oauth';
 export default (app: Application) => {
   const authService = new AuthenticationService(app);
 
-  service.register('jwt', new JWTStrategy());
-  service.register('local', new LocalStrategy());
+  authService.register('jwt', new JWTStrategy());
+  authService.register('local', new LocalStrategy());
 
   app.use('/authentication', authService);
   app.configure(expressOauth());
