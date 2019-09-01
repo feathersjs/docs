@@ -89,7 +89,7 @@ In the browser any oAuth flow can be initiated with the following link:
 
 ### Account linking
 
-To _link an existing user_ the current access token can be added the oAuth flow query using the `feathers_token` query parameter:
+To _link an existing user_ the current access token can be added to the oAuth flow query using the `feathers_token` query parameter:
 
 ```html
 <a href="/oauth/github?feathers_token=<your access token>">
