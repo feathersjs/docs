@@ -245,7 +245,7 @@ module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
     const { user } = context.params;
     // The actual message text
     // Make sure that messages are no longer than 400 characters
-    const text = context.data.text.substring(0, 400);
+    const text = data.text.substring(0, 400);
 
     // Update the original data (so that people can't submit additional stuff)
     context.data = {
@@ -281,7 +281,7 @@ export default () : Hook => {
     // The authenticated user
     const user = context.params.user;
     // The actual message text
-    const text = context.data.text
+    const text = data.text
       // Messages can't be longer than 400 characters
       .substring(0, 400);
 
