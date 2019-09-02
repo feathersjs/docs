@@ -13,7 +13,7 @@ The [database adapters](../api/databases/adapters.md) will continue to be indivi
 The `@feathersjs/cli` comes with a command to automatically upgrade applications generated through `@feathersjs/cli` (v3.x) with most of the changes necessary for v4. To update the CLI and upgrade your application run:
 
 ```
-npm i -g @feathersjs/cli -g
+npm i @feathersjs/cli -g
 cd myapp
 feathers upgrade
 ```
