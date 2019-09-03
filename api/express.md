@@ -284,7 +284,7 @@ app.configure(express.rest())
   });
 
 app.use('/todos', {
-  asy c get(id, params) {
+  async get(id, params) {
     console.log(params.provider); // -> 'rest'
     console.log(params.fromMiddleware); // -> 'Hello world'
 
