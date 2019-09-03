@@ -24,6 +24,7 @@ __Manual steps are necessary for__
 
 - The `hashPassword()` hook in `service/users/users.hooks.js` which now requires the password field name (usually `hashPassword('password')`)
 - Configuring oAuth providers - see [oAuth API](../api/authentication/oauth.md)
+- The authentication Express middleware has been moved to `const { authenticate } = require('@feathersjs/express');`
 - Any other authentication specific customization - see [authentication service API](../api/authentication/service.md)
 - Feathers client authentication - see [authentication client API](../api/authentication/client.md)
 
