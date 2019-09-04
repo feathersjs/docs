@@ -244,7 +244,7 @@ The following example shows an asynchronous hook that uses another service to re
 app.service('messages').hooks({
   after: {
     get: [
-      context => {
+      async context => {
         const userId = context.result.userId;
 
         // Also pass the `params` so we get a secure version of the user
