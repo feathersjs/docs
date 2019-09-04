@@ -77,14 +77,14 @@ There are two ways to initiate oAuth authentication:
 
 There are several URLs and redirects that are important for oAuth authentication:
 
-- `http(s)://<host>/oauth/<provider>`: The main URL to initiate the oAuth flow. Link to this from the browser.
+- `http(s)://<host>/oauth/connect/<provider>`: The main URL to initiate the oAuth flow. Link to this from the browser.
 - `http(s)://<host>/oauth/<provider>/callback`: The callback path that should be set in the oAuth application settings
 - `http(s)://<host>/oauth/<provider>/authenticate`: The internal redirect
 
 In the browser any oAuth flow can be initiated with the following link:
 
 ```html
-<a href="/oauth/github">Login with GitHub</a>
+<a href="/oauth/connect/github">Login with GitHub</a>
 ```
 
 ### Account linking
