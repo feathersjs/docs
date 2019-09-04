@@ -97,6 +97,7 @@ module.exports = {
           'authentication/facebook.md',
           'authentication/google.md',
           'authentication/stateless.md',
+          'authentication/revoke-jwt.md'
         ]
       }, {
         title: 'Express',
