@@ -15,6 +15,21 @@ Facebook login can be initialized like any other [oAuth provider](../../api/auth
 }
 ```
 
+Requesting the email property requires adding additional `scope` to the oauth configuration:
+```js
+{
+  "authentication": {
+    "oauth": {
+      "facebook": {
+        "key": "<App ID>",
+        "secret": "<App Secret>",
+        "scope": ["email"]
+      }
+    }
+  }
+}
+```
+
 ## Application client and secret
 
 The client id (App ID) and secret can be found in the Settings of the [Facebook app](https://developers.facebook.com/apps):
