@@ -21,7 +21,7 @@ $ npm install @feathersjs/authentication-local --save
 
 The following settings are available:
 
-- `usernameField`: Name of the username field in the (e.g. `'email'`)
+- `usernameField`: Name of the username field (e.g. `'email'`)
 - `passwordField`: Name of the password field (e.g. `'password'`)
 - `hashSize` (default: `10`): The BCrypt hash size
 - `errorMessage` (default: `'Invalid login'`): The error message to return on errors
