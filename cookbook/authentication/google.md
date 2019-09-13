@@ -77,12 +77,11 @@ class GoogleStrategy extends OAuthStrategy {
     // this will set 'googleId'
     const baseData = await super.getEntityData(profile);
     
-    // this will grab the picture, email address and name of the Google profile
+    // this will grab the picture and email address of the Google profile
     return {
       ...baseData,
       profilePicture: profile.picture,
-      email: profile.email,
-      displayName: profile.name
+      email: profile.email
     };
   }
 }
@@ -93,6 +92,6 @@ module.exports = app => {
   // ...
 };
 ```
-**Important**: googleId, profilePicture, email and displayName are properties that should exist on the database model!
+**Important**: googleId, profilePicture and email are properties that should exist on the database model!
     
 
