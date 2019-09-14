@@ -112,7 +112,7 @@ When using Feathers on the client, the authentication client does all those auth
 </html>
 ```
 
-In `public/app.js` we can now set up the Feathers client similar to the [getting started example](./starting.md). We also add a `login` method that first tries to use a stored token by calling `app.reAuthenticate()`. If that fails, we try to log in with email/password of our registered user:
+In `src/app.js` we can now set up the Feathers client similar to the [getting started example](./starting.md). We also add a `login` method that first tries to use a stored token by calling `app.reAuthenticate()`. If that fails, we try to log in with email/password of our registered user:
 
 ```js
 // Establish a Socket.io connection
