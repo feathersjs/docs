@@ -25,6 +25,7 @@ curl 'http://localhost:3030/users/' \
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/6bcea48aac6c7494c2ad)
 
 > __Note:__ Creating a user with the same email address will only work once, then fail since it already exists in the database.
+>__Note:__ If using Postman dekstop app add the local host url and set to HTTP method to POST. Below select the header tab and create a header where key is Content-type and value is application/json. Next Select body tab and add JSON data above.
 
 This will return something like this:
 
