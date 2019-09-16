@@ -93,7 +93,8 @@ module.exports = {
         collapsable: false,
         children: [
           'authentication/anonymous.md',
-          'authentication/facebook.md'
+          'authentication/facebook.md',
+          'authentication/google.md'
         ]
       }, {
         title: 'Express',
