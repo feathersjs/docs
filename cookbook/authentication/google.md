@@ -87,9 +87,14 @@ class GoogleStrategy extends OAuthStrategy {
 }
 
 module.exports = app => {
-  // ...
-  authService.register('google', new GoogleStrategy());
-  // ...
+  const authentication = new AuthenticationService(app);
+
+  authentication.register('jwt', new JWTStrategy());
+  authentication.register('local', new LocalStrategy());
+  authentication.register('google', new GoogleStrategy());
+
+  app.use('/authentication', authentication);
+  app.configure(expressOauth());
 };
 ```
 **Important**: googleId, profilePicture and email are properties that should exist on the database model!
