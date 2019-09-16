@@ -83,9 +83,14 @@ class FacebookOAuth extends OAuthStrategy {
 }
 
 module.exports = app => {
-  // ...
-  authService.register('facebook', new FacebookOAuth());
-  // ...
+  const authentication = new AuthenticationService(app);
+
+  authentication.register('jwt', new JWTStrategy());
+  authentication.register('local', new LocalStrategy());
+  authentication.register('facebook', new FacebookStrategy());
+
+  app.use('/authentication', authentication);
+  app.configure(expressOauth());
 };
 ```
 :::
@@ -128,9 +133,14 @@ class FacebookOAuth extends OAuthStrategy {
 }
 
 export default function(app: Application) {
-  // ...
-  authService.register('facebook', new FacebookStrategy());
-  // ...
+  const authentication = new AuthenticationService(app);
+
+  authentication.register('jwt', new JWTStrategy());
+  authentication.register('local', new LocalStrategy());
+  authentication.register('facebook', new FacebookStrategy());
+
+  app.use('/authentication', authentication);
+  app.configure(expressOauth());
 }
 ```
 :::
