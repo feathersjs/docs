@@ -23,7 +23,7 @@ To also request the email address, add the string "email" to the array of the 's
 {
   "authentication": {
     "oauth": {
-      "facebook": {
+      "google": {
         "key": "<App ID>",
         "secret": "<App Secret>",
         "scope": ["openid", "email"],
