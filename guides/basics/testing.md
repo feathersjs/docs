@@ -51,7 +51,7 @@ Now we can update the `scripts` section of our `package.json` to the following:
     "dev": "ts-node-dev --no-notify src/",
     "start": "npm run compile && node lib/",
     "clean": "shx rm -rf test/data/",
-    "mocha": "npm run clean && ts-mocha \"test/**/*.ts\" --recursive --exit",
+    "mocha": "npm run clean && NODE_ENV=test ts-mocha \"test/**/*.ts\" --recursive --exit",
     "compile": "shx rm -rf lib/ && tsc"
   },
 ```
