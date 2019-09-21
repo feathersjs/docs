@@ -126,7 +126,7 @@ export default function(app: any) {
       
       // Easily organize users by email and userid for things like messaging
       // app.channel(`emails/${user.email}`).join(channel);
-      // app.channel(`userIds/$(user.id}`).join(channel);
+      // app.channel(`userIds/${user.id}`).join(channel);
     }
   });
 
