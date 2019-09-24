@@ -77,6 +77,7 @@ class FacebookStrategy extends OAuthStrategy {
 
     return {
       ...baseData,
+      name:  profile.name,
       email: profile.email
     };
   }
