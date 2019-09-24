@@ -23,7 +23,7 @@ Requesting the email property requires adding additional `scope` to the oauth co
       "facebook": {
         "key": "<App ID>",
         "secret": "<App Secret>",
-        "scope": ["email"]
+        "scope": ["email, public_profile"]
       }
     }
   }
@@ -64,7 +64,7 @@ class FacebookStrategy extends OAuthStrategy {
       },
       params: {
         // There are 
-        fields: 'id,name,email'
+        fields: 'id,name,email,picture'
       }
     });
 
@@ -147,3 +147,4 @@ export default function(app: Application) {
 :::
 ::::
 
+> __Pro tip:__ [See all available Facebook user options here](https://developers.facebook.com/docs/graph-api/reference/user/).
