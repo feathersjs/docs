@@ -294,6 +294,8 @@ It's really no different than debugging any other NodeJS app but you can refer t
 
 This warning is not as bad as it sounds. If you got it from Feathers you most likely registered more than 64 services and/or event listeners on a Socket. If you don't think there are that many services or event listeners you may have a memory leak. Otherwise you can increase the number in the [Socket.io configuration](../api/socketio.md) via `io.sockets.setMaxListeners(number)` and with [Primus](../api/primus.md) via `primus.setMaxListeners(number)`. `number` can be `0` for unlimited listeners or any other number of how many listeners you'd expect in the worst case.
 
+For example, if you need 555 listeners, you can do this in your `src/app.js` file by replacing `app.configure(socketio());` with `app.configure(socketio(function(io) {io.sockets.setMaxListeners(555);}));`.
+
 ## Why can't I pass `params` from the client?
 
 When you make a call like:
