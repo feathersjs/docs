@@ -106,6 +106,79 @@ This will register `local`, `jwt` and oAuth authentication strategies using the 
 }
 ```
 
+### Authentication client
+
+The v4 authentication client comes with many usability improvements and more reliable socket (re)connection. Since the server side authentication now includes all necessary information, it is no longer necessary to encode the token and get the user separately.
+
+Instead of
+
+```js
+const feathersClient = feathers();
+
+feathersClient.configure(rest('http://localhost:3030').superagent(superagent))
+  .configure(auth({ storage: localStorage }));
+
+feathersClient.authenticate({
+  strategy: 'local',
+  email: 'admin@feathersjs.com',
+  password: 'admin'
+})
+.then(response => {
+  console.log('Authenticated!', response);
+  return feathersClient.passport.verifyJWT(response.accessToken);
+})
+.then(payload => {
+  console.log('JWT Payload', payload);
+  return feathersClient.service('users').get(payload.userId);
+})
+.then(user => {
+  feathersClient.set('user', user);
+  console.log('User', feathersClient.get('user'));
+})
+.catch(function(error){
+  console.error('Error authenticating!', error);
+});
+```
+
+Can now be done as
+
+```js
+const feathersClient = feathers();
+
+feathersClient.configure(rest('http://localhost:3030').superagent(superagent))
+  .configure(auth({ storage: localStorage }));
+
+async function authenticate() {
+  try {
+    const { user } = await feathersClient.authenticate({
+      strategy: 'local',
+      email: 'admin@feathersjs.com',
+      password: 'admin'
+    });
+    
+    console.log('User authenticated', user);
+    
+    console.log('Authentication information is', await app.get('authentication'));
+  } catch (error) {
+    // Authentication failed
+    // E.g. show login form
+  }
+```
+
+The `feathersClient.authenticate()` with no parameters to authenticate with an existing token is still avaiable but should be replaced by the more clear `feathersClient.reAuthenticate()`.
+
+To access the current authentication information, the `app.get('authentication')` promise can be used:
+
+```js
+// user is the authenticated user
+const { user } = await app.get('authentication');
+
+// As a promise instead of async/await
+app.get('authentication').then(authInfo => {
+  const { user } = authInfo;
+});
+```
+
 ### Upgrade Notes
 
 Important things to note:
