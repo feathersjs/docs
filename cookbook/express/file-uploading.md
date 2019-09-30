@@ -206,15 +206,15 @@ Every file we select gets uploaded and saved to the `./uploads` directory.
 
 Work done!, let's call it a day, shall we?
 
-... But hey, there is something that doesn't feels quite right ...right?
+... But hey, there is something that doesn't feel quite right ...right?
 
 ### DataURI upload problems
 
-It doesn't feels right because it is not. Let's imagine what would happen if we try to upload a large file, say 25MB or more: The entire file (plus some extra MB due to the encoding) has to be kept in memory for the entire upload process, this could look like nothing for a normal computer but for mobile devices it's a big deal.
+It doesn't feel right because it is not. Let's imagine what would happen if we try to upload a large file, say 25MB or more: The entire file (plus some extra MB due to the encoding) has to be kept in memory for the entire upload process, this could look like nothing for a normal computer but for mobile devices it's a big deal.
 
 We have a big RAM consumption problem. Not to mention we have to encode the file before sending it...
 
-The solution would be to modify the service, adding support for splitting the dataURI into small chunks, then uploading one at a time, collecting and reassembling everything on the server. But hey, it's not that the same thing   browsers and web servers has been doing since maybe the very early days of the web?  maybe since Netscape Navigator?
+The solution would be to modify the service, adding support for splitting the dataURI into small chunks, then uploading one at a time, collecting and reassembling everything on the server. But hey, it's not that the same thing   browsers and web servers have been doing since maybe the very early days of the web?  Maybe since Netscape Navigator?
 
 Well, actually it is, and doing a `multipart/form-data` post is still the easiest way to upload a file.
 
@@ -246,7 +246,7 @@ app.use('/uploads',
 );
 ```
 
-Notice we kept the file field name as *uri* just to maintain uniformity, as the service will always work with that name anyways. But you can change it if you prefer.
+Notice we kept the file field name as *uri* just to maintain uniformity, as the service will always work with that name anyways, but you can change it if you prefer.
 
 Feathers-blob only understands files encoded as dataURI, so we need to convert them first. Let's make a Hook for that:
 
@@ -278,9 +278,9 @@ app.service('/uploads').before({
 
 ## Further improvements
 
-The service always return the dataURI back to us, which may not be necessary as we'd just uploaded the file, also we need to validate the file and check for authorization.
+The service always returns the dataURI back to us, which may not be necessary as we just uploaded the file. We also need to validate the file and check for authorization.
 
-All those things can be easily done with more Hooks, and that's the benefit of keeping all inside FeathersJS services. I left that to you.
+All those things can be easily done with more Hooks, and that's the benefit of keeping all inside FeathersJS services. I leave that to you.
 
 For the frontend, there is a problem with the client: in order to show the upload progress it's stuck with only REST functionality and not real-time with socket.io.
 
