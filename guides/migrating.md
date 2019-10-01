@@ -242,6 +242,10 @@ The use-cases for `feathers.SKIP` can now be explicitly handled by
 - [Calling the hook-less service methods](#hook-less-service-methods) of the database adapters
 - Setting `context.event = null` to skip event emitting
 
+### `@feathersjs/express/errors`
+
+`@feathersjs/express/errors` has been moved to `const { errorHandler } = require('@feathersjs/express');`. It is no longer available via `@feathersjs/errors`.
+
 ## Database adapters
 
 The latest versions of the Feathers database adapters include some important security and usability updates by requiring to explicitly enable certain functionality that was previously available by default.
