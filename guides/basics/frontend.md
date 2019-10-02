@@ -20,8 +20,8 @@ First, let's update `public/index.html` to initialize everything we need for the
       content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=0" />
     <title>FeathersJS chat</title>
     <link rel="shortcut icon" href="favicon.ico">
-    <link rel="stylesheet" href="//cdn.rawgit.com/feathersjs/feathers-chat/v4.0.0/public/base.css">
-    <link rel="stylesheet" href="//cdn.rawgit.com/feathersjs/feathers-chat/v4.0.0/public/chat.css">
+    <link rel="stylesheet" href="//unpkg.com/feathers-chat@4.0.0/public/base.css">
+    <link rel="stylesheet" href="//unpkg.com/feathers-chat@4.0.0/public/chat.css">
   </head>
   <body>
     <div id="app" class="flex flex-column"></div>
