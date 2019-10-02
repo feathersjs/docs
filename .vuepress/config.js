@@ -93,6 +93,7 @@ module.exports = {
         collapsable: false,
         children: [
           'authentication/anonymous.md',
+          'authentication/api-key.md',
           'authentication/facebook.md',
           'authentication/google.md'
         ]
