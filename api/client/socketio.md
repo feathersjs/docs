@@ -354,3 +354,15 @@ socket.on('messages removed', function(message) {
   $('#message-' + message.id).remove();
 });
 ```
+
+#### Custom events
+
+[Custom events](../events.md#custom-events) can be listened to accordingly:
+
+```js
+var socket = io('http://localhost:3030/');
+
+socket.on('messages myevent', function(data) {
+  console.log('Got myevent event', data);
+});
+```
