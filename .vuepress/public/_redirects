@@ -41,6 +41,7 @@ https://crow.docs.feathersjs.com/* https://docs.feathersjs.com/:splat 301!
 /api/authentication/server.html             /api/authentication/
 
 /guides/frameworks/readme.html              /guides/frameworks.html
+/guides/basics/readme.html                  /guides/
 /guides/basics/clients.html                 /guides/basics/starting.html
 /guides/basics/databases.html               /guides/basics/services.html
 /guides/basics/real-time.html               /guides/basics/services.html
