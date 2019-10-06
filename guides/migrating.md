@@ -343,7 +343,7 @@ class MyAuthenticationService extends AuthenticationService {
 
     return {
       ...payload,
-      userId: user.id
+      userId: user.id || user._id 
     };
   }
 }
