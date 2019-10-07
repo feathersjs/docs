@@ -85,7 +85,10 @@ Removes the access token from storage on the client. It also calls the `remove` 
 `app.get('authentication') -> Promise` is a Promise that resolves with the current authentication information. For most strategies this is the best place to get the currently authenticated user:
 
 ```js
+// Returns the authenticated user
 const { user } = await app.get('authentication');
+// Gets the authenticated accessToken (JWT)
+const { accessToken } = await app.get('authentication');
 ```
 
 ## app.authentication
