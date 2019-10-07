@@ -69,7 +69,7 @@ app.use('/my-service', new MyService());
 
 > **ProTip:** Methods are optional, and if a method is not implemented Feathers will automatically emit a `NotImplemented` error.
 
-> **ProTip:** Notice that the TypeScript version of the example `MyService` class implements the ServiceMethods interface. If you look at, for instance, the users service that the Feathers CLI generates for you when you scaffold a new Feathers application you will notice that the users service class extends the chosen [database adapter](./databases/common.md) service class. The database adapter service classes actually extends a class named _AdapterService_, which implements the ServiceMethods interface.
+> **ProTip:** Notice that the TypeScript version of the example `MyService` class implements the `ServiceMethods` interface. If you look at, for instance, the users service that the Feathers CLI generates for you when you scaffold a new Feathers application you will notice that the users service class extends the chosen [database adapter](./databases/common.md) service class. The database adapter service classes actually extend a class named `AdapterService`, which implements the `ServiceMethods` interface.
 
 > __Important:__ Always use the service returned by `app.service(path)` not the service object (the `myService` object above) directly. See the [app.service documentation](./application.md#servicepath) for more information.
 
