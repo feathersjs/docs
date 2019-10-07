@@ -251,6 +251,8 @@ The use-cases for `feathers.SKIP` can now be explicitly handled by
 
 The latest versions of the Feathers database adapters include some important security and usability updates by requiring to explicitly enable certain functionality that was previously available by default.
 
+> __Important:__ The latest versions of the database adapters also work with previous versions of Feathers. An upgrade of the `@feathersjs/` modules is recommended but not necessary to use the latest database adapter features.
+
 ### Querying by id
 
 All database adapters now support additional query parameters for `get`, `remove`, `update` and `patch`. If the record does not match that query, even if the `id` is valid, a `NotFound` error will be thrown. This is very useful for the common case of e.g. restricting requests to the users company the same way as you already would in a `find` method:
