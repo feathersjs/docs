@@ -1,0 +1,154 @@
+This recipe will demonstrate how to use multiple Oauth methods in one single script, and serveit over a ProxyReverse.  This is required when you have multiple feathers servers running on different ports and you need to have everything proxied over the secure port 443.  For this example, i am using old-school Apache, but the same results are probably possible using Nginx.
+We will end up with a FeathersJS server using multiple Oauth2 methods running over a path called simply `/feathers/`.
+I find it most helpful to start with a new cloud server.   Personally, I prefer either Digital Ocean or Google-Cloud, but of course, you may use any service you choose.  Also, it is recommended purchasing an economical domain name from NameCheap to use an example.  
+You are strongly advised to ensure your certification is working using https://www.ssllabs.com/ssltest/analyze.html.  
+For this recipe, we are only using:
+- Auth0
+- Google
+- Facebook
+We will be using the complete OAuth-Grant callback format which may look unfamiliar to some:
+`https://DOMAIN.COM/feathers/oauth/connect/<oauth>/callback`
+Notice the entire URL is specified along with `https`.  Using the proxy method, the shortened URL version is not allowed.
+
+First, create a new Feathers server simply by entering:
+`feathers generate app;`
+You may choose any authentication type you wish, as we will override it in the next step.  Believe it or not, you now have a complete working server!
+Next, edit your newly created `./config/default.json` settings:  (notice `host` value is being changed from localhost to your new domain name)
+```
+{
+  "host": "DOMAIN.COM",
+  "port": 3030,.....................................................
+    "oauth": {
+        "redirect" : "/feathers/",
+         "defaults" : {
+                "protocol" : "https"
+        },
+      "auth0": {
+        "key": "mXXXXXXXXXXXXXXXXXXXXXXXXXXXXl",
+        "secret": "NXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX7",
+        "subdomain": "dev-y-wc5m4m",
+        "redirect_uri": "https://DOMAIN.COM/feathers/oauth/connect/auth0/callback",
+        "callback": "https://DOMAIN.COM/feathers/oauth/auth0/authenticate"
+      },
+      "facebook": {
+        "key": "500000000000000000000000004",
+        "secret": "000000000000000000000000000000000008a",
+        "scope": ["public_profile, email"],
+        "redirect_uri": "https://DOMAIN.COM/feathers/oauth/connect/facebook/callback",
+        "callback": "https://DOMAIN.COM/feathers/oauth/facebook/authenticate"
+      },
+      "google": {
+        "key": "8XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXi.apps.googleusercontent.com",
+        "secret": "XXXXXXXXXXXXXXXXXXXXXXXXi",
+        "redirect_uri": "https://DOMAIN.COM/feathers/oauth/connect/google/callback",
+        "callback": "https://DOMAIN.COM/feathers/oauth/google/authenticate",
+        "scope": [
+          "email",
+          "profile",
+          "openid"
+        ]
+      }
+    }
+```
+
+Next, add the following code to the appropriate sections of your `./public/index.html`:  (and notice code in the logout link)
+```
+<script type='text/javascript'  src='//unpkg.com/@feathersjs/client@^4.0.0/dist/feathers.js'></script>
+<script type="text/javascript"  src="//unpkg.com/socket.io-client@1.7.3/dist/socket.io.js"></script>
+
+<script type='text/javascript'>
+  // Socket.io is exposed as the \`io\` global.
+  var socket = io( { transports: ['polling', 'websocket'], path: '/feathers/socket.io' });
+
+  var feathersClient = feathers()
+    .configure(feathers.socketio(socket))
+    .configure(feathers.authentication({
+      cookie: 'feathers-jwt'
+    }));
+
+  feathersClient.authenticate()
+    .then(response => {
+      console.info('Feathers Client has Authenticated with the JWT access token!');
+      console.log(response);
+    })
+    .catch(error => {
+      console.info("We have not logged in with OAuth, yet.  This means there's no cookie storing the accessToken.  As a result, feathersClient.authenticate() failed.");
+      console.log(error);
+    });
+</script>
+<a href='https://DOMAIN.COM/feathers/oauth/connect/auth0'>auth0</a>          &nbsp;
+<a href='https://DOMAIN.COM/feathers/oauth/connect/facebook'>facebook</a>    &nbsp;
+<a href='https://DOMAIN.COM/feathers/oauth/connect/google'>google</a>        &nbsp;
+<a href='#' onClick='javascript: (async () => { await feathersClient.logout(); })(); '>logout!</a>
+
+Now set up a proxy-reverse in your httpd.conf (or ssl.conf) file, wherever your port 443 is specified:
+
+  <Location /feathers/>
+    ProxyPass http://localhost:3030/
+    ProxyPassReverse http://localhost:3030/
+  </Location>
+
+Finally, modify your ./src/authentication.js  file to look like the following.
+
+const { AuthenticationService, JWTStrategy } = require('@feathersjs/authentication');
+const { LocalStrategy } = require('@feathersjs/authentication-local');
+const { expressOauth, OAuthStrategy  } = require('@feathersjs/authentication-oauth');
+
+const axios = require('axios');
+
+class FacebookStrategy extends OAuthStrategy {
+  async getProfile (authResult) {
+
+    const accessToken = authResult.access_token;
+
+    const { data } = await axios.get('https://graph.facebook.com/me', {
+      headers: {
+        authorization: `Bearer ${accessToken}`
+      },
+      params: {
+        fields: 'id,name,email,picture'
+      }
+    });
+
+    return data;
+  }
+
+  async getEntityData(profile) {
+
+    const baseData = await super.getEntityData(profile);
+
+    return {
+      ...baseData,
+      name:  profile.name,
+      email: profile.email
+    };
+  }
+}
+
+class GoogleStrategy extends OAuthStrategy {
+  async getEntityData(profile) {
+
+    const baseData = await super.getEntityData(profile);
+
+    return {
+      ...baseData,
+      profilePicture: profile.picture,
+      email: profile.email
+    };
+  }
+}
+
+module.exports = app => {
+  const authentication = new AuthenticationService(app);
+
+  authentication.register('jwt', new JWTStrategy());
+  authentication.register('local', new LocalStrategy());
+  authentication.register('facebook', new FacebookStrategy());
+  authentication.register('google', new GoogleStrategy());
+
+  app.use('/authentication', authentication);
+  app.configure(expressOauth());
+};
+
+Now you may start the server and navigate to your new website using https://DOMAIN.COM/feathers/ and click on any of the OAuth links.   You will have to enter the browser console to see the login results.
+
