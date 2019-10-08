@@ -15,7 +15,7 @@ $ npm install @feathersjs/rest-client --save
 
 <!-- -->
 
-> **ProTip:** REST client services do emit `created`, `updated`, `patched` and `removed` events but only _locally for their own instance_. Real-time events from other clients can only be received by using a websocket connection.
+> **ProTip:** REST client services do emit `created`, `updated`, `patched` and `removed` events but only _locally for their own instance_. Real-time events from other clients can only be received by using a real-time transport ([Socket.io](./socketio.md) or [Primus](./primus.md)).
 
 <!-- -->
 
