@@ -26,7 +26,7 @@ Synchronously verify the configuration for this strategy and throw an error if e
 
 ## authenticate(authentication, params)
 
-Authenticate `authentication` data with additional `params`. A strategy may check for `data.strategy` being set to its `name` and throw an error if it does not match. `authenticate` will be called for all strategies. `authenticate` should throw a `NotAuthenticated` if it failed or return an authentication result object.
+Authenticate `authentication` data with additional `params`. `authenticate` should throw a `NotAuthenticated` if it failed or return an authentication result object.
 
 ## parse(req, res)
 
