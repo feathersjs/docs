@@ -15,13 +15,13 @@ The following settings are available:
 
 - `redirect`: The URL of the frontend to redirect to with the access token (or error message). The [authentication client](./client.md) handles those redirects automatically. If not set, the authentication result will be sent as JSON instead.
 - `defaults`: Default [grant configuration](https://github.com/simov/grant#configuration) used for all strategies. The following default options are set automatically:
-  - `path` (default: `/oauth`) - The oAuth base path
+  - `path` (default: `'/oauth'`) - The oAuth base path
 - `<strategy-name>` (e.g. `twitter`): The [grant configuration](https://github.com/simov/grant#configuration) used for a specific strategy.
 - For both `defaults` and specific strategies, the following options are set automatically:
   - `host`: Set to `host` from the configuration
-  - `protocol`: `http` for development, `https` for production (when `NODE_ENV=production`)
-  - `transport`: Set to `session` (see [grant response data](https://github.com/simov/grant#response-data-transport))
-  - `callback`: Set to `oauth/<name>/authenticate`. This should not be changed.
+  - `protocol`: `'http'` for development, `'https'` for production (when `NODE_ENV=production`)
+  - `transport`: Set to `'session'` (see [grant response data](https://github.com/simov/grant#response-data-transport))
+  - `callback`: Set to `'<defaults.path>/<name>/authenticate'`. This should not be changed.
 
 > __Pro tip:__ Removing the `redirect` setting is a good way to troubleshoot oAuth authentication errors.
 
