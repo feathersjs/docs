@@ -376,7 +376,7 @@ node app.js
 :::
 ::: tab "TypeScript"
 ```sh
-ts-node app.ts
+ts-node index.ts
 ```
 :::
 ::::
