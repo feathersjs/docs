@@ -220,6 +220,9 @@ npm install @feathersjs/socketio @feathersjs/express --save
 
 :::: tabs :options="{ useUrlFragment: false }"
 ::: tab "JavaScript"
+
+Update `app.js` with the following content:
+
 ```js
 const feathers = require('@feathersjs/feathers');
 const express = require('@feathersjs/express');
@@ -290,6 +293,9 @@ app.service('messages').create({
 ```
 :::
 ::: tab "TypeScript"
+
+Update `app.ts` with the following content:
+
 ```js
 import feathers from '@feathersjs/feathers';
 import '@feathersjs/transport-commons';
