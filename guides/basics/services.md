@@ -48,7 +48,7 @@ app.use('/my-service', new MyService());
 
 ::: tab "TypeScript class"
 ```typescript
-import { Service, Params, Id, NullableId Application } from '@feathersjs/feathers';
+import { Application, Id, NullableId, Params, Service } from '@feathersjs/feathers';
 
 class MyService implements Service<any> {
   async find(params: Params) {}
