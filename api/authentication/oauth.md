@@ -14,13 +14,13 @@ $ npm install @feathersjs/authentication-oauth --save
 The following settings are available:
 
 - `redirect`: The URL of the frontend to redirect to with the access token (or error message). The [authentication client](./client.md) handles those redirects automatically. If not set, the authentication result will be sent as JSON instead.
-- `defaults`: Default [grant configuration](https://github.com/simov/grant#configuration) used for all strategies. The following default options are set automatically:
+- `defaults`: Default [Grant configuration](https://github.com/simov/grant#configuration) used for all strategies. The following default options are set automatically:
   - `path` (default: `'/oauth'`) - The oAuth base path
-- `<strategy-name>` (e.g. `twitter`): The [grant configuration](https://github.com/simov/grant#configuration) used for a specific strategy.
+- `<strategy-name>` (e.g. `twitter`): The [Grant configuration](https://github.com/simov/grant#configuration) used for a specific strategy.
 - For both `defaults` and specific strategies, the following options are set automatically:
   - `host`: Set to `host` from the configuration
   - `protocol`: `'http'` for development, `'https'` for production (when `NODE_ENV=production`)
-  - `transport`: Set to `'session'` (see [grant response data](https://github.com/simov/grant#response-data-transport))
+  - `transport`: Set to `'session'` (see [Grant response data](https://github.com/simov/grant#response-data-transport))
   - `callback`: Set to `'<defaults.path>/<name>/authenticate'`. This should not be changed.
 
 > __Pro tip:__ Removing the `redirect` setting is a good way to troubleshoot oAuth authentication errors.
@@ -47,6 +47,34 @@ Standard oAuth authentication can be configured with those options in `config/de
 ```
 
 > __Note:__ All oAuth strategies will by default always look for configuration under `authentication.oauth.<name>`. If `authentication.oauth` is not set in the configuration, oAuth authentication will be disabled.
+
+Here is a [list of all Grant configuration options](https://github.com/simov/grant#all-available-options) that are available:
+
+Key | Location | Description
+:---| :--- | :---
+request_url | [oauth.json](https://github.com/simov/grant/blob/master/config/oauth.json) | OAuth1/step1
+authorize_url | [oauth.json](https://github.com/simov/grant/blob/master/config/oauth.json) | OAuth1/step2 or OAuth2/step1
+access_url | [oauth.json](https://github.com/simov/grant/blob/master/config/oauth.json) | OAuth1/step3 or OAuth2/step2
+oauth | [oauth.json](https://github.com/simov/grant/blob/master/config/oauth.json) | OAuth version number
+scope_delimiter | [oauth.json](https://github.com/simov/grant/blob/master/config/oauth.json) | string delimiter used for concatenating multiple scopes
+protocol, host, path | `defaults` | used to generate `redirect_uri`
+transport | `defaults` | [transport](#response-data-transport) to use to deliver the response data in your final `callback` route
+state | `defaults` | toggle random `state` string generation for OAuth2
+key | `[provider]` | OAuth app key, reserved aliases: `consumer_key` and `client_id`
+secret | `[provider]` | OAuth app secret, reserved aliases: `consumer_secret` and `client_secret`
+scope | `[provider]` | list of scopes to request
+custom_params | `[provider]` | custom authorization [parameters](#custom-parameters) and their values
+subdomain | `[provider]` | string to be [embedded](#subdomain-urls) in `request_url`, `authorize_url` and `access_url`
+nonce | `[provider]` | toggle random `nonce` string generation for [OpenID Connect](#openid-connect) providers
+callback | `[provider]` | final callback route on your server to receive the [response data](#response-data)
+dynamic | `[provider]` | allow [dynamic override](#dynamic-override) of configuration
+overrides | `[provider]` | [static overrides](#static-overrides) for a provider
+response | `[provider]` | [limit](#limit-response-data) the response data
+token_endpoint_auth_method | `[provider]` | authentication method for the [token endpoint](#token-endpoint-auth-method)
+name | generated | provider's [name](#grant), used to generate `redirect_uri`
+profile_url | [grant-profile](https://github.com/simov/grant-profile) | The URL to retrieve the user profile from  
+[provider] | generated | provider's [name](#grant) as key
+redirect_uri | generated | OAuth app [redirect URI](#redirect-uri), generated using `protocol`, `host`, `path` and `name`
 
 ## Usage
 
