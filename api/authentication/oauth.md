@@ -157,15 +157,26 @@ If the `redirect` option is not set, the authentication result data will be sent
 
 - `authService`: The name of the authentication service
 - `linkStrategy` (default: `'jwt'`): The name of the strategy to use for account linking
-- `expressSession` (default: `require('express-session')()`): The [Express session](https://github.com/expressjs/session) middleware to use. Uses in-memory sessions by default but may need to be customized to a persistent storage when using multiple instances of the application.
+- `expressSession` (default: `require('express-session')()`): The [Express session](https://github.com/expressjs/session) middleware to use. Uses in-memory sessions by default but may need to be customized to a persistent storage when using multiple instances of the application. Other sessions stores can be used by settin g the `expressSession` option using a different memory store, e.g. [connect-redis](https://github.com/tj/connect-redis) in the authentication configuration:
 
 ```js
+const redis = require('redis')
+const session = require('express-session')
 const { expressOauth } = require('@feathersjs/authentication-oauth');
 
+const RedisStore = require('connect-redis')(session)
+const redisClient = redis.createClient()
+
 app.configure(expressOauth({
-  service: '/v2/authentication'
+  expressSession: session({
+    store: new RedisStore({ client: redisClient }),
+    secret: 'keyboard cat',
+    resave: false,
+  })
 }));
 ```
+
+> __Important:__  If not customized, Express oAuth uses the in-memory Express session store which will show a `connect.session() MemoryStore is not designed for a production environment, as it will leak memory, and will not scale past a single process.` warning in production.
 
 ## OAuthStrategy
 
