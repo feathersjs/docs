@@ -95,7 +95,8 @@ module.exports = {
           'authentication/anonymous.md',
           'authentication/auth0.md',
           'authentication/facebook.md',
-          'authentication/google.md'
+          'authentication/google.md',
+          'authentication/stateless.md',
         ]
       }, {
         title: 'Express',

@@ -71,7 +71,7 @@ The following options are available:
 - `secret`: The JWT signing secret.
 - `service`: The path of the entity service
 - `authStrategies`: A list of authentication strategy names to allow on this authentication service to create access tokens.
-- `entity`: The name of the entity. Can be `null` if no entity is used (see [stateless tokens]()).
+- `entity`: The name of the field that will contain the entity after successful authentication. Will also be used to set `params[entity]` (usually `params.user`) when using the [authenticate hook](./hook). Can be `null` if no entity is used (see [stateless tokens](../../cookbook/authentication/stateless.md)).
 - `entityId`: The id property of an entity object. Only necessary if the entity service does not have an `id` property (e.g. when using a custom entity service).
 - `jwtOptions`: All options available for the [node-jsonwebtoken package](https://github.com/auth0/node-jsonwebtoken).
 
