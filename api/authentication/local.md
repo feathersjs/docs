@@ -41,6 +41,8 @@ Standard local authentication can be configured with those options in `config/de
 }
 ```
 
+> __Important:__ If you want to set the value of `usernameField` to `username` in your configuration file under Windows, the value has to be escaped as `\\username` (otherwise the `username` environment variable will be used).
+
 ## LocalStrategy
 
 > __Note:__ The methods described in this section are intended for [customization](#customization) purposes and internal calls. They usually do not need to be called directly.
