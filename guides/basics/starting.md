@@ -26,6 +26,13 @@ npm i typescript ts-node -g
 npm init --yes
 # Also initialize a TS configuration file that uses modern JavaScript
 tsc --init --target es2018
+
+# Make sure to add "lib": ["es2018", "dom"] into generated tsconfig.json file 
+{
+ "compilerOptions": {
+      "lib": ["es2018", "dom"]
+  }
+ }
 ```
 :::
 ::::
