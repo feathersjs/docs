@@ -312,9 +312,21 @@ For TypeScript we also have to install the TypeScript reporter:
 npm install @istanbuljs/nyc-config-typescript --save-dev
 ```
 
+Add the following `.nycrc` file:
+
+```json
+{
+  "extends": "@istanbuljs/nyc-config-typescript",
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx"
+  ]
+}
+```
+
 And then update the `package.json` like this:
 
-```ts
+```json
   "scripts": {
     "test": "npm run compile && npm run coverage",
     "dev": "ts-node-dev --no-notify src/",
