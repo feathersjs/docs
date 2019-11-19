@@ -78,6 +78,14 @@ redirect_uri | generated | OAuth app [redirect URI](#redirect-uri), generated us
 
 ## Usage
 
+### Cookbook guides
+
+For specific oAuth provider setup see the following [cookbook](../../cookbook/) guides:
+
+- [Auth0](../../cookbook/authentication/auth0.md)
+- [Facebook](../../cookbook/authentication/facbeook.md)
+- [Google](../../cookbook/authentication/google.md)
+
 ### Flow
 
 There are two ways to initiate oAuth authentication:
