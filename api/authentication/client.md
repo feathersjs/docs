@@ -51,7 +51,7 @@ app.reAuthenticate().then(() => {
 });
 ```
 
-> __Important:__ `app.reAuthenticate()` has to be called when you want to use the token from storage and __only once__ when the application initializes. Once successful, all subsequent requests will send their authentication information automatically.
+> __Important:__ `app.reAuthenticate()` has to be called when you want to use the token from storage. __There’s no need to call it more than once__, so you’d typically only do it when the application initializes. Once successful, all subsequent requests will send their authentication information automatically. In some rare cases, for example making sure the user object returned by `app.get('authentication')` is up-to-date after it was changed on the server, you may safely call it again.
 
 
 ## app.authenticate(data)
