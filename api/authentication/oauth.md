@@ -155,9 +155,19 @@ The `redirect` configuration option is used to redirect back to the frontend app
 
 Will redirect to `https://app.mydomain.com/#access_token=<user jwt>` or `https://app.mydomain.com/#error=<some error message>`. Redirects can be customized with the [getRedirect()](#getredirect-data) method of the oAuth strategy. The [authentication client](./client.md) handles the default redirects automatically already.
 
-> __Note:__ The redirect is using a hash instead of a query string by default because it is not logged server side and can be easily read on the client.
+> __Note:__ The redirect is using a hash instead of a query string by default because it is not logged server side and can be easily read on the client. You can force query based redirect by adding a `?` to the end of the `redirect` option.
 
 If the `redirect` option is not set, the authentication result data will be sent as JSON instead.
+
+Dynamic redirects to the same URL are possible by setting the `redirect` query parameter in the oAuth flow. For example, the following oAuth link:
+
+```html
+<a href="/oauth/github?redirect=dashboard">
+  Login with GitHub
+</a>
+```
+
+With the above configuration will redirect to `https://app.mydomain.com/dashboard` after the oAuth flow.
 
 ## Setup (Express)
 
