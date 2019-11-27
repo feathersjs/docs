@@ -27,7 +27,13 @@ app.service('messages').hooks({
 });
 ```
 
-It will either throw an error if all strategies failed or merge `params` with the result from the first successful authentication strategy. For example, a successful [JWT strategy]() authentication will set:
+The hook will
+
+- Throw an error if the strategy fails
+- Throw an error if no authentication information is set and it is an external call (`params.provider` is set) or do nothing if it is an internal call (`params.provider` is `undefined`)
+- If successful, merge `params` with the return value of the authentication strategy
+
+For example, a successful [JWT strategy](./jwt.md) authentication will set:
 
 ```js
 params.authentication.payload // The decoded payload

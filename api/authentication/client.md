@@ -36,7 +36,9 @@ const app = feathers();
 app.configure(socketio(socket));
 
 // Available options are listed in the "Options" section
-app.configure(auth(options))
+app.configure(auth({
+  storageKey: 'auth'
+}))
 ```
 
 ## app.reAuthenticate()
