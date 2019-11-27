@@ -11,6 +11,7 @@ The `AuthenticationService` is a [Feathers service](../services.md) that allows 
 
 - The [standard setup](#setup) used by the generator
 - How to [configure](#configuration) authentication and where the configuration should go
+- The different [authentication flows](#authentication-flows)
 - The methods available on the authentication service
 - How to [customize](#customization) the authentication service
 - The [Events](#events) sent by the authentication service
@@ -71,6 +72,7 @@ The following options are available:
 - `secret`: The JWT signing secret.
 - `service`: The path of the entity service
 - `authStrategies`: A list of authentication strategy names to allow on this authentication service to create access tokens.
+- `parseStrategies`: A list of authentication strategies that should be used to parse HTTP requests. Defaults to the same as `authStrategies`.
 - `entity`: The name of the field that will contain the entity after successful authentication. Will also be used to set `params[entity]` (usually `params.user`) when using the [authenticate hook](./hook). Can be `null` if no entity is used (see [stateless tokens](../../cookbook/authentication/stateless.md)).
 - `entityId`: The id property of an entity object. Only necessary if the entity service does not have an `id` property (e.g. when using a custom entity service).
 - `jwtOptions`: All options available for the [node-jsonwebtoken package](https://github.com/auth0/node-jsonwebtoken).
@@ -98,6 +100,33 @@ An authentication service configuration in `config/default.json` can look like t
 > *Note:* `typ` in the `header` options is not a typo, it is part of the [JWT JOSE header specification](https://tools.ietf.org/html/rfc7519#section-5).
 
 Additionally to the above configuration, most [strategies](./strategy.md) will look for their own configuration under the name it was registered. An example can be found in the [local strategy configuration](./local.md#configuration).
+
+## Authentication flows
+
+The following 
+
+### To _create a new JWT_
+
+For any strategy allowed in `authStratgies`, a user can call `app.service('/authentication').create(data)` or `POST /authentication` with `data` as `{ strategy: name, ...loginData }`. Internally authentication will then
+
+- Call the strategy `.authenticate` method with `data`
+- Create a JWT for the entity returned by the strategy
+- Return the JWT (`accessToken`) and the additional information from the strategy
+
+### To _authenticate an external request_
+
+For any HTTP request and strategy allowed in `parseStrategies` or - if not set - `authStrategies` authentication will:
+
+- Call [strategy.parse](./strategy.md#parse-req-res) and set the return value of the first strategy that does not return `null` as `params.authentication`
+- Verify `params.authentication` using the [authenticate hook](./hook.md) which calls the strategy `.authenticate` method with `params.authentication` as the data
+- Merge the return value of the strategy with `params` (e.g. setting `params.user`)
+
+### To authenticate _your own service request_
+
+For any service that uses the [authenticate hook](./hook.md) called internally you can set `params.authentication` in the service call which will then:
+
+- Verify `params.authentication` using the [authenticate hook](./hook.md) which calls the strategy `.authenticate` method with `params.authentication` as the data
+- Merge the return value of the strategy with `params` (e.g. setting `params.user`)
 
 ## AuthenticationService
 
