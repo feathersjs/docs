@@ -11,7 +11,7 @@ The `@feathersjs/authentication-client` module allows you to easily authenticate
 
 ## Configuration
 
-- `storage` (default: `localStorage` if available, `MemoryStorage` otherwise) - The storage to store the access token
+- `storage` (default: `localStorage` if available, `MemoryStorage` otherwise) - The storage to store the access token. For React Native use [async-storage](https://github.com/react-native-community/async-storage).
 - `path` (default: '/authentication') - The path of the authentication service
 - `locationKey` (default: `'access_token'`) - The name of the window hash parameter to parse for an access token from the `window.location`. Usually used by the oAuth flow.
 - `locationErrorKey` (default: `'error') - The name of the window hash parameter to parse for authentication errors. Usually used by the oAuth flow.
@@ -40,6 +40,8 @@ app.configure(auth({
   storageKey: 'auth'
 }))
 ```
+
+> __Note:__ Verifying or parsing the token on the client usually isn't necessary since the server does that on JWT authentication and returns with the token information but it can still be done manually with the [jwt-decode](https://www.npmjs.com/package/jwt-decode) package.
 
 ## app.reAuthenticate()
 
