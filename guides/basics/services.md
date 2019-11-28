@@ -217,10 +217,10 @@ exports.Users = class Users extends Service {
 Update `src/services/users/users.class.ts` with the following:
 
 ```ts
+import crypto from 'crypto';
+import { Params } from '@feathersjs/feathers';
 import { Service, NedbServiceOptions } from 'feathers-nedb';
 import { Application } from '../../declarations';
-import crypto from 'crypto';
-import { Params } from 'express-serve-static-core';
 
 // The Gravatar image service
 const gravatarUrl = 'https://s.gravatar.com/avatar';
