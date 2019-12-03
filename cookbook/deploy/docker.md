@@ -10,6 +10,22 @@ $ cd feathers-app/
 $ feathers generate app
 ```
 
+## Set the host
+
+Ensure the web app listen to all network (i.e. outside the container) by setting the host to '0.0.0.0' in api/config/default.json:
+
+```
+{
+  "host": "0.0.0.0",
+  "port": 3030,
+  "public": "../public/",
+  "paginate": {
+    "default": 10,
+    "max": 50
+  },
+  ...
+```
+
 ### Dockerfile
 
 Add the following `Dockerfile` to the project directory:
