@@ -113,7 +113,7 @@ For any strategy allowed in `authStratgies`, a user can call `app.service('/auth
 - Create a JWT for the entity returned by the strategy
 - Return the JWT (`accessToken`) and the additional information from the strategy
 
-> For `local` strategy, the user has to be created before doing auth, otheriwse, a 401 `NotAuthenticated` error will be send.
+> For `local` strategy, the user has to be created before doing auth, otherwise, a 401 `NotAuthenticated` error will be send.
 
 ### To _authenticate an external request_
 
