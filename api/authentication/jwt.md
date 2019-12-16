@@ -91,7 +91,7 @@ class MyJwtStrategy extends JWTStrategy {
 module.exports = app => {
   const authService = new AuthenticationService(app);
 
-  service.register('jwt', new MyJwtStrategy());
+  authService.register('jwt', new MyJwtStrategy());
 
   // ...
   app.use('/authentication', authService);
@@ -111,7 +111,7 @@ class MyJwtStrategy extends JWTStrategy {
 export default (app: Application) => {
   const authService = new AuthenticationService(app);
 
-  service.register('jwt', new MyJwtStrategy());
+  authService.register('jwt', new MyJwtStrategy());
 
   // ...
   app.use('/authentication', authService);
