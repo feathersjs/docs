@@ -229,7 +229,7 @@ const todoService = {
   }
 };
 
-app.use('/todos', ensureAuthenticated, logRequest, todoService, updateData);
+app.use('/todos', logRequest, todoService, updateData);
 ```
 
 > __Important:__ Custom middleware will only run for REST requests and not when used with other transports like Socket.io or Primus.
