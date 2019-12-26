@@ -83,7 +83,7 @@ const { AuthenticationService, JWTStrategy } = require('@feathersjs/authenticati
 const { LocalStrategy } = require('@feathersjs/authentication-local');
 
 class MyLocalStrategy extends LocalStrategy {
-  getEntityQuery(query, params) {
+  async getEntityQuery(query, params) {
     // Query for user but only include users marked as `active`
     return {
       ...query,
@@ -111,7 +111,7 @@ import { AuthenticationService, JWTStrategy } from '@feathersjs/authentication';
 import { LocalStrategy } from '@feathersjs/authentication-local';
 
 class MyLocalStrategy extends LocalStrategy {
-  getEntityQuery(query: Query, params: Params) {
+  async getEntityQuery(query: Query, params: Params) {
     // Query for use but only include `active` users
     return {
       ...query,
