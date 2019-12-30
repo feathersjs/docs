@@ -83,7 +83,7 @@ redirect_uri | generated | OAuth app [redirect URI](#redirect-uri), generated us
 For specific oAuth provider setup see the following [cookbook](../../cookbook/) guides:
 
 - [Auth0](../../cookbook/authentication/auth0.md)
-- [Facebook](../../cookbook/authentication/facbeook.md)
+- [Facebook](../../cookbook/authentication/facebook.md)
 - [Google](../../cookbook/authentication/google.md)
 
 ### Flow
