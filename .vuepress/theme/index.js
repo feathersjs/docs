@@ -38,6 +38,9 @@ module.exports = (options, ctx) => ({
       defaultTitle: {
         '/zh/': '警告'
       }
-    }]
+    }],
+    '@vuepress/last-updated',
+    [ '@dovyp/vuepress-plugin-clipboard-copy', true ],
+    'tabs'
   ]
 })

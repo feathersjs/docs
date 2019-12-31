@@ -144,10 +144,5 @@ module.exports = {
         }]
       }
     ]
-  },
-  plugins: [
-    '@vuepress/last-updated',
-    [ '@dovyp/vuepress-plugin-clipboard-copy', true ],
-    'tabs'
-  ]
+  }
 };

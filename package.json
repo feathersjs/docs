@@ -36,12 +36,12 @@
   "dependencies": {},
   "devDependencies": {
     "@dovyp/vuepress-plugin-clipboard-copy": "^1.0.0-alpha.7",
-    "remark": "^10.0.1",
-    "remark-validate-links": "^8.0.2",
-    "unified-engine": "^6.0.1",
-    "vfile-reporter": "^5.1.1",
+    "remark": "^11.0.2",
+    "remark-validate-links": "^9.0.1",
+    "unified-engine": "^7.0.0",
+    "vfile-reporter": "^6.0.0",
     "vue-tabs-component": "^1.5.0",
-    "vuepress": "^1.0.0-alpha.23",
+    "vuepress": "^1.2.0",
     "vuepress-plugin-tabs": "^0.2.2"
   }
 }
