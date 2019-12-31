@@ -130,6 +130,9 @@ module.exports = {
           text: 'Feathers VueX',
           link: 'https://vuex.feathersjs.com/'
         }, {
+          text: 'Common Hooks',
+          link: 'https://hooks-common.feathersjs.com/'
+        }, {
           text: 'Previous versions',
           items: [{
             text: 'Buzzard (v3)',
