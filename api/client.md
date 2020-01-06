@@ -233,6 +233,6 @@ define(function (require) {
     text: 'A new message'
   });
 
-  return const;
+  return app;
 });
 ```
