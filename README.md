@@ -5,7 +5,7 @@ sidebar: false
 
 <img style="display: block; width: 400px; margin: 0 auto; margin-top: 4em; margin-bottom: 2em;" src="/img/feathers-logo-wide.png" alt="FeathersJS logo" />
 
-Welcome to the FeathersJS documentation! Feathers is a web-framework for creating real-time applications and REST APIs using JavaScript or TypeScript with Node.JS, React Native and the browser. It works with any backend supporting many databases out of the box and with any frontend technology like React, VueJS, Angular, Android or iOS.
+Welcome to the FeathersJS documentation! Feathers is a lightweight web-framework for creating real-time applications and REST APIs using JavaScript or TypeScript. Feathers can interact with any backend technology, supports over a dozen databases and works with any frontend technology like React, VueJS, Angular, React Native, Android or iOS.
 
 <img style="margin: 2em 0;" src="/img/key-image-horizontal.png" alt="Feathers key image">
 
