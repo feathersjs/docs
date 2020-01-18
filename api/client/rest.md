@@ -182,6 +182,40 @@ app.configure(restClient.fetch(fetch));
 app.configure(restClient.fetch(window.fetch));
 ```
 
+### Connecting to multiple servers
+
+It is possible to instantiate and use individual services pointing to different servers by calling `rest('server').<library>().service(name)`:
+
+```js
+const feathers = require('@feathersjs/feathers');
+const rest = require('@feathersjs/rest-client');
+
+const app = feathers();
+
+const client1 = rest('http://feathers-api.com').fetch(window.fetch);
+const client2 = rest('http://other-feathers-api.com').fetch(window.fetch);
+
+// With additional options to e.g. set authentication information
+const client2 = rest('http://other-feathers-api.com', {
+  headers: {
+    Authorization: 'Bearer <Token for other-feathers-api.com>'
+  }
+}).fetch(window.fetch);
+
+// Configuring this will initialize default services for http://feathers-api.com
+app.configure(client1);
+
+// Connect to the `http://feathers-api.com/messages` service
+const messages = app.service('messages');
+
+// Register /users service that points to http://other-feathers-api.com/users
+app.use('/users', client2.service('users'));
+
+const users = app.service('users');
+```
+
+> __Note:__ If the authentication information is different, it needs to be set as an option as shown above or via `params.headers` when making the request.
+
 ### Extending rest clients
 
 This can be useful if you wish to override how the query is transformed before it is sent to the API.
