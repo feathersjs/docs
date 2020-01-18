@@ -182,6 +182,32 @@ app.configure(restClient.fetch(fetch));
 app.configure(restClient.fetch(window.fetch));
 ```
 
+### Extending rest clients
+
+This can be useful if you wish to override how the query is transformed before it is sent to the API.
+
+```js
+// In Node
+const fetch = require('node-fetch');
+const { FetchClient } = require('@feathersjs/rest-client');
+const qs = require('qs');
+
+class CustomFetch extends FetchClient {
+  getQuery (query) {
+    if (Object.keys(query).length !== 0) {
+      const queryString = qs.stringify(query, {
+        strictNullHandling: true
+      });
+
+      return `?${queryString}`;
+    }
+
+    return '';
+  }
+}
+
+app.configure(restClient.fetch(fetch, CustomFetch));
+```
 
 ## HTTP API
 
