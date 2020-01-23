@@ -187,6 +187,7 @@ Important things to note:
 - The `jwt` options have been moved to `jwtOptions`. It takes all [jsonwebtoken options](https://github.com/auth0/node-jsonwebtoken#jwtsignpayload-secretorprivatekey-options-callback). The `subject` option __should be removed__ when using the standard setup.
 - `authStrategies` are the strategies that are allowed on the `/authentication` endpoint
 - The `hashPassword` hook now explicitly requires the name of the field to hash instead of using a default (change any `hashPassword()` to e.g. `hashPassword('password')`).
+- For websockets, the `authenticate` event is no longer available. See [Socket.io Authentication direct usage](../api/client/socketio.md#authentication) for more information.
 
 ## Feathers core
 
