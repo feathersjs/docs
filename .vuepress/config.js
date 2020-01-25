@@ -141,9 +141,6 @@ module.exports = {
           }, {
             text: 'Auk (v2)',
             link: 'https://auk.docs.feathersjs.com/'
-          }, {
-            text: 'Legacy (v1)',
-            link: 'https://legacy.docs.feathersjs.com/'
           }]
         }]
       }
