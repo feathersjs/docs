@@ -124,7 +124,7 @@ Feathers errors contain the following fields:
 You can create custom errors by extending from the `FeathersError` class and calling its constructor with `(msg, name, code, className, data)`:
 
 - `message` - The error message
-- `name` - The error name (e.g. `my-errror`)
+- `name` - The error name (e.g. `my-error`)
 - `code` - An [HTTP error code](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html)
 - `className` - The full name of the error class
 - `data` - Additional data to include in the error
@@ -155,7 +155,7 @@ process.on('unhandledRejection', (reason, p) => {
 ```
 ## Error Handling
 
-It is important to make sure that errors get cleaned up before they go back to the client. [Express error handling middlware](https://docs.feathersjs.com/api/express.html#expresserrorhandler) works only for REST calls. If you want to make sure that ws errors are handled as well, you need to use [App Hooks](https://docs.feathersjs.com/guides/basics/hooks.html#application-hooks). App Error Hooks get called on an error to every service call regardless of transport.
+It is important to make sure that errors get cleaned up before they go back to the client. [Express error handling middleware](https://docs.feathersjs.com/api/express.html#expresserrorhandler) works only for REST calls. If you want to make sure that ws errors are handled as well, you need to use [App Hooks](https://docs.feathersjs.com/guides/basics/hooks.html#application-hooks). App Error Hooks get called on an error to every service call regardless of transport.
 
 Here is an example error handler you can add to app.hooks errors.
 

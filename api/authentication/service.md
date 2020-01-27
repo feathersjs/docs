@@ -107,7 +107,7 @@ The following
 
 ### To _create a new JWT_
 
-For any strategy allowed in `authStratgies`, a user can call `app.service('/authentication').create(data)` or `POST /authentication` with `data` as `{ strategy: name, ...loginData }`. Internally authentication will then
+For any strategy allowed in `authStrategies`, a user can call `app.service('/authentication').create(data)` or `POST /authentication` with `data` as `{ strategy: name, ...loginData }`. Internally authentication will then
 
 - Call the strategy `.authenticate` method with `data`
 - Create a JWT for the entity returned by the strategy

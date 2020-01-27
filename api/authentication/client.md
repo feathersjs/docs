@@ -111,7 +111,7 @@ Returns the instance of the [AuthenticationClient](#authenticationclient).
 
 ### handleSocket(socket)
 
-`app.authentication.handleSocket(socket) -> void` makes sure that a websocket real-time connection is always reauthenticated before making any other request.
+`app.authentication.handleSocket(socket) -> void` makes sure that a websocket real-time connection is always re-authenticated before making any other request.
 
 ### getFromLocation(location)
 
@@ -139,7 +139,7 @@ Returns the instance of the [AuthenticationClient](#authenticationclient).
 
 ### reAuthenticate(force)
 
-`app.authentication.reAuthenticate(force = false) -> Promise` will re-authenticate with the current access token from [app.authentication.getAccessToken()](). If `force` is set to `true` it will always reauthenticate, with the default `false` only when not already authenticated.
+`app.authentication.reAuthenticate(force = false) -> Promise` will re-authenticate with the current access token from [app.authentication.getAccessToken()](). If `force` is set to `true` it will always re-authenticate, with the default `false` only when not already authenticated.
 
 ### authenticate()
 
@@ -172,7 +172,7 @@ class MyAuthenticationClient extends auth.AuthenticationClient {
 // Setup the transport (Rest, Socket, etc.) here
 app.configure(socketio(socket));
 
-// Pass the custom authentication client class as the `Authenticaiton` option
+// Pass the custom authentication client class as the `Authentication` option
 app.configure(auth({
   Authentication: MyAuthenticationClient
 }))
