@@ -148,7 +148,7 @@ app.use('/todos', todoService);
 const host = express().use(vhost('foo.com', app));
 const server = host.listen(8080);
 
-// Here we need to call app.setup because .listen on our virtal hosted
+// Here we need to call app.setup because .listen on our virtual hosted
 // app is never called
 app.setup(server);
 ```
@@ -366,7 +366,7 @@ app.use(errorHandler());
 
 ## express.errorHandler()
 
-`expres.errorHandler` is an [Express error handler](https://expressjs.com/en/guide/error-handling.html) middleware that formats any error response to a REST call as JSON (or HTML if e.g. someone hits our API directly in the browser) and sets the appropriate error code.
+`express.errorHandler` is an [Express error handler](https://expressjs.com/en/guide/error-handling.html) middleware that formats any error response to a REST call as JSON (or HTML if e.g. someone hits our API directly in the browser) and sets the appropriate error code.
 
 > **ProTip:** You can still use any other Express compatible [error middleware](http://expressjs.com/en/guide/error-handling.html) with Feathers. In fact, the `express.errors` is just a slightly customized one.
 > **Very Important:** Just as in Express, the error handler has to be registered *after* all middleware and services.

@@ -53,7 +53,7 @@ Standard local authentication can be configured with those options in `config/de
 
 ### findEntity(username, params)
 
-`localStrategy.findEntity(username, params) -> Promise` return the entity for a given username and serice call parameters. It will use the query returned by `getEntityQuery` and call `.find` on the entity (usually `/users`) service. It will return a promise that resolves with the first result of the `.find` call or throw an error if nothing was found.
+`localStrategy.findEntity(username, params) -> Promise` return the entity for a given username and service call parameters. It will use the query returned by `getEntityQuery` and call `.find` on the entity (usually `/users`) service. It will return a promise that resolves with the first result of the `.find` call or throw an error if nothing was found.
 
 ### getEntity(entity, params)
 
