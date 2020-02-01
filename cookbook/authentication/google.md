@@ -54,7 +54,7 @@ The client id (App ID) and secret can be acquired by creating a [OAuth client ID
 {
   "authentication": {
     "oauth": {
-      "facebook": {
+      "google": {
         "key": "481298021138-hv27glb811ocr7pdon5lsg8hh5a6pgjv.apps.googleusercontent.com",
         "secret": "XkWl0witdP4ogeNIgyOi-CeS",
         "scope": ["openid", "email"],
