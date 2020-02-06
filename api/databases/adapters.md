@@ -15,6 +15,7 @@ The following databases are supported:
 | MySQL, PostgreSQL, MariaDB, SQLite, MSSQL | [feathers-knex](https://github.com/feathersjs-ecosystem/feathers-knex), [feathers-sequelize](https://github.com/feathersjs-ecosystem/feathers-sequelize) |
 | Elasticsearch | [feathers-elasticsearch](https://github.com/feathersjs-ecosystem/feathers-elasticsearch) |
 | Objection | [feathers-objection](https://github.com/feathersjs-ecosystem/feathers-objection) |
+| Cassandra | [feathers-cassandra](https://github.com/feathersjs-ecosystem/feathers-cassandra) |
 
 ## Memory/Filesystem
 
@@ -33,3 +34,4 @@ The following databases are supported:
 - [feathers-mongoose](https://github.com/feathersjs-ecosystem/feathers-mongoose) - A database adapter for [Mongoose](http://mongoosejs.com/) an Object Modelling library for NodeJS and MongoDB
 - [feathers-mongodb](https://github.com/feathersjs-ecosystem/feathers-mongodb) - A database adapter for [MongoDB](https://www.mongodb.com/) using the official NodeJS database driver
 - [feathers-elasticsearch](https://github.com/feathersjs-ecosystem/feathers-elasticsearch) - A database adapter for [Elasticsearch](https://github.com/elastic/elasticsearch)
+- [feathers-cassandra](https://github.com/feathersjs-ecosystem/feathers-cassandra) - A database adapter for [Cassandra](http://cassandra.apache.org)
