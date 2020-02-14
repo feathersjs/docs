@@ -106,6 +106,16 @@ To set a service specific timeout you can use:
 app.service('messages').timeout = 3000;
 ```
 
+### app.io
+
+`app.io` contains a reference to the `socket` object passed to `socketio(socket [, options])`
+
+```js
+app.io.on('disconnect', (reason) => {
+  // Show offline message
+});
+```
+
 ## Direct connection
 
 Feathers sets up a normal Socket.io server that you can connect to with any Socket.io compatible client, usually the [Socket.io client](http://socket.io/docs/client-api/) either by loading the `socket.io-client` module or `/socket.io/socket.io.js` from the server. Unlike HTTP calls, websockets do not have an inherent cross-origin restriction in the browser so it is possible to connect to any Feathers server. Additionally query parameter types do not have to be converted from strings as they do for REST requests.

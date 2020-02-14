@@ -119,6 +119,10 @@ The timeout per service can be changed like this:
 app.service('messages').timeout = 3000;
 ```
 
+### app.primus
+
+`app.primus` contains a reference to the `socket` object passed to `primus(socket [, options])`
+
 ## Direct connection
 
 In the browser, the connection can be established by loading the client from `primus/primus.js` and instantiating a new `Primus` instance. Unlike HTTP calls, websockets do not have a cross-origin restriction in the browser so it is possible to connect to any Feathers server.

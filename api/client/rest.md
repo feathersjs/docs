@@ -115,6 +115,10 @@ const promise = app.service('messages').get(1, {
 promise.abort();
 ```
 
+### app.rest
+
+`app.rest` contains a reference to the `connection` object passed to `rest().<name>(connection)`.
+
 ### jQuery
 
 Pass the instance of jQuery (`$`) to `restClient.jquery`:
