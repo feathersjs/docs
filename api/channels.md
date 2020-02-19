@@ -218,19 +218,18 @@ app.on('login', (payload, { connection }) => {
 
 ### app.on('logout')
 
-`app.on('logout', (authResult, params, context) => {})` is sent by the [AuthenticationService](./authentication/service.md) on successful logout.
-
-If the socket does not also disconnect at logout this is where the connection should be removed from its channels:
+`app.on('logout', (authResult, params, context) => {})` is sent by the [AuthenticationService](./authentication/service.md) on successful logout:
 
 ```js
 app.on('logout', (payload, { connection }) => {
   if(connection) {
-    //When logging out, leave all channels before joining anonymous channel
-    app.channel(app.channels).leave(connection);
+    // Join the channels a logged out connection should be in
     app.channel('anonymous').join(connection);
   }
 });
 ```
+
+> __Note:__ On `logout` the connection will be removed from all existing channels automatically.
 
 ## Channels
 
