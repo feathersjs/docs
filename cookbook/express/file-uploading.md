@@ -74,11 +74,6 @@ Let's look at this implemented in the `@feathersjs/cli` generated server code:
 
 // Initializes the `uploads` service on path `/uploads'
 
-
-// Here we used the nedb database, but you can
-// use any other ORM database.
-const createService = require('feathers-nedb');
-
 const createModel = require('../../models/uploads.model');
 const hooks = require('./uploads.hooks');
 const filters = require('./uploads.filters');
