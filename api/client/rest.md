@@ -9,7 +9,7 @@
 $ npm install @feathersjs/rest-client --save
 ```
 
-`@feathersjs/rest-client` allows to connect to a service exposed through the [Express REST API](../express.md#expressrest) using [jQuery](https://jquery.com/), [request](https://github.com/request/request), [Superagent](http://visionmedia.github.io/superagent/), [Axios](https://github.com/mzabriskie/axios) or [Fetch](https://facebook.github.io/react-native/docs/network.html) as the AJAX library.
+`@feathersjs/rest-client` allows to connect to a service exposed through the [Express REST API](../express.md#expressrest) using [jQuery](https://jquery.com/), [Superagent](http://visionmedia.github.io/superagent/), [Axios](https://github.com/mzabriskie/axios) or [Fetch](https://facebook.github.io/react-native/docs/network.html) as the AJAX library.
 
 > **Note:** For directly using a Feathers REST API (via HTTP) without using Feathers on the client see the [HTTP API](#http-api) section.
 
@@ -89,11 +89,11 @@ app.service('messages').create({
 Allows to pass additional options specific to the AJAX library. `params.connection.headers` will be merged with `params.headers`:
 
 ```js
-app.configure(restClient.request(request));
+app.configure(restClient.axios(axios));
 
 app.service('messages').get(1, {
   connection: {
-    followRedirect: false
+    // Axios specific options here
   }
 });
 ```
@@ -133,23 +133,6 @@ Or with a module loader:
 import $ from 'jquery';
 
 app.configure(restClient.jquery($));
-```
-
-### Request
-
-The [request](https://github.com/request/request) object needs to be passed explicitly to `feathers.request`. Using [request.defaults](https://github.com/request/request#convenience-methods) - which creates a new request object - is a great way to set things like default headers or authentication information:
-
-```js
-const request = require('request');
-const requestClient = request.defaults({
-  'auth': {
-    'user': 'username',
-    'pass': 'password',
-    'sendImmediately': false
-  }
-});
-
-app.configure(restClient.request(requestClient));
 ```
 
 ### Superagent
