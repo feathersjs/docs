@@ -134,8 +134,11 @@ module.exports = {
           text: 'Common Hooks',
           link: 'https://hooks-common.feathersjs.com/'
         }, {
-          text: 'Previous versions',
+          text: 'Other versions',
           items: [{
+            text: 'Dove (v5, next)',
+            link: 'https://dove.docs.feathersjs.com/'
+          }, {
             text: 'Buzzard (v3)',
             link: 'https://buzzard.docs.feathersjs.com/'
           }, {
