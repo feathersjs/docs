@@ -6,29 +6,34 @@ An authentication strategy is any object or class that implements at least an [a
 - [LocalStrategy](./local.md) in `@feathersjs/authentication-local`
 - [OAuthStrategy](./oauth.md) in `@feathersjs/authentication-oauth`
 
-More details on how to customize existing strategies can be found in their  API documentation. This section describes the APIcommon methods for all authentication strategies and how a custom authentication strategy can implemented.
+More details on how to customize existing strategies can be found in their  API documentation. This section describes the common methods for all authentication strategies and how a custom authentication strategy can implemented.
 
-## setName(name)
+## AuthenticationStrategy interface
+### setName(name)
 
 Will be called with the `name` under which the strategy has been [registered on the authentication service](./service.md#register-name-strategy). Does not have to be implemented.
 
-## setApplication(app)
+### setApplication(app)
 
 Will be called with the [Feathers application](../application.md) instance.  Does not have to be implemented.
 
-## setAuthentication(service)
+### setAuthentication(service)
 
 Will be called with the [Authentication service](./service.md) this strategy has been registered on. Does not have to be implemented.
 
-## verifyConfiguration()
+### verifyConfiguration()
 
 Synchronously verify the configuration for this strategy and throw an error if e.g. required fields are not set. Does not have to be implemented.
 
-## authenticate(authentication, params)
+### authenticate(authentication, params)
 
 Authenticate `authentication` data with additional `params`. `authenticate` should throw a `NotAuthenticated` if it failed or return an authentication result object.
 
-## parse(req, res)
+### handleConnection(event, connection [, authResult])
+
+Update a real-time connection (socket.io/primus) according to this strategy. It is used, for example, by the [JWT strategy](./jwt.md) for setting the `accessToken` and `strategy` properties in `connection.authentication`, to be used by the [authentication hook](./hook.md)
+
+### parse(req, res)
 
 Parse a given plain Node HTTP request and response and return `null` or the authentication information it provides. Does not have to be implemented.
 
