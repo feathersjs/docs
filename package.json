@@ -37,7 +37,7 @@
   "devDependencies": {
     "@dovyp/vuepress-plugin-clipboard-copy": "^1.0.0-alpha.7",
     "remark": "^11.0.2",
-    "remark-validate-links": "^9.0.1",
+    "remark-validate-links": "^9.2.0",
     "unified-engine": "^7.0.0",
     "vfile-reporter": "^6.0.0",
     "vue-tabs-component": "^1.5.0",
