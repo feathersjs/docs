@@ -176,6 +176,7 @@ With the above configuration will redirect to `https://app.mydomain.com/dashboar
 - `authService`: The name of the authentication service
 - `linkStrategy` (default: `'jwt'`): The name of the strategy to use for account linking
 - `expressSession` (default: `require('express-session')()`): The [Express session](https://github.com/expressjs/session) middleware to use. Uses in-memory sessions by default but may need to be customized to a persistent storage when using multiple instances of the application. Other sessions stores can be used by setting the `expressSession` option using a different memory store, e.g. [connect-redis](https://github.com/tj/connect-redis) in the authentication configuration:
+- `serviceParamsCallback` (default: `(req) => ({})`): Callback for proxying raw request params (like IP address or User-Agent) to authentication service. Userful when you need to save user's IP/User-Agent.
 
 ```js
 const redis = require('redis')
