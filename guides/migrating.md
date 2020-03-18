@@ -239,7 +239,7 @@ In preparation to support Koa style hooks (see [feathersjs/feathers#932](https:/
 
 The use-cases for `feathers.SKIP` can now be explicitly handled by
 
-- [Running hooks conditionally](https://feathers-plus.github.io/v1/feathers-hooks-common/#iff) through a flag
+- [Running hooks conditionally](https://hooks-common.feathersjs.com/hooks.html#iff) through a flag
 - [Calling the hook-less service methods](#hook-less-service-methods) of the database adapters
 - Setting `context.event = null` to skip event emitting
 
