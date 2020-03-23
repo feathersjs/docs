@@ -61,7 +61,7 @@ Now we can update the `scripts` section of our `package.json` to the following:
 On Windows the `mocha` command should look like this:
 
 ```sh
-npm run clean & SET NODE_ENV=test & mocha test/ --recursive --exit
+npm run clean & SET NODE_ENV=test& mocha test/ --recursive --exit
 ```
 
 This will make sure that the `test/data` folder is removed before every test run and `NODE_ENV` is set properly.
