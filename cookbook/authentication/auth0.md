@@ -13,7 +13,8 @@ This should be added in your configuration (usually `config/default.json`) as fo
     "auth0": {
       "key": "<Client ID>",
       "secret": "<Client Secret>",
-      "subdomain": "<Domain without auth0.com"
+      "subdomain": "<Domain without auth0.com",
+      "scope": ["openid", "profile", "email"]
     }
   }
 }
