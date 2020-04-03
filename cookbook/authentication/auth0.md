@@ -24,7 +24,7 @@ This should be added in your configuration (usually `config/default.json`) as fo
 
 ## Strategy
 
-To use Auth0 in the chat application from the [Feathers guide](../../guides/) we have to do the same modifications as already shown [for the GitHub login in the authentication guide](../../guides/authentication.md).
+To use Auth0 in the chat application from the [Feathers guide](../../guides/) we have to do the same modifications as already shown [for the GitHub login in the authentication guide](../../guides/basics/authentication.md).
 
 :::: tabs :options="{ useUrlFragment: false }"
 ::: tab "JavaScript"
