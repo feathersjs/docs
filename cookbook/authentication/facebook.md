@@ -104,7 +104,7 @@ import axios from 'axios';
 import { Application } from './declarations';
 
 class FacebookStrategy extends OAuthStrategy {
-  async getProfile (data: AuthenticationRequest, _params: Params) {
+  async getProfile (authResult: AuthenticationRequest, _params: Params) {
     // This is the oAuth access token that can be used
     // for Facebook API requests as the Bearer token
     const accessToken = authResult.access_token;
