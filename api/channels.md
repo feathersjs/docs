@@ -18,6 +18,18 @@ Some examples where channels are used:
 - Only admins should be notified when new users are created
 - When a user is created, modified or removed, non-admins should only receive a "safe" version of the user object (e.g. only `email`, `id` and `avatar`)
 
+## Concepts
+
+When using channels, the server pushes events (such as "created", "removed" etc. for a particular service) down to its clients via *channels*. The client doesn’t listen to these channels directly, but rather subscribes to specific events (e.g. on services) that it is interested in. Those events will only fire if the server pushes relevant data down a channel that the client is connected to.
+
+You can have any number of channels. This helps to organise how data is sent and to control the volume of data, by not sending things that aren't relevant. 
+
+When a new client connects, the server explicitly adds that *connection* to any relevant channels. This is how clients are given access to events that they are allowed to see.
+
+The server can also change connection channel membership from time to time, eg before vs after login.
+
+The server needs to explicitly *publish* channels it is interested in sharing with clients before they become available.
+
 ## Example
 
 The example below shows the generated `channels.js` file illustrating how the different parts fit together:
