@@ -20,7 +20,7 @@ Some examples where channels are used:
 
 ## Concepts
 
-When using channels, the server pushes events (such as "created", "removed" etc. for a particular service) down to its clients via *channels*. The client doesn’t listen to these channels directly, but rather subscribes to specific events (e.g. on services) that it is interested in. Those events will only fire if the server pushes relevant data down a channel that the client is connected to.
+When using channels, the server pushes events (such as "created", "removed" etc. for a particular service) down to its clients via *channels*. The client doesn’t listen to individual channels directly, but rather subscribes to specific events on services that it is interested in. Those events will only fire on the client if the server pushes data to one or more channels that the client has been added to.
 
 You can have any number of channels. This helps to organise how data is sent and to control the volume of data, by not sending things that aren't relevant. 
 
