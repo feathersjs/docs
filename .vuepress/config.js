@@ -2,6 +2,10 @@ module.exports = {
   title: 'FeathersJS',
   description: 'A REST and real-time API layer for modern applications',
   themeConfig: {
+    algolia: {
+      apiKey: 'feathersjs',
+      indexName: 'feathersjs'
+    },
     logo: '/img/feathers-logo-wide.png',
     repo: 'feathersjs/feathers',
     docsRepo: 'feathersjs/docs',
