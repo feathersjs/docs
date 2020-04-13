@@ -9,7 +9,6 @@ Modules most relevant on the client are:
 - `@feathersjs/feathers` to initialize a new Feathers [application](./application.md)
 - [@feathersjs/rest-client](./client/rest.md) to connect to services through [REST HTTP](./express.md).
 - [@feathersjs/socketio-client](./client/socketio.md) to connect to services through [Socket.io](./socketio.md).
-- [@feathersjs/primus-client](./client/primus.md) to connect to services through [Primus](./primus.md).
 - [@feathersjs/authentication-client](./authentication/client.md) to authenticate a client
 
 > __Important:__ You do not have to use Feathers on the client to connect to a Feathers server. The client chapters above also describe how to use a REST HTTP, Socket.io or Primus connection directly without Feathers on the client side. For details on authentication, see the [Authentication client chapter](./authentication/client.md).

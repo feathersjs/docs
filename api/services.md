@@ -99,7 +99,7 @@ console.log('.get(1)', item);
 
 `params` contain additional information for the service method call. Some properties in `params` can be set by Feathers already. Commonly used are:
 
-- `params.query` - the query parameters from the client, either passed as URL query parameters (see the [REST](./express.md) chapter) or through websockets (see [Socket.io](./socketio.md) or [Primus](./primus.md)).
+- `params.query` - the query parameters from the client, either passed as URL query parameters (see the [REST](./express.md) chapter) or through websockets (see [Socket.io](./socketio.md)).
 - `params.provider` - The transport (`rest`, `socketio` or `primus`) used for this service call. Will be `undefined` for internal calls from the server (unless passed explicitly).
 - `params.authentication` - The authentication information to use for the [authentication service](./authentication/service.md)
 - `params.user` - The authenticated user, either set by [Feathers authentication](./authentication/) or passed explicitly.

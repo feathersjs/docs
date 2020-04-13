@@ -48,7 +48,6 @@ module.exports = {
         children: [
           'express.md',
           'socketio.md',
-          'primus.md',
           'channels.md'
         ]
       }, {
@@ -57,8 +56,7 @@ module.exports = {
         children: [
           'client.md',
           'client/rest.md',
-          'client/socketio.md',
-          'client/primus.md'
+          'client/socketio.md'
         ]
       }, {
         title: 'Authentication',
