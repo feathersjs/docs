@@ -80,7 +80,7 @@ module.exports = function(app) {
   // app.service('users').publish('created', () => app.channel('admins'));
   
   // With the userid and email organization from above you can easily select involved users
-  // app.service('messages').publish(() => {
+  // app.service('messages').publish(data => {
   //   return [
   //     app.channel(`userIds/${data.createdBy}`),
   //     app.channel(`emails/${data.recipientEmail}`)
@@ -146,7 +146,7 @@ export default function(app: any) {
   // app.service('users').publish('created', () => app.channel('admins'));
   
   // With the userid and email organization from above you can easily select involved users
-  // app.service('messages').publish(() => {
+  // app.service('messages').publish(data => {
   //   return [
   //     app.channel(`userIds/${data.createdBy}`),
   //     app.channel(`emails/${data.recipientEmail}`)
