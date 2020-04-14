@@ -416,7 +416,7 @@ Use a hook when
 - The functionality can be used in more than one place (e.g. validation, permissions etc.)
 - It is not a core responsibility of the service and the service can work without it (e.g. sending an email after a user has been created)
 
-Extend a database service when
+Extend a service when
 
 - The functionality is only needed in this one place
 - The service could not function without it
