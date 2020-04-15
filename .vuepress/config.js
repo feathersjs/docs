@@ -3,7 +3,7 @@ module.exports = {
   description: 'A REST and real-time API layer for modern applications',
   themeConfig: {
     algolia: {
-      apiKey: 'feathersjs',
+      apiKey: '2835d290e600f7fb583e2b61a74032ba',
       indexName: 'feathersjs'
     },
     logo: '/img/feathers-logo-wide.png',
