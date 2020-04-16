@@ -81,11 +81,11 @@ messageService.create({
 });
 ```
 
-Since React Native for Android doesn't handle timeouts exceeding one minute, consider setting lower values for `pingInterval` and `pingTimeout` of `feathers-socketio` on your server. This which will stop warnings related to this [issue](https://github.com/facebook/react-native/issues/12981). For example:
+Since React Native for Android doesn't handle timeouts exceeding one minute, consider setting lower values for `pingInterval` and `pingTimeout` of [Socket.io](./socketio.md) **on your server**. This will stop warnings related to this [issue](https://github.com/facebook/react-native/issues/12981). For example:
 
 ```js
 const app = feathers();
-const socketio = require('feathers-socketio');
+const socketio = require('@feathersjs/socketio');
 
 app.configure(socketio({
   pingInterval: 10000,
