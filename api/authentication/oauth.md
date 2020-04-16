@@ -4,7 +4,7 @@
 [![Changelog](https://img.shields.io/badge/changelog-.md-blue.svg?style=flat-square)](https://github.com/feathersjs/feathers/blob/master/packages/authentication-oauth/CHANGELOG.md)
 
 ```
-$ npm install @feathersjs/authentication-oauth --save
+npm install @feathersjs/authentication-oauth --save
 ```
 
 `@feathersjs/authentication-oauth` allows to authenticate with over 180 oAuth providers (Google, Facebook, GitHub etc.) using [grant](https://github.com/simov/grant), an oAuth middleware module for NodeJS.

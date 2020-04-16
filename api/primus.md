@@ -4,7 +4,7 @@
 [![Changelog](https://img.shields.io/badge/changelog-.md-blue.svg?style=flat-square)](https://github.com/feathersjs/feathers/blob/master/packages/primus/CHANGELOG.md)
 
 ```
-$ npm install @feathersjs/primus --save
+npm install @feathersjs/primus --save
 ```
 
 The [@feathersjs/primus](https://github.com/feathersjs/primus) module allows to call [service methods](./services.md) and receive [real-time events](./events.md) via [Primus](https://github.com/primus/primus), a universal wrapper for real-time frameworks that supports Engine.IO, WebSockets, Faye, BrowserChannel, SockJS and Socket.IO.
@@ -16,7 +16,7 @@ The [@feathersjs/primus](https://github.com/feathersjs/primus) module allows to 
 Additionally to `@feathersjs/primus` your websocket library of choice also has to be installed.
 
 ```
-$ npm install ws --save
+npm install ws --save
 ```
 
 ### app.configure(primus(options))

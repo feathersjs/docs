@@ -34,7 +34,7 @@ const socket = new Socket('http://api.feathersjs.com');
 [![Changelog](https://img.shields.io/badge/changelog-.md-blue.svg?style=flat-square)](https://github.com/feathersjs/feathers/blob/master/packages/primus-client/CHANGELOG.md)
 
 ```
-$ npm install @feathersjs/primus-client --save
+npm install @feathersjs/primus-client --save
 ```
 
 The `@feathersjs/primus-client` module allows to connect to services exposed through the [Primus server](../primus.md) via the configured websocket library.
