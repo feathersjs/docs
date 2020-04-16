@@ -30,7 +30,7 @@ Lets look at the server code:
 
 const feathers = require('@feathersjs/feathers');
 const express = require('@feathersjs/express');
-const socketio = require('feathers-socketio');
+const socketio = require('@feathersjs/socketio');
 
 // feathers-blob service
 const blobService = require('feathers-blob');

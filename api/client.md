@@ -85,7 +85,7 @@ Since React Native for Android doesn't handle timeouts exceeding one minute, con
 
 ```js
 const app = feathers();
-const socketio = require('feathers-socketio');
+const socketio = require('@feathersjs/socketio');
 
 app.configure(socketio({
   pingInterval: 10000,
