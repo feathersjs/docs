@@ -4,7 +4,7 @@
 [![Changelog](https://img.shields.io/badge/changelog-.md-blue.svg?style=flat-square)](https://github.com/feathersjs/feathers/blob/master/packages/configuration/CHANGELOG.md)
 
 ```
-$ npm install @feathersjs/configuration --save
+npm install @feathersjs/configuration --save
 ```
 
 `@feathersjs/configuration` is a wrapper for [node-config](https://github.com/lorenwest/node-config) which allows to configure a server side Feathers application.
@@ -115,7 +115,7 @@ Or via custom environment variables by setting them in `config/custom-environmen
 ```
 
 ```
-$ PORT=8080 MONGOHQ_URL=mongodb://localhost:27017/production NODE_ENV=production node app
+PORT=8080 MONGOHQ_URL=mongodb://localhost:27017/production NODE_ENV=production node app
 // -> path/to/app/public/dist
 // -> myapp.com
 // -> 8080

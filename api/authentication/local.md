@@ -4,7 +4,7 @@
 [![Changelog](https://img.shields.io/badge/changelog-.md-blue.svg?style=flat-square)](https://github.com/feathersjs/feathers/blob/master/packages/authentication-local/CHANGELOG.md)
 
 ```
-$ npm install @feathersjs/authentication-local --save
+npm install @feathersjs/authentication-local --save
 ```
 
 `@feathersjs/authentication-local` provides a `LocalStrategy` for authenticating with a username/email and password combination, e.g.

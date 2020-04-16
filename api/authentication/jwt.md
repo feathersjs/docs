@@ -4,7 +4,7 @@
 [![Changelog](https://img.shields.io/badge/changelog-.md-blue.svg?style=flat-square)](https://github.com/feathersjs/feathers/blob/master/packages/authentication/CHANGELOG.md)
 
 ```
-$ npm install @feathersjs/authentication --save
+npm install @feathersjs/authentication --save
 ```
 
 The `JWTStrategy` is an [authentication strategy](./strategy.md) included in `@feathersjs/authentication` for authenticating JSON web token service methods calls and HTTP requests, e.g.

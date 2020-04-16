@@ -4,7 +4,7 @@
 [![Changelog](https://img.shields.io/badge/changelog-.md-blue.svg?style=flat-square)](https://github.com/feathersjs/feathers/blob/master/packages/authentication/CHANGELOG.md)
 
 ```
-$ npm install @feathersjs/authentication --save
+npm install @feathersjs/authentication --save
 ```
 
 The `AuthenticationService` is a [Feathers service](../services.md) that allows to register different [authentication strategies](./strategy.md) and manage access tokens (using [JSON web tokens (JWT)](https://jwt.io/) by default). This section describes

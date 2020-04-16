@@ -6,7 +6,7 @@
 [![Changelog](https://img.shields.io/badge/changelog-.md-blue.svg?style=flat-square)](https://github.com/feathersjs/feathers/blob/master/packages/socketio-client/CHANGELOG.md)
 
 ```
-$ npm install @feathersjs/socketio-client --save
+npm install @feathersjs/socketio-client --save
 ```
 
 The `@feathersjs/socketio-client` module allows to connect to services exposed through the [Socket.io transport](../socketio.md) via a Socket.io socket.
