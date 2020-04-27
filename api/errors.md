@@ -159,7 +159,7 @@ It is important to make sure that errors get cleaned up before they go back to t
 
 Here is an example error handler you can add to app.hooks errors.
 
-```
+```js
 const errors = require("@feathersjs/errors");
 const errorHandler = ctx => {
   if (ctx.error) {
@@ -178,7 +178,7 @@ const errorHandler = ctx => {
 
 ```
 then add it to the error.all hook
-```
+```js
 
 module.exports = {
   //...
