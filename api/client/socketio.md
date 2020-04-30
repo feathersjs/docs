@@ -76,36 +76,6 @@ app.service('messages').create({
 
 ::::
 
-
-### socketio(socket, options)
-
-Initialize the Socket.io client with the specified socket and options. 
-
-Options can be:
-
-- `timeout` (default: 5000ms) - The time after which a method call fails and times out. This usually happens when calling a service or service method that does not exist.
-
-```js
-const feathers = require('@feathersjs/feathers');
-const socketio = require('@feathersjs/socketio-client');
-const io = require('socket.io-client');
-
-const socket = io('http://api.feathersjs.com');
-const app = feathers();
-
-// Set up Socket.io client with the socket
-// And a timeout of 2 seconds
-app.configure(socketio(socket, {
-  timeout: 2000
-}));
-```
-
-To set a service specific timeout you can use:
-
-```javascript
-app.service('messages').timeout = 3000;
-```
-
 ### app.io
 
 `app.io` contains a reference to the `socket` object passed to `socketio(socket [, options])`
