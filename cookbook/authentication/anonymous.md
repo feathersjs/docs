@@ -1,6 +1,6 @@
 # Anonymous authentication
 
-Anonymous authentication can be allowed by creating a [custom strategy](../../api/authentication/strategy.md) that returns the `params` that you would like to use to identify an authenticated user.
+Anonymous authentication can be allowed by creating a [custom strategy](../../api/authentication/strategy.md) that returns the `params` that you would like to use to identify an authenticated user. In case there is a previously logged in user through a realtime transport, it's a good idea to explicitly set `params.user` to null.
 
 :::: tabs :options="{ useUrlFragment: false }"
 ::: tab "JavaScript"
@@ -12,7 +12,8 @@ const { AuthenticationBaseStrategy } = require('@feathersjs/authentication');
 class AnonymousStrategy extends AuthenticationBaseStrategy {
   async authenticate(authentication, params) {
     return {
-      anonymous: true
+      anonymous: true,
+      user: null
     }
   }
 }
