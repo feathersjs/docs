@@ -28,7 +28,7 @@ First, let's update `public/index.html` to initialize everything we need for the
     <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.12.0/moment.js"></script>
     <script src="//unpkg.com/@feathersjs/client@^4.3.0/dist/feathers.js"></script>
     <script src="/socket.io/socket.io.js"></script>
-    <script src="app.js"></script>
+    <script src="client.js"></script>
   </body>
 </html>
 ```
@@ -38,9 +38,9 @@ This will load our chat CSS style, add a container div `#app` and load several l
 - The browser version of Feathers (since we are not using a module loader like Webpack or Browserify)
 - Socket.io provided by the chat API
 - [MomentJS](https://momentjs.com/) to format dates
-- An `app.js` for our code to live in
+- A `client.js` for our code to live in
 
-Let’s create `public/app.js` where all the following code will live. Each of the following code samples should be added to the end of that file..
+Let’s create `public/client.js` where all the following code will live. Each of the following code samples should be added to the end of that file.
 
 ## Connect to the API
 
@@ -143,7 +143,7 @@ const addUser = user => {
     userList.innerHTML += `<li>
       <a class="block relative" href="#">
         <img src="${user.avatar}" alt="" class="avatar">
-        <span class="absolute username">${user.email}</span>
+        <span class="absolute username">${user.name || user.email}</span>
       </a>
     </li>`;
 
@@ -166,10 +166,10 @@ const addMessage = message => {
 
   if(chat) {
     chat.innerHTML += `<div class="message flex flex-row">
-      <img src="${user.avatar}" alt="${user.email}" class="avatar">
+      <img src="${user.avatar}" alt="${user.name || user.email}" class="avatar">
       <div class="message-wrapper">
         <p class="message-header">
-          <span class="username font-600">${user.email}</span>
+          <span class="username font-600">${user.name || user.email}</span>
           <span class="sent-date font-300">${moment(message.createdAt).format('MMM Do, hh:mm:ss')}</span>
         </p>
         <p class="message-content font-300">${text}</p>

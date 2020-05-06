@@ -107,12 +107,12 @@ When using Feathers on the client, the authentication client does all those auth
     <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.12.0/moment.js"></script>
     <script src="//unpkg.com/@feathersjs/client@^4.3.0/dist/feathers.js"></script>
     <script src="/socket.io/socket.io.js"></script>
-    <script src="app.js"></script>
+    <script src="client.js"></script>
   </body>
 </html>
 ```
 
-Create a new file `public/app.js` where we can now set up the Feathers client similar to the [getting started example](./starting.md). We also add a `login` method that first tries to use a stored token by calling `app.reAuthenticate()`. If that fails, we try to log in with email/password of our registered user:
+Create a new file `public/client.js` where we can now set up the Feathers client similar to the [getting started example](./starting.md). We also add a `login` method that first tries to use a stored token by calling `app.reAuthenticate()`. If that fails, we try to log in with email/password of our registered user:
 
 ```js
 // Establish a Socket.io connection
