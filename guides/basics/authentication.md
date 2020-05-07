@@ -211,6 +211,11 @@ class GitHubStrategy extends OAuthStrategy {
 
     return {
       ...baseData,
+      // You can also set the display name to profile.name
+      name: profile.login,
+      // The GitHub profile image
+      avatar: profile.avatar_url,
+      // The user email address (if available)
       email: profile.email
     };
   }
@@ -251,6 +256,11 @@ class GitHubStrategy extends OAuthStrategy {
 
     return {
       ...baseData,
+      // You can also set the display name to profile.name
+      name: profile.login,
+      // The GitHub profile image
+      avatar: profile.avatar_url,
+      // The user email address (if available)
       email: profile.email
     };
   }
