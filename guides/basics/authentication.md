@@ -194,7 +194,7 @@ Find the `authentication` section in `config/default.json` add a configuration s
 }
 ```
 
-This tells the oAuth strategy to redirect back to our index page after a successful login and already makes a basic login with GitHub possible. Because of the changes we made in the `users` service in the [services chapter](./services.md) we do need a small customization though. Instead of only adding `githubId` to a new user when they log in with GitHub we also need to include their email from the profile we get back since we use it as their username and to fetch the avatar. We can do this by extending the standard oAuth strategy and registering it as a GitHub specific one and overwriting the `getEntityData` method:
+This tells the oAuth strategy to redirect back to our index page after a successful login and already makes a basic login with GitHub possible. Because of the changes we made in the `users` service in the [services chapter](./services.md) we do need a small customization though. Instead of only adding `githubId` to a new user when they log in with GitHub we also include their email (if it is available), the display name to show in the chat and the avatar image from the profile we get back. We can do this by extending the standard oAuth strategy and registering it as a GitHub specific one and overwriting the `getEntityData` method:
 
 :::: tabs :options="{ useUrlFragment: false }"
 ::: tab "JavaScript"
