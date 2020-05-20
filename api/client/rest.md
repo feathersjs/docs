@@ -6,7 +6,7 @@
 [![Changelog](https://img.shields.io/badge/changelog-.md-blue.svg?style=flat-square)](https://github.com/feathersjs/feathers/blob/master/packages/rest-client/CHANGELOG.md)
 
 ```
-$ npm install @feathersjs/rest-client --save
+npm install @feathersjs/rest-client --save
 ```
 
 `@feathersjs/rest-client` allows to connect to a service exposed through the [Express REST API](../express.md#expressrest) using [jQuery](https://jquery.com/), [Superagent](http://visionmedia.github.io/superagent/), [Axios](https://github.com/mzabriskie/axios) or [Fetch](https://facebook.github.io/react-native/docs/network.html) as the AJAX library.

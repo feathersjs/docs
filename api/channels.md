@@ -18,6 +18,18 @@ Some examples where channels are used:
 - Only admins should be notified when new users are created
 - When a user is created, modified or removed, non-admins should only receive a "safe" version of the user object (e.g. only `email`, `id` and `avatar`)
 
+## Concepts
+
+When using channels, the server pushes events (such as "created", "removed" etc. for a particular service) down to its clients via *channels*. The client doesn’t listen to individual channels directly, but rather subscribes to specific events on services that it is interested in. Those events will only fire on the client if the server pushes data to one or more channels that the client has been added to.
+
+You can have any number of channels. This helps to organise how data is sent and to control the volume of data, by not sending things that aren't relevant. 
+
+When a new client connects, the server explicitly adds that *connection* to any relevant channels. This is how clients are given access to events that they are allowed to see.
+
+The server can also change connection channel membership from time to time, eg before vs after login.
+
+The server needs to explicitly *publish* channels it is interested in sharing with clients before they become available.
+
 ## Example
 
 The example below shows the generated `channels.js` file illustrating how the different parts fit together:
@@ -80,7 +92,7 @@ module.exports = function(app) {
   // app.service('users').publish('created', () => app.channel('admins'));
   
   // With the userid and email organization from above you can easily select involved users
-  // app.service('messages').publish(() => {
+  // app.service('messages').publish(data => {
   //   return [
   //     app.channel(`userIds/${data.createdBy}`),
   //     app.channel(`emails/${data.recipientEmail}`)
@@ -146,7 +158,7 @@ export default function(app: any) {
   // app.service('users').publish('created', () => app.channel('admins'));
   
   // With the userid and email organization from above you can easily select involved users
-  // app.service('messages').publish(() => {
+  // app.service('messages').publish(data => {
   //   return [
   //     app.channel(`userIds/${data.createdBy}`),
   //     app.channel(`emails/${data.recipientEmail}`)

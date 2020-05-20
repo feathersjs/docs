@@ -4,7 +4,7 @@
 [![Changelog](https://img.shields.io/badge/changelog-.md-blue.svg?style=flat-square)](https://github.com/feathersjs/feathers/blob/master/packages/errors/CHANGELOG.md)
 
 ```
-$ npm install @feathersjs/errors --save
+npm install @feathersjs/errors --save
 ```
 
 The `@feathersjs/errors` module contains a set of standard error classes used by all other Feathers modules.

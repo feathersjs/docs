@@ -13,9 +13,9 @@ npm install @feathersjs/cli -g
 Let's create a new directory for our app and in it, generate a new application:
 
 ```sh
-$ mkdir feathers-chat
-$ cd feathers-chat/
-$ feathers generate app
+mkdir feathers-chat
+cd feathers-chat/
+feathers generate app
 ```
 
 First, choose if you want to use JavaScript or TypeScript. When presented with the project name, just hit enter, or enter a name (no spaces). Next, write a short description of your application. All other questions should be confirmed with the default selection by hitting Enter.

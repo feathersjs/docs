@@ -4,7 +4,7 @@
 [![Changelog](https://img.shields.io/badge/changelog-.md-blue.svg?style=flat-square)](https://github.com/feathersjs/feathers/blob/master/packages/express/CHANGELOG.md)
 
 ```
-$ npm install @feathersjs/express --save
+npm install @feathersjs/express --save
 ```
 
 The `@feathersjs/express` module contains [Express](http://expressjs.com/) framework integrations for Feathers:

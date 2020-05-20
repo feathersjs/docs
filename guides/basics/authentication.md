@@ -107,12 +107,12 @@ When using Feathers on the client, the authentication client does all those auth
     <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.12.0/moment.js"></script>
     <script src="//unpkg.com/@feathersjs/client@^4.3.0/dist/feathers.js"></script>
     <script src="/socket.io/socket.io.js"></script>
-    <script src="app.js"></script>
+    <script src="client.js"></script>
   </body>
 </html>
 ```
 
-In `public/app.js` we can now set up the Feathers client similar to the [getting started example](./starting.md). We also add a `login` method that first tries to use a stored token by calling `app.reAuthenticate()`. If that fails, we try to log in with email/password of our registered user:
+Create a new file `public/client.js` where we can now set up the Feathers client similar to the [getting started example](./starting.md). We also add a `login` method that first tries to use a stored token by calling `app.reAuthenticate()`. If that fails, we try to log in with email/password of our registered user:
 
 ```js
 // Establish a Socket.io connection
@@ -194,7 +194,7 @@ Find the `authentication` section in `config/default.json` add a configuration s
 }
 ```
 
-This tells the oAuth strategy to redirect back to our index page after a successful login and already makes a basic login with GitHub possible. Because of the changes we made in the `users` service in the [services chapter](./services.md) we do need a small customization though. Instead of only adding `githubId` to a new user when they log in with GitHub we also need to include their email from the profile we get back since we use it as their username and to fetch the avatar. We can do this by extending the standard oAuth strategy and registering it as a GitHub specific one and overwriting the `getEntityData` method:
+This tells the oAuth strategy to redirect back to our index page after a successful login and already makes a basic login with GitHub possible. Because of the changes we made in the `users` service in the [services chapter](./services.md) we do need a small customization though. Instead of only adding `githubId` to a new user when they log in with GitHub we also include their email (if it is available), the display name to show in the chat and the avatar image from the profile we get back. We can do this by extending the standard oAuth strategy and registering it as a GitHub specific one and overwriting the `getEntityData` method:
 
 :::: tabs :options="{ useUrlFragment: false }"
 ::: tab "JavaScript"
@@ -211,6 +211,11 @@ class GitHubStrategy extends OAuthStrategy {
 
     return {
       ...baseData,
+      // You can also set the display name to profile.name
+      name: profile.login,
+      // The GitHub profile image
+      avatar: profile.avatar_url,
+      // The user email address (if available)
       email: profile.email
     };
   }
@@ -251,6 +256,11 @@ class GitHubStrategy extends OAuthStrategy {
 
     return {
       ...baseData,
+      // You can also set the display name to profile.name
+      name: profile.login,
+      // The GitHub profile image
+      avatar: profile.avatar_url,
+      // The user email address (if available)
       email: profile.email
     };
   }

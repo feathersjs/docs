@@ -52,7 +52,7 @@ messageService.create({
 React Native usage is the same as for the [Node client](#node). Install the required packages into your [React Native](https://facebook.github.io/react-native/) project.
 
 ```bash
-$ npm install @feathersjs/feathers @feathersjs/socketio-client socket.io-client
+npm install @feathersjs/feathers @feathersjs/socketio-client socket.io-client
 ```
 
 Then in the main application file:
@@ -80,11 +80,11 @@ messageService.create({
 });
 ```
 
-Since React Native for Android doesn't handle timeouts exceeding one minute, consider setting lower values for `pingInterval` and `pingTimeout` of `feathers-socketio` on your server. This which will stop warnings related to this [issue](https://github.com/facebook/react-native/issues/12981). For example:
+Since React Native for Android doesn't handle timeouts exceeding one minute, consider setting lower values for `pingInterval` and `pingTimeout` of [Socket.io](./socketio.md) **on your server**. This will stop warnings related to this [issue](https://github.com/facebook/react-native/issues/12981). For example:
 
 ```js
 const app = feathers();
-const socketio = require('feathers-socketio');
+const socketio = require('@feathersjs/socketio');
 
 app.configure(socketio({
   pingInterval: 10000,
@@ -136,7 +136,7 @@ As mentioned above, `node_modules/@feathersjs` and all its subfolders must be in
 [![Changelog](https://img.shields.io/badge/changelog-.md-blue.svg?style=flat-square)](https://github.com/feathersjs/feathers/blob/master/packages/client/CHANGELOG.md)
 
 ```
-$ npm install @feathersjs/client --save
+npm install @feathersjs/client --save
 ```
 
 `@feathersjs/client` is a module that bundles the separate Feathers client-side modules into one providing the code as ES5 which is compatible with modern browsers (IE10+). It can also be used directly in the browser through a `<script>` tag. Here is a table of which Feathers client module is included:

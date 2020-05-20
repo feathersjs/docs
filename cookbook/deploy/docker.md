@@ -5,9 +5,9 @@ A Feathers application can be [dockerized like any other Node.js application](ht
 ## Create an app
 
 ```sh
-$ mkdir feathers-app
-$ cd feathers-app/
-$ feathers generate app
+mkdir feathers-app
+cd feathers-app/
+feathers generate app
 ```
 
 ### Dockerfile
@@ -33,11 +33,11 @@ CMD ["npm", "run", "start"]
 ## Build the image
 
 ```sh
-$ docker build -t my-feathers-image .
+docker build -t my-feathers-image .
 ```
 
 ## Start the container
 
 ```sh
-$ docker run -d -p 3030:3030 --name my-feathers-container my-feathers-image 
+docker run -d -p 3030:3030 --name my-feathers-container my-feathers-image
 ```

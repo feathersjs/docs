@@ -1,6 +1,6 @@
 # File uploads in FeathersJS
 
-Over the last months we at [ciancoders.com](https://ciancoders.com/) have been working in a new SPA project using Feathers and React, the combination of those two turns out to be **just amazing**.  
+Over the last months we at [ciancoders.com](https://ciancoders.com/) have been working in a new SPA project using Feathers and React, the combination of those two turns out to be **just amazing**.
 
 Recently we were struggling to find a way to upload files without having to write a separate Express middleware or having to (re)write a complex Feathers service.
 
@@ -30,7 +30,7 @@ Lets look at the server code:
 
 const feathers = require('@feathersjs/feathers');
 const express = require('@feathersjs/express');
-const socketio = require('feathers-socketio');
+const socketio = require('@feathersjs/socketio');
 
 // feathers-blob service
 const blobService = require('feathers-blob');
