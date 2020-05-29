@@ -6,6 +6,7 @@ This guide explains the new features and changes necessary to migrate to the Fea
 
 ### Core
 
+- Services are no longer Uberproto (an ES5 inheritance utility) objects and instead rely on modern JavaScript classes and extension. This also means `service.mixin` is no longer available.
 - The unofficial `finally` hook type is no longer available and should be replaced by the new asynchronous hooks which offer the same functionality using plain JavaScript:
 
 ```js
@@ -22,6 +23,7 @@ app.service('myservice').hooks([
 
 - The undocumented `service._setup` method introduced in v1 will no longer be called. It was used to circumvent middleware inconsistencies from Express 3 and is no longer necessary.
 - The undocumented `app.providers` has been removed since it provided the same functionality as [`app.mixins`]()
+- `app.disable`, `app.disabled`, `app.enable` and `app.enabled` have been removed from basic Feathers applications. It will still be available in an Express compatible Feathers application. `app.get()` and `app.set()` should be used instead.
 
 ### Authentication
 
@@ -34,7 +36,7 @@ app.service('myservice').hooks([
 
 ### Configuration
 
-The implicit environment variable substitution in `@feathersjs/configuration` was causing subtle and hard to debug issues. It has been removed to instead rely on the functionality already provided by the underlying [node-config](https://github.com/lorenwest/node-config), specifically the [Custom Environment Variable support](https://github.com/lorenwest/node-config/wiki/Environment-Variables#custom-environment-variables). To use existing environment variables add the following configuration file in `config/custom-environment-variables.<json|yaml|js>` like this:
+The automatic environment variable substitution in `@feathersjs/configuration` was causing subtle and hard to debug issues. It has been removed to instead rely on the functionality already provided by the underlying [node-config](https://github.com/lorenwest/node-config), specifically the [Custom Environment Variable support](https://github.com/lorenwest/node-config/wiki/Environment-Variables#custom-environment-variables). To use existing environment variables add the following configuration file in `config/custom-environment-variables.<json|yaml|js>` like this:
 
 ```json
 // config/custom-environment-variables.json
