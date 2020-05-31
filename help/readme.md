@@ -30,6 +30,6 @@ If none of those work it's a very real possibility that we screwed something up 
 
 ## Paid support
 
-[Aquil.io](https://aquil.io/) offers hours in 30 or 60 minute sessions with a Feathers expert to walk you through any open issues you may be facing using FeathersJS. This may include architecture discussions, debug sessions, patterns, or more.
+[Aquil.io](https://aquil.io/) offers 30 or 60 minute sessions with a Feathers expert to walk you through any issues you may be facing using FeathersJS. This may include architecture discussions, debug sessions, patterns, or more.
 
 [Book an office hour with Aquil.io](https://aquil.io/office-hours)
