@@ -286,7 +286,7 @@ curl -H "Content-Type: application/json" -X POST -d '{"strategy":"local","email"
 Then to authenticate subsequent requests, add the returned `accessToken` to the `Authorization` header as `Bearer <your access token>`:
 
 ```bash
-curl -H "Content-Type: application/json" -H "Authorization: Bearer <your access token>" -X POST http://localhost:3030/authentication
+curl -H "Content-Type: application/json" -H "Authorization: Bearer <your access token>" http://localhost:3030/messages
 ```
 
 For more information see the [authentication API documentation](../readme.md).
