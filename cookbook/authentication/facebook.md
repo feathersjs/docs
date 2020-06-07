@@ -50,7 +50,7 @@ In `src/authentication.js`:
 
 ```js
 const axios = require('axios');
-const { OAuthStrategy } = require('@feathersjs/authentication-oauth');
+const { OAuthStrategy, expressOauth } = require('@feathersjs/authentication-oauth');
 
 class FacebookStrategy extends OAuthStrategy {
   async getProfile (authResult) {
@@ -99,7 +99,7 @@ module.exports = app => {
 ```ts
 import { Params } from '@feathersjs/feathers';
 import { AuthenticationService, JWTStrategy } from '@feathersjs/authentication';
-import { OAuthStrategy, OAuthProfile } from '@feathersjs/authentication-oauth';
+import { OAuthStrategy, OAuthProfile, expressOauth } from '@feathersjs/authentication-oauth';
 import axios from 'axios';
 import { Application } from './declarations';
 
