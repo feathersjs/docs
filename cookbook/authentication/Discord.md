@@ -18,7 +18,6 @@ Discord login can be initialized like any other [oAuth provider](../../api/authe
 
 > __Protip:__ A list of all available Discord scopes can be found [here](https://discord.com/developers/docs/topics/oauth2#shared-resources-oauth2-scopes)
 
-
 ## Application client and secret
 
 The client id (App ID) and secret can be found [here](https://discord.com/developers/applications/):
