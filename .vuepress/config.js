@@ -100,7 +100,7 @@ module.exports = {
           'authentication/auth0.md',
           'authentication/facebook.md',
           'authentication/google.md',
-          'authentication/discord.md',
+          'authentication/_discord.md',
           'authentication/stateless.md',
           'authentication/revoke-jwt.md'
         ]
