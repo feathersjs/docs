@@ -16,9 +16,7 @@ Discord login can be initialized like any other [oAuth provider](../../api/authe
 }
 ```
 
-::: Protip 
-A list of all available Discord scopes can be found [here](https://discord.com/developers/docs/topics/oauth2#shared-resources-oauth2-scopes)
-:::
+> __Protip:__ A list of all available Discord scopes can be found [here](https://discord.com/developers/docs/topics/oauth2#shared-resources-oauth2-scopes)
 
 
 ## Application client and secret
@@ -26,7 +24,7 @@ A list of all available Discord scopes can be found [here](https://discord.com/d
 The client id (App ID) and secret can be found [here](https://discord.com/developers/applications/):
 ![Discord App](https://cdn.discordapp.com/attachments/468897350807453706/722369856317423656/unknown.png)
 
-Now finally add this to your src/authentication.ts:
+Now add this to your src/authentication.ts:
 
 ```ts
 import {OAuthProfile, OAuthStrategy} from "@feathersjs/authentication-oauth";
@@ -66,16 +64,15 @@ export default class DiscordStrategy extends OAuthStrategy {
 
   async getEntityData(profile: OAuthProfile) {
     // `profile` is the data returned by getProfile
-
-    // @ts-ignore
     const baseData = await super.getEntityData(profile);
-    console.log(baseData)
-    if (profile.avatar == null)
+    
+    if (profile.avatar == null) {
       profile.avatar = 'https://cdn.discordapp.com/embed/avatars/0.png'
-    else {
+    } else {
       const isGif = profile.avatar.startsWith('a_');
       profile.avatar = `https://cdn.discordapp.com/avatars/${profile['id']}/${profile['avatar']}.${isGif ? 'gif' : 'png'}`
     }
+    
     return {
       ...baseData,
       username: profile.username,
