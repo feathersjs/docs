@@ -281,6 +281,8 @@ Now we can sign up users with email and password and it will automatically set a
 
 > __Note:__ We are keeping `githubId` from the original data so that we can add a "Login with GitHub" button in the [authentication](./authentication.md) chapter.
 
+> __Note:__ Please be patient and don't expect to be able to create users yet; even though we have a service, it is not yet ready and integrated.
+
 ## What's next?
 
 In this chapter we learned about services as Feathers core concept for abstracting data operations. We also saw how a service sends events which we will use later to create real-time applications. After that, we generated a messages service and updated our users service to include an avatar image. Next, we will look at [Hooks](./hooks.md) which is the other key part of how Feathers works.
