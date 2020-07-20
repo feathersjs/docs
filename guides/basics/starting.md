@@ -391,7 +391,7 @@ ts-node app.ts
 
 And visit [localhost:3030/messages](http://localhost:3030/messages) to see an array with the one message we created on the server.
 
-> __Pro Tip:__ A browser plugin like [JSON viewer for Chrome](https://chrome.google.com/webstore/detail/json-viewer/gbmdgpbipfallnflgajpaliibnhdgobh) makes it nicer to view JSON responses in the browser.
+> **Pro Tip:** The built-in [JSON viewer in Firefox](https://developer.mozilla.org/en-US/docs/Tools/JSON_viewer) or a browser plugin like [JSON viewer for Chrome](https://chrome.google.com/webstore/detail/json-viewer/gbmdgpbipfallnflgajpaliibnhdgobh) makes it nicer to view JSON responses in the browser.
 
 This is the basic setup of a Feathers API server. The `app.use` calls probably look familiar if you have used Express before. The `app.configure` calls set up the Feathers transport to host the API. `app.on('connection')` and `app.publish` are used to set up event channels which send real-time events to the proper clients (everybody that is connected to our server in this case). You can learn more about channels after finishing this guide in the [channels API](../../api/channels.md).
 
