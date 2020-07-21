@@ -100,7 +100,7 @@ module.exports = app => {
 ::: tab "TypeScript"
 ```ts
 import { Params } from '@feathersjs/feathers';
-import { AuthenticationService, JWTStrategy } from '@feathersjs/authentication';
+import { AuthenticationService, JWTStrategy, AuthenticationRequest } from '@feathersjs/authentication';
 import { LocalStrategy } from '@feathersjs/authentication-local';
 import { expressOauth, OAuthStrategy, OAuthProfile } from '@feathersjs/authentication-oauth';
 import axios from 'axios';
