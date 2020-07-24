@@ -66,6 +66,10 @@ Returns a promise that resolves with the following format:
 
 > __Note:__ Since the JWT strategy returns an `accessToken` property (the same as the token sent to this strategy), that access token will also be returned by [authenticationService.create](./service.md#create-data-params) instead of creating a new one.
 
+### getEntityQuery(params)
+
+Returns the `query` to use when calling `entityService.get` (default: `{}`). 
+
 ### parse(req, res)
 
 Parse the HTTP request headers for JWT authentication information. Returns a promise that resolves with either `null` or data in the form of:
