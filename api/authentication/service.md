@@ -18,7 +18,7 @@ The `AuthenticationService` is a [Feathers service](../services.md) that allows 
 
 ## Setup
 
-The standard setup of [the generator]() initializes an [AuthenticationService](#authenticationservice) at the `/authentication` path with a [JWT strategy](./jwt.md), [Local strategy](./local.md) and [oAuth authentication](./oauth.md).
+The standard setup of [the generator]() initializes an [AuthenticationService](#authenticationservice) at the `/authentication` path with a [JWT strategy](./jwt.md), [Local strategy](./local.md) and [OAuth authentication](./oauth.md).
 
 :::: tabs :options="{ useUrlFragment: false }"
 

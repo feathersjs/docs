@@ -1,6 +1,6 @@
 # Authentication
 
-We now have a fully functional chat application consisting of [services](./services.md) and [hooks](./hooks.md). The services come with authentication enabled by default, so before we can use it we need to create a new user and learn how Feathers authentication works. We will look at authenticating our REST API, and then how to authenticate with Feathers in the browser. Finally, we will discuss how to add "Login with GitHub" functionality using oAuth 2.0.
+We now have a fully functional chat application consisting of [services](./services.md) and [hooks](./hooks.md). The services come with authentication enabled by default, so before we can use it we need to create a new user and learn how Feathers authentication works. We will look at authenticating our REST API, and then how to authenticate with Feathers in the browser. Finally, we will discuss how to add "Login with GitHub" functionality using OAuth 2.0.
 
 ## Registering a user
 
@@ -158,11 +158,11 @@ main();
 
 If you now open the console and visit [localhost:3030](http://localhost:3030) you will see that our user has been authenticated.
 
-## GitHub login (oAuth)
+## GitHub login (OAuth)
 
-oAuth is an open authentication standard supported by almost every major platform. It is what is being used by the login with Facebook, Google, GitHub etc. buttons in a web application. From the Feathers perspective the authentication flow is pretty similar. Instead of authenticating with the `local` strategy by sending a username and password, we direct the user to authorize the application with the login provider. If it is successful we find or create the user on the `users` service with the information we got back from the provider and issue a token for them.
+OAuth is an open authentication standard supported by almost every major platform. It is what is being used by the login with Facebook, Google, GitHub etc. buttons in a web application. From the Feathers perspective the authentication flow is pretty similar. Instead of authenticating with the `local` strategy by sending a username and password, we direct the user to authorize the application with the login provider. If it is successful we find or create the user on the `users` service with the information we got back from the provider and issue a token for them.
 
-Let's use GitHub as an example for how to set up a "Login with GitHub" button. First, we have to [create a new oAuth application on GitHub](https://github.com/settings/applications/new). You can put anything in the name, homepage and description fields. The callback URL __must__ be set
+Let's use GitHub as an example for how to set up a "Login with GitHub" button. First, we have to [create a new OAuth application on GitHub](https://github.com/settings/applications/new). You can put anything in the name, homepage and description fields. The callback URL __must__ be set
 
 ```sh
 http://localhost:3030/oauth/github/callback
@@ -170,7 +170,7 @@ http://localhost:3030/oauth/github/callback
 
 ![Screenshot of the GitHub application screen](./assets/github-app.png)
 
-> __Note:__ You can find your existing applications in the [GitHub oAuth apps developer settings](https://github.com/settings/developers).
+> __Note:__ You can find your existing applications in the [GitHub OAuth apps developer settings](https://github.com/settings/developers).
 
 Once you clicked "Register application" we have to update our Feathers app configuration with the client id and secret copied from the GitHub application settings:
 
@@ -194,7 +194,7 @@ Find the `authentication` section in `config/default.json` add a configuration s
 }
 ```
 
-This tells the oAuth strategy to redirect back to our index page after a successful login and already makes a basic login with GitHub possible. Because of the changes we made in the `users` service in the [services chapter](./services.md) we do need a small customization though. Instead of only adding `githubId` to a new user when they log in with GitHub we also include their email (if it is available), the display name to show in the chat and the avatar image from the profile we get back. We can do this by extending the standard oAuth strategy and registering it as a GitHub specific one and overwriting the `getEntityData` method:
+This tells the OAuth strategy to redirect back to our index page after a successful login and already makes a basic login with GitHub possible. Because of the changes we made in the `users` service in the [services chapter](./services.md) we do need a small customization though. Instead of only adding `githubId` to a new user when they log in with GitHub we also include their email (if it is available), the display name to show in the chat and the avatar image from the profile we get back. We can do this by extending the standard OAuth strategy and registering it as a GitHub specific one and overwriting the `getEntityData` method:
 
 :::: tabs :options="{ useUrlFragment: false }"
 ::: tab "JavaScript"
@@ -280,11 +280,11 @@ export default function(app: Application) {
 :::
 ::::
 
-> __Pro tip:__ For more information about the oAuth flow and strategy see the [oAuth API documentation](../../api/authentication/oauth.md).
+> __Pro tip:__ For more information about the OAuth flow and strategy see the [OAuth API documentation](../../api/authentication/oauth.md).
 
-When we set up the [authentication client in the browser](#browser-authentication) it can also already handle oAuth logins. To log in with GitHub, visit [localhost:3030/oauth/github](http://localhost:3030/oauth/github). It will redirect to GitHub and ask to authorize our application. If everything went well, you will see a user with your GitHub email address being logged in the console.
+When we set up the [authentication client in the browser](#browser-authentication) it can also already handle OAuth logins. To log in with GitHub, visit [localhost:3030/oauth/github](http://localhost:3030/oauth/github). It will redirect to GitHub and ask to authorize our application. If everything went well, you will see a user with your GitHub email address being logged in the console.
 
-> __Note:__ The authentication client will not use the token from the oAuth login if there is already another token logged in. See the [oAuth API](../../api/authentication/oauth.md) for how to link to an existing account.
+> __Note:__ The authentication client will not use the token from the OAuth login if there is already another token logged in. See the [OAuth API](../../api/authentication/oauth.md) for how to link to an existing account.
 
 ## What's next?
 

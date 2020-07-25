@@ -1,6 +1,6 @@
 # Auth0
 
-To enable oAuth logins with [Auth0](http://auth0.com), we need the following settings after creating an application:
+To enable OAuth logins with [Auth0](http://auth0.com), we need the following settings after creating an application:
 
 ![Auth0 application](../assets/auth0-app.png)
 
