@@ -13,7 +13,7 @@ Issuing releases is typically very quick. Once an issue is resolved it is usuall
 Here are some things that you should be aware of when writing your app to make sure it is secure.
 
 - Make sure to set up proper [event channels](../api/channels.md) so that only clients that are allowed to see them can see real-time updates
-- Use hooks to check security roles to make sure users can only access data they should be permitted to. You can find useful hook utilities in [feathers-hooks-common](https://feathers-plus.github.io/v1/feathers-hooks-common/) and [feathers-authentication-hooks](https://github.com/feathersjs-ecosystem/feathers-authentication-hooks/).
+- Use hooks to check security roles to make sure users can only access data they should be permitted to. You can find useful hook utilities in [feathers-hooks-common](https://hooks-common.feathersjs.com/) and [feathers-authentication-hooks](https://github.com/feathersjs-ecosystem/feathers-authentication-hooks/).
 - Restrict the [allowed database queries](../api/databases/querying.md) to only the use cases your application requires by sanitizing `params.query` in a hook.
 - When you explicitly allow multiple element changes, make sure queries are secured properly to limit the items that can be changed.
 
