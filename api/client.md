@@ -194,8 +194,8 @@ Below is an example of the scripts you would use to load `@feathersjs/client` fr
 
 ```html
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/core-js/2.1.4/core.min.js"></script>
-<script src="//unpkg.com/@feathersjs/client@^3.0.0/dist/feathers.js"></script>
-<script src="//unpkg.com/socket.io-client@1.7.3/dist/socket.io.js"></script>
+<script src="//unpkg.com/@feathersjs/client@4.5.7/dist/feathers.js"></script>
+<script src="//unpkg.com/socket.io-client@2.3.0/dist/socket.io.js"></script>
 <script>
   // Socket.io is exposed as the `io` global.
   var socket = io('http://localhost:3030');
