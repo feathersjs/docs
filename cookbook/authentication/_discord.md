@@ -1,6 +1,6 @@
 # Discord
 
-Discord login can be initialized like any other [oAuth provider](../../api/authentication/oauth.md) by adding the app id and secret to `config/default.json`:
+Discord login can be initialized like any other [OAuth provider](../../api/authentication/oauth.md) by adding the app id and secret to `config/default.json`:
 
 ```js
 {
@@ -49,7 +49,7 @@ export default function (app: Application) {
 
 export default class DiscordStrategy extends OAuthStrategy {
   async getProfile(authResult: AuthenticationRequest) {
-    // This is the oAuth access token that can be used
+    // This is the OAuth access token that can be used
     // for Discord API requests as the Bearer token
     const accessToken = authResult.access_token;
     const userOptions: AxiosRequestConfig = {

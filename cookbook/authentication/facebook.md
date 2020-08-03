@@ -1,6 +1,6 @@
 # Facebook
 
-Facebook login can be initialized like any other [oAuth provider](../../api/authentication/oauth.md) by adding the app id and secret to `config/default.json`:
+Facebook login can be initialized like any other [OAuth provider](../../api/authentication/oauth.md) by adding the app id and secret to `config/default.json`:
 
 ```js
 {
@@ -38,7 +38,7 @@ The client id (App ID) and secret can be found in the Settings of the [Facebook 
 
 ## Getting profile data
 
-The standard oAuth strategy only returns the default profile fields (`id` and `name`). To get other fields, like the email or profile picture, the [getProfile](../../api/authentication/oauth.md#getprofile-data-params) method of the [oAuth strategy needs to be customized](../../api/authentication/oauth.md#customization) to call the Graph API profile endpoint `https://graph.facebook.com/me` with an HTTP request library like [Axios](https://developers.facebook.com/tools/explorer/) requesting the additional fields.
+The standard OAuth strategy only returns the default profile fields (`id` and `name`). To get other fields, like the email or profile picture, the [getProfile](../../api/authentication/oauth.md#getprofile-data-params) method of the [OAuth strategy needs to be customized](../../api/authentication/oauth.md#customization) to call the Graph API profile endpoint `https://graph.facebook.com/me` with an HTTP request library like [Axios](https://developers.facebook.com/tools/explorer/) requesting the additional fields.
 
 > __Pro tip:__ Facebook API requests can be tested via the [Graph API explorer](https://developers.facebook.com/tools/explorer/).
 
@@ -56,7 +56,7 @@ const { expressOauth, OAuthStrategy } = require('@feathersjs/authentication-oaut
 
 class FacebookStrategy extends OAuthStrategy {
   async getProfile (authResult) {
-    // This is the oAuth access token that can be used
+    // This is the OAuth access token that can be used
     // for Facebook API requests as the Bearer token
     const accessToken = authResult.access_token;
 
@@ -114,7 +114,7 @@ declare module './declarations' {
 
 class FacebookStrategy extends OAuthStrategy {
   async getProfile (authResult: AuthenticationRequest, _params: Params) {
-    // This is the oAuth access token that can be used
+    // This is the OAuth access token that can be used
     // for Facebook API requests as the Bearer token
     const accessToken = authResult.access_token;
 

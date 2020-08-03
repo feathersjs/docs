@@ -23,7 +23,7 @@ This will update the dependencies in `package.json`, update the `src/authenticat
 __Manual steps are necessary for__
 
 - The `hashPassword()` hook in `service/users/users.hooks.js` which now requires the password field name (usually `hashPassword('password')`)
-- Configuring oAuth providers - see [oAuth API](../api/authentication/oauth.md)
+- Configuring OAuth providers - see [OAuth API](../api/authentication/oauth.md)
 - The authentication Express middleware has been moved to `const { authenticate } = require('@feathersjs/express');`
 - Any other authentication specific customization - see [authentication service API](../api/authentication/service.md)
 - Feathers client authentication - see [authentication client API](../api/authentication/client.md)
@@ -34,8 +34,8 @@ The `@feathersjs/authentication-*` modules have been completely rewritten to inc
 
 - An extensible [authentication service](../api/authentication/service.md) that can register strategies and create authentication tokens (JWT by default but pluggable for anything else)
 - Protocol independent, fully customizable authentication strategies
-- Better [oAuth authentication](../api/authentication/oauth.md) with 180+ providers supported out of the box without any additional configuration (other than adding the application key and secret)
-- Built-in oAuth account linking and cross-domain oAuth redirects
+- Better [OAuth authentication](../api/authentication/oauth.md) with 180+ providers supported out of the box without any additional configuration (other than adding the application key and secret)
+- Built-in OAuth account linking and cross-domain OAuth redirects
 
 ### Manual upgrade
 
@@ -84,7 +84,7 @@ export default (app: Application) => {
 
 > __Important:__ The `@feathersjs/authentication-jwt` is deprecated since the JWT strategy is now directly included in `@feathersjs/authentication`.
 
-This will register `local`, `jwt` and oAuth authentication strategies using the standard authentication service on the `/authentication` path. oAuth will only be active if provider information is added to the configuration. The authentication configuration (usually in `config/default.json`) should be updated as follows:
+This will register `local`, `jwt` and OAuth authentication strategies using the standard authentication service on the `/authentication` path. OAuth will only be active if provider information is added to the configuration. The authentication configuration (usually in `config/default.json`) should be updated as follows:
 
 ```json
 "authentication": {
@@ -370,11 +370,11 @@ module.exports = app => {
 };
 ```
 
-### oAuth cookies
+### OAuth cookies
 
-To support oAuth for the old authentication client that was using a cookie instead of the redirect to transmit the access token the following middleware can be used:
+To support OAuth for the old authentication client that was using a cookie instead of the redirect to transmit the access token the following middleware can be used:
 
-> __Note:__ This is only necessary if the Feathers authentication client is not updated at the same time and if oAuth is being used.
+> __Note:__ This is only necessary if the Feathers authentication client is not updated at the same time and if OAuth is being used.
 
 ```js
 const authService = new AuthenticationService(app);

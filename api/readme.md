@@ -46,7 +46,7 @@ Feathers authentication mechanism
 * [Strategies](authentication/strategy.md) - More about authentication strategies
 * [Local](authentication/local.md) - Local email/password authentication
 * [JWT](authentication/jwt.md) - JWT authentication
-* [OAuth](authentication/oauth.md) - Using oAuth logins (Facebook, Twitter etc.)
+* [OAuth](authentication/oauth.md) - Using OAuth logins (Facebook, Twitter etc.)
 * [Client](authentication/client.md) - A client for a Feathers authentication server
 
 ## Databases

@@ -7,7 +7,7 @@
 npm install @feathersjs/authentication-oauth --save
 ```
 
-`@feathersjs/authentication-oauth` allows to authenticate with over 180 oAuth providers (Google, Facebook, GitHub etc.) using [grant](https://github.com/simov/grant), an oAuth middleware module for NodeJS.
+`@feathersjs/authentication-oauth` allows to authenticate with over 180 OAuth providers (Google, Facebook, GitHub etc.) using [grant](https://github.com/simov/grant), an OAuth middleware module for NodeJS.
 
 ## Configuration
 
@@ -15,7 +15,7 @@ The following settings are available:
 
 - `redirect`: The URL of the frontend to redirect to with the access token (or error message). The [authentication client](./client.md) handles those redirects automatically. If not set, the authentication result will be sent as JSON instead.
 - `defaults`: Default [Grant configuration](https://github.com/simov/grant#configuration) used for all strategies. The following default options are set automatically:
-  - `path` (default: `'/oauth'`) - The oAuth base path
+  - `path` (default: `'/oauth'`) - The OAuth base path
 - `<strategy-name>` (e.g. `twitter`): The [Grant configuration](https://github.com/simov/grant#configuration) used for a specific strategy.
 - For both `defaults` and specific strategies, the following options are set automatically:
   - `host`: Set to `host` from the configuration
@@ -23,9 +23,9 @@ The following settings are available:
   - `transport`: Set to `'session'` (see [Grant response data](https://github.com/simov/grant#response-data-transport))
   - `callback`: Set to `'<defaults.path>/<name>/authenticate'`. This should not be changed.
 
-> __Pro tip:__ Removing the `redirect` setting is a good way to troubleshoot oAuth authentication errors.
+> __Pro tip:__ Removing the `redirect` setting is a good way to troubleshoot OAuth authentication errors.
 
-Standard oAuth authentication can be configured with those options in `config/default.json` like this:
+Standard OAuth authentication can be configured with those options in `config/default.json` like this:
 
 ```json
 {
@@ -46,7 +46,7 @@ Standard oAuth authentication can be configured with those options in `config/de
 }
 ```
 
-> __Note:__ All oAuth strategies will by default always look for configuration under `authentication.oauth.<name>`. If `authentication.oauth` is not set in the configuration, oAuth authentication will be disabled.
+> __Note:__ All OAuth strategies will by default always look for configuration under `authentication.oauth.<name>`. If `authentication.oauth` is not set in the configuration, OAuth authentication will be disabled.
 
 Here is a [list of all Grant configuration options](https://github.com/simov/grant#all-available-options) that are available:
 
@@ -80,7 +80,7 @@ redirect_uri | generated | OAuth app [redirect URI](#redirect-uri), generated us
 
 ### Cookbook guides
 
-For specific oAuth provider setup see the following [cookbook](../../cookbook/) guides:
+For specific OAuth provider setup see the following [cookbook](../../cookbook/) guides:
 
 - [Auth0](../../cookbook/authentication/auth0.md)
 - [Facebook](../../cookbook/authentication/facebook.md)
@@ -88,10 +88,10 @@ For specific oAuth provider setup see the following [cookbook](../../cookbook/) 
 
 ### Flow
 
-There are two ways to initiate oAuth authentication:
+There are two ways to initiate OAuth authentication:
 
 1) Through the browser (most common)
-    - User clicks on link to oAuth URL (`oauth/<provider>`)
+    - User clicks on link to OAuth URL (`oauth/<provider>`)
     - Gets redirected to provider and authorizes the application
     - Callback to the [OauthStrategy](#oauthstrategy) which
         - Gets the users profile
@@ -109,15 +109,15 @@ There are two ways to initiate oAuth authentication:
 
 > __Note:__ If you are attempting to authenticate using an obtained access token, ensure that you have added the strategy (e.g. 'facebook') to your [authStrategies](./service.md#configuration).
 
-### oAuth URLs
+### OAuth URLs
 
-There are several URLs and redirects that are important for oAuth authentication:
+There are several URLs and redirects that are important for OAuth authentication:
 
-- `http(s)://<host>/oauth/<provider>`: The main URL to initiate the oAuth flow. Link to this from the browser.
-- `http(s)://<host>/oauth/<provider>/callback`: The callback path that should be set in the oAuth application settings
+- `http(s)://<host>/oauth/<provider>`: The main URL to initiate the OAuth flow. Link to this from the browser.
+- `http(s)://<host>/oauth/<provider>/callback`: The callback path that should be set in the OAuth application settings
 - `http(s)://<host>/oauth/<provider>/authenticate`: The internal redirect
 
-In the browser any oAuth flow can be initiated with the following link:
+In the browser any OAuth flow can be initiated with the following link:
 
 ```html
 <a href="/oauth/github">Login with GitHub</a>
@@ -125,7 +125,7 @@ In the browser any oAuth flow can be initiated with the following link:
 
 ### Account linking
 
-To _link an existing user_ the current access token can be added to the oAuth flow query using the `feathers_token` query parameter:
+To _link an existing user_ the current access token can be added to the OAuth flow query using the `feathers_token` query parameter:
 
 ```html
 <a href="/oauth/github?feathers_token=<your access token>">
@@ -133,7 +133,7 @@ To _link an existing user_ the current access token can be added to the oAuth fl
 </a>
 ```
 
-This will use the user (entity) of that access token to link the oAuth account to. Using the [authentication client](./client.md) you can get the current access token via `app.get('authentication')`:
+This will use the user (entity) of that access token to link the OAuth account to. Using the [authentication client](./client.md) you can get the current access token via `app.get('authentication')`:
 
 ```js
 const { accessToken } = await app.get('authentication');
@@ -141,7 +141,7 @@ const { accessToken } = await app.get('authentication');
 
 ### Redirects
 
-The `redirect` configuration option is used to redirect back to the frontend application after oAuth authentication was successful and an access token for the user has been created by the [authentication service](./service.md) or if authentication failed. It works cross domain and by default includes the access token or error message in the window location hash. The following configuration
+The `redirect` configuration option is used to redirect back to the frontend application after OAuth authentication was successful and an access token for the user has been created by the [authentication service](./service.md) or if authentication failed. It works cross domain and by default includes the access token or error message in the window location hash. The following configuration
 
 ```js
 {
@@ -153,13 +153,13 @@ The `redirect` configuration option is used to redirect back to the frontend app
 }
 ```
 
-Will redirect to `https://app.mydomain.com/#access_token=<user jwt>` or `https://app.mydomain.com/#error=<some error message>`. Redirects can be customized with the [getRedirect()](#getredirect-data) method of the oAuth strategy. The [authentication client](./client.md) handles the default redirects automatically already.
+Will redirect to `https://app.mydomain.com/#access_token=<user jwt>` or `https://app.mydomain.com/#error=<some error message>`. Redirects can be customized with the [getRedirect()](#getredirect-data) method of the OAuth strategy. The [authentication client](./client.md) handles the default redirects automatically already.
 
 > __Note:__ The redirect is using a hash instead of a query string by default because it is not logged server side and can be easily read on the client. You can force query based redirect by adding a `?` to the end of the `redirect` option.
 
 If the `redirect` option is not set, the authentication result data will be sent as JSON instead.
 
-Dynamic redirects to the same URL are possible by setting the `redirect` query parameter in the oAuth flow. For example, the following oAuth link:
+Dynamic redirects to the same URL are possible by setting the `redirect` query parameter in the OAuth flow. For example, the following OAuth link:
 
 ```html
 <a href="/oauth/github?redirect=dashboard">
@@ -167,11 +167,11 @@ Dynamic redirects to the same URL are possible by setting the `redirect` query p
 </a>
 ```
 
-With the above configuration will redirect to `https://app.mydomain.com/dashboard` after the oAuth flow.
+With the above configuration will redirect to `https://app.mydomain.com/dashboard` after the OAuth flow.
 
 ## Setup (Express)
 
-`expressOauth` (for setup see the [AuthenticationService](./service.md)) sets up oAuth authentication on a [Feathers Express](../express.md) application and can take the following options:
+`expressOauth` (for setup see the [AuthenticationService](./service.md)) sets up OAuth authentication on a [Feathers Express](../express.md) application and can take the following options:
 
 - `authService`: The name of the authentication service
 - `linkStrategy` (default: `'jwt'`): The name of the strategy to use for account linking
@@ -194,7 +194,7 @@ app.configure(expressOauth({
 }));
 ```
 
-> __Important:__  If not customized, Express oAuth uses the in-memory Express session store which will show a `connect.session() MemoryStore is not designed for a production environment, as it will leak memory, and will not scale past a single process.` warning in production.
+> __Important:__  If not customized, Express OAuth uses the in-memory Express session store which will show a `connect.session() MemoryStore is not designed for a production environment, as it will leak memory, and will not scale past a single process.` warning in production.
 
 ## OAuthStrategy
 
@@ -218,11 +218,11 @@ app.configure(expressOauth({
 
 ### getProfile(data, params)
 
-`oauthStrategy.getProfile(data, params) -> Promise` returns the user profile information from the oAuth provider that was used for the login. `data` is the oAuth callback information which normally contains e.g. the oAuth access token.
+`oauthStrategy.getProfile(data, params) -> Promise` returns the user profile information from the OAuth provider that was used for the login. `data` is the OAuth callback information which normally contains e.g. the OAuth access token.
 
 ### getRedirect (data)
 
-`oauthStrategy.getRedirect(data) -> Promise` returns the URL to redirect to after a successful oAuth login and entity lookup or creation. By default it redirects to `authentication.oauth.redirect` from the configuration with `#access_token=<access token for entity>` added to the end of the URL. The `access_token` hash is e.g. used by the [authentication client](./client.md) to log the user in after a successful oAuth login. The default redirects do work cross domain.
+`oauthStrategy.getRedirect(data) -> Promise` returns the URL to redirect to after a successful OAuth login and entity lookup or creation. By default it redirects to `authentication.oauth.redirect` from the configuration with `#access_token=<access token for entity>` added to the end of the URL. The `access_token` hash is e.g. used by the [authentication client](./client.md) to log the user in after a successful OAuth login. The default redirects do work cross domain.
 
 ### getCurrentEntity(params)
 
@@ -230,11 +230,11 @@ app.configure(expressOauth({
 
 ### findEntity(profile, params)
 
-`oauthStrategy.findEntity(profile, params) -> Promise` finds an entity for a given oAuth profile. Uses `{ [${this.name}Id]: profile.id }` by default.
+`oauthStrategy.findEntity(profile, params) -> Promise` finds an entity for a given OAuth profile. Uses `{ [${this.name}Id]: profile.id }` by default.
 
 ### createEntity(profile, params)
 
-`oauthStrategy.createEntity(profile, params) -> Promise` creates a new entity for the given oAuth profile. Uses `{ [${this.name}Id]: profile.id }` by default.
+`oauthStrategy.createEntity(profile, params) -> Promise` creates a new entity for the given OAuth profile. Uses `{ [${this.name}Id]: profile.id }` by default.
 
 ### updateEntity(entity, profile, params)
 
@@ -246,7 +246,7 @@ app.configure(expressOauth({
 
 ## Customization
 
-Normally, any oAuth provider set up in the [configuration](#configuration) will be initialized with the default [OAuthStrategy](#oauthstrategy). The flow for a specific provider can be customized by extending `OAuthStrategy` class and registering it under that name on the [AuthenticationService](./service.md):
+Normally, any OAuth provider set up in the [configuration](#configuration) will be initialized with the default [OAuthStrategy](#oauthstrategy). The flow for a specific provider can be customized by extending `OAuthStrategy` class and registering it under that name on the [AuthenticationService](./service.md):
 
 :::: tabs :options="{ useUrlFragment: false }"
 

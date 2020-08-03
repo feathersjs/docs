@@ -13,8 +13,8 @@ The `@feathersjs/authentication-client` module allows you to easily authenticate
 
 - `storage` (default: `localStorage` if available, `MemoryStorage` otherwise) - The storage to store the access token. For React Native use [async-storage](https://github.com/react-native-community/async-storage).
 - `path` (default: '/authentication') - The path of the authentication service
-- `locationKey` (default: `'access_token'`) - The name of the window hash parameter to parse for an access token from the `window.location`. Usually used by the oAuth flow.
-- `locationErrorKey` (default: `'error') - The name of the window hash parameter to parse for authentication errors. Usually used by the oAuth flow.
+- `locationKey` (default: `'access_token'`) - The name of the window hash parameter to parse for an access token from the `window.location`. Usually used by the OAuth flow.
+- `locationErrorKey` (default: `'error') - The name of the window hash parameter to parse for authentication errors. Usually used by the OAuth flow.
 - `jwtStrategy` (default: `'jwt'`) - The access token authentication strategy
 - `storageKey` (default: `'feathers-jwt'`) - Key for storing the token in e.g. localStorage
 - `header` (default: `'Authorization'`) - Name of the accessToken header
@@ -45,7 +45,7 @@ app.configure(auth({
 
 ## app.reAuthenticate()
 
-`app.reAuthenticate() -> Promise` will try to authenticate using the access token from the storage or the window location (e.g. after a successful [oAuth](./oauth.md) login). This is normally called to either show your application (when successful) or showing a login page or redirecting to the appropriate oAuth link.
+`app.reAuthenticate() -> Promise` will try to authenticate using the access token from the storage or the window location (e.g. after a successful [OAuth](./oauth.md) login). This is normally called to either show your application (when successful) or showing a login page or redirecting to the appropriate OAuth link.
 
 ```js
 app.reAuthenticate().then(() => {
@@ -115,7 +115,7 @@ Returns the instance of the [AuthenticationClient](#authenticationclient).
 
 ### getFromLocation(location)
 
-`app.authentication.getFromLocation(location) -> Promise` tries to retrieve an access token from `window.location`. This usually means the `access_token` in the hash set by the [oAuth authentication strategy](./oauth.md).
+`app.authentication.getFromLocation(location) -> Promise` tries to retrieve an access token from `window.location`. This usually means the `access_token` in the hash set by the [OAuth authentication strategy](./oauth.md).
 
 ### setAccessToken(token)
 
