@@ -179,9 +179,9 @@ This section describes specifics on how the [service methods](../services.md) ar
 
 Initializes a new service. Should call `super(options)` when overwritten.
 
-### hook-less
+### Methods without hooks
 
-The database adapters now support calling their service methods without any hooks by adding a `_` in front of the method name as `_find`, `_get`, `_create`, `_patch`, `_update` and `_remove`. This can be useful if you need the raw data from the service and don't want to trigger any of its hooks.
+The database adapters support calling their service methods without any hooks by adding a `_` in front of the method name as `_find`, `_get`, `_create`, `_patch`, `_update` and `_remove`. This can be useful if you need the raw data from the service and don't want to trigger any of its hooks.
 
 ```js
 // Call `get` without running any hooks
