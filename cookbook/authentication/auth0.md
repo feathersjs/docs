@@ -20,7 +20,7 @@ This should be added in your configuration (usually `config/default.json`) as fo
 }
 ```
 
-> __Important:__ `subdomain` should be the "Domain" from the application settings __without__ the `auth0.com` part. So, in the screenshot above, the subdomain for `dev-6gqkmpt6.auth0.com` would be `dev-6gqkmpt6`.
+> __Important:__ `subdomain` should be the "Domain" from the application settings __without__ the `auth0.com` part. So, in the screenshot above, the subdomain for `dev-6gqkmpt6.auth0.com` would be `dev-6gqkmpt6`. Updates to auth0 if it includes the region, subdomain includes the `.us` so the subdomain for `dev-6gqkmpt6.us.auth0.com` would be `dev-6gqkmpt6.us`
 
 ## Strategy
 
