@@ -9,7 +9,7 @@ module.exports = {
     logo: '/img/feathers-logo-wide.png',
     repo: 'feathersjs/feathers',
     docsRepo: 'feathersjs/docs',
-    docsBranch: 'master',
+    docsBranch: 'crow',
     editLinks: true,
     sidebarDepth: 2,
     sidebar: {

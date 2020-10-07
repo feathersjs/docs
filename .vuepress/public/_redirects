@@ -8,7 +8,7 @@ https://crow.docs.feathersjs.com/* https://docs.feathersjs.com/:splat 301!
 /guides/advanced/configuration.html         /api/configuration.html
 /api/rest.html                              /api/express.html
 
-/api/authentication/local-management.html   https://github.com/feathers-plus/feathers-authentication-management/blob/master/docs.md
+/api/authentication/local-management.html   https://github.com/feathersjs-ecosystem/feathers-authentication-management/blob/master/docs.md
 /api/authentication/hooks.html              https://github.com/feathersjs-ecosystem/feathers-authentication-hooks
 /api/hooks-common.html                      https://feathers-plus.github.io/v1/feathers-hooks-common/
 
