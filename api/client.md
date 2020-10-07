@@ -134,7 +134,7 @@ As mentioned above, `node_modules/@feathersjs` and all its subfolders must be in
 ## @feathersjs/client
 
 [![npm version](https://img.shields.io/npm/v/@feathersjs/client.svg?style=flat-square)](https://www.npmjs.com/package/@feathersjs/client)
-[![Changelog](https://img.shields.io/badge/changelog-.md-blue.svg?style=flat-square)](https://github.com/feathersjs/feathers/blob/master/packages/client/CHANGELOG.md)
+[![Changelog](https://img.shields.io/badge/changelog-.md-blue.svg?style=flat-square)](https://github.com/feathersjs/feathers/blob/crow/packages/client/CHANGELOG.md)
 
 ```
 npm install @feathersjs/client --save

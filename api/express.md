@@ -1,7 +1,7 @@
 # Express
 
 [![npm version](https://img.shields.io/npm/v/@feathersjs/express.svg?style=flat-square)](https://www.npmjs.com/package/@feathersjs/express)
-[![Changelog](https://img.shields.io/badge/changelog-.md-blue.svg?style=flat-square)](https://github.com/feathersjs/feathers/blob/master/packages/express/CHANGELOG.md)
+[![Changelog](https://img.shields.io/badge/changelog-.md-blue.svg?style=flat-square)](https://github.com/feathersjs/feathers/blob/crow/packages/express/CHANGELOG.md)
 
 ```
 npm install @feathersjs/express --save
