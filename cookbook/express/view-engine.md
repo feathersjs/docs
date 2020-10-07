@@ -2,7 +2,7 @@
 
 Since Feathers is just an extension of Express it's really simple to render templated views on the server with data from your Feathers services. There are a few different ways that you can structure your app so this guide will show you 3 typical ways you might have your Feathers app organized.
 
-## A Single "Monolithic" App
+## Rendering views from services
 
 You probably already know that when you register a Feathers service, Feathers creates RESTful endpoints for that service automatically. Well, really those are just Express routes, so you can define your own as well.
 
@@ -34,59 +34,70 @@ Simple right? We've now rendered a list of messages. All your hooks will get tri
 
 > **ProTip:** If you call a Feathers service "internally" (ie. not over sockets or REST) you won't have a `context.params.provider` attribute. This allows you to have hooks only execute when services are called externally vs. from your own code.
 
-## Feathers As A Sub-App
+## Using authentication
 
-Sometimes a better way to break up your Feathers app is to put your services into an API and mount your API as a sub-app. This is just like you would do with Express. If you do this, it's only a slight change to get data from your services.
+Feathers is by default stateless and does not use any sessions. You already can protect Express endpoints with the [express.authenticate](../../api/express.md#express-authenticate) middleware, however this will only work when passing the `Authorization` header (usually with a JWT) which a normal browser request does not support.
 
-```js
-// You've set up your main Feathers app already
+In order to render authenticated pages, an [express-sesssion](https://www.npmjs.com/package/express-session) needs to where the authenticated user can be added.
 
-// Register your view engine
-app.set('view engine', 'jade');
-
-// Require your configured API sub-app
-const api = require('./api');
-
-// Register your API sub app
-app.use('/api', api);
-
-app.get('/messages', function(req, res, next){
-  api.service('messages')
-    .find({ query: {$sort: { updatedAt: -1 } } })
-    .then(result => res.render('message-list', result.data))
-    .catch(next);
-});
-```
-
-Not a whole lot different. Your API sub app is pretty much the same as your single app in the previous example, and your main Feathers app is just a really small wrapper that does little more than render templates.
-
-## Feathers As A Separate App
-
-If your app starts to get a bit busier you might decide to move your API to a completely separate standalone Feathers app, maybe even on a different server. In order for both apps to talk to each other they'll need some way to make remote requests. Well, Feathers just so happens to have a [client side piece](../../api/client.md) that can be used on the server. This is how it works.
+Now you can add the following to `src/middleware/index.js|ts`:
 
 ```js
-// You've set up your feathers app already
+const session = require('express-session');
+const { authenticate } = require('@feathersjs/express');
 
-// Register your view engine
-app.set('view engine', 'jade');
+// This sets `req.authentication` from the information added to the session
+const setSessionAuthentication = (req, res, next) => {
+  req.authentication = req.session.authentication;
+  next();
+};
 
-// Include the Feathers client modules
-const client = require('@feathersjs/client');
-const socketio = require('@feathersjs/socketio-client');
-const io = require('socket.io-client');
+// eslint-disable-next-line no-unused-vars
+module.exports = function (app) {
+  // Initialize Express-session - might have to be configured
+  // with a persisten storage adapter (like Redis)
+  app.use(session({
+    secret: 'session-secret',
+    saveUninitialized: false,
+    resave: true
+  }));
 
-// Set up a socket connection to our remote API
-const socket = io('http://api.feathersjs.com');
-const api = client().configure(socketio(socket));
+  // An endpoint that you can POST to with `email` and `password` that
+  // will then perform a local user authentication
+  // e.g <form action="/login" method="post"></form>
+  app.post('/login', async (req, res, next) => {
+    try {
+      const { email, password } = req.body;
+      // Run normal local authentication through our service
+      const { accessToken } = await app.service('authentication').create({
+        strategy: 'local',
+        email,
+        password
+      });
 
-app.get('/messages', function(req, res, next){
-  api.service('messages')
-    .find({ query: {$sort: { updatedAt: -1 } } })
-    .then(result => res.render('message-list', result.data))
-    .catch(next);
-});
+      // Register the JWT authentication information on the session
+      req.session.authentication = {
+        strategy: 'jwt',
+        accessToken
+      };
+
+      // Redirect to an authenticated page
+      res.redirect('/hello');
+    } catch (error) {
+      next(error);
+    }
+  });
+  
+  // Remove the authentication information from the session to log out
+  app.get('logout', (req, res) => {
+    delete req.session.authentication;
+    res.end('You are now logged out');
+  });
+
+  // Renders an authenticated page or an 401 error page
+  // Always needs `setSessionAuthentication, authenticate('jwt')` middleware first
+  app.get('/hello', setSessionAuthentication, authenticate('jwt'), (req, res) => {
+    res.end(`Authenticated page with user ${req.user.email}`);
+  });
+};
 ```
-
-> **ProTip:** In the above example we set up sockets. Alternatively you could use a Feathers client [REST provider](../../api/client/rest.md).
-
-And with that, we've shown 3 different ways that you use a template engine with Feathers to render service data.
