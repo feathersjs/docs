@@ -104,7 +104,7 @@ console.log('.get(1)', item);
 - `params.authentication` - The authentication information to use for the [authentication service](./authentication/service.md)
 - `params.user` - The authenticated user, either set by [Feathers authentication](./authentication/) or passed explicitly.
 - `params.connection` - If the service call has been made by a real-time transport (e.g. through websockets), `params.connection` is the connection object that can be used with [channels](./channels.md).
-
+- `params.headers` - The HTTP headers connected to this service call if available. This is either the headers of the REST call of the headers passed when initializing a websocket connection.
 
 > __Important:__ For external calls only `params.query` will be sent between the client and server. If not passed, `params.query` will be `undefined` for internal calls.
 
