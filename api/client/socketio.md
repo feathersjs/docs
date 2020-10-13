@@ -125,13 +125,13 @@ Feathers sets up a normal Socket.io server that you can connect to with any Sock
 
 ```html
 <!-- Connecting to the same URL -->
-<script src="/socket.io/socket.io.js">
+<script src="/socket.io/socket.io.js"></script>
 <script>
   var socket = io();
 </script>
 
 <!-- Connecting to a different server -->
-<script src="http://localhost:3030/socket.io/socket.io.js">
+<script src="http://localhost:3030/socket.io/socket.io.js"></script>
 <script>
   var socket = io('http://localhost:3030/');
 </script>
