@@ -52,7 +52,7 @@ The automatic environment variable substitution in `@feathersjs/configuration` w
 ### REST clients
 
 - The `request` library has been deprecated and request support has been removed from the REST client.
-- Since all modern browsers now support built-in [fetch](), the Angular and jQuery REST clients have been removed as well
+- Since all modern browsers now support built-in [fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API), the Angular and jQuery REST clients have been removed as well.
 
 ### Primus transport
 

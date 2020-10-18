@@ -9,7 +9,7 @@
 npm install @feathersjs/rest-client --save
 ```
 
-`@feathersjs/rest-client` allows to connect to a service exposed through the [Express REST API](../express.md#expressrest) using [jQuery](https://jquery.com/), [Superagent](http://visionmedia.github.io/superagent/), [Axios](https://github.com/mzabriskie/axios) or [Fetch](https://facebook.github.io/react-native/docs/network.html) as the AJAX library.
+`@feathersjs/rest-client` allows to connect to a service exposed through the [Express REST HTTP API](../express.md#expressrest) using [fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API), [Superagent](http://visionmedia.github.io/superagent/) or [Axios](https://github.com/mzabriskie/axios).
 
 > **Note:** For directly using a Feathers REST API (via HTTP) without using Feathers on the client see the [HTTP API](#http-api) section.
 
@@ -119,20 +119,18 @@ promise.abort();
 
 `app.rest` contains a reference to the `connection` object passed to `rest().<name>(connection)`.
 
-### jQuery
+### Fetch
 
-Pass the instance of jQuery (`$`) to `restClient.jquery`:
-
-```js
-app.configure(restClient.jquery(window.jQuery));
-```
-
-Or with a module loader:
+Fetch also uses a default configuration:
 
 ```js
-import $ from 'jquery';
+// In Node
+const fetch = require('node-fetch');
 
-app.configure(restClient.jquery($));
+app.configure(restClient.fetch(fetch));
+
+// In modern browsers
+app.configure(restClient.fetch(window.fetch));
 ```
 
 ### Superagent
@@ -153,20 +151,6 @@ app.configure(restClient.superagent(superagent));
 const axios = require('axios');
 
 app.configure(restClient.axios(axios));
-```
-
-### Fetch
-
-Fetch also uses a default configuration:
-
-```js
-// In Node
-const fetch = require('node-fetch');
-
-app.configure(restClient.fetch(fetch));
-
-// In modern browsers
-app.configure(restClient.fetch(window.fetch));
 ```
 
 ### Connecting to multiple servers
