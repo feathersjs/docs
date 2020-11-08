@@ -289,7 +289,7 @@ export default () : Hook => {
     context.data = {
       text,
       // Set the user id
-      userId: user._id,
+      userId: user!._id,
       // Add the current date
       createdAt: new Date().getTime()
     };
