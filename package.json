@@ -29,11 +29,14 @@
   "scripts": {
     "build": "vuepress build",
     "start": "vuepress dev",
+    "fa:build": "node node_modules/vuepress-plugin-font-awesome/index.js",
     "netlify": "npm run build",
     "validate-links": "node scripts/validate-links"
   },
   "directories": {},
-  "dependencies": {},
+  "dependencies": {
+    "vuepress-plugin-font-awesome": "^1.90.6"
+  },
   "devDependencies": {
     "@dovyp/vuepress-plugin-clipboard-copy": "^1.0.0-alpha.7",
     "remark": "^11.0.2",

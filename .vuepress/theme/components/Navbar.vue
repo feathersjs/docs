@@ -26,6 +26,8 @@
       />
       <SearchBox v-else-if="$site.themeConfig.search !== false && $page.frontmatter.search !== false"/>
       <NavLinks class="can-hide"/>
+      <a href="#" style="margin-left:20px" @click="darkMode.toggle()"><span class="tooltip"><Lightbulb alt-text="Toggle dark mode" /><span class="tooltiptext">Toggle dark mode</span></span></a>
+
     </div>
   </header>
 </template>
@@ -35,13 +37,16 @@ import AlgoliaSearchBox from '@AlgoliaSearchBox'
 import SearchBox from '@SearchBox'
 import SidebarButton from '@theme/components/SidebarButton.vue'
 import NavLinks from '@theme/components/NavLinks.vue'
+import Lightbulb from '../../components/Fa/Lightbulb.vue'
+import DarkMode from '../util/dark-mode'
 
 export default {
-  components: { SidebarButton, NavLinks, SearchBox, AlgoliaSearchBox },
+  components: { SidebarButton, NavLinks, SearchBox, AlgoliaSearchBox, Lightbulb },
 
   data () {
     return {
-      linksWrapMaxWidth: null
+      linksWrapMaxWidth: null,
+      darkMode: null
     }
   },
 
@@ -58,6 +63,9 @@ export default {
     }
     handleLinksWrapWidth()
     window.addEventListener('resize', handleLinksWrapWidth, false)
+
+    this.darkMode = new DarkMode()
+    this.darkMode.init()
   },
 
   computed: {
@@ -67,6 +75,13 @@ export default {
 
     isAlgoliaSearch () {
       return this.algolia && this.algolia.apiKey && this.algolia.indexName
+    }
+  },
+
+
+  methods: {
+    toggleDM () {
+      this.darkMode.toggle();
     }
   }
 }
