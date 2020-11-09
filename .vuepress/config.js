@@ -1,6 +1,12 @@
 module.exports = {
   title: 'FeathersJS',
   description: 'A REST and real-time API layer for modern applications',
+  thirdPartyComponents: {
+    fontAwesomeIcons:{
+        regular:['lightbulb'],  // Regular font awesome icon keys here
+        solid:[ 'thumbs-up']    // Solid font awesome icon keys here
+    }
+  },
   themeConfig: {
     algolia: {
       apiKey: '2835d290e600f7fb583e2b61a74032ba',
