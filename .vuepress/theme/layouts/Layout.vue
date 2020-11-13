@@ -163,6 +163,10 @@ body.dark .home-link img {
     filter: invert(1) brightness(2);
 }
 
+body.dark img {
+    filter: invert(1) brightness(2);
+}
+
 body.dark div[class*=language-] {
     background-color: rgb(44, 62, 80);
 }
