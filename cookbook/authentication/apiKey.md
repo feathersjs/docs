@@ -116,8 +116,8 @@ export default (): Hook => {
     const { params } = context;
 
     const token =
-      params.query[server.auth.apiKey.urlParam] ||
-      params.headers[server.auth.apiKey.header];
+      params.query[configuration.apiKey.urlParam] ||
+      params.headers[configuration.apiKey.header];
 
     if (token && params.provider && !params.authentication) {
       context.params = {
@@ -136,7 +136,7 @@ export default (): Hook => {
 :::
 ::::
 
-This hook should be added __before__ the [authenticate hook](../../api/authentication/hook.md) wherever anonymous authentication should be allowed:
+This hook should be added __before__ the [authenticate hook](../../api/authentication/hook.md) wherever API Key authentication should be allowed:
 
 ```js
 all: [ allowApiKey(), authenticate('jwt', 'anonymous') ],
