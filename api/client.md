@@ -60,8 +60,10 @@ Then in the main application file:
 
 ```js
 import io from 'socket.io-client';
+import { AsyncStorage } from 'react-native';
 import feathers from '@feathersjs/feathers';
 import socketio from '@feathersjs/socketio-client';
+import authentication from '@feathersjs/authentication-client';
 
 const socket = io('http://api.my-feathers-server.com', {
   transports: ['websocket'],
@@ -70,6 +72,9 @@ const socket = io('http://api.my-feathers-server.com', {
 const client = feathers();
 
 client.configure(socketio(socket));
+client.configure(authentication({
+  storage: AsyncStorage
+});
 
 const messageService = client.service('messages');
 
