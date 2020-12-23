@@ -139,7 +139,7 @@ export default (): Hook => {
 This hook should be added __before__ the [authenticate hook](../../api/authentication/hook.md) wherever API Key authentication should be allowed:
 
 ```js
-all: [ allowApiKey(), authenticate('jwt', 'anonymous') ],
+all: [ allowApiKey(), authenticate('jwt', 'apiKey') ],
 ```
 
 If a user now accesses the service externally with the correct apiKey, the service call will succeed and have `params.apiKey` set to `true`.
