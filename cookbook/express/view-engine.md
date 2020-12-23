@@ -38,7 +38,9 @@ Simple right? We've now rendered a list of messages. All your hooks will get tri
 
 Feathers is by default stateless and does not use any sessions. You already can protect Express endpoints with the [express.authenticate](../../api/express.md#express-authenticate) middleware, however this will only work when passing the `Authorization` header (usually with a JWT) which a normal browser request does not support.
 
-In order to render authenticated pages, an [express-sesssion](https://www.npmjs.com/package/express-session) needs to where the authenticated user can be added.
+In order to render authenticated pages, [express-sesssion](https://www.npmjs.com/package/express-session) can be used to add the authentication information to the (browser) session:
+
+> npm i express-session --save
 
 Now you can add the following to `src/middleware/index.js|ts`:
 
@@ -52,7 +54,6 @@ const setSessionAuthentication = (req, res, next) => {
   next();
 };
 
-// eslint-disable-next-line no-unused-vars
 module.exports = function (app) {
   // Initialize Express-session - might have to be configured
   // with a persisten storage adapter (like Redis)
