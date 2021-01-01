@@ -49,7 +49,7 @@ app.use('/messages', service({ id, events, paginate }));
 - `events` (*optional*) - A list of [custom service events](../events.md#custom-events) sent by this service
 - `paginate` (*optional*) - A [pagination object](#pagination) containing a `default` and `max` page size
 - `whitelist` (*optional*) - A list of additional non-standard query parameters to allow (e.g `[ '$regex', '$populate' ]`)
-- `multi` (*optional*, default: `false`) - Allow `create` with arrays and `update` and `remove` with id `null` to change multiple items. Can be `true` for all methods or an array of allowed methods (e.g. `[ 'remove', 'create' ]`)
+- `multi` (*optional*, default: `false`) - Allow `create` with arrays and `patch` and `remove` with id `null` to change multiple items. Can be `true` for all methods or an array of allowed methods (e.g. `[ 'remove', 'create' ]`)
 
 
 ## Pagination
