@@ -122,7 +122,7 @@ app.service('messages').find({
 ```
 
 ```
-GET /messages?roomId[$in]=2&roomId[$in]=5
+GET /messages?roomId[$in][0]=2&roomId[$in][1]=5
 ```
 
 ## `$lt`, `$lte`
