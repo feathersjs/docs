@@ -23,7 +23,7 @@ The following settings are available:
 
 - `usernameField`: Name of the username field (e.g. `'email'`)
 - `passwordField`: Name of the password field (e.g. `'password'`)
-- `hashSize` (default: `10`): The BCrypt hash size
+- `hashSize` (default: `10`): The BCrypt salt length
 - `errorMessage` (default: `'Invalid login'`): The error message to return on errors
 - `entityUsernameField` (default: `usernameField`): Name of the username field on the entity if authentication request data and entity field names are different
 - `entityPasswordField` (default: `passwordField`): Name of the password field on the entity if authentication request data and entity field names are different
@@ -61,7 +61,7 @@ Standard local authentication can be configured with those options in `config/de
 
 ### hashPassword(password)
 
-`localStrategy.hashPassword(password) -> Promise` creates a safe one-way hash of the given plain `password` string. By default [bCryptJS]() is used.
+`localStrategy.hashPassword(password) -> Promise` creates a safe one-way hash of the given plain `password` string. By default [bCryptJS](https://www.npmjs.com/package/bcryptjs) is used.
 
 ### comparePassword(entity, password)
 
