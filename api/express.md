@@ -449,6 +449,35 @@ app.use('/hello', authenticate({
 });
 ```
 
+When clicking a normal link, web browsers do _not_ send the appropriate header. In order to initate an authenticated request to a middleware from a browser link, there are two options. One is using a session which is described in the [Server Side rendering guide](../cookbook/express/view-engine.md), another is to add the JWT access token to the query string and mapping it to an authentication request:
+
+```js
+const { authenticate } = require('@feathersjs/express');
+const setQueryAuthentication = (req, res, next) => {
+  const { access_token } = req.query;
+  
+  if (access_token) {
+    req.authentication = {
+      strategy: 'jwt',
+      accessToken: access_token
+    }
+  }
+  
+  next();
+}
+
+// Request this with `hello?access_token=<your jwt>`
+app.use('/hello', setQueryAuthentication, authenticate('jwt'), (req, res) => {
+  const { user } = req;
+
+  res.render(`Hello ${user.email}`);
+});
+```
+
+How to get the access token from the authentication client is described in the [authentication client documentation](../api/authentication/client.md#app-get-authentication).
+
+> __Important:__ When using HTTPS URLs are safely encrypted but when using this method you have to make sure that access tokens are not logged through any of your logging mechanisms.
+
 ## Routing
 
 Express route placeholders in a service URL will be added to the services `params.route`.
