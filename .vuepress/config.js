@@ -1,6 +1,7 @@
 module.exports = {
   title: 'FeathersJS',
   description: 'A REST and real-time API layer for modern applications',
+  head: [['link', { rel: 'icon', href: '/favicon.ico' }]],
   thirdPartyComponents: {
     fontAwesomeIcons:{
         regular:['lightbulb'],  // Regular font awesome icon keys here
