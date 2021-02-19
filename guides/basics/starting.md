@@ -40,6 +40,19 @@ npm install @feathersjs/feathers --save
 
 > __Note:__ All Feathers core modules are in the `@feathersjs` namespace.
 
+## For Typescript Users
+
+If you are using typescript, you *must* modify `tsconfig.json` to include `allowSyntheticDefaultImports: true` in order for typing to work with Feathers.
+
+```js
+{
+  "compilerOptions": {
+    // other configs omitted
+    "allowSyntheticDefaultImports": true,
+  }
+}
+```
+
 ## Our first app
 
 Now we can create a Feathers application with a simple messages service that allows to create new messages and find all existing ones.
