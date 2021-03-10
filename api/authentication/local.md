@@ -41,7 +41,7 @@ Standard local authentication can be configured with those options in `config/de
 }
 ```
 
-> __Important:__ If you want to set the value of `usernameField` to `username` in your configuration file under Windows, the value has to be escaped as `\\username` (otherwise the `username` environment variable will be used).
+> __Important:__ If you want to set the value of `usernameField` to `username` in your configuration file under Windows or running the node process manager `PM2` in Ubuntu/Linux, the value has to be escaped as `\\username` (otherwise the `username` environment variable will be used).
 
 ## LocalStrategy
 
