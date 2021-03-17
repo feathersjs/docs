@@ -200,11 +200,11 @@ const client1 = rest('http://feathers-api.com').fetch(window.fetch);
 const client2 = rest('http://other-feathers-api.com').fetch(window.fetch);
 
 // With additional options to e.g. set authentication information
-const client2 = rest('http://other-feathers-api.com', {
+const client2 = rest('http://other-feathers-api.com').fetch(window.fetch,{
   headers: {
     Authorization: 'Bearer <Token for other-feathers-api.com>'
   }
-}).fetch(window.fetch);
+});
 
 // Configuring this will initialize default services for http://feathers-api.com
 app.configure(client1);
