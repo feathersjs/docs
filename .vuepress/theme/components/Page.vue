@@ -14,8 +14,8 @@
       <blockquote>
         <p>
           Anything unclear or missing?
-          <a :href="commentLink" target="_blank" rel="noopener noreferrer">
-            Leave a comment
+          <a href="/help" rel="noopener noreferrer">
+            Get help
           </a>
           <OutboundLink/> or <a
             :href="editLink"
@@ -117,7 +117,7 @@ export default {
         repo,
         editLinks,
         docsDir = '',
-        docsBranch = 'master',
+        docsBranch,
         docsRepo = repo
       } = this.$site.themeConfig
 

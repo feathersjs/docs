@@ -2,9 +2,14 @@
 
 There are many ways that you can get help if you are stuck or have a question about Feathers.
 
+
+## Support Feathers, get help
+
+By [becoming a sponsor](https://github.com/sponsors/daffl/) you support Feathers continued development and get access to a Feathers newsletter and tiers with 30 or 60 minute monthly office hour sessions to walk you through any issues you may be facing using FeathersJS. This may include architecture discussions, debug sessions, patterns, or more.
+
 ## Resources
 
-There are many existing resources that may already have an answer to your question, so it always makes sense checking them first:
+Existing resources may already have an answer to your question, so it always makes sense checking them first:
 
 [The API documentation >](../api/)
 

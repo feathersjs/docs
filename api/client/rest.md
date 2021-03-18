@@ -3,7 +3,7 @@
 ## @feathersjs/rest-client
 
 [![npm version](https://img.shields.io/npm/v/@feathersjs/client.svg?style=flat-square)](https://www.npmjs.com/package/@feathersjs/rest-client)
-[![Changelog](https://img.shields.io/badge/changelog-.md-blue.svg?style=flat-square)](https://github.com/feathersjs/feathers/blob/master/packages/rest-client/CHANGELOG.md)
+[![Changelog](https://img.shields.io/badge/changelog-.md-blue.svg?style=flat-square)](https://github.com/feathersjs/feathers/blob/crow/packages/rest-client/CHANGELOG.md)
 
 ```
 npm install @feathersjs/rest-client --save
@@ -167,11 +167,11 @@ const client1 = rest('http://feathers-api.com').fetch(window.fetch);
 const client2 = rest('http://other-feathers-api.com').fetch(window.fetch);
 
 // With additional options to e.g. set authentication information
-const client2 = rest('http://other-feathers-api.com', {
+const client2 = rest('http://other-feathers-api.com').fetch(window.fetch,{
   headers: {
     Authorization: 'Bearer <Token for other-feathers-api.com>'
   }
-}).fetch(window.fetch);
+});
 
 // Configuring this will initialize default services for http://feathers-api.com
 app.configure(client1);
@@ -253,7 +253,7 @@ curl -H "Content-Type: application/json" -X POST -d '{"strategy":"local","email"
 Then to authenticate subsequent requests, add the returned `accessToken` to the `Authorization` header as `Bearer <your access token>`:
 
 ```bash
-curl -H "Content-Type: application/json" -H "Authorization: Bearer <your access token>" -X POST http://localhost:3030/authentication
+curl -H "Content-Type: application/json" -H "Authorization: Bearer <your access token>" http://localhost:3030/messages
 ```
 
 For more information see the [authentication API documentation](../readme.md).

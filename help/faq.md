@@ -158,6 +158,10 @@ The why and how to write your own services is covered [in the Feathers guide](..
 
 If you would like to publish your own database adapter, first make sure there isn't already a [community maintained adapter](https://github.com/feathersjs/awesome-feathersjs#database) for that database (many maintainers are happy to get some help, too). If not, you can run `feathers generate plugin` to create a new plugin. A reference implementation for a database adapter can be found in the [feathers-memory repository](https://github.com/feathersjs-ecosystem/feathers-memory). It is always possible for community maintained adapters to graduate into an _official_ Feathers adapter, at the moment there are however no plans to add support for any new databases from the Feathers team directly.
 
+## How do I watch for database changes?
+
+In order to get real-time updates for a change, all requests have to go through your Feathers application or API server. Feathers does _not_ watch the database for changes so if changes in the database are made outside of the Feathers application and clients should be notified, the notification needs to be sent manually.
+
 ## I am not getting real-time events
 
 Feathers v3 (`@feathersjs/feathers@v3.0.0`) introduced a more secure event system that does __not__ send real-time events by default. If you are not getting real-time events on the client, it is usually a problem with the [event channel](../api/channels.md) setup.

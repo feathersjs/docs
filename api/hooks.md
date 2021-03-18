@@ -161,6 +161,10 @@ The hook `context` is passed to a hook function and contains information about t
 
 `context.statusCode` is a __writeable, optional__ property that allows to override the standard [HTTP status code](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html) that should be returned.
 
+### context.event
+
+`context.event` is a __writeable, optional__ property that allows service events to be skipped by setting it to `null`
+
 ## Hook flow
 
 In general, hooks are executed in the order they are registered with the original service method being called after all `before` hooks. This flow can be affected as follows.

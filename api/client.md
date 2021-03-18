@@ -59,8 +59,10 @@ Then in the main application file:
 
 ```js
 import io from 'socket.io-client';
+import { AsyncStorage } from 'react-native';
 import feathers from '@feathersjs/feathers';
 import socketio from '@feathersjs/socketio-client';
+import authentication from '@feathersjs/authentication-client';
 
 const socket = io('http://api.my-feathers-server.com', {
   transports: ['websocket'],
@@ -69,6 +71,9 @@ const socket = io('http://api.my-feathers-server.com', {
 const client = feathers();
 
 client.configure(socketio(socket));
+client.configure(authentication({
+  storage: AsyncStorage
+});
 
 const messageService = client.service('messages');
 
@@ -133,7 +138,7 @@ As mentioned above, `node_modules/@feathersjs` and all its subfolders must be in
 ## @feathersjs/client
 
 [![npm version](https://img.shields.io/npm/v/@feathersjs/client.svg?style=flat-square)](https://www.npmjs.com/package/@feathersjs/client)
-[![Changelog](https://img.shields.io/badge/changelog-.md-blue.svg?style=flat-square)](https://github.com/feathersjs/feathers/blob/master/packages/client/CHANGELOG.md)
+[![Changelog](https://img.shields.io/badge/changelog-.md-blue.svg?style=flat-square)](https://github.com/feathersjs/feathers/blob/crow/packages/client/CHANGELOG.md)
 
 ```
 npm install @feathersjs/client --save
@@ -193,8 +198,8 @@ Below is an example of the scripts you would use to load `@feathersjs/client` fr
 
 ```html
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/core-js/2.1.4/core.min.js"></script>
-<script src="//unpkg.com/@feathersjs/client@^3.0.0/dist/feathers.js"></script>
-<script src="//unpkg.com/socket.io-client@1.7.3/dist/socket.io.js"></script>
+<script src="//unpkg.com/@feathersjs/client@^4.5.0/dist/feathers.js"></script>
+<script src="//unpkg.com/socket.io-client@^2.3.0/dist/socket.io.js"></script>
 <script>
   // Socket.io is exposed as the `io` global.
   var socket = io('http://localhost:3030');

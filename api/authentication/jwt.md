@@ -1,7 +1,7 @@
 # JWT
 
 [![npm version](https://img.shields.io/npm/v/@feathersjs/authentication.svg?style=flat-square)](https://www.npmjs.com/package/@feathersjs/authentication)
-[![Changelog](https://img.shields.io/badge/changelog-.md-blue.svg?style=flat-square)](https://github.com/feathersjs/feathers/blob/master/packages/authentication/CHANGELOG.md)
+[![Changelog](https://img.shields.io/badge/changelog-.md-blue.svg?style=flat-square)](https://github.com/feathersjs/feathers/blob/crow/packages/authentication/CHANGELOG.md)
 
 ```
 npm install @feathersjs/authentication --save
@@ -65,6 +65,10 @@ Returns a promise that resolves with the following format:
 ```
 
 > __Note:__ Since the JWT strategy returns an `accessToken` property (the same as the token sent to this strategy), that access token will also be returned by [authenticationService.create](./service.md#create-data-params) instead of creating a new one.
+
+### getEntityQuery(params)
+
+Returns the `query` to use when calling `entityService.get` (default: `{}`). 
 
 ### parse(req, res)
 

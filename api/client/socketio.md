@@ -3,7 +3,7 @@
 ## @feathersjs/socketio-client
 
 [![npm version](https://img.shields.io/npm/v/@feathersjs/client.svg?style=flat-square)](https://www.npmjs.com/package/@feathersjs/socketio-client)
-[![Changelog](https://img.shields.io/badge/changelog-.md-blue.svg?style=flat-square)](https://github.com/feathersjs/feathers/blob/master/packages/socketio-client/CHANGELOG.md)
+[![Changelog](https://img.shields.io/badge/changelog-.md-blue.svg?style=flat-square)](https://github.com/feathersjs/feathers/blob/crow/packages/socketio-client/CHANGELOG.md)
 
 ```
 npm install @feathersjs/socketio-client --save
@@ -95,13 +95,13 @@ Feathers sets up a normal Socket.io server that you can connect to with any Sock
 
 ```html
 <!-- Connecting to the same URL -->
-<script src="/socket.io/socket.io.js">
+<script src="/socket.io/socket.io.js"></script>
 <script>
   var socket = io();
 </script>
 
 <!-- Connecting to a different server -->
-<script src="http://localhost:3030/socket.io/socket.io.js">
+<script src="http://localhost:3030/socket.io/socket.io.js"></script>
 <script>
   var socket = io('http://localhost:3030/');
 </script>

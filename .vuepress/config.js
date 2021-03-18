@@ -1,6 +1,13 @@
 module.exports = {
   title: 'FeathersJS',
   description: 'A REST and real-time API layer for modern applications',
+  head: [['link', { rel: 'icon', href: '/favicon.ico' }]],
+  thirdPartyComponents: {
+    fontAwesomeIcons:{
+        regular:['lightbulb'],  // Regular font awesome icon keys here
+        solid:[ 'thumbs-up']    // Solid font awesome icon keys here
+    }
+  },
   themeConfig: {
     algolia: {
       apiKey: '2835d290e600f7fb583e2b61a74032ba',
@@ -9,7 +16,7 @@ module.exports = {
     logo: '/img/feathers-logo-wide.png',
     repo: 'feathersjs/feathers',
     docsRepo: 'feathersjs/docs',
-    docsBranch: 'master',
+    docsBranch: 'crow',
     editLinks: true,
     sidebarDepth: 2,
     sidebar: {
@@ -95,9 +102,12 @@ module.exports = {
         collapsable: false,
         children: [
           'authentication/anonymous.md',
+          'authentication/apiKey.md',
           'authentication/auth0.md',
           'authentication/facebook.md',
           'authentication/google.md',
+          'authentication/firebase.md',
+          'authentication/_discord.md',
           'authentication/stateless.md',
           'authentication/revoke-jwt.md'
         ]

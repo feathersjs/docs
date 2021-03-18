@@ -1,7 +1,7 @@
 # Configuration
 
 [![npm version](https://img.shields.io/npm/v/@feathersjs/configuration.svg?style=flat-square)](https://www.npmjs.com/package/@feathersjs/configuration)
-[![Changelog](https://img.shields.io/badge/changelog-.md-blue.svg?style=flat-square)](https://github.com/feathersjs/feathers/blob/master/packages/configuration/CHANGELOG.md)
+[![Changelog](https://img.shields.io/badge/changelog-.md-blue.svg?style=flat-square)](https://github.com/feathersjs/feathers/blob/crow/packages/configuration/CHANGELOG.md)
 
 ```
 npm install @feathersjs/configuration --save
@@ -25,6 +25,8 @@ const configuration = require('@feathersjs/configuration');
 // Use the application root and `config/` as the configuration folder
 const app = feathers().configure(configuration())
 ```
+
+**Note**: Direct access to nested config properties is not supported via `app.get()`. To access a nested config property (e.g. `Customer.dbConfig.host`, use `app.get('Customer').dbConfig.host` or `require('config')` directly and use it [as documented](https://github.com/lorenwest/node-config). 
 
 ## Variable types
 
