@@ -11,7 +11,7 @@ Modules most relevant on the client are:
 - [@feathersjs/socketio-client](./client/socketio.md) to connect to services through [Socket.io](./socketio.md).
 - [@feathersjs/authentication-client](./authentication/client.md) to authenticate a client
 
-> __Important:__ You do not have to use Feathers on the client to connect to a Feathers server. The client chapters above also describe how to use a REST HTTP, Socket.io or Primus connection directly without Feathers on the client side. For details on authentication, see the [Authentication client chapter](./authentication/client.md).
+> __Important:__ You do not have to use Feathers on the client to connect to a Feathers server. The client [REST client](./client/rest.md) and [Socket.io client](./client/socketio.md) chapters also describe how to use the connection directly without Feathers on the client side. For details on authentication, see the [Authentication client chapter](./authentication/client.md).
 
 This chapter describes how to set up Feathers as the client in Node, React Native and in the browser with a module loader like Webpack or Browserify or through a `<script>` tag. The examples are using [the Socket.io client](./client/socketio.md). For other connection methods see the chapters linked above.
 
@@ -152,7 +152,6 @@ npm install @feathersjs/client --save
 | @feathersjs/errors                | feathers.errors         |
 | @feathersjs/rest-client           | feathers.rest           |
 | @feathersjs/socketio-client       | feathers.socketio       |
-| @feathersjs/primus-client         | feathers.primus         |
 | @feathersjs/authentication-client | feathers.authentication |
 
 > __Important:__ The Feathers client libraries come transpiled to ES5 and require ES6 shims either through the [babel-polyfill](https://www.npmjs.com/package/babel-polyfill) module or by including [core.js](https://github.com/zloirock/core-js) in older browsers e.g. via `<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/core-js/2.1.4/core.min.js"></script>`
@@ -215,28 +214,4 @@ Below is an example of the scripts you would use to load `@feathersjs/client` fr
 
   // feathers.errors is an object with all of the custom error types.
 </script>
-```
-
-### RequireJS
-
-Here's how to load feathers-client using RequireJS Syntax:
-
-```js
-define(function (require) {
-  const feathers = require('@feathersjs/client');
-  const io = require('socket.io-client');
-
-  const socket = io('http://localhost:3030');
-  // @feathersjs/client is exposed as the `feathers` global.
-  const app = feathers();
-
-  app.configure(feathers.socketio(socket));
-  app.configure(feathers.authentication());
-
-  app.service('messages').create({
-    text: 'A new message'
-  });
-
-  return app;
-});
 ```

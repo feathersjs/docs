@@ -4,7 +4,7 @@
 
 ## Service methods
 
-Service methods are pre-defined [CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete) methods that your service object can implement (or that have already been implemented by one of the [database adapters](./databases/common.md)). Below is an example of a Feathers service using [async/await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function) as a JavaScript object and a [JavaScript or Typescript class](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Classes):
+Service methods are pre-defined [CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete) and [custom methods](#custommethod-data-params) that your service provides (or that have already been implemented by one of the [database adapters](./databases/common.md)). Below is an example of a Feathers service using [async/await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function) as a normal object or a [JavaScript or Typescript class](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Classes):
 
 :::: tabs :options="{ useUrlFragment: false }"
 
@@ -19,14 +19,14 @@ const myService = {
   async update(id, data, params) {},
   async patch(id, data, params) {},
   async remove(id, params) {},
-  setup(app, path) {}
+  async setup(app, path) {}
 }
 
 app.use('/my-service', myService);
 ```
 :::
 
-::: tab "Class(JS)"
+::: tab "JavaScript"
 ```js
 class MyService {
   async find(params) {
@@ -37,14 +37,14 @@ class MyService {
   async update(id, data, params) {}
   async patch(id, data, params) {}
   async remove(id, params) {}
-  setup(app, path) {}
+  async setup(app, path) {}
 }
 
 app.use('/my-service', new MyService());
 ```
 :::
 
-::: tab "Class(TS)"
+::: tab "TypeScript"
 ```typescript
 import { ServiceMethods, Params, Id, NullableId } from "@feathersjs/feathers";
 import { Application } from "../../declarations";
@@ -58,7 +58,7 @@ class MyService implements ServiceMethods<any> {
   async update(id: NullableId, data: any, params: Params) {}
   async patch(id: NullableId, data: any, params: Params) {}
   async remove(id: NullableId, params: Params) {}
-  setup(app: Application, path: string) {}
+  async setup(app: Application, path: string) {}
 }
 
 app.use('/my-service', new MyService());
@@ -67,7 +67,7 @@ app.use('/my-service', new MyService());
 
 ::::
 
-> **ProTip:** Methods are optional, and if a method is not implemented Feathers will automatically emit a `NotImplemented` error. At least one of the methods (e.g. `setup`) must be implemented to be considered a service.
+> **ProTip:** Methods are optional and if a method is not implemented Feathers will automatically emit a `NotImplemented` error. At least one of the methods (e.g. `setup`) must be implemented to be considered a service.
 
 > **ProTip:** Notice that the TypeScript version of the example `MyService` class implements the `ServiceMethods` interface. If you look at, for instance, the users service that the Feathers CLI generates for you when you scaffold a new Feathers application you will notice that the users service class extends the chosen [database adapter](./databases/common.md) service class. The database adapter service classes actually extend a class named `AdapterService`, which implements the `ServiceMethods` interface.
 
@@ -100,7 +100,7 @@ console.log('.get(1)', item);
 `params` contain additional information for the service method call. Some properties in `params` can be set by Feathers already. Commonly used are:
 
 - `params.query` - the query parameters from the client, either passed as URL query parameters (see the [REST](./express.md) chapter) or through websockets (see [Socket.io](./socketio.md)).
-- `params.provider` - The transport (`rest`, `socketio` or `primus`) used for this service call. Will be `undefined` for internal calls from the server (unless passed explicitly).
+- `params.provider` - The transport (`rest` or `socketio`) used for this service call. Will be `undefined` for internal calls from the server (unless passed explicitly).
 - `params.authentication` - The authentication information to use for the [authentication service](./authentication/service.md)
 - `params.user` - The authenticated user, either set by [Feathers authentication](./authentication/) or passed explicitly.
 - `params.connection` - If the service call has been made by a real-time transport (e.g. through websockets), `params.connection` is the connection object that can be used with [channels](./channels.md).
@@ -216,7 +216,7 @@ class MessageService {
 }
 
 class MyService {
-  setup(app) {
+  async setup(app) {
     this.app = app;
   }
 
@@ -236,6 +236,9 @@ const app = feathers()
 app.listen(3030);
 ```
 
+### .customMethod(data, params)
+
+A custom method is any other service method you want to expose to clients publicly. A custom always has a signature of `(data, params)` with the same semantics as standard service methods. They can be used with hooks and must be `async`.
 
 ## Feathers functionality
 
@@ -250,11 +253,6 @@ Register [hooks](./hooks.md) for this service.
 ### .publish([event, ] publisher)
 
 Register an event publishing callback. For more information, see the [channels chapter](./channels.md).
-
-
-### .mixin(mixin)
-
-`service.mixin(mixin) -> service` extends the functionality of a service. For more information see the [Uberproto](https://github.com/daffl/uberproto) project page.
 
 
 ### .on(eventname, listener)
