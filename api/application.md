@@ -12,9 +12,9 @@ const feathers = require('@feathersjs/feathers');
 const app = feathers();
 ```
 
-## .use(path, service)
+## .use(path, service [, options])
 
-`app.use(path, service) -> app` allows registering a [service object](./services.md) on a given `path`.
+`app.use(path, service [, options]) -> app` allows registering a [service object](./services.md) on a given `path`.
 
 ```js
 // Add a service.
@@ -29,6 +29,32 @@ app.use('/messages', {
 ```
 
 > __Note:__ `path` can be `/` to register a service at the root level.
+
+`options` can contain the following additional options for the service:
+
+- `methods` (default: `['find', 'get', 'create', 'patch', 'update','remove']`) - A list of official and [custom service methods](services.md#custommethod-data-params) exposed by this service. When using this option **all** method names that should be available externally must be passed otherwise. All methods passed will automatically be available for use with [hooks](./hooks).
+- `events` - A list of [public custom events sent by this service](./events.md#custom-events)
+
+```js
+class MyService {
+  async doSomething (data, params) {
+    this.emit('something', 'I did something');
+    return data;
+  }
+
+  async get(id) {
+    return {
+      id,
+      text: `This is the ${id} message!`
+    };
+  }
+}
+
+app.use('/messages', new MyService(), {
+  methods: [ 'get', 'doSomething' ],
+  events: [ 'something' ]
+});
+```
 
 ## .service(path)
 
@@ -76,13 +102,13 @@ app.configure(setupService);
 
 ## .listen(port)
 
-`app.listen([port]) -> HTTPServer` starts the application on the given port. It will set up all configured transports (if any) and then run [app.setup(server)](#setup-server) with the server object and then return the server object.
+`app.listen([port]) -> Promise<HTTPServer>` starts the application on the given port. It will set up all configured transports (if any) and then run [app.setup(server)](#setup-server) with the server object and then return the server object.
 
-`listen` will only be available if a server side transport (REST, Socket.io or Primus) has been configured.
+`listen` will only be available if a server side transport (REST or websocket) has been configured.
 
 ## .setup([server])
 
-`app.setup([server]) -> app` is used to initialize all services by calling each [services .setup(app, path)](services.md#setupapp-path) method (if available).
+`app.setup([server]) -> Promise<app>` is used to initialize all services by calling each [services .setup(app, path)](services.md#setupapp-path) method (if available).
 It will also use the `server` instance passed (e.g. through `http.createServer`) to set up SocketIO (if enabled) and any other provider that might require the server instance.
 
 Normally `app.setup` will be called automatically when starting the application via `app.listen([port])` but there are cases when it needs to be called explicitly.
@@ -127,7 +153,7 @@ Provided by the core [NodeJS EventEmitter .removeListener](https://nodejs.org/ap
 
 ## .mixins
 
-`app.mixins` contains a list of service mixins. A mixin is a callback (`(service, path) => {}`) that gets run for every service that is being registered. Adding your own mixins allows to add functionality to every registered service.
+`app.mixins` contains a list of service mixins. A mixin is a callback (`(service, path, options) => {}`) that gets run for every service that is being registered. Adding your own mixins allows to add functionality to every registered service.
 
 ```js
 const feathers = require('@feathersjs/feathers');
@@ -164,7 +190,7 @@ servicePaths.forEach(path => {
 });
 ```
 
-> __Note:__ To retrieve services, the [app.service(path)](#servicepath) method should be used (not `app.services.path` directly).
+> __Important:__ To retrieve services, the [app.service(path)](#servicepath) method should be used (not `app.services.path` directly).
 
 A Feathers [client](client.md) does not know anything about the server it is connected to. This means that `app.services` will _not_ automatically contain all services available on the server. Instead, the server has to provide the list of its services, e.g. through a [custom service](./services.md):
 

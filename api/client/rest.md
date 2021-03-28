@@ -19,7 +19,7 @@ npm install @feathersjs/rest-client --save
 
 <!-- -->
 
-> **Note:** A client application can only use a single transport (either REST, Socket.io or Primus). Using two transports in the same client application is normally not necessary.
+> **Note:** A client application can only use a single transport (e.g. either REST or Socket.io). Using two transports in the same client application is normally not necessary.
 
 ### rest([baseUrl])
 

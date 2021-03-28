@@ -238,7 +238,7 @@ const todoService = {
 app.use('/todos', logRequest, todoService, updateData);
 ```
 
-> __Important:__ Custom middleware will only run for REST requests and not when used with other transports like Socket.io or Primus.
+> __Important:__ Custom middleware will only run for REST requests and not when used with other transports (like Socket.io).
 
 Middleware that runs after the service has the service call information available as
 
