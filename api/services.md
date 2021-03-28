@@ -236,9 +236,9 @@ const app = feathers()
 app.listen(3030);
 ```
 
-### .customMethod(data, params)
+### Custom Methods
 
-A custom method is any other service method you want to expose to clients publicly. A custom always has a signature of `(data, params)` with the same semantics as standard service methods. They can be used with hooks and must be `async`.
+A custom method is any other service method you want to expose to clients publicly. A custom always has a signature of `(data, params)` with the same semantics as standard service methods (data is the payload, `params` is the service [params](#params)). They can be used with hooks and must be `async`.
 
 ## Feathers functionality
 
