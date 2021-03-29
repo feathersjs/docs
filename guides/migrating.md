@@ -2,6 +2,15 @@
 
 This guide explains the new features and changes necessary to migrate to the Feathers v5 (Dove) release. It expects applications to be using the previous Feathers v4 (Crow). See the [v4 (Crow) migration guide](https://crow.docs.feathersjs.com/guides/migrating.html) for upgrading to the previous version.
 
+## Testing the prerelease
+
+You can run the following to test the latest Dove pre-release in your application:
+
+```
+npx ncu --upgrade --target newest --filter /@feathersjs/
+npm install
+```
+
 ## Features
 
 ### Asynchronous setup
@@ -33,7 +42,10 @@ await app.setup();
 
 ### Configuration
 
-The automatic environment variable substitution in `@feathersjs/configuration` was causing subtle and hard to debug issues. It has been removed to instead rely on the functionality already provided and battle tested by the underlying [node-config](https://github.com/lorenwest/node-config), specifically the [Custom Environment Variable support](https://github.com/lorenwest/node-config/wiki/Environment-Variables#custom-environment-variables). To use existing environment variables add the following configuration file in `config/custom-environment-variables.<json|yaml|js>` like this:
+The automatic environment variable substitution in `@feathersjs/configuration` was causing subtle and hard to debug issues. It has been removed to instead rely on the functionality already provided and battle tested by the underlying [node-config](https://github.com/lorenwest/node-config). To update your configuration:
+
+- Relative paths are now longer relative to the configuration file but relative to where the application runs. This normally (when running from the application folder) means that paths starting with `../` and `./` have to be replaced with `./` and `./config/`.
+- Configuration through environment variables should be included via the `NODE_CONFIG` JSON string or as [Custom Environment Variable support](https://github.com/lorenwest/node-config/wiki/Environment-Variables#custom-environment-variables). To use existing environment variables add the following configuration file in `config/custom-environment-variables.<json|yaml|js>` like this:
 
 ```json
 // config/custom-environment-variables.json
