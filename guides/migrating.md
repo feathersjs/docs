@@ -7,6 +7,7 @@ This guide explains the new features and changes necessary to migrate to the Fea
 You can run the following to test the latest Dove pre-release in your application:
 
 ```
+npm install -g npm-check-updates;  ## if not already done
 npx npm-check-updates --upgrade --target newest --filter /@feathersjs/
 npm install
 ```
