@@ -40,6 +40,13 @@ app.listen(3030).then(server => {
 await app.setup();
 ```
 
+### Socket.io 4 and Grant 5
+
+The Socket.io and Grant (oAuth) dependencies have been updated to their latest versions. For more information on breaking changes see:
+
+- The Socket.io [version 3](https://socket.io/docs/v3/migrating-from-2-x-to-3-0/index.html#How-to-upgrade-an-existing-production-deployment) and [version 4](https://socket.io/docs/v3/migrating-from-3-x-to-4-0/) upgrade guide. Important points to note are a new improved [CORS policy](https://socket.io/docs/v3/migrating-from-2-x-to-3-0/index.html#CORS-handling) and an [explicit v2 client compatibility opt-in](https://socket.io/docs/v3/migrating-from-2-x-to-3-0/index.html#How-to-upgrade-an-existing-production-deployment)
+- For oAuth authentication the Grant standard configuration should continue to work as is. If you customized any other settings, see the [Grant v4 to v5 migration guide](https://github.com/simov/grant/blob/master/MIGRATION.md) for the changes necessary.
+
 ### Configuration
 
 The automatic environment variable substitution in `@feathersjs/configuration` was causing subtle and hard to debug issues. It has been removed to instead rely on the functionality already provided and battle tested by the underlying [node-config](https://github.com/lorenwest/node-config). To update your configuration:
