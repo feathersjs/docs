@@ -31,13 +31,21 @@ npm install
 // Before
 const server = app.listen(3030);
 
-app.setup();
-
 // Now
 app.listen(3030).then(server => {
 });
+```
 
+Usually you would call `app.listen`. In case you are calling `app.setup` instead (e.g. for internal jobs or seed scripts) it is now also asynchronous:
+
+```js
+// Before
+app.setup();
+// Do something here
+
+// Now
 await app.setup();
+// Do something here
 ```
 
 ### Socket.io 4 and Grant 5
@@ -64,6 +72,31 @@ The automatic environment variable substitution in `@feathersjs/configuration` w
   }
 }
 ```
+
+### Debugging
+
+The `debug` module has been removed as a direct dependency. This reduces the the client bundle size and allows to add a custom logger to Feathers internals. The original `debug` functionality can now be initialized as follows:
+
+```js
+const feathers = require('@feathersjs/feathers');
+const debug = require('debug');
+
+feathers.setDebug(debug);
+```
+
+To set a custom logger:
+
+```js
+const feathers = require('@feathersjs/feathers');
+
+const customDebug = (name) => (...args) => {
+  console.log(name, ...args);
+}
+
+feathers.setDebug(customDebug);
+```
+
+Setting the debugger will apply to all `@feathersjs` modules.
 
 ### Client
 

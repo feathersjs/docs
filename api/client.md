@@ -99,16 +99,16 @@ app.configure(socketio({
 
 ## Module loaders
 
-All modules in the `@feathersjs` namespace are using ES6. They must be transpiled to support browsers that don't completely support ES6. Most client-side module loaders exclude the `node_modules` folder from being transpiled and have to be configured to include modules in the `@feathersjs` namespace and the `debug` module.
+All modules in the `@feathersjs` namespace are using ES6. They must be transpiled to support browsers that don't completely support ES6. Most client-side module loaders exclude the `node_modules` folder from being transpiled and have to be configured to include modules in the `@feathersjs` namespace.
 
 ### Webpack
 
-For Webpack, the recommended `babel-loader` rule normally excludes everything in `node_modules`. It has to be adjusted to skip `node_modules/@feathersjs` and `node_modules/debug`. In the `module` `rules` in your `webpack.config.js`, update the `babel-loader` section to this:
+For Webpack, the recommended `babel-loader` rule normally excludes everything in `node_modules`. It has to be adjusted to skip `node_modules/@feathersjs`. In the `module` `rules` in your `webpack.config.js`, update the `babel-loader` section to this:
 
 ```js
 {
   test: /\.jsx?$/,
-  exclude: /node_modules(\/|\\)(?!(@feathersjs|debug))/,
+  exclude: /node_modules(\/|\\)(?!(@feathersjs))/,
   loader: 'babel-loader'
 }
 ```
