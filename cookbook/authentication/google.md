@@ -56,7 +56,7 @@ The client id (App ID) and secret can be acquired by creating a [OAuth client ID
     "oauth": {
       "google": {
         "key": "<client-id>.apps.googleusercontent.com",
-        "secret": "<sclient ecret>",
+        "secret": "<client ecret>",
         "scope": ["openid", "email"],
         "nonce": true
       }
