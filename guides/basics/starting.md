@@ -405,8 +405,8 @@ Now we can look at one of the really cool features of Feathers. It works the sam
 <head>
   <meta charset="UTF-8">
   <title>Feathers Example</title>
-<link rel="stylesheet" href="//unpkg.com/feathers-chat@4.0.0/public/base.css">
-    <link rel="stylesheet" href="//unpkg.com/feathers-chat@4.0.0/public/chat.css">
+  <link rel="stylesheet" href="//unpkg.com/feathers-chat@4.0.0/public/base.css">
+  <link rel="stylesheet" href="//unpkg.com/feathers-chat@4.0.0/public/chat.css">
 </head>
 <body>
   <main id="main" class="container">
