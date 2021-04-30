@@ -44,7 +44,6 @@ module.exports = {
       }],
       '/api/': [{
         title: 'Core',
-        collapsable: false,
         children: [
           'application.md',
           'services.md',
@@ -55,15 +54,14 @@ module.exports = {
         ]
       }, {
         title: 'Transports',
-        collapsable: false,
         children: [
+          'koa.md',
           'express.md',
           'socketio.md',
           'channels.md'
         ]
       }, {
         title: 'Client',
-        collapsable: false,
         children: [
           'client.md',
           'client/rest.md',
@@ -71,7 +69,6 @@ module.exports = {
         ]
       }, {
         title: 'Authentication',
-        collapsable: false,
         children: [
           'authentication/',
           'authentication/service.md',
@@ -84,7 +81,6 @@ module.exports = {
         ]
       }, {
         title: 'Databases',
-        collapsable: false,
         children: [
           'databases/adapters.md',
           'databases/common.md',
