@@ -137,9 +137,11 @@ Returns the instance of the [AuthenticationClient](#authenticationclient).
 
 `app.authentication.handleError(error, type: 'authenticate'|'logout') -> Promise` handles any error happening in the `authenticate` or `logout` method. By default it removes the access token if the error is a `NotAuthenticate` error. Otherwise it does nothing.
 
-### reAuthenticate(force)
+### reAuthenticate(force, strategy?)
 
-`app.authentication.reAuthenticate(force = false) -> Promise` will re-authenticate with the current access token from [app.authentication.getAccessToken()](). If `force` is set to `true` it will always re-authenticate, with the default `false` only when not already authenticated.
+`app.authentication.reAuthenticate(force = false, strategy) -> Promise` will re-authenticate with the current access token from [app.authentication.getAccessToken()](). If `force` is set to `true` it will always re-authenticate, with the default `false` only when not already authenticated.
+
+`strategy` is an optional parameter which defaults to the configured `jwtStrategy`.
 
 ### authenticate()
 
