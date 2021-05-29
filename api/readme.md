@@ -23,6 +23,7 @@ Feathers core functionality that works on the client and the server
 ## Transports
 
 Expose a Feathers application as an API server
+  * [Koa](koa.md) - Feathers KoaJS framework bindings, REST API provider and error middleware.
   * [Express](express.md) - Feathers Express framework bindings, REST API provider and error middleware.
   * [Socket.io](socketio.md) - The Socket.io real-time transport provider
   * [Configuration](configuration.md) - A node-config wrapper to initialize configuration of a server side application.
