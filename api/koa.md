@@ -15,13 +15,18 @@ The `@feathersjs/koa` module contains the [KoaJS](https://koajs.com/) framework 
 
 ```js
 const feathers = require('@feathersjs/feathers');
-const koa = require('@feathersjs/koa');
+const { koa, errorHandler, bodyParser, rest } = require('@feathersjs/koa');
 
 // Create an app that is a Feathers AND Express application
 const app = koa(feathers());
+
+app.use(errorHandler());
+app.use(authentication());
+app.use(bodyParser());
+app.use(rest());
 ```
 
-Additionally `@feathersjs/koa` also exposes the following middleware:
+`@feathersjs/koa` also exposes the following middleware:
 
 - `rest` - A middleware to expose services as REST APIs
 - `authentication` - A middleware for parsing HTTP headers for Feathers authentication information
