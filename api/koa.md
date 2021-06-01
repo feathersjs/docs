@@ -33,6 +33,10 @@ app.use(rest());
 - `bodyParser` - The [koa-bodyparser](https://github.com/koajs/bodyparser) middleware for parsing request bodies
 - `errorHandler` - A JSON error handler middleware. Should always be registered as the very first middleware.
 
+## koa(app, koaApp)
+
+`koa(app, koaApp) -> app` allows to extend an existing Koa application with the Feathers application `app`.
+
 ## koa()
 
 If no Feathers application is passed, `koa() -> app` returns a plain Koa application (`new Koa()`).
