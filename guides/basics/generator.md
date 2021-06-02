@@ -6,6 +6,13 @@ In the [getting started chapter](./starting.md) we created a Feathers applicatio
 npm install @feathersjs/cli -g
 ```
 
+We also need to install the feathersjs modules required by the generated application (authentication, authentication-local, authentication-oauth):
+```sh
+npm install @feathersjs/authentication -g
+npm install @feathersjs/authentication-local -g
+npm install @feathersjs/authentication-oauth -g
+```
+
 > __Important:__ As mentioned when [getting ready](./starting.md),  `@feathersjs/cli` also requires Node version 10 or later. If you already have it installed, `feathers --version` should show `4.1.0` or later.
 
 ## Generating the application
