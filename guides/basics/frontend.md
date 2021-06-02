@@ -47,6 +47,7 @@ Let’s create `public/client.js` where all the following code will live. Each o
 We’ll start with the most important thing first, the connection to our Feathers API that connects to our server using websockets and initializes the [authentication client](./authentication.md):
 
 ```js
+/* global io, feathers, moment */
 // Establish a Socket.io connection
 const socket = io();
 // Initialize our Feathers client application through Socket.io
