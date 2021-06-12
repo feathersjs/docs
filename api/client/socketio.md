@@ -86,6 +86,58 @@ app.io.on('disconnect', (reason) => {
 });
 ```
 
+### Custom Methods
+
+On the client, [custom service methods](../services.md#custom-methods) have to be listed via the `.methods` function to indicate that they can be called:
+
+:::: tabs :options="{ useUrlFragment: false }"
+
+::: tab "JavaScript"
+```js
+const feathers = require('@feathersjs/feathers');
+const socketio = require('@feathersjs/socketio-client');
+const io = require('socket.io-client');
+
+const socket = io('http://api.feathersjs.com');
+const app = feathers();
+
+// Set up Socket.io client with the socket
+app.configure(socketio(socket));
+
+// Initialize the method once
+client.service('myservice').methods('myCustomMethod');
+
+// Then it can be used like other service methods
+client.service('myservice').myCustomMethod(data, params);
+```
+:::
+
+::: tab "TypeScript"
+```typescript
+import { feathers, CustomMethod } from '@feathersjs/feathers';
+import socketio, { SocketService } from '@feathersjs/socketio-client';
+import io from 'socket.io-client';
+
+type ServiceTypes = {
+  myservice: SocketService & CustomMethod<'myCustomMethod'>
+}
+
+const socket = io('http://api.feathersjs.com');
+const app = feathers<ServiceTypes>();
+
+// Set up Socket.io client with the socket
+app.configure(socketio(socket));
+
+// Initialize the method once
+client.service('myservice').methods('myCustomMethod');
+
+// Then it can be used like other service methods
+client.service('myservice').myCustomMethod(data, params);
+```
+:::
+
+::::
+
 ## Direct connection
 
 Feathers sets up a normal Socket.io server that you can connect to with any Socket.io compatible client, usually the [Socket.io client](http://socket.io/docs/client-api/) either by loading the `socket.io-client` module or `/socket.io/socket.io.js` from the server. Unlike HTTP calls, websockets do not have an inherent cross-origin restriction in the browser so it is possible to connect to any Feathers server. Additionally query parameter types do not have to be converted from strings as they do for REST requests.
@@ -286,6 +338,17 @@ socket.emit('remove', 'messages', null, { read: true });
 ```
 
 Will call `app.service('messages').remove(null, { query: { read: 'true' } })` on the server to delete all read app.service('messages').
+
+### Custom methods
+
+[Custom service methods](../services.md#custom-methods) can be called directly via Socket.io by sending the same message:
+
+```js
+socket.emit('myCustomMethod', 'myservice', { message: 'Hello world' }, {}, (error, data) => {
+  console.log('Called myCustomMethod', data);
+});
+```
+
 
 
 ### Listening to events

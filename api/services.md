@@ -236,9 +236,41 @@ const app = feathers()
 app.listen(3030);
 ```
 
-### Custom Methods
+## Custom Methods
 
-A custom method is any other service method you want to expose to clients publicly. A custom always has a signature of `(data, params)` with the same semantics as standard service methods (data is the payload, `params` is the service [params](#params)). They can be used with hooks and must be `async`.
+A custom method is any other service method you want to expose publicly. A custom method always has a signature of `(data, params)` with the same semantics as standard service methods (`data` is the payload, `params` is the service [params](#params)). They can be used with hooks (including authentication) and must be `async` or return a Promise.
+
+In order to register a public custom method, the names of *all methods* have to be passed as the `methods` option when registering the service:
+
+```js
+class MyService {
+  async setup(app) {
+    this.app = app;
+  }
+
+  async get(name, params) {
+    const messages = this.app.service('messages');
+    const message = await messages.get(1, params);
+    
+    return { name, message };
+  }
+
+  async myCustomMethod (data, params) {
+    return data;
+  }
+}
+
+const app = feathers()
+  .configure(rest())
+  .use('/my-service', new MyService(), {
+    // Pass all methods you want to expose
+    methods: ['get', 'myCustomMethod']
+  });
+```
+
+See the [REST client](./client/rest.md) and [Socket.io client](,.client/socketio.md) chapters on how to use those custom methods on the client.
+
+> __Important:__ When passing the `methods` option __all methods__ you want to expose, including standard service methods, must be listed. This allows to completely disable standard service method you might not want to expose. The `methods` option only applies to external access (via a transport like HTTP or websockets). All methods continue to be available internally on the server.
 
 ## Feathers functionality
 
