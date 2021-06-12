@@ -119,9 +119,13 @@ promise.abort();
 
 `app.rest` contains a reference to the `connection` object passed to `rest().<name>(connection)`.
 
-### Fetch
+### Request libraries
 
-Fetch also uses a default configuration:
+The Feathers REST client can be used with several HTTP request libraries.
+
+#### Fetch
+
+Fetch uses a default configuration:
 
 ```js
 // In Node
@@ -133,7 +137,7 @@ app.configure(restClient.fetch(fetch));
 app.configure(restClient.fetch(window.fetch));
 ```
 
-### Superagent
+#### Superagent
 
 [Superagent](http://visionmedia.github.io/superagent/) currently works with a default configuration:
 
@@ -143,7 +147,7 @@ const superagent = require('superagent');
 app.configure(restClient.superagent(superagent));
 ```
 
-### Axios
+#### Axios
 
 [Axios](http://github.com/mzabriskie/axios) currently works with a default configuration:
 
@@ -152,6 +156,67 @@ const axios = require('axios');
 
 app.configure(restClient.axios(axios));
 ```
+
+### Custom Methods
+
+On the client, [custom service methods](../services.md#custom-methods) have to be listed via the `.methods` function to indicate that they can be called:
+
+:::: tabs :options="{ useUrlFragment: false }"
+
+::: tab "JavaScript"
+```js
+const feathers = require('@feathersjs/feathers');
+const rest = require('@feathersjs/rest-client');
+
+const client = feathers();
+
+// Connect to the same as the browser URL (only in the browser)
+const restClient = rest();
+
+// Connect to a different URL
+const restClient = rest('http://feathers-api.com')
+
+// Configure an AJAX library (see below) with that client 
+client.configure(restClient.fetch(window.fetch));
+
+// Initialize the method once
+client.service('myservice').methods('myCustomMethod');
+
+// Then it can be used like other service methods
+client.service('myservice').myCustomMethod(data, params);
+```
+:::
+
+::: tab "TypeScript"
+```typescript
+import { feathers, CustomMethod } from '@feathersjs/feathers';
+import rest, { RestService } from '@feathersjs/rest-client';
+
+// This will type `myservice` with the client methods and `myCustomMethod`
+type ServiceTypes = {
+  myservice: RestService & CustomMethod<'myCustomMethod'>
+}
+
+const client = feathers<ServiceTypes>();
+
+// Connect to the same as the browser URL (only in the browser)
+const restClient = rest();
+
+// Connect to a different URL
+const restClient = rest('http://feathers-api.com')
+
+// Configure an AJAX library (see below) with that client 
+client.configure(restClient.fetch(window.fetch));
+
+// Initialize the method once
+client.service('myservice').methods('myCustomMethod');
+
+// Then it can be used like other service methods
+client.service('myservice').myCustomMethod(data, params);
+```
+:::
+
+::::
 
 ### Connecting to multiple servers
 
@@ -389,3 +454,24 @@ DELETE /messages?read=true
 Will call `messages.remove(null, { query: { read: 'true' } })` to delete all read messages.
 
 > **Note:** With a [database adapters](../databases/adapters.md) the [`multi` option](../databases/common.md) has to be set to support patching multiple entries.
+
+
+### Custom methods
+
+[Custom service methods](../services.md#custom-methods) can be called directly via HTTP by sending a POST request and setting the `X-Service-Method` header to the method you want to call:
+
+```
+POST /messages
+
+X-Service-Method: myCustomMethod
+
+{
+  "message": "Hello world"
+}
+```
+
+Via CURL:
+
+```bash
+curl -H "Content-Type: application/json" -H "X-Service-Method: myCustomMethod" -X POST -d '{"message": "Hello world"}' http://localhost:3030/myservice
+```

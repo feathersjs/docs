@@ -137,10 +137,6 @@ For example, a payment service that sends status events to the client while proc
 
 ```js
 class PaymentService {
-  constructor() {
-    this.events = ['status'];
-  },
-
   create(data, params) {
     createStripeCustomer(params.user).then(customer => {
       this.emit('status', { status: 'created' });

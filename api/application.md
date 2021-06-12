@@ -32,7 +32,7 @@ app.use('/messages', {
 
 `options` can contain the following additional options for the service:
 
-- `methods` (default: `['find', 'get', 'create', 'patch', 'update','remove']`) - A list of official and [custom service methods](services.md#custommethod-data-params) exposed by this service. When using this option **all** method names that should be available externally must be passed otherwise. All methods passed will automatically be available for use with [hooks](./hooks).
+- `methods` (default: `['find', 'get', 'create', 'patch', 'update','remove']`) - A list of official and [custom service methods](services.md#custom-methods) exposed by this service. When using this option **all** method names that should be available externally must be passed otherwise. All methods passed will automatically be available for use with [hooks](./hooks).
 - `events` - A list of [public custom events sent by this service](./events.md#custom-events)
 
 ```js
