@@ -87,10 +87,11 @@ Next, we create a hook called `allow-apiKey` that sets `params.authentication` i
 module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
   return async context => {
     const { params } = context;
+    const authConfig = context.app.get('authentication');
 
     const token =
-      params.query[server.auth.apiKey.urlParam] ||
-      params.headers[server.auth.apiKey.header];
+      params.query[authConfig.apiKey.urlParam] ||
+      params.headers[authConfig.apiKey.header];
 
     if (token && params.provider && !params.authentication) {
       context.params = {
