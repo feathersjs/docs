@@ -20,7 +20,7 @@ Here are some things that you should be aware of when writing your app to make s
 - Escape any HTML and JavaScript to avoid XSS attacks.
 - Escape any SQL (typically done by the SQL library) to avoid SQL injection.
 - JSON Web Tokens (JWT's) are only signed. They are **not** encrypted. Therefore, the payload can be examined on the client. This is by design. **DO NOT** put anything that should be private in the JWT `payload` unless you encrypt it first.
-- Don't use a weak `secret` for you token service. The generator creates a strong one for you automatically. No need to change it.
+- Don't use a weak `secret` for your token service. The generator creates a strong one for you automatically. No need to change it.
 
 ## Technologies used
 
