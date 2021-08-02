@@ -19,7 +19,11 @@ npm install
 
 ### Custom methods
 
+See the [services API docs](../api/services.md#custom-methods) how to set up custom service methods and the [REST client](../api/client/rest.md#feathersjs-rest-client) and [Socket.io client](../api/client/socketio.md#feathersjs-socketio-client) chapters on how to use them on the client.
+
 ### Async hooks
+
+See the documentation for [feathersjs/hooks](https://github.com/feathersjs/hooks) for the new general purpose hook format that is now also supported by Feathers services (additional documentation to follow).
 
 ## Deprecations and breaking changes
 
