@@ -37,7 +37,7 @@ app.configure(socketio(socket));
 
 // Available options are listed in the "Options" section
 app.configure(auth({
-  storageKey: 'auth'
+  storageKey: 'feathers-jwt'
 }))
 ```
 
