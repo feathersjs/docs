@@ -2,6 +2,13 @@
 
 This guide explains the new features and changes necessary to migrate to the Feathers v5 (Dove) release. It expects applications to be using the previous Feathers v4 (Crow). See the [v4 (Crow) migration guide](https://crow.docs.feathersjs.com/guides/migrating.html) for upgrading to the previous version.
 
+## Status
+
+The final v5 release is expected around the end of 2021. Aside from the breaking changes and new features documented here, it will feature a new customizable CLI generator and a flexible schema definition system (more to follow when those pre-releases are ready). For more information
+
+- Follow [the v5 milestone](https://github.com/feathersjs/feathers/milestone/11) - open issues are in development, closed issues are already published as a prerelease
+- See the current [v5 Changelog](https://github.com/feathersjs/feathers/blob/dove/changelog.md#change-log)
+
 ## Testing the prerelease
 
 You can run the following to test the latest Dove pre-release in your application:
