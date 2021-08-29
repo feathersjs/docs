@@ -78,10 +78,7 @@ module.exports.Service = Service;
 // services/reset-password.class.js
 
 const jwt = require("jsonwebtoken");
-const util = require("util");
 const { BadRequest } = require("straightline-utils/errors");
-
-const verifyToken = util.promiseify(jwt.sign);
 
 class Service {
   setup(app) {
@@ -141,7 +138,7 @@ class Service {
     const resetSecret = this.app.get("resetSecret");
 
     try {
-      await verifyJWT(passwordResetToken, resetSecret);
+      jwt.verify(passwordResetToken, resetSecret);
     } catch (error) {
       throw new BadRequest("Password reset token is invalid.");
     }
