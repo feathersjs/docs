@@ -1,6 +1,6 @@
 # Forgot Password
 
-This cookbook is a basic example that shows how to create a `forgot-password` and `reset-password` service. Because resetting passwords requires sending emails (and/or texts), additional model properties and config, etc, it is not covered by the official feathers-authentication library. Instead, you are encouraged to use the following example and change it as needed.
+This cookbook is a basic example that shows how to create a `forgot-password` service. Because resetting passwords requires sending emails (and/or texts), additional model properties and config, etc, it is not covered by the official feathers-authentication library. Instead, you are encouraged to use the following example and change it as needed.
 
 Prerequisites
 
@@ -11,39 +11,36 @@ Prerequisites
 ```js
 // services/forgot-password.class.js
 
-const jwt = require('jsonwebtoken');
+const jwt = require("jsonwebtoken");
+const { BadRequest } = require("straightline-utils/errors");
 
 class Service {
   setup(app) {
     this.app = app;
-    this.usersService = app.service('api/users');
-    this.emailService = app.service('mailer');
+    this.usersService = app.service("api/users");
+    this.emailService = app.service("mailer");
   }
 
   async create(data, params) {
     const { email } = data;
 
-    const resetSecret = this.app.get('resetSecret');
+    const resetSecret = this.app.get("resetSecret");
     // const resetSecret = this.app.get('authentication').secret;
     // const resetSecret = 'MY_SECRET';
 
-    const clientUrl = this.app.get('clientUrl');
+    const clientUrl = this.app.get("clientUrl");
     // const clientUrl = 'https.myapp.com';
 
     // Note we don't really need a payload here. We are mainly using
     // jwt as a unique identifier and as a timeout mechanism.
-    const passwordResetToken = jwt.sign(
-      {},
-      resetSecret,
-      { expiresIn: '1d' }
-    );
+    const passwordResetToken = jwt.sign({}, resetSecret, { expiresIn: "1d" });
 
     const [user] = await this.usersService.find({
       query: {
         email,
-        $limit: 1
+        $limit: 1,
       },
-      paginate: false
+      paginate: false,
     });
 
     // Pro Tip - Use findOne(). See findOne cookbook.
@@ -53,37 +50,15 @@ class Service {
       await this.usersService.patch(user.id, { passwordResetToken });
       await this.emailService.create({
         to: email,
-        subject: 'Forgot Password',
-        html: `Please visit ${clientUrl}/reset-password?token=${passwordResetToken} to reset your password.`
+        subject: "Forgot Password",
+        html: `Please visit ${clientUrl}/reset-password?token=${passwordResetToken} to reset your password.`,
       });
     }
 
     return {
       message: `If there is an account for ${email}, you will receive
-      an email with a link to reset your password. Be sure to check your spam filter.`
+      an email with a link to reset your password. Be sure to check your spam filter.`,
     };
-  }
-}
-
-module.exports = function (options) {
-  return new Service(options);
-};
-
-module.exports.Service = Service;
-
-};
-```
-
-```js
-// services/reset-password.class.js
-
-const jwt = require("jsonwebtoken");
-const { BadRequest } = require("straightline-utils/errors");
-
-class Service {
-  setup(app) {
-    this.app = app;
-    this.usersService = app.service("api/users");
   }
 
   async get(passwordResetToken, params) {
@@ -115,8 +90,8 @@ class Service {
       });
   }
 
-  async create(data, params) {
-    const { password, passwordResetToken } = data;
+  async update(passwordResetToken, data, params) {
+    const { password } = data;
 
     const [user] = await this.usersService.find({
       query: {
