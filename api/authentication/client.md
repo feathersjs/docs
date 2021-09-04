@@ -36,9 +36,7 @@ const app = feathers();
 app.configure(socketio(socket));
 
 // Available options are listed in the "Options" section
-app.configure(auth({
-  storageKey: 'feathers-jwt'
-}))
+app.configure(auth())
 ```
 
 > __Note:__ Verifying or parsing the token on the client usually isn't necessary since the server does that on JWT authentication and returns with the token information but it can still be done manually with the [jwt-decode](https://www.npmjs.com/package/jwt-decode) package.
