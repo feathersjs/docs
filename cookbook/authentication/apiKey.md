@@ -9,8 +9,7 @@ We will start by providing the required configuration for this strategy. You sho
     "authStrategies": [ ...otherStrategies, "apiKey" ],
     "apiKey": {
       "allowedKeys": [ "API_KEY_1", "API_KEY_2" ]
-      "header": "x-access-token",
-      "urlParam": "token"
+      "header": "x-access-token"
     }
   }
 }
@@ -78,7 +77,7 @@ export default function(app: Application) {
 ::::
 
 
-Next, we create a hook called `allow-apiKey` that sets `params.authentication` if it does not exist and if `params.provider` exists (which means it is an external call) to use that `apiKey` strategy. We will also provide the capability for the apiKey to either be in a header or in a url param:
+Next, we create a hook called `allow-apiKey` that sets `params.authentication` if it does not exist and if `params.provider` exists (which means it is an external call) to use that `apiKey` strategy. We will also provide the capability for the apiKey to be read from the request header: (you could also read the token as a query parameter but you will have to filter it out before it's passed to Feathers calls like `get` and `find`.
 
 :::: tabs :options="{ useUrlFragment: false }"
 ::: tab "JavaScript"
@@ -86,11 +85,10 @@ Next, we create a hook called `allow-apiKey` that sets `params.authentication` i
 /* eslint-disable require-atomic-updates */
 module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
   return async context => {
-    const { params } = context;
-
-    const token =
-      params.query[server.auth.apiKey.urlParam] ||
-      params.headers[server.auth.apiKey.header];
+    const { params, app } = context;
+    
+    const headerField = app.get('authentication').apiKey.header;
+    const token = params.headers[headerField];
 
     if (token && params.provider && !params.authentication) {
       context.params = {
@@ -113,11 +111,10 @@ import { Hook, HookContext } from '@feathersjs/feathers';
 
 export default (): Hook => {
   return async (context: HookContext) => {
-    const { params } = context;
+    const { params, app } = context;
 
-    const token =
-      params.query[configuration.apiKey.urlParam] ||
-      params.headers[configuration.apiKey.header];
+    const headerField = app.get('authentication').apiKey.header;
+    const token = params.headers[headerField];
 
     if (token && params.provider && !params.authentication) {
       context.params = {
