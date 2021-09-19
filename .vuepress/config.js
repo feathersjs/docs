@@ -16,7 +16,7 @@ module.exports = {
     logo: '/img/feathers-logo-wide.png',
     repo: 'feathersjs/feathers',
     docsRepo: 'feathersjs/docs',
-    docsBranch: 'crow',
+    docsBranch: 'dove',
     editLinks: true,
     sidebarDepth: 2,
     sidebar: {
@@ -59,6 +59,14 @@ module.exports = {
           'express.md',
           'socketio.md',
           'channels.md'
+        ]
+      }, {
+        title: 'Schema',
+        children: [
+          'schema/',
+          'schema/schema.md',
+          'schema/resolvers.md',
+          'schema/hooks.md'
         ]
       }, {
         title: 'Client',
