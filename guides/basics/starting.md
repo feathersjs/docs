@@ -411,12 +411,13 @@ Now we can look at one of the really cool features of Feathers. It works the sam
 <body>
   <main id="main" class="container">
     <h1>Welcome to Feathers</h1>
-    <form class="form" onsubmit="sendMessage(event.preventDefault())">
+    <form class="form" id="message-form">
       <input type="text" id="message-text" placeholder="Enter message here">
       <button type="submit" class="button button-primary">Send message</button>
     </form>
 
     <h2>Here are the current messages:</h2>
+    <pre id="messages"></pre>
   </main>
 
   <script src="//unpkg.com/@feathersjs/client@^4.3.0/dist/feathers.js"></script>
@@ -444,21 +445,27 @@ Now we can look at one of the really cool features of Feathers. It works the sam
 
     // Renders a single message on the page
     function addMessage (message) {
-      document.getElementById('main').innerHTML += `<p>${message.text}</p>`;
+      document.getElementById('messages').textContent += `${message.text}\n`
     }
     
     const main = async () => {
+      const form = document.getElementById('message-form')
+      form.addEventListener('submit', (e) => {
+        e.preventDefault()
+        sendMessage()
+      })
+    
       // Find all existing messages
       const messages = await app.service('messages').find();
 
       // Add existing messages to the list
-      messages.forEach(addMessage);
+      messages.data.forEach(addMessage);
 
       // Add any newly created message to the list in real-time
       app.service('messages').on('created', addMessage);
     };
 
-    main();
+    window.addEventListener('DOMContentLoaded', main);
   </script>
 </body>
 </html>
