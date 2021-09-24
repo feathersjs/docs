@@ -459,7 +459,7 @@ Now we can look at one of the really cool features of Feathers. It works the sam
       const messages = await app.service('messages').find();
 
       // Add existing messages to the list
-      messages.data.forEach(addMessage);
+      messages.forEach(addMessage);
 
       // Add any newly created message to the list in real-time
       app.service('messages').on('created', addMessage);
