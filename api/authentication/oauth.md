@@ -14,6 +14,7 @@ npm install @feathersjs/authentication-oauth --save
 The following settings are available:
 
 - `redirect`: The URL of the frontend to redirect to with the access token (or error message). The [authentication client](./client.md) handles those redirects automatically. If not set, the authentication result will be sent as JSON instead.
+- `origins`: A list of allowed URLs to make requests from. For example setting this option to`[ "https://feathersjs.com", "https://feathers.cloud" ]` would allow requests from those domains and redirect back to where the request came from. This can be used _instead_ of the `redirect` option to allow oAuth logins from multiple domains.
 - `defaults`: Default [Grant configuration](https://github.com/simov/grant#configuration) used for all strategies. The following default options are set automatically:
   - `path` (default: `'/oauth'`) - The OAuth base path
 - `<strategy-name>` (e.g. `twitter`): The [Grant configuration](https://github.com/simov/grant#configuration) used for a specific strategy.
@@ -223,6 +224,10 @@ app.configure(expressOauth({
 ### getRedirect (data)
 
 `oauthStrategy.getRedirect(data) -> Promise` returns the URL to redirect to after a successful OAuth login and entity lookup or creation. By default it redirects to `authentication.oauth.redirect` from the configuration with `#access_token=<access token for entity>` added to the end of the URL. The `access_token` hash is e.g. used by the [authentication client](./client.md) to log the user in after a successful OAuth login. The default redirects do work cross domain.
+
+### getAllowedOrigin (params)
+
+`oauthStrategy.getAllowedOrigin(params) -> Promise` returns the redirect base URL or throws an error if it is not allowed.
 
 ### getCurrentEntity(params)
 
