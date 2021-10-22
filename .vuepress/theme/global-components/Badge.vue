@@ -4,23 +4,27 @@ export default {
   props: {
     type: {
       type: String,
-      default: 'tip'
+      default: "tip"
     },
     text: String,
     vertical: {
       type: String,
-      default: 'top'
+      default: "top"
     }
   },
-  render (h, { props, slots }) {
-    return h('span', {
-      class: ['badge', props.type],
-      style: {
-        verticalAlign: props.vertical
-      }
-    }, props.text || slots().default)
+  render(h, { props, slots }) {
+    return h(
+      "span",
+      {
+        class: ["badge", props.type],
+        style: {
+          verticalAlign: props.vertical
+        }
+      },
+      props.text || slots().default
+    );
   }
-}
+};
 </script>
 
 <style lang="stylus" scoped>
@@ -36,9 +40,9 @@ export default {
   &.tip, &.green
     background-color #42b983
   &.error
-    background-color #DA5961 //#f66
+    background-color #ED8A80 //#f66
   &.warning, &.warn, &.yellow
-    background-color darken(#ffe564, 35%)
+    background-color #72C174
   & + &
     margin-left 5px
 </style>

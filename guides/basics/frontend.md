@@ -6,7 +6,7 @@ In this chapter we will create a real-time chat frontend with signup and login u
 
 ![The Feathers chat application](./assets/feathers-chat.png)
 
-> __Note:__ We will not be using a frontend framework so we can focus on what Feathers is all about. Feathers is framework agnostic and can be used with any frontend framework like React, VueJS or Angular. For more information see the [frameworks section](../frameworks.md).
+> **Note:** We will not be using a frontend framework so we can focus on what Feathers is all about. Feathers is framework agnostic and can be used with any frontend framework like React, VueJS or Angular. For more information see the [frameworks section](../frameworks.md).
 
 ## Set up the page
 
@@ -15,13 +15,21 @@ First, let's update `public/index.html` to initialize everything we need for the
 ```html
 <html lang="en">
   <head>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8">
-    <meta name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=0" />
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=0"
+    />
     <title>FeathersJS chat</title>
-    <link rel="shortcut icon" href="favicon.ico">
-    <link rel="stylesheet" href="//unpkg.com/feathers-chat@4.0.0/public/base.css">
-    <link rel="stylesheet" href="//unpkg.com/feathers-chat@4.0.0/public/chat.css">
+    <link rel="shortcut icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="//unpkg.com/feathers-chat@4.0.0/public/base.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//unpkg.com/feathers-chat@4.0.0/public/chat.css"
+    />
   </head>
   <body>
     <div id="app" class="flex flex-column"></div>
@@ -102,7 +110,7 @@ const loginHTML = `<main class="login container">
 const chatHTML = `<main class="flex flex-column">
   <header class="title-bar flex flex-row flex-center">
     <div class="title-wrapper block center-element">
-      <img class="logo" src="http://feathersjs.com/img/feathers-logo-wide.png"
+      <img class="logo" src="http://feathersjs.com/img/Feathers-logo-2021-Black.svg'"
         alt="Feathers Logo">
       <span class="title">Chat</span>
     </div>
@@ -136,26 +144,31 @@ const chatHTML = `<main class="flex flex-column">
 </main>`;
 
 // Helper to safely escape HTML
-const escape = str => str.replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;').replace(/>/g, '&gt;')
+const escape = str =>
+  str
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
 
 // Add a new user to the list
 const addUser = user => {
-  const userList = document.querySelector('.user-list');
+  const userList = document.querySelector(".user-list");
 
-  if(userList) {
+  if (userList) {
     // Add the user to the list
     userList.innerHTML += `<li>
       <a class="block relative" href="#">
         <img src="${user.avatar}" alt="" class="avatar">
-        <span class="absolute username">${escape(user.name || user.email)}</span>
+        <span class="absolute username">${escape(
+          user.name || user.email
+        )}</span>
       </a>
     </li>`;
 
     // Update the number of users
-    const userCount = document.querySelectorAll('.user-list li').length;
-    
-    document.querySelector('.online-count').innerHTML = userCount;
+    const userCount = document.querySelectorAll(".user-list li").length;
+
+    document.querySelector(".online-count").innerHTML = userCount;
   }
 };
 
@@ -163,17 +176,21 @@ const addUser = user => {
 const addMessage = message => {
   // The user that sent this message (added by the populate-user hook)
   const { user = {} } = message;
-  const chat = document.querySelector('.chat');
+  const chat = document.querySelector(".chat");
   // Escape HTML to prevent XSS attacks
   const text = escape(message.text);
 
-  if(chat) {
+  if (chat) {
     chat.innerHTML += `<div class="message flex flex-row">
       <img src="${user.avatar}" alt="${user.name || user.email}" class="avatar">
       <div class="message-wrapper">
         <p class="message-header">
-          <span class="username font-600">${escape(user.name || user.email)}</span>
-          <span class="sent-date font-300">${moment(message.createdAt).format('MMM Do, hh:mm:ss')}</span>
+          <span class="username font-600">${escape(
+            user.name || user.email
+          )}</span>
+          <span class="sent-date font-300">${moment(message.createdAt).format(
+            "MMM Do, hh:mm:ss"
+          )}</span>
         </p>
         <p class="message-content font-300">${text}</p>
       </div>
@@ -198,31 +215,36 @@ Next, we'll add two functions to display the login and chat page, where we'll al
 
 ```js
 // Show the login page
-const showLogin = (error) => {
-  if(document.querySelectorAll('.login').length && error) {
-    document.querySelector('.heading').insertAdjacentHTML('beforeend', `<p>There was an error: ${error.message}</p>`);
+const showLogin = error => {
+  if (document.querySelectorAll(".login").length && error) {
+    document
+      .querySelector(".heading")
+      .insertAdjacentHTML(
+        "beforeend",
+        `<p>There was an error: ${error.message}</p>`
+      );
   } else {
-    document.getElementById('app').innerHTML = loginHTML;
+    document.getElementById("app").innerHTML = loginHTML;
   }
 };
 
 // Shows the chat page
 const showChat = async () => {
-  document.getElementById('app').innerHTML = chatHTML;
+  document.getElementById("app").innerHTML = chatHTML;
 
   // Find the latest 25 messages. They will come with the newest first
-  const messages = await client.service('messages').find({
+  const messages = await client.service("messages").find({
     query: {
       $sort: { createdAt: -1 },
       $limit: 25
     }
   });
-  
+
   // We want to show the newest message last
   messages.data.reverse().forEach(addMessage);
 
   // Find all users
-  const users = await client.service('users').find();
+  const users = await client.service("users").find();
 
   // Add each user to the list
   users.data.forEach(addUser);
@@ -250,20 +272,20 @@ const getCredentials = () => {
 // Log in either using the given email/password or the token from storage
 const login = async credentials => {
   try {
-    if(!credentials) {
+    if (!credentials) {
       // Try to authenticate using an existing token
       await client.reAuthenticate();
     } else {
       // Otherwise log in with the `local` strategy using the credentials we got
       await client.authenticate({
-        strategy: 'local',
+        strategy: "local",
         ...credentials
       });
     }
 
     // If successful, show the chat page
     showChat();
-  } catch(error) {
+  } catch (error) {
     // If we got an error, show the login page
     showLogin(error);
   }
@@ -287,50 +309,50 @@ const addEventListener = (selector, event, handler) => {
 };
 
 // "Signup and login" button click handler
-addEventListener('#signup', 'click', async () => {
+addEventListener("#signup", "click", async () => {
   // For signup, create a new user and then log them in
   const credentials = getCredentials();
-    
+
   // First create the user
-  await client.service('users').create(credentials);
+  await client.service("users").create(credentials);
   // If successful log them in
   await login(credentials);
 });
 
 // "Login" button click handler
-addEventListener('#login', 'click', async () => {
+addEventListener("#login", "click", async () => {
   const user = getCredentials();
 
   await login(user);
 });
 
 // "Logout" button click handler
-addEventListener('#logout', 'click', async () => {
+addEventListener("#logout", "click", async () => {
   await client.logout();
-    
-  document.getElementById('app').innerHTML = loginHTML;
+
+  document.getElementById("app").innerHTML = loginHTML;
 });
 
 // "Send" message form submission handler
-addEventListener('#send-message', 'submit', async ev => {
+addEventListener("#send-message", "submit", async ev => {
   // This is the message text input field
   const input = document.querySelector('[name="text"]');
 
   ev.preventDefault();
 
   // Create a new message and then clear the input field
-  await client.service('messages').create({
+  await client.service("messages").create({
     text: input.value
   });
 
-  input.value = '';
+  input.value = "";
 });
 
 // Listen to created events and add the new message in real-time
-client.service('messages').on('created', addMessage);
+client.service("messages").on("created", addMessage);
 
 // We will also see when new users get created in real-time
-client.service('users').on('created', addUser);
+client.service("users").on("created", addUser);
 
 // Call login right away so we can show the chat window
 // If the user can already be authenticated

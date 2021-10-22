@@ -13,7 +13,7 @@ module.exports = {
       apiKey: '2835d290e600f7fb583e2b61a74032ba',
       indexName: 'feathersjs'
     },
-    logo: '/img/feathers-logo-wide.png',
+    logo: 'img/Feathers-logo-2021-Black.svg',
     repo: 'feathersjs/feathers',
     docsRepo: 'feathersjs/docs',
     docsBranch: 'crow',
