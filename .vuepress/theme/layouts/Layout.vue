@@ -120,8 +120,6 @@ export default {
 };
 </script>
 
-<style src="/prism-feathers.css"></style>
-
 <!-- Dark mode : Based on idea from @matiaslopezd, https://github.com/feathersjs/docs/issues/1378 -->
 <style>
 body.dark,
