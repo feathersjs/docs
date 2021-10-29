@@ -1,101 +1,120 @@
 <template>
   <header class="navbar">
-    <SidebarButton @toggle-sidebar="$emit('toggle-sidebar')"/>
+    <SidebarButton @toggle-sidebar="$emit('toggle-sidebar')" />
 
-    <router-link
-      :to="$localePath"
-      class="home-link"
-    >
+    <router-link :to="$localePath" class="home-link">
       <img
         class="logo"
         v-if="$site.themeConfig.logo"
         :src="$withBase($site.themeConfig.logo)"
         :alt="$siteTitle"
-      >
+      />
     </router-link>
 
     <div
       class="links"
-      :style="linksWrapMaxWidth ? {
-        'max-width': linksWrapMaxWidth + 'px'
-      } : {}"
+      :style="
+        linksWrapMaxWidth
+          ? {
+              'max-width': linksWrapMaxWidth + 'px'
+            }
+          : {}
+      "
     >
-      <AlgoliaSearchBox
-        v-if="isAlgoliaSearch"
-        :options="algolia"
+      <AlgoliaSearchBox v-if="isAlgoliaSearch" :options="algolia" />
+      <SearchBox
+        v-else-if="
+          $site.themeConfig.search !== false &&
+            $page.frontmatter.search !== false
+        "
       />
-      <SearchBox v-else-if="$site.themeConfig.search !== false && $page.frontmatter.search !== false"/>
-      <NavLinks class="can-hide"/>
-      <a href="#" style="margin-left:20px" @click="darkMode.toggle()"><span class="tooltip"><Lightbulb alt-text="Toggle dark mode" /><span class="tooltiptext">Toggle dark mode</span></span></a>
-
+      <NavLinks class="can-hide" />
+      <a href="#" style="margin-left:20px" @click="darkMode.toggle()"
+        ><span class="tooltip"
+          ><Lightbulb alt-text="Toggle dark mode" /><span class="tooltiptext"
+            >Toggle dark mode</span
+          ></span
+        ></a
+      >
     </div>
   </header>
 </template>
 
 <script>
-import AlgoliaSearchBox from '@AlgoliaSearchBox'
-import SearchBox from '@SearchBox'
-import SidebarButton from '@theme/components/SidebarButton.vue'
-import NavLinks from '@theme/components/NavLinks.vue'
-import Lightbulb from '../../components/Fa/Lightbulb.vue'
-import DarkMode from '../util/dark-mode'
+import AlgoliaSearchBox from "@AlgoliaSearchBox";
+import SearchBox from "@SearchBox";
+import SidebarButton from "@theme/components/SidebarButton.vue";
+import NavLinks from "@theme/components/NavLinks.vue";
+import Lightbulb from "../../components/Fa/Lightbulb.vue";
+import DarkMode from "../util/dark-mode";
 
 export default {
-  components: { SidebarButton, NavLinks, SearchBox, AlgoliaSearchBox, Lightbulb },
+  components: {
+    SidebarButton,
+    NavLinks,
+    SearchBox,
+    AlgoliaSearchBox,
+    Lightbulb
+  },
 
-  data () {
+  data() {
     return {
       linksWrapMaxWidth: null,
       darkMode: null
-    }
+    };
   },
 
-  mounted () {
-    const MOBILE_DESKTOP_BREAKPOINT = 719 // refer to config.styl
-    const NAVBAR_VERTICAL_PADDING = parseInt(css(this.$el, 'paddingLeft')) + parseInt(css(this.$el, 'paddingRight'))
+  mounted() {
+    const MOBILE_DESKTOP_BREAKPOINT = 719; // refer to config.styl
+    const NAVBAR_VERTICAL_PADDING =
+      parseInt(css(this.$el, "paddingLeft")) +
+      parseInt(css(this.$el, "paddingRight"));
     const handleLinksWrapWidth = () => {
       if (document.documentElement.clientWidth < MOBILE_DESKTOP_BREAKPOINT) {
-        this.linksWrapMaxWidth = null
+        this.linksWrapMaxWidth = null;
       } else {
-        this.linksWrapMaxWidth = this.$el.offsetWidth - NAVBAR_VERTICAL_PADDING
-          - (this.$refs.siteName && this.$refs.siteName.offsetWidth || 0)
+        this.linksWrapMaxWidth =
+          this.$el.offsetWidth -
+          NAVBAR_VERTICAL_PADDING -
+          ((this.$refs.siteName && this.$refs.siteName.offsetWidth) || 0);
       }
-    }
-    handleLinksWrapWidth()
-    window.addEventListener('resize', handleLinksWrapWidth, false)
+    };
+    handleLinksWrapWidth();
+    window.addEventListener("resize", handleLinksWrapWidth, false);
 
-    this.darkMode = new DarkMode()
-    this.darkMode.init()
+    this.darkMode = new DarkMode();
+    this.darkMode.init();
   },
 
   computed: {
-    algolia () {
-      return this.$themeLocaleConfig.algolia || this.$site.themeConfig.algolia || {}
+    algolia() {
+      return (
+        this.$themeLocaleConfig.algolia || this.$site.themeConfig.algolia || {}
+      );
     },
 
-    isAlgoliaSearch () {
-      return this.algolia && this.algolia.apiKey && this.algolia.indexName
+    isAlgoliaSearch() {
+      return this.algolia && this.algolia.apiKey && this.algolia.indexName;
     }
   },
 
-
   methods: {
-    toggleDM () {
+    toggleDM() {
       this.darkMode.toggle();
     }
   }
-}
+};
 
-function css (el, property) {
+function css(el, property) {
   // NOTE: Known bug, will return 'auto' if style value is 'auto'
-  const win = el.ownerDocument.defaultView
+  const win = el.ownerDocument.defaultView;
   // null means not to return pseudo styles
-  return win.getComputedStyle(el, null)[property]
+  return win.getComputedStyle(el, null)[property];
 }
 </script>
 
 <style lang="stylus">
-$navbar-vertical-padding = 0.7rem
+$navbar-vertical-padding = 0.5rem
 $navbar-horizontal-padding = 1.5rem
 
 .navbar
@@ -116,7 +135,7 @@ $navbar-horizontal-padding = 1.5rem
   .links
     padding-left 1.5rem
     box-sizing border-box
-    background-color white
+    background-color #EDEDED
     white-space nowrap
     font-size 0.9rem
     position absolute

@@ -21,7 +21,7 @@ module.exports = {
     sidebarDepth: 2,
     sidebar: {
       '/guides/': [{
-        title: 'The Feathers guide',
+        title: 'The Feathers Guide',
         collapsable: false,
         children: [
           'basics/setup.md',

@@ -24,7 +24,7 @@ Feathers supports all NodeJS versions from the current Active LTS upwards. See [
 
 ## How do I create custom methods?
 
-One important thing to know about Feathers is that it only exposes the official [service methods](../api/services.md) to clients. While you can add and use any service method on the server, it is __not__ possible to expose those custom methods to clients.
+One important thing to know about Feathers is that it only exposes the official [service methods](../api/services.md) to clients. While you can add and use any service method on the server, it is **not** possible to expose those custom methods to clients.
 
 Feathers is built around the [REST architectural constraints](https://en.wikipedia.org/wiki/Representational_state_transfer#Architectural_constraints) and there are many good reasons for it. In general, almost anything that may require custom methods or RPC style actions can also be done either by creating a [custom service](../api/services.md) or through [hooks](../api/hooks.md).
 
@@ -37,11 +37,11 @@ Examples:
 Resources (services) don't have to be database records. It can be any kind of resource (like the current weather for a city or creating an email which will send it). Sending emails is usually done with either a separate email [service](../api/services.md):
 
 ```js
-app.use('/email', {
+app.use("/email", {
   create(data) {
     return sendEmail(data);
   }
-})
+});
 ```
 
 Or in a [hook](../api/hooks.md).
@@ -51,13 +51,9 @@ Or in a [hook](../api/hooks.md).
 This is what [Feathers hooks](../api/hooks.md) are for. When creating a new order you also have a well defined hook chain:
 
 ```js
-app.service('orders').hooks({
+app.service("orders").hooks({
   before: {
-    create: [
-      validateData(),
-      checkStock(),
-      checkVoucher()
-    ]
+    create: [validateData(), checkStock(), checkVoucher()]
   },
   after: {
     create: [
@@ -66,7 +62,7 @@ app.service('orders').hooks({
       updateStock() // Update product stock here
     ]
   }
-})
+});
 ```
 
 - A `userService.resetPassword` method
@@ -74,18 +70,20 @@ app.service('orders').hooks({
 This can also be implemented as a password service that resets the password in the `create` method:
 
 ```js
-const crypto = require('crypto');
+const crypto = require("crypto");
 
 class PasswordService {
   create(data) {
     const userId = data.user_id;
-    const userService = this.app.service('user');
-    
-    return userService.patch(userId, {
-      passwordToken: crypto.randomBytes(48)
-    }).then(user => sendEmail(user))
+    const userService = this.app.service("user");
+
+    return userService
+      .patch(userId, {
+        passwordToken: crypto.randomBytes(48)
+      })
+      .then(user => sendEmail(user));
   }
-  
+
   setup(app) {
     this.app = app;
   }
@@ -99,21 +97,21 @@ Normally we find that they actually aren't needed and that it is much better to 
 However, nested routes for services can still be created by registering an existing service on the nested route and mapping the route parameter to a query parameter like this:
 
 ```js
-app.use('/posts', postService);
-app.use('/users', userService);
+app.use("/posts", postService);
+app.use("/users", userService);
 
 // re-export the posts service on the /users/:userId/posts route
-app.use('/users/:userId/posts', app.service('posts'));
+app.use("/users/:userId/posts", app.service("posts"));
 
 // A hook that updates `data` with the route parameter
 function mapUserIdToData(context) {
-  if(context.data && context.params.route.userId) {
+  if (context.data && context.params.route.userId) {
     context.data.userId = context.params.route.userId;
   }
 }
 
 // For the new route, map the `:userId` route parameter to the query in a hook
-app.service('users/:userId/posts').hooks({
+app.service("users/:userId/posts").hooks({
   before: {
     find(context) {
       context.params.query.userId = context.params.route.userId;
@@ -121,8 +119,8 @@ app.service('users/:userId/posts').hooks({
     create: mapUserIdToData,
     update: mapUserIdToData,
     patch: mapUserIdToData
-  }  
-})
+  }
+});
 ```
 
 Now going to `/users/123/posts` will call `postService.find({ query: { userId: 123 } })` and return all posts for that user.
@@ -139,10 +137,10 @@ Feathers is using [JSON web tokens (JWT)](https://jwt.io/) for its standard auth
 - By default the only thing that Feathers stored in the JWT payload is the user id. It is a stateful token. You can change this and make the token stateless by putting more data into the JWT payload but this is at your discretion. Currently the user is looked up on every request after the JWT is verified to not be expired or tampered with.
 - You need to make sure that you revoke JWT tokens or set a low expiration date or add custom logic to verify that a user’s account is still valid/active. Currently the default expiration is 1 day. We chose a reasonable default for most apps but depending on your application this might be too long or too short.
 
-Additionally, it is still possible to use Feathers with existing *traditional* Express session mechanism by using [custom Express middleware](../api/express.md). For example, `params.user` for all service calls from a traditional Express session can be passed like this:
+Additionally, it is still possible to use Feathers with existing _traditional_ Express session mechanism by using [custom Express middleware](../api/express.md). For example, `params.user` for all service calls from a traditional Express session can be passed like this:
 
 ```js
-app.use(function(req,res, next) {
+app.use(function(req, res, next) {
   // Set service call `param.user` from `session.user`
   req.feathers.user = req.session.user;
 });
@@ -152,9 +150,9 @@ app.use(function(req,res, next) {
 
 Feathers [database adapters](../api/databases/adapters.md) implement 90% of the functionality you may need to use Feathers with certain databases and ORMs. However, even if your favourite database or ORM is not on the list or the adapter does not support specific functionality you are looking for, Feathers can still accomodate all your needs by [writing your own services](../api/services.md).
 
-> __Important:__ To use Feathers properly it is very important to understand how services work and that all existing database adapters are just services that talk to the database themselves.
+> **Important:** To use Feathers properly it is very important to understand how services work and that all existing database adapters are just services that talk to the database themselves.
 
-The why and how to write your own services is covered [in the Feathers guide](../guides/). In the generator a custom service can be created by running `feathers generate service`, choosing "A custom service" and then editing the `<servicename>/<servicename>.class.js` file to make the appropriate database calls.
+The why and how to write your own services is covered [in the Feathers Guide](../guides/). In the generator a custom service can be created by running `feathers generate service`, choosing "A custom service" and then editing the `<servicename>/<servicename>.class.js` file to make the appropriate database calls.
 
 If you would like to publish your own database adapter, first make sure there isn't already a [community maintained adapter](https://github.com/feathersjs/awesome-feathersjs#database) for that database (many maintainers are happy to get some help, too). If not, you can run `feathers generate plugin` to create a new plugin. A reference implementation for a database adapter can be found in the [feathers-memory repository](https://github.com/feathersjs-ecosystem/feathers-memory). It is always possible for community maintained adapters to graduate into an _official_ Feathers adapter, at the moment there are however no plans to add support for any new databases from the Feathers team directly.
 
@@ -164,7 +162,7 @@ In order to get real-time updates for a change, all requests have to go through 
 
 ## I am not getting real-time events
 
-Feathers v3 (`@feathersjs/feathers@v3.0.0`) introduced a more secure event system that does __not__ send real-time events by default. If you are not getting real-time events on the client, it is usually a problem with the [event channel](../api/channels.md) setup.
+Feathers v3 (`@feathersjs/feathers@v3.0.0`) introduced a more secure event system that does **not** send real-time events by default. If you are not getting real-time events on the client, it is usually a problem with the [event channel](../api/channels.md) setup.
 
 Have a look a the [quick start](../guides/basics/starting.md) and the [channels documentation](../api/channels.md).
 
@@ -184,7 +182,7 @@ See the above answer.
 
 ## How can I do custom methods like `findOrCreate`?
 
-Custom functionality can almost always be mapped to an existing service method using hooks.  For example, `findOrCreate` can be implemented as a before-hook on the service's `get` method.  [See this gist](https://gist.github.com/marshallswain/9fa3b1e855633af00998) for an example of how to implement this in a before-hook.
+Custom functionality can almost always be mapped to an existing service method using hooks. For example, `findOrCreate` can be implemented as a before-hook on the service's `get` method. [See this gist](https://gist.github.com/marshallswain/9fa3b1e855633af00998) for an example of how to implement this in a before-hook.
 
 ## How do I render templates?
 
@@ -231,10 +229,10 @@ With mongoose you can use the `$populate` query param to populate nested documen
 
 ```js
 // Find Hulk Hogan and include all the messages he sent
-app.service('user').find({
+app.service("user").find({
   query: {
-    name: 'hulk@hogan.net',
-    $populate: ['sentMessages']
+    name: "hulk@hogan.net",
+    $populate: ["sentMessages"]
   }
 });
 ```
@@ -243,13 +241,15 @@ With Sequelize you can do this:
 
 ```js
 // Find Hulk Hogan and include all the messages he sent
-app.service('user').find({
-  name: 'hulk@hogan.net',
+app.service("user").find({
+  name: "hulk@hogan.net",
   sequelize: {
-    include: [{
-      model: Message,
-      where: { sender: Sequelize.col('user.id') }
-    }]
+    include: [
+      {
+        model: Message,
+        where: { sender: Sequelize.col("user.id") }
+      }
+    ]
   }
 });
 ```
@@ -272,22 +272,21 @@ It's pretty much exactly the same as Express. More information can be found [her
 
 ## How do I do some processing after sending the response to the user?
 
-The hooks workflow allows you to handle these situations quite gracefully.  It depends if you `await` or not in your hook. Here's an example of a hook that sends an email, but doesn't wait for a success message.
+The hooks workflow allows you to handle these situations quite gracefully. It depends if you `await` or not in your hook. Here's an example of a hook that sends an email, but doesn't wait for a success message.
 
 ```js
 async context => {
-  
   // Send an email by calling to the email service.
-  context.app.service('emails').create({
-    to: 'user@email.com',
-    body: 'You are so great!'
+  context.app.service("emails").create({
+    to: "user@email.com",
+    body: "You are so great!"
   });
-  
+
   // Send a message to some logging service.
-  context.app.service('logging').create(context.data);
-  
+  context.app.service("logging").create(context.data);
+
   return context;
-}
+};
 ```
 
 ## How do I debug my app
@@ -305,10 +304,13 @@ For example, if you need 555 listeners, you can do this in your `src/app.js` fil
 When you make a call like:
 
 ```js
-const params = { foo: 'bar' };
-client.service('users').patch(1, { admin: true }, params).then(result => {
-  // handle response
-});
+const params = { foo: "bar" };
+client
+  .service("users")
+  .patch(1, { admin: true }, params)
+  .then(result => {
+    // handle response
+  });
 ```
 
 on the client the `context.params` object will only be available in your client side hooks. It will not be provided to the server. The reason for this is because `context.params` on the server usually contains information that should be server-side only. This can be database options, whether a request is authenticated, etc. If we passed those directly from the client to the server this would be a big security risk. Only the client side `context.params.query` and `context.params.headers` objects are provided to the server.
@@ -322,10 +324,10 @@ client.hooks({
     all: [
       context => {
         context.params.query.$client = {
-          platform: 'ios',
-          version: '1.0'
+          platform: "ios",
+          version: "1.0"
         };
-        
+
         return context;
       }
     ]
@@ -333,7 +335,7 @@ client.hooks({
 });
 
 // server side, inside app.hooks.js
-const hooks = require('feathers-hooks-common');
+const hooks = require("feathers-hooks-common");
 
 module.exports = {
   before: {
@@ -341,10 +343,10 @@ module.exports = {
       // remove values from context.params.query.$client and move them to context.params
       // so context.params.query.$client.version -> context.params.version
       // and context.params.query.$client is removed.
-      hooks.client('version', 'platform')
+      hooks.client("version", "platform")
     ]
   }
-}
+};
 ```
 
 ## My queries with null values aren't working
@@ -352,12 +354,14 @@ module.exports = {
 When making a request using REST (HTTP) query _string_ values don't have any type information and will always be strings. Some database adapters that have a schema (like `feathers-mongoose` or `feathers-sequelize`) will try to convert values to the correct type but others (like `feathers-mongodb`) can't. Additionally, `null` will always be a string and always has to be converted if you want to query for `null`. This can be done in a `before` [hook](../api/hooks.md):
 
 ```js
-app.service('myservice').hooks({
+app.service("myservice").hooks({
   before: {
     find(context) {
-      const { params: { query = {} } } = context;
+      const {
+        params: { query = {} }
+      } = context;
 
-      if(query.phone === 'null') {
+      if (query.phone === "null") {
         query.phone = null;
       }
 
@@ -371,16 +375,16 @@ app.service('myservice').hooks({
 
 Also see [this issue](https://github.com/feathersjs/feathers/issues/894).
 
-> __Note:__ This issue does not happen when using websockets since it retains all type information.
+> **Note:** This issue does not happen when using websockets since it retains all type information.
 
 ## Why are queries with arrays failing?
 
 If you are using REST and queries with larger arrays (more than 21 items to be exact) are failing, you are probably running into an issue with the [querystring](https://github.com/ljharb/qs) module which [limits the size of arrays to 21 items](https://github.com/ljharb/qs#parsing-arrays) by default. The recommended solution is to implement a custom query string parser function via `app.set('query parser', parserFunction)` with the `arrayLimit` option set to a higher value:
 
 ```js
-var qs = require('qs');
+var qs = require("qs");
 
-app.set('query parser', function (str) {
+app.set("query parser", function(str) {
   return qs.parse(str, {
     arrayLimit: 100
   });
