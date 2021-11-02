@@ -114,7 +114,7 @@ Feathers errors contain the following fields:
 - `message` - The error message string
 - `code` - The HTTP status code
 - `className` - A CSS class name that can be handy for styling errors based on the error type. (e.g. "bad-request" , etc.)
-- `data` - An object containing anything you passed to a Feathers error except for the `errors` object.
+- `data` - An object containing anything you passed to a Feathers error except for the `errors` object and `message`.
 - `errors` - An object containing whatever was passed to a Feathers error inside `errors`. This is typically validation errors or if you want to group multiple errors together.
 
 > **ProTip:** To convert a Feathers error back to an object call `error.toJSON()`. A normal `console.log` of a JavaScript Error object will not automatically show those additional properties described above (even though they can be accessed directly).
@@ -153,6 +153,7 @@ process.on('unhandledRejection', (reason, p) => {
   console.log('Unhandled Rejection at: Promise ', p, ' reason: ', reason);
 });
 ```
+
 ## Error Handling
 
 It is important to make sure that errors get cleaned up before they go back to the client. [Express error handling middleware](https://docs.feathersjs.com/api/express.html#expresserrorhandler) works only for REST calls. If you want to make sure that ws errors are handled as well, you need to use [App Hooks](https://docs.feathersjs.com/guides/basics/hooks.html#application-hooks). App Error Hooks get called on an error to every service call regardless of transport.
@@ -175,11 +176,11 @@ const errorHandler = ctx => {
     return ctx;
   }
 };
-
 ```
-then add it to the error.all hook
-```js
 
+then add it to the error.all hook
+
+```js
 module.exports = {
   //...
   error: {

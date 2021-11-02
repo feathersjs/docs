@@ -2,6 +2,12 @@
   <main class="page">
     <slot name="top"/>
 
+    <div class="page-warning content">
+      <p>
+        <strong>Important:</strong> This is the documentation for the upcoming Feathers v5 (Dove). See <a href="https://docs.feathersjs.com">docs.feathersjs.com</a> for the current version.
+      </p>
+    </div>
+
     <Content class="content" />
 
     <footer class="page-edit">

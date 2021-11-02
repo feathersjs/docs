@@ -23,9 +23,9 @@ Feathers core functionality that works on the client and the server
 ## Transports
 
 Expose a Feathers application as an API server
+  * [Koa](koa.md) - Feathers KoaJS framework bindings, REST API provider and error middleware.
   * [Express](express.md) - Feathers Express framework bindings, REST API provider and error middleware.
   * [Socket.io](socketio.md) - The Socket.io real-time transport provider
-  * [Primus](primus.md) - The Primus real-time transport provider
   * [Configuration](configuration.md) - A node-config wrapper to initialize configuration of a server side application.
   * [Channels](channels.md) - Decide what events to send to connected real-time clients
 
@@ -36,7 +36,6 @@ More details on how to use Feathers on the client
 * [Usage](client.md) - Feathers client usage in Node, React Native and the browser (also with Webpack and Browserify)
 * [REST](client/rest.md) - Feathers client and direct REST API server usage
 * [Socket.io](client/socketio.md) - Feathers client and direct Socket.io API server usage
-* [Primus](client/primus.md) - Feathers client and direct Primus API server usage
 
 ## Authentication
 

@@ -9,17 +9,17 @@
 npm install @feathersjs/rest-client --save
 ```
 
-`@feathersjs/rest-client` allows to connect to a service exposed through the [Express REST API](../express.md#expressrest) using [jQuery](https://jquery.com/), [request](https://github.com/request/request), [Superagent](http://visionmedia.github.io/superagent/), [Axios](https://github.com/mzabriskie/axios) or [Fetch](https://facebook.github.io/react-native/docs/network.html) as the AJAX library.
+`@feathersjs/rest-client` allows to connect to a service exposed through the [Express REST HTTP API](../express.md#expressrest) using [fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API), [Superagent](http://visionmedia.github.io/superagent/) or [Axios](https://github.com/mzabriskie/axios).
 
 > **Note:** For directly using a Feathers REST API (via HTTP) without using Feathers on the client see the [HTTP API](#http-api) section.
 
 <!-- -->
 
-> **ProTip:** REST client services do emit `created`, `updated`, `patched` and `removed` events but only _locally for their own instance_. Real-time events from other clients can only be received by using a real-time transport ([Socket.io](./socketio.md) or [Primus](./primus.md)).
+> **ProTip:** REST client services do emit `created`, `updated`, `patched` and `removed` events but only _locally for their own instance_. Real-time events from other clients can only be received by using a real-time transport ([Socket.io](./socketio.md)).
 
 <!-- -->
 
-> **Note:** A client application can only use a single transport (either REST, Socket.io or Primus). Using two transports in the same client application is normally not necessary.
+> **Note:** A client application can only use a single transport (e.g. either REST or Socket.io). Using two transports in the same client application is normally not necessary.
 
 ### rest([baseUrl])
 
@@ -89,11 +89,11 @@ app.service('messages').create({
 Allows to pass additional options specific to the AJAX library. `params.connection.headers` will be merged with `params.headers`:
 
 ```js
-app.configure(restClient.request(request));
+app.configure(restClient.axios(axios));
 
 app.service('messages').get(1, {
   connection: {
-    followRedirect: false
+    // Axios specific options here
   }
 });
 ```
@@ -119,62 +119,13 @@ promise.abort();
 
 `app.rest` contains a reference to the `connection` object passed to `rest().<name>(connection)`.
 
-### jQuery
+### Request libraries
 
-Pass the instance of jQuery (`$`) to `restClient.jquery`:
+The Feathers REST client can be used with several HTTP request libraries.
 
-```js
-app.configure(restClient.jquery(window.jQuery));
-```
+#### Fetch
 
-Or with a module loader:
-
-```js
-import $ from 'jquery';
-
-app.configure(restClient.jquery($));
-```
-
-### Request
-
-The [request](https://github.com/request/request) object needs to be passed explicitly to `feathers.request`. Using [request.defaults](https://github.com/request/request#convenience-methods) - which creates a new request object - is a great way to set things like default headers or authentication information:
-
-```js
-const request = require('request');
-const requestClient = request.defaults({
-  'auth': {
-    'user': 'username',
-    'pass': 'password',
-    'sendImmediately': false
-  }
-});
-
-app.configure(restClient.request(requestClient));
-```
-
-### Superagent
-
-[Superagent](http://visionmedia.github.io/superagent/) currently works with a default configuration:
-
-```js
-const superagent = require('superagent');
-
-app.configure(restClient.superagent(superagent));
-```
-
-### Axios
-
-[Axios](http://github.com/mzabriskie/axios) currently works with a default configuration:
-
-```js
-const axios = require('axios');
-
-app.configure(restClient.axios(axios));
-```
-
-### Fetch
-
-Fetch also uses a default configuration:
+Fetch uses a default configuration:
 
 ```js
 // In Node
@@ -185,6 +136,87 @@ app.configure(restClient.fetch(fetch));
 // In modern browsers
 app.configure(restClient.fetch(window.fetch));
 ```
+
+#### Superagent
+
+[Superagent](http://visionmedia.github.io/superagent/) currently works with a default configuration:
+
+```js
+const superagent = require('superagent');
+
+app.configure(restClient.superagent(superagent));
+```
+
+#### Axios
+
+[Axios](http://github.com/mzabriskie/axios) currently works with a default configuration:
+
+```js
+const axios = require('axios');
+
+app.configure(restClient.axios(axios));
+```
+
+### Custom Methods
+
+On the client, [custom service methods](../services.md#custom-methods) have to be listed via the `.methods` function to indicate that they can be called:
+
+:::: tabs :options="{ useUrlFragment: false }"
+
+::: tab "JavaScript"
+```js
+const feathers = require('@feathersjs/feathers');
+const rest = require('@feathersjs/rest-client');
+
+const client = feathers();
+
+// Connect to the same as the browser URL (only in the browser)
+const restClient = rest();
+
+// Connect to a different URL
+const restClient = rest('http://feathers-api.com')
+
+// Configure an AJAX library (see below) with that client 
+client.configure(restClient.fetch(window.fetch));
+
+// Initialize the method once
+client.service('myservice').methods('myCustomMethod');
+
+// Then it can be used like other service methods
+client.service('myservice').myCustomMethod(data, params);
+```
+:::
+
+::: tab "TypeScript"
+```typescript
+import { feathers, CustomMethod } from '@feathersjs/feathers';
+import rest, { RestService } from '@feathersjs/rest-client';
+
+// This will type `myservice` with the client methods and `myCustomMethod`
+type ServiceTypes = {
+  myservice: RestService & CustomMethod<'myCustomMethod'>
+}
+
+const client = feathers<ServiceTypes>();
+
+// Connect to the same as the browser URL (only in the browser)
+const restClient = rest();
+
+// Connect to a different URL
+const restClient = rest('http://feathers-api.com')
+
+// Configure an AJAX library (see below) with that client 
+client.configure(restClient.fetch(window.fetch));
+
+// Initialize the method once
+client.service('myservice').methods('myCustomMethod');
+
+// Then it can be used like other service methods
+client.service('myservice').myCustomMethod(data, params);
+```
+:::
+
+::::
 
 ### Connecting to multiple servers
 
@@ -422,3 +454,24 @@ DELETE /messages?read=true
 Will call `messages.remove(null, { query: { read: 'true' } })` to delete all read messages.
 
 > **Note:** With a [database adapters](../databases/adapters.md) the [`multi` option](../databases/common.md) has to be set to support patching multiple entries.
+
+
+### Custom methods
+
+[Custom service methods](../services.md#custom-methods) can be called directly via HTTP by sending a POST request and setting the `X-Service-Method` header to the method you want to call:
+
+```
+POST /messages
+
+X-Service-Method: myCustomMethod
+
+{
+  "message": "Hello world"
+}
+```
+
+Via CURL:
+
+```bash
+curl -H "Content-Type: application/json" -H "X-Service-Method: myCustomMethod" -X POST -d '{"message": "Hello world"}' http://localhost:3030/myservice
+```

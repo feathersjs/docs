@@ -16,7 +16,7 @@ module.exports = {
     logo: '/img/Feathers-logo-2021-Black.svg',
     repo: 'feathersjs/feathers',
     docsRepo: 'feathersjs/docs',
-    docsBranch: 'crow',
+    docsBranch: 'dove',
     editLinks: true,
     sidebarDepth: 2,
     sidebar: {
@@ -44,7 +44,6 @@ module.exports = {
       }],
       '/api/': [{
         title: 'Core',
-        collapsable: false,
         children: [
           'application.md',
           'services.md',
@@ -55,25 +54,29 @@ module.exports = {
         ]
       }, {
         title: 'Transports',
-        collapsable: false,
         children: [
+          'koa.md',
           'express.md',
           'socketio.md',
-          'primus.md',
           'channels.md'
         ]
       }, {
+        title: 'Schema',
+        children: [
+          'schema/',
+          'schema/schema.md',
+          'schema/resolvers.md',
+          'schema/hooks.md'
+        ]
+      }, {
         title: 'Client',
-        collapsable: false,
         children: [
           'client.md',
           'client/rest.md',
-          'client/socketio.md',
-          'client/primus.md'
+          'client/socketio.md'
         ]
       }, {
         title: 'Authentication',
-        collapsable: false,
         children: [
           'authentication/',
           'authentication/service.md',
@@ -86,7 +89,6 @@ module.exports = {
         ]
       }, {
         title: 'Databases',
-        collapsable: false,
         children: [
           'databases/adapters.md',
           'databases/common.md',
@@ -150,14 +152,11 @@ module.exports = {
         }, {
           text: 'Other versions',
           items: [{
-            text: 'Dove (v5, next)',
-            link: 'https://dove.docs.feathersjs.com/'
+            text: 'Crow (v4)',
+            link: 'https://crow.docs.feathersjs.com/'
           }, {
             text: 'Buzzard (v3)',
             link: 'https://buzzard.docs.feathersjs.com/'
-          }, {
-            text: 'Auk (v2)',
-            link: 'https://auk.docs.feathersjs.com/'
           }]
         }]
       }

@@ -24,13 +24,7 @@ Feathers supports all NodeJS versions from the current Active LTS upwards. See [
 
 ## How do I create custom methods?
 
-One important thing to know about Feathers is that it only exposes the official [service methods](../api/services.md) to clients. While you can add and use any service method on the server, it is **not** possible to expose those custom methods to clients.
-
-Feathers is built around the [REST architectural constraints](https://en.wikipedia.org/wiki/Representational_state_transfer#Architectural_constraints) and there are many good reasons for it. In general, almost anything that may require custom methods or RPC style actions can also be done either by creating a [custom service](../api/services.md) or through [hooks](../api/hooks.md).
-
-The benefits (like security, predictability, sending well defined real-time events) so far heavily outweighed the slight change in thinking required when conceptualizing your application logic.
-
-Examples:
+Feathers is built around the [REST architectural constraints](https://en.wikipedia.org/wiki/Representational_state_transfer#Architectural_constraints) reflected by its standard service methods. There are many benefits using those methods like security, predictability and sending pre-defined real-time events so you should try to structure your application as services. For example:
 
 - Send email action that does not store mail message in database.
 
@@ -65,30 +59,7 @@ app.service("orders").hooks({
 });
 ```
 
-- A `userService.resetPassword` method
-
-This can also be implemented as a password service that resets the password in the `create` method:
-
-```js
-const crypto = require("crypto");
-
-class PasswordService {
-  create(data) {
-    const userId = data.user_id;
-    const userService = this.app.service("user");
-
-    return userService
-      .patch(userId, {
-        passwordToken: crypto.randomBytes(48)
-      })
-      .then(user => sendEmail(user));
-  }
-
-  setup(app) {
-    this.app = app;
-  }
-}
-```
+However, there are some use cases where you might still want to allow additional methods for a client to call (like re-sending a verification email or resetting a password on the user service) and this is what [custom service method](../api/services.md#custom-methods) can be used for.
 
 ## How do I do nested or custom routes?
 
@@ -295,7 +266,7 @@ It's really no different than debugging any other NodeJS app but you can refer t
 
 ## `possible EventEmitter memory leak detected` warning
 
-This warning is not as bad as it sounds. If you got it from Feathers you most likely registered more than 64 services and/or event listeners on a Socket. If you don't think there are that many services or event listeners you may have a memory leak. Otherwise you can increase the number in the [Socket.io configuration](../api/socketio.md) via `io.sockets.setMaxListeners(number)` and with [Primus](../api/primus.md) via `primus.setMaxListeners(number)`. `number` can be `0` for unlimited listeners or any other number of how many listeners you'd expect in the worst case.
+This warning is not as bad as it sounds. If you got it from Feathers you most likely registered more than 64 services and/or event listeners on a Socket. If you don't think there are that many services or event listeners you may have a memory leak. Otherwise you can increase the number in the [Socket.io configuration](../api/socketio.md) via `io.sockets.setMaxListeners(number)`. `number` can be `0` for unlimited listeners or any other number of how many listeners you'd expect in the worst case.
 
 For example, if you need 555 listeners, you can do this in your `src/app.js` file by replacing `app.configure(socketio());` with `app.configure(socketio(function(io) {io.sockets.setMaxListeners(555);}));`.
 

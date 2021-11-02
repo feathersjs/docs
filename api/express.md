@@ -38,6 +38,11 @@ Note that `@feathersjs/express` (`express`) also exposes the standard [Express m
 - `express.static` - To statically host files in a folder
 - `express.Router` - Creates an Express router object
 
+
+## express(app, expressApp)
+
+`express(app, expressApp) -> app` allows to extend an existing Express application with the Feathers application `app`.
+
 ## express()
 
 If no Feathers application is passed, `express() -> app` returns a plain Express application just like a normal call to Express would.
@@ -238,7 +243,7 @@ const todoService = {
 app.use('/todos', logRequest, todoService, updateData);
 ```
 
-> __Important:__ Custom middleware will only run for REST requests and not when used with other transports like Socket.io or Primus.
+> __Important:__ Custom middleware will only run for REST requests and not when used with other transports (like Socket.io).
 
 Middleware that runs after the service has the service call information available as
 
