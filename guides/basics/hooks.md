@@ -116,7 +116,7 @@ Writeable properties are:
 
 - `context.params` - The service method call `params`. For external calls, `params` usually contains:
   - `context.params.query` - The query (e.g. query string for REST) for the service call
-  - `context.params.provider` - The name of the transport (which we will look at in the next chapter) the call has been made through. Usually `rest`, `socketio`, `primus`. Will be `undefined` for internal calls.
+  - `context.params.provider` - The name of the transport (which we will look at in the next chapter) the call has been made through. Usually `rest` or `socketio`. Will be `undefined` for internal calls.
 - `context.id` - The `id` for a `get`, `remove`, `update` and `patch` service method call
 - `context.data` - The `data` sent by the user in a `create`, `update` and `patch` service method call
 - `context.error` - The error that was thrown (in `error` hooks)

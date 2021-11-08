@@ -41,7 +41,7 @@ messages.emit('customEvent', {
 
 ## Service Events
 
-Any service automatically emits `created`, `updated`, `patched` and `removed` events when the respective service method returns successfully. This works on the client as well as on the server. When the client is using [Socket.io](socketio.md) or [Primus](primus.md), events will be pushed automatically from the server to all connected clients. This is essentially how Feathers does real-time.
+Any service automatically emits `created`, `updated`, `patched` and `removed` events when the respective service method returns successfully. This works on the client as well as on the server. When the client is using [Socket.io](socketio.md), events will be pushed automatically from the server to all connected clients. This is essentially how Feathers does real-time.
 
 > **ProTip:** Events are not fired until all of your [hooks](./hooks.md) have executed.
 
@@ -137,10 +137,6 @@ For example, a payment service that sends status events to the client while proc
 
 ```js
 class PaymentService {
-  constructor() {
-    this.events = ['status'];
-  },
-
   create(data, params) {
     createStripeCustomer(params.user).then(customer => {
       this.emit('status', { status: 'created' });
