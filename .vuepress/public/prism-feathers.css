@@ -15,7 +15,7 @@ code[class*="language-"] {
   color: #ffffff;
   font-size: 13px;
   text-shadow: none;
-  font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  font-family: Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
   direction: ltr;
   text-align: left;
   white-space: pre;
@@ -45,13 +45,13 @@ code[class*="language-"]::mozselection {
 }
 pre[class*="language-"] {
   padding: 1em;
-  margin: .5em 0;
+  margin: 0.5em 0;
   overflow: auto;
   background: #27464f;
 }
 :not(pre) > code[class*="language-"] {
-  padding: .1em .3em;
-  border-radius: .3em;
+  padding: 0.1em 0.3em;
+  border-radius: 0.3em;
   color: #f9c3ce;
   background: #27464f;
 }
@@ -59,16 +59,20 @@ pre[class*="language-"] {
 * Tokens
 */
 .namespace {
-  opacity: .7;
+  opacity: 0.7;
 }
-.token.comment,
+
 .token.prolog,
 .token.doctype,
 .token.cdata {
   color: #cccccc;
 }
+.token.comment {
+  color: #d4d4d4;
+  font-style: italic;
+}
 .token.punctuation {
-  color: #999999;
+  color: #cccccc;
 }
 .token.property,
 .token.tag,

@@ -114,17 +114,17 @@ function css(el, property) {
 </script>
 
 <style lang="stylus">
-$navbar-vertical-padding = 0.5rem
-$navbar-horizontal-padding = 1.5rem
+$navbar-vertical-padding = 0.25rem
+$navbar-horizontal-padding = 1rem
 
 .navbar
   padding $navbar-vertical-padding $navbar-horizontal-padding
-  line-height $navbarHeight - 1.4rem
+  line-height $navbarHeight - 0.25rem
   a, span, img
     display inline-block
   .logo
-    height $navbarHeight - 1.4rem
-    min-width $navbarHeight - 1.4rem
+    height $navbarHeight - 1rem
+    min-width $navbarHeight - 1rem
     margin-right 0.8rem
     vertical-align top
   .site-name

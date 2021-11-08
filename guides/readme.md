@@ -2,7 +2,7 @@
 
 Welcome to the Feathers Guides! This is the place to find all the resources to get started with Feathers.
 
-<img style="margin: 2em 0;" src="/img/key-image-horizontal.png" alt="Feathers key image">
+<img style="margin: 2em 0;" src="/img/Main charactar Uploading to Cloud.svg" alt="Feathers key image">
 
 ## The Feathers Guide
 

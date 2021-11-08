@@ -1,5 +1,7 @@
 # Migrating
 
+<img style="margin: 2em auto; max-width: 50%;" src="/img/Main Character Flying-02.svg" alt="Feathers key image">
+
 This guide explains the new features and changes to migrate to the Feathers v4 (Crow) release. It expects applications to be using the previous Feathers v3 (Buzzard).
 
 ## Versioning
@@ -20,7 +22,7 @@ feathers upgrade
 
 This will update the dependencies in `package.json`, update the `src/authentication.js` and `config/default.json` with the new authentication setup. The old contents will be kept in `src/authentication.backup.js` and `config/default.backup.json` but can be removed once upgrade is completed.
 
-__Manual steps are necessary for__
+**Manual steps are necessary for**
 
 - The `hashPassword()` hook in `service/users/users.hooks.js` which now requires the password field name (usually `hashPassword('password')`)
 - Configuring OAuth providers - see [OAuth API](../api/authentication/oauth.md)
@@ -44,45 +46,52 @@ To upgrade manually, replace the existing authentication configuration (usually 
 :::: tabs :options="{ useUrlFragment: false }"
 
 ::: tab "JavaScript"
+
 ```js
-const { AuthenticationService, JWTStrategy } = require('@feathersjs/authentication');
-const { LocalStrategy } = require('@feathersjs/authentication-local');
-const { expressOauth } = require('@feathersjs/authentication-oauth');
+const {
+  AuthenticationService,
+  JWTStrategy
+} = require("@feathersjs/authentication");
+const { LocalStrategy } = require("@feathersjs/authentication-local");
+const { expressOauth } = require("@feathersjs/authentication-oauth");
 
 module.exports = app => {
   const authentication = new AuthenticationService(app);
 
-  authentication.register('jwt', new JWTStrategy());
-  authentication.register('local', new LocalStrategy());
+  authentication.register("jwt", new JWTStrategy());
+  authentication.register("local", new LocalStrategy());
 
-  app.use('/authentication', authentication);
+  app.use("/authentication", authentication);
   app.configure(expressOauth());
 };
 ```
+
 :::
 
 ::: tab "TypeScript"
+
 ```typescript
-import { Application } from '@feathersjs/feathers';
-import { AuthenticationService, JWTStrategy } from '@feathersjs/authentication';
-import { LocalStrategy } from '@feathersjs/authentication-local';
-import { expressOauth } from '@feathersjs/authentication-oauth';
+import { Application } from "@feathersjs/feathers";
+import { AuthenticationService, JWTStrategy } from "@feathersjs/authentication";
+import { LocalStrategy } from "@feathersjs/authentication-local";
+import { expressOauth } from "@feathersjs/authentication-oauth";
 
 export default (app: Application) => {
   const authentication = new AuthenticationService(app);
 
-  authentication.register('jwt', new JWTStrategy());
-  authentication.register('local', new LocalStrategy());
+  authentication.register("jwt", new JWTStrategy());
+  authentication.register("local", new LocalStrategy());
 
-  app.use('/authentication', authentication);
+  app.use("/authentication", authentication);
   app.configure(expressOauth());
-}
+};
 ```
+
 :::
 
 ::::
 
-> __Important:__ The `@feathersjs/authentication-jwt` is deprecated since the JWT strategy is now directly included in `@feathersjs/authentication`.
+> **Important:** The `@feathersjs/authentication-jwt` is deprecated since the JWT strategy is now directly included in `@feathersjs/authentication`.
 
 This will register `local`, `jwt` and OAuth authentication strategies using the standard authentication service on the `/authentication` path. OAuth will only be active if provider information is added to the configuration. The authentication configuration (usually in `config/default.json`) should be updated as follows:
 
@@ -115,29 +124,31 @@ Instead of
 ```js
 const feathersClient = feathers();
 
-feathersClient.configure(rest('http://localhost:3030').superagent(superagent))
+feathersClient
+  .configure(rest("http://localhost:3030").superagent(superagent))
   .configure(auth({ storage: localStorage }));
 
-feathersClient.authenticate({
-  strategy: 'local',
-  email: 'admin@feathersjs.com',
-  password: 'admin'
-})
-.then(response => {
-  console.log('Authenticated!', response);
-  return feathersClient.passport.verifyJWT(response.accessToken);
-})
-.then(payload => {
-  console.log('JWT Payload', payload);
-  return feathersClient.service('users').get(payload.userId);
-})
-.then(user => {
-  feathersClient.set('user', user);
-  console.log('User', feathersClient.get('user'));
-})
-.catch(function(error){
-  console.error('Error authenticating!', error);
-});
+feathersClient
+  .authenticate({
+    strategy: "local",
+    email: "admin@feathersjs.com",
+    password: "admin"
+  })
+  .then(response => {
+    console.log("Authenticated!", response);
+    return feathersClient.passport.verifyJWT(response.accessToken);
+  })
+  .then(payload => {
+    console.log("JWT Payload", payload);
+    return feathersClient.service("users").get(payload.userId);
+  })
+  .then(user => {
+    feathersClient.set("user", user);
+    console.log("User", feathersClient.get("user"));
+  })
+  .catch(function(error) {
+    console.error("Error authenticating!", error);
+  });
 ```
 
 Can now be done as
@@ -155,9 +166,9 @@ async function authenticate() {
       email: 'admin@feathersjs.com',
       password: 'admin'
     });
-    
+
     console.log('User authenticated', user);
-    
+
     console.log('Authentication information is', await app.get('authentication'));
   } catch (error) {
     // Authentication failed
@@ -171,10 +182,10 @@ To access the current authentication information, the `app.get('authentication')
 
 ```js
 // user is the authenticated user
-const { user } = await app.get('authentication');
+const { user } = await app.get("authentication");
 
 // As a promise instead of async/await
-app.get('authentication').then(authInfo => {
+app.get("authentication").then(authInfo => {
   const { user } = authInfo;
 });
 ```
@@ -184,7 +195,7 @@ app.get('authentication').then(authInfo => {
 Important things to note:
 
 - Because of extensive changes and security improvements, you should change your JWT secret so that all users will be prompted to log in again.
-- The `jwt` options have been moved to `jwtOptions`. It takes all [jsonwebtoken options](https://github.com/auth0/node-jsonwebtoken#jwtsignpayload-secretorprivatekey-options-callback). The `subject` option __should be removed__ when using the standard setup.
+- The `jwt` options have been moved to `jwtOptions`. It takes all [jsonwebtoken options](https://github.com/auth0/node-jsonwebtoken#jwtsignpayload-secretorprivatekey-options-callback). The `subject` option **should be removed** when using the standard setup.
 - `authStrategies` are the strategies that are allowed on the `/authentication` endpoint
 - The `hashPassword` hook now explicitly requires the name of the field to hash instead of using a default (change any `hashPassword()` to e.g. `hashPassword('password')`).
 - For websockets, the `authenticate` event is no longer available. See [Socket.io Authentication direct usage](../api/client/socketio.md#authentication) for more information.
@@ -202,7 +213,7 @@ All `@feathersjs` modules now come with up-to-date TypeScript definitions. Any d
 Any Feathers application now allows to register a service at the root level with a name of `/`:
 
 ```js
-app.use('/', myService);
+app.use("/", myService);
 ```
 
 It will be available via `app.service('/')` through the client and directly at `http://feathers-server.com/` via REST.
@@ -215,7 +226,7 @@ Service events can now be skipped by setting `context.event` to `null`.
 context => {
   // Skip sending event
   context.event = null;
-}
+};
 ```
 
 ### `disconnect` event
@@ -223,12 +234,12 @@ context => {
 There is now an application level `disconnect` event when a connection gets disconnect:
 
 ```js
-app.on('disconnect', connection => {
+app.on("disconnect", connection => {
   // Do something on disconnect here
 });
 ```
 
-> __Note:__ Disconnected connections will be removed from all channels already automatically.
+> **Note:** Disconnected connections will be removed from all channels already automatically.
 
 ### Deprecated `(context, next)` and SKIP functionality
 
@@ -252,7 +263,7 @@ The use-cases for `feathers.SKIP` can now be explicitly handled by
 
 The latest versions of the Feathers database adapters include some important security and usability updates by requiring to explicitly enable certain functionality that was previously available by default.
 
-> __Important:__ The latest versions of the database adapters also work with previous versions of Feathers. An upgrade of the `@feathersjs/` modules is recommended but not necessary to use the latest database adapter features.
+> **Important:** The latest versions of the database adapters also work with previous versions of Feathers. An upgrade of the `@feathersjs/` modules is recommended but not necessary to use the latest database adapter features.
 
 ### Querying by id
 
@@ -261,8 +272,8 @@ All database adapters now support additional query parameters for `get`, `remove
 ```js
 // Will throw `NotFound` if `companyId` does not match
 // Even if the `id` is available
-app.service('/messages').get('<message id>', {
-  query: { companyId: '<my company>' }
+app.service("/messages").get("<message id>", {
+  query: { companyId: "<my company>" }
 });
 ```
 
@@ -272,21 +283,21 @@ The database adapters now support calling their service methods without any hook
 
 ```js
 // Call `get` without running any hooks
-const message = await app.service('/messages')._get('<message id>');
+const message = await app.service("/messages")._get("<message id>");
 ```
 
-> _Note:_ These methods are only available internally on the server, not on the client side and only for the Feathers database adapters. They do *not* send any events.
+> _Note:_ These methods are only available internally on the server, not on the client side and only for the Feathers database adapters. They do _not_ send any events.
 
 ### Multi updates
 
-Creating, updating or removing multiple records at once has always been part of the Feathers adapter specification but it turned out to be quite easy to miss. 
+Creating, updating or removing multiple records at once has always been part of the Feathers adapter specification but it turned out to be quite easy to miss.
 
 This means applications could be open to queries that a developer did not anticipate (like deleting or creating multiple records at once). Additionally, it could also lead to unexpected data in a hook that require special cases (like `context.data` or `context.result` being an array).
 
 Now, multiple `create`, `patch` and `remove` calls (with the `id` value set to `null`) are disabled by default and have to be enabled explicitly by setting the `multi` option:
 
 ```js
-const service = require('feathers-<database>');
+const service = require("feathers-<database>");
 
 // Allow multi create, patch and remove
 service({
@@ -295,12 +306,12 @@ service({
 
 // Only allow create with an array
 service({
-  multi: [ 'create' ]
+  multi: ["create"]
 });
 
 // Only allow multi patch and remove (with `id` set to `null`)
 service({
-  multi: [ 'patch', 'remove' ]
+  multi: ["patch", "remove"]
 });
 ```
 
@@ -313,11 +324,11 @@ Some database adapters allowed additional query parameters outside of the offici
 Non-standard query parameters (any query property starting with a `$`) will now throw an error. To allow them, they have to be explicitly whitelisted using the `whitelist` option:
 
 ```js
-const service = require('feathers-<database>');
+const service = require("feathers-<database>");
 
 // Allow to use $regex in query parameters
 service({
-  whitelist: [ '$regex' ]
+  whitelist: ["$regex"]
 });
 ```
 
@@ -334,9 +345,12 @@ For security reasons, the authentication secret should be changed so that all cu
 Although upgrading the clients and issuing new tokens is highly recommended, the following setup can be used to provide backwards compatible authentication:
 
 ```js
-const { AuthenticationService, JWTStrategy } = require('@feathersjs/authentication');
-const { LocalStrategy } = require('@feathersjs/authentication-local');
-const { expressOauth } = require('@feathersjs/authentication-oauth');
+const {
+  AuthenticationService,
+  JWTStrategy
+} = require("@feathersjs/authentication");
+const { LocalStrategy } = require("@feathersjs/authentication-local");
+const { expressOauth } = require("@feathersjs/authentication-oauth");
 
 class MyAuthenticationService extends AuthenticationService {
   async getPayload(authResult, params) {
@@ -353,7 +367,9 @@ class MyAuthenticationService extends AuthenticationService {
 
 class LegacyJWTStrategy extends JWTStrategy {
   getEntityId(authResult) {
-    const { authentication: { payload } } = authResult;
+    const {
+      authentication: { payload }
+    } = authResult;
 
     return payload.userId || payload.sub;
   }
@@ -362,10 +378,10 @@ class LegacyJWTStrategy extends JWTStrategy {
 module.exports = app => {
   const authentication = new MyAuthenticationService(app);
 
-  authentication.register('jwt', new LegacyJWTStrategy());
-  authentication.register('local', new LocalStrategy());
+  authentication.register("jwt", new LegacyJWTStrategy());
+  authentication.register("local", new LocalStrategy());
 
-  app.use('/authentication', authentication);
+  app.use("/authentication", authentication);
   app.configure(expressOauth());
 };
 ```
@@ -374,27 +390,27 @@ module.exports = app => {
 
 To support OAuth for the old authentication client that was using a cookie instead of the redirect to transmit the access token the following middleware can be used:
 
-> __Note:__ This is only necessary if the Feathers authentication client is not updated at the same time and if OAuth is being used.
+> **Note:** This is only necessary if the Feathers authentication client is not updated at the same time and if OAuth is being used.
 
 ```js
 const authService = new AuthenticationService(app);
 
-authService.register('jwt', new JWTStrategy());
-authService.register('local', new LocalStrategy());
-authService.register('github', new GitHubStrategy());
+authService.register("jwt", new JWTStrategy());
+authService.register("local", new LocalStrategy());
+authService.register("github", new GitHubStrategy());
 
-app.use('/authentication', authService);
-app.get('/oauth/cookie', (req, res) => {
+app.use("/authentication", authService);
+app.get("/oauth/cookie", (req, res) => {
   const { access_token } = req.query;
 
   if (access_token) {
-    res.cookie('feathers-jwt', access_token, {
+    res.cookie("feathers-jwt", access_token, {
       httpOnly: false
       // other cookie options here
     });
   }
 
-  res.redirect('/redirect-url');
+  res.redirect("/redirect-url");
 });
 
 app.configure(expressOauth());

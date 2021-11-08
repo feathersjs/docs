@@ -1,5 +1,7 @@
 # Frontend Frameworks
 
+<img style="margin: 2em 0;" src="/img/Main character on bench.svg" alt="Feathers key image">
+
 Feathers works the same on the server and on the client and is front-end framework agnostic. You can use it with Vue, React, React Native, Angular, or whatever other front-end tech stack you choose.
 
 ## Client Side Docs

@@ -1,5 +1,7 @@
 # Getting ready
 
+<img style="margin: 2em 0;" src="/img/Main charactar Uploading to Cloud.svg" alt="Feathers key image">
+
 Alright then! Let's learn what Feathers is all about. First we'll have a look at what we are going to do in this guide, what you should already know and what needs to be installed to use Feathers.
 
 ## What we will do
@@ -8,7 +10,7 @@ In this guide we will get a [quick start](./starting.md) by creating our first s
 
 ![The Feathers chat application](./assets/feathers-chat.png)
 
-You can find the final version at 
+You can find the final version at
 
 :::: tabs :options="{ useUrlFragment: false }"
 ::: tab "JavaScript"
@@ -35,7 +37,7 @@ $ npm --version
 6.9.0
 ```
 
-> __Note:__ Running NodeJS and npm should not require admin or root privileges.
+> **Note:** Running NodeJS and npm should not require admin or root privileges.
 
 Feathers does work in the browser and supports IE 10 and up. The browser examples used in the guides will however only work in the most recent versions of Chrome, Firefox, Safari and Edge.
 

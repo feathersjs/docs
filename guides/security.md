@@ -1,5 +1,7 @@
 # Security
 
+<img style="height: 5%; margin: 2em 0;" src="/img/Professor bird by server.svg" alt="Feathers key image">
+
 We take security very seriously at Feathers. We welcome any peer review of our 100% open source code to ensure nobody's Feathers app is ever compromised or hacked. However, as a web application developer, you are responsible for the security of your application. We do our very best to make sure Feathers is as secure as possible.
 
 ## Reporting security issues
@@ -32,5 +34,3 @@ Here are some things that you should be aware of when writing your app to make s
 As with any web application **you** need to guard against XSS attacks. Since Feathers persists the JWT in localstorage in the browser, if your app falls victim to a XSS attack your JWT could be used by an attacker to make malicious requests on your behalf. This is far from ideal. Therefore you need to take extra care in preventing XSS attacks. Our stance on this particular attack vector is that if you are susceptible to XSS attacks, then a compromised JWT is the least of your worries because keystrokes could be logged and attackers can just steal passwords, credit card numbers, or anything else your users type directly.
 
 For more information see [this issue](https://github.com/feathersjs/authentication/issues/132)
-
-
