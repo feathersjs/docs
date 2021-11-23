@@ -1,4 +1,4 @@
-# OAuth
+access_token# OAuth
 
 [![npm version](https://img.shields.io/npm/v/@feathersjs/authentication-oauth.svg?style=flat-square)](https://www.npmjs.com/package/@feathersjs/authentication-oauth)
 [![Changelog](https://img.shields.io/badge/changelog-.md-blue.svg?style=flat-square)](https://github.com/feathersjs/feathers/blob/crow/packages/authentication-oauth/CHANGELOG.md)
@@ -101,7 +101,7 @@ There are two ways to initiate OAuth authentication:
     - The frontend (e.g. [authentication client](./client.md)) uses the returned access token to authenticate
 
 2) With an existing access token, e.g. obtained through the Facebook mobile SDK
-    - Authenticate normally with `{ strategy: '<name>', access_token: 'oauth access token' }`.
+    - Authenticate normally with `{ strategy: '<name>', accessToken: 'oauth access token' }`.
     - Calls the [OauthStrategy](#oauthstrategy) which
         - Gets the users profile
         - Finds or creates the entity for that profile
