@@ -157,6 +157,17 @@ const axios = require('axios');
 app.configure(restClient.axios(axios));
 ```
 
+To use default values for all requests, `axios.create` with [the axios configuration](https://axios-http.com/docs/req_config) can be used:
+
+```js
+const axios = require('axios');
+
+app.configure(restClient.axios(axios.create({
+  headers: {'X-Requested-With': 'My-Feathers-Frontend'}
+})));
+```
+
+
 ### Custom Methods
 
 On the client, [custom service methods](../services.md#custom-methods) have to be listed via the `.methods` function to indicate that they can be called:
