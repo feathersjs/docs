@@ -8,7 +8,7 @@ We will start by providing the required configuration for this strategy. You sho
     ...otherConfig,
     "authStrategies": [ ...otherStrategies, "apiKey" ],
     "apiKey": {
-      "allowedKeys": [ "API_KEY_1", "API_KEY_2" ]
+      "allowedKeys": [ "API_KEY_1", "API_KEY_2" ],
       "header": "x-access-token"
     }
   }
