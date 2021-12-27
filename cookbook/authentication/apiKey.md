@@ -179,6 +179,9 @@ export default (): Hook => {
 This hook should be added __before__ the [authenticate hook](../../api/authentication/hook.md) wherever API Key authentication should be allowed:
 
 ```js
+import { authenticate } from '@feathersjs/authentication/lib/hooks';
+import allowApiKey from './hooks/allow-api-key';
+
 all: [ allowApiKey(), authenticate('jwt', 'apiKey') ],
 ```
 
