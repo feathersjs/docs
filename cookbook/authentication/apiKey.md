@@ -8,7 +8,32 @@ We will start by providing the required configuration for this strategy. You sho
     ...otherConfig,
     "authStrategies": [ ...otherStrategies, "apiKey" ],
     "apiKey": {
-      "allowedKeys": [ "API_KEY_1", "API_KEY_2" ]
+      "allowedKeys": [ "API_KEY_1", "API_KEY_2" ],
+      "header": "x-access-token"
+    }
+  }
+}
+```
+
+Note: if all you want is api key authentication, it is still necessary to register a secret, service and entity. Since no other authentication method is used, entity can be `null`.
+
+A fully working example with just API key authentication:
+```json
+{
+  "host": "localhost",
+  "port": 3030,
+  "public": "../public/",
+  "paginate": {
+    "default": 10,
+    "max": 50
+  },
+  "authentication": {
+    "secret": "some-secret",
+    "service": "users",
+    "entity": null,
+    "authStrategies": ["apiKey"],
+    "apiKey": {
+      "allowedKeys": [ "API_KEY_1", "API_KEY_2" ],
       "header": "x-access-token"
     }
   }
@@ -50,32 +75,50 @@ module.exports = app => {
 ::: tab "TypeScript"
 ```ts
 import { AuthenticationBaseStrategy, AuthenticationResult, AuthenticationService } from '@feathersjs/authentication';
-import { NotAuthenticated } from '@feathersjs/errors': 
+import { NotAuthenticated } from '@feathersjs/errors';
+import { ServiceAddons } from '@feathersjs/feathers';
+import { Application } from './declarations';
+
+
+declare module './declarations' {
+  interface ServiceTypes {
+    'authentication': AuthenticationService & ServiceAddons<any>;
+  }
+}
 
 class ApiKeyStrategy extends AuthenticationBaseStrategy {
+  app: Application;
+
+  constructor(app: Application) {
+    super();
+    this.app = app;
+  }
+
   async authenticate(authentication: AuthenticationResult) {
     const { token } = authentication;
-  
-    const config = this.authentication.configuration[this.name];
+
+    const config = this.app.get('authentication').apiKey;
 
     const match = config.allowedKeys.includes(token);
     if (!match) throw new NotAuthenticated('Incorrect API Key');
-  
+
     return {
       apiKey: true
     }
   }
 }
 
-export default function(app: Application) {
+export default function (app: Application) {
   const authentication = new AuthenticationService(app);
-  // ... authentication service setup
-  authentication.register('apiKey', new ApiKeyStrategy());
+
+  // This can have multiple .register calls if multiple strategies have been added
+  authentication.register('apiKey', new ApiKeyStrategy(app));
+
+  app.use('/authentication', authentication);
 }
 ```
 :::
 ::::
-
 
 Next, we create a hook called `allow-apiKey` that sets `params.authentication` if it does not exist and if `params.provider` exists (which means it is an external call) to use that `apiKey` strategy. We will also provide the capability for the apiKey to be read from the request header: (you could also read the token as a query parameter but you will have to filter it out before it's passed to Feathers calls like `get` and `find`.
 
@@ -114,7 +157,7 @@ export default (): Hook => {
     const { params, app } = context;
 
     const headerField = app.get('authentication').apiKey.header;
-    const token = params.headers[headerField];
+    const token = params.headers ? params.headers[headerField] : null;
 
     if (token && params.provider && !params.authentication) {
       context.params = {
