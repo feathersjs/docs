@@ -61,12 +61,11 @@ module.exports = {
           'channels.md'
         ]
       }, {
-        title: 'Schema',
+        title: 'Schemas',
         children: [
           'schema/',
           'schema/schema.md',
-          'schema/resolvers.md',
-          'schema/hooks.md'
+          'schema/resolvers.md'
         ]
       }, {
         title: 'Client',
