@@ -1,16 +1,22 @@
 # Resolvers
 
-Resolvers dynamically resolve individual properties based on a context, in a Feathers application usually the [hook context](../hooks.md).
+Resolvers dynamically resolve individual properties based on a context, in a Feathers application usually the [hook context](../hooks.md#hook-context).
 
 This provide a flexible way to do things like:
+
   - Populating associations
-  - Securing queries and e.g. limiting requests to a user
-  - Setting context (e.g. user) specific default values
+  - Returning computed properties
+  - Securing queries and e.g. limiting requests for a user
+  - Setting context (like user) specific default values
   - Removing protected properties for external requests
   - Add read- and write permissions on the property level
   - Hashing passwords and validating dynamic password policies
 
-Resolvers usually work together with [schema definitions](./schema.md) but can also be used on their own. You can create a resolver for any data type and resolvers can also be used outside of Feathers. Here is an example for a standalone resolver using a custom context:
+Resolvers usually work together with [schema definitions](./schema.md) but can also be used on their own. You can create a resolver for any data type and resolvers can also be used outside of Feathers.
+
+## Example
+
+Here is an example for a standalone resolver using a custom context:
 
 :::: tabs :options="{ useUrlFragment: false }"
 
@@ -66,7 +72,7 @@ import { resolve } from '@feathersjs/schema';
 
 type User = {
   id: number;
-  name: 'David'
+  name: string;
 }
 
 type Message = {
@@ -123,6 +129,13 @@ const partialMessage: Pick<User, 'id'|'text'|'user'> = await messageResolver.res
 
 ::::
 
+## Options
+
+A resolver takes the following options:
+
+- `schema` (_optional_): The schema used for this resolver
+- `validate` (_optional_): Validate the schema `before` or `after` resolving properties or not at all (`false`)
+- `properties`: An object of property names and their resolver functions
 
 ## Resolver functions
 
@@ -150,10 +163,92 @@ const userResolver = resolve({
 
 ## Feathers resolvers
 
-In a Feathers application, resolvers are normally used to convert service method data and responses:
+In a Feathers application, resolvers are normally used together with a [schema definition](./schema.md) to convert service method query, data and responses. When a schema is passed to the resolver it can validate the data before or after the resolver runs. The context for these resolvers is always the [Feathers hook context](../hooks.md#hook-context).
 
-- `data` resolver - Converts the `data` from a `create`, `update` or `patch` [service method](). This can be used to e.g. hash a password before storing it in the database or to remove properties the user is not allowed to write.
-- `query` resolver - Resolves [params.query](). This is often used to set default values or limit the query so a user can only request data they are allowed to see.
-- `result` resolver - Resolves the data that is returned by a service call ([context.result]() in a hook). This can be used to populate associations or protect properties from being returned for external requests.
+### Data resolvers
 
-The context for these resolvers is always the [Feathers hook context]() so you can access all method call information and other services. are used through the [resolver hooks](./hooks.md).
+`data` resolvers convert the `data` from a `create`, `update` or `patch` [service method](../services.md). This can be used to e.g. hash a password before storing it in the database or to remove properties the user is not allowed to write.
+
+A data resolver can be used on a service with the `resolveData` hook:
+
+```ts
+export const userSchema = schema({
+  $id: 'UserData',
+  type: 'object',
+  additionalProperties: false,
+  required: ['email'],
+  properties: {
+    email: { type: 'string' },
+    password: { type: 'string' }
+  }
+} as const);
+
+export type User = Infer<typeof userSchema>;
+
+export const userDataResolver = resolve<User, HookContext<Application>>({
+  schema: userSchema,
+  validate: 'before',
+  properties: {
+    password: async (password) => {
+      return hashPassword(password);
+    }
+  }
+});
+
+app.service('users').hooks({
+  create: [
+    resolveData(userDataResolver)
+  ]
+});
+```
+ 
+### Result resolvers
+
+`result` resolvers modify the data that is returned by a service call ([context.result](../hooks.md#context-result) in a hook). This can be used to populate associations or protect properties from being returned for external requests. A result resolver should also have a schema to know the shape of the data that will be returned but it does by default not run any validation.
+
+A result resolver can be registered for all or individual service methods using the `resolveResult` hook.
+
+### Query resolvers
+
+`query` resolvers modify `params.query`. This is often used to set default values or limit the query so a user can only request data they are allowed to see.
+
+```ts
+export const messageQuerySchema = schema({
+  $id: 'MessageQuery',
+  type: 'object',
+  additionalProperties: false,
+  properties: {
+    $limit: {
+      type: 'number',
+      minimum: 0,
+      maximum: 100
+    },
+    $skip: {
+      type: 'number'
+    },
+    $resolve: {
+      type: 'array',
+      items: { type: 'string' }
+    },
+    userId: queryProperty({
+      type: 'number'
+    })
+  }
+} as const);
+
+export type MessageQuery = Infer<typeof messageQuerySchema>;
+
+export const messageQueryResolver = resolve<MessageQuery, HookContext<Application>>({
+  schema: messageQuerySchema,
+  validate: 'before',
+  properties: {
+    userId: async (value, _query, context) => {
+      if (context.params?.user) {
+        return context.params.user.id;
+      }
+
+      return value;
+    }
+  }
+});
+```
