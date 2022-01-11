@@ -51,6 +51,35 @@ export type User = Infer<typeof userSchema>;
 
 > __Very Important:__ To get the correct TypeScript types the definition always needs to be declared via `schema({} as const)`.
 
+## Options
+
+`schema(definition, ajv)` allows to initialize a schema with a custom AJV instance:
+
+```js
+import ajvErrors from 'ajv-errors';
+import Ajv form 'ajv';
+import { schema } from '@feathersjs/schema';
+
+const ajv = new Ajv({
+  coerceTypes: true
+});
+
+ajvErrors(ajv);
+
+export const userSchema = schema({
+  $id: 'User',
+  type: 'object',
+  additionalProperties: false,
+  required: ['email', 'password'],
+  properties: {
+    id: { type: 'number' },
+    email: { type: 'string' },
+    password: { type: 'string' }
+  }
+}, ajv);
+
+```
+
 ## Extension
 
 To create a new schema that extends an existing one, combine the schema properties from `schema.definition` with the new properties:
