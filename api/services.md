@@ -268,7 +268,7 @@ const app = feathers()
   });
 ```
 
-See the [REST client](./client/rest.md) and [Socket.io client](,.client/socketio.md) chapters on how to use those custom methods on the client.
+See the [REST client](./client/rest.md) and [Socket.io client](./client/socketio.md) chapters on how to use those custom methods on the client.
 
 > __Important:__ When passing the `methods` option __all methods__ you want to expose, including standard service methods, must be listed. This allows to completely disable standard service method you might not want to expose. The `methods` option only applies to external access (via a transport like HTTP or websockets). All methods continue to be available internally on the server.
 
