@@ -4,21 +4,20 @@
 [![Dependency Status](https://img.shields.io/david/feathersjs/feathers.svg?style=flat-square&path=packages/socketio)](https://david-dm.org/feathersjs/feathers?path=packages/schema)
 [![Download Status](https://img.shields.io/npm/dm/@feathersjs/schema.svg?style=flat-square)](https://www.npmjs.com/package/@feathersjs/schema)
 
-`@feathersjs/schema` provides a way to define data models and to dynamically resolve them. It comes in three parts:
+`@feathersjs/schema` provides a way to define data models and to dynamically resolve them. It comes in two main parts:
 
-- [Schema](./schema.md) - Use [JSON schema](https://json-schema.org/) to define a data model with types and basic validations. This allows us to:
+- [Schema](./schema.md) - Uses [JSON schema](https://json-schema.org/) to define a data model with TypeScript types and basic validations. This allows us to:
   - Ensure data is valid and always in the right format
   - Automatically get TypeScript types from schema definitions
   - Automatically generate API documentation
   - Create [database adapter](../databases/commond.md) models without duplicating the data format
   - Validate query string queries and convert them to the right type
-- [Resolvers](./resolvers.md) - Resolve schema properties based on a context (usually the [hook context]()). This can be used for many different things like:
+- [Resolvers](./resolvers.md) - Resolve schema properties based on a context (usually the [hook context](../hooks.md)). This can be used for many different things like:
   - Populating associations
   - Securing queries and e.g. limiting requests to a user
   - Removing protected properties for external requests
   - Ability to add read- and write permissions on the property level
   - Hashing passwords and validating dynamic password policies
-- [Hooks](./hooks.md) - A collection of hooks that allow to validate schemas and resolve data.
 
 Here is an example of a user schema definition and resolver:
 

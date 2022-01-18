@@ -4,7 +4,7 @@ This guide explains the new features and changes necessary to migrate to the Fea
 
 ## Status
 
-The final v5 release is expected in the first quarter of 2022. Aside from the breaking changes and new features documented here, it will feature a new customizable CLI generator and a flexible schema definition system (more to follow when those pre-releases are ready). For more information
+The final v5 release is expected in the first quarter of 2022. Aside from the breaking changes and new features documented here. For more information
 
 - Follow [the v5 milestone](https://github.com/feathersjs/feathers/milestone/11) - open issues are in development, closed issues are already published as a prerelease
 - See the current [v5 Changelog](https://github.com/feathersjs/feathers/blob/dove/changelog.md#change-log)
@@ -20,13 +20,20 @@ npm install
 
 ## Features
 
-### Asynchronous setup
+### Schemas and resolvers
 
-`service.setup`, `app.setup` and `app.listen` now run asynchronously and return a Promise. This can be used to initialize database connections, caches etc. in the correct order and before the application starts. For more dynamic initialization flows, these methods can also be used with `@feathersjs/hooks`.
+[`@feathersjs/schema`](../api/schema/readme.md) provides a way to define data models and to dynamically resolve them. It comes in two main parts:
+
+- [Schema](../api/schema/schema.md) - Uses [JSON schema](https://json-schema.org/) to define a data model with TypeScript types and basic validations. This allows us to:
+- [Resolvers](../api/schema/resolvers.md) - Resolve schema properties based on a context (usually the [hook context](../api/hooks.md)).
 
 ### Custom methods
 
-See the [services API docs](../api/services.md#custom-methods) how to set up custom service methods and the [REST client](../api/client/rest.md#feathersjs-rest-client) and [Socket.io client](../api/client/socketio.md#feathersjs-socketio-client) chapters on how to use them on the client.
+Provides a way to expose custom service methods to external clients. See the [services API custom method docs](../api/services.md#custom-methods) how to set up custom service methods and the [REST client](../api/client/rest.md#feathersjs-rest-client) and [Socket.io client](../api/client/socketio.md#feathersjs-socketio-client) chapters on how to use them on the client.
+
+### Asynchronous setup
+
+`service.setup`, `app.setup` and `app.listen` now run asynchronously and return a Promise. This can be used to initialize database connections, caches etc. in the correct order and before the application starts. For more dynamic initialization flows, these methods can also be used with `@feathersjs/hooks`.
 
 ### Async hooks
 
@@ -86,7 +93,7 @@ The automatic environment variable substitution in `@feathersjs/configuration` w
 
 ### Debugging
 
-The `debug` module has been removed as a direct dependency. This reduces the the client bundle size and allows to add a custom logger to Feathers internals. The original `debug` functionality can now be initialized as follows:
+The `debug` module has been removed as a direct dependency. This reduces the the client bundle size and allows to support other platforms (like Deno). The original `debug` functionality can now be initialized as follows:
 
 ```js
 const feathers = require('@feathersjs/feathers');
@@ -95,12 +102,12 @@ const debug = require('debug');
 feathers.setDebug(debug);
 ```
 
-To set a custom logger:
+It is also possible to set a custom logger like this:
 
 ```js
 const feathers = require('@feathersjs/feathers');
 
-const customDebug = (name) => (...args) => {
+const customDebug = name => (...args) => {
   console.log(name, ...args);
 }
 
@@ -115,21 +122,16 @@ Setting the debugger will apply to all `@feathersjs` modules.
 - Since all modern browsers now support built-in [fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API), the Angular and jQuery REST clients have been removed as well.
 - The `@feathersjs/client` package now only comes with a full (`dist/feathers.js`) and core (`dist/core.js`) browser build. Using Feathers [with a module loader](../api/client.md#module-loaders) is recommended for all other use cases.
 
-### Authentication
-
-- Grant upgrade
-- handleConnection update
-
 ### Removed primus transport
 
-Due to low usage `@feathersjs/primus` and `@feathers/primus-client` have been removed from Feathers core. If you require continued support consider adopting it [as a sponsored module](https://github.com/sponsors/daffl).
+Due to low usage `@feathersjs/primus` and `@feathers/primus-client` have been removed from Feathers core.
 
 ### Legacy socket format and timeouts
 
-- The legacy `servicename::method` socket message format has been deprecated in Feathers 3 and has now been removed. Use a v3 or later [Feathers client]() or the [current Socket.io direct connection API]().
+- The legacy `servicename::method` socket message format has been deprecated in Feathers 3 and has now been removed. Use a v3 or later [Feathers client](../api/client.md) or the [current Socket.io direct connection API](../api/client/socketio.md).
 - The `timeout` setting for socket services has been removed. It was mainly intended as a fallback for the old message format and interfered with the underlying timeout and retry mechanism provided by the websocket libraries themselves.
 
-### Uberproto
+### Removed `service.mixin()`
 
 Services are no longer Uberproto (an ES5 inheritance utility) objects and instead rely on modern JavaScript classes and extension. This means `app.service(name).mixin(data)` is no longer available which can be replaced with a basic `Object.assign(app.service(name), data)`:
 
@@ -177,5 +179,6 @@ app.service('myservice').hooks([
 ### Other internal changes
 
 - The undocumented `service._setup` method introduced in v1 will no longer be called. It was used to circumvent middleware inconsistencies from Express 3 and is no longer necessary.
-- The undocumented `app.providers` has been removed since it provided the same functionality as [`app.mixins`]()
+- The undocumented `app.providers` has been removed since it provided the same functionality as [`app.mixins`](../api/application.md#mixins)
 - `app.disable`, `app.disabled`, `app.enable` and `app.enabled` have been removed from basic Feathers applications. It will still be available in an Express compatible Feathers application. `app.get()` and `app.set()` should be used instead.
+- The Express `rest` adapter now needs to be configured in the correct order, usually right after the `json()` middleware. This is already the case in generated applications but it may have to be adjusted in a custom setup.
