@@ -25,7 +25,7 @@ Existing resources may already have an answer to your question, so it always mak
 
 If none of those work it's a very real possibility that we screwed something up or it's just not clear. We're sorry :disappointed_relieved:. We want to hear about it and are very friendly so feel free to come talk to us:
 
-[Join the Slack group >](http://slack.feathersjs.com/)
+[Join the Discord server >](https://discord.gg/qa8kez8QBx)
 
 [Submit your issue to GitHub >](https://github.com/feathersjs/feathers/issues/new) 
 
