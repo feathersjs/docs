@@ -313,6 +313,6 @@ export const messagePatchSchema = schema({
 app.service('messages').hooks({
   create: validateData(messageSchema),
   update: validateData(messageSchema),
-  path: validateData(messagePatchSchema)
+  patch: validateData(messagePatchSchema)
 });
 ```
