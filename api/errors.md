@@ -124,9 +124,9 @@ Feathers errors contain the following fields:
 You can create custom errors by extending from the `FeathersError` class and calling its constructor with `(msg, name, code, className, data)`:
 
 - `message` - The error message
-- `name` - The error name (e.g. `my-error`)
+- `name` - The error name (e.g. `MyError`)
 - `code` - An [HTTP error code](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html)
-- `className` - The full name of the error class
+- `className` - The full name of the error class (e.g. `my-error`)
 - `data` - Additional data to include in the error
 
 
@@ -135,7 +135,7 @@ const { FeathersError } = require('@feathersjs/errors');
 
 class UnsupportedMediaType extends FeathersError {
   constructor(message, data) {
-    super(message, 'unsupported-media-type', 415, 'UnsupportedMediaType', data);
+    super(message, 'UnsupportedMediaType', 415, 'unsupported-media-type', data);
   }
 }
 
