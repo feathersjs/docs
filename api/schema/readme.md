@@ -10,7 +10,7 @@
   - Ensure data is valid and always in the right format
   - Automatically get TypeScript types from schema definitions
   - Automatically generate API documentation
-  - Create [database adapter](../databases/commond.md) models without duplicating the data format
+  - Create [database adapter](../databases/common.md) models without duplicating the data format
   - Validate query string queries and convert them to the right type
 - [Resolvers](./resolvers.md) - Resolve schema properties based on a context (usually the [hook context](../hooks.md)). This can be used for many different things like:
   - Populating associations
