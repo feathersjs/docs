@@ -35,6 +35,7 @@
   },
   "directories": {},
   "dependencies": {
+    "feathers-docs": "file:",
     "vuepress-plugin-font-awesome": "^1.90.6"
   },
   "devDependencies": {
