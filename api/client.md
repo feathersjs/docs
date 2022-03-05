@@ -113,6 +113,16 @@ For Webpack, the recommended `babel-loader` rule normally excludes everything in
 }
 ```
 
+### Vue CLI
+
+For Vue CLI, the `transpileDependencies` option will need to include `@feathersjs/*`. This is accomplished in the `vue.config.js` configuration file.
+
+```js
+module.exports = {
+  transpileDependencies: ["@feathersjs/*"]
+};
+```
+
 ### create-react-app
 
 [create-react-app](https://github.com/facebookincubator/create-react-app) uses [Webpack](#webpack) but does not allow to modify the configuration unless you eject. If you do not want to eject, use the [@feathersjs/client](https://github.com/feathersjs/client) module instead.
