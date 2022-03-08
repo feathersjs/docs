@@ -38,7 +38,7 @@ Simple right? We've now rendered a list of messages using the `/views/message-li
 
 Feathers is by default stateless and does not use any sessions. You already can protect Express endpoints with the [express.authenticate](../../api/express.md#express-authenticate) middleware, however this will only work when passing the `Authorization` header (usually with a JWT) which a normal browser request does not support.
 
-In order to render authenticated pages, [express-sesssion](https://www.npmjs.com/package/express-session) can be used to add the authentication information to the (browser) session:
+In order to render authenticated pages, [express-session](https://www.npmjs.com/package/express-session) can be used to add the authentication information to the (browser) session:
 
 > npm i express-session --save
 
