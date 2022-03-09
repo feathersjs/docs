@@ -18,6 +18,8 @@ npx npm-check-updates --upgrade --target newest --filter /@feathersjs/
 npm install
 ```
 
+You can see the migration steps necessary for the Feathers chat [here for Javascript](https://github.com/feathersjs/feathers-chat/compare/dove-pre) and [here for TypeScript](https://github.com/feathersjs/feathers-chat-ts/compare/dove-pre).
+
 ## Features
 
 ### Schemas and resolvers
