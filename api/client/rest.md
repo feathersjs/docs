@@ -70,6 +70,8 @@ const messages = app.service('messages');
 
 <!-- -->
 
+> **ProTip:** When `window.fetch` (or just `fetch` which is normally equal to `window.fetch`) is passed to the FeathersJS REST client, its context (`this`) has to be bound to `window` (using `bind(window)` on it). Otherwise `window.fetch` would be called by the FeathersJS REST client with incorrect context, causing a JavaScript error: `Failed to execute 'fetch' on 'Window': Illegal invocation`.
+
 > **ProTip:** In the browser, the base URL is relative from where services are registered. That means that a service at `http://api.feathersjs.com/api/v1/messages` with a base URL of `http://api.feathersjs.com` would be available as `app.service('api/v1/messages')`. With a base URL of `http://api.feathersjs.com/api/v1` it would be `app.service('messages')`.
 
 ### params.headers
