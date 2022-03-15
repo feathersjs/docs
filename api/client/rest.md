@@ -41,7 +41,7 @@ const restClient = rest();
 const restClient = rest('http://feathers-api.com')
 
 // Configure an AJAX library (see below) with that client 
-app.configure(restClient.fetch(window.fetch));
+app.configure(restClient.fetch(window.fetch.bind(window)));
 
 // Connect to the `http://feathers-api.com/messages` service
 const messages = app.service('messages');
@@ -58,7 +58,7 @@ const messages = app.service('messages');
   var restClient = feathers.rest('http://feathers-api.com')
 
   // Configure an AJAX library (see below) with that client 
-  app.configure(restClient.fetch(window.fetch));
+  app.configure(restClient.fetch(window.fetch.bind(window)));
 
   // Connect to the `http://feathers-api.com/messages` service
   const messages = app.service('messages');
@@ -183,7 +183,7 @@ const fetch = require('node-fetch');
 app.configure(restClient.fetch(fetch));
 
 // In modern browsers
-app.configure(restClient.fetch(window.fetch));
+app.configure(restClient.fetch(window.fetch.bind(window)));
 ```
 
 ### Connecting to multiple servers
@@ -196,11 +196,11 @@ const rest = require('@feathersjs/rest-client');
 
 const app = feathers();
 
-const client1 = rest('http://feathers-api.com').fetch(window.fetch);
-const client2 = rest('http://other-feathers-api.com').fetch(window.fetch);
+const client1 = rest('http://feathers-api.com').fetch(window.fetch.bind(window));
+const client2 = rest('http://other-feathers-api.com').fetch(window.fetch.bind(window));
 
 // With additional options to e.g. set authentication information
-const client2 = rest('http://other-feathers-api.com').fetch(window.fetch,{
+const client2 = rest('http://other-feathers-api.com').fetch(window.fetch.bind(window),{
   headers: {
     Authorization: 'Bearer <Token for other-feathers-api.com>'
   }
