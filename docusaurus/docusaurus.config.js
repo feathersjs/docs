@@ -51,6 +51,11 @@ const config = {
         },
         items: [
           {
+            type: 'search',
+            position: 'right',
+          },
+          
+          {
             type: 'doc',
             docId: 'intro',
             position: 'right',
@@ -80,16 +85,14 @@ const config = {
             position: 'right',
             label: 'Ecosystem',
           },
+          
           {
             type: 'doc',
             docId: 'intro',
             position: 'right',
             label: 'GitHub',
           },
-          {
-            type: 'search',
-            position: 'right',
-          },
+         
           
         ],
         
@@ -162,3 +165,35 @@ const config = {
 };
 
 module.exports = config;
+
+module.exports = {
+  title: 'My site',
+  // ...
+  themes: ['@docusaurus/theme-search-algolia'],
+  themeConfig: {
+    // ...
+    algolia: {
+      // The application ID provided by Algolia
+      appId: 'H377D39UCJ',
+
+      // Public API key: it is safe to commit it
+      apiKey: '179267c690107a3ab927fa2c904e1ea8',
+
+      indexName: 'feathers_docs',
+
+      // Optional: see doc section below
+      contextualSearch: false,
+
+      // Optional: Specify domains where the navigation should occur through window.location instead on history.push. Useful when our Algolia config crawls multiple documentation sites and we want to navigate with window.location.href to them.
+      externalUrlRegex: 'external\\.com|domain\\.com',
+
+      // Optional: Algolia search parameters
+      searchParameters: {},
+
+      // Optional: path for search page that enabled by default (`false` to disable it)
+      searchPagePath: 'search',
+
+      //... other Algolia params
+    },
+  },
+};
