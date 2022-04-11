@@ -157,9 +157,13 @@ The hook `context` is passed to a hook function and contains information about t
 
 > __Note:__ `context.dispatch` only affects the data sent through a Feathers Transport like [REST](./express.md) or [Socket.io](./socketio.md). An internal method call will still get the data set in `context.result`.
 
-### context.statusCode
+### context.http
 
-`context.statusCode` is a __writeable, optional__ property that allows to override the standard [HTTP status code](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html) that should be returned.
+`context.http` is a __writeable, optional__ property that allows customizing HTTP response specific properties. The following properties can be set:
+
+- `context.http.status` - Sets the [HTTP status code](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html) that should be returned. Usually the most appropriate status code will be picked automatically but there are cases where it needs to be customized.
+- `context.http.headers` - An object with additional HTTP response headers
+- `context.http.location` - Setting this property will trigger a redirect for HTTP requests.
 
 ### context.event
 
@@ -358,6 +362,8 @@ app.service('servicename').hooks({
 
 ## Application hooks
 
+### Service hooks
+
 To add hooks to every service `app.hooks(hooks)` can be used. Application hooks are [registered in the same format as service hooks](#registering-hooks) and also work exactly the same. Note when application hooks will be executed however:
 
 - `before` application hooks will always run _before_ all service `before` hooks
@@ -375,3 +381,28 @@ app.hooks({
 ```
 
 > __Note:__ generated applications come with `src/app.hooks.js` containing hooks that run for every service.
+
+### Setup and teardown
+
+A special kind of application hooks are `setup` and `teardown` hooks. They are advanced hooks that can be used to initialize database connections etc. when the application starts up (or shuts down).
+
+```js
+import { MongoClient } from 'mongodb';
+
+app.hooks({
+  setup: [
+    async (context, next) => {
+      const mongodb = new MongoClient(yourConnectionURI);
+      
+      await mongodb.connect();
+      context.app.set('mongodb', mongodb);
+    }
+  ],
+  teardown: [
+    async (context, next) => {
+      context.app.get('mongodb').close();
+      await next();
+    }
+  ]
+})
+```

@@ -26,7 +26,35 @@ const configuration = require('@feathersjs/configuration');
 const app = feathers().configure(configuration())
 ```
 
-**Note**: Direct access to nested config properties is not supported via `app.get()`. To access a nested config property (e.g. `Customer.dbConfig.host`, use `app.get('Customer').dbConfig.host` or `require('config')` directly and use it [as documented](https://github.com/lorenwest/node-config). 
+> **Note**: Direct access to nested config properties is not supported via `app.get()`. To access a nested config property (e.g. `Customer.dbConfig.host`, use `app.get('Customer').dbConfig.host` or `require('config')` directly and use it [as documented](https://github.com/lorenwest/node-config). 
+
+## Configuration schema
+
+The application configuration can be validated against a [Feathers schema](./schema/readme.md) when [app.setup](./application.md#setupserver) (or `app.listen`) is called by passing a schema when initializing `@feathersjs/configuration`:
+
+```js
+const feathers = require('@feathersjs/feathers');
+const schema = require('@feathersjs/schema');
+const configuration = require('@feathersjs/configuration');
+
+const configurationSchema = schema({
+  $id: 'FeathersConfiguration',
+  type: 'object',
+  additionalProperties: false,
+  required: ['port', 'host'],
+  properties: {
+    port: { type: 'number' },
+    host: { type: 'string' }
+  }
+});
+
+// Use the application root and `config/` as the configuration folder
+const app = feathers().configure(configuration(configurationSchema))
+
+// Configuration will only be validated now
+app.listen();
+```
+
 
 ## Environment variables
 
@@ -56,34 +84,3 @@ $ node myapp.js
 ```
 
 > __Note:__ The NODE_CONFIG_DIR environment variable isn’t used directly by @feathersjs/configuration but by the [node-config](https://github.com/lorenwest/node-config) module that it uses. For more information on configuring node-config settings, see the [Configuration Files Wiki page](https://github.com/lorenwest/node-config/wiki/Configuration-Files).
-
-## Example
-
-In `config/default.json` we want to use the local development environment and default MongoDB connection string:
-
-```js
-{
-  "frontend": "../public",
-  "host": "localhost",
-  "port": 3030,
-  "mongodb": "mongodb://localhost:27017/myapp",
-  "templates": "../templates"
-}
-```
-
-Now it can be used in our `app.js` like this:
-
-```js
-const feathers = require('@feathersjs/feathers');
-const configuration = require('@feathersjs/configuration');
-
-const app = feathers().configure(configuration());
-
-console.log(app.get('frontend'));
-console.log(app.get('host'));
-console.log(app.get('port'));
-console.log(app.get('mongodb'));
-console.log(app.get('templates'));
-
-```
-
