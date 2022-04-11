@@ -109,9 +109,13 @@ app.configure(setupService);
 ## .setup([server])
 
 `app.setup([server]) -> Promise<app>` is used to initialize all services by calling each [services .setup(app, path)](services.md#setupapp-path) method (if available).
-It will also use the `server` instance passed (e.g. through `http.createServer`) to set up SocketIO (if enabled) and any other provider that might require the server instance.
+It will also use the `server` instance passed (e.g. through `http.createServer`) to set up SocketIO (if enabled) and any other provider that might require the server instance. You can register [application hooks](./hooks.md#application-hooks) on setup to e.g. set up database connections and other things required to be initialized on startup in a certain order.
 
 Normally `app.setup` will be called automatically when starting the application via `app.listen([port])` but there are cases when it needs to be called explicitly.
+
+## .teardown([server])
+
+`app.teardown([server]) -> Promise<app>` can be called to gracefully shut down the application. When the app has been set up with a server (e.g. by calling `app.listen()`) the server will be closed automatically when calling `app.teardown()`. You can also register [application hooks](./hooks.md#application-hooks) on teardown to e.g. close database connection etc.
 
 ## .set(name, value)
 
