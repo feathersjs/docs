@@ -419,9 +419,10 @@ Now we can look at one of the really cool features of Feathers. It works the sam
     <h2>Here are the current messages:</h2>
   </main>
 
-  <script src="//unpkg.com/@feathersjs/client@^4.3.0/dist/feathers.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
-  <script type="text/javascript">
+    <script src="//unpkg.com/@feathersjs/client@pre/dist/feathers.js"></script>
+    <script type="module">
+    import { io } from 'https://cdn.socket.io/4.3.2/socket.io.esm.min.js'
+
     // Set up socket.io
     const socket = io('http://localhost:3030');
     // Initialize a Feathers app
