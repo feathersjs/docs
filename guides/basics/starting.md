@@ -6,7 +6,7 @@ Now that we are [ready to roll](./setup.md) we can create our first Feathers app
 
 You can try Feathers online on [StackBlitz](https://stackblitz.com/edit/vitejs-vite-gx8b9j?file=api%2Fapp.ts). It runs Feathers directly in the browser, and it is almost identical to the local setup but doesn't require installing anything on your machine.
 
-# Quick Start
+## Quick Start
 
 Let's create a new folder for our application:
 
