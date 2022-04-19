@@ -29,17 +29,90 @@ You can see the migration steps necessary for the Feathers chat [here for Javasc
 - [Schema](../api/schema/schema.md) - Uses [JSON schema](https://json-schema.org/) to define a data model with TypeScript types and basic validations. This allows us to:
 - [Resolvers](../api/schema/resolvers.md) - Resolve schema properties based on a context (usually the [hook context](../api/hooks.md)).
 
+### Configuration schemas
+
+[Feathers configuration](../api/configuration.md) can now be passed a schema instance to validate the configuration on application start (`app.listen` or `app.setup`).
+
 ### Custom methods
 
 Provides a way to expose custom service methods to external clients. See the [services API custom method docs](../api/services.md#custom-methods) how to set up custom service methods and the [REST client](../api/client/rest.md#feathersjs-rest-client) and [Socket.io client](../api/client/socketio.md#feathersjs-socketio-client) chapters on how to use them on the client.
 
-### Asynchronous setup
+### setup and teardown
 
-`service.setup`, `app.setup` and `app.listen` now run asynchronously and return a Promise. This can be used to initialize database connections, caches etc. in the correct order and before the application starts. For more dynamic initialization flows, these methods can also be used with `@feathersjs/hooks`.
+`service.setup`, `app.setup`, the new `app.teardown` and `app.listen` now run asynchronously and return a Promise. It is also possible to register [`setup` and `teardown` application hooks](../api/hooks.md#setup-and-teardown) to e.g. establish and gracefully close database connections when the application starts up.
 
 ### Async hooks
 
 See the documentation for [feathersjs/hooks](https://github.com/feathersjs/hooks) for the new general purpose hook format that is now also supported by Feathers services (additional documentation to follow).
+
+## TypeScript
+
+The new version comes with major improvements in TypeScript support from improved service typings, fully typed hook context and typed configuration. You can see the changes necessary in the Feathers chat [here](https://github.com/feathersjs/feathers-chat-ts/compare/dove-pre).
+
+### Application and hook context
+
+To get the typed hook context and application configuration update your `declarations.ts` as follows:
+
+```ts
+import '@feathersjs/transport-commons';
+import { Application as ExpressFeathers } from '@feathersjs/express';
+import { HookContext as FeathersHookContext } from '@feathersjs/feathers';
+
+export interface Configuration {
+  // Put types for app.get and app.set here
+  port: number;
+}
+// A mapping of service names to types. Will be extended in service files.
+export interface ServiceTypes {}
+// The application instance type that will be used everywhere else
+export type Application = ExpressFeathers<ServiceTypes, Configuration>;
+export type HookContext = FeathersHookContext<Application>;
+```
+
+Now `import { HookContext } from './declarations'` can be used as the context in hooks.
+
+### Service types
+
+Service types now only need the actual service class type and should no longer include the `& ServiceAddons<any>`. E.g. for the messages service like this:
+
+```ts
+// Add this service to the service type index
+declare module '../../declarations' {
+  interface ServiceTypes {
+    'messages': Messages;
+  }
+}
+```
+
+### Configuration types
+
+A Feathers application can now also include types for the values of `app.set` and `app.get`. The configuration can also be validated and the type inferred from a [Feathers schema](../api/schema/readme.md).
+
+### Typed params and query
+
+Service `Params` no longer include a catchall property type and need to be explicitly declared for services that use extended `params`. It is also possible to pass your own query type to use with `params.query`: 
+
+```ts
+import { Params } from '@feathersjs/feathers'
+
+export type MyQuery = {
+  name: string;
+}
+
+export type MyServiceParams extends Params<MyQuery> {
+  user: User;
+}
+```
+
+You can revert to the previous behaviour by overriding he `Params` declaration:
+
+```ts
+declare module '@feathersjs/feathers/lib/declarations' {
+  interface Params {
+    [key: string]: any;
+  }
+}
+```
 
 ## Deprecations and breaking changes
 
