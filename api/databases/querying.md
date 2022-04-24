@@ -4,25 +4,11 @@ All official database adapters support a common way for querying, sorting, limit
 
 > **Important**: When used via REST URLs all query values are strings. Depending on the service the values in `params.query` might have to be converted to the right type in a [before hook](../hooks.md).
 
-## Equality
+## Filters
 
-All fields that do not contain special query parameters are compared directly for equality.
+Filters are special properties (starting with a `$`) added at the top level of a query. They can determine page settings, the properties to select and more.
 
-```js
-// Find all unread messages in room #2
-app.service('messages').find({
-  query: {
-    read: false,
-    roomId: 2
-  }
-});
-```
-
-```
-GET /messages?read=false&roomId=2
-```
-
-## `$limit`
+### `$limit`
 
 `$limit` will return only the number of results you specify:
 
@@ -42,7 +28,7 @@ GET /messages?$limit=2&read=false
 
 > **Pro tip:** With [pagination enabled](common.md#pagination), to just get the number of available records set `$limit` to `0`. This will only run a (fast) counting query against the database and return a page object with the `total` and an empty `data` array.
 
-## `$skip`
+### `$skip`
 
 `$skip` will skip the specified number of results:
 
@@ -61,7 +47,7 @@ app.service('messages').find({
 GET /messages?$limit=2&$skip=2&read=false
 ```
 
-## `$sort`
+### `$sort`
 
 `$sort` will sort based on the object you provide. It can contain a list of properties by which to sort mapped to the order (`1` ascending, `-1` descending).
 
@@ -82,7 +68,7 @@ app.service('messages').find({
 /messages?$limit=10&$sort[createdAt]=-1
 ```
 
-## `$select`
+### `$select`
 
 `$select` allows to pick which fields to include in the result. This will work for any service method.
 
@@ -106,7 +92,50 @@ GET /messages?$select[]=text&$select[]=userId
 GET /messages/1?$select[]=text
 ```
 
-## `$in`, `$nin`
+### `$or`
+
+Find all records that match any of the given criteria.
+
+```js
+// Find all messages that are not marked as archived
+// or any message from room 2
+app.service('messages').find({
+  query: {
+    $or: [
+      { archived: { $ne: true } },
+      { roomId: 2 }
+    ]
+  }
+});
+```
+
+```
+GET /messages?$or[0][archived][$ne]=true&$or[1][roomId]=2
+```
+
+## Operators
+
+Operators either query a property for a specific value or determine nested special properties (starting with a `$`) that allow querying the property for certain conditions. When multiple operators are set, conditions have to apply for a property to match.
+
+### Equality
+
+All fields that do not contain special query parameters are compared directly for equality.
+
+```js
+// Find all unread messages in room #2
+app.service('messages').find({
+  query: {
+    read: false,
+    roomId: 2
+  }
+});
+```
+
+```
+GET /messages?read=false&roomId=2
+```
+
+### `$in`, `$nin`
 
 Find all records where the property does (`$in`) or does not (`$nin`) match any of the given values. 
 
@@ -125,7 +154,7 @@ app.service('messages').find({
 GET /messages?roomId[$in][]=2&roomId[$in][]=5
 ```
 
-## `$lt`, `$lte`
+### `$lt`, `$lte`
 
 Find all records where the value is less (`$lt`) or less and equal (`$lte`) to a given value. 
 
@@ -146,7 +175,7 @@ app.service('messages').find({
 GET /messages?createdAt[$lt]=1479664146607
 ```
 
-## `$gt`, `$gte`
+### `$gt`, `$gte`
 
 Find all records where the value is more (`$gt`) or more and equal (`$gte`) to a given value. 
 
@@ -167,7 +196,7 @@ app.service('messages').find({
 GET /messages?createdAt[$gt]=1479664146607
 ```
 
-## `$ne`
+### `$ne`
 
 Find all records that do not equal the given property value.
 
@@ -184,27 +213,6 @@ app.service('messages').find({
 
 ```
 GET /messages?archived[$ne]=true
-```
-
-## `$or`
-
-Find all records that match any of the given criteria.
-
-```js
-// Find all messages that are not marked as archived
-// or any message from room 2
-app.service('messages').find({
-  query: {
-    $or: [
-      { archived: { $ne: true } },
-      { roomId: 2 }
-    ]
-  }
-});
-```
-
-```
-GET /messages?$or[0][archived][$ne]=true&$or[1][roomId]=2
 ```
 
 ## Search
