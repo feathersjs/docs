@@ -102,7 +102,7 @@ There are two ways to initiate OAuth authentication:
     - The frontend (e.g. [authentication client](./client.md)) uses the returned access token to authenticate
 
 2) With an existing access token, e.g. obtained through the Facebook mobile SDK
-    - Authenticate normally with `{ strategy: '<name>', access_token: 'oauth access token' }`.
+    - Authenticate normally with `{ strategy: '<name>', accessToken: 'oauth access token' }`.
     - Calls the [OauthStrategy](#oauthstrategy) which
         - Gets the users profile
         - Finds or creates the entity for that profile

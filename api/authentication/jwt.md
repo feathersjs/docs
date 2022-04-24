@@ -34,7 +34,7 @@ Standard JWT authentication can be configured with those options in `config/defa
 ```json
 {
   "authentication": {
-    "jwt": {}
+    "jwtOptions": {}
   }
 }
 ```

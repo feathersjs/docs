@@ -41,7 +41,7 @@ const restClient = rest();
 const restClient = rest('http://feathers-api.com')
 
 // Configure an AJAX library (see below) with that client 
-app.configure(restClient.fetch(window.fetch));
+app.configure(restClient.fetch(window.fetch.bind(window)));
 
 // Connect to the `http://feathers-api.com/messages` service
 const messages = app.service('messages');
@@ -58,7 +58,7 @@ const messages = app.service('messages');
   var restClient = feathers.rest('http://feathers-api.com')
 
   // Configure an AJAX library (see below) with that client 
-  app.configure(restClient.fetch(window.fetch));
+  app.configure(restClient.fetch(window.fetch.bind(window)));
 
   // Connect to the `http://feathers-api.com/messages` service
   const messages = app.service('messages');
@@ -69,6 +69,8 @@ const messages = app.service('messages');
 ::::
 
 <!-- -->
+
+> **ProTip:** When `window.fetch` (or just `fetch` which is normally equal to `window.fetch`) is passed to the FeathersJS REST client, its context (`this`) has to be bound to `window` (using `bind(window)` on it). Otherwise `window.fetch` would be called by the FeathersJS REST client with incorrect context, causing a JavaScript error: `Failed to execute 'fetch' on 'Window': Illegal invocation`.
 
 > **ProTip:** In the browser, the base URL is relative from where services are registered. That means that a service at `http://api.feathersjs.com/api/v1/messages` with a base URL of `http://api.feathersjs.com` would be available as `app.service('api/v1/messages')`. With a base URL of `http://api.feathersjs.com/api/v1` it would be `app.service('messages')`.
 
@@ -188,7 +190,7 @@ const restClient = rest();
 const restClient = rest('http://feathers-api.com')
 
 // Configure an AJAX library (see below) with that client 
-client.configure(restClient.fetch(window.fetch));
+app.configure(restClient.fetch(window.fetch.bind(window)));
 
 // Initialize the method once
 client.service('myservice').methods('myCustomMethod');
@@ -239,11 +241,11 @@ const rest = require('@feathersjs/rest-client');
 
 const app = feathers();
 
-const client1 = rest('http://feathers-api.com').fetch(window.fetch);
-const client2 = rest('http://other-feathers-api.com').fetch(window.fetch);
+const client1 = rest('http://feathers-api.com').fetch(window.fetch.bind(window));
+const client2 = rest('http://other-feathers-api.com').fetch(window.fetch.bind(window));
 
 // With additional options to e.g. set authentication information
-const client2 = rest('http://other-feathers-api.com').fetch(window.fetch,{
+const client2 = rest('http://other-feathers-api.com').fetch(window.fetch.bind(window),{
   headers: {
     Authorization: 'Bearer <Token for other-feathers-api.com>'
   }

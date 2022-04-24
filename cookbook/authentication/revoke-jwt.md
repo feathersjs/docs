@@ -58,7 +58,6 @@ npm install redis
 ```
 
 ```js
-const { promisify } = require('util');
 const redis = require('redis');
 
 const { AuthenticationService } = require('@feathersjs/authentication');
@@ -69,15 +68,18 @@ class RedisAuthService extends AuthenticationService {
     super(app, configKey);
 
     const client = redis.createClient();
-
-    // Promise wrapper for Redis client
+    
     this.redis = {
       client,
-      get: promisify(client.get.bind(client)),
-      set: promisify(client.set.bind(client)),
-      exists: promisify(client.exists.bind(client)),
-      expireat: promisify(client.exists.bind(client))
+      get: client.get.bind(client),
+      set: client.set.bind(client),
+      exists: client.exists.bind(client),
+      expireat: client.exists.bind(client)
     }
+    
+    (async () => {
+      await this.redis.client.connect();
+    })()
   }
 
   async revokeAccessToken (accessToken) {
@@ -87,7 +89,7 @@ class RedisAuthService extends AuthenticationService {
     const expiry = verified.exp - Math.floor(Date.now() / 1000);
 
     // Add the revoked token to Redis and set expiration
-    await this.redis.set(accessToken, true, 'EX', expiry);
+    await this.redis.set(accessToken, 1, { EX: expiry });
 
     return verified;
   }

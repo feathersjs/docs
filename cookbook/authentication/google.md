@@ -48,15 +48,15 @@ The client id (App ID) and secret can be acquired by creating a [OAuth client ID
 
 **Important**: Fill in the callback url, in a default Feathers setup it will be /oauth/google/callback.
 
-3. Replace <App ID> and <App Secret> with the id and secret of the created OAuth client ID application
-![Creating OAuth client ID - step 3](https://bartduisters.com/img/feathers/oauth-client-id-3.png)
+3. Replace `<App ID>` and `<App Secret>` with the id and secret of the created OAuth client ID application
+  
 ```js
 {
   "authentication": {
     "oauth": {
       "google": {
-        "key": "481298021138-hv27glb811ocr7pdon5lsg8hh5a6pgjv.apps.googleusercontent.com",
-        "secret": "XkWl0witdP4ogeNIgyOi-CeS",
+        "key": "<client-id>.apps.googleusercontent.com",
+        "secret": "<client-secret>",
         "scope": ["openid", "email"],
         "nonce": true
       }
@@ -64,7 +64,12 @@ The client id (App ID) and secret can be acquired by creating a [OAuth client ID
   }
 }
 ```
-Note: Use the generated credentials of the OAuth client ID, the key and secret in the example no longer exist.
+
+Note: Use the generated credentials of the OAuth client ID.
+
+Note: `<client-id>` will be replaced by a string similar to **481298021138-hv27glb811ocr7pdon5lsg8hh5a6pgjv**.apps.googleusercontent.com.
+
+Note: `<client-secret>` will be replaced by a string similar to **XkWl0witdP4ogeNIgyOi-CeS**.
 
 ## Using the data returned from the Google App through a custom OAuth Strategy
 
