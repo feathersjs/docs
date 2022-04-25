@@ -222,3 +222,14 @@ app.defaultService = function(path) {
 ```
 
 This is used by the [client transport adapters](./client.md) to automatically register client side services that talk to a Feathers server.
+
+## .lookup
+
+`app.lookup(path)` allows to look up a full path and will return the `data` (route parameters) and `service` on the server:
+
+```js
+const { data, service } = app.lookup('messages/4321');
+
+// service -> app.service('messages')
+// data -> { __id: '4321' }
+```
