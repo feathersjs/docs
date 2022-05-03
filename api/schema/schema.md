@@ -229,21 +229,33 @@ export type Message = Infer<typeof messageSchema> & {
 
 ## Query helper
 
-The `queryProperty` helper takes a schema definition (usually `{ type: '<type>' }`) and returns a schema that allows all of the [Feathers query syntax](../databases/querying.md) (like `$gt`, `$ne` etc.) with the correct type:
+Schema ships with the following helpers to automatically create schemas that follow the [Feathers query syntax](../databases/querying.md) (like `$gt`, `$ne` etc.):
+
+- `queryProperty` helper takes a definition for a single property (usually `{ type: '<type>' }`) and returns a schema that allows the default query operators 
+- `queryProperties(schema.properties)` takes the all properties of a schema and converts them into query schema properties (using `queryProperty`)
+- `querySyntax(schema.properties)` initializes all properties the additional query syntax properties `$limit`, `$skip`, `$select` and `$sort`. `$select` and `$sort` will be typed so they only allow existing schema properties.
 
 ```js
-import { queryProperty } from '@feathersjs/schema';
+import { querySyntax } from '@feathersjs/schema';
 
 export const userQuerySchema = schema({
   $id: 'UserQuery',
   type: 'object',
   additionalProperties: false,
   properties: {
-    age: queryProperty({
-      type: 'number'
-    })
+    ...querySyntax(userSchema.properties)
   }
 } as const);
+
+export type UserQuery = Infer<typeof userQuerySchema>
+
+const userQuery: UserQuery = {
+  $limit: 10,
+  $select: [ 'email', 'id' ],
+  $sort: {
+    email: 1
+  }
+}
 ```
 
 ## Validation hooks
@@ -255,26 +267,14 @@ There are two [hooks](../hooks.md) available to validate `params.query` and the 
 The `validateQuery` hook validates `params.query` for allowed query values. This is a great place to convert [Feathers query syntax](../databases/querying.md) values and set restrictions and defaults and also where the [query schema helper](#query-helper) is normally used: 
 
 ```js
-import { schema, queryProperty, validateQuery } from '@feathersjs/schema';
+import { schema, querySyntax, validateQuery } from '@feathersjs/schema';
 
 export const userQuerySchema = schema({
   $id: 'UserQuery',
   type: 'object',
   additionalProperties: false,
   properties: {
-    $limit: {
-      type: 'number',
-      default: 10,
-      minimum: 10,
-      maximum: 100
-    },
-    $skip: {
-      type: 'number',
-      minimum: 0
-    },
-    age: queryProperty({
-      type: 'number'
-    })
+    ...querySyntax(userSchema.properties)
   }
 } as const);
 
