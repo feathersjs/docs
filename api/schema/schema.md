@@ -82,7 +82,7 @@ export const userSchema = schema({
 
 ## Extension
 
-To create a new schema that extends an existing one, combine the schema properties from `schema.definition` with the new properties:
+To create a new schema that extends an existing one, combine the schema properties from `schema.properties` (an `schema.required` if needed) with the new properties:
 
 :::: tabs :options="{ useUrlFragment: false }"
 
@@ -108,9 +108,9 @@ export const userResultSchema = schema({
   $id: 'UserResult',
   type: 'object',
   additionalProperties: false,
-  required: [...userSchema.definition.required, 'id'],
+  required: [...userSchema.required, 'id'],
   properties: {
-    ...userSchema.definition.properties,
+    ...userSchema.properties,
     id: { type: 'number' }
   }
 });
@@ -139,9 +139,9 @@ export const userResultSchema = schema({
   $id: 'UserResult',
   type: 'object',
   additionalProperties: false,
-  required: [...userSchema.definition.required, 'id'],
+  required: [...userSchema.required, 'id'],
   properties: {
-    ...userSchema.definition.properties,
+    ...userSchema.properties,
     id: { type: 'number' }
   }
 });
@@ -260,59 +260,4 @@ const userQuery: UserQuery = {
 
 ## Validation hooks
 
-There are two [hooks](../hooks.md) available to validate `params.query` and the service method `data`. Usually schema validation happens already through [resolvers](./resolvers.md) but these hooks can also be used individually.
-
-### `validateQuery`
-
-The `validateQuery` hook validates `params.query` for allowed query values. This is a great place to convert [Feathers query syntax](../databases/querying.md) values and set restrictions and defaults and also where the [query schema helper](#query-helper) is normally used: 
-
-```js
-import { schema, querySyntax, validateQuery } from '@feathersjs/schema';
-
-export const userQuerySchema = schema({
-  $id: 'UserQuery',
-  type: 'object',
-  additionalProperties: false,
-  properties: {
-    ...querySyntax(userSchema.properties)
-  }
-} as const);
-
-app.service('users').hooks([
-  validateQuery(userQuerySchema)
-]);
-```
-
-### `validateData`
-
-The `validateData` hook validates the `data` of a `create`, `update` or `patch` [service method](../services.md) call. To allow partial updates (for `patch`) you can create an [extended schema](#extension) with no `required` fields:
-
-```js
-import { schema, queryProperty, validateData } from '@feathersjs/schema';
-
-export const messageSchema = schema({
-  $id: 'MessageData',
-  type: 'object',
-  additionalProperties: false,
-  required: ['text'],
-  properties: {
-    text: { type: 'string' },
-    user: { $ref: 'User' }
-  }
-});
-
-export const messagePatchSchema = schema({
-  $id: 'MessagePatch',
-  type: 'object',
-  additionalProperties: false,
-  properties: {
-    ...messageSchema.properties
-  }
-});
-
-app.service('messages').hooks({
-  create: validateData(messageSchema),
-  update: validateData(messageSchema),
-  patch: validateData(messagePatchSchema)
-});
-```
+Schemas will be used for validation when they are passed to a [Resolver](./resolvers.md). See the [Feathers resolver](./resolvers.md#feathers-resolvers) on how to use the schema with resolvers.

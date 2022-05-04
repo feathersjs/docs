@@ -167,11 +167,13 @@ In a Feathers application, resolvers are normally used together with a [schema d
 
 ### Data resolvers
 
-`data` resolvers convert the `data` from a `create`, `update` or `patch` [service method](../services.md). This can be used to e.g. hash a password before storing it in the database or to remove properties the user is not allowed to write.
+`data` resolvers use the `resolveData` hook and convert the `data` from a `create`, `update` or `patch` [service method](../services.md). This can be used to validate against the schema and e.g. hash a password before storing it in the database or to remove properties the user is not allowed to write.
 
 A data resolver can be used on a service with the `resolveData` hook:
 
 ```ts
+import { resolveData, resolve } from '@feathersjs/schema'
+
 export const userSchema = schema({
   $id: 'UserData',
   type: 'object',
@@ -185,13 +187,11 @@ export const userSchema = schema({
 
 export type User = Infer<typeof userSchema>;
 
-export const userDataResolver = resolve<User, HookContext<Application>>({
+export const userDataResolver = resolve<User, HookContext>({
   schema: userSchema,
   validate: 'before',
   properties: {
-    password: async (password) => {
-      return hashPassword(password);
-    }
+    password: async (password) => hashPassword(password)
   }
 });
 
@@ -204,45 +204,69 @@ app.service('users').hooks({
  
 ### Result resolvers
 
-`result` resolvers modify the data that is returned by a service call ([context.result](../hooks.md#context-result) in a hook). This can be used to populate associations or protect properties from being returned for external requests. A result resolver should also have a schema to know the shape of the data that will be returned but it does by default not run any validation.
+`result` resolvers use the `resolveResult` hook and modify the data that is returned by a service call ([context.result](../hooks.md#context-result) in a hook). This can be used to populate associations or protect properties from being returned for external requests. A result resolver should also have a schema to know the shape of the data that will be returned but it does not need to run any validation.
 
 A result resolver can be registered for all or individual service methods using the `resolveResult` hook.
 
-### Query resolvers
-
-`query` resolvers modify `params.query`. This is often used to set default values or limit the query so a user can only request data they are allowed to see.
-
 ```ts
-export const messageQuerySchema = schema({
-  $id: 'MessageQuery',
+import { resolveResult, resolve } from '@feathersjs/schema'
+
+// Extend the userSchema from above with an `id` property
+// which is what a service usually returns
+export const userResultSchema = schema({
+  $id: 'UserData',
   type: 'object',
   additionalProperties: false,
+  required: [...userSchema.required, 'id'],
   properties: {
-    $limit: {
-      type: 'number',
-      minimum: 0,
-      maximum: 100
-    },
-    $skip: {
+    ...userSchema.properties,
+    id: {
       type: 'number'
-    },
-    $resolve: {
-      type: 'array',
-      items: { type: 'string' }
-    },
-    userId: queryProperty({
-      type: 'number'
-    })
+    }
   }
 } as const);
 
-export type MessageQuery = Infer<typeof messageQuerySchema>;
+export type UserResult = Infer<typeof userResultSchema>;
 
-export const messageQueryResolver = resolve<MessageQuery, HookContext<Application>>({
+export const userResultResolver = resolve<UserResult, HookContext<Application>>({
+  schema: userSchema,
+  properties: {
+    // Do not return the password for external requests
+    password: async (password, user, context) => context.params?.provider ? undefined : password
+  }
+});
+
+// Result can be resolved on every method
+app.service('users').hooks([
+  resolveResult(userResultResolver)
+]);
+```
+
+### Query resolvers
+
+`query` resolvers use the `resolveQuery` hook to modify `params.query`. This is often used to set default values or limit the query so a user can only request data they are allowed to see.
+
+```ts
+import { schema, querySyntax, resolveQuery } from '@feathersjs/schema';
+
+export const userQuerySchema = schema({
+  $id: 'UserQuery',
+  type: 'object',
+  additionalProperties: false,
+  properties: {
+    ...querySyntax(userResultSchema.properties)
+  }
+} as const);
+
+export type UserQuery = Infer<typeof userQuerySchema>;
+
+export const userQueryResolver = resolve<UserQuery, HookContext<Application>>({
   schema: messageQuerySchema,
   validate: 'before',
   properties: {
-    userId: async (value, _query, context) => {
+    // For external requests, only ever allow the user to see
+    // or change themselves
+    id: async (value, _query, context) => {
       if (context.params?.user) {
         return context.params.user.id;
       }
@@ -251,4 +275,9 @@ export const messageQueryResolver = resolve<MessageQuery, HookContext<Applicatio
     }
   }
 });
+
+// The query can be resolved on every method
+app.service('users').hooks([
+  resolveQuery(userQueryResolver)
+]);
 ```
