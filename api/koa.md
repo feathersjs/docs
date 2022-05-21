@@ -23,7 +23,7 @@ const app = koa(feathers());
 app.use(errorHandler());
 app.use(authentication());
 app.use(bodyParser());
-app.use(rest());
+app.configure(rest());
 ```
 
 `@feathersjs/koa` also exposes the following middleware:
