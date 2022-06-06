@@ -136,6 +136,8 @@ A resolver takes the following options:
 - `schema` (_optional_): The schema used for this resolver
 - `validate` (_optional_): Validate the schema `before` or `after` resolving properties or not at all (`false`)
 - `properties`: An object of property names and their resolver functions
+- `converter`: A `async (data, context) => {}` function that can return a completely new representation of the data. A `converter` runs before `properties` resolvers.
+
 
 ## Resolver functions
 
@@ -222,6 +224,9 @@ export const userResultSchema = schema({
     ...userSchema.properties,
     id: {
       type: 'number'
+    },
+    name: {
+      type: 'string'
     }
   }
 } as const);
@@ -231,8 +236,7 @@ export type UserResult = Infer<typeof userResultSchema>;
 export const userResultResolver = resolve<UserResult, HookContext<Application>>({
   schema: userSchema,
   properties: {
-    // Do not return the password for external requests
-    password: async (password, user, context) => context.params?.provider ? undefined : password
+    name: async (value, user) => user.email === 'hello@feathersjs.com' ? 'Feathers' : value
   }
 });
 
@@ -241,6 +245,34 @@ app.service('users').hooks([
   resolveResult(userResultResolver)
 ]);
 ```
+
+### Safe data resolvers
+
+`dispatch` resolvers used in the `resolveDispatch` hook, return a safe version of the data that will be sent to external clients. This includes nested associations (resolvers) and real-time events. Returning `undefined` for a property resolver will exclude the property which can be used to hide sensitive data like th user password:
+
+```ts
+import { resolveDispatch } from '@feathersjs/schema'
+
+export type UserResult = Infer<typeof userResultSchema>;
+
+export const userDispatchResolver = resolve<UserResult, HookContext<Application>>({
+  schema: userSchema,
+  properties: {
+    password: async () => undefined
+  }
+});
+
+// Dispatch should be resolved on every method
+app.service('users').hooks({
+  around: {
+    all: [
+      resolveDispatch(userDispatchResolver)
+    ]
+  }
+});
+```
+
+> __Important:__ In order to get the safe data from resolved associations, all services involved need the `resolveDispatch` or `resolveAll` hook registered. The `resolveDispatch` hook should also be registered before the `resolveResult` hook so that it gets the final result data. 
 
 ### Query resolvers
 
@@ -280,4 +312,29 @@ export const userQueryResolver = resolve<UserQuery, HookContext<Application>>({
 app.service('users').hooks([
   resolveQuery(userQueryResolver)
 ]);
+```
+
+### resolveAll
+
+The `resolveAll` hook combines the individual resolver hooks into a single easier to use format. `create` takes separate resolver options for the `create`, `update` and `patch` method:
+
+```ts
+import { resolveAll } from '@feathersjs/schema'
+
+app.service('users').hooks({
+  around: {
+    all: [
+      resolveAll({
+        dispatch: userDispatchResolver,
+        result: userResultResolver,
+          query: userQueryResolver,
+        data: {
+          create: userDataResolver,
+          update: userDataResolver,
+          patch: userPatchResolver
+        }
+      })
+    ]
+  }
+});
 ```
