@@ -129,7 +129,7 @@ messages.remove(1);
 
 ## Custom events
 
-By default, real-time clients will only receive the [standard events](#service-events). However, it is possible to define a list of custom events on a service as `service.events` that should also be passed when `service.emit('customevent', data)` is called on the server. The `context` for custom events won't be a full hook context but just an object containing `{ app, service, path, result }`.
+By default, real-time clients will only receive the [standard events](#service-events). However, it is possible to define a list of custom events when registering the service with [app.use](./application.md#usepath-service--options) that should also be sent to the client when `service.emit('customevent', data)` is called on the server. The `context` for custom events won't be a full hook context but just an object containing `{ app, service, path, result }`.
 
 > **Important:** Custom events can only be sent from the server to the client, not the other way (client to server). [Learn more](../help/faq.md#how-do-i-create-custom-methods)
 
@@ -137,15 +137,22 @@ For example, a payment service that sends status events to the client while proc
 
 ```js
 class PaymentService {
-  create(data, params) {
-    createStripeCustomer(params.user).then(customer => {
-      this.emit('status', { status: 'created' });
-      return createPayment(data).then(result => {
-        this.emit('status', { status: 'completed' });
-      });
-    });
+  async create(data, params) {
+    const customer = await createStripeCustomer(params.user);
+
+    this.emit('status', { status: 'created' });
+    const payment = await createPayment(data);
+
+    this.emit('status', { status: 'completed' });
+    
+    return payment;
   }
 }
+
+// Then register it like this:
+app.use('payments', new PaymentService(), {
+  events: ['status']
+})
 ```
 
 The [database adapters](./databases/common.md) also take a list of custom events as an [initialization option](./databases/common.md#serviceoptions):
