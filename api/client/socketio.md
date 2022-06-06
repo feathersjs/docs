@@ -88,7 +88,7 @@ app.io.on('disconnect', (reason) => {
 
 ### Custom Methods
 
-On the client, [custom service methods](../services.md#custom-methods) have to be listed via the `.methods` function to indicate that they can be called:
+On the client, [custom service methods](../services.md#custom-methods) are also registered using the `methods` option when registering the service via `socketClient.service()`:
 
 :::: tabs :options="{ useUrlFragment: false }"
 
@@ -99,13 +99,15 @@ const socketio = require('@feathersjs/socketio-client');
 const io = require('socket.io-client');
 
 const socket = io('http://api.feathersjs.com');
-const app = feathers();
+const client = feathers();
+const socketClient = socketio(socket)
 
 // Set up Socket.io client with the socket
-app.configure(socketio(socket));
+client.configure(socketClient);
 
-// Initialize the method once
-client.service('myservice').methods('myCustomMethod');
+client.service('myservice', connection.service('myservice'), {
+  methods: ['find', 'get', 'create', 'update', 'patch', 'remove', 'myCustomMethod']
+});
 
 // Then it can be used like other service methods
 client.service('myservice').myCustomMethod(data, params);
@@ -118,18 +120,28 @@ import { feathers, CustomMethod } from '@feathersjs/feathers';
 import socketio, { SocketService } from '@feathersjs/socketio-client';
 import io from 'socket.io-client';
 
+// `data` and return type of custom method
+type CustomMethodData = { name: string }
+type CustomMethodResponse = { acknowledged: boolean }
+
 type ServiceTypes = {
-  myservice: SocketService & CustomMethod<'myCustomMethod'>
+  // The type is a Socket service extended with custom methods
+  myservice: SocketService & {
+    myCustomMethods: CustomMethod<CustomMethodData, CustomMethodResponse>
+  }
 }
 
 const socket = io('http://api.feathersjs.com');
-const app = feathers<ServiceTypes>();
+const client = feathers<ServiceTypes>();
+const socketClient = socketio(socket)
 
 // Set up Socket.io client with the socket
-app.configure(socketio(socket));
+client.configure(socketClient);
 
-// Initialize the method once
-client.service('myservice').methods('myCustomMethod');
+// Register a socket client service with all methods listed
+client.service('myservice', socketClient.service('myservice'), {
+  methods: ['find', 'get', 'create', 'update', 'patch', 'remove', 'myCustomMethod']
+});
 
 // Then it can be used like other service methods
 client.service('myservice').myCustomMethod(data, params);
@@ -137,6 +149,8 @@ client.service('myservice').myCustomMethod(data, params);
 :::
 
 ::::
+
+> __Note:__ Just like on the server *all* methods you want to use have to be listed in the `methods` option.
 
 ## Direct connection
 

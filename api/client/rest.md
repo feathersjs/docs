@@ -172,7 +172,7 @@ app.configure(restClient.axios(axios.create({
 
 ### Custom Methods
 
-On the client, [custom service methods](../services.md#custom-methods) have to be listed via the `.methods` function to indicate that they can be called:
+On the client, [custom service methods](../services.md#custom-methods) are also registered using the `methods` option when registering the service via `restClient.service()`:
 
 :::: tabs :options="{ useUrlFragment: false }"
 
@@ -187,13 +187,15 @@ const client = feathers();
 const restClient = rest();
 
 // Connect to a different URL
-const restClient = rest('http://feathers-api.com')
+const restClient = rest('http://feathers-api.com').fetch(window.fetch.bind(window))
 
 // Configure an AJAX library (see below) with that client 
-app.configure(restClient.fetch(window.fetch.bind(window)));
+client.configure(restClient);
 
-// Initialize the method once
-client.service('myservice').methods('myCustomMethod');
+// Register a REST client service with all methods listed
+client.service('myservice', restClient.service('myservice'), {
+  methods: ['find', 'get', 'create', 'update', 'patch', 'remove', 'myCustomMethod']
+});
 
 // Then it can be used like other service methods
 client.service('myservice').myCustomMethod(data, params);
@@ -205,24 +207,32 @@ client.service('myservice').myCustomMethod(data, params);
 import { feathers, CustomMethod } from '@feathersjs/feathers';
 import rest, { RestService } from '@feathersjs/rest-client';
 
-// This will type `myservice` with the client methods and `myCustomMethod`
+// `data` and return type of custom method
+type CustomMethodData = { name: string }
+type CustomMethodResponse = { acknowledged: boolean }
+
 type ServiceTypes = {
-  myservice: RestService & CustomMethod<'myCustomMethod'>
+  // The type is a Socket service extended with custom methods
+  myservice: SocketService & {
+    myCustomMethods: CustomMethod<CustomMethodData, CustomMethodResponse>
+  }
 }
 
 const client = feathers<ServiceTypes>();
 
 // Connect to the same as the browser URL (only in the browser)
-const restClient = rest();
+const restClient = rest().fetch(window.fetch);
 
 // Connect to a different URL
-const restClient = rest('http://feathers-api.com')
+const restClient = rest('http://feathers-api.com').fetch(window.fetch);
 
 // Configure an AJAX library (see below) with that client 
-client.configure(restClient.fetch(window.fetch));
+client.configure(restClient);
 
-// Initialize the method once
-client.service('myservice').methods('myCustomMethod');
+// Register a REST client service with all methods listed
+client.service('myservice', restClient.service('myservice'), {
+  methods: ['find', 'get', 'create', 'update', 'patch', 'remove', 'myCustomMethod']
+});
 
 // Then it can be used like other service methods
 client.service('myservice').myCustomMethod(data, params);
@@ -230,6 +240,8 @@ client.service('myservice').myCustomMethod(data, params);
 :::
 
 ::::
+
+> __Note:__ Just like on the server *all* methods you want to use have to be listed in the `methods` option.
 
 ### Connecting to multiple servers
 
