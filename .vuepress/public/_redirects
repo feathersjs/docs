@@ -1,5 +1,3 @@
-https://crow.docs.feathersjs.com/* https://docs.feathersjs.com/:splat 301!
-
 # v2 Redirects
 
 /guides/step-by-step/generators/*           /guides/basics/generator.html
