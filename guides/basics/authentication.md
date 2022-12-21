@@ -158,6 +158,20 @@ main();
 
 If you now open the console and visit [localhost:3030](http://localhost:3030) you will see that our user has been authenticated.
 
+If you have CORS problems: `NotSameOriginAfterDefaultedToSameOriginByCoep`
+you can disable it by disable it on `src/app.js`
+
+
+```
+
+// Enable security, CORS, compression, favicon and body parsing
+app.use(helmet({
+  crossOriginEmbedderPolicy: false,
+  contentSecurityPolicy: false
+}));
+
+
+```
 ## GitHub login (OAuth)
 
 OAuth is an open authentication standard supported by almost every major platform. It is what is being used by the login with Facebook, Google, GitHub etc. buttons in a web application. From the Feathers perspective the authentication flow is pretty similar. Instead of authenticating with the `local` strategy by sending a username and password, we direct the user to authorize the application with the login provider. If it is successful we find or create the user on the `users` service with the information we got back from the provider and issue a token for them.
