@@ -44,7 +44,7 @@ function initialize(app){
       credential: firebase.credential.cert(firebaseConfig)
     });
   } catch (e) {
-    console.log('erorr initializing firebase', e);
+    console.log('error initializing firebase', e);
   }
 }
 
