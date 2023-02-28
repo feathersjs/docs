@@ -1,6 +1,17 @@
 <template>
   <main class="page">
     <slot name="top"/>
+    
+    <header class="note">
+      <blockquote>
+        <p>
+          <strong>Important:</strong> You are looking at the documentation of a previous version of Feathers.<br>
+          <a href="https://feathersjs.com" rel="noopener noreferrer">
+            <strong>Click here to go to the latest documentation.</strong>
+          </a>
+        </p>
+      </blockquote>
+    </header>
 
     <Content class="content" />
 
